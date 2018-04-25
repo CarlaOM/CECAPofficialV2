@@ -1,0 +1,82 @@
+<div class="content-wrapper">
+   <!--<section class="content-header">
+      <h1>
+         Dashboard
+         <small>Version 2.0</small>
+      </h1>
+      <ol class="breadcrumb">
+         <li>
+            <a href="#">
+               <i class="fa fa-dashboard"></i> Home</a>
+         </li>
+         <li class="active">Dashboard</li>
+      </ol>
+   </section>-->
+
+   <section class="content">
+
+      <app-addPerson (messageEvent)="receiveMessage()"></app-addPerson>
+
+      <!-- <app-persona></app-persona> -->
+
+      <table class="table">
+         <thead>
+            <th>Filtros</th>
+         </thead>
+         <tbody>
+            <tr>
+               <td>
+                  <a class="btn btn-primary"(click)="inscritos()" >Inscritos</a>
+               </td>
+               <td>
+                  <a class="btn btn-primary"(click)="confirmados()">Confirmados</a>
+               </td>
+               <td>
+                  <a class="btn btn-primary" (click)="interesados()">Interesados</a>
+               </td>
+               <td>
+                        <a class="btn btn-primary"(click)="enDuda()">En-Duda</a>
+               </td>
+               <td>
+                  <a class="btn btn-primary"(click)="noParticipa()">No-participa</a>
+               </td>
+               <td>
+                  <a class="btn btn-primary"(click)="proximo()">Proximo</a>
+               </td>
+               <td>
+                  <a class="btn btn-primary"(click)="todos()">Todos</a>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+     <!-- <section>
+            <div class="col-lg-1">Buscar:</div>
+            <div class="col-lg-5">
+                  <input type="text" [(ngModel)]="busqueda"></div>
+      </section>-->
+      <table class="table table-hover" >
+         <thead>
+            <tr>
+               <th>Nombre</th>
+               <th>Estado</th>
+               <th>Descripcion</th>
+               <th colspan="2">Ajustes</th>
+            </tr>
+         </thead>
+         <tbody> 
+            <!--<tr *ngFor="let i of inscriptions | buscarPersona: busqueda">-->
+            <tr *ngFor="let i of states">
+               <td>{{ i.name }}</td>
+               <td>{{ i.state }}</td>
+               <td>{{ i.description }}</td>
+               <td>
+                  <!-- <app-editPerson [editPerson]="event"></app-editPerson> -->
+                  <a class="btn btn-primary" (click)="edit(i.person)">EDITAR</a>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+      
+   </section>
+   <router-outlet></router-outlet>
+</div>
