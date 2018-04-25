@@ -52,6 +52,8 @@ import { EjecutivoComponent } from './ejecutivo/ejecutivo.component';
 import { EditEjecutivoComponent } from './ejecutivo/edit-ejecutivo/edit-ejecutivo.component';
 
 import { EditComponent } from './event/persona/edit/edit.component';
+import { SucursalComponent } from './sucursal/sucursal.component';
+import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +91,8 @@ import { EditComponent } from './event/persona/edit/edit.component';
     EditEjecutivoComponent,
     EditComponent,
     FilterPipe,
+    SucursalComponent,
+    AddSucursalComponent,
   ],
   imports: [
     BrowserModule,

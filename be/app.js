@@ -39,6 +39,7 @@ app
    
    .use('/persons', require('./routes/persons'))
    .use('/programs', require('./routes/programs'))
+   .use('/sucursal', require('./routes/sucursal'))
 
    .use(function (err, req, res, next) { 
       console.error(err.stack);

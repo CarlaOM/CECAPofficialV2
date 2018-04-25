@@ -16,6 +16,7 @@ import { EjecutivoComponent } from "./ejecutivo/ejecutivo.component";
 import { EditEjecutivoComponent } from './ejecutivo/edit-ejecutivo/edit-ejecutivo.component';
 import { PersonaComponent } from "./event/persona/persona.component";
 import { EditComponent } from "./event/persona/edit/edit.component";
+import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.component';
 
 const appRoutes: Routes = [
    { path: '', component: HomeComponent },//ruta basica
@@ -37,6 +38,7 @@ const appRoutes: Routes = [
          { path: 'cartera/edit/:name',component:EditCarteraComponent},
          { path: 'ejecutivo', component:EjecutivoComponent},
          { path: 'ejecutivo/edit/:active', component:EditEjecutivoComponent},
+         { path: 'sucursal/add', component: AddSucursalComponent}
       ]
 
    },
