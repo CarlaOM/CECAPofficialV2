@@ -53,6 +53,7 @@ import { EditEjecutivoComponent } from './ejecutivo/edit-ejecutivo/edit-ejecutiv
 
 import { EditComponent } from './event/persona/edit/edit.component';
 import { ModuloComponent } from './modulo/modulo.component';
+import { HeroFormComponent } from './hero-form/hero-form.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { ModuloComponent } from './modulo/modulo.component';
     EditComponent,
     FilterPipe,
     ModuloComponent,
+    HeroFormComponent,
   ],
   imports: [
     BrowserModule,
