@@ -96,6 +96,15 @@ module.exports = {
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } },
    })),
+   modulos: mongoose.model('modulos', new Schema({
+      number: Number,
+      name: String,
+      content: [String],
+
+      _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
+      record_date: { type: Date, default: function () { return new Date() } },
+   })),
+
    // registers: mongoose.model('registers', new Schema({
    //    name: String,
    //    datails: String,

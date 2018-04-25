@@ -52,6 +52,7 @@ import { EjecutivoComponent } from './ejecutivo/ejecutivo.component';
 import { EditEjecutivoComponent } from './ejecutivo/edit-ejecutivo/edit-ejecutivo.component';
 
 import { EditComponent } from './event/persona/edit/edit.component';
+import { ModuloComponent } from './modulo/modulo.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { EditComponent } from './event/persona/edit/edit.component';
     EditEjecutivoComponent,
     EditComponent,
     FilterPipe,
+    ModuloComponent,
   ],
   imports: [
     BrowserModule,
