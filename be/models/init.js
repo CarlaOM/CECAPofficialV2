@@ -365,6 +365,7 @@ module.exports = {
       saveData(_programs, db.programs);
       saveData(_persons, db.persons);
       saveData(_events, db.events);
+      saveData(_modulos, db.modulos);
       saveData(_sucursal, db.sucursal);
    },
 
@@ -375,6 +376,7 @@ module.exports = {
       clearCollections(db.programs);
       clearCollections(db.events);
       clearCollections(db.persons);
+      clearCollections(db.modulos);
       clearCollections(db.sucursal);
    }
 };
