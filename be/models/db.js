@@ -19,7 +19,7 @@ module.exports = {
       password_hash: String,
       // token: String,
       rol: ObjectId,
-
+      sucursal: ObjectId,
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } },
    })),
@@ -102,8 +102,6 @@ module.exports = {
       record_date: { type: Date, default: function () { return new Date() } },
    })),
 
-   /////////////////////////////////////////////////////////
-   
    modulos: mongoose.model('modulos', new Schema({
       number: Number,
       name: String,
@@ -112,6 +110,18 @@ module.exports = {
 
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } },
+   })),
+    
+   //////////////////////////////////////////////////////////////////
+     
+     sucursal: mongoose.model('sucursal', new Schema({
+         name: String,
+         nit:String,
+         ubicacion:String,
+         caja: Number,
+
+         _id:{type: ObjectId, default:function(){return new mongoose.Types.ObjectId}},
+         record_date:{type:Date, default: function(){return new Date() }}
    })),
 
    // registers: mongoose.model('registers', new Schema({
@@ -126,7 +136,7 @@ module.exports = {
 
    //Connection
    connection: function () {
-      var db = mongoose.connect('mongodb://localhost:27017/Cecap',
+      var db = mongoose.connect('mongodb://localhost:27017/Cecap2',
          function (err) {
             if (err) return console.log(err);
             console.log("MongoDB: connection to database succesful!");

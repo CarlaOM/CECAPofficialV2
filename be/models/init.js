@@ -20,6 +20,7 @@ var _user_admin = {
    password_hash: 'a',
    token: 'ASD@!C$$#Q@34234C$#CR$#C344354',
    rol: _rol_admin._id,
+   sucursal: _sucursal_stc,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
@@ -31,6 +32,7 @@ var _user_ejecutivo = {
    password_hash: 'e',
    token: 'ASDWQ#$VHTHEE^EVW324213123c21#2',
    rol: _rol_ejecutivo._id,
+   sucursal: _sucursal_stc,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
@@ -277,6 +279,7 @@ var _event_rrhh2 = {
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
+
 var _event_modulo1 = {
     description: 'solo para ejecutivos',
     date_start: new Date(2018, 05, 06),
@@ -326,6 +329,16 @@ var _event_modulo1 = {
 var _events = [_event_seg, _event_seg2, _event_rrhh, _event_rrhh2, _event_modulo1, _event_modulo2];
 
 
+var _sucursal_stc ={
+    name: 'cecap Cochabamba',
+    nit:'7012323123424',
+    ubicacion:'santa Cruz entre padilla',
+    caja: 1000,
+    _id: new mongoose.Types.ObjectId.ObjectId,
+    record_date: new Date()
+}
+var _sucursal = [_sucursal_stc];
+
 function saveData(collection, schema) {
    for (var i = 0; i < collection.length; i++) {
       collection[i].record_date = new Date();
@@ -353,6 +366,7 @@ module.exports = {
       saveData(_persons, db.persons);
       saveData(_events, db.events);
       saveData(_modulos, db.modulos);
+      saveData(_sucursal, db.sucursal);
    },
 
    clearCollections: function () {
@@ -363,5 +377,6 @@ module.exports = {
       clearCollections(db.events);
       clearCollections(db.persons);
       clearCollections(db.modulos);
+      clearCollections(db.sucursal);
    }
 };

@@ -272,7 +272,7 @@ router
 
    .post('/edit', function (req, res) {
       // console.log('test')
-      console.log('ESTE ES EL BODY DE QUERY')
+      console.log('ESTE ES EL BODY DE QUERY');
       //modificar active
       //db.users.findOne({ name: req.body.name, password_hash: req.body.password_hash, active: true }, { rol: 1, _id: 1 }, function (err, user) {
       if (err) return console.log(err);
@@ -292,8 +292,9 @@ router
             $set: { 'inscriptions.$.state': req.body.state, 'inscriptions.$.description': req.body.description }
          }).exec(function (err, off) {
             if (err) return res.status(400).send(err);
-            db.events.find({ _id: req.body.name, _id: { $in: req.body.person } }, function (err, event) {
-               if (err) return res.status(401).send(err);
+            //db.events.find({ _id: req.body.name, _id: { $in: req.body.person } }, function (err, event) {
+             db.events.find({ _id: req.body.name }, function (err, event) {
+                  if (err) return res.status(401).send(err);
                return res.status(201).send(event);
             });
             //	if (off.nModified == 0) return res.status(406).send();

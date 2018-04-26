@@ -1,0 +1,33 @@
+
+<div class="content-wrapper">
+    <section class="content">
+       <!-- test -->
+       <div style="text-align:center; margin:auto; width:70%;">
+          EDITAR INSCRIPCION      
+         <div class="jumbotron">
+            <div>
+                <label for="">Sucursal 
+                    <input type="text" name="name" #name="ngModel" [(ngModel)]="sucursal.name" class="form-control" placeholder="Nombre de Sucursal" required/>
+                </label>
+                <span *ngIf="!name.valid && name.touched" class="text-alert">
+                  *El nombre de Sucursal es obligatorio.
+                </span>
+            </div>
+            <div class="row mb-5">
+                <label data-error="wrong" data-success="right" for="form34">
+                    <i class="fa fa-user prefix grey-text"></i>  Nombre</label>
+              <input type="text" id="form34" class="form-control validate" #firstName>
+          </div>
+            <div> 
+                <input type="text" name="t" [(ngModel)]="inscription.description" class="form-control" required />
+                <label>Descripcion</label>          
+            </div>
+              <div>
+                <input type="submit" value="GUARDAR" class="btn btn-success" (click)="saveInscription()"/>
+                <input type="submit" value="CANCELAR" class="btn btn-success" (click)="cancelar(eventId)"/>
+              </div>
+         </div>
+     </div>
+   </section>
+     
+ </div>
