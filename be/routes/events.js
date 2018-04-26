@@ -1,14 +1,15 @@
 var express = require('express');
 var db = require('../models/db');
 var router = express.Router();
-
 var mongoose = require('mongoose');
+
 router
    .get('/', function (req, res) {
       var d = new Date();
       db.events.find({ date_start: { $gt: d } }, { date_start: 1, name: 1, program: 1, inscriptions: 1, total: 1 }, function (err, events) {
          if (err) return res.status(400).send(err);
          let programs = [];
+         //let modulos = [];
          var j = 0;
          let insert = true;
          var today = new Date;
@@ -17,7 +18,6 @@ router
             insert = true;
 
             do {
-
                if (programs.length == 0) { insert = false; programs.push(events[i].program); }
                else if (JSON.stringify(programs[j]) == JSON.stringify(events[i].program)) insert = false;
                if (today > events[i].date_start) { insert = false; }

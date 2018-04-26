@@ -37,7 +37,6 @@ module.exports = {
 
    ////////////////////////////////////////////////////////////////////////////
 
-
    events: mongoose.model('events', new Schema({
       name: String,
       description: String,
@@ -57,17 +56,21 @@ module.exports = {
       }],
       total: Number,
       program: ObjectId,
+      //modulo: [ObjectId],
 
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } },
    })),
+
+   //////////////////////////////////////////////////
+
    persons: mongoose.model('persons', new Schema({
       first_name: String,
       last_name: String,
       ci: Number,
       cellphone: Number,
       email:String,
-      ocupation:String,//1 = universitario, 2=Profecional, 3=particular
+      ocupation:String,//1 = universitario, 2=Profesional, 3=particular
       descOcupation:{
             //universitario
             carrera: String,
@@ -84,22 +87,28 @@ module.exports = {
       carteras:ObjectId,
       /////////////
       // user: ObjectId,
-
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } },
    })),
+
+   ////////////////////////////////////////////////////////
+
    programs: mongoose.model('programs', new Schema({
       name: String,
-      modules: [String],
+      //modules: [String],
       details: String,
 
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } },
    })),
+
+   /////////////////////////////////////////////////////////
+   
    modulos: mongoose.model('modulos', new Schema({
       number: Number,
       name: String,
       content: [String],
+      program: ObjectId,
 
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } },

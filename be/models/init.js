@@ -352,6 +352,7 @@ module.exports = {
       saveData(_programs, db.programs);
       saveData(_persons, db.persons);
       saveData(_events, db.events);
+      saveData(_modulos, db.modulos);
    },
 
    clearCollections: function () {
@@ -361,5 +362,6 @@ module.exports = {
       clearCollections(db.programs);
       clearCollections(db.events);
       clearCollections(db.persons);
+      clearCollections(db.modulos);
    }
 };
