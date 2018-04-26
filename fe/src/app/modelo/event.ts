@@ -1,7 +1,7 @@
 export class Event {
    constructor(
       // public name: string,
-      public desription: string,
+      public description: string,
       public date_start: Date,
       // public inscriptions: [{
       //    name: string,
@@ -10,6 +10,7 @@ export class Event {
       //    description: string
       // }],
       public total: number,
-      public program: string
+      public program: string,
+      //public modulo: string
    ) { }
 }

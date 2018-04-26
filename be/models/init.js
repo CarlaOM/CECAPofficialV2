@@ -85,6 +85,34 @@ var _program_rrhh = {
 }
 var _programs = [_program_seguridad, _program_rrhh];
 
+////////////////////////////////////////////
+var _modulo_1 = {
+    number: 1,
+    name: 'modulo 1',
+    content: [
+       '1. reclutamiento y seleccion',
+       '2. induccion',
+       '3. capacitacion'
+    ],
+ 
+    _id: new mongoose.Types.ObjectId,
+    record_date: new Date()
+ }
+ var _modulo_2 = {
+    number: 2,
+    name: 'modulo 2',
+    content: [
+       '1. remuneracion',
+       '2. motivacion',
+       '3. clima laboral'
+    ],
+ 
+    _id: new mongoose.Types.ObjectId,
+    record_date: new Date()
+ }
+var _modulos = [_modulo_1, _modulo_2];
+////////////////////////////////////////////
+
 var _person_1 = {
     first_name: 'laura',
     last_name: 'estrada',
@@ -234,6 +262,7 @@ var _event_rrhh2 = {
    date_start: new Date(2018, 11, 12),
    total: 20,
    program: _program_rrhh,
+
    inscriptions: [
       {
          state: 0,
@@ -250,16 +279,63 @@ var _event_rrhh2 = {
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
-var _events = [_event_seg, _event_seg2, _event_rrhh, _event_rrhh2];
+
+var _event_modulo1 = {
+    description: 'solo para ejecutivos',
+    date_start: new Date(2018, 05, 06),
+    total: 10,
+    program: _program_rrhh,
+    modulo: _modulo_1,
+ 
+    inscriptions: [
+       {
+          state: 0,
+          person: _person_1,
+          description: 'solo para ejecutivos',
+       },
+       {
+          state: 0,
+          person: _person_2,
+          description: 'solo para ejecutivos',
+       }
+    ],
+ 
+    _id: new mongoose.Types.ObjectId,
+    record_date: new Date()
+ }
+ var _event_modulo2 = {
+    description: 'solo para ejecutivos',
+    date_start: new Date(2018, 08, 02),
+    total: 20,
+    program: _program_rrhh,
+    modulo:  _modulo_2,
+ 
+    inscriptions: [
+       {
+          state: 0,
+          person: _person_1,
+          description: 'solo para ejecutivos',
+       },
+       {
+          state: 0,
+          person: _person_2,
+          description: 'solo para ejecutivos',
+       }
+    ],
+ 
+    _id: new mongoose.Types.ObjectId,
+    record_date: new Date()
+ }
+var _events = [_event_seg, _event_seg2, _event_rrhh, _event_rrhh2, _event_modulo1, _event_modulo2];
+
+
 var _sucursal_stc ={
     name: 'cecap Cochabamba',
     nit:'7012323123424',
     ubicacion:'santa Cruz entre padilla',
     caja: 1000,
-
     _id: new mongoose.Types.ObjectId.ObjectId,
     record_date: new Date()
-
 }
 var _sucursal = [_sucursal_stc];
 
