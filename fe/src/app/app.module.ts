@@ -51,6 +51,8 @@ import { EditCarteraComponent } from './cartera/edit-cartera/edit-cartera.compon
 import { EjecutivoComponent } from './ejecutivo/ejecutivo.component';
 import { EditEjecutivoComponent } from './ejecutivo/edit-ejecutivo/edit-ejecutivo.component';
 
+import { SucursalComponent } from './sucursal/sucursal.component';
+import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.component';
 import { EditComponent } from './event/persona/edit/edit.component';
 import { ModuloComponent } from './modulo/modulo.component';
 import { HeroFormComponent } from './hero-form/hero-form.component';
@@ -91,6 +93,8 @@ import { HeroFormComponent } from './hero-form/hero-form.component';
     EditEjecutivoComponent,
     EditComponent,
     FilterPipe,
+    SucursalComponent,
+    AddSucursalComponent,
     ModuloComponent,
     HeroFormComponent,
   ],
