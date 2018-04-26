@@ -34,4 +34,9 @@ export class EjecutivoComponent implements OnInit {
   this.router.navigate(['/home/ejecutivo/edit',_active]);
   //console.log("router.navigate");
   }
+  addEjecutivo(){
+
+    this.router.navigate(['/home/ejecutivo/add']);
+
+  }
 }
