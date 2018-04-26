@@ -7,7 +7,7 @@ import { User} from '../../modelo/user';
   selector: 'app-edit-ejecutivo',
   templateUrl: './edit-ejecutivo.component.html',
   styleUrls: ['./edit-ejecutivo.component.css'],
-  providers: [ PeticionesService]
+  providers: [ PeticionesService ]
 })
 export class EditEjecutivoComponent implements OnInit {
   @ViewChild('active') activeRef:ElementRef;
@@ -37,6 +37,7 @@ export class EditEjecutivoComponent implements OnInit {
      this._peticionesService.getOneUser(this.ejecutivoId).subscribe(
         result =>{
           this.ejecutivo=result;
+          console.log("result")
           this.ejecutivoActive=this.ejecutivo.active;
         },
         error =>{
