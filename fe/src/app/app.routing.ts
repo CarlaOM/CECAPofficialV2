@@ -20,6 +20,7 @@ import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.compone
 import { HeroFormComponent } from "./hero-form/hero-form.component";
 import { AddEjecutivoComponent } from "./ejecutivo/add-ejecutivo/add-ejecutivo.component";
 import { CajaChicaComponent } from "./caja/caja-chica/caja-chica.component";
+import { IngresoComponent } from "./caja/ingreso/ingreso.component";
 
 const appRoutes: Routes = [
    { path: '', component: HomeComponent },//ruta basica
@@ -44,7 +45,8 @@ const appRoutes: Routes = [
          { path: 'ejecutivo/edit/:active', component:EditEjecutivoComponent},
          { path: 'sucursal/add', component: AddSucursalComponent},
          { path: 'formulariobase',component:HeroFormComponent},
-         { path: 'caja', component:CajaChicaComponent}
+         { path: 'caja', component:CajaChicaComponent},
+         { path: 'caja/ingreso', component:IngresoComponent}
 
       ]
 
