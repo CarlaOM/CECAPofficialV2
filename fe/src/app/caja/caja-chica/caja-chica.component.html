@@ -11,23 +11,23 @@
       <h1>Hero Form</h1>
       <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
         <div class="form-group">
-          <label for="firstname">firs Name</label>
-          <input type="text" class="form-control" id="firstname"
+          <label for="titulo">Titulo</label>
+          <input type="text" class="form-control" id="titulo"
                  required
-                 [(ngModel)]="model.firstname" name="firstname"
-                 #firstname="ngModel">
-          <div [hidden]="firstname?.valid || firstname?.pristine"
+                 [(ngModel)]="model[1]" name="titulo"
+                 #titulo="ngModel">
+          <div [hidden]="titulo?.valid || titulo?.pristine"
                class="alert alert-danger">
             first Name is required
           </div>
         </div>
         <div class="form-group">
-          <label for="lastname">last Name</label>
-          <input type="text" class="form-control" id="lastname"
+          <label for="descripcion">last Name</label>
+          <input type="text" class="form-control" id="descripcion"
                  required
-                 [(ngModel)]="model.lastname" name="lastname"
-                 #lastname="ngModel">
-          <div [hidden]="lastname?.valid || lastname?.pristine"
+                 [(ngModel)]="model.descripcion" name="descripcion"
+                 #descripcion="ngModel">
+          <div [hidden]="descripcion?.valid || descripcion?.pristine"
                class="alert alert-danger">
             last Name is required
           </div>
@@ -84,11 +84,11 @@
       <h2>You submitted the following:</h2>
       <div class="row">
         <div class="col-xs-3">Name</div>
-        <div class="col-xs-9  pull-left">{{ model.firstname }}</div>
+        <div class="col-xs-9  pull-left">{{ model.titulo }}</div>
       </div>
       <div class="row">
           <div class="col-xs-3">Name</div>
-          <div class="col-xs-9  pull-left">{{ model.lastname }}</div>
+          <div class="col-xs-9  pull-left">{{ model.descripcion }}</div>
         </div>
       <div class="row">
         <div class="col-xs-3">Alter Ego</div>
