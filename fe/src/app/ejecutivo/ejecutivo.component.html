@@ -13,7 +13,9 @@
            <tr>
               <th>Nombre</th>
               <th>Estado</th>
-              <th colspan="3">Ajustes</th>
+              <th colspan="3">Informacion</th>
+                 
+              
            </tr>
         </thead>
         <tbody> 
@@ -22,8 +24,14 @@
               <td *ngIf="ejecutivo.active==true">Activo</td>
               <td *ngIf="ejecutivo.active==false">Inactivo</td>
               <td>
-                 <a class="btn btn-primary" (click)="editEjecutivo(ejecutivo._id)">EDITAR</a>
+                 <a class="btn btn-primary" (click)="infoEjecutivo(ejecutivo._id)" >ver</a>
               </td>
+              <td>
+                <a class="btn btn-warning" (click)="editEjecutivo(ejecutivo._id)">EDITAR</a>
+             </td>
+             <td>
+                <a class="btn btn-danger" >eliminar</a>
+             </td>
            </tr>
         </tbody>
      </table>
