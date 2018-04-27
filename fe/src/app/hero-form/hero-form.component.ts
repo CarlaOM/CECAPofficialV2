@@ -15,7 +15,7 @@ export class HeroFormComponent implements OnInit {
   powers = ['Really Smart', 'Super Flexible',
   'Super Hot', 'Weather Changer'];
 
-  model = new Hero(18, 'Dr IQ','apellido',4554, this.powers[0], 'Chuck Overstreet');
+  model = new Hero(18, 'Dr IQ','apellido',4554,"74017.linares", this.powers[0], 'Chuck Overstreet');
   // model=new Hero();
 
   submitted = false;

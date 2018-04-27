@@ -21,6 +21,11 @@ import { HeroFormComponent } from "./hero-form/hero-form.component";
 import { DetalleCajaComponent } from './sucursal/detalle-caja/detalle-caja.component';
 import { DetallePersonalComponent } from './sucursal/detalle-personal/detalle-personal.component';
 
+import { AddEjecutivoComponent } from "./ejecutivo/add-ejecutivo/add-ejecutivo.component";
+
+import { InfoEjecutivoComponent } from "./ejecutivo/info-ejecutivo/info-ejecutivo.component";
+
+import { CajaChicaComponent } from "./caja/caja-chica/caja-chica.component";
 
 
 const appRoutes: Routes = [
@@ -42,11 +47,15 @@ const appRoutes: Routes = [
          { path: 'cartera/:id',component:InfoCarteraComponent},
          { path: 'cartera/edit/:name',component:EditCarteraComponent},
          { path: 'ejecutivo', component:EjecutivoComponent},
+         { path: 'ejecutivo/add',component:AddEjecutivoComponent},
+         { path: 'ejecutivo/:id',component:InfoEjecutivoComponent},
          { path: 'ejecutivo/edit/:active', component:EditEjecutivoComponent},
          { path: 'sucursal/add', component: AddSucursalComponent},
          { path: 'sucursal/detalleCaja', component: DetalleCajaComponent},
          { path: 'sucursal/personal', component: DetallePersonalComponent},
-         { path: 'formulariobase',component:HeroFormComponent}
+         { path: 'formulariobase',component:HeroFormComponent},
+         { path: 'formulariobase',component:HeroFormComponent},
+         { path: 'caja', component:CajaChicaComponent}
 
       ]
 

@@ -30,7 +30,7 @@ import { AddProgramComponent } from './events/addProgram/addProgram.component';
 import { AddEventComponent } from './events/addEvent/addEvent.component';
 import { AddPersonComponent } from './event/addPerson/addPerson.component';
 import { EditPersonComponent } from './event/editPerson/editPerson.component';
-import { AddEjecutivoComponent } from './events/add-ejecutivo/add-ejecutivo.component';
+import { AddEjecutivoComponent } from './ejecutivo/add-ejecutivo/add-ejecutivo.component';
 
 //Graphics
 import { ChartsModule } from 'ng2-charts';
@@ -58,6 +58,11 @@ import { ModuloComponent } from './modulo/modulo.component';
 import { HeroFormComponent } from './hero-form/hero-form.component';
 import { DetalleCajaComponent } from './sucursal/detalle-caja/detalle-caja.component';
 import { DetallePersonalComponent } from './sucursal/detalle-personal/detalle-personal.component';
+
+import { InfoEjecutivoComponent } from './ejecutivo/info-ejecutivo/info-ejecutivo.component';
+import { CajaChicaComponent } from './caja/caja-chica/caja-chica.component';
+import { IngresoComponent } from './caja/ingreso/ingreso.component';
+
 
 @NgModule({
   declarations: [
@@ -101,6 +106,12 @@ import { DetallePersonalComponent } from './sucursal/detalle-personal/detalle-pe
     HeroFormComponent,
     DetalleCajaComponent,
     DetallePersonalComponent,
+
+    InfoEjecutivoComponent,
+
+    CajaChicaComponent,
+    IngresoComponent,
+
   ],
   imports: [
     BrowserModule,
