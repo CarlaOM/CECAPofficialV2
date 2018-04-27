@@ -18,6 +18,10 @@ import { PersonaComponent } from "./event/persona/persona.component";
 import { EditComponent } from "./event/persona/edit/edit.component";
 import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.component';
 import { HeroFormComponent } from "./hero-form/hero-form.component";
+import { DetalleCajaComponent } from './sucursal/detalle-caja/detalle-caja.component';
+import { DetallePersonalComponent } from './sucursal/detalle-personal/detalle-personal.component';
+
+
 
 const appRoutes: Routes = [
    { path: '', component: HomeComponent },//ruta basica
@@ -40,6 +44,8 @@ const appRoutes: Routes = [
          { path: 'ejecutivo', component:EjecutivoComponent},
          { path: 'ejecutivo/edit/:active', component:EditEjecutivoComponent},
          { path: 'sucursal/add', component: AddSucursalComponent},
+         { path: 'sucursal/detalleCaja', component: DetalleCajaComponent},
+         { path: 'sucursal/personal', component: DetallePersonalComponent},
          { path: 'formulariobase',component:HeroFormComponent}
 
       ]

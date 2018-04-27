@@ -167,6 +167,19 @@
             <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
           </ul>
         </li> -->
+        <li class="treeview">
+          <a href="#">
+            <i class="glyphicon glyphicon-globe"></i>
+            <span>Sucursales</span><!-- aqui va lista de sucursales-->
+            <span class="pull-right-container">
+              <i class="glyphicon glyphicon-menu-down"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a [routerLink]="['/home/sucursal/detalleCaja']"><i class="fa fa-circle-o"></i> Cecap Cochabamba</a></li>
+            <li><a [routerLink]="['/home/sucursal/detalleCaja']"><i class="fa fa-circle-o"></i> Cecap Sta. Cruz</a></li>
+          </ul>
+        </li> 
         <li><a [routerLink]="['/home/events']"><i class="fa fa-book"></i><span>Eventos</span></a></li>
         <li><a [routerLink]="['/home/reports']"><i class="fa fa-book"></i> <span>Reportes</span></a></li>
         <li><a [routerLink]="['/home/cartera']"><i class="fa fa-book"></i> <span>Cartera</span></a></li>

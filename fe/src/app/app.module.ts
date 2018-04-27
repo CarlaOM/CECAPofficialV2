@@ -56,6 +56,8 @@ import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.compone
 import { EditComponent } from './event/persona/edit/edit.component';
 import { ModuloComponent } from './modulo/modulo.component';
 import { HeroFormComponent } from './hero-form/hero-form.component';
+import { DetalleCajaComponent } from './sucursal/detalle-caja/detalle-caja.component';
+import { DetallePersonalComponent } from './sucursal/detalle-personal/detalle-personal.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +99,8 @@ import { HeroFormComponent } from './hero-form/hero-form.component';
     AddSucursalComponent,
     ModuloComponent,
     HeroFormComponent,
+    DetalleCajaComponent,
+    DetallePersonalComponent,
   ],
   imports: [
     BrowserModule,
