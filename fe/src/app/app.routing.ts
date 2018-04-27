@@ -19,6 +19,7 @@ import { EditComponent } from "./event/persona/edit/edit.component";
 import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.component';
 import { HeroFormComponent } from "./hero-form/hero-form.component";
 import { AddEjecutivoComponent } from "./ejecutivo/add-ejecutivo/add-ejecutivo.component";
+import { InfoEjecutivoComponent } from "./ejecutivo/info-ejecutivo/info-ejecutivo.component";
 
 const appRoutes: Routes = [
    { path: '', component: HomeComponent },//ruta basica
@@ -40,6 +41,7 @@ const appRoutes: Routes = [
          { path: 'cartera/edit/:name',component:EditCarteraComponent},
          { path: 'ejecutivo', component:EjecutivoComponent},
          { path: 'ejecutivo/add',component:AddEjecutivoComponent},
+         { path: 'ejecutivo/:id',component:InfoEjecutivoComponent},
          { path: 'ejecutivo/edit/:active', component:EditEjecutivoComponent},
          { path: 'sucursal/add', component: AddSucursalComponent},
          { path: 'formulariobase',component:HeroFormComponent}
