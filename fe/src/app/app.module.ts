@@ -56,6 +56,8 @@ import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.compone
 import { EditComponent } from './event/persona/edit/edit.component';
 import { ModuloComponent } from './modulo/modulo.component';
 import { HeroFormComponent } from './hero-form/hero-form.component';
+import { DetalleCajaComponent } from './sucursal/detalle-caja/detalle-caja.component';
+import { DetallePersonalComponent } from './sucursal/detalle-personal/detalle-personal.component';
 
 import { InfoEjecutivoComponent } from './ejecutivo/info-ejecutivo/info-ejecutivo.component';
 import { CajaChicaComponent } from './caja/caja-chica/caja-chica.component';
@@ -102,6 +104,8 @@ import { IngresoComponent } from './caja/ingreso/ingreso.component';
     AddSucursalComponent,
     ModuloComponent,
     HeroFormComponent,
+    DetalleCajaComponent,
+    DetallePersonalComponent,
 
     InfoEjecutivoComponent,
 
