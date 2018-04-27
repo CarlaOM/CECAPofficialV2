@@ -34,11 +34,13 @@ export class AddEjecutivoComponent implements OnInit {
  
   public sucursales=["sucursal1","sucursal2","sucursal3"];
   public carteras=['cartera1','caretera2','caretea3'];
-  // model = new Ejecutivo(78,"NOMBRE","APELLIDO",6532,"ASDF@ASDF.ASD",this.roles[0],this.sucursales[0],this.carteras[0]);
-  model=new Ejecutivo();
+  model = new Ejecutivo(78,"NOMBRE","APELLIDO",6532,"ASDF@ASDF.ASD",this.roles[0],this.sucursales[0],this.carteras[0]);
+  // model=new Ejecutivo();
   get diagnostic() { return JSON.stringify(this.model); }
 /////////////////////////////////////////////////
+  submitted = false;
 
+  onSubmit() { this.submitted = true; }
   ngOnInit() {
     // this._peticionesService.getCarteras().subscribe(response=>{
     //   this.carteras=response;

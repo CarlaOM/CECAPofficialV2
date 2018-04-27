@@ -48,7 +48,7 @@
             <label for="email">email</label>
             <input type="email" class="form-control" id="email"
                    required
-                   [(ngModel)]="email.cell" name="email"
+                   [(ngModel)]="model.cell" name="email"
                    #email="ngModel">
             <div [hidden]="email?.valid || email?.pristine"
                  class="alert alert-danger">
@@ -76,7 +76,7 @@
         </div>
    
         <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
-        <button type="button" class="btn btn-default" (click)="newHero(); heroForm.reset()">New Hero</button>
+        <button type="button" class="btn btn-default" (click)="heroForm.reset()">New Hero</button>
       </form>
     </div>
    
