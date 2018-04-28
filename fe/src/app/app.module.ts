@@ -55,19 +55,11 @@ import { SucursalComponent } from './sucursal/sucursal.component';
 import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.component';
 import { EditComponent } from './event/persona/edit/edit.component';
 import { HeroFormComponent } from './hero-form/hero-form.component';
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { ProgramaComponent } from './programa/programa.component';
-import { ModuloComponent } from './programa/modulo/modulo.component';
-import { EditProgramaComponent } from './programa/edit-programa/edit-programa.component';
-=======
-=======
 
 import { ProgramaComponent } from './programa/programa.component';
 import { ModuloComponent } from './programa/modulo/modulo.component';
 import { EditProgramaComponent } from './programa/edit-programa/edit-programa.component';
 
->>>>>>> 72ef2f5fca311c87eddde5970b1cd45aecccd170
 import { DetalleCajaComponent } from './sucursal/detalle-caja/detalle-caja.component';
 import { DetallePersonalComponent } from './sucursal/detalle-personal/detalle-personal.component';
 
@@ -75,11 +67,6 @@ import { InfoEjecutivoComponent } from './ejecutivo/info-ejecutivo/info-ejecutiv
 import { CajaChicaComponent } from './caja/caja-chica/caja-chica.component';
 import { IngresoComponent } from './caja/ingreso/ingreso.component';
 
-<<<<<<< HEAD
->>>>>>> 2d4fd3c9ae4eb99b650dd18ce8e8c79e9c59fa74
-
-=======
->>>>>>> 72ef2f5fca311c87eddde5970b1cd45aecccd170
 @NgModule({
   declarations: [
     AppComponent,
@@ -119,29 +106,17 @@ import { IngresoComponent } from './caja/ingreso/ingreso.component';
     SucursalComponent,
     AddSucursalComponent,
     HeroFormComponent,
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 72ef2f5fca311c87eddde5970b1cd45aecccd170
-    
+
     ProgramaComponent,
     ModuloComponent,
     EditProgramaComponent,
-<<<<<<< HEAD
-=======
-=======
 
->>>>>>> 72ef2f5fca311c87eddde5970b1cd45aecccd170
     DetalleCajaComponent,
     DetallePersonalComponent,
     InfoEjecutivoComponent,
     CajaChicaComponent,
     IngresoComponent,
 
-<<<<<<< HEAD
->>>>>>> 2d4fd3c9ae4eb99b650dd18ce8e8c79e9c59fa74
-=======
->>>>>>> 72ef2f5fca311c87eddde5970b1cd45aecccd170
   ],
   imports: [
     BrowserModule,
