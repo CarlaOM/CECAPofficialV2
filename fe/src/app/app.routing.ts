@@ -19,6 +19,10 @@ import { EditComponent } from "./event/persona/edit/edit.component";
 import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.component';
 import { HeroFormComponent } from "./hero-form/hero-form.component";
 import { AddEjecutivoComponent } from "./ejecutivo/add-ejecutivo/add-ejecutivo.component";
+import { Programa } from './modelo/programa';
+import { ProgramaComponent } from './programa/programa.component';
+import { ModuloComponent } from './programa/modulo/modulo.component';
+import {EditProgramaComponent} from './programa/edit-programa/edit-programa.component';
 
 const appRoutes: Routes = [
    { path: '', component: HomeComponent },//ruta basica
@@ -42,10 +46,11 @@ const appRoutes: Routes = [
          { path: 'ejecutivo/add',component:AddEjecutivoComponent},
          { path: 'ejecutivo/edit/:active', component:EditEjecutivoComponent},
          { path: 'sucursal/add', component: AddSucursalComponent},
-         { path: 'formulariobase',component:HeroFormComponent}
-
+         { path: 'formulariobase',component:HeroFormComponent},
+         { path: 'programs', component: ProgramaComponent},
+         { path: 'program/:id', component: ModuloComponent},
+         { path: 'program/edit/:id', component: EditProgramaComponent},
       ]
-
    },
 
    //{path: '', component: LoginFormComponent}

@@ -54,8 +54,10 @@ import { EditEjecutivoComponent } from './ejecutivo/edit-ejecutivo/edit-ejecutiv
 import { SucursalComponent } from './sucursal/sucursal.component';
 import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.component';
 import { EditComponent } from './event/persona/edit/edit.component';
-import { ModuloComponent } from './modulo/modulo.component';
 import { HeroFormComponent } from './hero-form/hero-form.component';
+import { ProgramaComponent } from './programa/programa.component';
+import { ModuloComponent } from './programa/modulo/modulo.component';
+import { EditProgramaComponent } from './programa/edit-programa/edit-programa.component';
 
 @NgModule({
   declarations: [
@@ -95,8 +97,11 @@ import { HeroFormComponent } from './hero-form/hero-form.component';
     FilterPipe,
     SucursalComponent,
     AddSucursalComponent,
-    ModuloComponent,
     HeroFormComponent,
+    
+    ProgramaComponent,
+    ModuloComponent,
+    EditProgramaComponent,
   ],
   imports: [
     BrowserModule,
