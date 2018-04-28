@@ -18,12 +18,15 @@ import { PersonaComponent } from "./event/persona/persona.component";
 import { EditComponent } from "./event/persona/edit/edit.component";
 import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.component';
 import { HeroFormComponent } from "./hero-form/hero-form.component";
+import { DetalleCajaComponent } from './sucursal/detalle-caja/detalle-caja.component';
+import { DetallePersonalComponent } from './sucursal/detalle-personal/detalle-personal.component';
+
 import { AddEjecutivoComponent } from "./ejecutivo/add-ejecutivo/add-ejecutivo.component";
 
 import { InfoEjecutivoComponent } from "./ejecutivo/info-ejecutivo/info-ejecutivo.component";
 
 import { CajaChicaComponent } from "./caja/caja-chica/caja-chica.component";
-import { VistaCajaComponent } from "./caja/vista-caja/vista-caja.component";
+import { IngresoComponent } from "./caja/ingreso/ingreso.component";
 
 
 const appRoutes: Routes = [
@@ -49,9 +52,12 @@ const appRoutes: Routes = [
          { path: 'ejecutivo/:id',component:InfoEjecutivoComponent},
          { path: 'ejecutivo/edit/:active', component:EditEjecutivoComponent},
          { path: 'sucursal/add', component: AddSucursalComponent},
+         { path: 'sucursal/detalleCaja', component: DetalleCajaComponent},
+         { path: 'sucursal/personal', component: DetallePersonalComponent},
+         { path: 'formulariobase',component:HeroFormComponent},
          { path: 'formulariobase',component:HeroFormComponent},
          { path: 'caja', component:CajaChicaComponent},
-         { path: 'caja/principal',component:VistaCajaComponent}
+         { path: 'caja/ingreso', component:IngresoComponent}
 
       ]
 
