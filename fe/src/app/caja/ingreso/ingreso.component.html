@@ -1,0 +1,113 @@
+<div class="content-wrapper">
+  <br>
+  <div class="">
+
+
+ 
+  <div class="box box-primary">
+
+<div class="container">
+    <div [hidden]="submitted">
+      <h1>Ingreso</h1>
+      <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+        <div class="form-group">
+          <label for="titulo">Titulo</label>
+          <input type="text" class="form-control" id="titulo"
+                 required
+                 [(ngModel)]="model[1]" name="titulo"
+                 #titulo="ngModel">
+          <div [hidden]="titulo?.valid || titulo?.pristine"
+               class="alert alert-danger">
+            El Titulo es requerido
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="descripcion">Descripcion</label>
+          <input type="text" class="form-control" id="descripcion"
+                 required
+                 [(ngModel)]="model[2]" name="descripcion"
+                 #descripcion="ngModel">
+          <div [hidden]="descripcion?.valid || descripcion?.pristine"
+               class="alert alert-danger">
+            Descripcion es requerido
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inscrito">Inscrito</label>
+          <input type="number" class="form-control" id="inscrito"
+                 required
+                 [(ngModel)]="model[3]" name="inscrito"
+                 #inscrito="ngModel">
+          <div [hidden]="inscrito?.valid || inscrito?.pristine"
+               class="alert alert-danger">
+            inscrito es requerido
+          </div>
+        </div>
+
+        <div class="form-group">
+            <label for="Ci">Ci</label>
+            <input type="Ci" class="form-control" id="Ci"
+                   required
+                   [(ngModel)]="model[4]" name="Ci"
+                   #Ci="ngModel">
+            <div [hidden]="Ci?.valid || Ci?.pristine"
+                 class="alert alert-danger">
+                 Ci is required
+            </div>
+          </div>
+   
+        <div class="form-group">
+          <label for="recibo">Numero de Recibo</label>
+          <input type="text" class="form-control" id="recibo"
+                 required
+                 [(ngModel)]="model[5]" name="recibo"
+                 #recibo="ngModel">
+          <div [hidden]="recibo?.valid || recibo?.pristine"
+                class="alert alert-danger">
+            Numero de Recibo es requerido
+          </div>
+        </div>
+   
+        <div class="form-group">
+          <label for="monto">Monto</label>
+          <input type="number" class="form-control" id="monto"
+              required
+              [(ngModel)]="model[6]" name="monto"
+              #monto="ngModel">
+          <div [hidden]="monto.valid || monto.pristine" class="alert alert-danger">
+            monto is required
+          </div>
+        </div>
+   
+        <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
+        <button type="button" class="btn btn-default" (click)="heroForm.reset()">New Hero</button>
+      </form>
+    </div>
+   
+    <div [hidden]="!submitted">
+      <h2>You submitted the following:</h2>
+      <div class="row">
+        <div class="col-xs-3">Name</div>
+        <div class="col-xs-9  pull-left">{{ model[1] }}</div>
+      </div>
+      <div class="row">
+          <div class="col-xs-3">Name</div>
+          <div class="col-xs-9  pull-left">{{ model[2] }}</div>
+        </div>
+      <div class="row">
+        <div class="col-xs-3">Alter Ego</div>
+        <div class="col-xs-9 pull-left">{{ model[5] }}</div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">monto</div>
+        <div class="col-xs-9 pull-left">{{ model[6] }}</div>
+      </div>
+      <br>
+      <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+    </div>
+  </div>
+
+  </div>
+
+</div>
+</div>

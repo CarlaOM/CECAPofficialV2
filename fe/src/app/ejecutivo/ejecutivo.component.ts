@@ -39,4 +39,8 @@ export class EjecutivoComponent implements OnInit {
     this.router.navigate(['/home/ejecutivo/add']);
 
   }
+  infoEjecutivo(_id:string){
+    // console.log(_id);
+    this.router.navigate(['/home/ejecutivo',_id]);
+  }
 }
