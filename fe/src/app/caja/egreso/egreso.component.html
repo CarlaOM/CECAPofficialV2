@@ -8,7 +8,7 @@
 
 <div class="container">
     <div [hidden]="submitted">
-      <h1>Ingreso</h1>
+      <h1>Egresos</h1>
       <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
         <div class="form-group">
           <label for="titulo">Titulo</label>
@@ -16,9 +16,12 @@
                  required
                  [(ngModel)]="model[1]" name="titulo"
                  #titulo="ngModel">
-          <div [hidden]="titulo?.valid || titulo?.pristine"
+          <div [hidden]="titulo?.pristine"
                class="danger">
             El Titulo es requerido
+          <!-- <div [hidden]="titulo?.valid"
+                class="danger">
+            El titulo requiere letras -->
           </div>
         </div>
         <div class="form-group">
@@ -32,42 +35,7 @@
             Descripcion es requerido
           </div>
         </div>
-        <div class="form-group">
-          <label for="inscrito">Inscrito</label>
-          <input type="number" class="form-control" id="inscrito"
-                 required
-                 [(ngModel)]="model[3]" name="inscrito"
-                 #inscrito="ngModel">
-          <div [hidden]="inscrito?.valid || inscrito?.pristine"
-               class="alert alert-danger">
-            inscrito es requerido
-          </div>
-        </div>
 
-        <div class="form-group">
-            <label for="Ci">Ci</label>
-            <input type="Ci" class="form-control" id="Ci"
-                   required
-                   [(ngModel)]="model[4]" name="Ci"
-                   #Ci="ngModel">
-            <div [hidden]="Ci?.valid || Ci?.pristine"
-                 class="alert alert-danger">
-                 Ci is required
-            </div>
-          </div>
-   
-        <div class="form-group">
-          <label for="recibo">Numero de Recibo</label>
-          <input type="text" class="form-control" id="recibo"
-                 required
-                 [(ngModel)]="model[5]" name="recibo"
-                 #recibo="ngModel">
-          <div [hidden]="recibo?.valid || recibo?.pristine"
-                class="alert alert-danger">
-            Numero de Recibo es requerido
-          </div>
-        </div>
-   
         <div class="form-group">
           <label for="monto">Monto</label>
           <input type="number" class="form-control" id="monto"
@@ -75,7 +43,7 @@
               [(ngModel)]="model[6]" name="monto"
               #monto="ngModel">
           <div [hidden]="monto.valid || monto.pristine" class="alert alert-danger">
-            monto is required
+            Monto es requerido o el tipo de dato es invalido 
           </div>
         </div>
    
@@ -103,7 +71,7 @@
         <div class="col-xs-9 pull-left">{{ model[6] }}</div>
       </div>
       <br>
-      <button class="btn btn-primary" (click)="submitted=false">Editar</button>
+      <button class="btn btn-primary" (click)="submitted=false">Edit</button>
     </div>
   </div>
 

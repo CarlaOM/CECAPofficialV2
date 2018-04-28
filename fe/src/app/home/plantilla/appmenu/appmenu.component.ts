@@ -8,6 +8,7 @@ import { Identity } from '../../../services/global';
 })
 export class AppmenuComponent implements OnInit {
   public nameUser;
+  public prueba= 'add';
   constructor() { }
 
   ngOnInit() {
