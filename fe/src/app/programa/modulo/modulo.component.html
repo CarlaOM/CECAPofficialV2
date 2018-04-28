@@ -1,0 +1,36 @@
+<div class="content-wrapper">
+  <section class="content-header">
+      <h1>
+         Modulos
+         <small>Lista</small>
+      </h1>
+   </section>
+<section class="content">
+      <a class="btn btn-primary a" (click)="addPrograma()">Registrar Modulo</a>
+     
+   <table class="table table-hover" >
+      <thead>
+         <tr>
+            <th>Nro</th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th colspan="3">Ajustes</th>
+         </tr>
+      </thead>
+      <tbody> 
+         <tr *ngFor="let modulo of modulos">
+            <td>{{ modulo.number }}</td>
+            <td>{{ modulo.name }}</td>
+            <td>
+              <a class="btn btn-warning" (click)="editEjecutivo(ejecutivo._id)">VER CONTENIDO</a>
+            </td>
+            <td>
+               <a class="btn btn-success" (click)="editEjecutivo(ejecutivo._id)">EDITAR</a>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+   
+</section>
+<router-outlet></router-outlet>
+</div>
