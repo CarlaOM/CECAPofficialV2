@@ -33,8 +33,16 @@ export class AddEjecutivoComponent implements OnInit {
   public sucursales=["sucursal1","sucursal2","sucursal3"];
   public carteras=['cartera1','caretera2','caretea3'];
   model = new Ejecutivo(78,"NOMBRE","APELLIDO",6532,"ASDF@ASDF.ASD",this.roles[0],this.sucursales[0],this.carteras[0]);
+<<<<<<< HEAD
+<<<<<<< HEAD
+ // model=new Ejecutivo();
+=======
+  // model=new Ejecutivo();
+>>>>>>> 2d4fd3c9ae4eb99b650dd18ce8e8c79e9c59fa74
+=======
  // model=new Ejecutivo();
   
+>>>>>>> 72ef2f5fca311c87eddde5970b1cd45aecccd170
   get diagnostic() { return JSON.stringify(this.model); }
 /////////////////////////////////////////////////
   submitted = false;

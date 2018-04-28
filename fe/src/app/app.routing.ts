@@ -56,16 +56,29 @@ const appRoutes: Routes = [
          { path: 'ejecutivo/:id',component:InfoEjecutivoComponent},
          { path: 'ejecutivo/edit/:active', component:EditEjecutivoComponent},
          { path: 'sucursal/add', component: AddSucursalComponent},
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 72ef2f5fca311c87eddde5970b1cd45aecccd170
          { path: 'formulariobase',component:HeroFormComponent},
          { path: 'programs', component: ProgramaComponent},
          { path: 'program/:id', component: ModuloComponent},
          { path: 'program/edit/:id', component: EditProgramaComponent},
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 72ef2f5fca311c87eddde5970b1cd45aecccd170
          { path: 'sucursal/detalleCaja', component: DetalleCajaComponent},
          { path: 'sucursal/personal', component: DetallePersonalComponent},
          { path: 'formulariobase',component:HeroFormComponent},
          { path: 'formulariobase',component:HeroFormComponent},
          { path: 'caja', component:CajaChicaComponent},
          { path: 'caja/ingreso', component:IngresoComponent}
+<<<<<<< HEAD
+
+>>>>>>> 2d4fd3c9ae4eb99b650dd18ce8e8c79e9c59fa74
+=======
+>>>>>>> 72ef2f5fca311c87eddde5970b1cd45aecccd170
       ]
    },
 
