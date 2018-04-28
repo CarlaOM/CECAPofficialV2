@@ -1,3 +1,5 @@
+//import { isObject } from 'util';
+
 // import { mongo } from 'mongoose';
 
 var mongoose = require('mongoose');
@@ -13,53 +15,49 @@ module.exports = {
 
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
    })),
+
+   ////////////////////////////////////////////////////////////////////////////
+
    users: mongoose.model('users', new Schema({
       name: String,
       active: Boolean,
       password_hash: String,
       // token: String,
       rol: ObjectId,
-      sucursal: ObjectId,
+      offices: ObjectId,
+      amount: Number,
+
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } },
    })),
 
-
    ////////////////////////////////////////////////////////////////////////////
 
-   carteras: mongoose.model('carteras',new Schema({
-      name:String,
-      user:ObjectId,
-      _id:{type:ObjectId,default:function(){return new mongoose.Types.ObjectId}},
-      record_date:{type:Date, default:function(){return new Date}}
-
-   })),
-
-   ////////////////////////////////////////////////////////////////////////////
-
-   events: mongoose.model('events', new Schema({
-      name: String,
-      description: String,
+   cashFlowUsers: mongoose.model('cashFlowUsers', new Schema({
       date_start: Date,
-      inscriptions: [{
-         name: String,
-         state: Number,
-         person: ObjectId,
+      date_end: Date,
+      amount: Number,
+      amount_delivered: Number,
+      details: [{
+         receipt: Number,
          description: String,
-         user: ObjectId
-         // 0 en duda
-         // 1 inscrito
-         // 2 interesado
-         // 3 confirmar
-         // 4 sin interes
-         // 5 proximo evento
+         amount: Number,
       }],
-      total: Number,
-      program: ObjectId,
-      //modulo: [ObjectId],
+      user: ObjectId,
 
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } },
+   })),
+
+   ////////////////////////////////////////////////////////////////////////////
+
+   carteras: mongoose.model('carteras', new Schema({
+      name: String,
+      user: ObjectId,
+
+      _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
+      record_date: { type: Date, default: function () { return new Date } }
+
    })),
 
    //////////////////////////////////////////////////
@@ -68,25 +66,98 @@ module.exports = {
       first_name: String,
       last_name: String,
       ci: Number,
+      phone: Number,
       cellphone: Number,
-      email:String,
-      ocupation:String,//1 = universitario, 2=Profesional, 3=particular
-      descOcupation:{
-            //universitario
-            carrera: String,
-            universidad: String,
-            semestre:String,
-            //Particular
-            areaTrabajo: String,
-            //Profesional
-            profesion: String,
-            empresa: String,
-            cargo: String,
-         },
+      email: String,
+      ocupation: String,//1 = universitario, 2=Profesional, 3=particular
+      descOcupation: {
+         //universitario
+         carrera: String,
+         universidad: String,
+         semestre: String,
+         //Particular
+         areaTrabajo: String,
+         //Profesional
+         profesion: String,
+         empresa: String,
+         cargo: String,
+      },
       //////////////
-      carteras:ObjectId,
+      carteras: ObjectId,
       /////////////
+      profile: {
+         programs: [{
+            program: ObjectId,
+            modulars: [{
+               amount: [{
+                  detail: String,
+                  receipt: Number,
+                  date: Date,
+                  amount: Number
+               }],
+               debt: Number,
+               assistance: Boolean,
+               event: ObjectId,
+               inscription: ObjectId,
+               module: ObjectId,
+               print_certificate: Boolean,
+            }],
+            final_work: {
+               stade: Number,
+               observations: String,
+            },
+            requirements: {},
+            print_diploma: Boolean
+         }]
+      },
       // user: ObjectId,
+      _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
+      record_date: { type: Date, default: function () { return new Date() } },
+   })),
+
+   ////////////////////////////////////////////////////////////////////////////
+   
+   facilitators: mongoose.model('facilitators', new Schema({
+      name: String,
+      job: String,
+
+
+      _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
+      record_date: { type: Date, default: function () { return new Date() } },
+   })),
+
+   ////////////////////////////////////////////////////////////////////////////
+
+   events: mongoose.model('events', new Schema({
+      name: String,
+      description: String,
+      date_start: Date,
+      modular:[{
+         date_start: Date,
+         date_end: Date,
+         facilitator: ObjectId,
+         list: [{
+            person: ObjectId,
+            amount: Number,
+            receipt: Number,
+            assist: Boolean,
+            type: Number, //nuevo // nivelacion
+         }],
+         module: ObjectId,
+         _id: ObjectId
+      }],
+      inscriptions: [{
+         // segun al numero de asistencias sacar el precio total q tiene q pagar
+         total_price: Number,
+         module_price: Number,
+         canceled_price: Number,
+         person: ObjectId,
+         user: ObjectId
+      }],
+      total: Number,
+      program: ObjectId,
+      //modulo: [ObjectId],
+
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } },
    })),
@@ -102,7 +173,7 @@ module.exports = {
       record_date: { type: Date, default: function () { return new Date() } },
    })),
 
-   modulos: mongoose.model('modulos', new Schema({
+   modules: mongoose.model('modules', new Schema({
       number: Number,
       name: String,
       content: [String],
@@ -111,17 +182,49 @@ module.exports = {
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } },
    })),
-    
-   //////////////////////////////////////////////////////////////////
-     
-     sucursal: mongoose.model('sucursal', new Schema({
-         name: String,
-         nit:String,
-         ubicacion:String,
-         caja: Number,
 
-         _id:{type: ObjectId, default:function(){return new mongoose.Types.ObjectId}},
-         record_date:{type:Date, default: function(){return new Date() }}
+   //////////////////////////////////////////////////////////////////
+
+   offices: mongoose.model('offices', new Schema({
+      name: String,
+      // nit:String,
+      ubicacion: String,
+      caja: Number,
+      departament: String,
+      company_id: ObjectId,
+
+      _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
+      record_date: { type: Date, default: function () { return new Date() } }
+   })),
+
+   //////////////////////////////////////////////////////////////////
+
+   company: mongoose.model('company', new Schema({
+      name: String,
+      nit: String,
+      caja: Number,
+      cash_flow: [{
+         amount: Number,
+         description: String,
+         _id: ObjectId
+      }],
+      _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
+      record_date: { type: Date, default: function () { return new Date() } }
+   })),
+
+   //////////////////////////////////////////////////////////////////
+
+   correlatives: mongoose.model('correlatives', new Schema({
+      year: Date,
+      company_id: ObjectId,
+      receipts: [{
+         receipt: Number,
+         amount: Number,
+         description: String
+      }],
+
+      _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
+      record_date: { type: Date, default: function () { return new Date() } }
    })),
 
    // registers: mongoose.model('registers', new Schema({

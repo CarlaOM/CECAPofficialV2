@@ -54,16 +54,29 @@ import { EditEjecutivoComponent } from './ejecutivo/edit-ejecutivo/edit-ejecutiv
 import { SucursalComponent } from './sucursal/sucursal.component';
 import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.component';
 import { EditComponent } from './event/persona/edit/edit.component';
+<<<<<<< HEAD
 import { ModuloComponent } from './modulo/modulo.component';
 import { HeroFormComponent } from './hero-form/hero-form.component';
+=======
+import { HeroFormComponent } from './hero-form/hero-form.component';
+
+import { ProgramaComponent } from './programa/programa.component';
+import { ModuloComponent } from './programa/modulo/modulo.component';
+import { EditProgramaComponent } from './programa/edit-programa/edit-programa.component';
+
+>>>>>>> cc9fbeaee0f5f4c4aa8d53f6fa32a4651b64d49c
 import { DetalleCajaComponent } from './sucursal/detalle-caja/detalle-caja.component';
 import { DetallePersonalComponent } from './sucursal/detalle-personal/detalle-personal.component';
 
 import { InfoEjecutivoComponent } from './ejecutivo/info-ejecutivo/info-ejecutivo.component';
 import { CajaChicaComponent } from './caja/caja-chica/caja-chica.component';
+<<<<<<< HEAD
 import { IngresoComponent } from './caja/ingreso/ingreso.component';
 import { EgresoComponent } from './caja/egreso/egreso.component';
 
+=======
+import { IngresoComponent } from './caja/ingreso/ingreso.component';
+>>>>>>> cc9fbeaee0f5f4c4aa8d53f6fa32a4651b64d49c
 
 @NgModule({
   declarations: [
@@ -103,8 +116,8 @@ import { EgresoComponent } from './caja/egreso/egreso.component';
     FilterPipe,
     SucursalComponent,
     AddSucursalComponent,
-    ModuloComponent,
     HeroFormComponent,
+<<<<<<< HEAD
     DetalleCajaComponent,
     DetallePersonalComponent,
 
@@ -113,6 +126,18 @@ import { EgresoComponent } from './caja/egreso/egreso.component';
     CajaChicaComponent,
     IngresoComponent,
     EgresoComponent,
+=======
+
+    ProgramaComponent,
+    ModuloComponent,
+    EditProgramaComponent,
+
+    DetalleCajaComponent,
+    DetallePersonalComponent,
+    InfoEjecutivoComponent,
+    CajaChicaComponent,
+    IngresoComponent,
+>>>>>>> cc9fbeaee0f5f4c4aa8d53f6fa32a4651b64d49c
 
   ],
   imports: [

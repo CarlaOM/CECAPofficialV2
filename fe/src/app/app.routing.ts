@@ -22,12 +22,20 @@ import { DetalleCajaComponent } from './sucursal/detalle-caja/detalle-caja.compo
 import { DetallePersonalComponent } from './sucursal/detalle-personal/detalle-personal.component';
 
 import { AddEjecutivoComponent } from "./ejecutivo/add-ejecutivo/add-ejecutivo.component";
+<<<<<<< HEAD
+=======
+import { Programa } from './modelo/programa';
+import { ProgramaComponent } from './programa/programa.component';
+import { ModuloComponent } from './programa/modulo/modulo.component';
+import {EditProgramaComponent} from './programa/edit-programa/edit-programa.component';
+>>>>>>> cc9fbeaee0f5f4c4aa8d53f6fa32a4651b64d49c
 
 import { InfoEjecutivoComponent } from "./ejecutivo/info-ejecutivo/info-ejecutivo.component";
 
 import { CajaChicaComponent } from "./caja/caja-chica/caja-chica.component";
 import { IngresoComponent } from "./caja/ingreso/ingreso.component";
 import { EgresoComponent } from './caja/egreso/egreso.component';
+
 
 
 const appRoutes: Routes = [
@@ -57,12 +65,22 @@ const appRoutes: Routes = [
          { path: 'sucursal/personal', component: DetallePersonalComponent},
          { path: 'formulariobase',component:HeroFormComponent},
          { path: 'formulariobase',component:HeroFormComponent},
+         { path: 'programs', component: ProgramaComponent},
+         { path: 'program/:id', component: ModuloComponent},
+         { path: 'program/edit/:id', component: EditProgramaComponent},
+         { path: 'sucursal/detalleCaja', component: DetalleCajaComponent},
+         { path: 'sucursal/personal', component: DetallePersonalComponent},
+         { path: 'formulariobase',component:HeroFormComponent},
+         { path: 'formulariobase',component:HeroFormComponent},
          { path: 'caja', component:CajaChicaComponent},
+<<<<<<< HEAD
          { path: 'caja/ingreso', component:IngresoComponent},
          { path: 'caja/egreso', component:EgresoComponent}
 
+=======
+         { path: 'caja/ingreso', component:IngresoComponent}
+>>>>>>> cc9fbeaee0f5f4c4aa8d53f6fa32a4651b64d49c
       ]
-
    },
 
    //{path: '', component: LoginFormComponent}

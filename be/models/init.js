@@ -20,7 +20,8 @@ var _user_admin = {
    password_hash: 'a',
    token: 'ASD@!C$$#Q@34234C$#CR$#C344354',
    rol: _rol_admin._id,
-   sucursal: _sucursal_stc,
+   offices: _offices_stc,
+   amount: 1000,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
@@ -32,7 +33,8 @@ var _user_ejecutivo = {
    password_hash: 'e',
    token: 'ASDWQ#$VHTHEE^EVW324213123c21#2',
    rol: _rol_ejecutivo._id,
-   sucursal: _sucursal_stc,
+   offices: _offices_stc,
+   amount: 2000,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
@@ -89,18 +91,20 @@ var _programs = [_program_seguridad, _program_rrhh];
 var _modulo_1 = {
     number: 1,
     name: 'modulo 1',
+    program: _program_rrhh,
     content: [
        '1. reclutamiento y seleccion',
        '2. induccion',
        '3. capacitacion'
     ],
- 
+    
     _id: new mongoose.Types.ObjectId,
     record_date: new Date()
  }
  var _modulo_2 = {
     number: 2,
     name: 'modulo 2',
+    program: _program_rrhh,
     content: [
        '1. remuneracion',
        '2. motivacion',
@@ -329,15 +333,17 @@ var _event_modulo1 = {
 var _events = [_event_seg, _event_seg2, _event_rrhh, _event_rrhh2, _event_modulo1, _event_modulo2];
 
 
-var _sucursal_stc ={
+var _offices_stc ={
     name: 'cecap Cochabamba',
-    nit:'7012323123424',
+    //nit:'7012323123424',
     ubicacion:'santa Cruz entre padilla',
     caja: 1000,
+    departament: 'Sta. Cruz',
+    company_id:'',
     _id: new mongoose.Types.ObjectId.ObjectId,
     record_date: new Date()
 }
-var _sucursal = [_sucursal_stc];
+var _offices = [_offices_stc];
 
 function saveData(collection, schema) {
    for (var i = 0; i < collection.length; i++) {
@@ -366,7 +372,7 @@ module.exports = {
       saveData(_persons, db.persons);
       saveData(_events, db.events);
       saveData(_modulos, db.modulos);
-      saveData(_sucursal, db.sucursal);
+      saveData(_offices, db.offices);
    },
 
    clearCollections: function () {
