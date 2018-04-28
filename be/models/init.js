@@ -91,18 +91,20 @@ var _programs = [_program_seguridad, _program_rrhh];
 var _modulo_1 = {
     number: 1,
     name: 'modulo 1',
+    program: _program_rrhh,
     content: [
        '1. reclutamiento y seleccion',
        '2. induccion',
        '3. capacitacion'
     ],
- 
+    
     _id: new mongoose.Types.ObjectId,
     record_date: new Date()
  }
  var _modulo_2 = {
     number: 2,
     name: 'modulo 2',
+    program: _program_rrhh,
     content: [
        '1. remuneracion',
        '2. motivacion',
