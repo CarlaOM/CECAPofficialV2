@@ -60,6 +60,7 @@ import { HeroFormComponent } from './hero-form/hero-form.component';
 import { InfoEjecutivoComponent } from './ejecutivo/info-ejecutivo/info-ejecutivo.component';
 import { CajaChicaComponent } from './caja/caja-chica/caja-chica.component';
 import { IngresoComponent } from './caja/ingreso/ingreso.component';
+import { VistaCajaComponent } from './caja/vista-caja/vista-caja.component';
 
 
 @NgModule({
@@ -107,6 +108,7 @@ import { IngresoComponent } from './caja/ingreso/ingreso.component';
 
     CajaChicaComponent,
     IngresoComponent,
+    VistaCajaComponent,
 
   ],
   imports: [
