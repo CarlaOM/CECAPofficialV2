@@ -1,4 +1,4 @@
-import { isObject } from 'util';
+//import { isObject } from 'util';
 
 // import { mongo } from 'mongoose';
 
@@ -24,7 +24,7 @@ module.exports = {
       password_hash: String,
       // token: String,
       rol: ObjectId,
-      sucursal: ObjectId,
+      offices: ObjectId,
       amount: Number,
 
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
@@ -90,7 +90,7 @@ module.exports = {
             program: ObjectId,
             modulars: [{
                amount: [{
-                  detail: string,
+                  detail: String,
                   receipt: Number,
                   date: Date,
                   amount: Number
