@@ -55,9 +55,17 @@ import { SucursalComponent } from './sucursal/sucursal.component';
 import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.component';
 import { EditComponent } from './event/persona/edit/edit.component';
 import { HeroFormComponent } from './hero-form/hero-form.component';
+
 import { ProgramaComponent } from './programa/programa.component';
 import { ModuloComponent } from './programa/modulo/modulo.component';
 import { EditProgramaComponent } from './programa/edit-programa/edit-programa.component';
+
+import { DetalleCajaComponent } from './sucursal/detalle-caja/detalle-caja.component';
+import { DetallePersonalComponent } from './sucursal/detalle-personal/detalle-personal.component';
+
+import { InfoEjecutivoComponent } from './ejecutivo/info-ejecutivo/info-ejecutivo.component';
+import { CajaChicaComponent } from './caja/caja-chica/caja-chica.component';
+import { IngresoComponent } from './caja/ingreso/ingreso.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +110,13 @@ import { EditProgramaComponent } from './programa/edit-programa/edit-programa.co
     ProgramaComponent,
     ModuloComponent,
     EditProgramaComponent,
+
+    DetalleCajaComponent,
+    DetallePersonalComponent,
+    InfoEjecutivoComponent,
+    CajaChicaComponent,
+    IngresoComponent,
+
   ],
   imports: [
     BrowserModule,
