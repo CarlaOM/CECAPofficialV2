@@ -26,7 +26,7 @@ var _user_admin = {
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 };
-var _user_ejecutivo = {
+var _user_ejecutivo1 = {
    name: 'e',
    salary: 123,
    active: true,
@@ -39,7 +39,58 @@ var _user_ejecutivo = {
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 };
-var _users = [_user_admin, _user_ejecutivo];
+var _user_ejecutivo2 = {
+    name: 'i',
+    salary: 123,
+    active: true,
+    password_hash: 'i',
+    token: 'ASDWQ#$VHTHEE^EVW324213123c21#2',
+    rol: _rol_ejecutivo._id,
+    offices: _offices_stc,
+    amount: 1500,
+ 
+    _id: new mongoose.Types.ObjectId,
+    record_date: new Date()
+ };
+var _users = [_user_admin, _user_ejecutivo1,_user_ejecutivo2];
+/////////////////CashFlowUser//////////////////////////
+var _cashFlowUser1 = {
+    date_start: '2018-03-25',
+      date_end: '2018-04-25',
+      amount: 1000,
+      amount_delivered: 1000,
+      details: [{
+         receipt: 1,
+         description: 'ingresos por inscripcion',
+         amount: 1000,
+      }],
+      user: _user_ejecutivo1,
+      _id: new mongoose.Types.ObjectId,
+    record_date: new Date()
+};
+var _cashFlowUser2 = {
+    date_start: '2018-03-25',
+      date_end: '2018-04-25',
+      amount: 500,
+      amount_delivered: 500,
+      details: [{
+         receipt: 1,
+         description: 'ingresos por inscripcion',
+         amount: 200,
+      },
+      {
+        receipt: 2,
+        description: 'ingresos por inscripcion',
+        amount: 300,
+     }
+    ],
+      user: _user_ejecutivo2,
+
+      _id: new mongoose.Types.ObjectId,
+    record_date: new Date()
+};
+var _cashFlowUser =[_cashFlowUser1,_cashFlowUser2];
+
 ///////////////////////////////////////////
 
 var _cartera_user_1={
@@ -52,22 +103,28 @@ var _cartera_user_1={
 }
 var _cartera_user_2={
     name:'cartera2',
-    user:_user_ejecutivo,
+    user:_user_ejecutivo1,
+    _id:new mongoose.Types.ObjectId,
+    record_date:new Date()
+}
+var _cartera_user_3={
+    name:'cartera3',
+    user:_user_ejecutivo2,
     _id:new mongoose.Types.ObjectId,
     record_date:new Date()
 }
 
-var _carteras=[_cartera_user_1,_cartera_user_2];
+var _carteras=[_cartera_user_1,_cartera_user_2,_cartera_user_3];
 
-////////////////////////////////////////////
+//////////////////////////////////////////////////////
 
 var _program_seguridad = {
    name: 'seguridad industrial',
-   modules: [
-      '1. higiene',
-      '2. seguridad',
-      '3. prevension'
-   ],
+//    modules: [
+//       '1. higiene',
+//       '2. seguridad',
+//       '3. prevension'
+//    ],
    details: 'para industrias.',
 
    _id: new mongoose.Types.ObjectId,
@@ -75,11 +132,11 @@ var _program_seguridad = {
 }
 var _program_rrhh = {
    name: 'recursos humanos',
-   modules: [
-      '1. psicologia laboral',
-      '2. planificacion',
-      '3. proyeccion'
-   ],
+//    modules: [
+//       '1. psicologia laboral',
+//       '2. planificacion',
+//       '3. proyeccion'
+//    ],
    details: 'para empresas.',
 
    _id: new mongoose.Types.ObjectId,
@@ -88,7 +145,7 @@ var _program_rrhh = {
 var _programs = [_program_seguridad, _program_rrhh];
 
 ////////////////////////////////////////////
-var _modulo_1 = {
+var _modulo_1_seguridad = {
     number: 1,
     name: 'modulo 1',
     program: _program_rrhh,
@@ -97,11 +154,12 @@ var _modulo_1 = {
        '2. induccion',
        '3. capacitacion'
     ],
-    
+    program: _program_seguridad,
+
     _id: new mongoose.Types.ObjectId,
     record_date: new Date()
  }
- var _modulo_2 = {
+ var _modulo_2_seguridad = {
     number: 2,
     name: 'modulo 2',
     program: _program_rrhh,
@@ -110,46 +168,189 @@ var _modulo_1 = {
        '2. motivacion',
        '3. clima laboral'
     ],
+    program: _program_seguridad,
  
     _id: new mongoose.Types.ObjectId,
     record_date: new Date()
  }
-var _modulos = [_modulo_1, _modulo_2];
+ var _modulo_1_rrhh = {
+    number: 2,
+    name: 'modulo 1',
+    content: [
+       '1. remuneracion1',
+       '2. motivacion2',
+       '3. clima laboral3'
+    ],
+    program: _program_rrhh,
+ 
+    _id: new mongoose.Types.ObjectId,
+    record_date: new Date()
+ }
+var _modulos = [_modulo_1_seguridad, _modulo_2_seguridad,_modulo_1_rrhh];
 ////////////////////////////////////////////
-
-var _person_1 = {
-    first_name: 'laura',
-    last_name: 'estrada',
-    birthday: new Date(1992, 1, 1),
-    ci: '1234567',
-    cellphone: '79452311',
-    email:'laura@laura.com',
-    ocupation:'profesional',
-//    user: _user_admin,
-////////////
-    carteras:_cartera_user_1,
-///////////
-
-   _id: new mongoose.Types.ObjectId,
-   record_date: new Date()
+var _person_1 ={
+    first_name: 'Jose',
+      last_name: 'Gallardo',
+      ci: 1234567,
+      phone: 76543218,
+      cellphone: 4653126,
+      email: 'gallardo@gmail.com',
+      ocupation: 'universitario',//1 = universitario, 2=Profesional, 3=particular
+      descOcupation: {
+         //universitario
+         carrera: 'Sistemas',
+         universidad: 'umss',
+         semestre: '6to',
+         //Particular
+         areaTrabajo: '',
+         //Profesional
+         profesion: '',
+         empresa: '',
+         cargo: '',
+      },
+      //////////////
+      carteras: _cartera_user_2,
+      /////////////
+      profile: {
+         programs: [{
+            program: _program_rrhh,
+            modulars: [{
+               amount: [{
+                  detail: 'String',
+                  receipt: 1001,
+                  date: '2018-03-31',
+                  amount: 150
+               }],
+               debt: 150,
+               assistance: true,
+               event: _event_seg,////////////////////duad???????
+               inscription: '',////////////////////dudaÇ??????
+               module: _modulo_1_rrhh,
+               print_certificate: false,
+            }],
+            final_work: {
+               stade: 2,  // entregado = 1, no entrego = 2
+               observations: 'aun no entrego el proyecto',
+            },
+            requirements: [
+                'asistir a todos los modulos',
+                'entregar trabajo'
+            ],
+            print_diploma: false
+         }]
+      },
+      _id: new mongoose.Types.ObjectId,
+      record_date: new Date()
 }
 var _person_2 = {
-   first_name: 'juan',
-   last_name: 'perez',
-   birthday: new Date(1992, 1, 1),
-   ci: '7123357',
-   cellphone: '60121234',
-   email:'juan@juan.com',
-   ocupation:'particular',
-//    user: _user_ejecutivo,
-////////////////////////
-    carteras:_cartera_user_2,
-/////////////////////////
-
-   _id: new mongoose.Types.ObjectId,
-   record_date: new Date()
+    first_name: 'laura',
+    last_name: 'estrada',
+    ci: 1234566,
+    phone:431241514,
+    cellphone: 79452311,
+    email:'laura@laura.com',
+    ocupation:'profesional',
+    descOcupation: {
+        //universitario
+        carrera: '',
+        universidad: '',
+        semestre: '',
+        //Particular
+        areaTrabajo: '',
+        //Profesional
+        profesion: 'Ingeniero',
+        empresa: 'digitalHarbor',
+        cargo: 'rrhh',
+     },
+     //////////////
+     carteras: _cartera_user_2,
+     /////////////
+     profile: {
+        programs: [{
+           program: _program_rrhh,
+           modulars: [{
+              amount: [{
+                 detail: 'modulo 1 rrhh',
+                 receipt: 1001,
+                 date: '2018-03-31',
+                 amount: 150
+              }],
+              debt: 150,
+              assistance: true,
+              event: _event_seg,////////////////////duad???????
+              inscription: '',////////////////////dudaÇ??????
+              module: _modulo_1_rrhh,
+              print_certificate: false,
+           }],
+           final_work: {
+              stade: 2,  // entregado = 1, no entrego = 2
+              observations: 'aun no entrego el proyecto',
+           },
+           requirements: [
+               'asistir a todos los modulos',
+               'entregar trabajo'
+           ],
+           print_diploma: false
+        }]
+     },
+     _id: new mongoose.Types.ObjectId,
+     record_date: new Date()
 }
 var _person_3 = {
+   first_name: 'juan',
+   last_name: 'perez',
+   ci: 712337757,
+   phone: 49879878,
+   cellphone: 60121234,
+   email:'juan@juan.com',
+   ocupation:'particular',
+   descOcupation: {
+    //universitario
+    carrera: '',
+    universidad: '',
+    semestre: '',
+    //Particular
+    areaTrabajo: 'carpinteria',
+    //Profesional
+    profesion: '',
+    empresa: '',
+    cargo: '',
+ },
+ //////////////
+ carteras: _cartera_user_2,
+ /////////////
+ profile: {
+    programs: [{
+       program: _program_rrhh,
+       modulars: [{
+          amount: [{
+             detail: 'modulo 1 rrhh',
+             receipt: 1001,
+             date: '2018-03-31',
+             amount: 150
+          }],
+          debt: 150,
+          assistance: true,
+          event: _event_seg,////////////////////duad???????
+          inscription: '',////////////////////dudaÇ??????
+          module: _modulo_1_rrhh,
+          print_certificate: false,
+       }],
+       final_work: {
+          stade: 2,  // entregado = 1, no entrego = 2
+          observations: 'aun no entrego el proyecto',
+       },
+       requirements: [
+           'asistir a todos los modulos',
+           'entregar trabajo'
+       ],
+       print_diploma: false
+    }]
+ },
+ _id: new mongoose.Types.ObjectId,
+ record_date: new Date()
+}
+var _person_4 = {
     first_name: 'lucia',
     last_name: 'galarza',
     birthday: new Date(1992, 1, 1),
@@ -169,181 +370,319 @@ var _person_3 = {
         empresa: '',
         cargo: '',
      },
- //    user: _user_ejecutivo,
- ////////////////////////
-     carteras:_cartera_user_2,
- /////////////////////////
- 
-    _id: new mongoose.Types.ObjectId,
-    record_date: new Date()
- }
-var _persons = [_person_1, _person_2, _person_3];
-
+     //////////////
+     carteras: _cartera_user_2,
+     /////////////
+     profile: {
+        programs: [{
+           program: _program_rrhh,
+           modulars: [{
+              amount: [{
+                 detail: 'modulo 1 rrhh',
+                 receipt: 1001,
+                 date: '2018-03-31',
+                 amount: 150
+              }],
+              debt: 150,
+              assistance: true,
+              event: _event_seg,////////////////////duad???????
+              inscription: '',////////////////////dudaÇ??????
+              module: _modulo_1_rrhh,
+              print_certificate: false,
+           }],
+           final_work: {
+              stade: 2,  // entregado = 1, no entrego = 2
+              observations: 'aun no entrego el proyecto',
+           },
+           requirements: [
+               'asistir a todos los modulos',
+               'entregar trabajo'
+           ],
+           print_diploma: false
+        }]
+     },
+     _id: new mongoose.Types.ObjectId,
+     record_date: new Date()
+ };
+var _persons = [_person_1, _person_2, _person_3,_person_4];
+//////////////////////////////////////////////////////////////////////////
+var _facilitator_1 = {
+    name: 'Paola Quintanilla',
+      job: 'rrhh',
+      _id: new mongoose.Types.ObjectId,
+      record_date: new Date()
+};
+var _facilitator_2 = {
+    name: 'Alvaro Garcia',
+      job: 'Seguridad',
+      _id: new mongoose.Types.ObjectId,
+      record_date: new Date()
+};
+var _facilitators = [_facilitator_1, _facilitator_2];
+////////////////////////////////////////////////////////////////////////////////
 var _event_seg = {
+    name:'seguridad imformatica y redes sociales',
    description: 'solo para ejecutivos',
    date_start: new Date(2018, 1, 12),
-   total: 30,
-   program: _program_seguridad,
+   
+   modular:[{
+        date_start: '2018-03-25',
+        date_end: '2018-04-25',
+        facilitator: _facilitator_2,
+        list: [{
+            person: _person_1,
+            amount: 300,
+            receipt: 101,
+            assist: true,
+            type: 1, //nuevo // nivelacion
+        },
+        {
+            person: _person_2,
+            amount: 300,
+            receipt: 102,
+            assist: true,
+            type: 1, //nuevo // nivelacion
+        },
+        {
+            person: _person_3,
+            amount: 300,
+            receipt: 103,
+            assist: true,
+            type: 1, //nuevo // nivelacion
+        }
+        ],
+        module: _modulo_1_seguridad,
+        _id: new mongoose.Types.ObjectId
+    }],
+    
    inscriptions: [
       {
-         state: 1,
-         person: _person_1,
-         user: _user_admin,
-         description: 'solo para ejecutivos',
+        total_price: 600,
+        module_price: 150,
+        canceled_price: 300,
+        person: _person_1,
+        user: _user_admin
       },
       {
-         state: 1,
+        total_price: 600,
+        module_price: 150,
+        canceled_price: 300,
          person: _person_2,
-         user: _user_ejecutivo,
-         description: 'solo para ejecutivos',
+         user: _user_ejecutivo1
       },
       {
-         state: 1,
+        total_price: 600,
+        module_price: 150,
+        canceled_price: 300,
          person: _person_3,
-         user: _user_admin,
-         description: 'solo para ejecutivos',
+         user: _user_admin
       }
    ],
+   total: 30,
+   program: _program_seguridad,
    
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _event_seg2 = {
-   description: 'solo para ejecutivos',
-   date_start: new Date(2018, 02, 12),
-   total: 30,
-   program: _program_seguridad,
+    name:'seguridad 2 imformatica y redes sociales',
+    description: 'solo para ejecutivos',
+    date_start: new Date(2018, 1, 12),
+    modular:[{
+        date_start: '2018-03-25',
+        date_end: '2018-04-25',
+        facilitator: _facilitator_1,
+        list: [{
+            person: _person_1,
+            amount: 150,
+            receipt: 102,
+            assist: false,
+            type: 1, //nuevo // nivelacion
+        },
+        {
+            person: _person_2,
+            amount: 150,
+            receipt: 102,
+            assist: false,
+            type: 1, //nuevo // nivelacion
+        },
+        {
+            person: _person_3,
+            amount: 150,
+            receipt: 103,
+            assist: false,
+            type: 1, //nuevo // nivelacion
+        }
+        ],
+        module: _modulo_1_seguridad,
+        _id: new mongoose.Types.ObjectId
+    }],
    inscriptions: [
       {
-         state: 0,
+        total_price: 600,
+        module_price: 150,
+        canceled_price: 300,
          person: _person_1,
-         user: _user_ejecutivo,
-         description: 'solo para ejecutivos',
+         user: _user_ejecutivo2
       },
       {
-         state: 0,
+        total_price: 600,
+        module_price: 150,
+        canceled_price: 300,
          person: _person_2,
-         user: _user_ejecutivo,
-         description: 'solo para ejecutivos',
+         user: _user_ejecutivo2
       }
       ,
       {
-         state: 1,
+        total_price: 600,
+        module_price: 150,
+        canceled_price: 300,
          person: _person_3,
-         user: _user_admin,
-         description: 'solo para ejecutivos',
+         user: _user_admin
       }
    ],
-   
+   total: 30,
+   program: _program_seguridad,
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
 var _event_rrhh = {
    description: 'solo para ejecutivos',
    date_start: new Date(2018, 03, 12),
-   total: 20,
-   program: _program_rrhh,
+   modular:[{
+    date_start: '2018-03-25',
+    date_end: '2018-04-25',
+    facilitator: _facilitator_1,
+    list: [{
+        person: _person_1,
+        amount: 150,
+        receipt: 102,
+        assist: false,
+        type: 1, //nuevo // nivelacion
+    },
+    {
+        person: _person_2,
+        amount: 150,
+        receipt: 102,
+        assist: false,
+        type: 1, //nuevo // nivelacion
+    },
+    {
+        person: _person_4,
+        amount: 150,
+        receipt: 103,
+        assist: false,
+        type: 1, //nuevo // nivelacion
+    }
+    ],
+    module: _modulo_1_rrhh,
+    _id: new mongoose.Types.ObjectId
+}],
    inscriptions: [
       {
-         state: 0,
+        total_price: 500,
+        module_price: 100,
+        canceled_price: 300,
          person: _person_1,
-         user: _user_admin,
-         description: 'solo para ejecutivos',
+         user: _user_admin
       },
       {
+        total_price: 500,
+        module_price: 100,
+        canceled_price: 300,
          state: 0,
          person: _person_2,
-         user: _user_ejecutivo,
-         description: 'solo para ejecutivos',
+         user: _user_ejecutivo1
       }
    ],
-
+   total: 20,
+   program: _program_rrhh,
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
 var _event_rrhh2 = {
    description: 'solo para ejecutivos',
    date_start: new Date(2018, 11, 12),
-   total: 20,
-   program: _program_rrhh,
-
+ 
+   modular:[{
+    date_start: '2018-03-25',
+    date_end: '2018-04-25',
+    facilitator: _facilitator_1,
+    list: [{
+        person: _person_1,
+        amount: 150,
+        receipt: 102,
+        assist: false,
+        type: 1, //nuevo // nivelacion
+    },
+    {
+        person: _person_2,
+        amount: 150,
+        receipt: 102,
+        assist: false,
+        type: 1, //nuevo // nivelacion
+    },
+    {
+        person: _person_3,
+        amount: 150,
+        receipt: 103,
+        assist: false,
+        type: 1, //nuevo // nivelacion
+    }
+    ],
+    module: _modulo_1_rrhh,
+    _id: new mongoose.Types.ObjectId
+    }],
    inscriptions: [
       {
-         state: 0,
+        total_price: 500,
+        module_price: 100,
+        canceled_price: 300,
          person: _person_1,
-         description: 'solo para ejecutivos',
+         user: _user_ejecutivo2
       },
       {
-         state: 0,
+        total_price: 500,
+        module_price: 100,
+        canceled_price: 300,
          person: _person_2,
-         description: 'solo para ejecutivos',
+         user: _user_ejecutivo2
       }
    ],
-
+   total: 20,
+   program: _program_rrhh,
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
+var _events = [_event_seg, _event_seg2, _event_rrhh, _event_rrhh2];
 
-var _event_modulo1 = {
-    description: 'solo para ejecutivos',
-    date_start: new Date(2018, 05, 06),
-    total: 10,
-    program: _program_rrhh,
-    modulo: _modulo_1,
- 
-    inscriptions: [
-       {
-          state: 0,
-          person: _person_1,
-          description: 'solo para ejecutivos',
-       },
-       {
-          state: 0,
-          person: _person_2,
-          description: 'solo para ejecutivos',
-       }
-    ],
- 
-    _id: new mongoose.Types.ObjectId,
-    record_date: new Date()
- }
- var _event_modulo2 = {
-    description: 'solo para ejecutivos',
-    date_start: new Date(2018, 08, 02),
-    total: 20,
-    program: _program_rrhh,
-    modulo:  _modulo_2,
- 
-    inscriptions: [
-       {
-          state: 0,
-          person: _person_1,
-          description: 'solo para ejecutivos',
-       },
-       {
-          state: 0,
-          person: _person_2,
-          description: 'solo para ejecutivos',
-       }
-    ],
- 
-    _id: new mongoose.Types.ObjectId,
-    record_date: new Date()
- }
-var _events = [_event_seg, _event_seg2, _event_rrhh, _event_rrhh2, _event_modulo1, _event_modulo2];
-
-
+/////////////////////////////////////////////////////////7
 var _offices_stc ={
     name: 'cecap Cochabamba',
     //nit:'7012323123424',
     ubicacion:'santa Cruz entre padilla',
     caja: 1000,
     departament: 'Sta. Cruz',
-    company_id:'',
-    _id: new mongoose.Types.ObjectId.ObjectId,
+    company_id: _company,
+    _id: new mongoose.Types.ObjectId,
     record_date: new Date()
-}
+};
 var _offices = [_offices_stc];
+//////////////////////////////////////////////////////////
+var _company0 = {
+    name: 'CECAP Company',
+      nit: 71231901020,
+      caja: 200000,
+      cash_flow: [{
+         amount: 2000,
+         description: ' fundacion company',
+         _id: new mongoose.Types.ObjectId
+      }],
+    _id: new mongoose.Types.ObjectId,
+    record_date: new Date()
+};
+var _company = [_company0];
+///////////////////////////////////////////////////////////
 
 function saveData(collection, schema) {
    for (var i = 0; i < collection.length; i++) {
@@ -371,8 +710,12 @@ module.exports = {
       saveData(_programs, db.programs);
       saveData(_persons, db.persons);
       saveData(_events, db.events);
-      saveData(_modulos, db.modulos);
+      saveData(_modulos, db.modules);
+      saveData(_company, db.company);
+      saveData(_facilitators, db.facilitators);
+      saveData(_cashFlowUser, db.cashFlowUsers);
       saveData(_offices, db.offices);
+      
    },
 
    clearCollections: function () {
@@ -383,6 +726,9 @@ module.exports = {
       clearCollections(db.events);
       clearCollections(db.persons);
       clearCollections(db.modulos);
-      clearCollections(db.sucursal);
+      clearCollections(db.offices);
+      clearCollections(db.cashFlowUsers);
+      clearCollections(db.company);
+      clearCollections(db.facilitators);
    }
 };
