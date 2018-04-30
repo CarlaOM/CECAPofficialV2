@@ -110,7 +110,7 @@ module.exports = {
                stade: Number,
                observations: String,
             },
-            requirements: {},
+            requirements: [],
             print_diploma: Boolean
          }]
       },
@@ -148,7 +148,7 @@ module.exports = {
             type: Number, //nuevo // nivelacion
          }],
          module: ObjectId,
-         _id: ObjectId
+         _id: ObjectId///////////////duda?????
       }],
       inscriptions: [{
          // segun al numero de asistencias sacar el precio total q tiene q pagar

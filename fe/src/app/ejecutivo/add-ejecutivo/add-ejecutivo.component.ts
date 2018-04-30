@@ -26,8 +26,6 @@ export class AddEjecutivoComponent implements OnInit {
   @Output()MessageEvent=new EventEmitter();
   @ViewChild("close", {read: ElementRef}) close: ElementRef;
   
-
-
   constructor(private _peticionesService:PeticionesService) { }
 
   /////////////////////////////////////////////////
