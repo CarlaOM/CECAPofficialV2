@@ -20,8 +20,12 @@ module.exports = {
 
    users: mongoose.model('users', new Schema({
       name: String,
+      cell:Number,
+      correo:String,
+      
       active: Boolean,
       password_hash: String,
+
       // token: String,
       rol: ObjectId,
       offices: ObjectId,
@@ -188,7 +192,7 @@ module.exports = {
    offices: mongoose.model('offices', new Schema({
       name: String,
       // nit:String,
-      ubicacion: String,
+      ubicacion: Strinog,
       caja: Number,
       departament: String,
       company_id: ObjectId,
