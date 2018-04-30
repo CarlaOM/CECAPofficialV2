@@ -21,6 +21,7 @@ router
   //  })
 
 
+
    .get('/', function (req, res) {
     db.offices.find({}, function (err, offices) {
        if (err) return res.status(400).send(err);

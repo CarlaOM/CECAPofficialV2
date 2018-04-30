@@ -17,7 +17,7 @@ export var Identity: User = {
 };
 export var Roles: Array<Rol> = [
    {
-      _id: '',
+      _id: '5ae69da01cb6ee181c3d4276',
       name: 'Admin'
    },
    {

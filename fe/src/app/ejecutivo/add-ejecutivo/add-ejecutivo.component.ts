@@ -1,9 +1,9 @@
 import { Component, OnInit, ElementRef,ViewChild,Output,EventEmitter } from '@angular/core';
 import {PeticionesService } from '../../services/peticiones.service';
-// import {Cartera} from '../../modelo/cartera';
-// import { Identity,Roles } from "../../services/global";
+import {Cartera} from '../../modelo/cartera';
+import { Identity,Roles } from "../../services/global";
 // import {User} from '../../modelo/user';
-// import { Sucursal } from "../../modelo/sucursal";
+import { Sucursal } from "../../modelo/sucursal";
 import { Ejecutivo } from "./Ejecutivo";
 
 @Component({
@@ -29,19 +29,16 @@ export class AddEjecutivoComponent implements OnInit {
   constructor(private _peticionesService:PeticionesService) { }
 
   /////////////////////////////////////////////////
-  public roles = ['rol1','rol2','rol3'];
+  public roles = Roles;
+  
  
-  public sucursaleslis=["sucursal1","sucursal2","sucursal3"];
-  public carteraslis=['cartera1','caretera2','caretea3'];
-  model = new Ejecutivo(78,"NOMBRE","APELLIDO",6532,"ASDF@ASDF.ASD",this.roles[0],this.sucursaleslis[0],this.carteraslis[0]);
+  model = new Ejecutivo(Identity._id,"NOMBRE","",true,"APELLIDO",6532,"ASDF@ASDF.ASD","this.roles[1].name","asdf","asdf");
   // model=new Ejecutivo();
   get diagnostic() { return JSON.stringify(this.model); }
 /////////////////////////////////////////////////
   submitted = false;
 
-  onSubmit() { this.submitted = true;
-                console.log(this.model);
-  }
+ 
   ngOnInit() {
     this._peticionesService.getCarteras().subscribe(response=>{
       this.carteras=response;
@@ -54,6 +51,19 @@ export class AddEjecutivoComponent implements OnInit {
     
     
   }
+  onSubmit() { this.submitted = true;
+    console.log(this.model);
+    this._peticionesService.addUser(this.model).subscribe(response=>{
+            this.newUser=response;
+            console.log(this.newUser);
+            this.MessageEvent.emit();
+            
+           
+           
+      
+          })
+
+}
 
 //   save(){
 //     const name= this.nameRef.nativeElement.value;

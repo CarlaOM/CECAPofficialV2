@@ -192,7 +192,7 @@ module.exports = {
    offices: mongoose.model('offices', new Schema({
       name: String,
       // nit:String,
-      ubicacion: Strinog,
+      ubicacion: String,
       caja: Number,
       departament: String,
       company_id: ObjectId,
