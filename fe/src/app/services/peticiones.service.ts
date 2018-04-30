@@ -94,6 +94,7 @@ export class PeticionesService {
     getOneUser(_id) {
         return this._http.get(this.url + 'users/' + _id).map((res: Response) => res);
     }
+    
     getMejorEjecutivo(_id) {
         return this._http.get(this.url + 'events/mejorEjecutivo/' + _id).map((res: Response) => res);
     }
@@ -163,5 +164,8 @@ export class PeticionesService {
         // console.log(body);
         var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
         return this._http.put(this.url + 'programs/' + idProgram, body, { headers: headers }).map((res: Response) => res);
+    }
+    getSucursales() {
+        return this._http.get(this.url + 'sucursales').map((res: Response) => res);
     }
 }

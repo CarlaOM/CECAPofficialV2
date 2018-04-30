@@ -10,17 +10,28 @@ router
    // .get('/', function (req, res, next) {
    // 	f.validation(res, req.body.token, next);
    //   })
+  //  .get('/', function (req, res) {
+  //   //   console.log(res)
+  //     db.offices.find({}, function (err, offices) {
+  //        if (err) return res.status(400).send(err);
+  //        console.log('hola');
+  //        return res.status(200).send(offices);
+  //        //console.log(res.status(200).send(users))
+  //     });
+  //  })
+
+
+
    .get('/', function (req, res) {
-      console.log(res)
-      db.sucursal.find({}, function (err, sucursal) {
-         if (err) return res.status(400).send(err);
-         return res.status(200).send(sucursal);
-         //console.log(res.status(200).send(users))
-      });
-   })
+    db.offices.find({}, function (err, offices) {
+       if (err) return res.status(400).send(err);
+
+       return res.status(200).send(offices);
+    });
+     }) 
    .get('/:id', function (req, res) {
       console.log(res)
-      db.sucursal.findOne({ _id: req.params.id }, function (err, sucursal) {
+      db.offices.findOne({ _id: req.params.id }, function (err, sucursal) {
          if (err) return res.status(400).send(err);
          if (sucursal == null) return res.status(404).send();
          return res.status(200).send(sucursal);

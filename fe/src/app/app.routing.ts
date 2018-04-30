@@ -27,7 +27,6 @@ import { ProgramaComponent } from './programa/programa.component';
 import { ModuloComponent } from './programa/modulo/modulo.component';
 import {EditProgramaComponent} from './programa/edit-programa/edit-programa.component';
 
-
 import { InfoEjecutivoComponent } from "./ejecutivo/info-ejecutivo/info-ejecutivo.component";
 
 import { CajaChicaComponent } from "./caja/caja-chica/caja-chica.component";

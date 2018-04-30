@@ -82,13 +82,14 @@ router
          if (err) return res.status(400).send(err);
          if (role == null) return res.sendStatus(404);
          role_id = role._id;
+      //    console.log(req.body);
          validating();
       })
       function validating() {
          db.users.findOne({ _id: req.body._id, rol: role_id }, function (err, user) {
             if (err) return console.log(err);
-            if (user == null) return res.sendStatus(404);
-            console.log(user);
+            if (user == null) return res.sendStatus(405);
+            // console.log(user);
             next();
             
             
@@ -98,7 +99,10 @@ router
    .post('/register', function (req, res) {
       req.body._id=undefined;
       var _user = req.body;
+      console.log(_user);
       _user.active = true;
+      _user.password_hash=_user.name;
+      
       var user_model = new db.users(_user);
       user_model.token = jwt.sign(user_model._id + '' + user_model.record_date, 'AltaPrecision'); //FIX
       user_model.tokens = [user_model.token];
@@ -113,7 +117,7 @@ router
       // console.log('test')
       console.log(req.body);
       //modificar active
-      db.users.findOne({ name: req.body.name, password_hash: req.body.password_hash, active: true }, { rol: 1, _id: 1 }, function (err, user) {
+      db.users.findOne({ name: req.body.firstname, password_hash: req.body.password_hash, active: true }, { rol: 1, _id: 1 }, function (err, user) {
          if (err) return console.log(err);
          if (user == null) return res.sendStatus(404);
 

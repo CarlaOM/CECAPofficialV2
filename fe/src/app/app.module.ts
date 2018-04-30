@@ -54,6 +54,7 @@ import { EditEjecutivoComponent } from './ejecutivo/edit-ejecutivo/edit-ejecutiv
 import { SucursalComponent } from './sucursal/sucursal.component';
 import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.component';
 import { EditComponent } from './event/persona/edit/edit.component';
+
 import { HeroFormComponent } from './hero-form/hero-form.component';
 
 import { ProgramaComponent } from './programa/programa.component';
@@ -108,6 +109,14 @@ import { EgresoComponent } from './caja/egreso/egreso.component';
     SucursalComponent,
     AddSucursalComponent,
     HeroFormComponent,
+    DetalleCajaComponent,
+    DetallePersonalComponent,
+
+    InfoEjecutivoComponent,
+
+    CajaChicaComponent,
+    IngresoComponent,
+    EgresoComponent,
 
     ProgramaComponent,
     ModuloComponent,
@@ -118,7 +127,6 @@ import { EgresoComponent } from './caja/egreso/egreso.component';
     InfoEjecutivoComponent,
     CajaChicaComponent,
     IngresoComponent,
-    EgresoComponent
 
   ],
   imports: [
