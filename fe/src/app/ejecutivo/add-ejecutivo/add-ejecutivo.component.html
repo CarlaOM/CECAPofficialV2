@@ -132,7 +132,7 @@
                             required
                             [(ngModel)]="model.sucursal" name="sucursal"
                             #sucursal="ngModel">
-                      <option *ngFor="let sucur of sucursales" [value]="sucur">{{sucur}}</option>
+                      <option *ngFor="let sucur of sucursales" [value]="sucur">{{sucur.name}}</option>
                     </select>
                     <div [hidden]="sucursal.valid || sucursal.pristine" class="">
                             sucursal is required
@@ -145,7 +145,7 @@
                             required
                             [(ngModel)]="model.cartera" name="cartera"
                             #cartera="ngModel">
-                      <option *ngFor="let carte of carteras" [value]="carte">{{carte}}</option>
+                      <option *ngFor="let carte of carteras" [value]="carte">{{carte.name}}</option>
                     </select>
                     <div [hidden]="cartera.valid || cartera.pristine" class="">
                             cartera is required

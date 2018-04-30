@@ -73,6 +73,11 @@ export class PeticionesService {
    getCarteras(){
        return this._http.get(this.url+'carteras').map((res:Response)=>res);
    }
+   getSucursales(){
+        return this._http.get(this.url+'sucursales').map((res:Response)=>res);
+
+
+   }
    getCartera(_id){
 
     return this._http.get(this.url + 'carteras/' + _id).map((res: Response) => res);

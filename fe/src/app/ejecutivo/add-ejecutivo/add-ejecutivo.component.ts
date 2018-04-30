@@ -13,7 +13,8 @@ import { Ejecutivo } from "./Ejecutivo";
   providers:[PeticionesService]
 })
 export class AddEjecutivoComponent implements OnInit {
-  //public carteras;
+  public carteras;
+  public sucursales;
   public carteraSeleccionada;
   public carteraObject;
   public  rolid;
@@ -32,19 +33,26 @@ export class AddEjecutivoComponent implements OnInit {
   /////////////////////////////////////////////////
   public roles = ['rol1','rol2','rol3'];
  
-  public sucursales=["sucursal1","sucursal2","sucursal3"];
-  public carteras=['cartera1','caretera2','caretea3'];
-  model = new Ejecutivo(78,"NOMBRE","APELLIDO",6532,"ASDF@ASDF.ASD",this.roles[0],this.sucursales[0],this.carteras[0]);
+  public sucursaleslis=["sucursal1","sucursal2","sucursal3"];
+  public carteraslis=['cartera1','caretera2','caretea3'];
+  model = new Ejecutivo(78,"NOMBRE","APELLIDO",6532,"ASDF@ASDF.ASD",this.roles[0],this.sucursaleslis[0],this.carteraslis[0]);
   // model=new Ejecutivo();
   get diagnostic() { return JSON.stringify(this.model); }
 /////////////////////////////////////////////////
   submitted = false;
 
-  onSubmit() { this.submitted = true; }
+  onSubmit() { this.submitted = true;
+                console.log(this.model);
+  }
   ngOnInit() {
-    // this._peticionesService.getCarteras().subscribe(response=>{
-    //   this.carteras=response;
-    // });
+    this._peticionesService.getCarteras().subscribe(response=>{
+      this.carteras=response;
+      console.log(this.carteras);
+    });
+    this._peticionesService.getSucursales().subscribe(response=>{
+      this.sucursales=response;
+      console.log(this.sucursales)
+    });
     
     
   }
