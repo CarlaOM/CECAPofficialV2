@@ -12,6 +12,10 @@ var _rol_ejecutivo = {
 
    _id: new mongoose.Types.ObjectId
 };
+var _rol_gerente ={
+    name: 'Gerente',
+    _id : new mongoose.Types.ObjectId
+}
 var _roles = [_rol_admin, _rol_ejecutivo];
 
 var _user_admin = {
@@ -92,6 +96,31 @@ var _cashFlowUser2 = {
 var _cashFlowUser =[_cashFlowUser1,_cashFlowUser2];
 
 ///////////////////////////////////////////
+var _correlative1 = {
+    year: '2018-03-04',
+    company_id:_company, //ObjectId
+    receipts: [{
+       receipt: 010,   //numero recivo
+       amount: 1000,      //catidad
+       description: 'factura de inscripcion'  
+    }],
+    _id: new mongoose.Types.ObjectId,
+    record_date: new Date()
+};
+var _correlative2 = {
+    year: '2018-04-01',
+    company_id:_company, //ObjectId
+    receipts: [{
+       receipt: 011,   //numero recivo
+       amount: 1000,      //catidad
+       description: 'factura de inscripcion'  
+    }],
+    _id: new mongoose.Types.ObjectId,
+    record_date: new Date()
+};
+
+var _correlatives = [_correlative1, _correlative2 ];
+///////////////////////////////////////////////////////
 
 var _cartera_user_1={
     name:'cartera1',
@@ -353,9 +382,10 @@ var _person_3 = {
 var _person_4 = {
     first_name: 'lucia',
     last_name: 'galarza',
-    birthday: new Date(1992, 1, 1),
+    //birthday: new Date(1992, 1, 1),
     ci: '5342425',
-    cellphone: '79121232',
+    phone: 51234314,
+    cellphone: 79121232,
     email:'lucia@lucia.com',
     ocupation:'estudiante',
     descOcupation:{
@@ -375,7 +405,7 @@ var _person_4 = {
      /////////////
      profile: {
         programs: [{
-           program: _program_rrhh,
+           programs: _program_rrhh,//modificado de program a programs
            modulars: [{
               amount: [{
                  detail: 'modulo 1 rrhh',
@@ -545,7 +575,7 @@ var _event_seg2 = {
    program: _program_seguridad,
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _event_rrhh = {
    description: 'solo para ejecutivos',
    date_start: new Date(2018, 03, 12),
@@ -599,7 +629,7 @@ var _event_rrhh = {
    program: _program_rrhh,
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _event_rrhh2 = {
    description: 'solo para ejecutivos',
    date_start: new Date(2018, 11, 12),
@@ -684,6 +714,7 @@ var _company0 = {
 var _company = [_company0];
 ///////////////////////////////////////////////////////////
 
+
 function saveData(collection, schema) {
    for (var i = 0; i < collection.length; i++) {
       collection[i].record_date = new Date();
@@ -715,6 +746,7 @@ module.exports = {
       saveData(_facilitators, db.facilitators);
       saveData(_cashFlowUser, db.cashFlowUsers);
       saveData(_offices, db.offices);
+      saveData(_correlatives, db.correlatives);
       
    },
 
@@ -730,5 +762,6 @@ module.exports = {
       clearCollections(db.cashFlowUsers);
       clearCollections(db.company);
       clearCollections(db.facilitators);
+      clearCollections(db.correlatives);
    }
 };

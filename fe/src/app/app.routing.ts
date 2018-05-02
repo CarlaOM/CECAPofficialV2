@@ -10,6 +10,7 @@ import { ReportsComponent } from './graphicReports/reports/reports.component';
 import { ReportTrimestralComponent} from './graphicReports/report-trimestral/report-trimestral.component';
 import { ReportEventComponent } from './graphicReports/report-event/report-event.component';
 import { CarteraComponent } from "./cartera/cartera.component";
+import { AddCarteraComponent } from './cartera/add-cartera/add-cartera.component';
 import { InfoCarteraComponent } from "./cartera/info-cartera/info-cartera.component";
 import { EditCarteraComponent } from "./cartera/edit-cartera/edit-cartera.component";
 import { EjecutivoComponent } from "./ejecutivo/ejecutivo.component";
@@ -32,6 +33,9 @@ import { InfoEjecutivoComponent } from "./ejecutivo/info-ejecutivo/info-ejecutiv
 import { CajaChicaComponent } from "./caja/caja-chica/caja-chica.component";
 import { IngresoComponent } from "./caja/ingreso/ingreso.component";
 import { EgresoComponent } from './caja/egreso/egreso.component';
+import { AddCorrelativeComponent } from './correlative/add-correlative/add-correlative.component';
+
+import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facilitador.component';
 
 
 
@@ -51,6 +55,7 @@ const appRoutes: Routes = [
          { path: 'persons', component: PersonaComponent},
          { path: 'persons/edit/:id', component: EditComponent},
          { path: 'cartera', component:CarteraComponent},
+         { path: 'cartera/add', component:AddCarteraComponent},
          { path: 'cartera/:id',component:InfoCarteraComponent},
          { path: 'cartera/edit/:name',component:EditCarteraComponent},
          { path: 'ejecutivo', component:EjecutivoComponent},
@@ -71,7 +76,9 @@ const appRoutes: Routes = [
          { path: 'formulariobase',component:HeroFormComponent},
          { path: 'caja', component:CajaChicaComponent},
          { path: 'caja/ingreso', component:IngresoComponent},
-         { path: 'caja/egreso', component:EgresoComponent}
+         { path: 'caja/egreso', component:EgresoComponent},
+         { path: 'facilitador', component:AddFacilitadorComponent},
+         { path: 'correlative/add', component:AddCorrelativeComponent}
 
       ]
    },

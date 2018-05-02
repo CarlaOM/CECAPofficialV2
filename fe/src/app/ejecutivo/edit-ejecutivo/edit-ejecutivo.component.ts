@@ -2,6 +2,8 @@ import { Component, OnInit, ElementRef,ViewChild, Input, EventEmitter} from '@an
 import { PeticionesService } from '../../services/peticiones.service';
 import { ActivatedRoute,Router } from "@angular/router";
 import { User} from '../../modelo/user';
+import { Cartera } from "../../modelo/cartera";
+import { Identity,Roles } from "../../services/global";
 
 @Component({
   selector: 'app-edit-ejecutivo',
@@ -10,10 +12,19 @@ import { User} from '../../modelo/user';
   providers: [ PeticionesService ]
 })
 export class EditEjecutivoComponent implements OnInit {
-  @ViewChild('active') activeRef:ElementRef;
   public ejecutivo;
   public ejecutivoId;
   public ejecutivoActive;
+  public carteras;
+  public carteraActual;
+  public sucursales;
+  public roles=Roles;
+  public ejecutivoName;
+  public ejecutivoLastName;
+  public ejecutivoCell;
+  public ejecutivoCorreo;
+  public ejecutivoRol;
+  
 
   constructor(
     private _peticionesService: PeticionesService,
@@ -22,14 +33,36 @@ export class EditEjecutivoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this._peticionesService.getCarteras().subscribe(response=>{
+      this.carteras=response;
+      
+
+      // for (let cart of this.carteras) {
+      //   if(cart.user==this.ejecutivoId){
+
+      //       this.carteraActual=cart;
+           
+      //   }
+        
+      // }
+      
+    });
+    this._peticionesService.getSucursales().subscribe(response=>{
+      this.sucursales=response;
+      // console.log(this.sucursales)
+    });
+    
     this.queryEjecutivoId();
     this.findEjecutivo();
+    this.findCarteraFromEjecutivo();
   }
 
   queryEjecutivoId(){
       this.route.params.subscribe(params => {
       this.ejecutivoId=params.active;
-      console.log(this.ejecutivo);
+
+     
+     
    });
   }
 
@@ -37,8 +70,12 @@ export class EditEjecutivoComponent implements OnInit {
      this._peticionesService.getOneUser(this.ejecutivoId).subscribe(
         result =>{
           this.ejecutivo=result;
-          console.log("result")
+          console.log(this.ejecutivo);
           this.ejecutivoActive=this.ejecutivo.active;
+          this.ejecutivoName=this.ejecutivo.name;
+          this.ejecutivoLastName=this.ejecutivo.lastname;
+          this.ejecutivoCell=this.ejecutivo.cell;
+          this.ejecutivoCorreo=this.ejecutivo.correo;
         },
         error =>{
           console.log(<any>error);
@@ -46,8 +83,17 @@ export class EditEjecutivoComponent implements OnInit {
   }
 
   saveEjecutivo(){
-    //console.log(this.ejecutivo);
-    //this.ejecutivo.active=this.activeRef.nativeElement.value;
+    // console.log(this.ejecutivo);
+    this.ejecutivo.active=this.ejecutivoActive;
+    this.ejecutivo.name=this.ejecutivoName;
+    this.ejecutivo.lastname=this.ejecutivoLastName;
+    this.ejecutivo.cell=this.ejecutivoCell;
+    this.ejecutivo.correo=this.ejecutivoCorreo;
+    
+    
+    
+    
+    
     this._peticionesService.updateUser(this.ejecutivo).subscribe(
       result=>{
         var res=result;
@@ -59,5 +105,25 @@ export class EditEjecutivoComponent implements OnInit {
         console.log(<any>error);
         alert('Error al guardar');
       });
+
+
   }
+
+  findCarteraFromEjecutivo(){
+
+  //   this._peticionesService.findCarteraFromEjecutivo(this.ejecutivoId).subscribe(
+  //       result=>{
+
+
+  //       }
+
+  //   )
+    
+    
+   }
+  onSubmit() { 
+   this.saveEjecutivo();
+  }
+
+  
 }
