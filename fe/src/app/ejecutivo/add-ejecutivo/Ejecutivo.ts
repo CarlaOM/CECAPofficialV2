@@ -1,5 +1,5 @@
 import { Rol } from "../../modelo/rol";
-import { Sucursal } from "../../modelo/sucursal";
+import { Offices } from "../../modelo/offices";
 import { Cartera } from "../../modelo/cartera";
 
 export class Ejecutivo {

@@ -128,6 +128,7 @@ router
       console.log(req.body);
       //modificar active
       db.users.findOne({ name: req.body.name, password_hash: req.body.password_hash, active: true }, { rol: 1, _id: 1 }, function (err, user) {
+         console.log(user)
          if (err) return console.log(err);
          console.log(user);
          if (user == null) return res.sendStatus(404);
