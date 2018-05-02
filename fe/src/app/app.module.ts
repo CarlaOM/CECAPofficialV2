@@ -69,7 +69,7 @@ import { InfoEjecutivoComponent } from './ejecutivo/info-ejecutivo/info-ejecutiv
 import { CajaChicaComponent } from './caja/caja-chica/caja-chica.component';
 import { IngresoComponent } from './caja/ingreso/ingreso.component';
 import { EgresoComponent } from './caja/egreso/egreso.component';
-
+import { VistaCajaComponent } from "./caja/vista-caja/vista-caja.component";
 
 @NgModule({
   declarations: [
@@ -126,6 +126,7 @@ import { EgresoComponent } from './caja/egreso/egreso.component';
     DetalleCajaComponent,
     DetallePersonalComponent,
     InfoEjecutivoComponent,
+    VistaCajaComponent,
     CajaChicaComponent,
     IngresoComponent
 
