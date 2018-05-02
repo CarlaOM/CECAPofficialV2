@@ -2,7 +2,6 @@ import { Component, OnInit, ElementRef,ViewChild,Output,EventEmitter } from '@an
 import { PeticionesService } from '../../services/peticiones.service';
 import { ActivatedRoute,Router } from "@angular/router";
 import {Cartera} from '../../modelo/cartera';
-;
 
 
 @Component({
@@ -22,6 +21,10 @@ export class EditCarteraComponent implements OnInit {
     public router: Router
 
   ) { }
+  submitted = false;
+
+  onSubmit() { 
+  }
 
   ngOnInit() {
     this.queryCarteraId();

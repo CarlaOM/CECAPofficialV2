@@ -35,7 +35,9 @@ import { IngresoComponent } from "./caja/ingreso/ingreso.component";
 import { EgresoComponent } from './caja/egreso/egreso.component';
 import { AddCorrelativeComponent } from './correlative/add-correlative/add-correlative.component';
 
+import { facilitadorComponent } from './facilitador/facilitador.component';
 import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facilitador.component';
+
 
 
 
@@ -77,7 +79,8 @@ const appRoutes: Routes = [
          { path: 'caja', component:CajaChicaComponent},
          { path: 'caja/ingreso', component:IngresoComponent},
          { path: 'caja/egreso', component:EgresoComponent},
-         { path: 'facilitador', component:AddFacilitadorComponent},
+         { path: 'facilitador', component:facilitadorComponent},
+         { path: 'facilitador/add', component:AddFacilitadorComponent},
          { path: 'correlative/add', component:AddCorrelativeComponent}
 
       ]

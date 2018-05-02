@@ -71,7 +71,8 @@ import { IngresoComponent } from './caja/ingreso/ingreso.component';
 import { EgresoComponent } from './caja/egreso/egreso.component';
 import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facilitador.component';
 import { AddCorrelativeComponent } from './correlative/add-correlative/add-correlative.component';
-
+import { facilitadorComponent } from './facilitador/facilitador.component';
+import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-facilitador.component';
 
 @NgModule({
   declarations: [
@@ -131,7 +132,9 @@ import { AddCorrelativeComponent } from './correlative/add-correlative/add-corre
     CajaChicaComponent,
     IngresoComponent,
     AddFacilitadorComponent,
-    AddCorrelativeComponent
+    AddCorrelativeComponent,
+    facilitadorComponent,
+    EditFacilitadorComponent
 
   ],
   imports: [
