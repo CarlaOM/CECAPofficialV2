@@ -23,6 +23,7 @@ import { PersonaComponent } from "./event/persona/persona.component"
 import { UserService} from './services/user.service';
 import { SearchPipe } from './event/filtro/filtropersona.pipe';
 import { FilterPipe } from "./event/persona/filter.pipe";
+import { SucursalService } from './services/sucursal.service'
 
 
 import {HttpClientModule} from '@angular/common/http';
@@ -31,6 +32,7 @@ import { AddEventComponent } from './events/addEvent/addEvent.component';
 import { AddPersonComponent } from './event/addPerson/addPerson.component';
 import { EditPersonComponent } from './event/editPerson/editPerson.component';
 import { AddEjecutivoComponent } from './ejecutivo/add-ejecutivo/add-ejecutivo.component';
+
 
 //Graphics
 import { ChartsModule } from 'ng2-charts';
@@ -54,7 +56,6 @@ import { EditEjecutivoComponent } from './ejecutivo/edit-ejecutivo/edit-ejecutiv
 import { SucursalComponent } from './sucursal/sucursal.component';
 import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.component';
 import { EditComponent } from './event/persona/edit/edit.component';
-
 import { HeroFormComponent } from './hero-form/hero-form.component';
 
 import { ProgramaComponent } from './programa/programa.component';
@@ -126,7 +127,7 @@ import { EgresoComponent } from './caja/egreso/egreso.component';
     DetallePersonalComponent,
     InfoEjecutivoComponent,
     CajaChicaComponent,
-    IngresoComponent,
+    IngresoComponent
 
   ],
   imports: [
@@ -136,13 +137,14 @@ import { EgresoComponent } from './caja/egreso/egreso.component';
     HttpClientModule,
     FormsModule,
     HttpModule,
-    ChartsModule,
+    ChartsModule
     
   ],
   providers: [
     appRoutingProviders,
     UserService,
     FilterPipe,
+    SucursalService,
   ],//aniadir appRo..
   bootstrap: [AppComponent]
 })

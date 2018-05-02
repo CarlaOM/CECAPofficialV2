@@ -39,7 +39,7 @@ app
    
    .use('/persons', require('./routes/persons'))
    .use('/programs', require('./routes/programs'))
-   .use('/sucursales', require('./routes/sucursales'))
+   .use('/offices', require('./routes/offices'))
 
    .use(function (err, req, res, next) { 
       console.error(err.stack);
