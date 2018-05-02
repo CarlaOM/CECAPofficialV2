@@ -104,7 +104,10 @@ export class PeticionesService {
     getOneUser(_id) {
         return this._http.get(this.url + 'users/' + _id).map((res: Response) => res);
     }
-    
+    deleteUser(_id){
+
+        return this._http.delete(this.url + 'users/' + _id).map((res: Response) => res);
+    }
     getMejorEjecutivo(_id) {
         return this._http.get(this.url + 'events/mejorEjecutivo/' + _id).map((res: Response) => res);
     }
@@ -135,6 +138,7 @@ export class PeticionesService {
         var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
         return this._http.get(this.url + 'carteras/otro/' + id, { headers: headers }).map((res: Response) => res);
     }
+    
 
     // updateUsers (user: User): Observable<null> {
     //   return this.http.put(this.usersUrl, user, httpOptions).pipe(
@@ -176,6 +180,6 @@ export class PeticionesService {
         return this._http.put(this.url + 'programs/edit/' + idProgram, body, { headers: headers }).map((res: Response) => res);
     }
     getSucursales() {
-        return this._http.get(this.url + 'sucursales').map((res: Response) => res);
+        return this._http.get(this.url + 'offices').map((res: Response) => res);
     }
 }

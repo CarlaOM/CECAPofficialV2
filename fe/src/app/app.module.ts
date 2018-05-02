@@ -70,6 +70,7 @@ import { CajaChicaComponent } from './caja/caja-chica/caja-chica.component';
 import { IngresoComponent } from './caja/ingreso/ingreso.component';
 import { EgresoComponent } from './caja/egreso/egreso.component';
 import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facilitador.component';
+import { AddCorrelativeComponent } from './correlative/add-correlative/add-correlative.component';
 
 
 @NgModule({
@@ -129,7 +130,8 @@ import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facil
     InfoEjecutivoComponent,
     CajaChicaComponent,
     IngresoComponent,
-    AddFacilitadorComponent
+    AddFacilitadorComponent,
+    AddCorrelativeComponent
 
   ],
   imports: [
