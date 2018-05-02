@@ -35,13 +35,12 @@ app
    .use('/events', require('./routes/events'))
    // .use('/registers', require('./routes/registers'))
    .use('/carteras', require('./routes/carteras'))
-  
+   .use('/facilitators', require('./routes/facilitators'))
    
    .use('/persons', require('./routes/persons'))
    .use('/programs', require('./routes/programs'))
    .use('/offices', require('./routes/offices'))
    .use('/correlatives', require('./routes/correlatives'))
-
    .use(function (err, req, res, next) { 
       console.error(err.stack);
       return res.status(err.status || 500).send('Not Found');
@@ -49,7 +48,7 @@ app
 
 //   db.
 //If need initialize db 
-if (false) { 
+if (true) { 
    var init = require('./models/init');
    // init.clearCollections();
    init.initializer();

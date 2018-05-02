@@ -69,6 +69,7 @@ import { InfoEjecutivoComponent } from './ejecutivo/info-ejecutivo/info-ejecutiv
 import { CajaChicaComponent } from './caja/caja-chica/caja-chica.component';
 import { IngresoComponent } from './caja/ingreso/ingreso.component';
 import { EgresoComponent } from './caja/egreso/egreso.component';
+import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facilitador.component';
 import { AddCorrelativeComponent } from './correlative/add-correlative/add-correlative.component';
 
 
@@ -129,6 +130,7 @@ import { AddCorrelativeComponent } from './correlative/add-correlative/add-corre
     InfoEjecutivoComponent,
     CajaChicaComponent,
     IngresoComponent,
+    AddFacilitadorComponent,
     AddCorrelativeComponent
 
   ],
