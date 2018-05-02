@@ -19,33 +19,20 @@ export class ProgramaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._peticionesService.getPrograms().subscribe(response=>{
-      this.programs=response;
-    });
-    this.query();
-  }
-
-  receiveMessage() {
-    this.query();
-  }
-
-  query() {
     this._peticionesService.getPrograms().subscribe(
-       result => {
-          this.programs = result;
-          console.log(result)
-       },
-       error => {
-          console.log(<any>error);
-       });
- }
-
+      result => {
+         this.programs = result;
+         console.log(result)
+      },
+      error => {
+         console.log(<any>error);
+      });
+  }
  send(_id: string) {
-  this.router.navigate(['home/program', _id]);
+  this.router.navigate(['home/modulo', _id]);
  }
-
   editProgram(_id:string){
-    this.router.navigate(['/home/program/edit',_id]);
+    this.router.navigate(['/home/program/edit', _id]);
     console.log("router.navigate");
   }
 }
