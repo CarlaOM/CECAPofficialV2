@@ -46,7 +46,7 @@ router
 //         return res.status(200).send(program);
 //        });
 //    })
-   .put('/:id', function (req, res) { 
+   /*.put('/:id', function (req, res) { 
        console.log(req.body)
        console.log(req.params.id)
       db.programs.findOne({ _id: req.params.id }, function (err, program) {
@@ -62,7 +62,7 @@ router
             return res.status(200).send(program);
          });
       });
-   })
+   })**/
    .put('/edit/:id', function(req, res){
     console.log(req.body)
     console.log(req.params.id)

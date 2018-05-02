@@ -59,7 +59,7 @@ import { EditComponent } from './event/persona/edit/edit.component';
 import { HeroFormComponent } from './hero-form/hero-form.component';
 
 import { ProgramaComponent } from './programa/programa.component';
-import { ModuloComponent } from './programa/modulo/modulo.component';
+import { ModuloComponent } from './modulo/modulo.component';
 import { EditProgramaComponent } from './programa/edit-programa/edit-programa.component';
 
 import { DetalleCajaComponent } from './sucursal/detalle-caja/detalle-caja.component';
