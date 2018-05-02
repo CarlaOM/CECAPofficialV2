@@ -30,7 +30,7 @@ export class AddCarteraComponent implements OnInit {
     const newCartera=new Cartera(name,null);
     console.log(newCartera);
 
-    if(this.nameRef.nativeElement.value){
+    if(this.nameRef.nativeElement.value==''){
 
       window.alert("Asegurese que todos los campos no esten vacios")
     }else{

@@ -730,5 +730,6 @@ module.exports = {
       clearCollections(db.cashFlowUsers);
       clearCollections(db.company);
       clearCollections(db.facilitators);
+      clearCollections(db.correlatives);
    }
 };

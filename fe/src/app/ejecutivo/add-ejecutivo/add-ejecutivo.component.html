@@ -65,14 +65,14 @@
         <h1>Registrar Ejecutio</h1>
         <form (ngSubmit)="onSubmit()" #addEjecutivo="ngForm" >
           <div class="form-group">
-            <label for="firstname">Nombres</label>
-            <input type="text" class="form-control" id="firstname"
+            <label for="name">Nombres</label>
+            <input type="text" class="form-control" id="name"
                    required
-                   [(ngModel)]="model.firstname" name="firstname"
-                   #firstname="ngModel"
+                   [(ngModel)]="model.name" name="name"
+                   #name="ngModel"
                    >
-            <div [hidden]="firstname?.valid || firstname?.pristine"
-                 class="alert alert-danger">
+            <div [hidden]="name?.valid || name?.pristine"
+                 class="">
               first Name is required
             </div>
           </div>
@@ -83,8 +83,8 @@
                    [(ngModel)]="model.lastname" name="lastname"
                    #lastname="ngModel">
             <div [hidden]="lastname?.valid || lastname?.pristine"
-                 class="alert alert-danger">
-              last Name is required
+            class="">
+            last Name is required
             </div>
           </div>
           <div class="form-group">
@@ -94,20 +94,20 @@
                    [(ngModel)]="model.cell" name="cell"
                    #cell="ngModel">
             <div [hidden]="cell?.valid || cell?.pristine"
-                 class="alert alert-danger">
-              cell is required
+            class="">
+            cell is required
             </div>
           </div>
   
           <div class="form-group">
-              <label for="email">Correo</label>
-              <input type="email" class="form-control" id="email"
+              <label for="correo">Correo</label>
+              <input type="correo" class="form-control" id="correo"
                      required
-                     [(ngModel)]="model.email" name="email"
-                     #email="ngModel">
-              <div [hidden]="email?.valid || email?.pristine"
-                   class="alert alert-danger">
-                   email is required
+                     [(ngModel)]="model.correo" name="correo"
+                     #correo="ngModel">
+              <div [hidden]="correo?.valid || correo?.pristine"
+              class="">
+              email is required
               </div>
             </div>
         
@@ -118,23 +118,23 @@
                             required
                             [(ngModel)]="model.rol" name="rol"
                             #rol="ngModel">
-                      <option *ngFor="let ro of roles" [value]="ro">{{ro}}</option>
+                      <option *ngFor="let ro of roles" [value]="ro._id">{{ro.name}}</option>
                     </select>
-                    <div [hidden]="rol.valid || rol.pristine" class="alert alert-danger">
-                      Power is required
+                    <div [hidden]="rol.valid || rol.pristine" class="">
+                      rol is required
                     </div>
             </div>
            
 
             <div class="form-group">
-                    <label for="sucursal">sucursal</label>
-                    <select class="form-control" id="sucursal"
+                    <label for="offices">sucursal</label>
+                    <select class="form-control" id="offices"
                             required
-                            [(ngModel)]="model.sucursal" name="sucursal"
-                            #sucursal="ngModel">
-                      <option *ngFor="let sucur of sucursales" [value]="sucur">{{sucur}}</option>
+                            [(ngModel)]="model.offices" name="offices"
+                            #offices="ngModel">
+                      <option *ngFor="let sucur of sucursales" [value]="sucur._id">{{sucur.name}}</option>
                     </select>
-                    <div [hidden]="sucursal.valid || sucursal.pristine" class="alert alert-danger">
+                    <div [hidden]="offices.valid || offices.pristine" class="">
                             sucursal is required
                     </div>
             </div>
@@ -145,9 +145,9 @@
                             required
                             [(ngModel)]="model.cartera" name="cartera"
                             #cartera="ngModel">
-                      <option *ngFor="let carte of carteras" [value]="carte">{{carte}}</option>
+                      <option *ngFor="let carte of carteras" [value]="carte.name">{{carte.name}}</option>
                     </select>
-                    <div [hidden]="cartera.valid || cartera.pristine" class="alert alert-danger">
+                    <div [hidden]="cartera.valid || cartera.pristine" class="">
                             cartera is required
                     </div>
             </div>

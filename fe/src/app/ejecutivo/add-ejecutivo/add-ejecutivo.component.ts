@@ -1,9 +1,9 @@
 import { Component, OnInit, ElementRef,ViewChild,Output,EventEmitter } from '@angular/core';
 import {PeticionesService } from '../../services/peticiones.service';
-// import {Cartera} from '../../modelo/cartera';
-// import { Identity,Roles } from "../../services/global";
+import {Cartera} from '../../modelo/cartera';
+import { Identity,Roles } from "../../services/global";
 // import {User} from '../../modelo/user';
-// import { Sucursal } from "../../modelo/sucursal";
+import { Offices } from "../../modelo/offices";
 import { Ejecutivo } from "./Ejecutivo";
 
 @Component({
@@ -13,7 +13,8 @@ import { Ejecutivo } from "./Ejecutivo";
   providers:[PeticionesService]
 })
 export class AddEjecutivoComponent implements OnInit {
-  //public carteras;
+  public carteras;
+  public sucursales;
   public carteraSeleccionada;
   public carteraObject;
   public  rolid;
@@ -28,24 +29,41 @@ export class AddEjecutivoComponent implements OnInit {
   constructor(private _peticionesService:PeticionesService) { }
 
   /////////////////////////////////////////////////
-  public roles = ['rol1','rol2','rol3'];
+  public roles = Roles;
+  
  
-  public sucursales=["sucursal1","sucursal2","sucursal3"];
-  public carteras=['cartera1','caretera2','caretea3'];
-  model = new Ejecutivo(78,"NOMBRE","APELLIDO",6532,"ASDF@ASDF.ASD",this.roles[0],this.sucursales[0],this.carteras[0]);
-
- // model=new Ejecutivo();
-
+  model = new Ejecutivo(Identity._id,"NOMBRE","",true,"APELLIDO",6532,"ASDF@ASDF.ASD","this.roles[1].name","asdf","asdf");
+  // model=new Ejecutivo();
   get diagnostic() { return JSON.stringify(this.model); }
 /////////////////////////////////////////////////
   submitted = false;
 
-  onSubmit() { this.submitted = true; }
+ 
   ngOnInit() {
-    // this._peticionesService.getCarteras().subscribe(response=>{
-    //   this.carteras=response;
-    // });
+    this._peticionesService.getCarteras().subscribe(response=>{
+      this.carteras=response;
+      console.log(this.carteras);
+    });
+    this._peticionesService.getSucursales().subscribe(response=>{
+      this.sucursales=response;
+      console.log(this.sucursales)
+    });
+    
+    
   }
+  onSubmit() { this.submitted = true;
+    console.log(this.model);
+    this._peticionesService.addUser(this.model).subscribe(response=>{
+            this.newUser=response;
+            console.log(this.newUser);
+            this.MessageEvent.emit();
+            
+           
+           
+      
+          })
+
+}
 
 //   save(){
 //     const name= this.nameRef.nativeElement.value;

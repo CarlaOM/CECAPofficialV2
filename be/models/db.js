@@ -20,8 +20,12 @@ module.exports = {
 
    users: mongoose.model('users', new Schema({
       name: String,
+      cell:Number,
+      correo:String,
+      
       active: Boolean,
       password_hash: String,
+
       // token: String,
       rol: ObjectId,
       offices: ObjectId,

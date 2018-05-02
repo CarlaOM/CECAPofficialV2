@@ -1,147 +1,64 @@
-
-<div class="content-wrapper">
-    <section class="content">
-       <!-- test -->
-       <div style="text-align:center; margin:auto; width:70%;">
-          EDITAR INSCRIPCION      
-         <div class="jumbotron">
-            <div>
-                <label for="">Sucursal 
-                    <input type="text" name="name" #name="ngModel" [(ngModel)]="sucursal.name" class="form-control" placeholder="Nombre de Sucursal" required/>
-                </label>
-                <span *ngIf="!name.valid && name.touched" class="text-alert">
-                  *El nombre de Sucursal es obligatorio.
-                </span>
-            </div>
-            <div class="row mb-5">
-                <label data-error="wrong" data-success="right" for="form34">
-                    <i class="fa fa-user prefix grey-text"></i>  Nombre</label>
-              <input type="text" id="form34" class="form-control validate" #firstName>
-          </div>
-            <div> 
-                <input type="text" name="t" [(ngModel)]="inscription.description" class="form-control" required />
-                <label>Descripcion</label>          
-            </div>
-              <div>
-                <input type="submit" value="GUARDAR" class="btn btn-success" (click)="saveInscription()"/>
-                <input type="submit" value="CANCELAR" class="btn btn-success" (click)="cancelar(eventId)"/>
-              </div>
-         </div>
-     </div>
-   </section>
- </div>
-
- 
- <!--modelo interface-->
  <div class="content-wrapper">
-    <br>
+   <br>
     <div class="">
-    <div class="box box-primary">
-  
-  <div class="container">
-      <div [hidden]="submitted">
-        <h1>Registrar Ejecutio</h1>
-        <form (ngSubmit)="onSubmit()" #addEjecutivo="ngForm" >
-          <div class="form-group">
-            <label for="firstname">Nombres</label>
-            <input type="text" class="form-control" id="firstname"
-                   required
-                   [(ngModel)]="model.firstname" name="firstname"
-                   #firstname="ngModel"
-                   >
-            <div [hidden]="firstname?.valid || firstname?.pristine"
-                 class="alert alert-danger">
-              first Name is required
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="lastname">Apellidos</label>
-            <input type="text" class="form-control" id="lastname"
-                   required
-                   [(ngModel)]="model.lastname" name="lastname"
-                   #lastname="ngModel">
-            <div [hidden]="lastname?.valid || lastname?.pristine"
-                 class="alert alert-danger">
-              last Name is required
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="cell">Celular</label>
-            <input type="number" class="form-control" id="cell"
-                   required
-                   [(ngModel)]="model.cell" name="cell"
-                   #cell="ngModel">
-            <div [hidden]="cell?.valid || cell?.pristine"
-                 class="alert alert-danger">
-              cell is required
-            </div>
-          </div>
-  
-          <div class="form-group">
-              <label for="email">Correo</label>
-              <input type="email" class="form-control" id="email"
-                     required
-                     [(ngModel)]="model.email" name="email"
-                     #email="ngModel">
-              <div [hidden]="email?.valid || email?.pristine"
-                   class="alert alert-danger">
-                   email is required
-              </div>
-            </div>
-        
-            
-            <div class="form-group">
-                    <label for="rol">Hero rol</label>
-                    <select class="form-control" id="rol"
-                            required
-                            [(ngModel)]="model.rol" name="rol"
-                            #rol="ngModel">
-                      <option *ngFor="let ro of roles" [value]="ro">{{ro}}</option>
-                    </select>
-                    <div [hidden]="rol.valid || rol.pristine" class="alert alert-danger">
-                      Power is required
+      <div class="box box-primary">
+      
+        <div class="container ">
+            <div [hidden]="submitted">
+                <h1>Registrar Sucursal</h1>
+                <br>
+                <form (ngSubmit)="onSubmit()" #addEjecutivo="ngForm" class="jumbotron">
+                    <div class="form-group col-sm-8">
+                        <label for="name" class="control-label" >Nombre Sucursal</label>
+                            <input type="text" class="form-control" id="name" 
+                            [(ngModel)]="office.name" name="name" #name="ngModel" required />
+                            <span *ngIf="!name.valid && name.touched" class="text-alert">
+                                    *Nombre de Sucursal requerido.
+                            </span>
+                        <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
+                            kjkn
+                        </div>-->
                     </div>
-            </div>
-           
-
-            <div class="form-group">
-                    <label for="sucursal">sucursal</label>
-                    <select class="form-control" id="sucursal"
-                            required
-                            [(ngModel)]="model.sucursal" name="sucursal"
-                            #sucursal="ngModel">
-                      <option *ngFor="let sucur of sucursales" [value]="sucur">{{sucur}}</option>
-                    </select>
-                    <div [hidden]="sucursal.valid || sucursal.pristine" class="alert alert-danger">
-                            sucursal is required
+                    <div class="form-group col-sm-8">
+                        <label for="ubicacion" class=" control-label">Ubicacion</label>
+                                <input type="text" class="form-control" id="ubicacion" 
+                                    [(ngModel)]="office.ubicacion" name="ubicacion" #ubicacion="ngModel" required >
+                                <span *ngIf="!ubicacion.valid && ubicacion.touched" class="text-alert">
+                                            *Ubicacion de Sucursal requerido.
+                                </span>
+                            <!--<div [hidden]="ubicacion?.valid || ubicacion?.pristine" class="">
+                                Ubicacion requerida
+                            </div>-->
                     </div>
-            </div>
-
-            <div class="form-group">
-                    <label for="cartera">cartera</label>
-                    <select class="form-control" id="cartera"
-                            required
-                            [(ngModel)]="model.cartera" name="cartera"
-                            #cartera="ngModel">
-                      <option *ngFor="let carte of carteras" [value]="carte">{{carte}}</option>
-                    </select>
-                    <div [hidden]="cartera.valid || cartera.pristine" class="alert alert-danger">
-                            cartera is required
+                    <div class="form-group col-sm-8">
+                        <label for="caja">Caja</label>
+                        <input type="number" class="form-control" id="caja" 
+                            [(ngModel)]="office.caja" name="caja" #caja="ngModel" required >
+                            <span *ngIf="!caja.valid && caja.touched" class="text-alert">
+                                    *Caja de Sucursal requerido.
+                                </span>
+                        <!--<div [hidden]="caja?.valid || caja?.pristine" class="">
+                                Monto inicial Requerido
+                        </div>-->
                     </div>
+                    <div class="form-group col-sm-8">
+                            <label for="departament">Departamento</label>
+                                <input type="text" class="form-control" id="departament" required
+                                [(ngModel)]="office.departament" name="departament" #departament="ngModel" >
+                                <span *ngIf="!departament.valid && departament.touched" class="text-alert">
+                                        *Departamento de Sucursal requerido.
+                                </span>
+                            <!--<div [hidden]="departament?.valid || departament?.pristine" class="">
+                               *Departamento requeridos
+                            </div>-->
+                    </div>
+                    <div class="form-group col-sm-8" style="text-align:center ">
+                        <button type="submit" class="btn btn-success" [disabled]="!addEjecutivo.form.valid">Registrar</button>
+                        <button type="button" class="btn btn-danger" (click)="addEjecutivo.reset()">Cancelar</button>
+                     </div>
+                </form>
             </div>
-            
-
-
-     
-          
-     
-          <button type="submit" class="btn btn-success" [disabled]="!addEjecutivo.form.valid">Registrar</button>
-          <button type="button" class="btn btn-danger" (click)="addEjecutivo.reset()">Cancelar</button>
-        </form>
-      </div>
+        </div>
+      </div> 
     </div>
-  
-    </div>
-  
-  </div>
-  </div>
+</div>

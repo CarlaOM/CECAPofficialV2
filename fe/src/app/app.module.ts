@@ -23,6 +23,7 @@ import { PersonaComponent } from "./event/persona/persona.component"
 import { UserService} from './services/user.service';
 import { SearchPipe } from './event/filtro/filtropersona.pipe';
 import { FilterPipe } from "./event/persona/filter.pipe";
+import { SucursalService } from './services/sucursal.service'
 
 
 import {HttpClientModule} from '@angular/common/http';
@@ -31,6 +32,7 @@ import { AddEventComponent } from './events/addEvent/addEvent.component';
 import { AddPersonComponent } from './event/addPerson/addPerson.component';
 import { EditPersonComponent } from './event/editPerson/editPerson.component';
 import { AddEjecutivoComponent } from './ejecutivo/add-ejecutivo/add-ejecutivo.component';
+
 
 //Graphics
 import { ChartsModule } from 'ng2-charts';
@@ -142,6 +144,7 @@ import { EgresoComponent } from './caja/egreso/egreso.component';
     appRoutingProviders,
     UserService,
     FilterPipe,
+    SucursalService,
   ],//aniadir appRo..
   bootstrap: [AppComponent]
 })
