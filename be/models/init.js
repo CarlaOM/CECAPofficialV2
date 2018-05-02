@@ -353,9 +353,10 @@ var _person_3 = {
 var _person_4 = {
     first_name: 'lucia',
     last_name: 'galarza',
-    birthday: new Date(1992, 1, 1),
+    //birthday: new Date(1992, 1, 1),
     ci: '5342425',
-    cellphone: '79121232',
+    phone: 51234314,
+    cellphone: 79121232,
     email:'lucia@lucia.com',
     ocupation:'estudiante',
     descOcupation:{
@@ -375,7 +376,7 @@ var _person_4 = {
      /////////////
      profile: {
         programs: [{
-           program: _program_rrhh,
+           programs: _program_rrhh,//modificado de program a programs
            modulars: [{
               amount: [{
                  detail: 'modulo 1 rrhh',
@@ -715,6 +716,7 @@ module.exports = {
       saveData(_facilitators, db.facilitators);
       saveData(_cashFlowUser, db.cashFlowUsers);
       saveData(_offices, db.offices);
+      saveData(_correlatives, db.correlatives);
       
    },
 
