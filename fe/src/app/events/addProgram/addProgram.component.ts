@@ -27,7 +27,7 @@ export class AddProgramComponent implements OnInit {
       let modules = this.modulesAreaRef.nativeElement.value.split('\n');
       modules.splice(-1, 1);
       const details = this.detailsAreaRef.nativeElement.value;
-      const newProgram = new Programa(name, modules, details);
+      const newProgram = new Programa(name, details);
       this._peticionesService.addProgram(newProgram).subscribe(response => {
          // console.log(response);
          this.close.nativeElement.click();
