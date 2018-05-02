@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
-import { PeticionesService } from '../../services/peticiones.service';
+import { ActivatedRoute, Router } from "@angular/router";
+import { PeticionesService } from '../services/peticiones.service';
+import { Modulo } from '../modelo/modulo';
 
 @Component({
   selector: 'app-modulo',
@@ -15,15 +16,14 @@ export class ModuloComponent implements OnInit {
 
   constructor(
       private route: ActivatedRoute,
+      private router: Router,
       private _peticionesService: PeticionesService
   ) { }
 
   ngOnInit() {
-    this.queryProgram();
-    this.findProgram();
-    this.findModulo();
+    this.queryProgramId();
+    this.findModulos();
   }
-
   //ngAfterViewInit() {
   //  this.query();
   //}
@@ -31,32 +31,27 @@ export class ModuloComponent implements OnInit {
   //receiveMessage() {
   //  this.query();
   //}
- 
-  queryProgram() {
+  queryProgramId(){
     this.route.params.subscribe(params => {
-       this.programId = params.id
-    });
+    this.programId=params.id;
+     });
   }
-
-  findProgram(){
-    this._peticionesService.getProgram(this.programId).subscribe(
+  findModulos(){
+    console.log(this.programId)
+    this._peticionesService.getModulos(this.programId).subscribe(
        result =>{
-         this.program=result; 
-         console.log(result)     
+         this.modulos=result;
+         console.log(this.modulos)
        },
        error =>{
          console.log(<any>error);
        })
+  }
+  send(_id: string) {
+    this.router.navigate(['home/modulo', _id]);
    }
-  
-   findModulo(){
-     this._peticionesService.getModulos().subscribe(
-       result =>{
-        this.modulos=result;
-        console.log(result)
-       },
-       error =>{
-         console.log(<any>error)
-       })
-   }
+  editProgram(_id:string){
+      this.router.navigate(['/home/modulo/edit', _id]);
+      console.log("router.navigate");
+    }
 }

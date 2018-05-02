@@ -22,10 +22,10 @@
             <td>{{ modulo.number }}</td>
             <td>{{ modulo.name }}</td>
             <td>
-              <a class="btn btn-warning" (click)="editEjecutivo(ejecutivo._id)">VER CONTENIDO</a>
+              <a class="btn btn-info" (click)="send(modulo._id)">VER CONTENIDO</a>
             </td>
             <td>
-               <a class="btn btn-success" (click)="editEjecutivo(ejecutivo._id)">EDITAR</a>
+               <a class="btn btn-warning" (click)="editModulo(modulo._id)">EDITAR</a>
             </td>
          </tr>
       </tbody>
