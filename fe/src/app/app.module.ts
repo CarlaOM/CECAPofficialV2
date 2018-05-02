@@ -69,6 +69,7 @@ import { InfoEjecutivoComponent } from './ejecutivo/info-ejecutivo/info-ejecutiv
 import { CajaChicaComponent } from './caja/caja-chica/caja-chica.component';
 import { IngresoComponent } from './caja/ingreso/ingreso.component';
 import { EgresoComponent } from './caja/egreso/egreso.component';
+import { AddCorrelativeComponent } from './correlative/add-correlative/add-correlative.component';
 
 
 @NgModule({
@@ -127,7 +128,8 @@ import { EgresoComponent } from './caja/egreso/egreso.component';
     DetallePersonalComponent,
     InfoEjecutivoComponent,
     CajaChicaComponent,
-    IngresoComponent
+    IngresoComponent,
+    AddCorrelativeComponent
 
   ],
   imports: [
