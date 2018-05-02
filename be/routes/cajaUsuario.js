@@ -7,7 +7,7 @@ var router = express.Router();
 
 router
    .get('/', function (req, res) {
-      db.cajaUsuario.find({}, function (err, cajaUsuario) {
+      db.cashFlowUsers.find({}, function (err, cajaUsuario) {
          if (err) return res.status(400).send(err);
 
          return res.status(200).send(cajaUsuario);

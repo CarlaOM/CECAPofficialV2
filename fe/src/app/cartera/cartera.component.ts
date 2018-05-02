@@ -17,20 +17,22 @@ export class CarteraComponent implements OnInit {
 
   public carteras;
   public role;
-
   constructor(
 
     private route: ActivatedRoute,
     private router: Router,
     private _peticionesService: PeticionesService
   ) { }
-
+  
   ngOnInit() {
 
     this._peticionesService.getCarteras().subscribe(response=>{
       this.carteras=response;
     });
     this.queryRol();
+  }
+  addCartera(){
+    this.router.navigate(['/home/cartera/add']);
   }
   send(_id:string){
     // console.log(_id);
