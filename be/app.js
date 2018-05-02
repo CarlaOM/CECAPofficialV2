@@ -40,6 +40,7 @@ app
    .use('/persons', require('./routes/persons'))
    .use('/programs', require('./routes/programs'))
    .use('/offices', require('./routes/offices'))
+   .use('/correlatives', require('./routes/correlatives'))
 
    .use(function (err, req, res, next) { 
       console.error(err.stack);

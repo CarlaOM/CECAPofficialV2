@@ -92,6 +92,31 @@ var _cashFlowUser2 = {
 var _cashFlowUser =[_cashFlowUser1,_cashFlowUser2];
 
 ///////////////////////////////////////////
+var _correlative1 = {
+    year: '2018-03-04',
+    company_id:_company, //ObjectId
+    receipts: [{
+       receipt: 010,   //numero recivo
+       amount: 1000,      //catidad
+       description: 'factura de inscripcion'  
+    }],
+    _id: new mongoose.Types.ObjectId,
+    record_date: new Date()
+};
+var _correlative2 = {
+    year: '2018-04-01',
+    company_id:_company, //ObjectId
+    receipts: [{
+       receipt: 011,   //numero recivo
+       amount: 1000,      //catidad
+       description: 'factura de inscripcion'  
+    }],
+    _id: new mongoose.Types.ObjectId,
+    record_date: new Date()
+};
+
+var _correlatives = [_correlative1, _correlative2 ];
+///////////////////////////////////////////////////////
 
 var _cartera_user_1={
     name:'cartera1',
@@ -546,7 +571,7 @@ var _event_seg2 = {
    program: _program_seguridad,
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _event_rrhh = {
    description: 'solo para ejecutivos',
    date_start: new Date(2018, 03, 12),
@@ -600,7 +625,7 @@ var _event_rrhh = {
    program: _program_rrhh,
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _event_rrhh2 = {
    description: 'solo para ejecutivos',
    date_start: new Date(2018, 11, 12),
@@ -684,6 +709,7 @@ var _company0 = {
 };
 var _company = [_company0];
 ///////////////////////////////////////////////////////////
+
 
 function saveData(collection, schema) {
    for (var i = 0; i < collection.length; i++) {

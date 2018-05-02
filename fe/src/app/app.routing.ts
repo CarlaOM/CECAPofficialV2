@@ -32,6 +32,7 @@ import { InfoEjecutivoComponent } from "./ejecutivo/info-ejecutivo/info-ejecutiv
 import { CajaChicaComponent } from "./caja/caja-chica/caja-chica.component";
 import { IngresoComponent } from "./caja/ingreso/ingreso.component";
 import { EgresoComponent } from './caja/egreso/egreso.component';
+import { AddCorrelativeComponent } from './correlative/add-correlative/add-correlative.component';
 
 
 
@@ -71,7 +72,8 @@ const appRoutes: Routes = [
          { path: 'formulariobase',component:HeroFormComponent},
          { path: 'caja', component:CajaChicaComponent},
          { path: 'caja/ingreso', component:IngresoComponent},
-         { path: 'caja/egreso', component:EgresoComponent}
+         { path: 'caja/egreso', component:EgresoComponent},
+         { path: 'correlative/add', component:AddCorrelativeComponent}
 
       ]
    },
