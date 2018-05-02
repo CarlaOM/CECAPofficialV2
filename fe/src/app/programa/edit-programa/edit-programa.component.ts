@@ -58,7 +58,7 @@ export class EditProgramaComponent implements OnInit {
         result=>{
           var res=result;
           console.log(res);
-          this.router.navigate(['home/program']);
+          this.router.navigate(['home/programs']);
           alert('Se Guardo correctamente la edicion');
         },
         error=>{
@@ -67,10 +67,10 @@ export class EditProgramaComponent implements OnInit {
         })
     }
   }
-  save() {
-    console.log(this.program);
-    this.close.nativeElement.click();
-  }
+  //save() {
+    //console.log(this.program);
+    //this.close.nativeElement.click();
+  //}
   cancel() {
     this.router.navigate(['home/programs']);
    }
