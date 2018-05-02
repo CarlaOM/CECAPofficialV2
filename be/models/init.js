@@ -12,6 +12,10 @@ var _rol_ejecutivo = {
 
    _id: new mongoose.Types.ObjectId
 };
+var _rol_gerente ={
+    name: 'Gerente',
+    _id : new mongoose.Types.ObjectId
+}
 var _roles = [_rol_admin, _rol_ejecutivo];
 
 var _user_admin = {
