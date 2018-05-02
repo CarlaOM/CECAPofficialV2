@@ -58,6 +58,14 @@ export class EditCarteraComponent implements OnInit {
 
 
   }
+  simbolos(nameV){
+    console.log("ingreso simbolos");
+    var res = false;
+    for(var i = 0; i<nameV.length;i++){
+      if(nameV[i] == '!' || nameV[i] == '@' || nameV[i] == '#' || nameV[i] == '$' || nameV[i] == '%' || nameV[i] == '^' ){res = true;}
+    }
+    return res;
+  }
   editCartera(){
 
     // console.log(this.cartera);
@@ -66,8 +74,12 @@ export class EditCarteraComponent implements OnInit {
     if(this.nameRef.nativeElement.value==''){
 
       window.alert("Asegurese que todos los campos esten llenos");
+    
     }else{
-
+      if(this.simbolos(this.nameRef.nativeElement.value)){
+        console.log("hay simbolos");
+        window.alert("asegurese de no introducir simbolos");
+      } else{
 
       this._peticionesService.updateCartera(this.cartera).subscribe(
         result=>{
@@ -81,7 +93,7 @@ export class EditCarteraComponent implements OnInit {
           console.log(errorMessage);
         }
       )
-
+     }
     }
    
   }

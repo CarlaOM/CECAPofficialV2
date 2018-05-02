@@ -79,8 +79,13 @@ export class PeticionesService {
     getCarteras() {
         return this._http.get(this.url + 'carteras').map((res: Response) => res);
     }
-    getCartera(_id) {
-
+    crearCartera(cartera){
+        let body = JSON.stringify(cartera);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'carteras/guardar', body, { headers: headers }).map((res: Response) => res);
+    }
+    getCartera(_id) { 
+        
         return this._http.get(this.url + 'carteras/' + _id).map((res: Response) => res);
     }
     addUser(user) {

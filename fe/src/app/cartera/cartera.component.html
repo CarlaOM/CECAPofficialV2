@@ -18,11 +18,12 @@
         </li>
         <li class="active">carteras</li>
      </ol>-->
-     <li  *ngIf='role?.name == "Admin"'>
+     <!-- <li  *ngIf='role?.name == "Admin"'>
       <app-add-cartera></app-add-cartera>
-     </li>
+     </li> -->
   </section>
   <section class="content">
+      <a class="btn btn-primary a" (click)="addCartera()">registrar cartera</a>
      <table class="table table-hover">
         <thead>
            <tr>

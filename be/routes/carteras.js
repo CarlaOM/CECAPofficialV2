@@ -1,3 +1,5 @@
+// import { BADFAMILY } from 'dns';
+
 var express = require('express');
 var mongoose = require('mongoose');
 var body_parser = require('body-parser');
@@ -116,6 +118,11 @@ router
           return res.status(200).send(cartera);
        });
     });
+ })
+ .post('/guardar',function(req,res){
+    var cartera = new db.carteras(req.body);
+     console.log(cartera);
+     cartera.save();
  })
  .post('/register', function (req, res) {
     var cartera=new db.carteras(req.body);

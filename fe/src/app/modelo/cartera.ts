@@ -3,5 +3,5 @@ export class Cartera {
        public name:string,
        public user:string
        
-    ) { }
+    ) { } 
  }
