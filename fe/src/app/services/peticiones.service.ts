@@ -170,6 +170,6 @@ export class PeticionesService {
         return this._http.put(this.url + 'programs/edit/' + idProgram, body, { headers: headers }).map((res: Response) => res);
     }
     getSucursales() {
-        return this._http.get(this.url + 'sucursales').map((res: Response) => res);
+        return this._http.get(this.url + 'offices').map((res: Response) => res);
     }
 }

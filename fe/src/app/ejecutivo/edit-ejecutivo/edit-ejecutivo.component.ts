@@ -90,7 +90,7 @@ export class EditEjecutivoComponent implements OnInit {
     this.ejecutivo.cell=this.ejecutivoCell;
     this.ejecutivo.correo=this.ejecutivoCorreo;
     
-
+    
     
     
     
