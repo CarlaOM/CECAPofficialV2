@@ -145,7 +145,7 @@
                             required
                             [(ngModel)]="model.cartera" name="cartera"
                             #cartera="ngModel">
-                      <option *ngFor="let carte of carteras" [value]="carte.name">{{carte.name}}</option>
+                      <option *ngFor="let carte of carteras" [value]="carte._id">{{carte.name}}</option>
                     </select>
                     <div [hidden]="cartera.valid || cartera.pristine" class="">
                             cartera is required
@@ -157,7 +157,7 @@
      
           
      
-          <button type="submit" class="btn btn-success" [disabled]="!addEjecutivo.form.valid">Registrar</button>
+          <button type="submit" class="btn btn-success" [disabled]="!addEjecutivo.form.valid" >Registrar</button>
           <button type="button" class="btn btn-danger" (click)="addEjecutivo.reset()">Cancelar</button>
         </form>
       </div>

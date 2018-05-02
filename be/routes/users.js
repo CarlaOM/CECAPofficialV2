@@ -27,6 +27,16 @@ router
       });
    })
 
+   .delete('/:id',function(req,res){
+
+      db.users.deleteOne({_id:req.params.id},function(err,user){
+
+            if(err) return res.status(400).send(err);
+            if(user==null)return res.status(404).send();
+            return res.status(200).send(user);
+      })
+   })
+
    .get('/roles', function (req, res) {
       db.roles.find({}, function (err, users) {
          if (err) return res.status(400).send(err);
@@ -120,6 +130,7 @@ router
       db.users.findOne({ name: req.body.name, password_hash: req.body.password_hash, active: true }, { rol: 1, _id: 1 }, function (err, user) {
          console.log(user)
          if (err) return console.log(err);
+         console.log(user);
          if (user == null) return res.sendStatus(404);
 
          res.status(200).send(user);
@@ -156,7 +167,7 @@ router
    // 		});
    // 	});
    // })
-
+   
 
    .post('/', function (req, res) {
       var users = new db.users(req.body);
