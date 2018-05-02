@@ -46,7 +46,7 @@ router
 //         return res.status(200).send(program);
 //        });
 //    })
-   /*.put('/:id', function (req, res) { 
+    .put('/:id', function (req, res) { 
        console.log(req.body)
        console.log(req.params.id)
       db.programs.findOne({ _id: req.params.id }, function (err, program) {
@@ -62,19 +62,18 @@ router
             return res.status(200).send(program);
          });
       });
-   })**/
+   })
    .put('/edit/:id', function(req, res){
     console.log(req.body)
     console.log(req.params.id)
      db.programs.update({_id: req.params.id},
         {
             $set: {'name': req.body.name,
-                   'details:': req.body.details}
+                   'details': req.body.details}
         }).exec(function(err, off){
             if (err) return res.status(400).send(err);
       })
    })
-
    .delete('/:id', function (req, res) {
       db.programs.remove({ _id: req.params.id }, function (err, program) {
          if (err) return res.status(400).send(err);
