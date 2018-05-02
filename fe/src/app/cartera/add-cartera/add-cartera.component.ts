@@ -13,11 +13,11 @@ import { ActivatedRoute,Router } from "@angular/router";
 })
 export class AddCarteraComponent implements OnInit {
 
-  @ViewChild('name') nameRef:ElementRef;
-  @Output()MessageEvent=new EventEmitter();
-  @ViewChild("close", {read: ElementRef}) close: ElementRef;
+  // @ViewChild('name') carteraNameutput()MessageEvent=new EventEmitter();
+  // @ViewChild("close", {read: ElementRef}) close: ElementRef;
   
   public cartera;
+  public carteraName;
 
   constructor(private _peticionesService:PeticionesService) { 
      this.cartera = new Cartera ("",null)
@@ -31,7 +31,6 @@ export class AddCarteraComponent implements OnInit {
   ngOnInit() {
   }
   simbolos(nameV){
-    console.log("ingreso simbolos");
     var res = false;
     for(var i = 0; i<nameV.length;i++){
       if(nameV[i] == '!' || nameV[i] == '@' || nameV[i] == '#' || nameV[i] == '$' || nameV[i] == '%' || nameV[i] == '^' ){res = true;}
@@ -40,35 +39,38 @@ export class AddCarteraComponent implements OnInit {
   }
   guardar(){
     // console.log("hola pao" + this.cartera.name);
-    this.cartera.name=this.nameRef.nativeElement.value;
+    this.cartera.name=this.carteraName;
     console.log(this.cartera);
-    if(this.simbolos(this.nameRef.nativeElement.value)){
+    if(this.simbolos(this.carteraName)){
       console.log("hay simbolos");
-      window.alert("El nombre de cartera es requerido");
+      window.alert("No se permiten simbolos");
     }else{
       this._peticionesService.crearCartera(this.cartera).subscribe(
-    
-        Response=> {
-          console.log("guardado")
+        
+        result=> {
+          var esperado = result;
+       // console.log(esperado);
+       // this.router.navigate(['home/event', this.eventId]);
+        alert('Se Creo correctamente la cartera');
         },
         error=>{}
       )
     }
   }
   save(){
-    const name=this.nameRef.nativeElement.value;
+    const name=this.carteraName;
 
     const newCartera=new Cartera(name,null);
     console.log(newCartera);
 
-    if(this.nameRef.nativeElement.value==''){
+    if(this.carteraName==''){
 
       window.alert("Asegurese que todos los campos no esten vacios")
     }else{
       this._peticionesService.addCartera(newCartera).subscribe(response=>{
-        this.MessageEvent.emit();
+        // this.MessageEvent.emit();
   
-        this.close.nativeElement.click();
+        // this.close.nativeElement.click();
       })
 
     }

@@ -3,7 +3,7 @@ import {PeticionesService } from '../../services/peticiones.service';
 import {Cartera} from '../../modelo/cartera';
 import { Identity,Roles } from "../../services/global";
 // import {User} from '../../modelo/user';
-import { Sucursal } from "../../modelo/sucursal";
+import { Offices } from "../../modelo/offices";
 import { Ejecutivo } from "./Ejecutivo";
 
 @Component({

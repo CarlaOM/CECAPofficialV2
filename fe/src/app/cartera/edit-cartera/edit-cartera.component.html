@@ -1,4 +1,4 @@
-<section class="content-wrapper">
+<!-- <section class="content-wrapper">
       <div class="content-wrapper">
             
              <section class="content">
@@ -20,4 +20,41 @@
              <router-outlet></router-outlet>
           </div>
 
-</section>
+</section> -->
+<div class="content-wrapper">
+            <br>
+            <div class="">
+          
+          
+           
+            <div class="box box-primary">
+          
+          <div class="container">
+              <div [hidden]="submitted">
+                <h1>Registrar Cartera</h1>
+                <form (ngSubmit)="editCartera()" #addCartera="ngForm" >
+                    <!-- <form #addCartera="ngForm" > -->
+                  <div class="form-group">
+                    <label for="name">Nombre Cartera</label>
+                    <input type="text" class="form-control" id="name"
+                           required
+                           [(ngModel)]="carteraName" name="name"
+                          #name="ngModel"
+                           >
+                    <div [hidden]="name?.valid || name?.pristine"
+                         class="">
+                      first name is required
+                    </div>
+                    <!-- <input type="text" id="name" class="form-control validate" value="{{carteraName}}" #name> -->
+                  </div>
+                  <button  type="submit" class="btn btn-success"  (click)="editCartera()">Editar</button>
+                  <button type="button" class="btn btn-danger" (click)="addCartera.reset()">Cancelar</button>
+                </form>
+              </div>
+             
+            </div>
+          
+            </div>
+          
+          </div>
+          </div>

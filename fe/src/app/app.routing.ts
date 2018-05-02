@@ -34,6 +34,8 @@ import { CajaChicaComponent } from "./caja/caja-chica/caja-chica.component";
 import { IngresoComponent } from "./caja/ingreso/ingreso.component";
 import { EgresoComponent } from './caja/egreso/egreso.component';
 
+import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facilitador.component';
+
 
 
 const appRoutes: Routes = [
@@ -65,7 +67,7 @@ const appRoutes: Routes = [
          { path: 'formulariobase',component:HeroFormComponent},
          { path: 'formulariobase',component:HeroFormComponent},
          { path: 'programs', component: ProgramaComponent},
-         { path: 'program/:id', component: ModuloComponent},
+         { path: 'modulo/:id', component: ModuloComponent},
          { path: 'program/edit/:id', component: EditProgramaComponent},
          { path: 'sucursal/detalleCaja', component: DetalleCajaComponent},
          { path: 'sucursal/personal', component: DetallePersonalComponent},
@@ -74,7 +76,7 @@ const appRoutes: Routes = [
          { path: 'caja', component:CajaChicaComponent},
          { path: 'caja/ingreso', component:IngresoComponent},
          { path: 'caja/egreso', component:EgresoComponent},
-         
+         { path: 'facilitador', component:AddFacilitadorComponent}
 
       ]
    },

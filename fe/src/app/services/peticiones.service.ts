@@ -46,8 +46,8 @@ export class PeticionesService {
     getPrograms() {
         return this._http.get(this.url + 'programs').map((res: Response) => res);
     }
-    getProgram(id) {
-        return this._http.get(this.url + 'programs/' + id ).map((res: Response) => res);
+    getProgram(_id) {
+        return this._http.get(this.url + 'programs/' + _id).map((res: Response) => res);
     }
     getModulos() {
         return this._http.get(this.url + 'modulos').map((res: Response) => res);
@@ -87,6 +87,11 @@ export class PeticionesService {
     getCartera(_id) { 
         
         return this._http.get(this.url + 'carteras/' + _id).map((res: Response) => res);
+    }
+    addFacilitador(user) {
+        let body = JSON.stringify(user);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'facilitators/register', body, { headers: headers }).map((res: Response) => res);
     }
     addUser(user) {
         let body = JSON.stringify(user);
@@ -165,10 +170,10 @@ export class PeticionesService {
     updateProgram(program_object) {
         console.log(program_object);
         let body = JSON.stringify(program_object);
-        var idProgram = program_object.id;
+        var idProgram = program_object._id;
         // console.log(body);
         var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-        return this._http.put(this.url + 'programs/' + idProgram, body, { headers: headers }).map((res: Response) => res);
+        return this._http.put(this.url + 'programs/edit/' + idProgram, body, { headers: headers }).map((res: Response) => res);
     }
     getSucursales() {
         return this._http.get(this.url + 'sucursales').map((res: Response) => res);
