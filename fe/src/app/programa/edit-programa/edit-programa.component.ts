@@ -11,8 +11,11 @@ import { Programa } from '../../modelo/programa';
 })
 export class EditProgramaComponent implements OnInit {
   @ViewChild('name') nameRef:ElementRef;
+  @ViewChild('details') detailsRef:ElementRef;
+  @ViewChild("close", { read: ElementRef }) close: ElementRef;
   public program;
   public programName;
+  public programDetails;
   public programId;
 
   constructor(
@@ -26,26 +29,29 @@ export class EditProgramaComponent implements OnInit {
     this.findProgram();
   }
   queryProgramId(){
-    // console.log('hasdf');
       this.route.params.subscribe(params => {
-      this.programId=params.name;
+      this.programId=params.id;
    });
   }
   findProgram(){
      this._peticionesService.getProgram(this.programId).subscribe(
         result =>{
-          this.program=result; console.log(this.program)
-          this.programName=this.program.name;  
+          this.program=result;
+          this.programName=this.program.name; 
+          this.programDetails=this.program.details;
+          console.log(this.program.name)
+          console.log(this.program.details)
         },
         error =>{
           console.log(<any>error);
         })
   }
-  editProgram(){
+  saveProgram(){
     //console.log(this.program);
-    this.program.name=this.nameRef.nativeElement.value;
+    this.program.name = this.nameRef.nativeElement.value;
+    this.program.details = this.detailsRef.nativeElement.value;
     
-    if(this.nameRef.nativeElement.value==''){
+    if(this.nameRef.nativeElement.value=='' || this.detailsRef.nativeElement.value==''){
       window.alert("Asegurese que todos los campos esten llenos");
     }else{
       this._peticionesService.updateProgram(this.program).subscribe(
@@ -53,11 +59,19 @@ export class EditProgramaComponent implements OnInit {
           var res=result;
           console.log(res);
           this.router.navigate(['home/program']);
+          alert('Se Guardo correctamente la edicion');
         },
         error=>{
           console.log(<any>error);
+          alert('Error al Guardar verifique los datos');
         })
     }
   }
-
+  save() {
+    console.log(this.program);
+    this.close.nativeElement.click();
+  }
+  cancel() {
+    this.router.navigate(['home/programs']);
+   }
 }

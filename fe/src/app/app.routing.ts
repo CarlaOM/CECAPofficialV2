@@ -63,7 +63,7 @@ const appRoutes: Routes = [
          { path: 'formulariobase',component:HeroFormComponent},
          { path: 'formulariobase',component:HeroFormComponent},
          { path: 'programs', component: ProgramaComponent},
-         { path: 'program/:id', component: ModuloComponent},
+         { path: 'modulo/:id', component: ModuloComponent},
          { path: 'program/edit/:id', component: EditProgramaComponent},
          { path: 'sucursal/detalleCaja', component: DetalleCajaComponent},
          { path: 'sucursal/personal', component: DetallePersonalComponent},
