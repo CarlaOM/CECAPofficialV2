@@ -20,6 +20,7 @@ module.exports = {
 
    users: mongoose.model('users', new Schema({
       name: String,
+      lastname:String,
       cell:Number,
       correo:String,
       

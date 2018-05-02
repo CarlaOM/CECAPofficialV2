@@ -2,15 +2,6 @@
   
    <section class="content">
 
-
-      <!-- <app-addPerson (messageEvent)="receiveMessage()"></app-addPerson> -->
-
-
-     <!-- <section>
-            <div class="col-lg-1">Buscar:</div>
-            <div class="col-lg-5">
-                  <input type="text" [(ngModel)]="busqueda"></div>
-      </section>-->
       <section>
        <div class="row user-infos cyruxx">
            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xs-offset-0 col-sm-offset-0 col-md-offset-1 col-lg-offset-1">
@@ -28,7 +19,7 @@
                                    <dt>Nombres</dt>
                                    <dd>{{ejecutivo?.name}}</dd>
                                    <dt>Apellidos:</dt>
-                                   <dd>{{aaa }}</dd>
+                                   <dd>{{ejecutivo?.lastname }}</dd>
                                    <dt>Celular</dt>
                                    <dd>{{ejecutivo?.cell}}</dd>
                                    <dt>Correo</dt>
@@ -46,17 +37,14 @@
                                <strong>{{ejecutivo?.name}}</strong><br>
                                <table class="table table-user-information">
                                    <tbody>
-                                   <!-- <tr>
-                                       <td>Nivel de Usuario</td>
-                                       <td>Administrator</td>
-                                   </tr> -->
+                                 
                                    <tr>
                                        <td>Nombres</td>
                                        <td>{{ejecutivo?.name}}</td>
                                    </tr>
                                    <tr>
                                     <td>Apellidos</td>
-                                    <td>{{aaa}}</td>
+                                    <td>{{ejecutivo?.lastname}}</td>
                                 </tr>
                                 <tr>
                                     <td>Celular</td>

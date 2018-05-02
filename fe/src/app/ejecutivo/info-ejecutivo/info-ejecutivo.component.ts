@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PeticionesService } from '../../services/peticiones.service';
 import { ActivatedRoute,Router } from "@angular/router";
 import { User} from '../../modelo/user';
+import {  } from "../";
 
 @Component({
   selector: 'app-info-ejecutivo',
@@ -14,6 +15,8 @@ export class InfoEjecutivoComponent implements OnInit {
 
   public ejecutivo;
   public ejecutivoId;
+  public carteras;
+  public sucursales;
 
   constructor(
 
@@ -23,6 +26,15 @@ export class InfoEjecutivoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this._peticionesService.getCarteras().subscribe(response=>{
+      this.carteras=response;
+      console.log(this.carteras);
+    });
+    this._peticionesService.getSucursales().subscribe(response=>{
+      this.sucursales=response;
+      console.log(this.sucursales)
+    });
     this.queryEjecutivoId();
     this.findEjecutivo();
   }
