@@ -10,21 +10,19 @@ router
       db.modules.find({}, function (err, modules) {
          if (err) return res.status(400).send(err);
 
-         return res.status(200).send(modulos);
+         return res.status(200).send(modules);
       });
    })
    .get('/:id', function (req, res) {
-      db.modules.findOne({ _id: req.params.id }, function (err, modulos) {
+      db.modules.findOne({ _id: req.params.id }, function (err, modulo) {
          if (err) return res.status(400).send(err);
-         if (modules == null) return res.status(404).send();
+         if (modulo == null) return res.status(404).send();
 
-         return res.status(200).send(modulos);
+         return res.status(200).send(modulo);
       });
    })
    .get('/lista/:id', function (req, res) {
-    console.log(req.body)
     console.log('hola')
-    console.log(req.params.id)
     db.modules.find({ program: req.params.id }, function (err, modules) {
        if (err) return res.status(400).send(err);
 
@@ -60,6 +58,18 @@ router
             return res.status(200).send(modulo);
          });
       });
+   })
+   .put('/edit/:id', function(req, res){
+    console.log(req.body)
+    console.log(req.params.id)
+     db.programs.update({_id: req.params.id},
+        {
+            $set: {'number': req.body.number,
+                   'name': req.body.name,
+                   'content': req.body.content}
+        }).exec(function(err, off){
+            if (err) return res.status(400).send(err);
+      })
    })
    .delete('/:id', function (req, res) {
       db.modulos.remove({ _id: req.params.id }, function (err, modulo) {

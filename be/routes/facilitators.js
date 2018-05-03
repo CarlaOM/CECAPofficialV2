@@ -7,7 +7,13 @@ var router = express.Router();
 
  
 router
+.get('/', function (req, res) {
+    db.facilitators.find({}, function (err, facilitators) {
+       if (err) return res.status(400).send(err);
 
+       return res.status(200).send(facilitators);
+    });
+ })
 .post('/register', function (req, res) {
     var cartera=new db.facilitators(req.body);
    //  console.log(cartera);
@@ -20,4 +26,5 @@ router
     })
   
  });
+ 
  module.exports = router;

@@ -11,8 +11,8 @@ import { Modulo } from '../modelo/modulo';
 })
 export class ModuloComponent implements OnInit {
   public programId;
-  public program;
   public modulos;
+  public program;
 
   constructor(
       private route: ActivatedRoute,
@@ -47,11 +47,7 @@ export class ModuloComponent implements OnInit {
          console.log(<any>error);
        })
   }
-  send(_id: string) {
-    this.router.navigate(['home/modulo', _id]);
-   }
-  editProgram(_id:string){
+  editModulo(_id:string){
       this.router.navigate(['/home/modulo/edit', _id]);
-      console.log("router.navigate");
     }
 }
