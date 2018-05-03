@@ -94,8 +94,16 @@ export class PeticionesService {
         var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
         return this._http.post(this.url + 'facilitators/register', body, { headers: headers }).map((res: Response) => res);
     }
-    getFacilitador() {
+    getFacilitadores() {
         return this._http.get(this.url + 'facilitators').map((res: Response) => res);
+    }
+    updateFacilitador(facilitador_object) {
+        console.log(facilitador_object);
+        let body = JSON.stringify(facilitador_object);
+        var idfacilitador = facilitador_object._id;
+        // console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.put(this.url + 'facilitators/update/' + idfacilitador, body, { headers: headers }).map((res: Response) => res);
     }
     addUser(user) {
         let body = JSON.stringify(user);

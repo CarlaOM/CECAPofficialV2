@@ -96,7 +96,7 @@ module.exports = {
             modulars: [{
                amount: [{
                   detail: String,
-                  receipt: Number,
+                  receipt: Number,// nro factura
                   date: Date,
                   amount: Number
                }],
