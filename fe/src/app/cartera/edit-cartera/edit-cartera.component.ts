@@ -72,14 +72,14 @@ export class EditCarteraComponent implements OnInit {
   editCartera(){
 
     // console.log(this.cartera);
-    this.cartera.name=this.nameRef.nativeElement.value;
+    this.cartera.name=this.carteraName;
     
-    if(this.nameRef.nativeElement.value==''){
+    if(this.carteraName==''){
 
       window.alert("Asegurese que todos los campos esten llenos");
     
     }else{
-      if(this.simbolos(this.nameRef.nativeElement.value)){
+      if(this.simbolos(this.carteraName)){
         console.log("hay simbolos");
         window.alert("asegurese de no introducir simbolos");
       } else{

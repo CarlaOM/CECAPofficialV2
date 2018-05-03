@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { PeticionesService } from '../services/peticiones.service';
-import { User } from '../modelo/user';
+// import { facilitador } from '../modelo/facilitador';
 import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
@@ -20,7 +20,7 @@ export class facilitadorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._peticionesService.getFacilitador().subscribe(
+    this._peticionesService.getFacilitadores().subscribe(
       result => {
          this.facilitadores = result;
          console.log(this.facilitadores); 
@@ -29,19 +29,20 @@ export class facilitadorComponent implements OnInit {
       console.log(<any>error)
     });
  }
-  editfacilitador(_active:boolean){
-  //console.log("facilitadorComponent");
-  this.router.navigate(['/home/facilitador/edit',_active]);
-  //console.log("router.navigate");
-  }
+ 
   addfacilitador(){
 
     this.router.navigate(['/home/facilitador/add']);
 
   }
+  editfacilitador(_id){
+    console.log(_id);
+    this.router.navigate(['/home/facilitador/edit',_id]);
+    // console.log("router.navigate");
+  }
   infofacilitador(_id:string){
     // console.log(_id);
-    this.router.navigate(['/home/facilitador',_id]);
+    this.router.navigate(['/home/facilitador/info',_id]);
   }
   // deletefacilitador(_id:string){
   //   this._peticionesService.deleteUser().subscribe(
