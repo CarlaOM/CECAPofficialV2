@@ -141,7 +141,7 @@ export class PeticionesService {
         //  return this._http.get(this.url+'cartera/listPersonsCartera/'+_id).map((res: Response)=> res);
 
     }
-    getUserCartera(id) {
+    getCarteraFromUserId(id) {
         // console.log(body);
         var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
         return this._http.get(this.url + 'carteras/otro/' + id, { headers: headers }).map((res: Response) => res);
@@ -198,4 +198,15 @@ export class PeticionesService {
     getSucursales() {
         return this._http.get(this.url + 'offices').map((res: Response) => res);
     }
+    getSucursal(id){
+
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.get(this.url + 'offices/' + id, { headers: headers }).map((res: Response) => res);
+   
+    
+    }
+    getRoles() {
+        return this._http.get(this.url + 'roles').map((res: Response) => res);
+    }
+   
 }

@@ -16,7 +16,7 @@ var _rol_gerente ={
     name: 'Gerente',
     _id : new mongoose.Types.ObjectId
 }
-var _roles = [_rol_admin, _rol_ejecutivo];
+var _roles = [_rol_admin, _rol_ejecutivo,_rol_gerente];
 
 var _user_admin = {
    name: 'a',
@@ -242,7 +242,7 @@ var _person_1 ={
       /////////////
       profile: {
          programs: [{
-            program: _program_rrhh,
+            programs: _program_rrhh,
             modulars: [{
                amount: [{
                   detail: 'String',
@@ -252,9 +252,9 @@ var _person_1 ={
                }],
                debt: 150,
                assistance: true,
-               event: _event_seg,////////////////////duad???????
-               inscription: '',////////////////////dudaÇ??????
-               module: _modulo_1_rrhh,
+               events: _event_seg,////////////////////duad???????
+               inscriptions: '',////////////////////dudaÇ??????
+               modules: _modulo_1_rrhh,
                print_certificate: false,
             }],
             final_work: {
@@ -306,9 +306,9 @@ var _person_2 = {
               }],
               debt: 150,
               assistance: true,
-              event: _event_seg,////////////////////duad???????
-              inscription: '',////////////////////dudaÇ??????
-              module: _modulo_1_rrhh,
+              events: _event_seg,////////////////////duad???????
+              inscriptions: '',////////////////////dudaÇ??????
+              modules: _modulo_1_rrhh,
               print_certificate: false,
            }],
            final_work: {
@@ -350,7 +350,7 @@ var _person_3 = {
  /////////////
  profile: {
     programs: [{
-       program: _program_rrhh,
+       programs: _program_rrhh,
        modulars: [{
           amount: [{
              detail: 'modulo 1 rrhh',
@@ -360,9 +360,9 @@ var _person_3 = {
           }],
           debt: 150,
           assistance: true,
-          event: _event_seg,////////////////////duad???????
-          inscription: '',////////////////////dudaÇ??????
-          module: _modulo_1_rrhh,
+          events: _event_seg,////////////////////duad???????
+          inscriptions: '',////////////////////dudaÇ??????
+          modules: _modulo_1_rrhh,
           print_certificate: false,
        }],
        final_work: {
@@ -415,9 +415,9 @@ var _person_4 = {
               }],
               debt: 150,
               assistance: true,
-              event: _event_seg,////////////////////duad???????
-              inscription: '',////////////////////dudaÇ??????
-              module: _modulo_1_rrhh,
+              events: _event_seg,////////////////////duad???????
+              inscriptions: '',////////////////////dudaÇ??????
+              modules: _modulo_1_rrhh,
               print_certificate: false,
            }],
            final_work: {
@@ -434,7 +434,7 @@ var _person_4 = {
      _id: new mongoose.Types.ObjectId,
      record_date: new Date()
  };
-var _persons = [_person_1, _person_2, _person_3,_person_4];
+var _persons = [_person_1,_person_2,_person_3,_person_4];
 //////////////////////////////////////////////////////////////////////////
 var _facilitator_1 = {
     name: 'Paola Quintanilla',
@@ -453,36 +453,36 @@ var _facilitators = [_facilitator_1, _facilitator_2];
 var _event_seg = {
     name:'seguridad imformatica y redes sociales',
    description: 'solo para ejecutivos',
-   date_start: new Date(2018, 1, 12),
+   date_start:'2018-03-25' ,
    
    modular:[{
         date_start: '2018-03-25',
         date_end: '2018-04-25',
-        facilitator: _facilitator_2,
+        facilitators: _facilitator_1,
         list: [{
-            person: _person_1,
+            persons: _person_1,
             amount: 300,
             receipt: 101,
             assist: true,
             type: 1, //nuevo // nivelacion
         },
         {
-            person: _person_2,
+            persons: _person_2,
             amount: 300,
             receipt: 102,
             assist: true,
             type: 1, //nuevo // nivelacion
         },
         {
-            person: _person_3,
+            persons: _person_3,
             amount: 300,
             receipt: 103,
             assist: true,
             type: 1, //nuevo // nivelacion
         }
         ],
-        module: _modulo_1_seguridad,
-        _id: new mongoose.Types.ObjectId
+        modules: _modulo_1_seguridad
+       // _id: new mongoose.Types.ObjectId
     }],
     
    inscriptions: [
@@ -490,201 +490,32 @@ var _event_seg = {
         total_price: 600,
         module_price: 150,
         canceled_price: 300,
-        person: _person_1,
-        user: _user_admin
+        persons: _person_1,
+        users: _user_admin
       },
       {
         total_price: 600,
         module_price: 150,
         canceled_price: 300,
-         person: _person_2,
-         user: _user_ejecutivo1
+         persons: _person_1,
+         users: _user_ejecutivo1
       },
       {
         total_price: 600,
         module_price: 150,
         canceled_price: 300,
-         person: _person_3,
-         user: _user_admin
+         persons: _person_1,
+         users: _user_admin
       }
    ],
    total: 30,
-   program: _program_seguridad,
+   programs: _program_seguridad,
    
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 };
-var _event_seg2 = {
-    name:'seguridad 2 imformatica y redes sociales',
-    description: 'solo para ejecutivos',
-    date_start: new Date(2018, 1, 12),
-    modular:[{
-        date_start: '2018-03-25',
-        date_end: '2018-04-25',
-        facilitator: _facilitator_1,
-        list: [{
-            person: _person_1,
-            amount: 150,
-            receipt: 102,
-            assist: false,
-            type: 1, //nuevo // nivelacion
-        },
-        {
-            person: _person_2,
-            amount: 150,
-            receipt: 102,
-            assist: false,
-            type: 1, //nuevo // nivelacion
-        },
-        {
-            person: _person_3,
-            amount: 150,
-            receipt: 103,
-            assist: false,
-            type: 1, //nuevo // nivelacion
-        }
-        ],
-        module: _modulo_1_seguridad,
-        _id: new mongoose.Types.ObjectId
-    }],
-   inscriptions: [
-      {
-        total_price: 600,
-        module_price: 150,
-        canceled_price: 300,
-         person: _person_1,
-         user: _user_ejecutivo2
-      },
-      {
-        total_price: 600,
-        module_price: 150,
-        canceled_price: 300,
-         person: _person_2,
-         user: _user_ejecutivo2
-      }
-      ,
-      {
-        total_price: 600,
-        module_price: 150,
-        canceled_price: 300,
-         person: _person_3,
-         user: _user_admin
-      }
-   ],
-   total: 30,
-   program: _program_seguridad,
-   _id: new mongoose.Types.ObjectId,
-   record_date: new Date()
-};
-var _event_rrhh = {
-   description: 'solo para ejecutivos',
-   date_start: new Date(2018, 03, 12),
-   modular:[{
-    date_start: '2018-03-25',
-    date_end: '2018-04-25',
-    facilitator: _facilitator_1,
-    list: [{
-        person: _person_1,
-        amount: 150,
-        receipt: 102,
-        assist: false,
-        type: 1, //nuevo // nivelacion
-    },
-    {
-        person: _person_2,
-        amount: 150,
-        receipt: 102,
-        assist: false,
-        type: 1, //nuevo // nivelacion
-    },
-    {
-        person: _person_4,
-        amount: 150,
-        receipt: 103,
-        assist: false,
-        type: 1, //nuevo // nivelacion
-    }
-    ],
-    module: _modulo_1_rrhh,
-    _id: new mongoose.Types.ObjectId
-}],
-   inscriptions: [
-      {
-        total_price: 500,
-        module_price: 100,
-        canceled_price: 300,
-         person: _person_1,
-         user: _user_admin
-      },
-      {
-        total_price: 500,
-        module_price: 100,
-        canceled_price: 300,
-         state: 0,
-         person: _person_2,
-         user: _user_ejecutivo1
-      }
-   ],
-   total: 20,
-   program: _program_rrhh,
-   _id: new mongoose.Types.ObjectId,
-   record_date: new Date()
-};
-var _event_rrhh2 = {
-   description: 'solo para ejecutivos',
-   date_start: new Date(2018, 11, 12),
- 
-   modular:[{
-    date_start: '2018-03-25',
-    date_end: '2018-04-25',
-    facilitator: _facilitator_1,
-    list: [{
-        person: _person_1,
-        amount: 150,
-        receipt: 102,
-        assist: false,
-        type: 1, //nuevo // nivelacion
-    },
-    {
-        person: _person_2,
-        amount: 150,
-        receipt: 102,
-        assist: false,
-        type: 1, //nuevo // nivelacion
-    },
-    {
-        person: _person_3,
-        amount: 150,
-        receipt: 103,
-        assist: false,
-        type: 1, //nuevo // nivelacion
-    }
-    ],
-    module: _modulo_1_rrhh,
-    _id: new mongoose.Types.ObjectId
-    }],
-   inscriptions: [
-      {
-        total_price: 500,
-        module_price: 100,
-        canceled_price: 300,
-         person: _person_1,
-         user: _user_ejecutivo2
-      },
-      {
-        total_price: 500,
-        module_price: 100,
-        canceled_price: 300,
-         person: _person_2,
-         user: _user_ejecutivo2
-      }
-   ],
-   total: 20,
-   program: _program_rrhh,
-   _id: new mongoose.Types.ObjectId,
-   record_date: new Date()
-};
-var _events = [_event_seg, _event_seg2, _event_rrhh, _event_rrhh2];
+
+var _events = [_event_seg];
 
 /////////////////////////////////////////////////////////7
 var _offices_stc ={

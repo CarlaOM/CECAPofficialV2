@@ -23,5 +23,10 @@ export class VistaCajaComponent implements OnInit {
     
 
   }
+  goEgreso(){
+
+    this.router.navigate(['/home/caja/egreso']);
+    
+  }
 
 }
