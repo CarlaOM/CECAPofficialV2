@@ -33,6 +33,5 @@ export class ProgramaComponent implements OnInit {
  }
   editProgram(_id:string){
     this.router.navigate(['/home/program/edit', _id]);
-    console.log("router.navigate");
   }
 }

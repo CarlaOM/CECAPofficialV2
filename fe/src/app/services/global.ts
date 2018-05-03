@@ -17,12 +17,17 @@ export var Identity: User = {
 };
 export var Roles: Array<Rol> = [
    {
-      _id: '5ae69da01cb6ee181c3d4276',
+      _id: '5aea1b1f60896154cd282fb4',
       name: 'Admin'
    },
    {
-      _id: '5acd8be53bfdae1018ec3628',
+      _id: '5aea1b1f60896154cd282fb5',
       name: 'Ejecutivo'
+   },
+   {
+        _id:'5aea36445f00ed76e827868b',
+        name:'Gerente'
+
    }
 ];
 export var CarteraS:Cartera={

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PeticionesService } from '../../services/peticiones.service';
 import {Cartera} from '../../modelo/cartera';
-import { Identity,Roles } from "../../services/global";
+import { Identity } from "../../services/global";
 // import {User} from '../../modelo/user';
 import { Offices } from "../../modelo/offices";
 import { facilitador } from "../../modelo/facilitador";

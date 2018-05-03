@@ -12,7 +12,7 @@ router
    //   })
    .get('/', function (req, res) {
       console.log(res)
-      db.users.find({ active: true }, { name: 1,  active:1, password_hash:1, rol: 1 }, function (err, users) {
+      db.users.find({}, { name: 1,  active:1, password_hash:1, rol: 1 }, function (err, users) {
          if (err) return res.status(400).send(err);
          return res.status(200).send(users);
          //console.log(res.status(200).send(users))
@@ -45,8 +45,12 @@ router
       });
    })
    .get('/rolName/:id', function(req, res){
+
+      console.log(req.params.id);
       db.roles.findOne({_id: req.params.id}, function(err, roleName){
          if (err) return res.status(400).send(err);
+         if (roleName == null) return res.sendStatus(404);
+         
          return res.status(200).send(roleName);
       });
    })
@@ -183,18 +187,41 @@ router
       
    })
    .put('/:id', function (req, res) {
-      db.users.update(
-         { _id: req.params.id },
-         {
-            $set: {
-               name: req.body.user.name,
-               salary: req.body.user.salary,
-               active: req.body.user.active,
-               password_hash: req.body.user.password_hash
-            }
-         }, function (err, user) {
+
+      // console.log(req.body.user);
+      // db.users.update(
+      //    { _id: req.params.id },
+      //    {
+      //       $set: {
+      //          name: req.body.user.name,
+      //       //    salary: req.body.user.salary,
+      //          active: req.body.user.active,
+      //          password_hash: req.body.user.name,
+      //          lastname:req.body.user.lastname,
+      //          cell:req.body.user.cell,
+      //          correo:req.body.user.correo,
+      //          rol:req.body.user.rol,
+      //          offices:req.body.user.offices
+
+      //       }
+      //    }, function (err, user) {
+      //       if (err) return res.status(400).send(err);
+      //       return res.status(200).send();
+      //    });
+
+      db.users.findOne({ _id: req.params.id }, function (err, user) {
             if (err) return res.status(400).send(err);
-            return res.status(200).send();
+            if (user == null) return res.status(404).send();
+     
+            for (i in req.body) {
+               user[i] = req.body[i];
+               console.log(user[i]);  
+            }
+            user.save(function (err, user) {
+               if (err) return res.status(400).send(err);
+     
+               return res.status(200).send(user);
+            });
          });
    });
 

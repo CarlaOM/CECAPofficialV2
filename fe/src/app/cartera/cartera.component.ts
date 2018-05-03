@@ -4,6 +4,8 @@ import { PeticionesService } from '../services/peticiones.service';
 import { Person } from '../modelo/person';
 import { Identity, Roles } from "../services/global";
 // import { forEach } from '@angular/router/src/utils/collection';
+// import { Identity } from "../services/global";
+import { forEach } from '@angular/router/src/utils/collection';
 
 
 @Component({

@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef,ViewChild,Output,EventEmitter } from '@an
 import { Router,ActivatedRoute } from "@angular/router";
 import {PeticionesService } from '../../services/peticiones.service';
 import {Cartera} from '../../modelo/cartera';
-import { Identity,Roles } from "../../services/global";
+import { Identity, } from "../../services/global";
 // import {User} from '../../modelo/user';
 import { Offices } from "../../modelo/offices";
 import { Ejecutivo } from "./Ejecutivo";
@@ -20,6 +20,7 @@ export class AddEjecutivoComponent implements OnInit {
   public carteraObject;
   public  rolid;
   public newUser;
+  public roles;
   
   constructor(
     private _peticionesService:PeticionesService,
@@ -28,7 +29,6 @@ export class AddEjecutivoComponent implements OnInit {
   ) { }
 
   /////////////////////////////////////////////////
-  public roles = Roles;
   
  
   model = new Ejecutivo(Identity._id,"NOMBRE","APELLIDO","",true,6532,"ASDF@ASDF.ASD","this.roles[1].name","asdf","asdf");
@@ -46,6 +46,10 @@ export class AddEjecutivoComponent implements OnInit {
     this._peticionesService.getSucursales().subscribe(response=>{
       this.sucursales=response;
       console.log(this.sucursales)
+    });
+    this._peticionesService.getRoles().subscribe(response=>{
+      this.roles=response;
+      console.log(this.roles);
     });
     
     
