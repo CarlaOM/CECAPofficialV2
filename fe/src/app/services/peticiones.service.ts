@@ -93,13 +93,17 @@ export class PeticionesService {
         
         return this._http.get(this.url + 'carteras/' + _id).map((res: Response) => res);
     }
+    
+    getFacilitadores() {
+        return this._http.get(this.url + 'facilitators').map((res: Response) => res);
+    }
+    getFacilitador(id){
+        return this._http.get(this.url + 'facilitators/' + id).map((res: Response) => res);
+    }
     addFacilitador(user) {
         let body = JSON.stringify(user);
         var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
         return this._http.post(this.url + 'facilitators/register', body, { headers: headers }).map((res: Response) => res);
-    }
-    getFacilitadores() {
-        return this._http.get(this.url + 'facilitators').map((res: Response) => res);
     }
     updateFacilitador(facilitador_object) {
         console.log(facilitador_object);
@@ -205,6 +209,11 @@ export class PeticionesService {
     }
     getSucursales() {
         return this._http.get(this.url + 'offices').map((res: Response) => res);
+    }
+    addCorrelative(correlative){
+        let body = JSON.stringify(correlative);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'correlatives/add', body, { headers: headers }).map((res: Response) => res);
     }
     getSucursal(id){
 

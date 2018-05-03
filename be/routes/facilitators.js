@@ -14,6 +14,14 @@ router
        return res.status(200).send(facilitators);
     });
  })
+ .get('/:id',  function (req, res) {
+      db.facilitators.findOne({ _id: req.params.id }, function (err, facilitador) {
+         if (err) return res.status(400).send(err);
+         if (facilitador == null) return res.status(404).send();
+
+         return res.status(200).send(facilitador);
+      });
+   })
  .put('update/:id', function (req, res) {
     db.facilitators.findOne({ _id: req.params.id }, function (err, facilitador) {
        if (err) return res.status(400).send(err);

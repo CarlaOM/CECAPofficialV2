@@ -5,12 +5,12 @@ import { ActivatedRoute,Router } from "@angular/router";
 @Component({
   selector: 'app-edit-facilitador',
   templateUrl: './edit-facilitador.component.html',
-  styleUrls: ['./edit-facilitador.component.css']
+  styleUrls: ['./edit-facilitador.component.css'],
+  providers: [ PeticionesService]
 })
 export class EditFacilitadorComponent implements OnInit {
   public facilitadorName;
   public facilitadorjob;
-
   public facilitador;
   public facilitadorId;
   constructor(
@@ -19,13 +19,14 @@ export class EditFacilitadorComponent implements OnInit {
     public router: Router
 
   ) { }
-  submitted = false;
+  
   ngOnInit() {
-
+      this.queryFacilitador();
 
   }
   onSubmit() { 
   }
+ 
   simbolos(nameV){
     console.log("ingreso simbolos");
     var res = false;
@@ -65,5 +66,20 @@ export class EditFacilitadorComponent implements OnInit {
     }
    
   }
-
+  queryFacilitador(){
+    this.route.params.subscribe(params => {
+      this.facilitadorId = params.id;
+      console.log(this.facilitadorId);
+     });
+    this._peticionesService.getFacilitador(this.facilitadorId).subscribe(
+         result => {
+            this.facilitador = result;
+            console.log(this.facilitador);
+         },
+         error => {
+            var errorMessage = <any>error;
+            console.log(errorMessage);
+         }
+      );
+  }
 }
