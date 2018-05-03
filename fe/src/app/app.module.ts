@@ -59,8 +59,9 @@ import { EditComponent } from './event/persona/edit/edit.component';
 import { HeroFormComponent } from './hero-form/hero-form.component';
 
 import { ProgramaComponent } from './programa/programa.component';
-import { ModuloComponent } from './programa/modulo/modulo.component';
 import { EditProgramaComponent } from './programa/edit-programa/edit-programa.component';
+import { ModuloComponent } from './modulo/modulo.component';
+import { EditModuloComponent } from './modulo/edit-modulo/edit-modulo.component';
 
 import { DetalleCajaComponent } from './sucursal/detalle-caja/detalle-caja.component';
 import { DetallePersonalComponent } from './sucursal/detalle-personal/detalle-personal.component';
@@ -71,6 +72,11 @@ import { IngresoComponent } from './caja/ingreso/ingreso.component';
 import { EgresoComponent } from './caja/egreso/egreso.component';
 
 
+import { VistaCajaComponent } from "./caja/vista-caja/vista-caja.component";
+import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facilitador.component';
+
+import { facilitadorComponent } from './facilitador/facilitador.component';
+import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-facilitador.component';
 
 @NgModule({
   declarations: [
@@ -121,15 +127,20 @@ import { EgresoComponent } from './caja/egreso/egreso.component';
     EgresoComponent,
 
     ProgramaComponent,
-    ModuloComponent,
     EditProgramaComponent,
+    ModuloComponent,
+    EditModuloComponent,
 
     DetalleCajaComponent,
     DetallePersonalComponent,
     InfoEjecutivoComponent,
+    VistaCajaComponent,
     CajaChicaComponent,
     IngresoComponent,
-    AddCorrelativeComponent
+    AddFacilitadorComponent,
+    AddCorrelativeComponent,
+    facilitadorComponent,
+    EditFacilitadorComponent
 
   ],
   imports: [

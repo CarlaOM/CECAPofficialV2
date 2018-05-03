@@ -59,6 +59,8 @@ module.exports = {
    carteras: mongoose.model('carteras', new Schema({
       name: String,
       user: ObjectId,
+      active:Boolean,
+      
 
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date } }
@@ -92,7 +94,7 @@ module.exports = {
       /////////////
       profile: {
          programs: [{
-            program: ObjectId,
+            programs: ObjectId,
             modulars: [{
                amount: [{  ///observation
                   detail: String,
@@ -102,9 +104,9 @@ module.exports = {
                }],
                debt: Number,  //deuda
                assistance: Boolean,
-               event: ObjectId,
+               events: ObjectId,
                inscription: ObjectId,
-               module: ObjectId,
+               modules: ObjectId,
                print_certificate: Boolean,
             }],
             final_work: {
@@ -140,27 +142,27 @@ module.exports = {
       modular:[{
          date_start: Date,
          date_end: Date,
-         facilitator: ObjectId,
+         facilitators: ObjectId,
          list: [{
-            person: ObjectId,
+            persons: ObjectId,
             amount: Number,
             receipt: Number,
             assist: Boolean,
             type: Number, //nuevo // nivelacion
          }],
-         module: ObjectId,
-         _id: ObjectId///////////////duda?????
+         modules: ObjectId
+         //_id: ObjectId///////////////duda?????
       }],
       inscriptions: [{
          // segun al numero de asistencias sacar el precio total q tiene q pagar
          total_price: Number,
          module_price: Number,
          canceled_price: Number,
-         person: ObjectId,
-         user: ObjectId
+         persons: ObjectId,
+         users: ObjectId
       }],
       total: Number,
-      program: ObjectId,
+      programs: ObjectId,
       //modulo: [ObjectId],
 
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },

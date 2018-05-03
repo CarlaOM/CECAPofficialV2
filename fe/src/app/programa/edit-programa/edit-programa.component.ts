@@ -13,10 +13,10 @@ export class EditProgramaComponent implements OnInit {
   @ViewChild('name') nameRef:ElementRef;
   @ViewChild('details') detailsRef:ElementRef;
   @ViewChild("close", { read: ElementRef }) close: ElementRef;
+  public programId;
   public program;
   public programName;
   public programDetails;
-  public programId;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,8 +39,8 @@ export class EditProgramaComponent implements OnInit {
           this.program=result;
           this.programName=this.program.name; 
           this.programDetails=this.program.details;
-          console.log(this.program.name)
-          console.log(this.program.details)
+          //console.log(this.program.name)
+          //console.log(this.program.details)
         },
         error =>{
           console.log(<any>error);
@@ -58,7 +58,7 @@ export class EditProgramaComponent implements OnInit {
         result=>{
           var res=result;
           console.log(res);
-          this.router.navigate(['home/program']);
+          this.router.navigate(['home/programs']);
           alert('Se Guardo correctamente la edicion');
         },
         error=>{
@@ -67,10 +67,10 @@ export class EditProgramaComponent implements OnInit {
         })
     }
   }
-  save() {
-    console.log(this.program);
-    this.close.nativeElement.click();
-  }
+  //save() {
+    //console.log(this.program);
+    //this.close.nativeElement.click();
+  //}
   cancel() {
     this.router.navigate(['home/programs']);
    }

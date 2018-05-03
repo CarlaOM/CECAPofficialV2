@@ -49,8 +49,13 @@ export class PeticionesService {
     getProgram(_id) {
         return this._http.get(this.url + 'programs/' + _id).map((res: Response) => res);
     }
-    getModulos() {
-        return this._http.get(this.url + 'modulos').map((res: Response) => res);
+    getModulos(idProgram) { 
+        console.log(idProgram)
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.get(this.url + 'modules/lista/' + idProgram, { headers: headers }).map((res: Response) => res);
+    }
+    getModulo(_id) {
+        return this._http.get(this.url + 'modules/' + _id).map((res: Response) => res);
     }
     //    getIdProgram(nomProgram){
     //     let body = JSON.stringify(nomProgram);
@@ -79,9 +84,22 @@ export class PeticionesService {
     getCarteras() {
         return this._http.get(this.url + 'carteras').map((res: Response) => res);
     }
-    getCartera(_id) {
-
+    crearCartera(cartera){
+        let body = JSON.stringify(cartera);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'carteras/guardar', body, { headers: headers }).map((res: Response) => res);
+    }
+    getCartera(_id) { 
+        
         return this._http.get(this.url + 'carteras/' + _id).map((res: Response) => res);
+    }
+    addFacilitador(user) {
+        let body = JSON.stringify(user);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'facilitators/register', body, { headers: headers }).map((res: Response) => res);
+    }
+    getFacilitador() {
+        return this._http.get(this.url + 'facilitators').map((res: Response) => res);
     }
     addUser(user) {
         let body = JSON.stringify(user);
@@ -123,7 +141,7 @@ export class PeticionesService {
         //  return this._http.get(this.url+'cartera/listPersonsCartera/'+_id).map((res: Response)=> res);
 
     }
-    getUserCartera(id) {
+    getCarteraFromUserId(id) {
         // console.log(body);
         var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
         return this._http.get(this.url + 'carteras/otro/' + id, { headers: headers }).map((res: Response) => res);
@@ -169,6 +187,14 @@ export class PeticionesService {
         var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
         return this._http.put(this.url + 'programs/edit/' + idProgram, body, { headers: headers }).map((res: Response) => res);
     }
+    updateModulo(modulo_object) {
+        console.log(modulo_object);
+        let body = JSON.stringify(modulo_object);
+        var idModulo = modulo_object._id;
+        // console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.put(this.url + 'modules/edit/' + idModulo, body, { headers: headers }).map((res: Response) => res);
+    }
     getSucursales() {
         return this._http.get(this.url + 'offices').map((res: Response) => res);
     }
@@ -177,4 +203,15 @@ export class PeticionesService {
         var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
         return this._http.post(this.url + 'correlatives/add', body, { headers: headers }).map((res: Response) => res);
     }
+    getSucursal(id){
+
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.get(this.url + 'offices/' + id, { headers: headers }).map((res: Response) => res);
+   
+    
+    }
+    getRoles() {
+        return this._http.get(this.url + 'roles').map((res: Response) => res);
+    }
+   
 }

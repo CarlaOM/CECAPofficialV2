@@ -10,6 +10,7 @@ import { ReportsComponent } from './graphicReports/reports/reports.component';
 import { ReportTrimestralComponent} from './graphicReports/report-trimestral/report-trimestral.component';
 import { ReportEventComponent } from './graphicReports/report-event/report-event.component';
 import { CarteraComponent } from "./cartera/cartera.component";
+import { AddCarteraComponent } from './cartera/add-cartera/add-cartera.component';
 import { InfoCarteraComponent } from "./cartera/info-cartera/info-cartera.component";
 import { EditCarteraComponent } from "./cartera/edit-cartera/edit-cartera.component";
 import { EjecutivoComponent } from "./ejecutivo/ejecutivo.component";
@@ -25,15 +26,21 @@ import { DetallePersonalComponent } from './sucursal/detalle-personal/detalle-pe
 import { AddEjecutivoComponent } from "./ejecutivo/add-ejecutivo/add-ejecutivo.component";
 import { Programa } from './modelo/programa';
 import { ProgramaComponent } from './programa/programa.component';
-import { ModuloComponent } from './programa/modulo/modulo.component';
-import {EditProgramaComponent} from './programa/edit-programa/edit-programa.component';
+import { EditProgramaComponent } from './programa/edit-programa/edit-programa.component';
+import { ModuloComponent } from './modulo/modulo.component';
+import { EditModuloComponent } from './modulo/edit-modulo/edit-modulo.component';
 
 import { InfoEjecutivoComponent } from "./ejecutivo/info-ejecutivo/info-ejecutivo.component";
+import { VistaCajaComponent } from "./caja/vista-caja/vista-caja.component";
 
 import { CajaChicaComponent } from "./caja/caja-chica/caja-chica.component";
 import { IngresoComponent } from "./caja/ingreso/ingreso.component";
 import { EgresoComponent } from './caja/egreso/egreso.component';
 import { AddCorrelativeComponent } from './correlative/add-correlative/add-correlative.component';
+
+import { facilitadorComponent } from './facilitador/facilitador.component';
+import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facilitador.component';
+
 
 
 
@@ -53,6 +60,7 @@ const appRoutes: Routes = [
          { path: 'persons', component: PersonaComponent},
          { path: 'persons/edit/:id', component: EditComponent},
          { path: 'cartera', component:CarteraComponent},
+         { path: 'cartera/add', component:AddCarteraComponent},
          { path: 'cartera/:id',component:InfoCarteraComponent},
          { path: 'cartera/edit/:name',component:EditCarteraComponent},
          { path: 'ejecutivo', component:EjecutivoComponent},
@@ -65,11 +73,15 @@ const appRoutes: Routes = [
          { path: 'sucursal/personal', component: DetallePersonalComponent},
          { path: 'formulariobase',component:HeroFormComponent},
          { path: 'programs', component: ProgramaComponent},
-         { path: 'modulo/:id', component: ModuloComponent},
          { path: 'program/edit/:id', component: EditProgramaComponent},
+         { path: 'modulos/:id', component: ModuloComponent},
+         { path: 'modulo/edit/:id', component: EditModuloComponent},
          { path: 'caja', component:CajaChicaComponent},
+         { path: 'caja/vistacaja', component:VistaCajaComponent},
          { path: 'caja/ingreso', component:IngresoComponent},
          { path: 'caja/egreso', component:EgresoComponent},
+         { path: 'facilitador', component:facilitadorComponent},
+         { path: 'facilitador/add', component:AddFacilitadorComponent},
          { path: 'correlative/add', component:AddCorrelativeComponent}
 
       ]

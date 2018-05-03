@@ -177,7 +177,7 @@ router
          var persons = event.inscriptions.map((p) => p.person)
          Persons(persons);
          // return res.status(200).send(event);
-      });
+      })
       function Persons(p) {
          db.persons.find({ _id: { $in: p } }, function (err, persons) {
             if (err) return res.status(400).send(err);

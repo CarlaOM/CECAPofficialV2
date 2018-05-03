@@ -28,11 +28,10 @@ export class ProgramaComponent implements OnInit {
          console.log(<any>error);
       });
   }
- send(_id: string) {
-  this.router.navigate(['home/modulo', _id]);
+ send(_id:string) {
+  this.router.navigate(['home/modulos', _id]);
  }
   editProgram(_id:string){
     this.router.navigate(['/home/program/edit', _id]);
-    console.log("router.navigate");
   }
 }

@@ -17,6 +17,9 @@ export class InfoEjecutivoComponent implements OnInit {
   public ejecutivoId;
   public carteras;
   public sucursales;
+  public rolUser;
+  public carteraReturned;
+  public sucursalReturned;
 
   constructor(
 
@@ -50,11 +53,57 @@ export class InfoEjecutivoComponent implements OnInit {
        result =>{
          this.ejecutivo=result;
          console.log(this.ejecutivo);
+         this.findRol(this.ejecutivo.rol);
          
        },
        error =>{
          console.log(<any>error);
        });
+ }
+
+ findRol(idRol){
+   console.log(idRol);
+
+  this._peticionesService.getRole(idRol).subscribe(
+    result =>{
+
+      this.rolUser=result;
+      console.log(this.rolUser)
+      this.findCartera(this.ejecutivoId);
+    },
+    error =>{
+      console.log(<any>error);
+    });
+ }
+ findCartera(ejecutivoId){
+    this._peticionesService.getCarteraFromUserId(ejecutivoId).subscribe(
+    result =>{
+
+      this.carteraReturned=result;
+      console.log(this.carteraReturned)
+
+      this.findSucursal(this.ejecutivo.offices);
+    },
+    error =>{
+      console.log(<any>error);
+    });
+
+ }
+ findSucursal(sucursalId){
+
+  console.log(sucursalId);
+    this._peticionesService.getSucursal(sucursalId).subscribe(
+    result =>{
+
+      this.sucursalReturned=result;
+      console.log(this.sucursalReturned)
+
+     
+    },
+    error =>{
+      console.log(<any>error);
+    });
+
  }
 
 }
