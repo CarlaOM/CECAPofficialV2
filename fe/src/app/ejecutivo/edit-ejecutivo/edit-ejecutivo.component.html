@@ -51,7 +51,7 @@
             <label for="lastname">Apellidos</label>
             <input type="text" class="form-control" id="lastname"
                    required
-                   [ngModel]="ejecutivo?.lastname" name="lastname"
+                   [(ngModel)]="ejecutivoLastName" name="lastname"
                    #lastname="ngModel">
             <div [hidden]="lastname?.valid || lastname?.pristine"
             class="">
@@ -62,7 +62,7 @@
             <label for="cell">Celular</label>
             <input type="number" class="form-control" id="cell"
                    required
-                   [ngModel]="ejecutivo?.cell" name="cell"
+                   [(ngModel)]="ejecutivoCell" name="cell"
                    #cell="ngModel">
             <div [hidden]="cell?.valid || cell?.pristine"
             class="">
@@ -74,7 +74,7 @@
               <label for="correo">Correo</label>
               <input type="correo" class="form-control" id="correo"
                      required
-                     [ngModel]="ejecutivo?.correo" name="correo"
+                     [(ngModel)]="ejecutivoCorreo" name="correo"
                      #correo="ngModel">
               <div [hidden]="correo?.valid || correo?.pristine"
               class="">
@@ -87,7 +87,7 @@
                     <label for="rol"> rol</label>
                     <select class="form-control" id="rol"
                             required
-                            [ngModel]="ejecutivo?.rol" name="rol"
+                            [(ngModel)]="ejecutivoRol" name="rol"
                             #rol="ngModel">
                       <option *ngFor="let ro of roles" [value]="ro._id">{{ro.name}}</option>
                     </select>
@@ -101,7 +101,7 @@
                     <label for="offices">sucursal</label>
                     <select class="form-control" id="offices"
                             required
-                            [ngModel]="ejecutivo?.offices" name="offices"
+                            [(ngModel)]="ejecutivoOffice" name="offices"
                             #offices="ngModel">
                       <option *ngFor="let sucur of sucursales" [value]="sucur._id">{{sucur.name}}</option>
                     </select>
@@ -114,7 +114,7 @@
                     <label for="cartera">cartera</label>
                     <select class="form-control" id="cartera"
                             required
-                            [ngModel]="ejecutivo?.cartera" name="cartera"
+                            [(ngModel)]="ejecutivoCartera" name="cartera"
                             #cartera="ngModel">
                       <option *ngFor="let carte of carteras" [value]="carte._id">{{carte.name}}</option>
                     </select>

@@ -59,6 +59,8 @@ module.exports = {
    carteras: mongoose.model('carteras', new Schema({
       name: String,
       user: ObjectId,
+      active:Boolean,
+      
 
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date } }

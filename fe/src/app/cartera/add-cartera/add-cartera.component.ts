@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef,ViewChild,Output,EventEmitter } from '@angular/core';
 import {PeticionesService } from '../../services/peticiones.service';
-import { Identity,Roles,CarteraS } from "../../services/global";
+import { Identity,CarteraS } from "../../services/global";
 import {Cartera} from '../../modelo/cartera';
 import { ActivatedRoute,Router } from "@angular/router";
 

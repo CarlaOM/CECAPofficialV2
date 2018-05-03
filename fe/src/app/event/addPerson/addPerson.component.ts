@@ -147,7 +147,7 @@ export class AddPersonComponent implements OnInit {
    //    }
    queryCartera() {
       //console.log(Identity._id)
-      this._peticionesService.getUserCartera(Identity._id).subscribe(
+      this._peticionesService.getCarteraFromUserId(Identity._id).subscribe(
          result => {
             this.cartera = result;
             console.log('aqui la cartera del usuario::::');
