@@ -71,11 +71,9 @@ import { CajaChicaComponent } from './caja/caja-chica/caja-chica.component';
 import { IngresoComponent } from './caja/ingreso/ingreso.component';
 import { EgresoComponent } from './caja/egreso/egreso.component';
 
-
-import { VistaCajaComponent } from "./caja/vista-caja/vista-caja.component";
-import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facilitador.component';
-
 import { facilitadorComponent } from './facilitador/facilitador.component';
+import { VistaCajaComponent } from './caja/vista-caja/vista-caja.component';
+import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facilitador.component';
 import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-facilitador.component';
 
 @NgModule({
@@ -137,9 +135,9 @@ import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-fa
     VistaCajaComponent,
     CajaChicaComponent,
     IngresoComponent,
+    facilitadorComponent,
     AddFacilitadorComponent,
     AddCorrelativeComponent,
-    facilitadorComponent,
     EditFacilitadorComponent
 
   ],
