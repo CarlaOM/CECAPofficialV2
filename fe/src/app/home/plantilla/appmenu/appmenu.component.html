@@ -108,7 +108,6 @@
           <a href="pages/mailbox/mailbox.html">
             <i class="fa fa-envelope"></i> <span>Mailbox</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">12</small>
               <small class="label pull-right bg-green">16</small>
               <small class="label pull-right bg-red">5</small>
             </span>
@@ -167,20 +166,7 @@
           </ul>
         </li> -->
         <li class="treeview">
-          <a href="">
-            <i class="glyphicon glyphicon-globe"></i>
-            <span>Sucursales</span><!-- aqui va lista de sucursales-->
-            <span class="pull-right-container">
-              <i class="glyphicon glyphicon-menu-down"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a [routerLink]="['/home/sucursal/detalleCaja']"><i class="fa fa-circle-o"></i> Cecap Cochabamba</a></li>
-            <li><a [routerLink]="['/home/sucursal/detalleCaja']"><i class="fa fa-circle-o"></i> Cecap Sta. Cruz</a></li>
-          </ul>
-        </li> 
-        <li class="treeview">
-            <a href="">
+            <a href="#">
               <i class="glyphicon glyphicon-th-list"></i>
               <span>Funciones Añadir</span>
               <span class="pull-right-container">
@@ -188,11 +174,25 @@
               </span>
             </a>
             <ul class="treeview-menu">
-                <li><a [routerLink]="['/home/sucursal/add']"><i class="fa fa-book"></i> Add Sucursal</a></li>
-                
+                <li><a [routerLink]="['/home/sucursal/add']"><i class="fa fa-book"></i>Add Sucursal</a></li>
                 <li><a [routerLink]="['/home/correlative/add']"><i class="fa fa-book"></i>Add Correlativo</a></li>
             </ul>
-        </li> 
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="glyphicon glyphicon-globe"></i>
+            <span>Sucursales</span>
+            <span class="pull-right-container">
+                <i class="glyphicon glyphicon-menu-down"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a [routerLink]="['/home/sucursal/detalleCaja']"><i class="fa fa-circle-o"></i> Cecap Cochabamba</a></li>
+              <li><a [routerLink]="['/home/sucursal/detalleCaja']"><i class="fa fa-circle-o"></i> Cecap Sta. Cruz</a></li>
+            </ul>
+          </li>
+        <li><a [routerLink]="['/home/sucursal']"><i class="fa fa-book"></i>Sucursales</a></li>
+        <li><a [routerLink]="['/home/correlative/add']"><i class="fa fa-book"></i>Add Correlativo</a></li>
         <li><a [routerLink]="['/home/events']"><i class="fa fa-book"></i><span>Eventos</span></a></li>
         <li><a [routerLink]="['/home/reports']"><i class="fa fa-book"></i> <span>Reportes</span></a></li>
         <li><a [routerLink]="['/home/cartera']"><i class="fa fa-book"></i> <span>Cartera</span></a></li>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SucursalService } from '../services/sucursal.service';
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-sucursal',
@@ -7,9 +9,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SucursalComponent implements OnInit {
 
-  constructor() { }
+  public sucursales;
+  constructor(
+    private _peticionSucursalService: SucursalService,
+     private route: ActivatedRoute,
+     private router: Router
+  ) { }
 
   ngOnInit() {
+    this.querySucursales();
   }
-
+  sendEdit(){
+    
+  }
+  querySucursales(){
+      this._peticionSucursalService.getSucursales().subscribe(
+        result => {
+          this.sucursales = result;
+         console.log(this.sucursales);
+        },
+        error => {
+          var errorMessage = <any>error;
+          console.log(errorMessage);
+          alert('Error ');
+        }
+      );
+  }
 }

@@ -172,4 +172,9 @@ export class PeticionesService {
     getSucursales() {
         return this._http.get(this.url + 'offices').map((res: Response) => res);
     }
+    addCorrelative(correlative){
+        let body = JSON.stringify(correlative);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'correlatives/add', body, { headers: headers }).map((res: Response) => res);
+    }
 }

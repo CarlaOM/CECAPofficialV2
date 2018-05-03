@@ -94,13 +94,13 @@ module.exports = {
          programs: [{
             program: ObjectId,
             modulars: [{
-               amount: [{
+               amount: [{  ///observation
                   detail: String,
                   receipt: Number,
                   date: Date,
                   amount: Number
                }],
-               debt: Number,
+               debt: Number,  //deuda
                assistance: Boolean,
                event: ObjectId,
                inscription: ObjectId,
