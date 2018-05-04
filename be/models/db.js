@@ -146,7 +146,7 @@ module.exports = {
             amount: Number,
             receipt: Number,
             assist: Boolean,
-            type: Number, //nuevo // nivelacion
+            type: Number, //1=nuevo //2=nivelacion
          }],
          module: ObjectId,
          _id: ObjectId///////////////duda?????
