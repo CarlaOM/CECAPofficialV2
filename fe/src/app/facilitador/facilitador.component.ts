@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { PeticionesService } from '../services/peticiones.service';
-import { User } from '../modelo/user';
-import { forEach } from '@angular/router/src/utils/collection';
+// import { facilitador } from '../modelo/facilitador';
 
 @Component({
   selector: 'app-facilitador',
@@ -20,28 +19,19 @@ export class facilitadorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._peticionesService.getFacilitador().subscribe(
-      result => {
-         this.facilitadores = result;
-         console.log(this.facilitadores); 
-      },
-    error => {
-      console.log(<any>error)
-    });
+    this.queryFacilitators();
  }
-  editfacilitador(_active:boolean){
+ editFacilitador(id:String){
   //console.log("facilitadorComponent");
-  this.router.navigate(['/home/facilitador/edit',_active]);
-  //console.log("router.navigate");
+  this.router.navigate(['/home/facilitador/edit/', id]);
   }
+ 
   addfacilitador(){
-
     this.router.navigate(['/home/facilitador/add']);
-
   }
   infofacilitador(_id:string){
     // console.log(_id);
-    this.router.navigate(['/home/facilitador',_id]);
+    this.router.navigate(['/home/facilitador/info',_id]);
   }
   // deletefacilitador(_id:string){
   //   this._peticionesService.deleteUser().subscribe(
@@ -53,4 +43,14 @@ export class facilitadorComponent implements OnInit {
   //   });
 
   // }
+  queryFacilitators(){
+    this._peticionesService.getFacilitadores().subscribe(
+      result => {
+         this.facilitadores = result;
+         console.log(this.facilitadores); 
+      },
+    error => {
+      console.log(<any>error)
+    });
+  }
 }

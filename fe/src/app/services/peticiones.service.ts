@@ -93,13 +93,25 @@ export class PeticionesService {
         
         return this._http.get(this.url + 'carteras/' + _id).map((res: Response) => res);
     }
+    
+    getFacilitadores() {
+        return this._http.get(this.url + 'facilitators').map((res: Response) => res);
+    }
+    getFacilitador(id){
+        return this._http.get(this.url + 'facilitators/' + id).map((res: Response) => res);
+    }
     addFacilitador(user) {
         let body = JSON.stringify(user);
         var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
         return this._http.post(this.url + 'facilitators/register', body, { headers: headers }).map((res: Response) => res);
     }
-    getFacilitador() {
-        return this._http.get(this.url + 'facilitators').map((res: Response) => res);
+    updateFacilitador(facilitador_object) {
+        console.log(facilitador_object);
+        let body = JSON.stringify(facilitador_object);
+        var idfacilitador = facilitador_object._id;
+        // console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.put(this.url + 'facilitators/update/' + idfacilitador, body, { headers: headers }).map((res: Response) => res);
     }
     addUser(user) {
         let body = JSON.stringify(user);
@@ -141,7 +153,7 @@ export class PeticionesService {
         //  return this._http.get(this.url+'cartera/listPersonsCartera/'+_id).map((res: Response)=> res);
 
     }
-    getUserCartera(id) {
+    getCarteraFromUserId(id) {
         // console.log(body);
         var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
         return this._http.get(this.url + 'carteras/otro/' + id, { headers: headers }).map((res: Response) => res);
@@ -198,4 +210,20 @@ export class PeticionesService {
     getSucursales() {
         return this._http.get(this.url + 'offices').map((res: Response) => res);
     }
+    addCorrelative(correlative){
+        let body = JSON.stringify(correlative);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'correlatives/add', body, { headers: headers }).map((res: Response) => res);
+    }
+    getSucursal(id){
+
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.get(this.url + 'offices/' + id, { headers: headers }).map((res: Response) => res);
+   
+    
+    }
+    getRoles() {
+        return this._http.get(this.url + 'roles').map((res: Response) => res);
+    }
+   
 }

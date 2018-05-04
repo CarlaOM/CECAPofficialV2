@@ -52,7 +52,7 @@ import { EditCarteraComponent } from './cartera/edit-cartera/edit-cartera.compon
 
 import { EjecutivoComponent } from './ejecutivo/ejecutivo.component';
 import { EditEjecutivoComponent } from './ejecutivo/edit-ejecutivo/edit-ejecutivo.component';
-
+import { AddCorrelativeComponent } from './correlative/add-correlative/add-correlative.component';
 import { SucursalComponent } from './sucursal/sucursal.component';
 import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.component';
 import { EditComponent } from './event/persona/edit/edit.component';
@@ -72,9 +72,10 @@ import { InfoEjecutivoComponent } from './ejecutivo/info-ejecutivo/info-ejecutiv
 import { CajaChicaComponent } from './caja/caja-chica/caja-chica.component';
 import { IngresoComponent } from './caja/ingreso/ingreso.component';
 import { EgresoComponent } from './caja/egreso/egreso.component';
-import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facilitador.component';
-import { AddCorrelativeComponent } from './correlative/add-correlative/add-correlative.component';
+
 import { facilitadorComponent } from './facilitador/facilitador.component';
+import { VistaCajaComponent } from './caja/vista-caja/vista-caja.component';
+import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facilitador.component';
 import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-facilitador.component';
 
 @NgModule({
@@ -135,12 +136,13 @@ import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-fa
     DetalleCajaComponent,
     DetallePersonalComponent,
     InfoEjecutivoComponent,
+    VistaCajaComponent,
     CajaChicaComponent,
     IngresoComponent,
+    facilitadorComponent,
     AddFacilitadorComponent,
     AddCorrelativeComponent,
-    facilitadorComponent,
-    EditFacilitadorComponent,
+    EditFacilitadorComponent
 
   ],
   imports: [

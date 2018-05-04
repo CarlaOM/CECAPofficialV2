@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Offices } from '../../modelo/offices';
 import { SucursalService } from '../../services/sucursal.service';
-//import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 
 @Component({
@@ -15,8 +15,8 @@ export class AddSucursalComponent implements OnInit {
 
   constructor(
       private _peticionSucursalService: SucursalService,
-     // private route: ActivatedRoute,
-     // private router: Router
+     private route: ActivatedRoute,
+     private router: Router
    ) {
     this.office = new Offices('','',null,'',null);//name,ubicacion,caja,departament,company_id
    }
@@ -41,4 +41,7 @@ export class AddSucursalComponent implements OnInit {
     );
   }
   queryCompany(){}
+  cancelar() {
+    this.router.navigate(['home/sucursal']);
+  }
 }
