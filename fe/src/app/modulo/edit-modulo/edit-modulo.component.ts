@@ -51,6 +51,7 @@ export class EditModuloComponent implements OnInit {
       },
       error =>{
         console.log(<any>error);
+        
       })
   }
   saveModulo(){
@@ -59,7 +60,7 @@ export class EditModuloComponent implements OnInit {
     this.modulo.name = this.nameRef.nativeElement.value;
     this.modulo.content = this.contentRef.nativeElement.value;
   
-    if(this.numberRef.nativeElement.value=='' || this.nameRef.nativeElement.value=='' || this.contentRef.nativeElement.value==''){
+    if(this.numberRef.nativeElement.value==null || this.nameRef.nativeElement.value=='' || this.contentRef.nativeElement.value==''){
       window.alert("Asegurese que todos los campos esten llenos");
     }else{
       this._peticionesService.updateModulo(this.modulo).subscribe(
@@ -85,7 +86,7 @@ export class EditModuloComponent implements OnInit {
     //});
   //}
   cancel() {
-    this.router.navigate(['home/modulos']);
+    this.router.navigate(['home/modulos'], { replaceUrl: true });
 }
 
 }

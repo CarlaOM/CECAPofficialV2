@@ -28,6 +28,7 @@ import { AddEjecutivoComponent } from "./ejecutivo/add-ejecutivo/add-ejecutivo.c
 import { Programa } from './modelo/programa';
 import { ProgramaComponent } from './programa/programa.component';
 import { EditProgramaComponent } from './programa/edit-programa/edit-programa.component';
+import { AddProgramaComponent } from './programa/add-programa/add-programa.component';
 import { ModuloComponent } from './modulo/modulo.component';
 import { EditModuloComponent } from './modulo/edit-modulo/edit-modulo.component';
 
@@ -76,6 +77,7 @@ const appRoutes: Routes = [
          { path: 'formulariobase',component:HeroFormComponent},
          { path: 'programs', component: ProgramaComponent},
          { path: 'program/edit/:id', component: EditProgramaComponent},
+         { path: 'program/add',component:AddProgramaComponent},
          { path: 'modulos/:id', component: ModuloComponent},
          { path: 'modulo/edit/:id', component: EditModuloComponent},
          { path: 'caja', component:CajaChicaComponent},
