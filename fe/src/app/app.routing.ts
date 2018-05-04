@@ -16,6 +16,7 @@ import { EditCarteraComponent } from "./cartera/edit-cartera/edit-cartera.compon
 import { EjecutivoComponent } from "./ejecutivo/ejecutivo.component";
 import { EditEjecutivoComponent } from './ejecutivo/edit-ejecutivo/edit-ejecutivo.component';
 import { PersonaComponent } from "./event/persona/persona.component";
+import { AddPersonComponent } from './event/addPerson/addPerson.component';
 import { EditComponent } from "./event/persona/edit/edit.component";
 import { SucursalComponent } from './sucursal/sucursal.component';
 import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.component';
@@ -43,6 +44,7 @@ import { AddCorrelativeComponent } from './correlative/add-correlative/add-corre
 
 
 
+
 const appRoutes: Routes = [
    { path: '', component: HomeComponent },//ruta basica
    { path: 'login', component: LoginComponent },
@@ -57,6 +59,7 @@ const appRoutes: Routes = [
          { path: 'trimestral', component: ReportTrimestralComponent },
          { path: 'reportEvent/:id', component: ReportEventComponent },
          { path: 'persons', component: PersonaComponent},
+         { path: 'persons/add', component: AddPersonComponent},
          { path: 'persons/edit/:id', component: EditComponent},
          { path: 'cartera', component:CarteraComponent},
          { path: 'cartera/add', component:AddCarteraComponent},

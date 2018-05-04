@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PeticionesService } from '../services/peticiones.service';
 //import { UserService } from '../services/user.service';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 import { Identity } from '../services/global';
-
+import { ActivatedRoute, Router } from "@angular/router";
 @Component({
    selector: 'app-events',
    templateUrl: './events.component.html',
@@ -20,7 +20,9 @@ export class EventsComponent implements OnInit {
       private _peticionesService: PeticionesService
       //,private _userService: UserService
    ) { }
-
+   addPerson(){
+    this.router.navigate(['home/event/persons']);
+   }
    ngOnInit() {
       this.query();
       this.queryRol();
