@@ -60,8 +60,10 @@ import { HeroFormComponent } from './hero-form/hero-form.component';
 
 import { ProgramaComponent } from './programa/programa.component';
 import { EditProgramaComponent } from './programa/edit-programa/edit-programa.component';
+import { AddProgramaComponent } from './programa/add-programa/add-programa.component';
 import { ModuloComponent } from './modulo/modulo.component';
 import { EditModuloComponent } from './modulo/edit-modulo/edit-modulo.component';
+import { AddModuloComponent } from './modulo/add-modulo/add-modulo.component';
 
 import { DetalleCajaComponent } from './sucursal/detalle-caja/detalle-caja.component';
 import { DetallePersonalComponent } from './sucursal/detalle-personal/detalle-personal.component';
@@ -72,7 +74,8 @@ import { IngresoComponent } from './caja/ingreso/ingreso.component';
 import { EgresoComponent } from './caja/egreso/egreso.component';
 import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facilitador.component';
 import { AddCorrelativeComponent } from './correlative/add-correlative/add-correlative.component';
-
+import { facilitadorComponent } from './facilitador/facilitador.component';
+import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-facilitador.component';
 
 @NgModule({
   declarations: [
@@ -124,8 +127,10 @@ import { AddCorrelativeComponent } from './correlative/add-correlative/add-corre
 
     ProgramaComponent,
     EditProgramaComponent,
+    AddProgramaComponent,
     ModuloComponent,
     EditModuloComponent,
+    AddModuloComponent,
 
     DetalleCajaComponent,
     DetallePersonalComponent,
@@ -134,6 +139,8 @@ import { AddCorrelativeComponent } from './correlative/add-correlative/add-corre
     IngresoComponent,
     AddFacilitadorComponent,
     AddCorrelativeComponent,
+    facilitadorComponent,
+    EditFacilitadorComponent,
 
   ],
   imports: [

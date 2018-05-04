@@ -26,6 +26,7 @@ import { AddEjecutivoComponent } from "./ejecutivo/add-ejecutivo/add-ejecutivo.c
 import { Programa } from './modelo/programa';
 import { ProgramaComponent } from './programa/programa.component';
 import { EditProgramaComponent } from './programa/edit-programa/edit-programa.component';
+import { AddProgramaComponent } from './programa/add-programa/add-programa.component';
 import { ModuloComponent } from './modulo/modulo.component';
 import { EditModuloComponent } from './modulo/edit-modulo/edit-modulo.component';
 
@@ -36,7 +37,9 @@ import { IngresoComponent } from "./caja/ingreso/ingreso.component";
 import { EgresoComponent } from './caja/egreso/egreso.component';
 import { AddCorrelativeComponent } from './correlative/add-correlative/add-correlative.component';
 
+import { facilitadorComponent } from './facilitador/facilitador.component';
 import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facilitador.component';
+
 
 
 
@@ -70,6 +73,7 @@ const appRoutes: Routes = [
          { path: 'formulariobase',component:HeroFormComponent},
          { path: 'programs', component: ProgramaComponent},
          { path: 'program/edit/:id', component: EditProgramaComponent},
+         { path: 'program/add',component:AddProgramaComponent},
          { path: 'modulos/:id', component: ModuloComponent},
          { path: 'modulo/edit/:id', component: EditModuloComponent},
          { path: 'sucursal/detalleCaja', component: DetalleCajaComponent},
@@ -79,7 +83,8 @@ const appRoutes: Routes = [
          { path: 'caja', component:CajaChicaComponent},
          { path: 'caja/ingreso', component:IngresoComponent},
          { path: 'caja/egreso', component:EgresoComponent},
-         { path: 'facilitador', component:AddFacilitadorComponent},
+         { path: 'facilitador', component:facilitadorComponent},
+         { path: 'facilitador/add', component:AddFacilitadorComponent},
          { path: 'correlative/add', component:AddCorrelativeComponent}
 
       ]
