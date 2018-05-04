@@ -9,7 +9,8 @@
             <!-- <li *ngIf='role?.name == "Admin"'><app-add-ejecutivo></app-add-ejecutivo></li> -->
             <li *ngIf='role?.name == "Admin"'><app-addProgram></app-addProgram></li>
             <li *ngIf='role?.name == "Admin"'><app-addEvent (messageEvent)="receiveMessage()"></app-addEvent></li>
-            <li><app-addPerson (messageEvent)="receiveMessage()"></app-addPerson></li>
+            <!-- <li><app-addPerson (messageEvent)="receiveMessage()"></app-addPerson></li> -->
+            <a class="btn btn-primary a" (click)="addPerson()">Registrar Persona</a>
       </ol>
    </section>
    <section class="content h">
