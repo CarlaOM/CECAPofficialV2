@@ -60,8 +60,10 @@ import { HeroFormComponent } from './hero-form/hero-form.component';
 
 import { ProgramaComponent } from './programa/programa.component';
 import { EditProgramaComponent } from './programa/edit-programa/edit-programa.component';
+import { AddProgramaComponent } from './programa/add-programa/add-programa.component';
 import { ModuloComponent } from './modulo/modulo.component';
 import { EditModuloComponent } from './modulo/edit-modulo/edit-modulo.component';
+import { AddModuloComponent } from './modulo/add-modulo/add-modulo.component';
 
 import { DetalleCajaComponent } from './sucursal/detalle-caja/detalle-caja.component';
 import { DetallePersonalComponent } from './sucursal/detalle-personal/detalle-personal.component';
@@ -126,8 +128,10 @@ import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-fa
 
     ProgramaComponent,
     EditProgramaComponent,
+    AddProgramaComponent,
     ModuloComponent,
     EditModuloComponent,
+    AddModuloComponent,
 
     DetalleCajaComponent,
     DetallePersonalComponent,
