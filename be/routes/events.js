@@ -6,11 +6,11 @@ var mongoose = require('mongoose');
 router
    .get('/', function (req, res) {
       var d = new Date();
-      db.events.find({ date_start: { $gt: d } }, { date_start: 1, name: 1, program: 1, inscriptions: 1, total: 1 }, function (err, events) {
+      db.events.find({ date_start: { $gt: d } }, {name: 1,description:1,date_start: 1,modulars:1, inscriptions: 1, total: 1 , program: 1}, function (err, events) {
          if (err) return res.status(400).send(err);
          let programs = [];
          //let modulos = [];
-         var j = 0;
+         var j = 0; 
          let insert = true;
          var today = new Date;
          for (let i = 0; i < events.length; i++) {
@@ -35,7 +35,7 @@ router
                   if (JSON.stringify(event.program) == JSON.stringify(program._id)) {
                      event.name = program.name;
                   }
-               })
+               });
             });
             return res.status(200).send(events);
          });
@@ -261,7 +261,7 @@ router
       function saveEvent(persons) {
          event.inscriptions = persons.map(res => {
             return { state: 0, person: res._id, user: res.user }
-         })
+         });
          event.save(function (err, event) {
             if (err) return res.status(400).send(err);
 
