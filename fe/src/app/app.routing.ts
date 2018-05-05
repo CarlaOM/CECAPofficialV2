@@ -16,6 +16,7 @@ import { EditCarteraComponent } from "./cartera/edit-cartera/edit-cartera.compon
 import { EjecutivoComponent } from "./ejecutivo/ejecutivo.component";
 import { EditEjecutivoComponent } from './ejecutivo/edit-ejecutivo/edit-ejecutivo.component';
 import { PersonaComponent } from "./event/persona/persona.component";
+import { AddPersonComponent } from './event/addPerson/addPerson.component';
 import { EditComponent } from "./event/persona/edit/edit.component";
 import { SucursalComponent } from './sucursal/sucursal.component';
 import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.component';
@@ -27,6 +28,7 @@ import { AddEjecutivoComponent } from "./ejecutivo/add-ejecutivo/add-ejecutivo.c
 import { Programa } from './modelo/programa';
 import { ProgramaComponent } from './programa/programa.component';
 import { EditProgramaComponent } from './programa/edit-programa/edit-programa.component';
+import { AddProgramaComponent } from './programa/add-programa/add-programa.component';
 import { ModuloComponent } from './modulo/modulo.component';
 import { EditModuloComponent } from './modulo/edit-modulo/edit-modulo.component';
 
@@ -40,6 +42,7 @@ import { facilitadorComponent } from './facilitador/facilitador.component';
 import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facilitador.component';
 import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-facilitador.component';
 import { AddCorrelativeComponent } from './correlative/add-correlative/add-correlative.component';
+
 
 
 
@@ -57,6 +60,7 @@ const appRoutes: Routes = [
          { path: 'trimestral', component: ReportTrimestralComponent },
          { path: 'reportEvent/:id', component: ReportEventComponent },
          { path: 'persons', component: PersonaComponent},
+         { path: 'persons/add', component: AddPersonComponent},
          { path: 'persons/edit/:id', component: EditComponent},
          { path: 'cartera', component:CarteraComponent},
          { path: 'cartera/add', component:AddCarteraComponent},
@@ -74,6 +78,7 @@ const appRoutes: Routes = [
          { path: 'formulariobase',component:HeroFormComponent},
          { path: 'programs', component: ProgramaComponent},
          { path: 'program/edit/:id', component: EditProgramaComponent},
+         { path: 'program/add',component:AddProgramaComponent},
          { path: 'modulos/:id', component: ModuloComponent},
          { path: 'modulo/edit/:id', component: EditModuloComponent},
          { path: 'caja', component:CajaChicaComponent},
