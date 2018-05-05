@@ -42,6 +42,7 @@ app
    .use('/modules', require('./routes/modules'))
    .use('/offices', require('./routes/offices'))
    .use('/roles', require('./routes/roles'))   
+   .use('cajaUsuario', require('./routes/cajaUsuario'))
    .use('/correlatives', require('./routes/correlatives'))
    .use(function (err, req, res, next) { 
       console.error(err.stack);

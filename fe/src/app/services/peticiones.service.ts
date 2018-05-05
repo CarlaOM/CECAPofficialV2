@@ -208,5 +208,11 @@ export class PeticionesService {
     getRoles() {
         return this._http.get(this.url + 'roles').map((res: Response) => res);
     }
+
+    addCashFlowUserIngreso(ingreso) {
+        let body = JSON.stringify(ingreso);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'cajaUsuario/register', body, { headers: headers }).map((res: Response) => res);
+    }
    
 }

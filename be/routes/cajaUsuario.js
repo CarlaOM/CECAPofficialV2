@@ -118,15 +118,18 @@ router
     });
  })
  .post('/register', function (req, res) {
-    var cartera=new db.cajaUsuario(req.body);
+    var cashFlowUsers=new db.cashFlowUsers(req.body);
+
+    console.log(cashFlowUsers);
+    console.log("chash desde backend")
    //  console.log(cartera);
-    if(cartera.name=='')return res.status(400)
-    cartera.save(function(err,cartera){
+   // if(cartera.name=='')return res.status(400)
+    // cartera.save(function(err,cartera){
 
-        if(err) return console.log(err);
+        // if(err) return console.log(err);
 
-        res.status(200).send(cartera);
-    })
+        // res.status(200).send(cartera);
+    // })
   
  });
 
