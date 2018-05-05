@@ -41,13 +41,18 @@ export class PeticionesService {
     addProgram(program) {
         let body = JSON.stringify(program);
         var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-        return this._http.post(this.url + 'programs', body, { headers: headers }).map((res: Response) => res);
+        return this._http.post(this.url + 'programs/add', body, { headers: headers }).map((res: Response) => res);
     }
     getPrograms() {
         return this._http.get(this.url + 'programs').map((res: Response) => res);
     }
     getProgram(_id) {
         return this._http.get(this.url + 'programs/' + _id).map((res: Response) => res);
+    }
+    addModulo(modulo) {
+        let body = JSON.stringify(modulo);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'modules/add', body, { headers: headers }).map((res: Response) => res);
     }
     getModulos(idProgram) { 
         console.log(idProgram)
@@ -219,8 +224,6 @@ export class PeticionesService {
 
         var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
         return this._http.get(this.url + 'offices/' + id, { headers: headers }).map((res: Response) => res);
-   
-    
     }
     getRoles() {
         return this._http.get(this.url + 'roles').map((res: Response) => res);

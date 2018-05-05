@@ -49,5 +49,8 @@ export class ModuloComponent implements OnInit {
   }
   editModulo(_id:string){
       this.router.navigate(['/home/modulo/edit', _id]);
-    }
+  }
+  addModulo(){
+    this.router.navigate(['/home/modulo/add']);
+  }
 }

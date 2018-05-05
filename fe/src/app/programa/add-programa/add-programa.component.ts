@@ -10,29 +10,36 @@ import { Programa } from '../../modelo/programa';
   providers: [ PeticionesService]
 })
 export class AddProgramaComponent implements OnInit {
-  public programs;
-  public programObject;
-  submitted = false;
-
+  public program: Programa;
+  
   constructor(
     private _peticionesService:PeticionesService,
     private router: Router,
     private route: ActivatedRoute,
-  ) { }
+  ) {
+      this.program = new Programa('', '');//name, details
+    }
 
   ngOnInit() {
-    this._peticionesService.getPrograms().subscribe(response=>{
-      this.programs=response;
-      console.log(this.programs);
-    });
+    this.query();
   }
-  onSubmit() { this.submitted = true;
-    console.log(this.programObject);
-    this._peticionesService.addProgram(this.programObject).subscribe(response=>{
-      this.router.navigate(['/home/program/']); 
-    },error=>{
-      console.log(<any>error);
-    })
+  onSubmit() {
+    console.log(this.program);
+    this._peticionesService.addProgram(this.program).subscribe(
+      result => {
+        var esperado = result;
+        console.log(esperado);
+        alert('El Programa se Creo correctamente');
+      },
+      error => {
+        var errorMessage = <any>error;
+        console.log(errorMessage);
+        alert('Error al Crear Programa verifique los datos');
+      }
+    );
   }
-
+  query() {}
+  cancel() {
+    this.router.navigate(['home/programs']);
+  }
 }
