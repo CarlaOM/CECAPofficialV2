@@ -10,7 +10,6 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class AddEventComponent implements OnInit {
    public programs;
-   public nomPrograma;
    @ViewChild('description') descriptionRef: ElementRef;
    @ViewChild('date') dateRef: ElementRef;
    @ViewChild('total') totalRef: ElementRef;
@@ -39,19 +38,21 @@ export class AddEventComponent implements OnInit {
    console.log(this.model);
   }
    save() {
-      const description = this.descriptionRef.nativeElement.value;
-      let date = this.dateRef.nativeElement.value;
-      const total = this.totalRef.nativeElement.value;
-      const program = this.programRef.nativeElement.value;
+      // const description = this.descriptionRef.nativeElement.value;
+      // let date = this.dateRef.nativeElement.value;
+      // const total = this.totalRef.nativeElement.value;
+      // const program = this.programRef.nativeElement.value;
       // const newEvent = new Event(description, date, total, program);
       // console.log(newEvent);
 
 
-      if((this.descriptionRef.nativeElement.value=='')||(this.totalRef.nativeElement.value=='')){
+      // if((this.descriptionRef.nativeElement.value=='')||(this.model.total==0)){
+      if((this.model.description=='')||(this.model.total==0)){
         window.alert("Asegurese de llenar todos los campos")
 
       }else{
-          if(this.dateRef.nativeElement.value <new Date()){
+          // if(this.dateRef.nativeElement.value <new Date()){
+          if(this.model.date_start<new Date()){
             window.alert("Asegurese que la fecha sea mayor a la de hoy")
             
           }else{
