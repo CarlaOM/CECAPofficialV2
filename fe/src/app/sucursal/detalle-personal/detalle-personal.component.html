@@ -3,7 +3,7 @@
     
     <section class="content-header">
        <h1>
-          Detalle Caja
+          Detalle Sucursal
           <small>Sucursal Cochabamba</small>
        </h1>
        <div>     
@@ -29,11 +29,23 @@
           </thead>
   
           <tbody>
-  
-             <tr *ngFor="let i of collection" class="bg-info text-center">
-                <td>{{i}}</td>
-                <td><a class="btn btn-primary" (click)="send()">Detalle</a></td>
-                <td><a class="btn btn-primary" (click)="send()">Detalle</a></td>
+              <!-- name: String,
+              lastname:String,
+              cell:Number,
+              correo:String,
+              
+              active: Boolean,
+              password_hash: String,
+        
+              // token: String,
+              rol: ObjectId,
+              offices: ObjectId,
+              amount: Number, -->
+        
+             <tr *ngFor="let i of users" class="bg-info text-center">
+                <td>{{i.name}}</td>
+                <td>{{i.rol}}</td>
+                <td>{{i.active}}</td>
                 <td>
                    <a class="btn btn-primary" (click)="send()">Editar</a>
                    <a class="btn btn-primary" (click)="send()">Cambiar Sucursal</a>

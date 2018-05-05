@@ -35,4 +35,8 @@ export class SucursalComponent implements OnInit {
         }
       );
   }
+  verSucursal(id:String){
+    //console.log("facilitadorComponent");
+    this.router.navigate(['/home/sucursal/detalleCaja/', id]);
+    }
 }
