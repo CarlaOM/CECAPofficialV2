@@ -8,10 +8,13 @@
       <ol class="breadcrumb">
             <!-- <li *ngIf='role?.name == "Admin"'><app-add-ejecutivo></app-add-ejecutivo></li> -->
             <li *ngIf='role?.name == "Admin"'><app-addProgram></app-addProgram></li>
-            <li *ngIf='role?.name == "Admin"'><app-addEvent (messageEvent)="receiveMessage()"></app-addEvent></li>
+            <!-- <li *ngIf='role?.name == "Admin"'><app-addEvent (messageEvent)="receiveMessage()"></app-addEvent></li> -->
             <!-- <li><app-addPerson (messageEvent)="receiveMessage()"></app-addPerson></li> -->
-            <a class="btn btn-primary a" (click)="addPerson()">Registrar Persona</a>
+            <!-- <a class="btn btn-primary a" (click)="addPerson()">Registrar Persona</a> -->
+            <li><a class="btn btn-primary" [routerLink]="['/home/events/add']"><i class="fa fa-book"></i>Registrar Eventos</a></li>
+            <li><a class="btn btn-primary" [routerLink]="['/home/persons/add']"><i class="fa fa-book"></i>Registrar Personas</a></li>
       </ol>
+      <br>
    </section>
    <section class="content h">
       <table class="table table-hover">
