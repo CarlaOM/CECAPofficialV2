@@ -21,7 +21,7 @@ export class EventsComponent implements OnInit {
       //,private _userService: UserService
    ) { }
    addPerson(){
-    this.router.navigate(['home/event/persons']);
+    this.router.navigate(['home/event/persons/add']);
    }
    ngOnInit() {
       this.query();
