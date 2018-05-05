@@ -31,7 +31,7 @@
             <tr *ngFor="let event of events" class="bg-info text-center">
                <td>{{ event.name }}</td>
                <td>{{ event.date_start | date }}</td>
-               <td>{{ event.cupos }}</td>
+               <td>{{ event.total }}</td>
                <td>
                   <a class="btn btn-primary" (click)="send(event._id)">INFORMACION</a>
                </td>
