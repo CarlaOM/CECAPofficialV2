@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class AddEventComponent implements OnInit {
    public programs;
+   public nomPrograma;
    @ViewChild('description') descriptionRef: ElementRef;
    @ViewChild('date') dateRef: ElementRef;
    @ViewChild('total') totalRef: ElementRef;
@@ -28,15 +29,14 @@ export class AddEventComponent implements OnInit {
    ngOnInit() {
       this._peticionesService.getPrograms().subscribe(response => {
          this.programs = response;
-         // console.log(response);
+         console.log(this.programs);
       });
    }
-   submitted = false;
    cancelar() {
-    this.router.navigate(['home/sucursal']);
-  }
+    this.router.navigate(['home/events']);
+    }
   onSubmit(){
-   
+   console.log(this.model);
   }
    save() {
       const description = this.descriptionRef.nativeElement.value;
