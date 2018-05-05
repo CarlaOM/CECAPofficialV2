@@ -69,6 +69,7 @@ const appRoutes: Routes = [
          { path: 'sucursal', component: SucursalComponent },
          { path: 'sucursal/add', component: AddSucursalComponent},
          { path: 'sucursal/detalleCaja', component: DetalleCajaComponent},
+         { path: 'sucursal/detalleCaja/:id', component: DetalleCajaComponent},
          { path: 'sucursal/personal', component: DetallePersonalComponent},
          { path: 'formulariobase',component:HeroFormComponent},
          { path: 'programs', component: ProgramaComponent},

@@ -3,8 +3,8 @@
   
   <section class="content-header">
      <h1>
-        Detalle Caja
-        <small>Sucursal Cochabamba</small>
+        Detalle Sucursal
+        <small> <strong>{{office.name}}</strong></small>
      </h1>
      <div>     
       <ol class="breadcrumb">
@@ -29,7 +29,7 @@
         </thead>
 
         <tbody>
-
+            
            <tr *ngFor="let i of collection" class="bg-info text-center">
               <td>{{i}}</td>
               <td>1000 BS  <a class="btn btn-primary" (click)="send()">Detalle</a></td>

@@ -139,19 +139,20 @@ module.exports = {
       name: String,
       description: String,
       date_start: Date,
-      modular:[{
+      modulars:[{
          date_start: Date,
          date_end: Date,
          facilitators: ObjectId,
-         list: [{
-            persons: ObjectId,
-            amount: Number,
-            receipt: Number,
-            assist: Boolean,
-            type: Number, //nuevo // nivelacion
-         }],
-         modules: ObjectId
-         //_id: ObjectId///////////////duda?????
+         modules: ObjectId,
+         list:[{
+               amount: Number,
+               receipt: Number, 
+               assist: Boolean,
+               type: Number, //nuevo // nivelacion
+               persons: ObjectId
+         }
+        ],
+      _id: ObjectId///////////////duda?????
       }],
       inscriptions: [{
          // segun al numero de asistencias sacar el precio total q tiene q pagar
@@ -224,6 +225,7 @@ module.exports = {
    correlatives: mongoose.model('correlatives', new Schema({
       year: Date,
       company_id: ObjectId,
+      //user_id: ObjectId,
       receipts: [{
          receipt: Number,
          amount: Number,

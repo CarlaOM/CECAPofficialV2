@@ -22,6 +22,9 @@ export class SucursalService {
    getSucursales(){
         return this._http.get(this.url + 'offices').map((res: Response) => res);
     }
+    getSucursal(id){
+        return this._http.get(this.url + 'offices/' + id).map((res: Response) => res);
+    }
    addOffice(office) {
     let body = JSON.stringify(office);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
