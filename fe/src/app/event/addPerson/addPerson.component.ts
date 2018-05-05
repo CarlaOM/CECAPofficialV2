@@ -42,7 +42,7 @@ export class AddPersonComponent implements OnInit {
       this.inscription = new Inscription('', '', '', '');
       //this.identy=Identity._id;
    }
-   model = new Persona(Identity._id,"","","",0,"","");
+   model = new Persona(Identity._id,"","","",null,"","");
    submitted = false;
    onSubmit(){}
    ngOnInit() {
