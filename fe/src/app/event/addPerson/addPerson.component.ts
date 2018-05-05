@@ -1,13 +1,15 @@
 import { Component, OnInit, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
 import { PeticionesService } from '../../services/peticiones.service';
 import { Identity } from '../../services/global';
 import { Person } from '../../modelo/person';
 import { Inscription } from '../../modelo/inscription';
-
+import { Persona } from './Persona';
 @Component({
    selector: 'app-addPerson',
    templateUrl: './addPerson.component.html',
-   styleUrls: ['./addPerson.component.css']
+   styleUrls: ['./addPerson.component.css'],
+   providers:[PeticionesService]
 })
 export class AddPersonComponent implements OnInit {
 
@@ -40,7 +42,9 @@ export class AddPersonComponent implements OnInit {
       this.inscription = new Inscription('', '', '', '');
       //this.identy=Identity._id;
    }
-
+   model = new Persona(Identity._id,"","","",null,"","");
+   submitted = false;
+   onSubmit(){}
    ngOnInit() {
        console.log(Identity._id);
        //this.queryPrograms();

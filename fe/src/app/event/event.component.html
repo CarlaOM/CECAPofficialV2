@@ -15,10 +15,15 @@
 
    <section class="content">
 
-      <app-addPerson (messageEvent)="receiveMessage()"></app-addPerson>
-
+      <!-- <app-addPerson (messageEvent)="receiveMessage()"></app-addPerson> -->
+      <!-- <a class="btn btn-primary" (click)="addPerson()">Registrar Persona</a> -->
       <!-- <app-persona></app-persona> -->
-
+      <div>     
+            <ol class="breadcrumb">
+                <li><a class="btn btn-primary" [routerLink]="['/home/persons/add']"><i class="fa fa-book"></i>Add Personas</a></li>
+               
+            </ol>
+          </div> 
       <table class="table">
          <thead>
             <th>Filtros</th>

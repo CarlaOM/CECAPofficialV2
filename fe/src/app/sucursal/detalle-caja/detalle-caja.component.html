@@ -3,14 +3,14 @@
   
   <section class="content-header">
      <h1>
-        Detalle Caja
-        <small>Sucursal Cochabamba</small>
+        Detalle Sucursal
+        <small> <strong>{{office.name}}</strong></small>
      </h1>
      <div>     
       <ol class="breadcrumb">
             <!--<li *ngIf='role?.name == "Admin"'><app-add-ejecutivo></app-add-ejecutivo></li>-->
-            <li><a class="btn btn-primary" [routerLink]="['/home/sucursal/personal']"><i class="fa fa-book"></i><span>Presonal</span></a></li>
-            <li><a class="btn btn-primary" [routerLink]="['/home/sucursal/personal']"><i class="fa fa-book"></i><span>Presonal</span></a></li>
+            <li><a class="btn btn-primary" [routerLink]="['/home/sucursal/personal']"><i class="fa fa-book"></i><span>Personal</span></a></li>
+            
 
       </ol>
     </div> 
@@ -29,7 +29,7 @@
         </thead>
 
         <tbody>
-
+            
            <tr *ngFor="let i of collection" class="bg-info text-center">
               <td>{{i}}</td>
               <td>1000 BS  <a class="btn btn-primary" (click)="send()">Detalle</a></td>

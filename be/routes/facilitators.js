@@ -14,6 +14,45 @@ router
        return res.status(200).send(facilitators);
     });
  })
+ .get('/:id',  function (req, res) {
+      db.facilitators.findOne({ _id: req.params.id }, function (err, facilitador) {
+         if (err) return res.status(400).send(err);
+         if (facilitador == null) return res.status(404).send();
+
+         return res.status(200).send(facilitador);
+      });
+   })
+ .put('update/:id', function (req, res) {
+    db.facilitators.findOne({ _id: req.params.id }, function (err, facilitador) {
+       if (err) return res.status(400).send(err);
+       if (facilitador == null) return res.status(404).send();
+
+       for (i in req.body) {
+        facilitador[i] = req.body[i];
+         //  console.log(cartera[i]);  
+       }
+       db.facilitators.update({_id: req.params.id},
+        {
+              $set:{'descOcupation.carrera':req.body.carrera,
+                    'descOcupation.universidad':req.body.universidad,
+                    'descOcupation.semestre':req.body.semestre,
+                    //Particular
+                    'descOcupation.areaTrabajo':req.body.areaTrabajo,
+                    //Profesional
+                    'descOcupation.profesion':req.body.profesion,
+                    'descOcupation.empresa': req.body.empresa,
+                    'descOcupation.cargo': req.body.cargo,
+              }
+        }).exec(function(err, off){
+              if (err) return res.status(400).send(err);
+        })
+       facilitador.save(function (err, facilitador) {
+          if (err) return res.status(400).send(err);
+
+          return res.status(200).send(facilitador);
+       });
+    });
+ })
 .post('/register', function (req, res) {
     var cartera=new db.facilitators(req.body);
    //  console.log(cartera);

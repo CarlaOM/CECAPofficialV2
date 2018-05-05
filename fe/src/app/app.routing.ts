@@ -16,7 +16,9 @@ import { EditCarteraComponent } from "./cartera/edit-cartera/edit-cartera.compon
 import { EjecutivoComponent } from "./ejecutivo/ejecutivo.component";
 import { EditEjecutivoComponent } from './ejecutivo/edit-ejecutivo/edit-ejecutivo.component';
 import { PersonaComponent } from "./event/persona/persona.component";
+import { AddPersonComponent } from './event/addPerson/addPerson.component';
 import { EditComponent } from "./event/persona/edit/edit.component";
+import { SucursalComponent } from './sucursal/sucursal.component';
 import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.component';
 import { HeroFormComponent } from "./hero-form/hero-form.component";
 import { DetalleCajaComponent } from './sucursal/detalle-caja/detalle-caja.component';
@@ -26,6 +28,7 @@ import { AddEjecutivoComponent } from "./ejecutivo/add-ejecutivo/add-ejecutivo.c
 import { Programa } from './modelo/programa';
 import { ProgramaComponent } from './programa/programa.component';
 import { EditProgramaComponent } from './programa/edit-programa/edit-programa.component';
+import { AddProgramaComponent } from './programa/add-programa/add-programa.component';
 import { ModuloComponent } from './modulo/modulo.component';
 import { EditModuloComponent } from './modulo/edit-modulo/edit-modulo.component';
 
@@ -35,10 +38,10 @@ import { VistaCajaComponent } from "./caja/vista-caja/vista-caja.component";
 import { CajaChicaComponent } from "./caja/caja-chica/caja-chica.component";
 import { IngresoComponent } from "./caja/ingreso/ingreso.component";
 import { EgresoComponent } from './caja/egreso/egreso.component';
-import { AddCorrelativeComponent } from './correlative/add-correlative/add-correlative.component';
-
 import { facilitadorComponent } from './facilitador/facilitador.component';
 import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facilitador.component';
+import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-facilitador.component';
+import { AddCorrelativeComponent } from './correlative/add-correlative/add-correlative.component';
 
 
 
@@ -57,6 +60,7 @@ const appRoutes: Routes = [
          { path: 'trimestral', component: ReportTrimestralComponent },
          { path: 'reportEvent/:id', component: ReportEventComponent },
          { path: 'persons', component: PersonaComponent},
+         { path: 'persons/add', component: AddPersonComponent},
          { path: 'persons/edit/:id', component: EditComponent},
          { path: 'cartera', component:CarteraComponent},
          { path: 'cartera/add', component:AddCarteraComponent},
@@ -66,25 +70,26 @@ const appRoutes: Routes = [
          { path: 'ejecutivo/add',component:AddEjecutivoComponent},
          { path: 'ejecutivo/:id',component:InfoEjecutivoComponent},
          { path: 'ejecutivo/edit/:active', component:EditEjecutivoComponent},
+         { path: 'sucursal', component: SucursalComponent },
          { path: 'sucursal/add', component: AddSucursalComponent},
          { path: 'sucursal/detalleCaja', component: DetalleCajaComponent},
+         { path: 'sucursal/detalleCaja/:id', component: DetalleCajaComponent},
          { path: 'sucursal/personal', component: DetallePersonalComponent},
-         { path: 'formulariobase',component:HeroFormComponent},
          { path: 'formulariobase',component:HeroFormComponent},
          { path: 'programs', component: ProgramaComponent},
          { path: 'program/edit/:id', component: EditProgramaComponent},
+         { path: 'program/add',component:AddProgramaComponent},
          { path: 'modulos/:id', component: ModuloComponent},
          { path: 'modulo/edit/:id', component: EditModuloComponent},
-         { path: 'sucursal/detalleCaja', component: DetalleCajaComponent},
-         { path: 'sucursal/personal', component: DetallePersonalComponent},
-         { path: 'formulariobase',component:HeroFormComponent},
-         { path: 'formulariobase',component:HeroFormComponent},
          { path: 'caja', component:CajaChicaComponent},
          { path: 'caja/vistacaja', component:VistaCajaComponent},
          { path: 'caja/ingreso', component:IngresoComponent},
          { path: 'caja/egreso', component:EgresoComponent},
          { path: 'facilitador', component:facilitadorComponent},
          { path: 'facilitador/add', component:AddFacilitadorComponent},
+         { path: 'facilitador/edit/:id', component:EditFacilitadorComponent},
+         
+         
          { path: 'correlative/add', component:AddCorrelativeComponent}
 
       ]

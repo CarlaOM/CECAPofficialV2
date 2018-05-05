@@ -1,6 +1,35 @@
 var mongoose = require('mongoose');
 var db = require('./db');
 
+///////////////////////////////////////
+
+var _offices_stc ={
+    name: 'cecap Cochabamba',
+    //nit:'7012323123424',
+    ubicacion:'santa Cruz entre padilla',
+    caja: 1000,
+    departament: 'Sta. Cruz',
+    company_id: _company,
+    _id: new mongoose.Types.ObjectId,
+    record_date: new Date()
+};
+var _offices = [_offices_stc];
+//////////////////////////////////////////////////////////
+var _company0 = {
+    name: 'CECAP Company',
+      nit: 71231901020,
+      caja: 200000,
+      cash_flow: [{
+         amount: 2000,
+         description: ' fundacion company',
+         _id: new mongoose.Types.ObjectId
+      }],
+    _id: new mongoose.Types.ObjectId,
+    record_date: new Date()
+};
+var _company = [_company0];
+///////////////////////////////////////////////////////////
+
 //Accounts
 var _rol_admin = {
    name: 'Admin',
@@ -18,6 +47,7 @@ var _rol_gerente ={
 }
 var _roles = [_rol_admin, _rol_ejecutivo,_rol_gerente];
 
+/////////////////////////////////////////////////////////
 var _user_admin = {
    name: 'a',
    active: true,
@@ -57,6 +87,21 @@ var _user_ejecutivo2 = {
     record_date: new Date()
  };
 var _users = [_user_admin, _user_ejecutivo1,_user_ejecutivo2];
+
+//////////////////////////////////////////////////////////////////////////
+var _facilitator_1 = {
+    name: 'Paola Quintanilla',
+      job: 'rrhh',
+      _id: new mongoose.Types.ObjectId,
+      record_date: new Date()
+};
+var _facilitator_2 = {
+    name: 'Alvaro Garcia',
+      job: 'Seguridad',
+      _id: new mongoose.Types.ObjectId,
+      record_date: new Date()
+};
+var _facilitators = [_facilitator_1, _facilitator_2];
 /////////////////CashFlowUser//////////////////////////
 var _cashFlowUser1 = {
     date_start: '2018-03-25',
@@ -98,7 +143,7 @@ var _cashFlowUser =[_cashFlowUser1,_cashFlowUser2];
 ///////////////////////////////////////////
 var _correlative1 = {
     year: '2018-03-04',
-    company_id:_company, //ObjectId
+    company_id:_company._id, //ObjectId
     receipts: [{
        receipt: 010,   //numero recivo
        amount: 1000,      //catidad
@@ -109,7 +154,7 @@ var _correlative1 = {
 };
 var _correlative2 = {
     year: '2018-04-01',
-    company_id:_company, //ObjectId
+    company_id:_company._id, //ObjectId
     receipts: [{
        receipt: 011,   //numero recivo
        amount: 1000,      //catidad
@@ -118,17 +163,13 @@ var _correlative2 = {
     _id: new mongoose.Types.ObjectId,
     record_date: new Date()
 };
-
 var _correlatives = [_correlative1, _correlative2 ];
-///////////////////////////////////////////////////////
-
+////////////////////////CARTERA USER//////////////////////
 var _cartera_user_1={
     name:'cartera1',
     user:_user_admin,
     _id:new mongoose.Types.ObjectId,
     record_date:new Date()
-
-
 }
 var _cartera_user_2={
     name:'cartera2',
@@ -142,37 +183,21 @@ var _cartera_user_3={
     _id:new mongoose.Types.ObjectId,
     record_date:new Date()
 }
-
 var _carteras=[_cartera_user_1,_cartera_user_2,_cartera_user_3];
-
 //////////////////////////////////////////////////////
-
 var _program_seguridad = {
    name: 'seguridad industrial',
-//    modules: [
-//       '1. higiene',
-//       '2. seguridad',
-//       '3. prevension'
-//    ],
    details: 'para industrias.',
-
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
 var _program_rrhh = {
    name: 'recursos humanos',
-//    modules: [
-//       '1. psicologia laboral',
-//       '2. planificacion',
-//       '3. proyeccion'
-//    ],
    details: 'para empresas.',
-
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
 var _programs = [_program_seguridad, _program_rrhh];
-
 ////////////////////////////////////////////
 var _modulo_1_seguridad = {
     number: 1,
@@ -187,8 +212,8 @@ var _modulo_1_seguridad = {
 
     _id: new mongoose.Types.ObjectId,
     record_date: new Date()
- }
- var _modulo_2_seguridad = {
+   }
+var _modulo_2_seguridad = {
     number: 2,
     name: 'modulo 2',
     program: _program_rrhh,
@@ -202,7 +227,8 @@ var _modulo_1_seguridad = {
     _id: new mongoose.Types.ObjectId,
     record_date: new Date()
  }
- var _modulo_1_rrhh = {
+
+var _modulo_1_rrhh = {
     number: 2,
     name: 'modulo 1',
     content: [
@@ -216,7 +242,8 @@ var _modulo_1_seguridad = {
     record_date: new Date()
  }
 var _modulos = [_modulo_1_seguridad, _modulo_2_seguridad,_modulo_1_rrhh];
-////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////7
 var _person_1 ={
     first_name: 'Jose',
       last_name: 'Gallardo',
@@ -252,7 +279,7 @@ var _person_1 ={
                }],
                debt: 150,
                assistance: true,
-               events: _event_seg,////////////////////duad???????
+               //events: _event_seg,////////////////////duad???????
                inscriptions: '',////////////////////dudaÇ??????
                modules: _modulo_1_rrhh,
                print_certificate: false,
@@ -270,7 +297,7 @@ var _person_1 ={
       },
       _id: new mongoose.Types.ObjectId,
       record_date: new Date()
-}
+} 
 var _person_2 = {
     first_name: 'laura',
     last_name: 'estrada',
@@ -306,7 +333,7 @@ var _person_2 = {
               }],
               debt: 150,
               assistance: true,
-              events: _event_seg,////////////////////duad???????
+              //events: _event_seg,////////////////////duad???????
               inscriptions: '',////////////////////dudaÇ??????
               modules: _modulo_1_rrhh,
               print_certificate: false,
@@ -360,7 +387,7 @@ var _person_3 = {
           }],
           debt: 150,
           assistance: true,
-          events: _event_seg,////////////////////duad???????
+          //events: _event_seg,////////////////////duad???????
           inscriptions: '',////////////////////dudaÇ??????
           modules: _modulo_1_rrhh,
           print_certificate: false,
@@ -415,7 +442,7 @@ var _person_4 = {
               }],
               debt: 150,
               assistance: true,
-              events: _event_seg,////////////////////duad???????
+              //events: _event_seg,////////////////////duad???????
               inscriptions: '',////////////////////dudaÇ??????
               modules: _modulo_1_rrhh,
               print_certificate: false,
@@ -435,81 +462,50 @@ var _person_4 = {
      record_date: new Date()
  };
 var _persons = [_person_1,_person_2,_person_3,_person_4];
-//////////////////////////////////////////////////////////////////////////
-var _facilitator_1 = {
-    name: 'Paola Quintanilla',
-      job: 'rrhh',
-      _id: new mongoose.Types.ObjectId,
-      record_date: new Date()
-};
-var _facilitator_2 = {
-    name: 'Alvaro Garcia',
-      job: 'Seguridad',
-      _id: new mongoose.Types.ObjectId,
-      record_date: new Date()
-};
-var _facilitators = [_facilitator_1, _facilitator_2];
-////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////
 var _event_seg = {
     name:'seguridad imformatica y redes sociales',
    description: 'solo para ejecutivos',
    date_start:'2018-03-25' ,
-   
-   modular:[{
-        date_start: '2018-03-25',
-        date_end: '2018-04-25',
-        facilitators: _facilitator_1,
-        list: [{
-            persons: _person_1,
-            amount: 300,
-            receipt: 101,
-            assist: true,
-            type: 1, //nuevo // nivelacion
-        },
-        {
-            persons: _person_2,
-            amount: 300,
-            receipt: 102,
-            assist: true,
-            type: 1, //nuevo // nivelacion
-        },
-        {
-            persons: _person_3,
-            amount: 300,
-            receipt: 103,
-            assist: true,
-            type: 1, //nuevo // nivelacion
-        }
-        ],
-        modules: _modulo_1_seguridad
-       // _id: new mongoose.Types.ObjectId
+   modulars:[{
+       date_start: '2018-03-25',
+       date_end: '2018-04-25',
+       facilitators: _facilitator_1._id,
+       modules: _modulo_1_seguridad._id,
+        // list:[{
+        //     amount: 300,
+        //     receipt: 101,
+        //     assist: true,
+        //     type: 1, //nuevo // nivelacion
+        //     persons: _person_1
+        // }],
+    _id: new mongoose.Types.ObjectId()
     }],
-    
    inscriptions: [
-      {
+      { 
         total_price: 600,
         module_price: 150,
         canceled_price: 300,
-        persons: _person_1,
-        users: _user_admin
+        persons: _person_1._id,
+        users: _user_admin._id
       },
       {
         total_price: 600,
         module_price: 150,
         canceled_price: 300,
-         persons: _person_1,
-         users: _user_ejecutivo1
+         persons: _person_2._id,
+         users: _user_ejecutivo1._id
       },
       {
         total_price: 600,
         module_price: 150,
         canceled_price: 300,
-         persons: _person_1,
-         users: _user_admin
+         persons: _person_3._id,
+         users: _user_admin._id
       }
    ],
    total: 30,
-   programs: _program_seguridad,
+   programs: _program_seguridad._id,
    
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
@@ -517,33 +513,8 @@ var _event_seg = {
 
 var _events = [_event_seg];
 
-/////////////////////////////////////////////////////////7
-var _offices_stc ={
-    name: 'cecap Cochabamba',
-    //nit:'7012323123424',
-    ubicacion:'santa Cruz entre padilla',
-    caja: 1000,
-    departament: 'Sta. Cruz',
-    company_id: _company,
-    _id: new mongoose.Types.ObjectId,
-    record_date: new Date()
-};
-var _offices = [_offices_stc];
-//////////////////////////////////////////////////////////
-var _company0 = {
-    name: 'CECAP Company',
-      nit: 71231901020,
-      caja: 200000,
-      cash_flow: [{
-         amount: 2000,
-         description: ' fundacion company',
-         _id: new mongoose.Types.ObjectId
-      }],
-    _id: new mongoose.Types.ObjectId,
-    record_date: new Date()
-};
-var _company = [_company0];
-///////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
 
 
 function saveData(collection, schema) {
@@ -568,16 +539,17 @@ module.exports = {
    initializer: function () {
       saveData(_roles, db.roles);
       saveData(_users, db.users);
+      saveData(_company, db.company);
+      saveData(_correlatives, db.correlatives);
       saveData(_carteras,db.carteras);
       saveData(_programs, db.programs);
-      saveData(_persons, db.persons);
-      saveData(_events, db.events);
       saveData(_modulos, db.modules);
-      saveData(_company, db.company);
       saveData(_facilitators, db.facilitators);
       saveData(_cashFlowUser, db.cashFlowUsers);
       saveData(_offices, db.offices);
-      saveData(_correlatives, db.correlatives);
+      saveData(_events, db.events);
+      saveData(_persons, db.persons);
+      
       
    },
 

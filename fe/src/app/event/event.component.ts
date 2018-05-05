@@ -22,7 +22,9 @@ export class EventComponent implements AfterViewInit {
       private router: Router,
       private _peticionesService: PeticionesService
    ) { }
-
+   addPerson(){
+    this.router.navigate(['home/event/persons/add']); 
+   }
    // ngOnInit() {
    // }
    ngAfterViewInit() {
