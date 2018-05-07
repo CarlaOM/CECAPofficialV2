@@ -43,6 +43,7 @@ app
    .use('/offices', require('./routes/offices'))
    .use('/roles', require('./routes/roles'))   
    .use('/cajaUsuario', require('./routes/cajaUsuario'))
+   .use('/companies', require('./routes/companies'))  
    .use('/correlatives', require('./routes/correlatives'))
    .use(function (err, req, res, next) { 
       console.error(err.stack);
@@ -51,7 +52,7 @@ app
 
 //   db.
 //If need initialize db 
-if (false) { 
+if (true) { 
    var init = require('./models/init');
    // init.clearCollections();
    init.initializer();

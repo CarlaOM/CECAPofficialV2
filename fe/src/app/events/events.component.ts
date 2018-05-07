@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PeticionesService } from '../services/peticiones.service';
 //import { UserService } from '../services/user.service';
-// import { Router } from '@angular/router';
 import { Identity } from '../services/global';
 import { ActivatedRoute, Router } from "@angular/router";
 @Component({
@@ -12,7 +11,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 
 })
 export class EventsComponent implements OnInit {
-    public false=false;
+   
    public events;
    public role;
    constructor(
@@ -20,24 +19,23 @@ export class EventsComponent implements OnInit {
       private _peticionesService: PeticionesService
       //,private _userService: UserService
    ) { }
-   addPerson(){
-    this.router.navigate(['home/event/persons']);
-   }
    ngOnInit() {
-      this.query();
-      this.queryRol();
-      console.log(this.role);
-   }
+       this.queryRol();
+       this.queryEvents(); 
+       //   console.log(this.role);
+    }
+    addPerson(){
+     this.router.navigate(['home/event/persons/add']);
+    }
    send(_id: string) {
       this.router.navigate(['home/event', _id]);
    }
-   receiveMessage() {
-      this.query();
-   }
-   query() {
+   
+   queryEvents() {
       this._peticionesService.getEvents().subscribe(
          result => {
             this.events = result;
+           // console.log(this.events)
             this.events.map(event => {
                var sum = 0;
                event.inscriptions.forEach(e => {
@@ -53,7 +51,7 @@ export class EventsComponent implements OnInit {
       );
    }
    queryRol(){
-       console.log(Identity.rol)
+       //console.log(Identity.rol)
     this._peticionesService.getRole(Identity.rol).subscribe(
         result => {
          this.role = result;

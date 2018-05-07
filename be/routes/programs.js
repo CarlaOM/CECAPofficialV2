@@ -20,7 +20,14 @@ router
          return res.status(200).send(program);
       });
    })
-
+   .post('/add', function(req, res){
+        console.log(req.body);
+        var program = new db.programs(req.body);
+        program.save(function (err, program) {
+            if (err){return res.status(400).send(err);} 
+            return res.status(200).send(program);
+        });
+   })
    .post('/', function (req, res) {
       var program = new db.programs(req.body);
       db.programs.findOne({name: req.body.name}, function(err, exiteNom){

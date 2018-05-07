@@ -8,12 +8,12 @@ var router = express.Router();
  
 router
    .get('/', function (req, res) {
-    db.offices.find({}, function (err, offices) {
-       if (err) return res.status(400).send(err);
+      db.offices.find({}, function (err, offices) {
+        if (err) return res.status(400).send(err);
 
-       return res.status(200).send(offices);
-    });
-     }) 
+        return res.status(200).send(offices);
+      });
+    }) 
    .get('/:id', function (req, res) {
       console.log(req.params);
       db.offices.findOne({ _id: req.params.id }, function (err, office) {
@@ -30,11 +30,6 @@ router
         return res.status(200).send(office);
      });
    })
-
-  
-
-
-   
    ;
 
    module.exports = router; 

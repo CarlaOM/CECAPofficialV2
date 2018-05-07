@@ -30,4 +30,7 @@ export class SucursalService {
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.post(this.url + 'offices/add', body, { headers: headers }).map((res: Response) => res);
    }
+   getCompanys(){
+     return this._http.get(this.url + 'companies').map((res: Response) => res);
+   }
 }

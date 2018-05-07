@@ -23,14 +23,15 @@ import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.compone
 import { HeroFormComponent } from "./hero-form/hero-form.component";
 import { DetalleCajaComponent } from './sucursal/detalle-caja/detalle-caja.component';
 import { DetallePersonalComponent } from './sucursal/detalle-personal/detalle-personal.component';
-
 import { AddEjecutivoComponent } from "./ejecutivo/add-ejecutivo/add-ejecutivo.component";
+
 import { Programa } from './modelo/programa';
 import { ProgramaComponent } from './programa/programa.component';
 import { EditProgramaComponent } from './programa/edit-programa/edit-programa.component';
 import { AddProgramaComponent } from './programa/add-programa/add-programa.component';
 import { ModuloComponent } from './modulo/modulo.component';
 import { EditModuloComponent } from './modulo/edit-modulo/edit-modulo.component';
+import { AddModuloComponent } from './modulo/add-modulo/add-modulo.component';
 
 import { InfoEjecutivoComponent } from "./ejecutivo/info-ejecutivo/info-ejecutivo.component";
 import { VistaCajaComponent } from "./caja/vista-caja/vista-caja.component";
@@ -42,6 +43,8 @@ import { facilitadorComponent } from './facilitador/facilitador.component';
 import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facilitador.component';
 import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-facilitador.component';
 import { AddCorrelativeComponent } from './correlative/add-correlative/add-correlative.component';
+import { AddEventComponent } from './events/addEvent/addEvent.component';
+//import { AlertComponent } from './events/alert/alert.component';
 
 
 
@@ -54,6 +57,8 @@ const appRoutes: Routes = [
       children: [
          { path: 'home', redirectTo: 'home', pathMatch: 'full' },
          { path: 'events', component: EventsComponent },
+         //{ path: 'events/alert', component: AlertComponent },
+         { path: 'events/add', component:AddEventComponent},
          { path: 'event/:id', component: EventComponent },
          { path: 'editPerson/:id', component: EditPersonComponent },
          { path: 'reports', component: ReportsComponent },
@@ -81,6 +86,7 @@ const appRoutes: Routes = [
          { path: 'program/add',component:AddProgramaComponent},
          { path: 'modulos/:id', component: ModuloComponent},
          { path: 'modulo/edit/:id', component: EditModuloComponent},
+         { path: 'modulo/add',component:AddModuloComponent},
          { path: 'caja', component:CajaChicaComponent},
          { path: 'caja/vistacaja', component:VistaCajaComponent},
          { path: 'caja/ingreso', component:IngresoComponent},
@@ -88,8 +94,7 @@ const appRoutes: Routes = [
          { path: 'facilitador', component:facilitadorComponent},
          { path: 'facilitador/add', component:AddFacilitadorComponent},
          { path: 'facilitador/edit/:id', component:EditFacilitadorComponent},
-         
-         
+        
          { path: 'correlative/add', component:AddCorrelativeComponent}
 
       ]

@@ -20,10 +20,10 @@ module.exports = {
 
    users: mongoose.model('users', new Schema({
       name: String,
-      lastname:String,
-      cell:Number,
-      correo:String,
-      
+      lastname: String,
+      cell: Number,
+      correo: String,
+
       active: Boolean,
       password_hash: String,
 
@@ -65,8 +65,8 @@ module.exports = {
    carteras: mongoose.model('carteras', new Schema({
       name: String,
       user: ObjectId,
-      active:Boolean,
-      
+      active: Boolean,
+
 
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date } }
@@ -129,7 +129,7 @@ module.exports = {
    })),
 
    ////////////////////////////////////////////////////////////////////////////
-   
+
    facilitators: mongoose.model('facilitators', new Schema({
       name: String,
       job: String,
@@ -145,20 +145,13 @@ module.exports = {
       name: String,
       description: String,
       date_start: Date,
-      modulars:[{
+      modulars: [{
          date_start: Date,
          date_end: Date,
          facilitators: ObjectId,
          modules: ObjectId,
-         list:[{
-               amount: Number,
-               receipt: Number, 
-               assist: Boolean,
-               type: Number, //nuevo // nivelacion
-               persons: ObjectId
-         }
-        ],
-      _id: ObjectId///////////////duda?????
+         lists: [ObjectId],
+         _id: ObjectId///////////////duda?????
       }],
       inscriptions: [{
          // segun al numero de asistencias sacar el precio total q tiene q pagar
@@ -172,6 +165,20 @@ module.exports = {
       programs: ObjectId,
       //modulo: [ObjectId],
 
+      _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
+      record_date: { type: Date, default: function () { return new Date() } },
+   })),
+
+   ////////////////////////////////////////////////////////
+   lists: mongoose.model('lists', new Schema({
+      amount: Number,
+      receipt: Number,
+      assist: Boolean,
+      type: Number, //nuevo // nivelacion
+      persons: ObjectId,
+      events: ObjectId,
+      modulars: ObjectId,
+      
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } },
    })),
@@ -213,7 +220,7 @@ module.exports = {
 
    //////////////////////////////////////////////////////////////////
 
-   company: mongoose.model('company', new Schema({
+   companies: mongoose.model('companies', new Schema({
       name: String,
       nit: String,
       caja: Number,

@@ -1,72 +1,71 @@
-<div class="modal fade" id="modalAddEvent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-   <div class="modal-dialog" role="document">
-      <div class="modal-content">
-         <div class="modal-header text-center">
-            <h4 class="modal-title w-100 font-weight-bold">Registro de Evento</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" #close>
-               <span aria-hidden="true">&times;</span>
-            </button>
-         </div>
-
-         <div class="modal-body mx-3">
-
-            <!-- <form (ngSubmit)="onSubmit(contactForm);" #contactForm="ngForm" > -->
-
-            <!-- <div class="md-form mb-5">
-               <i class="fa fa-book prefix grey-text"></i>
-               <input type="text" id="form34" class="form-control validate" #nameInput>
-               <label data-error="wrong" data-success="right" for="form34">Nombre</label>
-            </div> -->
-            <div class="md-form">
-                <label data-error="wrong" data-success="right" for="form8">
-                    <i class="fa fa-pencil prefix grey-text"></i> Descripcion</label>
-               <input type="text" id="form34" class="form-control validate" #description>
-            </div>
-            <br>
-            <div class="md-form">
-                <label data-error="wrong" data-success="right" for="form8">
-                    <i class="fa fa-calendar prefix grey-text"></i> Inicio</label>
-               <input type="date" id="form34" class="form-control validate" #date>
-            </div>
-            <br>
-            <div class="md-form">
-                <label data-error="wrong" data-success="right" for="form8">
-                    <i class="fa fa-plus prefix grey-text"></i> Cupos totales</label>
-               <input type="number" id="form34" class="form-control validate" #total>
-            </div>
-            <br>
-            <div class="md-form mb-5">
-               <label data-error="wrong" data-success="right" for="form32">
-                  <i class="fa fa-tag prefix grey-text"></i> Programa</label>
-               <select class="selectpicker" #program>
-                  <option *ngFor="let program of programs" value="{{program._id}}">{{program.name}}</option>
-               </select>
-            </div>
-            <!-- <div class="md-form mb-5">
-                      <i class="fa fa-tag prefix grey-text"></i>
-                      <select class="selectpicker">
-                          <option value="Interesado">Interesado</option>
-                          <option value="Confirmado">Confirmado</option>
-                          <option value="Sin Interes">Sin Interes</option>
-                          <option value="Proximo evento">Proximo evento</option>
-                          
+  <div class="content-wrapper">
+    <br>
+    <!-- <app-alerts></app-alerts> -->
+     <div class="">
+       <div class="box box-primary">
+       
+         <div class="container ">
+             <div [hidden]="submitted">
+                 <h1>Registrar Evento</h1>
+                 <br>
+                 <form (ngSubmit)="save()" #addEvent="ngForm" class="jumbotron">
+                     <div class="form-group col-sm-8">
+                         <label for="name" class="control-label" >Nombre Evento</label>
+                             <input type="text" class="form-control" id="name" 
+                             [(ngModel)]="model.name" name="name" #name="ngModel" required />
+                             <span *ngIf="!name.valid && name.touched" class="text-alert">
+                                     *Nombre de Evento requerido.
+                             </span>
+                         <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
+                             kjkn
+                         </div>-->
+                     </div>
+                     <div class="form-group col-sm-8">
+                         <label for="descripcion" class=" control-label">Descripcion</label>
+                                 <input type="text" class="form-control" id="descripcion" 
+                                     [(ngModel)]="model.description" name="descripcion" #descripcion="ngModel" required >
+                                 <span *ngIf="!descripcion.valid && descripcion.touched" class="text-alert">
+                                             *descripcion de Evento requerido.
+                                 </span>
+                             <!--<div [hidden]="descripcion?.valid || descripcion?.pristine" class="">
+                                 descripcion requerida
+                             </div>-->
+                     </div>
+                     <div class="form-group col-sm-8">
+                        <label data-error="wrong" data-success="right" for="form8">
+                            <i class="fa fa-calendar prefix grey-text"></i> Inicio</label>
+                       <input type="date" id="form34" class="form-control validate" [(ngModel)]="model.date_start" name="descripcion" #date>
+                    </div>
+                     <div class="form-group col-sm-8">
+                         <label for="total">Total cupos</label>
+                         <input type="number" class="form-control" id="total" 
+                             [(ngModel)]="model.total" name="total" #total="ngModel" required >
+                             <span *ngIf="!total.valid && total.touched" class="text-alert">
+                                     *total cupo de evento requerido.
+                                 </span>
+                         <!--<div [hidden]="total?.valid || total?.pristine" class="">
+                                 Monto inicial Requerido
+                         </div>-->
+                     </div>
+                     <div class="form-group col-sm-8">
+                        <label for="nomPrograma">Programa</label>
+                        <select class="form-control" id="nomPrograma" required
+                                [(ngModel)]="model.program" name="nomPrograma"
+                                #nomPrograma="ngModel">
+                          <option *ngFor="let programa of programs" [value]="programa._id">{{programa.name}}</option>
                         </select>
-                        <br>
-                      <label data-error="wrong" data-success="right" for="form32">interes</label>
-                  </div> -->
-
-
+                        
+                        <!-- <div [hidden]="offices.valid || offices.pristine" class="">
+                                sucursal is required
+                        </div> -->
+                    </div>
+                     <div class="form-group col-sm-8" style="text-align:center ">
+                         <button type="submit" class="btn btn-success" [disabled]="!addEvent.form.valid">Registrar</button>
+                         <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+                      </div>
+                 </form>
+             </div>
          </div>
-         <div class="modal-footer d-flex justify-content-center">
-            <button class="btn btn-unique" (click)="save()">Guardar
-               <i class="fa fa-paper-plane-o ml-1"></i>
-            </button>
-         </div>
-         <!-- </form> -->
-      </div>
-   </div>
-</div>
-
-<div class="text-center">
-   <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalAddEvent">Registrar Eventos</a>
-</div>
+       </div> 
+     </div>
+ </div>

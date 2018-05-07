@@ -1,10 +1,10 @@
 export class Event {
    constructor(
-      // public name: string,
+      public name: string,
       public description: string,
       public date_start: Date,
       // public inscriptions: [{
-      //    name: string,
+        //   name: string,
       //    state: number,
       //    person: string,
       //    description: string

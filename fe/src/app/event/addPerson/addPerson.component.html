@@ -85,6 +85,19 @@
                       </select>
                    
             </div>
+            <div class="form-group col-sm-8">
+                    <label>Evento</label>
+            </div>
+            <div class="form-group col-sm-8">
+              <label for="evento">Evento</label>
+              <select class="form-control" id="evento"
+                      required
+                      [(ngModel)]="modelEvent" name="evento"
+                      #evento="ngModel">
+                <option *ngFor="let evento of eventos" [value]="evento._id">{{evento.name}}</option>
+              </select>
+              
+          </div>
           <div class="form-control col-sm-8" >
           <button type="submit" class="btn btn-success" [disabled]="!addEjecutivo.form.valid" >Registrar</button>
           <button type="button" class="btn btn-danger" (click)="addEjecutivo.reset()">Cancelar</button>
