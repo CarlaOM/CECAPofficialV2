@@ -112,27 +112,37 @@ var _cashFlowUser1 = {
          receipt: 1,
          description: 'ingresos por inscripcion',
          amount: 1000,
+         input:true,
+         date_detail:'2018-03-25'
       }],
+      active:false,
       user: _user_ejecutivo1,
       _id: new mongoose.Types.ObjectId,
     record_date: new Date()
 };
 var _cashFlowUser2 = {
-    date_start: '2018-03-25',
-      date_end: '2018-04-25',
+    date_start: '2018-05-25',
+      date_end: '',
       amount: 500,
       amount_delivered: 500,
       details: [{
          receipt: 1,
          description: 'ingresos por inscripcion',
          amount: 200,
+         input:true,
+         date_detail:'2018-05-25',
+         title:'inscripcion'
       },
       {
         receipt: 2,
         description: 'ingresos por inscripcion',
         amount: 300,
+        input:true,
+        date_detail:'2018-05-25',
+        title:'inscripcion'
      }
     ],
+      active:true,
       user: _user_ejecutivo2,
 
       _id: new mongoose.Types.ObjectId,

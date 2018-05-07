@@ -19,8 +19,7 @@ export class IngresoComponent implements OnInit {
   public ingresoNombreInscrito;
   public ingresoCi;
   public ingresoRecibo;
-  public ingresoMontoBase;
-  public ingresoMonto;
+  public ingresoDetailMonto;
   public ingreso;
 
   // public ingreso:Cashflowusers;
@@ -33,7 +32,7 @@ export class IngresoComponent implements OnInit {
 
 
   ) {
-    this.ingreso=new Cashflowusers(new Date(),new Date(),0,0,0,"","","")///(datestart,dateend,amount,amountdelivered,receipt,description,detailamount)
+    this.ingreso=new Cashflowusers(new Date(),new Date(),0,0,0,"","","","")///(datestart,dateend,amount,amountdelivered,receipt,description,detailamount)
 
    }
 
@@ -50,24 +49,28 @@ export class IngresoComponent implements OnInit {
     
     this.ingreso.date_start=new Date;
     this.ingreso.date_end=new Date;
-    this.ingreso.amount=this.ingresoMontoBase;
-    this.ingreso.amount_delivered=this.ingresoMonto;
     this.ingreso.receipt=this.ingresoRecibo;
-    this.ingreso.description="Titulo : "+this.ingresoTitulo+"\n"+
-                              "Nombre Inscrito : "+this.ingresoNombreInscrito+"\n"+
-                              "Ci : "+this.ingresoCi+"\n"+
-                              "Descripcion: "+this.ingresoDescripcion;
-    this.ingreso.detail_amount=this.ingresoMonto;
+    this.ingreso.description=
+    
+                              // "Titulo : "+this.ingresoTitulo+"\n"+
+                              // "Nombre Inscrito : "+this.ingresoNombreInscrito+"\n"+
+                              // "Ci : "+this.ingresoCi+"\n"+
+                              // "Descripcion: "+
+                              
+                              this.ingresoDescripcion;
+    this.ingreso.detail_amount=this.ingresoDetailMonto;
     this.ingreso.user=Identity._id;
+    this.ingreso.title=this.ingresoTitulo;
 
 
-    console.log(this.ingreso);
-    console.log(Identity._id);
+    // console.log(this.ingreso);
+    // console.log(Identity._id);
 
     this._peticionesService.addCashFlowUserIngreso(this.ingreso).subscribe(
       result => {
         var returned = result;
-       console.log(returned)
+      //  console.log(returned)
+       this.router.navigate(['home/caja/vistacaja']);
       },
       error => {
         var errorMessage = <any>error;

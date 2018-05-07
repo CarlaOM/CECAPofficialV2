@@ -8,7 +8,8 @@ export class Cashflowusers{
         receipt:number,
         description:string,
         detail_amount:string,
-        user:string
+        user:string,
+        title:string,
       
     ){}
 }

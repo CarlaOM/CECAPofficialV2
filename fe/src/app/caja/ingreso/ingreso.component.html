@@ -67,7 +67,7 @@
             Numero de Recibo es requerido
           </div>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label for="montoBase">Monto Base</label>
           <input type="number" class="form-control" id="montoBase"
               required
@@ -76,12 +76,12 @@
           <div [hidden]="montoBase.valid || montoBase.pristine" class="alert alert-danger">
             montobase is required
           </div>
-        </div>
+        </div> -->
         <div class="form-group">
           <label for="monto">Monto que se esta pagando</label>
           <input type="number" class="form-control" id="monto"
               required
-              [(ngModel)]="ingresoMonto" name="monto"
+              [(ngModel)]="ingresoDetailMonto" name="monto"
               #monto="ngModel">
           <div [hidden]="monto.valid || monto.pristine" class="alert alert-danger">
             monto is required
