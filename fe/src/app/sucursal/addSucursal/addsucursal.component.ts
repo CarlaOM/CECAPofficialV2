@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class AddSucursalComponent implements OnInit {
 
   public office: Offices;
-
+  public companys;
   constructor(
       private _peticionSucursalService: SucursalService,
      private route: ActivatedRoute,
@@ -32,6 +32,7 @@ export class AddSucursalComponent implements OnInit {
        // console.log(esperado);
        // this.router.navigate(['home/event', this.eventId]);
         alert('Se Creo correctamente la Sucursal');
+        this.router.navigate(['home/sucursal']);
       },
       error => {
         var errorMessage = <any>error;
@@ -40,7 +41,18 @@ export class AddSucursalComponent implements OnInit {
       }
     );
   }
-  queryCompany(){}
+  queryCompany(){
+    this._peticionSucursalService.getCompanys().subscribe(
+      result => {
+        this.companys = result;
+      },
+      error => {
+        var errorMessage = <any>error;
+        console.log(errorMessage);
+        alert('No existe compañia');
+      }
+    );
+  }
   cancelar() {
     this.router.navigate(['home/sucursal']);
   }

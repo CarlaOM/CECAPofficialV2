@@ -207,7 +207,7 @@ module.exports = {
 
    //////////////////////////////////////////////////////////////////
 
-   company: mongoose.model('company', new Schema({
+   companies: mongoose.model('companies', new Schema({
       name: String,
       nit: String,
       caja: Number,

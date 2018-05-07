@@ -185,7 +185,7 @@ router
       // add vigent events
      
       
-   })
+   }) 
    .put('/:id', function (req, res) {
 
       // console.log(req.body.user);
