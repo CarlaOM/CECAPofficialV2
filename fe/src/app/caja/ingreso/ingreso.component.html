@@ -17,7 +17,7 @@
                  [(ngModel)]="ingresoTitulo" name="titulo"
                  #titulo="ngModel">
           <div [hidden]="titulo?.valid || titulo?.pristine"
-               class="danger">
+               class="text-alert">
             El Titulo es requerido
           </div>
         </div>
@@ -28,7 +28,7 @@
                  [(ngModel)]="ingresoDescripcion" name="descripcion"
                  #descripcion="ngModel">
           <div [hidden]="descripcion?.valid || descripcion?.pristine"
-               class="alert alert-danger">
+               class="text-alert">
             Descripcion es requerido
           </div>
         </div>
@@ -39,7 +39,7 @@
                  [(ngModel)]="ingresoNombreInscrito" name="inscrito"
                  #inscrito="ngModel">
           <div [hidden]="inscrito?.valid || inscrito?.pristine"
-               class="alert alert-danger">
+               class="text-alertr">
             inscrito es requerido
           </div>
         </div>
@@ -51,7 +51,7 @@
                    [(ngModel)]="ingresoCi" name="Ci"
                    #Ci="ngModel">
             <div [hidden]="Ci?.valid || Ci?.pristine"
-                 class="alert alert-danger">
+                 class="text-alert">
                  Ci is required
             </div>
           </div>
@@ -63,7 +63,7 @@
                  [(ngModel)]="ingresoRecibo" name="recibo"
                  #recibo="ngModel">
           <div [hidden]="recibo?.valid || recibo?.pristine"
-                class="alert alert-danger">
+                class="text-alert">
             Numero de Recibo es requerido
           </div>
         </div>
@@ -83,7 +83,7 @@
               required
               [(ngModel)]="ingresoDetailMonto" name="monto"
               #monto="ngModel">
-          <div [hidden]="monto.valid || monto.pristine" class="alert alert-danger">
+          <div [hidden]="monto.valid || monto.pristine" class="text-alert">
             monto is required
           </div>
         </div>

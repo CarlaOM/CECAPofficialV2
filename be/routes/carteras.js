@@ -16,6 +16,13 @@ router
       });
    })
 
+   .get('/libres/', function (req, res) {
+    db.carteras.find({active:false}, function (err, carteras) {
+       if (err) return res.status(400).send(err);
+
+       return res.status(200).send(carteras);
+    });
+ })
   
 //    .post('/', function (req, res) {
 //     var cartera = new db.carteras(req.body);
@@ -112,6 +119,7 @@ router
           cartera[i] = req.body[i];
          //  console.log(cartera[i]);  
        }
+       cartera.active=true;
        cartera.save(function (err, cartera) {
           if (err) return res.status(400).send(err);
 

@@ -148,7 +148,24 @@ var _cashFlowUser2 = {
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 };
-var _cashFlowUser = [_cashFlowUser1, _cashFlowUser2];
+var _cashFlowUserAdmin = {
+  date_start: '2018-03-25',
+  date_end: '',
+  amount: 1000,
+  amount_delivered: 0,
+     details: [{
+        receipt: 1,
+        description: 'ingresos por inscripcion',
+        amount: 1000,
+        input:true,
+        date_detail:'2018-03-25'
+     }],
+     active:true,
+     user: _user_admin,
+     _id: new mongoose.Types.ObjectId,
+   record_date: new Date()
+};
+var _cashFlowUser = [_cashFlowUser1, _cashFlowUser2,_cashFlowUserAdmin];
 
 ///////////////////////////////////////////
 var _correlative1 = {

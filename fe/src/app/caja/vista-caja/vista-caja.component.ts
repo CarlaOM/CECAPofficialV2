@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import {PeticionesService } from '../../services/peticiones.service';
 import { Identity, } from "../../services/global";
-import { runInThisContext } from 'vm';
+// import { runInThisContext } from 'vm';
 
 
 
