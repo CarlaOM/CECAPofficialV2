@@ -19,14 +19,14 @@ export class EventsComponent implements OnInit {
       private _peticionesService: PeticionesService
       //,private _userService: UserService
    ) { }
-   addPerson(){
-    this.router.navigate(['home/event/persons/add']);
-   }
    ngOnInit() {
-      this.queryEvents(); 
-      this.queryRol();
-    //   console.log(this.role);
-   }
+       this.queryRol();
+       this.queryEvents(); 
+       //   console.log(this.role);
+    }
+    addPerson(){
+     this.router.navigate(['home/event/persons/add']);
+    }
    send(_id: string) {
       this.router.navigate(['home/event', _id]);
    }
@@ -35,7 +35,7 @@ export class EventsComponent implements OnInit {
       this._peticionesService.getEvents().subscribe(
          result => {
             this.events = result;
-            console.log(this.events)
+           // console.log(this.events)
             this.events.map(event => {
                var sum = 0;
                event.inscriptions.forEach(e => {
@@ -51,7 +51,7 @@ export class EventsComponent implements OnInit {
       );
    }
    queryRol(){
-       console.log(Identity.rol)
+       //console.log(Identity.rol)
     this._peticionesService.getRole(Identity.rol).subscribe(
         result => {
          this.role = result;

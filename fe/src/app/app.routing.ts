@@ -44,6 +44,7 @@ import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facil
 import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-facilitador.component';
 import { AddCorrelativeComponent } from './correlative/add-correlative/add-correlative.component';
 import { AddEventComponent } from './events/addEvent/addEvent.component';
+//import { AlertComponent } from './events/alert/alert.component';
 
 
 
@@ -56,6 +57,7 @@ const appRoutes: Routes = [
       children: [
          { path: 'home', redirectTo: 'home', pathMatch: 'full' },
          { path: 'events', component: EventsComponent },
+         //{ path: 'events/alert', component: AlertComponent },
          { path: 'events/add', component:AddEventComponent},
          { path: 'event/:id', component: EventComponent },
          { path: 'editPerson/:id', component: EditPersonComponent },

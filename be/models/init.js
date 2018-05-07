@@ -560,7 +560,7 @@ module.exports = {
    initializer: function () {
       saveData(_roles, db.roles);
       saveData(_users, db.users);
-      saveData(_company, db.company);
+      saveData(_company, db.companies);
       saveData(_correlatives, db.correlatives);
       saveData(_carteras, db.carteras);
       saveData(_programs, db.programs);
@@ -584,7 +584,7 @@ module.exports = {
       clearCollections(db.modules);
       clearCollections(db.offices);
       clearCollections(db.cashFlowUsers);
-      clearCollections(db.company);
+      clearCollections(db.companies);
       clearCollections(db.facilitators);
       clearCollections(db.correlatives);
       clearCollections(db.lists);

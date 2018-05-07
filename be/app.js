@@ -41,7 +41,8 @@ app
    .use('/programs', require('./routes/programs'))
    .use('/modules', require('./routes/modules'))
    .use('/offices', require('./routes/offices'))
-   .use('/roles', require('./routes/roles'))   
+   .use('/roles', require('./routes/roles'))
+   .use('/companies', require('./routes/companies'))  
    .use('/correlatives', require('./routes/correlatives'))
    .use(function (err, req, res, next) { 
       console.error(err.stack);
@@ -50,7 +51,7 @@ app
 
 //   db.
 //If need initialize db 
-if (false) { 
+if (true) { 
    var init = require('./models/init');
    // init.clearCollections();
    init.initializer();

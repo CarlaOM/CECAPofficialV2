@@ -4,7 +4,8 @@ import { HttpModule } from '@angular/http';
 import { FormsModule }   from '@angular/forms';
 import{ routing, appRoutingProviders } from './app.routing';
 import { AsyncLocalStorageModule } from 'angular-async-local-storage';
-
+//modules
+import { AlertsModule } from 'angular-alert-module';
 //components
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -17,6 +18,7 @@ import { AppsettingsComponent } from './home/plantilla/appsettings/appsettings.c
 import { EventsComponent } from './events/events.component';
 import { EventComponent } from './event/event.component';
 import { PersonaComponent } from "./event/persona/persona.component"
+import { AlertComponent } from './events/alert/alert.component';
 
 
 //Services
@@ -142,7 +144,8 @@ import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-fa
     facilitadorComponent,
     AddFacilitadorComponent,
     AddCorrelativeComponent,
-    EditFacilitadorComponent
+    EditFacilitadorComponent,
+    AlertComponent
 
   ],
   imports: [
@@ -152,7 +155,9 @@ import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-fa
     HttpClientModule,
     FormsModule,
     HttpModule,
-    ChartsModule
+    ChartsModule,
+    // Specify this module as an import
+    AlertsModule.forRoot()
     
   ],
   providers: [
