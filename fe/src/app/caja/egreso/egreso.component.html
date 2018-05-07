@@ -17,7 +17,7 @@
                  [(ngModel)]="egresoTitulo" name="titulo"
                  #titulo="ngModel">
           <div [hidden]="titulo?.pristine"
-               class="danger">
+               class="text-alert">
             El Titulo es requerido
           <!-- <div [hidden]="titulo?.valid"
                 class="danger">
@@ -31,7 +31,7 @@
                  [(ngModel)]="egresoDescripcion" name="descripcion"
                  #descripcion="ngModel">
           <div [hidden]="descripcion?.valid || descripcion?.pristine"
-               class="alert alert-danger">
+               class="text-alert">
             Descripcion es requerido
           </div>
         </div>
@@ -42,7 +42,7 @@
               required
               [(ngModel)]="egresoRecibo" name="recibo"
               #recibo="ngModel">
-          <div [hidden]="recibo.valid || recibo.pristine" class="alert alert-danger">
+          <div [hidden]="recibo.valid || recibo.pristine" class="text-alert">
             recibo es requerido o el tipo de dato es invalido 
           </div>
         </div>
@@ -53,7 +53,7 @@
               required
               [(ngModel)]="egresoMonto" name="monto"
               #monto="ngModel">
-          <div [hidden]="monto.valid || monto.pristine" class="alert alert-danger">
+          <div [hidden]="monto.valid || monto.pristine" class="text-alert">
             Monto es requerido o el tipo de dato es invalido 
           </div>
         </div>

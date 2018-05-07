@@ -39,7 +39,7 @@ export class AddEjecutivoComponent implements OnInit {
 
  
   ngOnInit() {
-    this._peticionesService.getCarteras().subscribe(response=>{
+    this._peticionesService.getCarterasLibres().subscribe(response=>{
       this.carteras=response;
       console.log(this.carteras);
     });

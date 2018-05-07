@@ -36,7 +36,6 @@ import { AddModuloComponent } from './modulo/add-modulo/add-modulo.component';
 import { InfoEjecutivoComponent } from "./ejecutivo/info-ejecutivo/info-ejecutivo.component";
 import { VistaCajaComponent } from "./caja/vista-caja/vista-caja.component";
 
-import { CajaChicaComponent } from "./caja/caja-chica/caja-chica.component";
 import { IngresoComponent } from "./caja/ingreso/ingreso.component";
 import { EgresoComponent } from './caja/egreso/egreso.component';
 import { facilitadorComponent } from './facilitador/facilitador.component';
@@ -87,7 +86,6 @@ const appRoutes: Routes = [
          { path: 'modulos/:id', component: ModuloComponent},
          { path: 'modulo/edit/:id', component: EditModuloComponent},
          { path: 'modulo/add',component:AddModuloComponent},
-         { path: 'caja', component:CajaChicaComponent},
          { path: 'caja/vistacaja', component:VistaCajaComponent},
          { path: 'caja/ingreso', component:IngresoComponent},
          { path: 'caja/egreso', component:EgresoComponent},

@@ -43,7 +43,7 @@
                    #name="ngModel"
                    >
             <div [hidden]="name?.valid || name?.pristine"
-                 class="">
+                 class="text-alert">
               first Name is required
             </div>
           </div>
@@ -54,7 +54,7 @@
                    [(ngModel)]="ejecutivoLastName" name="lastname"
                    #lastname="ngModel">
             <div [hidden]="lastname?.valid || lastname?.pristine"
-            class="">
+            class="text-alert">
             last Name is required
             </div>
           </div>
@@ -65,7 +65,7 @@
                    [(ngModel)]="ejecutivoCell" name="cell"
                    #cell="ngModel">
             <div [hidden]="cell?.valid || cell?.pristine"
-            class="">
+            class="text-alert">
             cell is required
             </div>
           </div>
@@ -77,7 +77,7 @@
                      [(ngModel)]="ejecutivoCorreo" name="correo"
                      #correo="ngModel">
               <div [hidden]="correo?.valid || correo?.pristine"
-              class="">
+              class="text-alert">
               email is required
               </div>
             </div>
@@ -91,7 +91,7 @@
                             #rol="ngModel">
                       <option *ngFor="let ro of roles" [value]="ro._id">{{ro.name}}</option>
                     </select>
-                    <div [hidden]="rol.valid || rol.pristine" class="">
+                    <div [hidden]="rol.valid || rol.pristine" class="text-alert">
                       rol is required
                     </div>
             </div>
@@ -105,7 +105,7 @@
                             #offices="ngModel">
                       <option *ngFor="let sucur of sucursales" [value]="sucur._id">{{sucur.name}}</option>
                     </select>
-                    <div [hidden]="offices.valid || offices.pristine" class="">
+                    <div [hidden]="offices.valid || offices.pristine" class="text-alert">
                             sucursal is required
                     </div>
             </div>
@@ -118,7 +118,7 @@
                             #cartera="ngModel">
                       <option *ngFor="let carte of carteras" [value]="carte._id">{{carte.name}}</option>
                     </select>
-                    <div [hidden]="cartera?.valid || cartera?.pristine" class="">
+                    <div [hidden]="cartera?.valid || cartera?.pristine" class="text-alert">
                             cartera is required
                     </div>
             </div>
