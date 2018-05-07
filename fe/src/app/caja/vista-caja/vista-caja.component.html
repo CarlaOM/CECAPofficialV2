@@ -15,6 +15,7 @@
          <tr>
             <th>titulo</th>
             <th>descripcion</th>
+            <th>num recibo</th>
             <th>fecha</th>
             <th>ingreso</th>
             <th>egreso</th>
@@ -25,26 +26,48 @@
          </tr>
       </thead>
       <tbody> 
-         <tr *ngFor="let ejecutivo of ejecutivos">
-            <td>{{ ejecutivo.name }}</td>
-            <td *ngIf="ejecutivo.active==true">Activo</td>
-            <td *ngIf="ejecutivo.active==false">Inactivo</td>
-            <td>
-               <a class="btn btn-primary" (click)="infoEjecutivo(ejecutivo._id)" >ver</a>
-            </td>
-            <td>
-              <a class="btn btn-warning" (click)="editEjecutivo(ejecutivo._id)">EDITAR</a>
-           </td>
-           <td>
-              <a class="btn btn-danger" >eliminar</a>
-           </td>
+         <tr *ngFor="let detalle of detalles">
+
+
+                <td class="">{{detalle.title }}</td>
+                <td class="">{{detalle.description}}</td>
+                <td class="">{{detalle.receipt}}</td>
+                <td class="">{{detalle.date_detail|date}}</td>
+                <td class="" *ngIf="detalle.input==true; else vacio "> {{detalle.amount}}</td>
+                <td class="" *ngIf="detalle.input==false; else vacio">{{detalle.amount}}</td>
+                <ng-template #vacio class="">
+                  ---
+    
+                </ng-template>
+                <td class=""></td>
+           
+
+
          </tr>
       </tbody>
+      <tfoot>
+        <tr>
+
+          <td></td>   
+          <td></td>          
+
+          <td></td>          
+          <td></td>          
+          <td></td>          
+          <td></td>          
+          <td>{{total}}</td>          
+          <td></td>          
+
+        </tr>
+      </tfoot>
+
+
    </table>
 
    
+      <a class="btn btn-danger a" (click)="goCloseCash()">Cerrar Caja</a>
 
    
 </section>
-<router-outlet></router-outlet>
+<!-- <router-outlet></router-outlet> -->
 </div>

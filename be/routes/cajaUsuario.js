@@ -6,145 +6,150 @@ var db = require('../models/db');
 var router = express.Router();
 
 router
-   .get('/', function (req, res) {
-      db.cashFlowUsers.find({}, function (err, cajaUsuario) {
+   .get('/:id', function (req, res) {
+      db.cashFlowUsers.findOne({active:true,user:req.params.id}, function (err, cajaUsuario) {
          if (err) return res.status(400).send(err);
 
          return res.status(200).send(cajaUsuario);
       });
    })
 
-  
-//    .post('/', function (req, res) {
-//     var cartera = new db.cajaUsuario(req.body);
-//     var d = new Date();
-//     // if ((event.date_start == undefined || event.date_start < d) ||event.description == '' || event.total == '' || event.program == '') return res.status(400).send();
-//     db.cajaUsuario.find({}, function (err, persons) {
-//        if (err) return res.status(400).send(err);
-//        saveCartera(cartera);
-//     });
-//     function saveCartera(cartera) {
-      
-//        event.save(function (err, event) {
-//           if (err) return res.status(400).send(err);
-
-//           return res.status(201).send(event);
-//        });
-//     }
+ 
 
 
+ .post('/ingreso', function (req, res) {
+     //console.log(req.body);
+     var caja=req.body;
+     //console.log(caja.receipt);
+     //console.log(caja.description);
+     //console.log(caja.detail_amount);
+    // var cashFlowUsers=new db.cashFlowUsers(req.body);////no
 
-.get('/persons/:_id', function (req, res) {
-    
-    
-    db.cajaUsuario.findOne({_id: req.params._id},function(err,cartera){
-        if(err)return res.status().send(err);
-        if(cartera==null)return res.status(404).send();
-        // console.log(cartera);
-       getPersonas(cartera);
-       
+    let detail={  
+        receipt:caja.receipt,
+        description:caja.description,
+        amount:caja.detail_amount,
+        input:true,   
+        date_detail:new Date(), 
+        title:caja.title,
+    };
+
+    db.cashFlowUsers.findOne({active:true, user:caja.user},function(err,caja){
+        if(err) return res.status(400).send(err);
+
+
         
-    }
 
-    );
 
-    function getPersonas(cartera){
-        // let carteraObj=moongose.Types.ObjectId(cartera);
-        db.persons.find({cajaUsuario:cartera},function(err,persons){
-            if(err)return res.status(400).send(err);
-            // console.log(persons);
-            if (persons == null) return res.status(404).send();
-            
-           return res.status(200).send(persons);
-        });
-    }
+        caja.details.push(detail),function(err,detail){
+
+            if(err) return res.status(400).send(err);
     
- })
-.get('/otro/:id', function (req, res) {
-    db.cajaUsuario.findOne({user: req.params.id},function(err,cartera){
-        if(err)return res.status().send(err);
-        if(cartera==null)return res.status(404).send();
-      //   console.log('hola desde get cartera user');
-      //   console.log(cartera); 
-       // getPersonas(cartera);
-       return res.status(200).send(cartera);
-    });
+        };
+
+
+        caja.amount+=detail.amount;
+        caja.save(function(err,caja){
+
+            if(err)return res.status(404).send(err);
+    
+            res.status(200).send(caja);
+        });
+    })
+
+    //console.log(cashFlowUsers);
 
    
- })
- .get('/:id', function (req, res) {
-    db.cajaUsuario.findOne({ _id: req.params.id }, function (err, cartera) {
-       if (err) return res.status(400).send(err);
-       if (cartera == null) return res.status(404).send();
+    console.log("chash desde backend")
 
-       return res.status(200).send(cartera);
-    });
- })
-
-//  .post('/register', function (req, res, next) {
-//     var role_id;
-//     db.roles.findOne({ name: 'Admin' }, function (err, role) {
-//        if (err) return res.status(400).send(err);
-//        if (role == null) return res.sendStatus(404);
-//        role_id = role._id;
-//        validating();
-//     })
-//     function validating() {
-//        db.users.findOne({ _id: req.body._id, rol: role_id }, function (err, user) {
-//           if (err) return console.log(err);
-//           if (user == null) return res.sendStatus(404);
-//           console.log(user);
-//           next();
-          
-          
-//        });
-//     }
-//  })
-
-.put('/:id', function (req, res) {
-    db.cajaUsuario.findOne({ _id: req.params.id }, function (err, cartera) {
-       if (err) return res.status(400).send(err);
-       if (cartera == null) return res.status(404).send();
-
-       for (i in req.body) {
-          cartera[i] = req.body[i];
-         //  console.log(cartera[i]);  
-       }
-       cartera.save(function (err, cartera) {
-          if (err) return res.status(400).send(err);
-
-          return res.status(200).send(cartera);
-       });
-    });
- })
- .post('/register', function (req, res) {
-    var cartera=new db.cajaUsuario(req.body);
-   //  console.log(cartera);
-    if(cartera.name=='')return res.status(400)
-    cartera.save(function(err,cartera){
-
-        if(err) return console.log(err);
-
-        res.status(200).send(cartera);
-    })
   
- });
+ })
 
- 
- 
+ .post('/egreso',function(req,res){
+
+    console.log('holaaasdfasfasfasfadf');
+    var cajaEgreso=req.body;
+
+    console.log(cajaEgreso);
+
+    let detailEgreso={
+
+        receipt:cajaEgreso.receipt,
+        description:cajaEgreso.description,
+        amount:cajaEgreso.detail_amount,
+        input:false,
+        date_detail:new Date(),
+        title:cajaEgreso.title
+    };
+    db.cashFlowUsers.findOne({active:true,user:cajaEgreso.user},function(err,caja){
+
+
+        if(err) return res.status(400).send(err);
+        caja.details.push(detailEgreso),function(err,detail){
+
+            if(err) return res.status(400).send(err);
+    
+        };
+        caja.amount-=detailEgreso.amount;
+        caja.save(function(err,caja){
+
+            if(err)return res.status(404).send(err);
+    
+            res.status(200).send(caja);
+        });
+
+    })
+
+})
+
+    .get('/close/:id',function(req,res){
+
+        // var cajaClose=req.body;
+        db.cashFlowUsers.findOne({active:true,user:req.params.id},function(err,cajaForClose){
+
+            if(err) return res.status(400).send(err);
+
+            cajaForClose.active=false;
+            cajaForClose.date_end=new Date();
+            ////////////////////////////////////
+            /////enviar a admin/////
+            ////////////////////////////////////
+
+            cajaForClose.amount_delivered=cajaForClose.amount;
+
+            cajaForClose.save(function(err,caja){
+
+                if(err)return res.status(405).send(err);
+
+                var nuevaCaja=new db.cashFlowUsers();
+                nuevaCaja.date_start=new Date();
+                nuevaCaja.dete_end='';
+                nuevaCaja.amount=0;
+                nuevaCaja.amount_delivered=0;
+                nuevaCaja.active=true;
+                nuevaCaja.user=cajaForClose.user;
+
+                nuevaCaja.save(function(err,caja){
+
+                    if(err) return res.status(404).send(err);
+                    res.status(200).send(caja);
+                });
+
+        
+            });
+
+        });
 
 
 
 
+    })
 
-//function PUT
-//  .put('/:id', function (req, res) {
-//     console.log(req.body);
-//     db.cajaUsuario.find({user: req.params.id},function(err,cartera){
-//         if(err)return res.status().send(err);
-//         if(cartera==null)return res.status(404).send();
-//         console.log(cartera);
-//        // getPersonas(cartera);
-//     });
-// });
+
+
+
+;
+
+
+
 module.exports = router;

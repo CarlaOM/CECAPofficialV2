@@ -228,5 +228,36 @@ export class PeticionesService {
     getRoles() {
         return this._http.get(this.url + 'roles').map((res: Response) => res);
     }
+
+    addCashFlowUserIngreso(ingreso) {
+        //console.log(ingreso);
+        let body = JSON.stringify(ingreso);
+        //console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'cajaUsuario/ingreso', body, { headers: headers }).map((res: Response) => res);
+    }
+
+    addCashFlowUserEgreso(egreso) {
+        // console.log(egreso);
+        let body = JSON.stringify(egreso);
+        //console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'cajaUsuario/egreso', body, { headers: headers }).map((res: Response) => res);
+    }
+
+    getCashFlowUser(id){
+
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.get(this.url + 'cajaUsuario/' + id, { headers: headers }).map((res: Response) => res);
+   
+    
+    }
+
+    closeCashFlowUser(id){
+
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.get(this.url + 'cajaUsuario/close/' + id, { headers: headers }).map((res: Response) => res);
+   
+    }
    
 }
