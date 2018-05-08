@@ -5,7 +5,7 @@ import {Cartera} from '../../modelo/cartera';
 import { Identity, } from "../../services/global";
 // import {User} from '../../modelo/user';
 import { Offices } from "../../modelo/offices";
-import { Ejecutivo } from "./Ejecutivo";
+import { Ejecutivo } from "../../modelo/Ejecutivo";
 
 @Component({
   selector: 'app-add-ejecutivo',
