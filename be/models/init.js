@@ -275,8 +275,8 @@ var _person_1 = {
    first_name: 'Jose',
    last_name: 'Gallardo',
    ci: 1234567,
-   phone: 76543218,
-   cellphone: 4653126,
+   phone: 4653126,
+   cellphone: 76543218,
    email: 'gallardo@gmail.com',
    ocupation: 'universitario',//1 = universitario, 2=Profesional, 3=particular
    descOcupation: {
@@ -438,7 +438,7 @@ var _person_4 = {
    last_name: 'galarza',
    //birthday: new Date(1992, 1, 1),
    ci: '5342425',
-   phone: 51234314,
+   phone: 41234314,
    cellphone: 79121232,
    email: 'lucia@lucia.com',
    ocupation: 'estudiante',
@@ -487,13 +487,17 @@ var _person_4 = {
    },
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-};
+}; 
 var _persons = [_person_1, _person_2, _person_3, _person_4];
 ////////////////////////////////////////////
 var _event_seg = {
    name: 'seguridad imformatica y redes sociales',
    description: 'solo para ejecutivos',
    date_start: '2018-03-25',
+        // interes:[{
+        //     events: _person_1,
+        //     record_date: new Date()
+        // }],
    modulars: [{
       date_start: '2018-03-25',
       date_end: '2018-04-25',
@@ -507,6 +511,9 @@ var _event_seg = {
          total_price: 600,
          module_price: 150,
          canceled_price: 300,
+         name: _person_1.name,
+         phone: _person_1.phone,
+         cellphone: _person_1.cellphone,
          persons: _person_1._id,
          users: _user_admin._id
       },
@@ -514,6 +521,9 @@ var _event_seg = {
          total_price: 600,
          module_price: 150,
          canceled_price: 300,
+         name: _person_2.name,
+         phone: _person_2.phone,
+         cellphone: _person_2.cellphone,
          persons: _person_2._id,
          users: _user_ejecutivo1._id
       },
@@ -521,6 +531,9 @@ var _event_seg = {
          total_price: 600,
          module_price: 150,
          canceled_price: 300,
+         name: _person_3.name,
+         phone: _person_3.phone,
+         cellphone: _person_3.cellphone,
          persons: _person_3._id,
          users: _user_admin._id
       }

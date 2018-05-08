@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.Types.ObjectId;
 process.env.TZ = 'America/La_Paz';
 
-module.exports = {
+module.exports = { 
    ///Account
    roles: mongoose.model('roles', new Schema({
       name: String,
@@ -158,6 +158,9 @@ module.exports = {
          total_price: Number,
          module_price: Number,
          canceled_price: Number,
+         name: String,
+         phone: Number,
+         cellphone: Number,
          persons: ObjectId,
          users: ObjectId
       }],
@@ -172,7 +175,7 @@ module.exports = {
    ////////////////////////////////////////////////////////
    lists: mongoose.model('lists', new Schema({
       amount: Number,
-      receipt: Number,
+      receipt: Number, 
       assist: Boolean,
       type: Number, //nuevo // nivelacion
       persons: ObjectId,
