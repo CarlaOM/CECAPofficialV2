@@ -39,6 +39,7 @@ module.exports = {
    ////////////////////////////////////////////////////////////////////////////
 
    cashFlowUsers: mongoose.model('cashFlowUsers', new Schema({
+      
       date_start: Date,
       date_end: Date,
       amount: Number,
@@ -47,8 +48,13 @@ module.exports = {
          receipt: Number,
          description: String,
          amount: Number,
+         input:Boolean,
+         date_detail:Date,
+         title:String
       }],
       user: ObjectId,
+      active:Boolean,
+      
 
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } },

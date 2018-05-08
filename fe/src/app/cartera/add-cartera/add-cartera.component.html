@@ -9,7 +9,7 @@
 <div class="container">
     <div [hidden]="submitted">
       <h1>Registrar Cartera</h1>
-      <form (ngSubmit)="guardar()" #addCartera="ngForm" >
+      <form (ngSubmit)="onSubmit()" #addCartera="ngForm" >
           <!-- <form #addCartera="ngForm" > -->
         <div class="form-group">
           <label for="name">Nombre Cartera</label>
@@ -19,12 +19,12 @@
                 #name="ngModel"
                  >
           <div [hidden]="name?.valid || name?.pristine"
-               class="">
+               class="text-alert">
             first name is required
           </div>
           <!-- <input type="text" id="name" class="form-control validate" value="{{carteraName}}" #name> -->
         </div>
-        <button  type="submit" class="btn btn-success"  (click)="guardar()">Registrar</button>
+        <button  type="submit" class="btn btn-success"  (click)="save()">Registrar</button>
         <button type="button" class="btn btn-danger" (click)="addCartera.reset()">Cancelar</button>
       </form>
     </div>

@@ -1,7 +1,3 @@
-import { Rol } from "../../modelo/rol";
-import { Offices } from "../../modelo/offices";
-import { Cartera } from "../../modelo/cartera";
-
 export class Ejecutivo {
 
     constructor(

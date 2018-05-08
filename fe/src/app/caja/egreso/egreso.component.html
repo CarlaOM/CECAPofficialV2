@@ -9,15 +9,15 @@
 <div class="container">
     <div [hidden]="submitted">
       <h1>Egresos</h1>
-      <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+      <form (ngSubmit)="onSubmit()" #EgresoForm="ngForm">
         <div class="form-group">
           <label for="titulo">Titulo</label>
           <input type="text" class="form-control" id="titulo"
                  required
-                 [(ngModel)]="model[1]" name="titulo"
+                 [(ngModel)]="egresoTitulo" name="titulo"
                  #titulo="ngModel">
           <div [hidden]="titulo?.pristine"
-               class="danger">
+               class="text-alert">
             El Titulo es requerido
           <!-- <div [hidden]="titulo?.valid"
                 class="danger">
@@ -28,11 +28,22 @@
           <label for="descripcion">Descripcion</label>
           <input type="text" class="form-control" id="descripcion"
                  required
-                 [(ngModel)]="model[2]" name="descripcion"
+                 [(ngModel)]="egresoDescripcion" name="descripcion"
                  #descripcion="ngModel">
           <div [hidden]="descripcion?.valid || descripcion?.pristine"
-               class="alert alert-danger">
+               class="text-alert">
             Descripcion es requerido
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="recibo">Num Recibo</label>
+          <input type="number" class="form-control" id="recibo"
+              required
+              [(ngModel)]="egresoRecibo" name="recibo"
+              #recibo="ngModel">
+          <div [hidden]="recibo.valid || recibo.pristine" class="text-alert">
+            recibo es requerido o el tipo de dato es invalido 
           </div>
         </div>
 
@@ -40,19 +51,19 @@
           <label for="monto">Monto</label>
           <input type="number" class="form-control" id="monto"
               required
-              [(ngModel)]="model[6]" name="monto"
+              [(ngModel)]="egresoMonto" name="monto"
               #monto="ngModel">
-          <div [hidden]="monto.valid || monto.pristine" class="alert alert-danger">
+          <div [hidden]="monto.valid || monto.pristine" class="text-alert">
             Monto es requerido o el tipo de dato es invalido 
           </div>
         </div>
    
-        <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Guardar</button>
-        <button type="button" class="btn btn-default" (click)="heroForm.reset()">Limpiar</button>
+        <button type="submit" class="btn btn-success" [disabled]="!EgresoForm.form.valid">Guardar</button>
+        <button type="button" class="btn btn-default" (click)="EgresoForm.reset()">Limpiar</button>
       </form>
     </div>
    
-    <div [hidden]="!submitted">
+    <!-- <div [hidden]="!submitted">
       <h2>You submitted the following:</h2>
       <div class="row">
         <div class="col-xs-3">Name</div>
@@ -72,7 +83,7 @@
       </div>
       <br>
       <button class="btn btn-primary" (click)="submitted=false">Edit</button>
-    </div>
+    </div> -->
   </div>
 
   </div>

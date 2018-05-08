@@ -71,7 +71,6 @@ import { DetalleCajaComponent } from './sucursal/detalle-caja/detalle-caja.compo
 import { DetallePersonalComponent } from './sucursal/detalle-personal/detalle-personal.component';
 
 import { InfoEjecutivoComponent } from './ejecutivo/info-ejecutivo/info-ejecutivo.component';
-import { CajaChicaComponent } from './caja/caja-chica/caja-chica.component';
 import { IngresoComponent } from './caja/ingreso/ingreso.component';
 import { EgresoComponent } from './caja/egreso/egreso.component';
 
@@ -79,6 +78,7 @@ import { facilitadorComponent } from './facilitador/facilitador.component';
 import { VistaCajaComponent } from './caja/vista-caja/vista-caja.component';
 import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facilitador.component';
 import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-facilitador.component';
+import { ProfilePersonComponent } from './event/profile-person/profile-person.component';
 
 @NgModule({
   declarations: [
@@ -124,7 +124,6 @@ import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-fa
 
     InfoEjecutivoComponent,
 
-    CajaChicaComponent,
     IngresoComponent,
     EgresoComponent,
 
@@ -139,12 +138,12 @@ import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-fa
     DetallePersonalComponent,
     InfoEjecutivoComponent,
     VistaCajaComponent,
-    CajaChicaComponent,
     IngresoComponent,
     facilitadorComponent,
     AddFacilitadorComponent,
     AddCorrelativeComponent,
     EditFacilitadorComponent,
+    ProfilePersonComponent,
     AlertComponent
 
   ],

@@ -5,7 +5,7 @@ import {Cartera} from '../../modelo/cartera';
 import { Identity, } from "../../services/global";
 // import {User} from '../../modelo/user';
 import { Offices } from "../../modelo/offices";
-import { Ejecutivo } from "./Ejecutivo";
+import { Ejecutivo } from "../../modelo/Ejecutivo";
 
 @Component({
   selector: 'app-add-ejecutivo',
@@ -39,7 +39,7 @@ export class AddEjecutivoComponent implements OnInit {
 
  
   ngOnInit() {
-    this._peticionesService.getCarteras().subscribe(response=>{
+    this._peticionesService.getCarterasLibres().subscribe(response=>{
       this.carteras=response;
       console.log(this.carteras);
     });
