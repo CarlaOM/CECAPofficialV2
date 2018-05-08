@@ -41,7 +41,7 @@ export class AddPersonComponent implements OnInit {
     constructor(private _peticionesService: PeticionesService) {
         // _peticionService: PeticionesService,
         this.person = new Person('', '', null, null, '', null, '');
-        this.inscription = new Inscription('', '', '', '');
+        this.inscription = new Inscription('', null, null,null,'', '');
         //this.identy=Identity._id;
 
     }

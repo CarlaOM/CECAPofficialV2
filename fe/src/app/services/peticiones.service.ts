@@ -19,21 +19,15 @@ export class PeticionesService {
         // this.url = "https://jsonplaceholder.typicode.com/users";
 
     }
-
-    getPrueba() {
-        return "hola desde el servicio"
-    }
-
-    // getPersonas(): Observable<any> {
-    //    // return this._http.get(this.url)
-    //    //                 .map(res => res.json() );
-    //    return this._http.get(this.url);
-    // }
     getEvents() {
         return this._http.get(this.url + 'events').map((res: Response) => res);
     }
     getEvent(id) {
         return this._http.get(this.url + 'events/' + id).map((res: Response) => res);
+    }
+    //prueba
+    getEventInscriptions(id){
+        return this._http.get(this.url + 'events/interes/' + id).map((res: Response) => res);
     }
     getTrimestral() {
         return this._http.get(this.url + 'events/trimestral').map((res: Response) => res);

@@ -5,7 +5,7 @@ import { FormsModule }   from '@angular/forms';
 import{ routing, appRoutingProviders } from './app.routing';
 import { AsyncLocalStorageModule } from 'angular-async-local-storage';
 //modules
-import { AlertsModule } from 'angular-alert-module';
+//import { AlertsModule } from 'angular-alert-module';
 //components
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -157,7 +157,7 @@ import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-fa
     HttpModule,
     ChartsModule,
     // Specify this module as an import
-    AlertsModule.forRoot()
+    //AlertsModule.forRoot()
     
   ],
   providers: [
