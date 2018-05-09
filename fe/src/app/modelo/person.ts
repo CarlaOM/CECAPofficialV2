@@ -3,6 +3,7 @@ export class Person {
       public first_name: string,
       public last_name: string,
       public ci: number,
+      //public phone:number,
       public cellphone:number,
       public email:string,
       public ocupation: number,  //1 = universitario, 2=Profecional, 3=particular

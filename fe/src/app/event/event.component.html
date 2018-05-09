@@ -46,6 +46,7 @@
                <th>Celular</th>
                <th>Telefono</th>
                <th>Monto Cancelado</th>
+               <th>Perfil</th>
                <th colspan="2">Ajustes</th>
             </tr>
          </thead>
@@ -57,8 +58,11 @@
                <td>{{ i.phone }}</td>
                <td>{{ i.canceled_price }}</td>
                <td>
+                  <a class="btn btn-info" (click)="viewProfile(i.persons)">VER</a>
+               </td>
+               <td>
                   <!-- <app-editPerson [editPerson]="event"></app-editPerson> -->
-                  <a class="btn btn-primary" (click)="edit(i.persons)">EDITAR</a>
+                  <a class="btn btn-warning" (click)="edit(i.persons)">EDITAR</a>
                </td>
             </tr>
          </tbody>
