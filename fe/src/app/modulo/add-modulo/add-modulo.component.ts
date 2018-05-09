@@ -22,11 +22,17 @@ export class AddModuloComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.query();
+    this.queryPrograms();
+  }
+  queryPrograms(){
     this._peticionesService.getPrograms().subscribe(response => {
-      this.programs = response;
-      console.log(response);
-    });
+        this.programs = response;
+      //console.log(this.programs);
+       },
+       error=>{
+        console.log(<any>error);
+       }
+      );
   }
   onSubmit() {
     console.log(this.modulo);
@@ -43,7 +49,6 @@ export class AddModuloComponent implements OnInit {
       }
     );
   }
-  query() {}
   cancel() {
     this.router.navigate(['home/modulo']);
   }
