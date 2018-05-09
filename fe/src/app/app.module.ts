@@ -79,7 +79,6 @@ import { VistaCajaComponent } from './caja/vista-caja/vista-caja.component';
 import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facilitador.component';
 import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-facilitador.component';
 import { ProfilePersonComponent } from './event/profile-person/profile-person.component';
-import { EditProfileComponent } from './event/profile-person/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -145,8 +144,7 @@ import { EditProfileComponent } from './event/profile-person/edit-profile/edit-p
     AddCorrelativeComponent,
     EditFacilitadorComponent,
     ProfilePersonComponent,
-    AlertComponent,
-    EditProfileComponent
+    AlertComponent
 
   ],
   imports: [
