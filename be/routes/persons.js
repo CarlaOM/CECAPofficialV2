@@ -23,29 +23,40 @@ router
    .post('/', function (req, res) {
       var person = new db.persons(req.body);
       console.log(person);
-         db.persons.findOne({ci: req.body.ci}, function(err, existeCi){
-            if (existeCi == null) {
-                  db.persons.findOne({cellphone: req.body.cellphone}, function(err, existeCellphone){
+      //    db.persons.findOne({ci: req.body.ci,cellphone: req.body.cellphone}, function(err, existeCi){
+      //       if (existeCi == null) {
+                  db.persons.findOne({ci: req.body.ci,cellphone: req.body.cellphone}, function(err, existeCellphone){
                         if(existeCellphone == null){
                               if (person.first_name == '' || person.last_name == '' || person.ci == '' || person.carteras == '') 
                               return res.status(400).send();
                               // save person
                               person.save(function (err, person) {
                               if (err) return res.status(400).send(err);
-                              add(person);
+                              add(person);//enviar Tp, Mp, Cp
                               });
-                              function add(person) {
-                                    var inscription = {
-                                       state: 0,
-                                       person: person._id,
-                                       user: person.user
-                                       //description
-                                    }
+                              function add(person, totalPrice, modulPrice, canceledPrice, user) {
+                                    // var inscription = {
+                                    //    state: 0,
+                                    //    person: person._id,
+                                    //    user: person.user
+                                    //    //description
+                                    // };
+                                    inscript = {
+                                          // segun al numero de asistencias sacar el precio total q tiene q pagar
+                                          total_price: totalPrice,
+                                          module_price: modulPrice,
+                                          canceled_price: canceledPrice,
+                                          name: person.first_name + person.last_name,
+                                          phone: person.phone,
+                                          cellphone: person.cellphone,
+                                          persons: person._id,
+                                          users: user
+                                       };
                                     var d = new Date();
-                                    db.events.update(
-                                       {
+                                    db.events.update({
                                           date_start: { $gt: d }
-                                       }, {
+                                       }, 
+                                       {
                                           $push: {
                                              inscriptions: inscription
                                           }
@@ -61,19 +72,14 @@ router
                                  }
                         }else{
                               if (err) return res.status(400).send(err);
-                              console.log('El numero de Celular de la Persona ya existe')
+                              console.log('La Persona ya existe');
                         }
                   });
-            //return res.status(404).send();
-
-            }else{
-                  if (err) return res.status(400).send(err);
-                  console.log('El numero de CI de la Persona ya existe')
-            }
-         });
-            
-      // add vigent events
-      
+      //       }else{
+      //             if (err) return res.status(400).send(err);
+      //             console.log('El numero de CI de la Persona ya existe')
+      //       }
+      //    });      
    })
 
    .put('/:id', function (req, res) {

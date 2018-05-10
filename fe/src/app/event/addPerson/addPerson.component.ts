@@ -4,7 +4,6 @@ import { PeticionesService } from '../../services/peticiones.service';
 import { Identity } from '../../services/global';
 import { Person } from '../../modelo/person';
 import { Inscription } from '../../modelo/inscription';
-import { Persona } from './Persona';
 @Component({
     selector: 'app-addPerson',
     templateUrl: './addPerson.component.html',
@@ -24,57 +23,57 @@ export class AddPersonComponent implements OnInit {
     @ViewChild('description') descRef: ElementRef;
     @ViewChild("close", { read: ElementRef }) close: ElementRef;
     @Output() messageEvent = new EventEmitter();
-
+    
+    public person;//coleccion
+    public eventos;
     public programs;
+
     public interes;//coleccion de interes
     public profecion
     public inscription;
-    public person;
     public progSeleccionado;
     public idProgram;
     public intSeleccionado;// interes de la persona seleccionada
     public interesNum;
-    public ocupSeleccionado;
+    public ocupSeleccionado:String;
     public identy;
     public cartera;
     public modelEvent;
-    constructor(private _peticionesService: PeticionesService) {
-        // _peticionService: PeticionesService,
-        this.person = new Person('', '', null, null, '', null, '');
-        this.inscription = new Inscription('', null, null,null,'', '');
+    constructor(
+        private _peticionesService: PeticionesService
+    ) {
+        this.person = new Person('', '', null, null, null,'',0, null, '');
+       // this.inscription = new Inscription('', null, null,null,'', '');
         //this.identy=Identity._id;
 
     }
-    model = new Persona(Identity._id, "", "", "", null, "", "");
-    submitted = false;
-    public eventos;
     onSubmit() { 
-        console.log(this.model);
-        this._peticionesService.addPerson(this.model).subscribe(
-          result => {
-            var esperado = result;
-           // console.log(esperado);
-           // this.router.navigate(['home/event', this.eventId]);
-            alert('Se Creo correctamente la Sucursal');
-          },
-          error => {
-            var errorMessage = <any>error;
-            console.log(errorMessage);
-            alert('Error al Crear Sucursal verifique los datos');
-          }
-        );
     }
     ngOnInit() {
         console.log(Identity._id);
         //this.queryPrograms();
-        this.queryCartera();
         this.queryEvents();
-        // console.log(this.cartera);
-        // this.interes=[{inscrito:0,confirmado:1,interesado:2,En_duda:3,No_participa:4,Proximo:5}];
+        this.queryCartera();
         this.interes = ['inscrito', 'confirmado', 'interesado', 'En duda', 'No participa', 'Proximo'];
     }
+    guardar(){
+        console.log(this.person);
+        this._peticionesService.addPerson(this.person).subscribe(
+          result => {
+            var esperado = result;
+           // console.log(esperado);
+           // this.router.navigate(['home/event', this.eventId]);
+            alert('Se Registro a la persona de manera correcta');
+          },
+          error => {
+            var errorMessage = <any>error;
+            console.log(errorMessage);
+            alert('Error al registrar persona verifique los datos');
+          }
+        );
+    }
     captProgram() {
-        console.log(this.progSeleccionado);
+        console.log(this.modelEvent);
         // this.queryIdProgram();
         // console.log(this.idProgram+ 'hola max');
     }
@@ -107,74 +106,40 @@ export class AddPersonComponent implements OnInit {
     }
     captOcupation() { console.log(this.ocupSeleccionado); }
 
-    save() {
-        const firstName = this.firstNameRef.nativeElement.value;
-        let lastName = this.lastNameRef.nativeElement.value;
-        const ci = this.ciRef.nativeElement.value;
-        //const user = Identity._id;
-        const cellphone = this.cellphoneRef.nativeElement.value;
-        const email = this.emailRef.nativeElement.value;
-        // let cartera = '';
-        // if (this.birthdayRef.nativeElement.value == '') birthday = new Date(1, 2, 3);
-        //else birthday = this.birthdayRef.nativeElement.value;
-        const newPerson = new Person(firstName, lastName, ci, cellphone, email, this.ocupSeleccionado, this.cartera._id);
-        console.log(newPerson);
-
-        if ((this.firstNameRef.nativeElement.value == '') ||
-            (this.lastNameRef.nativeElement.value == '') ||
-            (this.ciRef.nativeElement.value == '') ||
-            (this.cellphoneRef.nativeElement.value == '') ||
-            (this.emailRef.nativeElement.value == '')
-        ) {
-
-
-            window.alert(
-                "Asegurese que todos los campos esten llenos"
-            )
-        } else {
-
-            this._peticionesService.addPerson(newPerson).subscribe(response => {
-                console.log(response);
-                this.messageEvent.emit();
-                this.close.nativeElement.click();
-            },
-                error => {
-                    var errorMessage = <any>error;
-                    console.log(errorMessage);
-                    alert('La Cedula de Identidad o Telefono de la Persona ya existe');
-                });
-
-        }
-
-
-
-    }
-
-    // queryPrograms() {
-    //    this._peticionesService.getPrograms().subscribe(
-    //       result => {
-    //          this.programs = result;
-    //          //    console.log('aqui los programas');
-    //          //    console.log(this.programs);
-    //       },
-    //       error => {
-    //          var errorMessage = <any>error;
-    //          console.log(errorMessage);
-    //       }
-    //    );
-    // }
-    //    queryIdProgram(){
-    //     this._peticionesService.getIdProgram(this.progSeleccionado).subscribe(
-    //         result => {
-    //          this.idProgram = result;
-    //         //    console.log('ID PROGRAM');
+    // save() {
+    //     const firstName = this.firstNameRef.nativeElement.value;
+    //     let lastName = this.lastNameRef.nativeElement.value;
+    //     const ci = this.ciRef.nativeElement.value;
+    //     //const user = Identity._id;
+    //     const cellphone = this.cellphoneRef.nativeElement.value;
+    //     const email = this.emailRef.nativeElement.value;
+    //     // let cartera = '';
+    //     // if (this.birthdayRef.nativeElement.value == '') birthday = new Date(1, 2, 3);
+    //     //else birthday = this.birthdayRef.nativeElement.value;
+    //     const newPerson = new Person(firstName, lastName, ci, cellphone, email, this.ocupSeleccionado, this.cartera._id);
+    //     console.log(newPerson);
+    //     if ((this.firstNameRef.nativeElement.value == '') ||
+    //         (this.lastNameRef.nativeElement.value == '') ||
+    //         (this.ciRef.nativeElement.value == '') ||
+    //         (this.cellphoneRef.nativeElement.value == '') ||
+    //         (this.emailRef.nativeElement.value == '')
+    //     ) {
+    //         window.alert(
+    //             "Asegurese que todos los campos esten llenos"
+    //         )
+    //     } else {
+    //         this._peticionesService.addPerson(newPerson).subscribe(response => {
+    //             console.log(response);
+    //             this.messageEvent.emit();
+    //             this.close.nativeElement.click();
     //         },
-    //         error => {
-    //            var errorMessage = <any>error;
-    //            console.log(errorMessage);
-    //         }
-    //      );
-    //    }
+    //             error => {
+    //                 var errorMessage = <any>error;
+    //                 console.log(errorMessage);
+    //                 alert('La Cedula de Identidad o Telefono de la Persona ya existe');
+    //             });
+    //     }
+    // }
     queryCartera() {
         //console.log(Identity._id)
         this._peticionesService.getCarteraFromUserId(Identity._id).subscribe(
