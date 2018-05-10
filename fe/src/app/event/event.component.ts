@@ -60,6 +60,9 @@ export class EventComponent implements AfterViewInit {
       // console.log('antes de enviar', personId)
       this.router.navigate(['home/editPerson', personId + '-' + this.eventId]);
    }
+   viewProfile(personId){
+    this.router.navigate(['home/profilePerson', personId]);
+   }
    inscritos() {
       for (let i = 0; i <= this.states.length; i++) {
          this.states.pop(); i = 0;

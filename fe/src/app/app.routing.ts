@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { EventsComponent } from './events/events.component';
 import { EventComponent } from './event/event.component';
 import { EditPersonComponent } from './event/editPerson/editPerson.component';
+import { ProfilePersonComponent } from './event/profile-person/profile-person.component';
 import { ReportsComponent } from './graphicReports/reports/reports.component';
 import { ReportTrimestralComponent} from './graphicReports/report-trimestral/report-trimestral.component';
 import { ReportEventComponent } from './graphicReports/report-event/report-event.component';
@@ -60,6 +61,7 @@ const appRoutes: Routes = [
          { path: 'events/add', component:AddEventComponent},
          { path: 'event/:id', component: EventComponent },
          { path: 'editPerson/:id', component: EditPersonComponent },
+         { path: 'profilePerson/:id', component:ProfilePersonComponent},
          { path: 'reports', component: ReportsComponent },
          { path: 'trimestral', component: ReportTrimestralComponent },
          { path: 'reportEvent/:id', component: ReportEventComponent },
@@ -92,8 +94,7 @@ const appRoutes: Routes = [
          { path: 'facilitador', component:facilitadorComponent},
          { path: 'facilitador/add', component:AddFacilitadorComponent},
          { path: 'facilitador/edit/:id', component:EditFacilitadorComponent},
-        
-         { path: 'correlative/add', component:AddCorrelativeComponent}
+         { path: 'correlative/add', component:AddCorrelativeComponent},
 
       ]
    },
