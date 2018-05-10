@@ -16,11 +16,13 @@ export class IngresoComponent implements OnInit {
 
   public ingresoTitulo;
   public ingresoDescripcion;
-  public ingresoNombreInscrito;
-  public ingresoCi;
+  public ingresoEvent;
+  // public ingresoNombreInscrito;
+  // public ingresoCi;
   public ingresoRecibo;
   public ingresoDetailMonto;
   public ingreso;
+  public eventos;
 
   // public ingreso:Cashflowusers;
 
@@ -32,7 +34,7 @@ export class IngresoComponent implements OnInit {
 
 
   ) {
-    this.ingreso=new Cashflowusers(new Date(),new Date(),0,0,0,"","","","")///(datestart,dateend,amount,amountdelivered,receipt,description,detailamount)
+    this.ingreso=new Cashflowusers(new Date(),new Date(),0,0,0,"","","","","")///(datestart,dateend,amount,amountdelivered,receipt,description,detailamount)
 
    }
 
@@ -41,6 +43,12 @@ export class IngresoComponent implements OnInit {
  
 
   ngOnInit() {
+
+    this._peticionesService.getEvents().subscribe(response =>{
+
+      this.eventos=response;
+      console.log(this.eventos);
+    })
 
   }
 
@@ -61,6 +69,7 @@ export class IngresoComponent implements OnInit {
     this.ingreso.detail_amount=this.ingresoDetailMonto;
     this.ingreso.user=Identity._id;
     this.ingreso.title=this.ingresoTitulo;
+    this.ingreso.events=this.ingresoEvent;
 
 
     // console.log(this.ingreso);

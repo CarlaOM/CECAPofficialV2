@@ -50,9 +50,37 @@ module.exports = {
          amount: Number,
          input:Boolean,
          date_detail:Date,
-         title:String
+         title:String,
+         events:ObjectId
       }],
       user: ObjectId,
+      active:Boolean,
+      state:Number,////////-1 sin cerrar
+                  //////// 0  pendiente
+                  ////////  1 cerrado
+      
+
+      _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
+      record_date: { type: Date, default: function () { return new Date() } },
+   })),
+
+
+   ////////////////////////////////////////////////////////////////////////////
+
+   cashFlowOffices: mongoose.model('cashFlowOffices', new Schema({
+      
+      date_start: Date,
+      date_end: Date,
+      amount: Number,
+      amount_delivered: Number,
+      input:Number,
+      output:Number,
+      details:[{
+            cashFlowUsers:ObjectId,
+            dateCloseCash:Date,
+
+      }],
+      offices: ObjectId,
       active:Boolean,
       
 

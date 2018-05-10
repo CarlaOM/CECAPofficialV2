@@ -16,10 +16,13 @@ export class EgresoComponent implements OnInit {
 
   public egresoTitulo;
   public egresoDescripcion;
+  public egresoEvent;
   public egresoRecibo;
   public egresoMonto;
 
   public egreso;
+
+  public eventos;
 
   constructor(
     private _peticionesService:PeticionesService,
@@ -27,7 +30,7 @@ export class EgresoComponent implements OnInit {
     private route: ActivatedRoute,
   ) { 
 
-    this.egreso=new Cashflowusers(new Date(),new Date(),0,0,0,"","","","")///(datestart,dateend,amount,amountdelivered,receipt,description,detailamount)
+    this.egreso=new Cashflowusers(new Date(),new Date(),0,0,0,"","","","","")///(datestart,dateend,amount,amountdelivered,receipt,description,detailamount)
 
   }
 
@@ -44,6 +47,7 @@ export class EgresoComponent implements OnInit {
 
     this.egreso.title=this.egresoTitulo;
     this.egreso.description=this.egresoDescripcion;
+    this.egreso.events=this.egresoEvent;
     this.egreso.detail_amount=this.egresoMonto;
     this.egreso.receipt=this.egresoRecibo;
     this.egreso.user=Identity._id;
@@ -64,6 +68,12 @@ export class EgresoComponent implements OnInit {
     );
   }
   ngOnInit() {
+
+    this._peticionesService.getEvents().subscribe(response =>{
+
+      this.eventos=response;
+      console.log(this.eventos);
+    })
   }
 
 }

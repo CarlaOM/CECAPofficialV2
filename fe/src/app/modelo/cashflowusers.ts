@@ -10,6 +10,7 @@ export class Cashflowusers{
         detail_amount:string,
         user:string,
         title:string,
+        events:string,
       
     ){}
 }

@@ -20,10 +20,6 @@ router
  .post('/ingreso', function (req, res) {
      //console.log(req.body);
      var caja=req.body;
-     //console.log(caja.receipt);
-     //console.log(caja.description);
-     //console.log(caja.detail_amount);
-    // var cashFlowUsers=new db.cashFlowUsers(req.body);////no
 
     let detail={  
         receipt:caja.receipt,
@@ -32,38 +28,55 @@ router
         input:true,   
         date_detail:new Date(), 
         title:caja.title,
+        events:caja.events
     };
 
     db.cashFlowUsers.findOne({active:true, user:caja.user},function(err,caja){
         if(err) return res.status(400).send(err);
-
-
-        
-
-
         caja.details.push(detail),function(err,detail){
-
             if(err) return res.status(400).send(err);
-    
         };
-
-
         caja.amount+=detail.amount;
         caja.save(function(err,caja){
-
             if(err)return res.status(404).send(err);
-    
+           // addPlusDetailCashOffice();
             res.status(200).send(caja);
         });
+
+        function addPlusDetailCashOffice(){
+
+            db.users.findOne({_id:caja.user},function(err,user){
+
+                db.offices.findOne({_id:user.offices},function(err,office){
+
+                    db.cashFlowOffices.findOne({active:true,offices:office},function(err,cashOffice){
+
+                        if(detail.input==true){
+                            cashOffice.input+=detail.amount;
+                            cashOffice.amount+=detail.amount;
+                        }else{
+                            cashOffice.output+=detail.amount;
+                            cashOffice.amount-=detail.amount;
+                        }
+                        
+                        let detailPlusCashOffice={
+                            cashFlowUsers:caja._id,
+                            dateCloseCash:'',
+                        }
+                        cashOffice.details.push(detailPlusCashOffice);
+                        cashOffice.save();
+                    })
+                })
+            })
+        }
+
+        
     })
-
-    //console.log(cashFlowUsers);
-
-   
     console.log("chash desde backend")
 
   
  })
+ 
 
  .post('/egreso',function(req,res){
 
@@ -79,24 +92,47 @@ router
         amount:cajaEgreso.detail_amount,
         input:false,
         date_detail:new Date(),
-        title:cajaEgreso.title
+        title:cajaEgreso.title,
+        events:cajaEgreso.events,
     };
     db.cashFlowUsers.findOne({active:true,user:cajaEgreso.user},function(err,caja){
 
-
         if(err) return res.status(400).send(err);
         caja.details.push(detailEgreso),function(err,detail){
-
             if(err) return res.status(400).send(err);
-    
         };
         caja.amount-=detailEgreso.amount;
         caja.save(function(err,caja){
-
             if(err)return res.status(404).send(err);
-    
+           // addSubstractDetailCashOffice();
             res.status(200).send(caja);
         });
+
+        function addSubstractDetailCashOffice(){
+
+            db.users.findOne({_id:cajaEgreso.user},function(err,user){
+
+                db.offices.findOne({_id:user.offices},function(err,office){
+
+                    db.cashFlowOffices.findOne({active:true,offices:office},function(err,cashOffices){
+                        if(detailEgreso.input==true){
+                            cashOffices.input+=detailEgreso.amount;
+                            cashOffices.amount+=detailEgreso.amount;
+                        }else{
+                            cashOffices.output+=detailEgreso.amount;
+                            cashOffices.amount-=detailEgreso.amount;
+                        }
+
+                        let detailSubstractCashOffice={
+                            cashFlowOffices:caja._id,
+                            dateCloseCash:'',
+                        }
+                        cashOffices.details.push(detailSubstractCashOffice);
+                        cashOffices.save();
+                    })
+                })
+            })
+        }
 
     })
 
@@ -111,6 +147,7 @@ router
 
             cajaForClose.active=false;
             cajaForClose.date_end=new Date();
+            cajaForClose.state=0;
             ////////////////////////////////////
             /////enviar a admin/////
             ////////////////////////////////////
@@ -127,6 +164,7 @@ router
                 nuevaCaja.amount=0;
                 nuevaCaja.amount_delivered=0;
                 nuevaCaja.active=true;
+                nuevaCaja.state=-1;
                 nuevaCaja.user=cajaForClose.user;
 
                 nuevaCaja.save(function(err,caja){
