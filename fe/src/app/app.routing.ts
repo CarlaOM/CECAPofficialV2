@@ -44,6 +44,7 @@ import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facil
 import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-facilitador.component';
 import { AddCorrelativeComponent } from './correlative/add-correlative/add-correlative.component';
 import { AddEventComponent } from './events/addEvent/addEvent.component';
+import { PendingCashComponent } from "./pending-cash/pending-cash.component";
 //import { AlertComponent } from './events/alert/alert.component';
 
 
@@ -95,6 +96,7 @@ const appRoutes: Routes = [
          { path: 'facilitador/add', component:AddFacilitadorComponent},
          { path: 'facilitador/edit/:id', component:EditFacilitadorComponent},
          { path: 'correlative/add', component:AddCorrelativeComponent},
+         { path: 'pendientes',component:PendingCashComponent},
 
       ]
    },

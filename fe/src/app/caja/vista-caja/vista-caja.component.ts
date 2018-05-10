@@ -26,7 +26,7 @@ export class VistaCajaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._peticionesService.getCashFlowUser(Identity._id).subscribe(response=>{
+    this._peticionesService.getCashFlowUserByUser(Identity._id).subscribe(response=>{
       this.cash=response;
 
       console.log(this.cash);
