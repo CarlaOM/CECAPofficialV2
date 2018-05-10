@@ -1,4 +1,4 @@
-<div class="modal fade" id="modalAlert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" style="border: rosybrown" id="modalAlert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
      <div class="modal-content">
           <div class="modal-header text-center">
@@ -9,13 +9,14 @@
           </div>
           <div class="modal-body mx-3 ">
             <li *ngFor="let programa of programs"><strong> * {{programa.name}}</strong></li>
-            <div class=""><h5>Estos son los programas que tiene para añadir al nuevo Evento, si quiere crear o registrar un nuevo programa elija la opcion 
-                <strong>REGISTRAR PROGRAMA</strong> y si no <strong>CONTINUAR</strong></h5>
+            <div style="background: plum"><h5>Estos son los programas que tiene para añadir al nuevo Evento, si usted quiere crear o registrar un nuevo programa elija la opcion 
+                <strong >CREAR PROGRAMA</strong> y si no 
+                <strong >CREAR EVENTO</strong></h5>
             </div>
           </div>
           <div class="modal-footer d-flex justify-content-center" >
-                <button type="submit" class="btn btn-success"(click)="craerProgram()">Registrar Programa</button>
-                <button type="button" class="btn btn-warning" (click)="continuar()">Continuar</button>
+               <button type="button" class="btn btn-success" (click)="continuar()">CREAR EVENTO</button>
+                <button type="submit" class="btn btn-warning"(click)="craerProgram()">CREAR PROGRAMA</button>
           </div>
      </div>
   </div>

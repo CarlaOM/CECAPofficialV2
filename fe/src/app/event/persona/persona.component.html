@@ -1,9 +1,15 @@
 <div class="content-wrapper">
   <section class="content">
-     <!-- <app-addPerson (messageEvent)="receiveMessage()"></app-addPerson> -->
+      <div>     
+          <ol class="breadcrumb">
+              <li><a class="btn btn-primary" [routerLink]="['/home/persons/add']"><i class="fa fa-book"></i>Registrar Persona</a></li>
+              <!-- <app-addPerson (messageEvent)="receiveMessage()"></app-addPerson> -->
+          </ol>
+      </div> 
+     
      <!-- <app-persona></app-persona> -->
      <table class="table">
-           <th>Filtros Personas</th>
+           <th>Filtros Personas</th> 
      </table>
      <!-- <section>
         <div class="col-lg-1">Buscar:</div>
