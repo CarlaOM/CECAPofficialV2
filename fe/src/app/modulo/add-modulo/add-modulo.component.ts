@@ -27,12 +27,11 @@ export class AddModuloComponent implements OnInit {
   queryPrograms(){
     this._peticionesService.getPrograms().subscribe(response => {
         this.programs = response;
-      //console.log(this.programs);
+        //console.log(this.programs);
        },
        error=>{
         console.log(<any>error);
-       }
-      );
+       });
   }
   onSubmit() {
     console.log(this.modulo);

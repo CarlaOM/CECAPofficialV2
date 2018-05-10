@@ -14,9 +14,9 @@
                           [(ngModel)]="modulo.number" name="number" #number="ngModel" required >
                           <span *ngIf="!number.valid && number.touched" class="text-alert">
                                   *Numero del Modulo requerido.
-                              </span>
+                          </span>
                       <!--<div [hidden]="number?.valid || number?.pristine" class="">
-                              Numbero Requerido
+                              Numero Requerido
                       </div>-->
                    </div>
                    <div class="form-group col-sm-8">
@@ -47,14 +47,14 @@
                                 <option *ngFor="let program of programs" value="{{program._id}}">{{program.name}}</option>
                                </select>-->
                                <select class="form-control" id="program" required
-                                [(ngModel)]="model.program" name="program"
-                                #nomPrograma="ngModel">
+                                    [(ngModel)]="modulo.program" name="program"
+                                    #program="ngModel">
                                  <option *ngFor="let program of programs" [value]="program._id">{{program.name}}</option>
                                 </select>
                                <!--<span *ngIf="!program.valid && program.touched" class="text-alert">
                                        *Programa del Modulo requerido.
                                </span>
-                           <div [hidden]="departament?.valid || departament?.pristine" class="">
+                           <div [hidden]="program?.valid || program?.pristine" class="">
                               *Programa requerido
                            </div>-->
                    </div>
