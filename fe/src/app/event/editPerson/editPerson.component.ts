@@ -26,7 +26,7 @@ export class EditPersonComponent implements OnInit {
       private route: ActivatedRoute,
       private router: Router
    ) { 
-      this.inscription = new Inscription('', '', '', '');
+      this.inscription = new Inscription('', null, null,null,'', '');
    }
  
    ngOnInit() {

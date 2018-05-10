@@ -9,10 +9,9 @@ import { forEach } from '@angular/router/src/utils/collection';
    templateUrl: './event.component.html',
    styleUrls: ['./event.component.css'],
    providers: [PeticionesService]
-
 })
 export class EventComponent implements AfterViewInit {
-   private eventId;
+   public eventId;
    public event;
    public inscriptions;
    public ocupation;
@@ -34,18 +33,20 @@ export class EventComponent implements AfterViewInit {
    receiveMessage() {
       this.query();
    }
-   query() {
+   query(){
       this.route.params.subscribe(params => {
          this.eventId = params.id
+         console.log(this.eventId);
       });
-      this._peticionesService.getEvent(this.eventId).subscribe(
+      this._peticionesService.getEventInscriptions(this.eventId).subscribe(
          result => {
             this.event = result;
             console.log(this.event);
             this.inscriptions = this.event.inscriptions;
+            
             //prueba total
             var total = this.event.total;
-            console.log(this.inscriptions);
+            //console.log(this.inscriptions);
             this.todos();
             // console.log(total);
          },
@@ -59,12 +60,15 @@ export class EventComponent implements AfterViewInit {
       // console.log('antes de enviar', personId)
       this.router.navigate(['home/editPerson', personId + '-' + this.eventId]);
    }
+   viewProfile(personId){
+    this.router.navigate(['home/profilePerson', personId]);
+   }
    inscritos() {
       for (let i = 0; i <= this.states.length; i++) {
          this.states.pop(); i = 0;
       }
-      for (let i of this.inscriptions) {
-         if (i.state == 1) { this.states.push(i); }
+      for (let i of this.inscriptions){
+         if (i.canceled_price > 0) { this.states.push(i); }
       }
    }
    confirmados() {

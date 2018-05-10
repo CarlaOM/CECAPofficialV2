@@ -1,30 +1,15 @@
 <div class="content-wrapper">
-   <!--<section class="content-header">
-      <h1>
-         Dashboard
-         <small>Version 2.0</small>
-      </h1>
-      <ol class="breadcrumb">
-         <li>
-            <a href="#">
-               <i class="fa fa-dashboard"></i> Home</a>
-         </li>
-         <li class="active">Dashboard</li>
-      </ol>
-   </section>-->
-
    <section class="content">
-
       <!-- <app-addPerson (messageEvent)="receiveMessage()"></app-addPerson> -->
       <!-- <a class="btn btn-primary" (click)="addPerson()">Registrar Persona</a> -->
       <!-- <app-persona></app-persona> -->
       <div>     
             <ol class="breadcrumb">
-                <li><a class="btn btn-primary" [routerLink]="['/home/persons/add']"><i class="fa fa-book"></i>Add Personas</a></li>
+                <li><a class="btn btn-primary" [routerLink]="['/home/persons/add']"><i class="fa fa-book"></i>Registrar Persona</a></li>
                
             </ol>
-          </div> 
-      <table class="table">
+        </div> 
+      <!-- <table class="table">
          <thead>
             <th>Filtros</th>
          </thead>
@@ -53,18 +38,15 @@
                </td>
             </tr>
          </tbody>
-      </table>
-     <!-- <section>
-            <div class="col-lg-1">Buscar:</div>
-            <div class="col-lg-5">
-                  <input type="text" [(ngModel)]="busqueda"></div>
-      </section>-->
+      </table> -->
       <table class="table table-hover" >
          <thead>
             <tr>
                <th>Nombre</th>
-               <th>Estado</th>
-               <th>Descripcion</th>
+               <th>Celular</th>
+               <th>Telefono</th>
+               <th>Monto Cancelado</th>
+               <th>Perfil</th>
                <th colspan="2">Ajustes</th>
             </tr>
          </thead>
@@ -72,11 +54,15 @@
             <!--<tr *ngFor="let i of inscriptions | buscarPersona: busqueda">-->
             <tr *ngFor="let i of states">
                <td>{{ i.name }}</td>
-               <td>{{ i.state }}</td>
-               <td>{{ i.description }}</td>
+               <td>{{ i.cellphone }}</td>
+               <td>{{ i.phone }}</td>
+               <td>{{ i.canceled_price }}</td>
+               <td>
+                  <a class="btn btn-info" (click)="viewProfile(i.persons)">VER</a>
+               </td>
                <td>
                   <!-- <app-editPerson [editPerson]="event"></app-editPerson> -->
-                  <a class="btn btn-primary" (click)="edit(i.person)">EDITAR</a>
+                  <a class="btn btn-warning" (click)="edit(i.persons)">EDITAR</a>
                </td>
             </tr>
          </tbody>

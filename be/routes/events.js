@@ -5,44 +5,44 @@ var mongoose = require('mongoose');
 
 router
    .get('/', function (req, res) {
-      // var d = new Date();
-      // db.events.find({ date_start: { $gt: d } }, {name: 1,description:1,date_start: 1,modulars:1, inscriptions: 1, total: 1 , program: 1}, function (err, events) {
-      //    if (err) return res.status(400).send(err);
-      //    let programs = [];
-      //    //let modulos = [];
-      //    var j = 0; 
-      //    let insert = true;
-      //    var today = new Date;
-      //    for (let i = 0; i < events.length; i++) {
-      //       j = 0;
-      //       insert = true;
+//       var d = new Date();
+//       db.events.find({ date_start: { $gt: d } }, {name: 1,description:1,date_start: 1,modulars:1, inscriptions: 1, total: 1 , program: 1}, function (err, events) {
+//          if (err) return res.status(400).send(err);
+//          let programs = [];
+//          //let modulos = [];
+//          var j = 0; 
+//          let insert = true;
+//          var today = new Date;
+//          for (let i = 0; i < events.length; i++) {
+//             j = 0;
+//             insert = true;
 
-      //       do {
-      //          if (programs.length == 0) { insert = false; programs.push(events[i].program); }
-      //          else if (JSON.stringify(programs[j]) == JSON.stringify(events[i].program)) insert = false;
-      //          if (today > events[i].date_start) { insert = false; }
-      //          j++;
-      //       } while (j < programs.length);
-      //       if (insert) programs.push(events[i].program);
-      //    }
-      //    getPrograms(programs, events);
-      // });
-      // function getPrograms(programs, events) {
-      //    db.programs.find({ _id: { $in: programs } }, { name: 1 }, function (err, programs) {
-      //       if (err) return res.status(400).send(err);
-      //       events.forEach(event => {
-      //          programs.forEach(program => {
-      //             if (JSON.stringify(event.program) == JSON.stringify(program._id)) {
-      //                event.name = program.name;
-      //             }
-      //          });
-      //       });
-      //       return res.status(200).send(events);
-      //    });
-      // }
+//             do {
+//                if (programs.length == 0) { insert = false; programs.push(events[i].program); }
+//                else if (JSON.stringify(programs[j]) == JSON.stringify(events[i].program)) insert = false;
+//                if (today > events[i].date_start) { insert = false; }
+//                j++;
+//             } while (j < programs.length);
+//             if (insert) programs.push(events[i].program);
+//          }
+//          getPrograms(programs, events);
+//       });
+//       function getPrograms(programs, events) {
+//          db.programs.find({ _id: { $in: programs } }, { name: 1 }, function (err, programs) {
+//             if (err) return res.status(400).send(err);
+//             events.forEach(event => {
+//                programs.forEach(program => {
+//                   if (JSON.stringify(event.program) == JSON.stringify(program._id)) {
+//                      event.name = program.name;
+//                   }
+//                });
+//             });
+//             return res.status(200).send(events);
+//          });
+//       }
       db.events.find({},function(err,events){
          return res.status(200).send(events);
-      })
+      });
    })
    .get('/lists', function (req, res) {
       db.lists.find({},function(err,lists){
@@ -144,6 +144,45 @@ router
          })
       }
    })
+   //////////get personas por evento
+   .get('/interes/:id', function (req, res) {
+      db.events.findOne({ _id: req.params.id }, function (err, event) {
+         if (err) return res.status(400).send(err);
+         if (event == null) return res.status(404).send();
+         // return res.status(200).send(event);
+         // getProgram(event);
+         var persons = event.inscriptions.map(i => i.persons);
+         getPerson(persons, event);
+      });
+      // function getProgram(event){
+      //    db.programs.findOne({ _id: event.programs }, { name: 1 }, function (err, program) {
+      //       if (err) return res.status(400).send(err);
+      //       event.name = program.name;
+      //       // return res.status(200).send(event);
+      //       var persons = event.inscriptions.map(i => i.person);
+      //       getPerson(persons, event);
+      //    });
+      // }
+      function getPerson(persons, event) {
+            db.persons.find({ _id: { $in: persons } }, function (err, persons) {
+               if (err) return res.status(400).send(err);
+               // console.log(persons)
+               event.inscriptions.forEach(i => {
+                  persons.forEach(person => {
+                        if (JSON.stringify(i.persons) == JSON.stringify(person._id)) {
+                           i.name = person.first_name + ' ' + person.last_name;
+                           i.phone= person.phone;
+                           i.cellphone=person.cellphone;
+                        }
+                     });
+               });
+            //console.log(event);
+            return res.status(200).send(event);
+         });
+      }
+
+   })
+   ///////////////////////////////////
    .get('/:id', function (req, res) {
       db.events.findOne({ _id: req.params.id }, function (err, event) {
          if (err) return res.status(400).send(err);
@@ -151,14 +190,14 @@ router
          // return res.status(200).send(event);
          getProgram(event);
       });
-      function getProgram(event) {
-         db.programs.findOne({ _id: event.program }, { name: 1 }, function (err, program) {
+      function getProgram(event){
+         db.programs.findOne({ _id: event.programs }, { name: 1 }, function (err, program) {
             if (err) return res.status(400).send(err);
             event.name = program.name;
             // return res.status(200).send(event);
             var persons = event.inscriptions.map(i => i.person);
             getPerson(persons, event);
-         })
+         });
       }
       function getPerson(persons, event) {
          db.persons.find({ _id: { $in: persons } }, function (err, persons) {
@@ -167,10 +206,9 @@ router
             event.inscriptions.forEach(i => {
                persons.forEach(person => {
                   if (JSON.stringify(i.person) == JSON.stringify(person._id)) {
-                     i.name = person.first_name + ' ' + person.last_name;
-
+                     i.persons = person.first_name + ' ' + person.last_name;
                   }
-               })
+               });
             });
             // console.log(event);
             return res.status(200).send(event);
@@ -192,7 +230,7 @@ router
             if (err) return res.status(400).send(err);
 
             return res.status(200).send(persons);
-         });
+         })
       }
 
    })
@@ -223,7 +261,7 @@ router
                      i.name = person.first_name + ' ' + person.last_name;
 
                   }
-               })
+               });
             });
             // console.log(event);
             return res.status(200).send(event);
@@ -257,7 +295,7 @@ router
             return res.status(200).send(persons);
          });
       }
-   })
+   }) 
 
    .post('/', function (req, res) {
       var event = new db.events(req.body);
