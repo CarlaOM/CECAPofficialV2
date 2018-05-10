@@ -6,14 +6,35 @@ var db = require('../models/db');
 var router = express.Router();
 
 router
+    .get('/', function (req, res) {
+        db.cashFlowUsers.find({active:true}, function (err, cajas) {
+        if (err) return res.status(400).send(err);
+
+
+
+        return res.status(200).send(cajas);
+        });
+    })
+    .get('/pending', function (req, res) {
+        db.cashFlowUsers.find({state:0}, function (err, cajas) {
+        if (err) return res.status(400).send(err);
+        return res.status(200).send(cajas);
+        });
+    })
    .get('/:id', function (req, res) {
-      db.cashFlowUsers.findOne({active:true,user:req.params.id}, function (err, cajaUsuario) {
+      db.cashFlowUsers.findOne({_id:req.params.id}, function (err, cajaUsuario) {
          if (err) return res.status(400).send(err);
 
          return res.status(200).send(cajaUsuario);
       });
    })
+   .get('/byUser/:id', function (req, res) {
+    db.cashFlowUsers.findOne({active:true,user:req.params.id}, function (err, cajaUsuario) {
+       if (err) return res.status(400).send(err);
 
+       return res.status(200).send(cajaUsuario);
+    });
+    })
  
 
 
