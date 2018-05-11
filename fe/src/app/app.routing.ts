@@ -5,7 +5,6 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { EventsComponent } from './events/events.component';
 import { EventComponent } from './event/event.component';
-import { EditPersonComponent } from './event/editPerson/editPerson.component';
 import { ProfilePersonComponent } from './event/profile-person/profile-person.component';
 import { ReportsComponent } from './graphicReports/reports/reports.component';
 import { ReportTrimestralComponent} from './graphicReports/report-trimestral/report-trimestral.component';
@@ -17,7 +16,7 @@ import { EditCarteraComponent } from "./cartera/edit-cartera/edit-cartera.compon
 import { EjecutivoComponent } from "./ejecutivo/ejecutivo.component";
 import { EditEjecutivoComponent } from './ejecutivo/edit-ejecutivo/edit-ejecutivo.component';
 import { PersonaComponent } from "./event/persona/persona.component";
-import { AddPersonComponent } from './event/addPerson/addPerson.component';
+import { AddPersonComponent } from './event/persona/addPerson/addPerson.component';
 import { EditComponent } from "./event/persona/edit/edit.component";
 import { SucursalComponent } from './sucursal/sucursal.component';
 import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.component';
@@ -61,7 +60,6 @@ const appRoutes: Routes = [
          //{ path: 'events/alert', component: AlertComponent },
          { path: 'events/add', component:AddEventComponent},
          { path: 'event/:id', component: EventComponent },
-         { path: 'editPerson/:id', component: EditPersonComponent },
          { path: 'profilePerson/:id', component:ProfilePersonComponent},
          { path: 'reports', component: ReportsComponent },
          { path: 'trimestral', component: ReportTrimestralComponent },
