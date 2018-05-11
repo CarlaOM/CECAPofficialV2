@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { PeticionesService } from '../../../services/peticiones.service';
+import { Person } from '../../../modelo/person';
+import { Inscription } from '../../../modelo/inscription';
+import { Registro } from '../../../modelo/registro';
 import { DescOcupation } from '../../../modelo/descOcupation';
 @Component({
   selector: 'app-edit',
@@ -9,40 +12,82 @@ import { DescOcupation } from '../../../modelo/descOcupation';
   providers: [ PeticionesService]
 })
 export class EditComponent implements OnInit {
- public personName;
- public person;
- public idPerson;
- public descOcupation: DescOcupation;
+  @ViewChild("close", { read: ElementRef }) close: ElementRef;
+    @Output() messageEvent = new EventEmitter();
+    
+    public personId;
+    public person;//colection
+    public personfirstname;
+    public last_name;
+    public ci;
+    public cellphone;
+    public phone;
+    public email;
+    public ocupacion;
+
+    public ocupSelected;
+    public descOcupation;
+    public eventos;//colection
+    public programs;//colection
+    public montoCan;
+    public IdEvent;
+
+    public registro: Registro;
+
+    public inscription;
+    submitted= false;
+
   constructor(
      private _peticionesService: PeticionesService,
       private route: ActivatedRoute,
       private router: Router
   ) {
-    this.descOcupation = new DescOcupation('','','','','','','');
+    
    }
 
   ngOnInit() {
-    this.queryPerson();
+    this.queryPersonId();
+    this.findPerson();
+    
+
+}
+queryPersonId(){
+  this.route.params.subscribe(params => {
+    this.personId = params.id;
+  })
+}
+findPerson(){
+  this._peticionesService.getPerson(this.personId).subscribe(
+    result => {
+      this.person = result;
+      console.log(this.person);
+      this.personfirstname = this.person.first_name;
+      this.last_name= this.person.last_name;
+      this.ci = this.person.ci;
+      this.cellphone = this.person.cellphone;
+      this.phone = this.person.phone;
+      this.email = this.person.email;
+      this.ocupacion = this.person.ocupacion;
+      
+    }, error => {
+      var errorMessage = <any>error;
+          console.log(errorMessage);
+    }
+  )
 }
 
-queryPerson(){ 
-  this.route.params.subscribe(params => {
-    this.idPerson = params.id;
-    console.log(this.idPerson)
-   });
-  this._peticionesService.getPerson(this.idPerson).subscribe(
-       result => {
-          this.person = result;
-       },
-       error => {
-          var errorMessage = <any>error;
-          console.log(errorMessage);
-       }
-    );
- }
  saveEdition(){
-  console.log(this.descOcupation);
-  this._peticionesService.updatePersonOcupation(this.descOcupation, this.person._id).subscribe(
+
+  this.person.first_name=this.personfirstname;
+  this.person.last_name=this.last_name
+  this.person.ci=this.ci;
+  this.person.cellphone=this.cellphone;
+  this.person.phone=this.phone;
+  this.person.email=this.email;
+  this.person.ocupacion=this.ocupacion;
+
+  // console.log(this.descOcupation);
+  this._peticionesService.updatePerson(this.person).subscribe(
       result =>{
         this.router.navigate(['home/persons']);
         alert('Se Guardo correctamente la edicion');
