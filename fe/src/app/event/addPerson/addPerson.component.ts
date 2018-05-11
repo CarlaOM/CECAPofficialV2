@@ -4,6 +4,10 @@ import { PeticionesService } from '../../services/peticiones.service';
 import { Identity } from '../../services/global';
 import { Person } from '../../modelo/person';
 import { Inscription } from '../../modelo/inscription';
+import { Registro } from '../../modelo/registro';
+import { DescOcupation } from '../../modelo/descOcupation';
+
+
 @Component({
     selector: 'app-addPerson',
     templateUrl: './addPerson.component.html',
@@ -27,6 +31,10 @@ export class AddPersonComponent implements OnInit {
     public person;//coleccion
     public eventos;
     public programs;
+    public ocupSelected;
+    public descOcupation: DescOcupation;
+
+    public registro: Registro;
 
     public interes;//coleccion de interes
     public profecion
@@ -35,7 +43,6 @@ export class AddPersonComponent implements OnInit {
     public idProgram;
     public intSeleccionado;// interes de la persona seleccionada
     public interesNum;
-    public ocupSeleccionado:String;
     public identy;
     public cartera;
     public modelEvent;
@@ -45,7 +52,9 @@ export class AddPersonComponent implements OnInit {
         this.person = new Person('', '', null, null, null,'',0, null, '');
        // this.inscription = new Inscription('', null, null,null,'', '');
         //this.identy=Identity._id;
-
+        this.descOcupation = new DescOcupation('','','','','','','');
+        this.registro = new Registro(null, null);
+        
     }
     onSubmit() { 
     }
@@ -104,7 +113,7 @@ export class AddPersonComponent implements OnInit {
         console.log(this.intSeleccionado);
         console.log(this.interesNum);
     }
-    captOcupation() { console.log(this.ocupSeleccionado); }
+    captOcupation(){ console.log(this.ocupSelected); }
 
     // save() {
     //     const firstName = this.firstNameRef.nativeElement.value;
