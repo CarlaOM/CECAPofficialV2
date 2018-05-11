@@ -136,10 +136,10 @@ export class PeticionesService {
 
     updatePerson(event_object) {
         let body = JSON.stringify(event_object);
-        var idEvent = event_object.name;
+        var idPerson = event_object._id;
         // console.log(body);
         var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-        return this._http.put(this.url + 'events/' + idEvent, body, { headers: headers }).map((res: Response) => res);
+        return this._http.put(this.url + 'persons/' + idPerson, body, { headers: headers }).map((res: Response) => res);
     }
     //return this._http.post(this.url + 'events/edit',body,{headers : headers}).map((res:Response)=>res);
     //.catch(this.handleError);
