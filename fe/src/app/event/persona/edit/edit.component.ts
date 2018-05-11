@@ -86,15 +86,18 @@ findPerson(){
   this.person.email=this.email;
   this.person.ocupacion=this.ocupacion;
 
-  // console.log(this.descOcupation);
+  console.log(this.person);
   this._peticionesService.updatePerson(this.person).subscribe(
       result =>{
+        var res = result;
+        console.log(res);
         this.router.navigate(['home/persons']);
         alert('Se Guardo correctamente la edicion');
       },
       error=>{
         var errorMessage = <any>error;
-          console.log(errorMessage);
+          console.log(errorMessage + "Error al editar");
+          alert("no se edito");
       }
   );
  }
