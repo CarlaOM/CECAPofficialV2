@@ -30,6 +30,7 @@ export class AddPersonComponent implements OnInit {
     public registro: Registro;
 
     public inscription;
+    submitted= false;
 
     constructor(
         private _peticionesService: PeticionesService,
@@ -112,6 +113,7 @@ export class AddPersonComponent implements OnInit {
             });
     }
     cancel(){
-        this.router.navigate(['home/events']);
+        // this.router.navigate(['home/events']);
+        window.history.back();
     }
 }
