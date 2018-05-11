@@ -1,6 +1,8 @@
 export class Registro {
     constructor(
-        public ocupSeleccionado: string,
-        public states: Array<any> 
+        public idEvent: string,
+        public idUser:string,
+        public persona:{},
+        public montCancel: number
     ) { }
  }

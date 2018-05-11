@@ -15,45 +15,33 @@ import { DescOcupation } from '../../modelo/descOcupation';
     providers: [PeticionesService]
 })
 export class AddPersonComponent implements OnInit {
-
-    @ViewChild('firstName') firstNameRef: ElementRef;
-    @ViewChild('lastName') lastNameRef: ElementRef;
-    @ViewChild('ci') ciRef: ElementRef;
-    @ViewChild('cellphone') cellphoneRef: ElementRef;
-    @ViewChild('email') emailRef: ElementRef;
-    //    @ViewChild('ocupation') ocupationRef: ElementRef;
-    //    @ViewChild('program') programRef: ElementRef;
-    //    @ViewChild('interes') interesRef: ElementRef;
-    @ViewChild('description') descRef: ElementRef;
     @ViewChild("close", { read: ElementRef }) close: ElementRef;
     @Output() messageEvent = new EventEmitter();
     
-    public person;//coleccion
-    public eventos;
-    public programs;
+    public person: Person;//colection
     public ocupSelected;
     public descOcupation: DescOcupation;
+    public eventos;//colection
+    public programs;//colection
+    public montoCan;
+    public IdEvent;
+    public cartera;
 
     public registro: Registro;
 
-    public interes;//coleccion de interes
-    public profecion
     public inscription;
-    public progSeleccionado;
-    public idProgram;
-    public intSeleccionado;// interes de la persona seleccionada
-    public interesNum;
-    public identy;
-    public cartera;
-    public modelEvent;
+
     constructor(
-        private _peticionesService: PeticionesService
+        private _peticionesService: PeticionesService,
+        private route: ActivatedRoute,
+        private router: Router
     ) {
-        this.person = new Person('', '', null, null, null,'',0, null, '');
+        this.person = new Person('', '', null, null, null,'','', null, '');
+        //first_name,last_name,ci,phone,cellphone,email,ocupation,descOcupation:{ },carteras
        // this.inscription = new Inscription('', null, null,null,'', '');
         //this.identy=Identity._id;
         this.descOcupation = new DescOcupation('','','','','','','');
-        this.registro = new Registro(null, null);
+        this.registro = new Registro(null,null, null,null);//idEvent,idUser,persona:{}, montCancel
         
     }
     onSubmit() { 
@@ -63,14 +51,22 @@ export class AddPersonComponent implements OnInit {
         //this.queryPrograms();
         this.queryEvents();
         this.queryCartera();
-        this.interes = ['inscrito', 'confirmado', 'interesado', 'En duda', 'No participa', 'Proximo'];
-    }
+        }
     guardar(){
-        console.log(this.person);
-        this._peticionesService.addPerson(this.person).subscribe(
+        //console.log(this.IdEvent);
+        //console.log(this.montoCan);
+        // console.log(this.descOcupation);
+        this.person.descOcupation = this.descOcupation;
+        //console.log(this.person);
+        this.registro.idEvent = this.IdEvent;
+        this.registro.idUser = Identity._id;
+        this.registro.persona = this.person;
+        this.registro.montCancel= this.montoCan;
+        console.log(this.registro);
+        this._peticionesService.addPerson(this.registro).subscribe(
           result => {
             var esperado = result;
-           // console.log(esperado);
+            console.log(esperado);
            // this.router.navigate(['home/event', this.eventId]);
             alert('Se Registro a la persona de manera correcta');
           },
@@ -81,81 +77,22 @@ export class AddPersonComponent implements OnInit {
           }
         );
     }
-    captProgram() {
-        console.log(this.modelEvent);
-        // this.queryIdProgram();
-        // console.log(this.idProgram+ 'hola max');
+    captOcupation(){ 
+        console.log(this.ocupSelected);
+        this.descOcupation.universidad = '';this.descOcupation.carrera = '';
+        this.descOcupation.semestre = '';this.descOcupation.areaTrabajo = '';
+        this.descOcupation.profesion = '';this.descOcupation.cargo = '';
+        this.descOcupation.empresa = '';
+        this.person.ocupation = this.ocupSelected; 
     }
-    captInteres() {
-        if (this.intSeleccionado == 'inscrito') {
-            this.interesNum = 0
-        } else {
-            if (this.intSeleccionado == 'confirmado') {
-                this.interesNum = 1
-            } else {
-                if (this.intSeleccionado == 'interesado') {
-                    this.interesNum = 2
-                } else {
-                    if (this.intSeleccionado == 'En duda') {
-                        this.interesNum = 3
-                    } else {
-                        if (this.intSeleccionado == 'No participa') {
-                            this.interesNum = 4
-                        } else {
-                            if (this.intSeleccionado == 'Proximo') {
-                                this.interesNum = 5
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        console.log(this.intSeleccionado);
-        console.log(this.interesNum);
-    }
-    captOcupation(){ console.log(this.ocupSelected); }
-
-    // save() {
-    //     const firstName = this.firstNameRef.nativeElement.value;
-    //     let lastName = this.lastNameRef.nativeElement.value;
-    //     const ci = this.ciRef.nativeElement.value;
-    //     //const user = Identity._id;
-    //     const cellphone = this.cellphoneRef.nativeElement.value;
-    //     const email = this.emailRef.nativeElement.value;
-    //     // let cartera = '';
-    //     // if (this.birthdayRef.nativeElement.value == '') birthday = new Date(1, 2, 3);
-    //     //else birthday = this.birthdayRef.nativeElement.value;
-    //     const newPerson = new Person(firstName, lastName, ci, cellphone, email, this.ocupSeleccionado, this.cartera._id);
-    //     console.log(newPerson);
-    //     if ((this.firstNameRef.nativeElement.value == '') ||
-    //         (this.lastNameRef.nativeElement.value == '') ||
-    //         (this.ciRef.nativeElement.value == '') ||
-    //         (this.cellphoneRef.nativeElement.value == '') ||
-    //         (this.emailRef.nativeElement.value == '')
-    //     ) {
-    //         window.alert(
-    //             "Asegurese que todos los campos esten llenos"
-    //         )
-    //     } else {
-    //         this._peticionesService.addPerson(newPerson).subscribe(response => {
-    //             console.log(response);
-    //             this.messageEvent.emit();
-    //             this.close.nativeElement.click();
-    //         },
-    //             error => {
-    //                 var errorMessage = <any>error;
-    //                 console.log(errorMessage);
-    //                 alert('La Cedula de Identidad o Telefono de la Persona ya existe');
-    //             });
-    //     }
-    // }
     queryCartera() {
         //console.log(Identity._id)
         this._peticionesService.getCarteraFromUserId(Identity._id).subscribe(
             result => {
                 this.cartera = result;
-                console.log('aqui la cartera del usuario::::');
-                console.log(this.cartera);
+                this.person.carteras = this.cartera._id
+                // console.log('aqui la cartera del usuario::::');
+                // console.log(this.cartera);
             },
             error => {
                 var errorMessage = <any>error;
@@ -167,11 +104,14 @@ export class AddPersonComponent implements OnInit {
         this._peticionesService.getEvents().subscribe(
             result => {
                 this.eventos = result;
-                console.log(this.eventos);
+                //console.log(this.eventos);
             },
             error => {
                 var errorMessage = <any>error;
                 console.log(errorMessage);
             });
+    }
+    cancel(){
+        this.router.navigate(['home/events']);
     }
 }

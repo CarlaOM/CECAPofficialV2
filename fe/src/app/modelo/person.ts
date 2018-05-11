@@ -6,19 +6,8 @@ export class Person {
       public phone: number,
       public cellphone:number,
       public email:string,
-      public ocupation: number,  //1 = universitario, 2=Profecional, 3=particular
-      public descOcupation: {
-        //universitario
-        carrera: String,
-        universidad: String,
-        semestre: String,
-        //Particular
-        areaTrabajo: String,
-        //Profesional
-        profesion: String,
-        empresa: String,
-        cargo: String,
-     },
+      public ocupation: string,  //1 = universitario, 2=Profecional, 3=particular
+      public descOcupation: { },
      // public user: string,
       public carteras:string
    ) { }
