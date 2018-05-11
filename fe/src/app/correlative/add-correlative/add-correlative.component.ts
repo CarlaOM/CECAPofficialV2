@@ -26,14 +26,16 @@ export class AddCorrelativeComponent implements OnInit {
 
   ngOnInit() {
   }
- guardar(){
-  console.log(this.correlativo);
-  this._peticionesService.addCorrelative(this.correlativo).subscribe(response=>{
-    //this.router.navigate(['/home/ejecutivo/']); 
-},error=>{
-
-var errorMessage=<any>error;
-console.log(errorMessage);
-})
- }
+  guardar(){
+      console.log(this.correlativo);
+      this._peticionesService.addCorrelative(this.correlativo).subscribe(response=>{
+      //this.router.navigate(['/home/ejecutivo/']); 
+      },error=>{
+          var errorMessage=<any>error;
+          console.log(errorMessage);
+      })
+  }
+  cancel(){
+    this.router.navigate(['home/events']);
+  }
 }
