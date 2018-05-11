@@ -15,6 +15,37 @@ var _offices_stc = {
 };
 var _offices = [_offices_stc];
 //////////////////////////////////////////////////////////
+
+var _cashFlowOffices_stc={
+
+  date_start: '2018-03-10',
+  date_end: '',
+  amount: 2500,
+  amount_delivered: 0,
+  input:2500,
+  output:0,
+  details:[{
+            cashFlowUsers:_cashFlowUser1,
+            dateCloseCash:'',
+
+           },{
+             cashFlowUsers:_cashFlowUser2,
+             dateCloseCash:'',
+           },{
+             cashFlowUsers:_cashFlowUserAdmin,
+             dateCloseCash:'',
+           }
+  ],
+  offices: _offices_stc,
+  active:true,
+  
+
+  _id: new mongoose.Types.ObjectId,
+  record_date: new Date()
+};
+
+var _cashFlowOffices=[_cashFlowOffices_stc];
+/////////////////////////////////////////////////////////
 var _company0 = {
    name: 'CECAP Company',
    nit: 71231901020,
@@ -113,9 +144,11 @@ var _cashFlowUser1 = {
          description: 'ingresos por inscripcion',
          amount: 1000,
          input:true,
-         date_detail:'2018-03-25'
+         date_detail:'2018-03-25',
+         events:_event_seg
       }],
       active:false,
+      state:-1,
       user: _user_ejecutivo1,
       _id: new mongoose.Types.ObjectId,
     record_date: new Date()
@@ -131,7 +164,8 @@ var _cashFlowUser2 = {
          amount: 200,
          input:true,
          date_detail:'2018-05-25',
-         title:'inscripcion'
+         title:'inscripcion',
+         events:_event_seg
       },
       {
         receipt: 2,
@@ -143,6 +177,7 @@ var _cashFlowUser2 = {
      }
     ],
       active:true,
+      state:-1,
       user: _user_ejecutivo2,
 
    _id: new mongoose.Types.ObjectId,
@@ -158,9 +193,11 @@ var _cashFlowUserAdmin = {
         description: 'ingresos por inscripcion',
         amount: 1000,
         input:true,
-        date_detail:'2018-03-25'
+        date_detail:'2018-03-25',
+        events:_event_seg
      }],
      active:true,
+     state:-1,
      user: _user_admin,
      _id: new mongoose.Types.ObjectId,
    record_date: new Date()
@@ -611,6 +648,7 @@ module.exports = {
       saveData(_events, db.events);
       saveData(_persons, db.persons);
       saveData(_lists, db.lists);
+      saveData(_cashFlowOffices,db.cashFlowOffices);
 
    },
 
@@ -628,5 +666,6 @@ module.exports = {
       clearCollections(db.facilitators);
       clearCollections(db.correlatives);
       clearCollections(db.lists);
+      clearCollections(db.cashFlowOffices);
    }
 };

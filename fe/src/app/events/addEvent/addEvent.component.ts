@@ -12,12 +12,12 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class AddEventComponent implements OnInit {
    public programs;
-   @ViewChild('description') descriptionRef: ElementRef;
-   @ViewChild('date') dateRef: ElementRef;
-   @ViewChild('total') totalRef: ElementRef;
-   @ViewChild('program') programRef: ElementRef;
-   @ViewChild("close", { read: ElementRef }) close: ElementRef;
-   @Output() messageEvent = new EventEmitter();
+   //@ViewChild('description') descriptionRef: ElementRef;
+   //@ViewChild('date') dateRef: ElementRef;
+   //@ViewChild('total') totalRef: ElementRef;
+   //@ViewChild('program') programRef: ElementRef;
+   //@ViewChild("close", { read: ElementRef }) close: ElementRef;
+   //@Output() messageEvent = new EventEmitter();
    public model: Event;
    constructor(
      private _peticionesService: PeticionesService,
