@@ -20,12 +20,12 @@
                  >
           <div [hidden]="name?.valid || name?.pristine"
                class="text-alert">
-            first name is required
+            *El Nombre de Cartera es OBLIGATORIO
           </div>
           <!-- <input type="text" id="name" class="form-control validate" value="{{carteraName}}" #name> -->
         </div>
-        <button  type="submit" class="btn btn-success"  (click)="save()">Registrar</button>
-        <button type="button" class="btn btn-danger" (click)="addCartera.reset()">Cancelar</button>
+        <button  type="submit" class="btn btn-success"  [disabled]="!addCartera.form.valid" (click)="guardar()">Registrar</button>
+        <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
       </form>
     </div>
    

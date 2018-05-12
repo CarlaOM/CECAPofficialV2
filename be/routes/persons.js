@@ -19,7 +19,6 @@ router
          return res.status(200).send(person);
       });
    })
-
    .post('/', function (req, res) {
       var person = new db.persons(req.body.persona);
       console.log(person);
@@ -109,7 +108,8 @@ router
       console.log(req.body);
       db.persons.update({_id: req.params.id},
       {
-            $set:{'descOcupation.carrera':req.body.carrera,
+            $set:{//Universitario
+                  'descOcupation.carrera':req.body.carrera,
                   'descOcupation.universidad':req.body.universidad,
                   'descOcupation.semestre':req.body.semestre,
                   //Particular

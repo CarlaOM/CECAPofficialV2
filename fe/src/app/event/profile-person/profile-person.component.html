@@ -1,23 +1,25 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
-       <A href="edit.html" >Editar Perfil</A>
-  <br>
-  <p class="text-info">Fecha:{{date}}</p>
-  </div>
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+    <div class="col-md-4 toppad  pull-right col-md-offset-3 ">
+      <!--<A href="edit.html" >Editar Perfil</A>-->
+      <br>
+      <p class="text-info">Fecha: {{date | date}}</p>
+    </div>
 
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-4 col-lg-offset-4 toppad" >
+      <h2 class="text-info" align="center">Perfil de Persona</h2>
+      <br>
       <div class="panel panel-info">
         <div class="panel-heading">
-          <h3 class="panel-title">{{person?.first_name}} {{person?.last_name}}</h3>
+          <h3 class="panel-title"><strong>{{person?.first_name}} {{person?.last_name}}</strong></h3>
         </div>
         <div class="panel-body">
           <div class="row">
             <div class="col-md-3 col-lg-3 " align="center"><img  class="profile-img img-circle img-responsive" src="assets/dist/img/line.png" alt=""></div>
-            
-            <div class=" col-md-9 col-lg-9 "> 
+              
+            <div class=" col-md-9 col-lg-9 ">
+                <strong>Datos personales:</strong>
               <table class="table table-user-information">
-                <strong>Informacion de la Persona:</strong>
                 <tbody>
                   <tr>
                     <td>Nombres</td>
@@ -27,10 +29,10 @@
                     <td>Apellidos</td>
                     <td>{{person?.last_name}}</td>
                   </tr>
-                  <!--<tr>
-                    <td>Telefono:</td>
+                  <tr>
+                    <td>Telefono</td>
                     <td>{{person?.phone}}</td>
-                  </tr>-->
+                  </tr>
                   <tr>
                     <td>Celular</td>
                     <td>{{person?.cellphone}}</td>
@@ -40,15 +42,53 @@
                     <td><a href="mailto:email">{{person?.email}}</a></td>
                   </tr>
                   <tr>
-                    <td>Ocupacion</td>
-                    <td>{{person?.ocupation}}</td>                      
-                  </tr>
-                  <tr>
                     <td>Cartera</td>
-                    <td>{{person?.carteras}}</td>
+                    <td>{{carteraReturned?.name}}</td>
                   </tr>
                 </tbody>
-              </table> 
+              </table>
+            <strong>Estado laboral de la Persona:</strong>
+              <table class="table table-user-information">
+                <tbody>
+                  <tr>
+                    <td>Ocupacion</td>
+                    <td>{{person?.ocupation}}</td>                                                                                        
+                  </tr>
+                <!--Universitario-->
+                  <tr>
+                      <td>Carrera</td>                                        
+                      <td>{{person?.descOcupation["carrera"]}}</td>                                      
+                  </tr>
+                  <tr> 
+                      <td>Universidad</td>                                        
+                      <td>{{person?.descOcupation["universidad"]}}</td>                                   
+                  </tr>
+                  <tr>
+                      <td>Semestre</td>                                        
+                      <td>{{person?.descOcupation["semestre"]}}</td>                                     
+                  </tr>
+                <!--Particular-->
+                  <tr>
+                      <td>Area de Trabajo</td>                                        
+                      <td>{{person?.descOcupation["areaTrabajo"]}}</td>                                     
+                  </tr>
+                  <tr>
+                <!--Profesional-->
+                  <tr>
+                    <td>Profesion</td>                                        
+                    <td>{{person?.descOcupation["profesion"]}}</td>                                     
+                  </tr>
+                  <tr>
+                    <td>Empresa</td>                                        
+                    <td>{{person?.descOcupation["empresa"]}}</td>                                     
+                  </tr>
+                  <tr>
+                    <td>Cargo</td>                                        
+                      <td>{{person?.descOcupation["cargo"]}}</td>                                     
+                  </tr>
+                </tbody>
+              </table>
+            <strong>Informacion adicional:</strong>
               <table class="table table-user-information">
                 <tbody>
                   <tr>
@@ -58,10 +98,6 @@
                   <tr>
                     <td>Requisitos</td>
                     <td></td>
-                  <tr>
-                    <td>Phone Number</td>
-                    <td>123-4567-890(Landline)<br><br>555-4567-890(Mobile)
-                    </td>
                   </tr>
                 </tbody>
               </table> 

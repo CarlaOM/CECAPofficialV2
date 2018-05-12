@@ -129,9 +129,9 @@
                 <fieldset>
                     <legend></legend>
                     <label>
-                        <input type="radio" name="status" [(ngModel)]="ejecutivoActive" value=true> Activo</label>
+                        <input type="radio" name="status" [(ngModel)]="ejecutivoActive" value=true  [defaultChecked]=""> Activo</label>
                     <label>
-                        <input type="radio" name="status" [(ngModel)]="ejecutivoActive" value=false> Inactivo</label>
+                        <input type="radio" name="status" [(ngModel)]="ejecutivoActive" value=false > Inactivo</label>
                 </fieldset>
                 <div [hidden]="cartera?.valid || cartera?.pristine" class="">
                         cartera is required
@@ -144,7 +144,7 @@
           
      
           <button type="submit" class="btn btn-success" [disabled]="!editEjecutivo.form.valid">Registrar</button>
-          <button type="button" class="btn btn-danger" (click)="editEjecutivo.reset()">Cancelar</button>
+          <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
         </form>
       </div>
      

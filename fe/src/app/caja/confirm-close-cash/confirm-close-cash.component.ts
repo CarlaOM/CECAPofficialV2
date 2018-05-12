@@ -32,7 +32,12 @@ export class ConfirmCloseCashComponent implements OnInit {
         this.cash=response;
 
         this.close.nativeElement.click();
-        this.router.navigate(['/home/caja/vistacaja']);
+        // this.router.navigate(['/home/caja/vistacaja']);
+        // this.router.navigate(['/home/caja/vistacaja']);
+        // this.router.navigate(['/home/caja/vistacaja']);
+        // this.router.navigateByUrl(['/home/caja/vistacaja']);
+        this.router.navigateByUrl('/home/caja/vistacaja', {skipLocationChange: true})
+
 
       })
   

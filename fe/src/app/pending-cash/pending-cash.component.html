@@ -30,17 +30,20 @@
                 <td class="">{{caja.fechaFin|date}}</td>
                 <td class="">{{caja.monto}}</td>
                 <td class=""> <a class="btn btn-warning" (click)="infoPendiente(caja.idCaja)">Ver Detalle y confirmar</a></td>
-                <!-- <td>{{caja.estado}}</td> -->
                 <td class="" *ngSwitchCase="-1">
                     Caja sin Confirmar
                 </td>
-                <td class="danger" *ngSwitchCase="0">
+                <td class="" *ngSwitchCase="0">
                     <!-- <a class="btn btn-warning" (click)="confirmarCaja(caja.idCaja)">caja por confirmar</a> -->
-                    caja por confirmar
+                    <!-- caja por confirmar -->
+                    <button class="btn btn-danger" [disabled]="btnInactive">caja por confirmar </button>
+
                 </td>
-                <td class="success" *ngSwitchCase="1">
+                <td class="" *ngSwitchCase="1">
                     <!-- <a class="btn btn-success" >Caja Confirmada</a> -->
-                    caja  confirmada
+                    <!-- caja  confirmada -->
+                    <button class="btn btn-success" [disabled]="btnInactive">caja por confirmar </button>
+
                 </td>
                 <ng-template #vacio class="">
                   ---

@@ -61,7 +61,8 @@
    
       <a class="btn btn-primary" (click)="goPendingCash()">Cancelar</a>
 
-      <a class="btn btn-primary" (click)="confirmPendingCash()">Confirmar</a>
+      <!-- <a class="btn btn-danger" (click)="confirmPendingCash()">Confirmar</a> -->
+      <button class="btn btn-danger" [disabled]="btnInactiveConfirm" (click)="confirmPendingCash()">Confirmar</button>
 
 
    
