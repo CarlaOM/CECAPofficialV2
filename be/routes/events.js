@@ -168,7 +168,7 @@ router
                if (err) return res.status(400).send(err);
                // console.log(persons)
                event.inscriptions.forEach(i => {
-                  persons.forEach(person => {
+                  persons.forEach(person => { 
                         if (JSON.stringify(i.persons) == JSON.stringify(person._id)) {
                            i.name = person.first_name + ' ' + person.last_name;
                            i.phone= person.phone;

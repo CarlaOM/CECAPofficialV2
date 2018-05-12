@@ -599,7 +599,7 @@ var _list_2 = {
    receipt: 102,
    assist: true,
    type: 1, //nuevo // nivelacion
-   persons: _person_2._id,
+   person: _person_2._id,
    events: _event_seg._id,
    modulars: _event_seg.modulars[0]._id,
    
@@ -630,38 +630,38 @@ function clearCollections(schema) {
 
 
 module.exports = {
-   initializer: function () {
-      saveData(_roles, db.roles);
-      saveData(_users, db.users);
-      saveData(_company, db.companies);
-      saveData(_correlatives, db.correlatives);
-      saveData(_carteras, db.carteras);
-      saveData(_programs, db.programs);
-      saveData(_modulos, db.modules);
-      saveData(_facilitators, db.facilitators);
-      saveData(_cashFlowUser, db.cashFlowUsers);
-      saveData(_offices, db.offices);
-      saveData(_events, db.events);
-      saveData(_persons, db.persons);
-      saveData(_lists, db.lists);
-      saveData(_cashFlowOffices,db.cashFlowOffices);
+  initializer: function () {
+     saveData(_roles, db.roles);
+     saveData(_users, db.users);
+     saveData(_company, db.company);
+     saveData(_correlatives, db.correlatives);
+     saveData(_carteras, db.carteras);
+     saveData(_programs, db.programs);
+     saveData(_modulos, db.modules);
+     saveData(_facilitators, db.facilitators);
+     saveData(_cashFlowUser, db.cashFlowUsers);
+     saveData(_offices, db.offices);
+     saveData(_events, db.events);
+     saveData(_persons, db.persons);
+     saveData(_lists, db.lists);
+     saveData(_cashFlowOffices,db.cashFlowOffices);
 
-   },
+  },
 
-   clearCollections: function () {
-      clearCollections(db.roles);
-      clearCollections(db.users);
-      clearCollections(db.carteras);
-      clearCollections(db.programs);
-      clearCollections(db.events);
-      clearCollections(db.persons);
-      clearCollections(db.modules);
-      clearCollections(db.offices);
-      clearCollections(db.cashFlowUsers);
-      clearCollections(db.companies);
-      clearCollections(db.facilitators);
-      clearCollections(db.correlatives);
-      clearCollections(db.lists);
-      clearCollections(db.cashFlowOffices);
-   }
+  clearCollections: function () {
+     clearCollections(db.roles);
+     clearCollections(db.users);
+     clearCollections(db.carteras);
+     clearCollections(db.programs);
+     clearCollections(db.events);
+     clearCollections(db.persons);
+     clearCollections(db.modules);
+     clearCollections(db.offices);
+     clearCollections(db.cashFlowUsers);
+     clearCollections(db.company);
+     clearCollections(db.facilitators);
+     clearCollections(db.correlatives);
+     clearCollections(db.lists);
+     clearCollections(db.cashFlowOffices);
+  }
 };
