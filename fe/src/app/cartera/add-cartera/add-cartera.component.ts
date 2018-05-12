@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef,ViewChild,Output,EventEmitter } from '@an
 import {PeticionesService } from '../../services/peticiones.service';
 import { Identity,CarteraS } from "../../services/global";
 import {Cartera} from '../../modelo/cartera';
-import { ActivatedRoute,Router } from "@angular/router";
+import { ActivatedRoute,Router,Route } from "@angular/router";
 
 @Component({
   selector: 'app-add-cartera',
@@ -19,7 +19,11 @@ export class AddCarteraComponent implements OnInit {
   public cartera;
   public carteraName;
 
-  constructor(private _peticionesService:PeticionesService) { 
+  constructor(
+      private _peticionesService:PeticionesService,
+      private router:Router  
+      
+    ) { 
      this.cartera = new Cartera ("",null)
   }
 
@@ -43,15 +47,17 @@ export class AddCarteraComponent implements OnInit {
     console.log(this.cartera);
     if(this.simbolos(this.carteraName)){
       console.log("hay simbolos");
-      window.alert("No se permiten simbolos");
+      this.router.navigate(['home/cartera']);
+
+       alert("No se permiten simbolos");
     }else{
-      this._peticionesService.crearCartera(this.cartera).subscribe(
+      this._peticionesService.addCartera(this.cartera).subscribe(
         
         result=> {
           var esperado = result;
        // console.log(esperado);
-       // this.router.navigate(['home/event', this.eventId]);
-        alert('Se Creo correctamente la cartera');
+       alert('Se Creo correctamente la cartera');
+       this.router.navigate(['home/cartera']);
         },
         error=>{}
       )
@@ -76,6 +82,10 @@ export class AddCarteraComponent implements OnInit {
     }
 
    
+  }
+  cancel(){
+
+    this.router.navigate(['home/cartera']);
   }
 
 }

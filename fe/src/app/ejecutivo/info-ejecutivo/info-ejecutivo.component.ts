@@ -105,5 +105,11 @@ export class InfoEjecutivoComponent implements OnInit {
     });
 
  }
+ goEjecutivoList(){
+
+  // this.router.navigate(['home/ejecutivo']);
+  window.history.back();
+
+ }
 
 }

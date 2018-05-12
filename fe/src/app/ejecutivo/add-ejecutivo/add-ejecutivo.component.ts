@@ -31,7 +31,7 @@ export class AddEjecutivoComponent implements OnInit {
   /////////////////////////////////////////////////
   
  
-  model = new Ejecutivo(Identity._id,"NOMBRE","APELLIDO","",true,6532,"ASDF@ASDF.ASD","this.roles[1].name","asdf","asdf");
+  model = new Ejecutivo(Identity._id,"","","",true,undefined,"","","","");
   // model=new Ejecutivo();
   get diagnostic() { return JSON.stringify(this.model); }
 /////////////////////////////////////////////////
@@ -75,44 +75,6 @@ export class AddEjecutivoComponent implements OnInit {
   }
  
 
-//   save(){
-//     const name= this.nameRef.nativeElement.value;
-//     let date=this.dateRef.nativeElement.value;
-//     let cell=this.cellRef.nativeElement.value;
-//     this.carteraSeleccionada=this.carteraRef.nativeElement.value;
-//     const userid=Identity._id;
-//    this.rolid=Roles[1]._id
-//     let asdf=cell+'';
-  
-
-//     const newEjecutivo=new User(userid,name,true,name,this.rolid);
-   
-//    if(( this.nameRef.nativeElement.value=='') || (this.cellRef.nativeElement.value   =='') ){
-//      window.alert("Asegurese que todos los campos esten llenados");
-//    console.log(newEjecutivo);
-//    return;
-    
-//    }else{
-//     this._peticionesService.addUser(newEjecutivo).subscribe(response=>{
-//       this.newUser=response;
-//       console.log(this.newUser);
-//       this.MessageEvent.emit();
-      
-//       this.findCartera();
-      
-      
-      
-//         this.close.nativeElement.click();
-      
-     
-
-//     })
-
-//    }
-
-   
-
-//   }
   findCartera(){
     this.carteraSeleccionada=this.model.cartera;
     console.log(this.carteraSeleccionada);
@@ -146,6 +108,10 @@ export class AddEjecutivoComponent implements OnInit {
       }
     )
 
+  }
+  cancel(){
+
+    this.router.navigate(['home/ejecutivo']);
   }
 
 }

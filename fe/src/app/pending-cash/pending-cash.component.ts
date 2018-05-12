@@ -17,15 +17,16 @@ export class PendingCashComponent implements OnInit {
 
   public cajas;
   public nuevasCajas=[];
-  public pendienteUsuario;
-  public pendienteFechaInicio;
-  public pendieteFechaFin;
-  public pendienteMonto;
-  public penditeState;
+  // public pendienteUsuario;
+  // public pendienteFechaInicio;
+  // public pendieteFechaFin;
+  // public pendienteMonto;
+  // public penditeState;
   public confirmedCash;
+  public btnInactive=true;
 
 
-  public test=23;
+
   
 
   constructor(
@@ -87,10 +88,12 @@ export class PendingCashComponent implements OnInit {
     this._peticionesService.confirmCashFlowUser(idCaja).subscribe(response=>{
 
       this.confirmedCash=response;
-      // this.router.navigate(['home/pendientes']);
-      setTimeout(() => {
-        this.router.navigate(['home/pendientes'])
-      }, 500);
+      this.router.navigate(['home/pendientes']);
+      this.router.navigate(['home/pendientes']);
+      this.router.navigate(['home/pendientes']);
+      this.router.navigate(['home/pendientes']);
+
+      
       
     })
     // this.router.navigateByUrl('/home/programs', {skipLocationChange: true}).then(()=>

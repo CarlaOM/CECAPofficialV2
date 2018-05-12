@@ -27,6 +27,7 @@ export class EditEjecutivoComponent implements OnInit {
   public ejecutivoOffice;
   public ejecutivoCartera;
   
+  
 
   public carteraSeleccionada;
   public carteraObject;
@@ -38,20 +39,9 @@ export class EditEjecutivoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._peticionesService.getCarteras().subscribe(response=>{
+    this._peticionesService.getCarterasLibres().subscribe(response=>{
       this.carteras=response;
-
-      
-
-      // for (let cart of this.carteras) {
-      //   if(cart.user==this.ejecutivoId){
-
-      //       this.carteraActual=cart;
-           
-      //   }
-        
-      // }
-      
+      console.log(this.carteras);
     });
     this._peticionesService.getSucursales().subscribe(response=>{
       this.sucursales=response;
@@ -64,14 +54,14 @@ export class EditEjecutivoComponent implements OnInit {
     
     this.queryEjecutivoId();
     this.findEjecutivo();
-    this.findCarteraFromEjecutivo();
   }
 
   queryEjecutivoId(){
       this.route.params.subscribe(params => {
       this.ejecutivoId=params.active;
 
-     
+      this.findCarteraFromEjecutivo();
+
      
    });
   }
@@ -162,19 +152,22 @@ export class EditEjecutivoComponent implements OnInit {
 
 
   findCarteraFromEjecutivo(){
+      this._peticionesService.getCarteraFromUserId(this.ejecutivoId).subscribe(result=>{
+          this.carteraActual=result;
+          this.carteras.push(this.carteraActual);
 
-  //   this._peticionesService.findCarteraFromEjecutivo(this.ejecutivoId).subscribe(
-  //       result=>{
+          this.ejecutivoCartera=result;
 
-
-  //       }
-
-  //   )
-    
-    
+          console.log(this.carteras);
+      })
+  
    }
   onSubmit() { 
    this.saveEjecutivo();
+  }
+  cancel(){
+
+    this.router.navigate(['home/ejecutivo']);
   }
 
   
