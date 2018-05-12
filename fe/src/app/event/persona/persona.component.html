@@ -31,7 +31,8 @@
               <th>Apellido</th>
               <th>Telefono</th>
               <th>Ocupacion</th>
-              <th colspan="2">Ajustes</th>
+              <th>Asistencia</th>
+              <th colspan="2">Opciones</th>
            </tr>
         </thead>
         <tbody> 
@@ -42,7 +43,16 @@
               <td>{{ i.cellphone }}</td>
               <td>{{ i.ocupation }}</td>
               <td>
+                  <p *ngIf="color == 'verde'">
+                    <a class=" btn btn-success" (click)="butonv()">ok</a>
+                  </p>
+                  <p *ngIf="color == 'rojo'">
+                    <a class=" btn btn-danger" (click)="butonv()">not</a>
+                  </p>
+              </td>
+              <td>
                  <a class="btn btn-primary" (click)="edit(i._id)">EDITAR</a>
+                 <a class="btn btn-primary" (click)="asistence(i._id)">ASISTENCIA</a>
               </td>
            </tr>
         </tbody>

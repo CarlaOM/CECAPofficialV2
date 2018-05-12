@@ -18,7 +18,7 @@ export class PersonaComponent implements OnInit {
   public busqueda;
    public name: string;
    public searchText: string = "";
-
+  public color='rojo';
   constructor(
      private router: Router,
      private route: ActivatedRoute,
@@ -46,10 +46,17 @@ export class PersonaComponent implements OnInit {
     );
  }
   edit(_id) {
-    
     this.router.navigate(['home/persons/edit', _id]);
   }
-
+  asistence(_id){
+    this.router.navigate(['home/persons/asistencia', _id]);
+  }
+  butonv(){
+    this.color='verde'
+  }
+  butonr(){
+    this.color='rojo'
+  }
   clearFilter() {
     this.searchText = "";
   }

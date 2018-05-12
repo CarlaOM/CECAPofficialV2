@@ -1,0 +1,26 @@
+<div class="content-wrapper">
+  <section class="content">
+     <div style="text-align:center; margin:auto; width:40%;">
+        CONTROL ASISTENCIA
+           <div><label><h1>{{ person.first_name }} {{person.last_name}}</h1></label></div>
+       <div >
+          <div class="form-group col-sm-8" style="text-align: center">
+              <label for="first_name" class="control-label" >Nombre</label>
+                  <input type="text" class="form-control" id="first_name" 
+                  [(ngModel)]="person.first_name" name="first_name" #firstname="ngModel" required />
+                  <span *ngIf="!firstname.valid && firstname.touched" class="text-alert">
+                          *Nombre de persona requerido.
+                  </span>
+              <!-- <div [hidden]="first_name?.valid || first_name?.pristine" class="text-alert">
+                  kjknkasdkjhjask
+              </div> -->
+          </div>
+          <div class="jumbotron">
+            <input type="submit" value="GUARDAR" class="btn btn-success" (click)="saveEdition()"/>
+            <input type="submit" value="CANCELAR" class="btn btn-success" (click)="cancelar()"/>
+          </div>
+       </div>
+   </div>
+ </section>
+   
+</div>

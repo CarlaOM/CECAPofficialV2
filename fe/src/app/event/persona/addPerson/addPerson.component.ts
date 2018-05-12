@@ -69,6 +69,7 @@ export class AddPersonComponent implements OnInit {
             console.log(esperado);
            // this.router.navigate(['home/event', this.eventId]);
             alert('Se Registro a la persona de manera correcta');
+            
           },
           error => {
             var errorMessage = <any>error;
@@ -112,6 +113,7 @@ export class AddPersonComponent implements OnInit {
             });
     }
     cancel(){
-        this.router.navigate(['home/events']);
+        // this.router.navigate(['home/events']);
+        window.history.back();
     }
 }
