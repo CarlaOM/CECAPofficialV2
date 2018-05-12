@@ -21,27 +21,22 @@ router
    })
 
    .post('/', function (req, res) {
-      var person = new db.persons(req.body);
+      var person = new db.persons(req.body.persona);
       console.log(person);
       //    db.persons.findOne({ci: req.body.ci,cellphone: req.body.cellphone}, function(err, existeCi){
       //       if (existeCi == null) {
-                  db.persons.findOne({ci: req.body.ci,cellphone: req.body.cellphone}, function(err, existeCellphone){
+                  db.persons.findOne({ci: req.body.persona.ci,cellphone: req.body.persona.cellphone}, function(err, existeCellphone){
                         if(existeCellphone == null){
                               if (person.first_name == '' || person.last_name == '' || person.ci == '' || person.carteras == '') 
                               return res.status(400).send();
                               // save person
                               person.save(function (err, person) {
                               if (err) return res.status(400).send(err);
-                              add(person);//enviar Tp, Mp, Cp
+                              addInscription(person,0,0,req.body.montCancel, req.body.idUser, req.body.idEvent);//enviar Tp, Mp, Cp
                               });
-                              function add(person, totalPrice, modulPrice, canceledPrice, user) {
-                                    // var inscription = {
-                                    //    state: 0,
-                                    //    person: person._id,
-                                    //    user: person.user
-                                    //    //description
-                                    // };
-                                    inscript = {
+                              function addInscription(person, totalPrice, modulPrice, canceledPrice, user,idEvent) {
+                                    
+                                   var inscription = {
                                           // segun al numero de asistencias sacar el precio total q tiene q pagar
                                           total_price: totalPrice,
                                           module_price: modulPrice,
@@ -53,9 +48,20 @@ router
                                           users: user
                                        };
                                     var d = new Date();
-                                    db.events.update({
-                                          date_start: { $gt: d }
-                                       }, 
+                                    //////////////////////
+                                    // db.events.update({ _id: idEvent, 'inscriptions.person': req.body.person },
+                                    //       {
+                                    //             $set: { 'inscriptions.$.state': req.body.state, 'inscriptions.$.description': req.body.description }
+                                    //       }).exec(function (err, off) {
+                                    //             if (err) return res.status(400).send(err);
+                                    //             //db.events.find({ _id: req.body.name, _id: { $in: req.body.person } }, function (err, event) {
+                                    //             db.events.find({ _id: req.body.name }, function (err, event) {
+                                    //                   if (err) return res.status(401).send(err);
+                                    //             return res.status(201).send(event);
+                                    //             });
+                                    //             //	if (off.nModified == 0) return res.status(406).send();
+                                    //       });
+                                    db.events.update({_id: idEvent}, 
                                        {
                                           $push: {
                                              inscriptions: inscription
@@ -83,6 +89,8 @@ router
    })
 
    .put('/:id', function (req, res) {
+      console.log("exito");
+      console.log(req.params.id);
       db.persons.findOne({ _id: req.params.id }, function (err, person) {
          if (err) return res.status(400).send(err);
          if (person == null) return res.status(404).send();

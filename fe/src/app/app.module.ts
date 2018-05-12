@@ -31,8 +31,7 @@ import { SucursalService } from './services/sucursal.service'
 import {HttpClientModule} from '@angular/common/http';
 import { AddProgramComponent } from './events/addProgram/addProgram.component';
 import { AddEventComponent } from './events/addEvent/addEvent.component';
-import { AddPersonComponent } from './event/addPerson/addPerson.component';
-import { EditPersonComponent } from './event/editPerson/editPerson.component';
+import { AddPersonComponent } from './event/persona/addPerson/addPerson.component';
 import { AddEjecutivoComponent } from './ejecutivo/add-ejecutivo/add-ejecutivo.component';
 
 
@@ -99,7 +98,6 @@ import { ConfirmPendingCashComponent } from './pending-cash/confirm-pending-cash
     AddEventComponent,
     AddPersonComponent,
     PersonaComponent,
-    EditPersonComponent,
     
     ReportsComponent,
     ReportTrimestralComponent,
