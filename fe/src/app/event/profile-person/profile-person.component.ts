@@ -18,8 +18,14 @@ export class ProfilePersonComponent implements OnInit {
   public date;
   public carteras;
   public carteraReturned;
-  public registro: Registro;
-  public inscription;
+  public ocupation;
+  public ocupations: DescOcupation;
+  public program;
+  public programId;
+  public finalWork;
+  //public registro: Registro;
+  //public inscription;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -34,11 +40,13 @@ export class ProfilePersonComponent implements OnInit {
     });
     this.queryPersonId();
     this.findPerson();
+    this.queryProgram();
+    this.findProgram();
   }
   queryPersonId(){
     this.route.params.subscribe(params => {
     this.personId=params.id;
-     });
+    });
   }
   findPerson(){
     console.log(this.personId)
@@ -47,6 +55,10 @@ export class ProfilePersonComponent implements OnInit {
          this.person = result;
          console.log(result)
          this.findCartera(this.personId);
+         this.ocupation = this.person.ocupation;
+         console.log(this.ocupation)
+         this.ocupations = this.person.descOcupation;
+         console.log(this.ocupations)
       },
       error => {
          console.log(<any>error);
@@ -62,7 +74,32 @@ export class ProfilePersonComponent implements OnInit {
       console.log(<any>error);
     });
   }
+  queryProgram(){
+    this.route.params.subscribe(params => {
+    this.programId=params.id;
+    });
+  }
+  findProgram(){
+    this._peticionesService.getProgram(this.programId).subscribe(
+      result => {
+         this.program = result;
+         console.log(result)
+      },
+      error => {
+         console.log(<any>error);
+      });
+      this.fillFinalWork(this.programId);
+  }
+  fillFinalWork(programId){
+      this._peticionesService.getPerson(this.personId).subscribe(
+         result => {
+            this.finalWork = result;
+            console.log(this.finalWork);
+         },
+         error => {
+            console.log(<any>error);
+         });
+  }
   fillModulars(){}
-  fillFinalWork(){}
   fillRequirements(){}
 }
