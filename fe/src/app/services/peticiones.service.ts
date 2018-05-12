@@ -38,6 +38,7 @@ export class PeticionesService {
         return this._http.post(this.url + 'programs/add', body, { headers: headers }).map((res: Response) => res);
     }
     getPrograms() {
+     
         return this._http.get(this.url + 'programs').map((res: Response) => res);
     }
     getProgram(_id) {
@@ -83,6 +84,9 @@ export class PeticionesService {
     getCarteras() {
         return this._http.get(this.url + 'carteras').map((res: Response) => res);
     }
+    getCartera(_id) {  
+        return this._http.get(this.url + 'carteras/' + _id).map((res: Response) => res);
+    }
     getCarterasLibres() {
         return this._http.get(this.url + 'carteras/libres').map((res: Response) => res);
     }
@@ -90,12 +94,7 @@ export class PeticionesService {
         let body = JSON.stringify(cartera);
         var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
         return this._http.post(this.url + 'carteras/guardar', body, { headers: headers }).map((res: Response) => res);
-    }
-    getCartera(_id) { 
-        
-        return this._http.get(this.url + 'carteras/' + _id).map((res: Response) => res);
-    }
-    
+    } 
     getFacilitadores() {
         return this._http.get(this.url + 'facilitators').map((res: Response) => res);
     }
