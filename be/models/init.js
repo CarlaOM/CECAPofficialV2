@@ -16,36 +16,6 @@ var _offices_stc = {
 var _offices = [_offices_stc];
 //////////////////////////////////////////////////////////
 
-var _cashFlowOffices_stc={
-
-  date_start: '2018-03-10',
-  date_end: '',
-  amount: 2500,
-  amount_delivered: 0,
-  input:2500,
-  output:0,
-  details:[{
-            cashFlowUsers:_cashFlowUser1,
-            dateCloseCash:'',
-
-           },{
-             cashFlowUsers:_cashFlowUser2,
-             dateCloseCash:'',
-           },{
-             cashFlowUsers:_cashFlowUserAdmin,
-             dateCloseCash:'',
-           }
-  ],
-  offices: _offices_stc,
-  active:true,
-  
-
-  _id: new mongoose.Types.ObjectId,
-  record_date: new Date()
-};
-
-var _cashFlowOffices=[_cashFlowOffices_stc];
-/////////////////////////////////////////////////////////
 var _company0 = {
    name: 'CECAP Company',
    nit: 71231901020,
@@ -205,6 +175,32 @@ var _cashFlowUserAdmin = {
 var _cashFlowUser = [_cashFlowUser1, _cashFlowUser2,_cashFlowUserAdmin];
 
 ///////////////////////////////////////////
+
+var _cashFlowOffices_stc={
+
+  date_start: '2018-03-10',
+  date_end: '',
+  amount: 1000,
+  amount_delivered: 0,
+  input:1000,
+  output:0,
+  details:[{
+            cashFlowUsers:_cashFlowUser1,
+            dateCloseCash:'2018-04-25',
+
+           },
+  ],
+  offices: _offices_stc,
+  active:true,
+  
+
+  _id: new mongoose.Types.ObjectId,
+  record_date: new Date()
+};
+
+var _cashFlowOffices=[_cashFlowOffices_stc];
+/////////////////////////////////////////////////////////
+
 var _correlative1 = {
    year: '2018-03-04',
    company_id: _company._id, //ObjectId
