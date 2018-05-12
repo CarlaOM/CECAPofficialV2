@@ -51,12 +51,18 @@ export class PersonaComponent implements OnInit {
   asistence(_id){
     this.router.navigate(['home/persons/asistencia', _id]);
   }
-  butonv(){
-    this.color='verde'
-  }
-  butonr(){
-    this.color='rojo'
-  }
+  // butonv(){
+  //  if(this.color == 'rojo') this.color='verde'
+  //  else{this.color = 'rojo'}
+  // }
+  butonv(_id){
+    if(this.color == 'rojo') {
+      this.router.navigate(['home/persons/asistencia', _id]);
+      this.color='verde'
+    }
+    else{this.color = 'rojo'}
+   }
+  
   clearFilter() {
     this.searchText = "";
   }

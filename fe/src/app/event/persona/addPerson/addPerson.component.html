@@ -65,7 +65,7 @@
                                   </span>
                           </div>
                           <!-- observed-->
-                          <div class="form-group col-sm-4">
+                          <div class="form-group col-sm-3">
                               <label for="monto" class="control-label"style="text-align:right" >Pago Inicial</label>
                                   <input type="number" class="form-control" id="monto" 
                                   [(ngModel)]="montoCan" name="monto" #monto="ngModel" required />
@@ -73,6 +73,14 @@
                                           *Monto Inicial requerido.
                                   </span>
                           </div>
+                          <div class="form-group col-sm-3">
+                                <label for="difinePrice" class="control-label"style="text-align:right" >Precio Definido</label>
+                                    <input type="number" class="form-control" id="difinePrice" 
+                                    [(ngModel)]="priceDef" name="definePrice" #definePrice="ngModel" required />
+                                    <span *ngIf="!definePrice.valid && definePrice.touched" class="text-alert">
+                                            *Necesita definir un Precio de Cobro.
+                                    </span>
+                            </div>
                       </div>
                       <div class="form-group col-sm-8">
                           <label for="ocupSelect">

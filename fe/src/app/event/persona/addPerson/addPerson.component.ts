@@ -23,7 +23,8 @@ export class AddPersonComponent implements OnInit {
     public descOcupation: DescOcupation;
     public eventos;//colection
     public programs;//colection
-    public montoCan;
+    public montoCan=0;
+    public priceDef=0;
     public IdEvent;
     public cartera;
 

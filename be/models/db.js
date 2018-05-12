@@ -186,6 +186,7 @@ module.exports = {
          total_price: Number,
          module_price: Number,
          canceled_price: Number,
+         price_event: Number,
          name: String,
          phone: Number,
          cellphone: Number,

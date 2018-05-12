@@ -42,6 +42,14 @@
               <th>{{i.last_name}}</th>
               <td>{{ i.cellphone }}</td>
               <td>{{ i.ocupation }}</td>
+              <!-- <td>
+                  <p *ngIf="color == 'verde'">
+                    <a class=" btn btn-success" (click)="butonv(i._id)">ok</a>
+                  </p>
+                  <p *ngIf="color == 'rojo'">
+                    <a class=" btn btn-danger" (click)="butonv(i._id)">not</a>
+                  </p>
+              </td>  -->
               <td>
                   <p *ngIf="color == 'verde'">
                     <a class=" btn btn-success" (click)="butonv(i._id)">ok</a>
@@ -49,7 +57,7 @@
                   <p *ngIf="color == 'rojo'">
                     <a class=" btn btn-danger" (click)="butonv(i._id)">not</a>
                   </p>
-              </td>
+              </td> 
               <td>
                  <a class="btn btn-primary" (click)="edit(i._id)">EDITAR</a>
                  <a class="btn btn-primary" (click)="asistence(i._id)">ASISTENCIA</a>
