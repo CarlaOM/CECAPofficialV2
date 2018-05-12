@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { PeticionesService } from '../../services/peticiones.service';
 import { Person } from '../../modelo/person';
+import { DescOcupation } from '../../modelo/descOcupation';
+import { Inscription } from '../../modelo/inscription';
+import { Registro } from '../../modelo/registro';
 
 @Component({
   selector: 'app-profile-person',
@@ -13,6 +16,10 @@ export class ProfilePersonComponent implements OnInit {
   public person;
   public personId;
   public date;
+  public carteras;
+  public carteraReturned;
+  public registro: Registro;
+  public inscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,6 +28,10 @@ export class ProfilePersonComponent implements OnInit {
   ) { this.date = new Date(); }
 
   ngOnInit() {
+    this._peticionesService.getCarteras().subscribe(response=>{
+      this.carteras=response;
+      console.log(this.carteras);
+    });
     this.queryPersonId();
     this.findPerson();
   }
@@ -35,15 +46,23 @@ export class ProfilePersonComponent implements OnInit {
       result => {
          this.person = result;
          console.log(result)
+         this.findCartera(this.personId);
       },
       error => {
          console.log(<any>error);
       });
   }
+  findCartera(personId){
+    this._peticionesService.getCartera(this.person.carteras).subscribe(
+    result =>{
+      this.carteraReturned=result;
+      //console.log(this.carteraReturned)
+    },
+    error =>{
+      console.log(<any>error);
+    });
+  }
   fillModulars(){}
   fillFinalWork(){}
   fillRequirements(){}
-  editProfile(_id:string){
-    this.router.navigate(['/home/profile/edit', _id]);
-  }
 }
