@@ -189,9 +189,9 @@ module.exports = {
          dolares_price: Number,
          canceled_price: Number,
          price_event: Number,
-         name: String,
-         ci: String,
-         cellphone: Number,
+      //    name: String,
+      //    ci: String,
+      //    cellphone: Number,
          persons: ObjectId,
          users: ObjectId
       }],
