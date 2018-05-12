@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.Types.ObjectId;
 process.env.TZ = 'America/La_Paz';
 
-module.exports = { 
+module.exports = {
    ///Account
    roles: mongoose.model('roles', new Schema({
       name: String,
@@ -39,7 +39,6 @@ module.exports = {
    ////////////////////////////////////////////////////////////////////////////
 
    cashFlowUsers: mongoose.model('cashFlowUsers', new Schema({
-      
       date_start: Date,
       date_end: Date,
       amount: Number,
@@ -58,7 +57,6 @@ module.exports = {
       state:Number,////////-1 sin cerrar
                   //////// 0  pendiente
                   ////////  1 cerrado
-      
 
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } },
@@ -130,16 +128,15 @@ module.exports = {
          programs: [{
             programs: ObjectId,
             modulars: [{
-               amount: [{  ///observation
+               amount: {  ///observation
                   detail: String,
-                  receipt: Number,// nro factura
+                  receipt: String,// nro factura
                   date: Date,
                   amount: Number
-               }],
-               debt: Number,  //deuda
-               assistance: Boolean,
+               },
+               assist: Boolean, //cambio
                events: ObjectId,
-               inscription: ObjectId,
+               // inscription: ObjectId,
                modules: ObjectId,
                print_certificate: Boolean,
             }],
@@ -148,6 +145,9 @@ module.exports = {
                observations: String,
             },
             requirements: [],
+            total_price: Number,
+            payed: Number,
+            debt: Number,  //deuda
             print_diploma: Boolean
          }]
       },
@@ -183,12 +183,11 @@ module.exports = {
       }],
       inscriptions: [{
          // segun al numero de asistencias sacar el precio total q tiene q pagar
-         total_price: Number,
+         total_price: Number, //total a pagar segun asistencia
          module_price: Number,
+         bolivianos_price: Number,
+         dolares_price: Number,
          canceled_price: Number,
-         name: String,
-         phone: Number,
-         cellphone: Number,
          persons: ObjectId,
          users: ObjectId
       }],
@@ -202,8 +201,9 @@ module.exports = {
 
    ////////////////////////////////////////////////////////
    lists: mongoose.model('lists', new Schema({
-      amount: Number,
-      receipt: Number, 
+      bolivianos: Number,
+      dolares: Number,
+      receipt: String, // varios recibos
       assist: Boolean,
       type: Number, //nuevo // nivelacion
       persons: ObjectId,
@@ -251,7 +251,7 @@ module.exports = {
 
    //////////////////////////////////////////////////////////////////
 
-   companies: mongoose.model('companies', new Schema({
+   company: mongoose.model('company', new Schema({
       name: String,
       nit: String,
       caja: Number,
@@ -292,7 +292,7 @@ module.exports = {
 
    //Connection
    connection: function () {
-      var db = mongoose.connect('mongodb://localhost:27017/Cecap2',
+      var db = mongoose.connect('mongodb://localhost:27017/CecapImports',
          function (err) {
             if (err) return console.log(err);
             console.log("MongoDB: connection to database succesful!");
