@@ -275,4 +275,22 @@ export class PeticionesService {
    
     }
    
+    addDetailCashFlowOffice(detail){
+
+        // console.log(egreso);
+        let body = JSON.stringify(detail);
+        //console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'cajaSucursal/addDetail', body, { headers: headers }).map((res: Response) => res);
+   
+    }
+
+    getCurrentCashFlowOffice(id){
+        // console.log(id);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.get(this.url + 'cajaSucursal/current/' + id, { headers: headers }).map((res: Response) => res);
+   
+    
+    }
+
 }

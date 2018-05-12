@@ -45,6 +45,7 @@ app
    .use('/cajaUsuario', require('./routes/cajaUsuario'))
    .use('/companies', require('./routes/companies'))  
    .use('/correlatives', require('./routes/correlatives'))
+   .use('/cajaSucursal',require('./routes/cajaSucursal'))
    .use(function (err, req, res, next) { 
       console.error(err.stack);
       return res.status(err.status || 500).send('Not Found');
