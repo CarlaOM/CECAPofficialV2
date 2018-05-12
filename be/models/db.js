@@ -210,7 +210,7 @@ module.exports = {
       receipt: String, // varios recibos
       assist: Boolean,
       type: Number, //nuevo // nivelacion
-      persons: ObjectId,
+      person: ObjectId,
       events: ObjectId,
       modulars: ObjectId,
       
