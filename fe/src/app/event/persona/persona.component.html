@@ -44,10 +44,10 @@
               <td>{{ i.ocupation }}</td>
               <td>
                   <p *ngIf="color == 'verde'">
-                    <a class=" btn btn-success" (click)="butonv()">ok</a>
+                    <a class=" btn btn-success" (click)="butonv(i._id)">ok</a>
                   </p>
                   <p *ngIf="color == 'rojo'">
-                    <a class=" btn btn-danger" (click)="butonv()">not</a>
+                    <a class=" btn btn-danger" (click)="butonv(i._id)">not</a>
                   </p>
               </td>
               <td>

@@ -22,15 +22,26 @@
          </tr>
       </thead>
       <tbody> 
-         <tr *ngFor="let caja of nuevasCajas">
+         <tr *ngFor="let caja of nuevasCajas" [ngSwitch]="caja.estado">
 
 
                 <td class="">{{caja.usuario}}</td>
                 <td class="">{{caja.fechaInicio|date}}</td>
                 <td class="">{{caja.fechaFin|date}}</td>
                 <td class="">{{caja.monto}}</td>
-                <td class="">{{caja.idCaja}}</td>
-                <td class="">{{caja.estado}}</td>
+                <td class=""> <a class="btn btn-warning" (click)="infoPendiente(caja.idCaja)">Ver Detalle y confirmar</a></td>
+                <!-- <td>{{caja.estado}}</td> -->
+                <td class="" *ngSwitchCase="-1">
+                    Caja sin Confirmar
+                </td>
+                <td class="danger" *ngSwitchCase="0">
+                    <!-- <a class="btn btn-warning" (click)="confirmarCaja(caja.idCaja)">caja por confirmar</a> -->
+                    caja por confirmar
+                </td>
+                <td class="success" *ngSwitchCase="1">
+                    <!-- <a class="btn btn-success" >Caja Confirmada</a> -->
+                    caja  confirmada
+                </td>
                 <ng-template #vacio class="">
                   ---
     

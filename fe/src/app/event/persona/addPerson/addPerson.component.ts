@@ -30,6 +30,7 @@ export class AddPersonComponent implements OnInit {
     public registro: Registro;
 
     public inscription;
+    submitted= false;
 
     constructor(
         private _peticionesService: PeticionesService,

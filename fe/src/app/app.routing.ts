@@ -46,6 +46,7 @@ import { AddEventComponent } from './events/addEvent/addEvent.component';
 import { PendingCashComponent } from "./pending-cash/pending-cash.component";
 import { ControlAsistanceComponent } from './event/control-asistance/control-asistance.component';
 
+import { InfoPendingCashComponent } from "./pending-cash/info-pending-cash/info-pending-cash.component";
 //import { AlertComponent } from './events/alert/alert.component';
 
 
@@ -98,6 +99,7 @@ const appRoutes: Routes = [
          { path: 'facilitador/edit/:id', component:EditFacilitadorComponent},
          { path: 'correlative/add', component:AddCorrelativeComponent},
          { path: 'pendientes',component:PendingCashComponent},
+         { path: 'pendientes/info/:id',component:InfoPendingCashComponent}
 
       ]
    },
