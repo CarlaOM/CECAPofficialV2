@@ -55,36 +55,36 @@
                     <td>{{person?.ocupation}}</td>                                                                                        
                   </tr>
                 <!--Universitario-->
-                  <tr>
+                  <tr *ngIf="ocupation=='universitario'">
                       <td>Carrera</td>                                        
-                      <td>{{person?.descOcupation["carrera"]}}</td>                                      
+                      <td>{{ocupations?.carrera}}</td>                                      
                   </tr>
-                  <tr> 
+                  <tr *ngIf="ocupation=='universitario'"> 
                       <td>Universidad</td>                                        
-                      <td>{{person?.descOcupation["universidad"]}}</td>                                   
+                      <td>{{ocupations?.universidad}}</td>                                   
                   </tr>
-                  <tr>
+                  <tr *ngIf="ocupation=='universitario'">
                       <td>Semestre</td>                                        
-                      <td>{{person?.descOcupation["semestre"]}}</td>                                     
+                      <td>{{ocupations?.semestre}}</td>                                     
                   </tr>
                 <!--Particular-->
-                  <tr>
+                  <tr *ngIf="ocupation=='particular'">
                       <td>Area de Trabajo</td>                                        
-                      <td>{{person?.descOcupation["areaTrabajo"]}}</td>                                     
+                      <td>{{ocupations?.areaTrabajo}}</td>                                     
                   </tr>
                   <tr>
                 <!--Profesional-->
-                  <tr>
+                  <tr *ngIf="ocupation=='profesional'">
                     <td>Profesion</td>                                        
-                    <td>{{person?.descOcupation["profesion"]}}</td>                                     
+                    <td>{{ocupations?.profesion}}</td>                                     
                   </tr>
-                  <tr>
+                  <tr *ngIf="ocupation=='profesional'">
                     <td>Empresa</td>                                        
-                    <td>{{person?.descOcupation["empresa"]}}</td>                                     
+                    <td>{{ocupations?.empresa}}</td>                                     
                   </tr>
-                  <tr>
+                  <tr *ngIf="ocupation=='profesional'">
                     <td>Cargo</td>                                        
-                      <td>{{person?.descOcupation["cargo"]}}</td>                                     
+                      <td>{{ocupations?.cargo}}</td>                                     
                   </tr>
                 </tbody>
               </table>
