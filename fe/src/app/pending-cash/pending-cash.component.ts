@@ -3,6 +3,7 @@ import { Router,ActivatedRoute,NavigationEnd } from "@angular/router";
 import {PeticionesService } from './../services/peticiones.service';
 import { Identity, } from "./../services/global";
 import { Location } from "@angular/common";
+import { CashFlowOffices } from "./../modelo/cashFlowOffices";
 
 @Component({
   selector: 'app-pending-cash',
@@ -22,8 +23,11 @@ export class PendingCashComponent implements OnInit {
   // public pendieteFechaFin;
   // public pendienteMonto;
   // public penditeState;
-  public confirmedCash;
+  public confirmedCashUser;
   public btnInactive=true;
+
+  public cashOffice:CashFlowOffices;
+  public currentCashFlowOffice;
 
 
 
@@ -35,8 +39,8 @@ export class PendingCashComponent implements OnInit {
     private route: ActivatedRoute,
     private location:Location,
   ) {
-
-        
+    this.cashOffice=new CashFlowOffices(null,null,null,null,'',null,'')
+        ///cashFlowOffice(date_start,date_end,amount,amount_delivered,cashFLOWuSER,DATECLOSECASH,OFFICES)
    }
 
   ngOnInit() {
@@ -51,6 +55,16 @@ export class PendingCashComponent implements OnInit {
 
 
       
+    })
+  ///////obtenemos  cashflowoffice  de nuestro usuario que tiene su sucursal////
+    this._peticionesService.getCurrentCashFlowOffice(Identity._id).subscribe(response=>{
+
+      this.currentCashFlowOffice=response;
+
+      console.log(this.currentCashFlowOffice);
+      console.log(this.cashOffice);
+      // this.cashOffice.=this.currentCashFlowOffice._id;
+
     })
   }
   
@@ -87,7 +101,14 @@ export class PendingCashComponent implements OnInit {
 
     this._peticionesService.confirmCashFlowUser(idCaja).subscribe(response=>{
 
-      this.confirmedCash=response;
+      this.confirmedCashUser=response;
+
+     
+      this._peticionesService.addDetailCashFlowOffice(this.cashOffice).subscribe(response=>{
+
+
+
+      })
       this.router.navigate(['home/pendientes']);
       this.router.navigate(['home/pendientes']);
       this.router.navigate(['home/pendientes']);
