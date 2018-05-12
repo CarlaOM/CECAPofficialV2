@@ -21,6 +21,8 @@ export class InfoPendingCashComponent implements OnInit {
   public detalles;
   public total;
 
+  public btnInactiveConfirm;
+
   public confirmedCash;
 
   constructor(
@@ -39,6 +41,10 @@ export class InfoPendingCashComponent implements OnInit {
       this.cash=response;
       this.detalles=this.cash.details;
       this.total=this.cash.amount;
+      if(this.cash.state==1){
+
+        this.btnInactiveConfirm=true;
+      }
 
      })
   }
