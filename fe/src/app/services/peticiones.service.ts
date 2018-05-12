@@ -270,5 +270,10 @@ export class PeticionesService {
         return this._http.get(this.url + 'cajaUsuario/close/' + id, { headers: headers }).map((res: Response) => res);
    
     }
+    confirmCashFlowUser(id){
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.get(this.url + 'cajaUsuario/confirm/' + id, { headers: headers }).map((res: Response) => res);
+   
+    }
    
 }
