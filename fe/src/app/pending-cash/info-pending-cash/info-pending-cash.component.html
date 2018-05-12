@@ -1,14 +1,11 @@
 <div class="content-wrapper">
   <section class="content-header">
       <h1>
-         Caja Chica Ejecutivo
+         Detalle Caja Chica Ejecutivo
          <small>ingresos - egresos</small>
       </h1>
    </section>
 <section class="content">
-      <a class="btn btn-primary a" (click)="goIngreso()" >ingreso</a>
-      <a class="btn btn-primary a" (click)="goEgreso()">egreso</a>
-      
      
    <table class="table table-hover" >
       <thead>
@@ -38,6 +35,7 @@
                   ---
     
                 </ng-template>
+                <td class=""></td>
            
 
 
@@ -52,7 +50,7 @@
           <td class="success"></td>          
           <td class="success"></td>          
           <td class="success"></td>          
-          <td class="success">{{total}}</td>       
+          <td class="success">{{total}}</td>          
 
         </tr>
       </tfoot>
@@ -61,8 +59,13 @@
    </table>
 
    
-      <a class="btn btn-danger a" (click)="goCloseCash()">Cerrar Caja</a>
-      <!-- <app-confirm-close-cash></app-confirm-close-cash> -->
+      <a class="btn btn-primary" (click)="goPendingCash()">Cancelar</a>
+
+      <!-- <a class="btn btn-danger" (click)="confirmPendingCash()">Confirmar</a> -->
+      <button class="btn btn-danger" [disabled]="btnInactiveConfirm" (click)="confirmPendingCash()">Confirmar</button>
+
+
    
 </section>
+<!-- <router-outlet></router-outlet> -->
 </div>

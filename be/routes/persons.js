@@ -88,6 +88,8 @@ router
    })
 
    .put('/:id', function (req, res) {
+      console.log("exito");
+      console.log(req.params.id);
       db.persons.findOne({ _id: req.params.id }, function (err, person) {
          if (err) return res.status(400).send(err);
          if (person == null) return res.status(404).send();

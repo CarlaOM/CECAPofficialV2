@@ -31,8 +31,7 @@ import { SucursalService } from './services/sucursal.service'
 import {HttpClientModule} from '@angular/common/http';
 import { AddProgramComponent } from './events/addProgram/addProgram.component';
 import { AddEventComponent } from './events/addEvent/addEvent.component';
-import { AddPersonComponent } from './event/addPerson/addPerson.component';
-import { EditPersonComponent } from './event/editPerson/editPerson.component';
+import { AddPersonComponent } from './event/persona/addPerson/addPerson.component';
 import { AddEjecutivoComponent } from './ejecutivo/add-ejecutivo/add-ejecutivo.component';
 
 
@@ -80,6 +79,9 @@ import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facil
 import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-facilitador.component';
 import { ProfilePersonComponent } from './event/profile-person/profile-person.component';
 import { PendingCashComponent } from './pending-cash/pending-cash.component';
+import { InfoPendingCashComponent } from './pending-cash/info-pending-cash/info-pending-cash.component';
+import { ConfirmCloseCashComponent } from './caja/confirm-close-cash/confirm-close-cash.component';
+import { ConfirmPendingCashComponent } from './pending-cash/confirm-pending-cash/confirm-pending-cash.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +98,6 @@ import { PendingCashComponent } from './pending-cash/pending-cash.component';
     AddEventComponent,
     AddPersonComponent,
     PersonaComponent,
-    EditPersonComponent,
     
     ReportsComponent,
     ReportTrimestralComponent,
@@ -146,7 +147,10 @@ import { PendingCashComponent } from './pending-cash/pending-cash.component';
     EditFacilitadorComponent,
     ProfilePersonComponent,
     AlertComponent,
-    PendingCashComponent
+    PendingCashComponent,
+    InfoPendingCashComponent,
+    ConfirmCloseCashComponent,
+    ConfirmPendingCashComponent
 
   ],
   imports: [

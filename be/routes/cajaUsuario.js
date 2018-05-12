@@ -7,6 +7,7 @@ var router = express.Router();
 
 router
     .get('/', function (req, res) {
+        /////lista todas las cajas activas//////
         db.cashFlowUsers.find({active:true}, function (err, cajas) {
         if (err) return res.status(400).send(err);
 
@@ -16,12 +17,17 @@ router
         });
     })
     .get('/pending', function (req, res) {
-        db.cashFlowUsers.find({state:0}, function (err, cajas) {
+        ////// lista todas las cajas que estan en el etado pendientes////
+        /////// para el gerente////
+        // db.cashFlowUsers.find({state:0,active:true,state:1}, function (err, cajas) {
+        db.cashFlowUsers.find({$or:[{active:true,state:0},{active:true,state:1}]}, function (err, cajas) {
+
         if (err) return res.status(400).send(err);
         return res.status(200).send(cajas);
         });
     })
    .get('/:id', function (req, res) {
+       /////////busca una caja con el id de la caja ////////
       db.cashFlowUsers.findOne({_id:req.params.id}, function (err, cajaUsuario) {
          if (err) return res.status(400).send(err);
 
@@ -29,7 +35,9 @@ router
       });
    })
    .get('/byUser/:id', function (req, res) {
-    db.cashFlowUsers.findOne({active:true,user:req.params.id}, function (err, cajaUsuario) {
+       ////////lista de cajas del usuario activas para que pueda cerrar ////
+       ////////para el usuario////
+    db.cashFlowUsers.findOne({active:true,state:-1,user:req.params.id}, function (err, cajaUsuario) {
        if (err) return res.status(400).send(err);
 
        return res.status(200).send(cajaUsuario);
@@ -52,7 +60,7 @@ router
         events:caja.events
     };
 
-    db.cashFlowUsers.findOne({active:true, user:caja.user},function(err,caja){
+    db.cashFlowUsers.findOne({active:true,state:-1, user:caja.user},function(err,caja){
         if(err) return res.status(400).send(err);
         caja.details.push(detail),function(err,detail){
             if(err) return res.status(400).send(err);
@@ -116,7 +124,7 @@ router
         title:cajaEgreso.title,
         events:cajaEgreso.events,
     };
-    db.cashFlowUsers.findOne({active:true,user:cajaEgreso.user},function(err,caja){
+    db.cashFlowUsers.findOne({active:true,state:-1,user:cajaEgreso.user},function(err,caja){
 
         if(err) return res.status(400).send(err);
         caja.details.push(detailEgreso),function(err,detail){
@@ -162,11 +170,11 @@ router
     .get('/close/:id',function(req,res){
 
         // var cajaClose=req.body;
-        db.cashFlowUsers.findOne({active:true,user:req.params.id},function(err,cajaForClose){
+        db.cashFlowUsers.findOne({active:true,state:-1,user:req.params.id},function(err,cajaForClose){
 
             if(err) return res.status(400).send(err);
 
-            cajaForClose.active=false;
+            cajaForClose.active=true;
             cajaForClose.date_end=new Date();
             cajaForClose.state=0;
             ////////////////////////////////////
@@ -203,7 +211,18 @@ router
 
 
     })
-
+   
+    .get('/confirm/:id', function (req, res) {
+        //////confirmar caja usuario /cambiar de estdo de 0 a 1 ///
+        ////desde gerente///////
+       db.cashFlowUsers.findOne({_id:req.params.id}, function (err, cajaUsuario) {
+          if (err) return res.status(400).send(err);
+ 
+          cajaUsuario.state=1;
+          cajaUsuario.save();
+          return res.status(200).send(cajaUsuario);
+       });
+    })
 
 
 
