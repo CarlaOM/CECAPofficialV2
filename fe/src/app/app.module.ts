@@ -79,6 +79,9 @@ import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facil
 import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-facilitador.component';
 import { ProfilePersonComponent } from './event/profile-person/profile-person.component';
 import { PendingCashComponent } from './pending-cash/pending-cash.component';
+import { InfoPendingCashComponent } from './pending-cash/info-pending-cash/info-pending-cash.component';
+import { ConfirmCloseCashComponent } from './caja/confirm-close-cash/confirm-close-cash.component';
+import { ConfirmPendingCashComponent } from './pending-cash/confirm-pending-cash/confirm-pending-cash.component';
 
 @NgModule({
   declarations: [
@@ -144,7 +147,10 @@ import { PendingCashComponent } from './pending-cash/pending-cash.component';
     EditFacilitadorComponent,
     ProfilePersonComponent,
     AlertComponent,
-    PendingCashComponent
+    PendingCashComponent,
+    InfoPendingCashComponent,
+    ConfirmCloseCashComponent,
+    ConfirmPendingCashComponent
 
   ],
   imports: [
