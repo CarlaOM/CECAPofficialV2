@@ -44,8 +44,8 @@ router
                                           phone: person.phone,
                                           cellphone: person.cellphone,
                                           persons: person._id,
-                                          users: user
-                                       };
+                                          users: user 
+                                    };
                                     var d = new Date();
                                     //////////////////////
                                     // db.events.update({ _id: idEvent, 'inscriptions.person': req.body.person },

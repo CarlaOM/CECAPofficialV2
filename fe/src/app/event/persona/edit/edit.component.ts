@@ -24,9 +24,10 @@ export class EditComponent implements OnInit {
     public phone;
     public email;
     public ocupacion;
+    public AreaTrabajo;
 
     public ocupSelected;
-    public descOcupation;
+    public descOcupation: DescOcupation;
     public eventos;//colection
     public programs;//colection
     public montoCan;
@@ -67,24 +68,32 @@ findPerson(){
       this.cellphone = this.person.cellphone;
       this.phone = this.person.phone;
       this.email = this.person.email;
-      this.ocupacion = this.person.ocupacion;
-      
+      this.ocupacion = this.person.ocupation;
+      this.descOcupation = this.person.descOcupation;
+      console.log(this.descOcupation+ "hola");
     }, error => {
       var errorMessage = <any>error;
           console.log(errorMessage);
     }
   )
 }
-
+captOcupation(){ 
+  console.log(this.ocupSelected);
+  this.descOcupation.universidad = '';this.descOcupation.carrera = '';
+  this.descOcupation.semestre = '';this.descOcupation.areaTrabajo = '';
+  this.descOcupation.profesion = '';this.descOcupation.cargo = '';
+  this.descOcupation.empresa = '';
+  this.person.ocupation = this.ocupSelected; 
+}
  saveEdition(){
 
   this.person.first_name=this.personfirstname;
-  this.person.last_name=this.last_name
+  this.person.last_name=this.last_name;
   this.person.ci=this.ci;
   this.person.cellphone=this.cellphone;
   this.person.phone=this.phone;
   this.person.email=this.email;
-  this.person.ocupacion=this.ocupacion;
+  this.person.ocupation=this.ocupacion;
 
   console.log(this.person);
   this._peticionesService.updatePerson(this.person).subscribe(
@@ -101,7 +110,7 @@ findPerson(){
       }
   );
  }
- cancelar() {
+ cancel() {
   this.router.navigate(['/home/persons']);
  }
 }

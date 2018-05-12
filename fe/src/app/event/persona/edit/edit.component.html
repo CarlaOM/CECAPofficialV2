@@ -105,49 +105,49 @@
                         </select>
                         <div class="form-group col-sm-6">
                           <br>
-                          <p *ngIf="ocupSelected == 'estudiante'">
+                          <p *ngIf="ocupacion == 'estudiante'">
                             <input type="text" placeholder="Universidad" name="universidad" #universidad="ngModel" 
                             [(ngModel)]="descOcupation.universidad" class="form-control" required />
                             <span *ngIf="!universidad.valid && universidad.touched" class="text-alert">
                                 <h6>*Nombre de Universidad requerido.</h6> 
                             </span>
                           </p>
-                          <p *ngIf="ocupSelected == 'estudiante'">
+                          <p *ngIf="ocupacion == 'estudiante'">
                               <input type="text" placeholder="Carrera" name="carrera" #carrera="ngModel"
                                [(ngModel)]="descOcupation.carrera" class="form-control" required  />
                                <span *ngIf="!carrera.valid && carrera.touched" class="text-alert">
                                   <h6>*carrera de persona requerido.</h6>
                                </span> 
                             </p> 
-                            <p *ngIf="ocupSelected == 'estudiante'">
-                              <input type="text" placeholder="Semestre" name="semestre" #semestre="ngModel" 
+                            <p *ngIf="ocupacion == 'estudiante'">
+                              <input type="text" name="semestre" #semestre="ngModel" 
                               [(ngModel)]="descOcupation.semestre" class="form-control" required /> 
                               <span *ngIf="!semestre.valid && semestre.touched" class="text-alert">
                                   <h6>*semestre de persona requerido.</h6>
                               </span>
                             </p>
-                            <p *ngIf="ocupSelected == 'particular'">
+                            <p *ngIf="ocupacion == 'particular'">
                               <input type="text" placeholder="Area de Trabajo" name="areaTrabajo" #areaTrabajo="ngModel" 
                               [(ngModel)]="descOcupation.areaTrabajo" class="form-control" required /> 
                               <span *ngIf="!areaTrabajo.valid && areaTrabajo.touched" class="text-alert">
                                   <h6>*Area de trabajo de persona requerido.</h6>
                               </span>
                             </p> 
-                            <p *ngIf="ocupSelected == 'profesional'">
+                            <p *ngIf="ocupacion == 'profesional'">
                               <input type="text" placeholder="Profesion" name="profesion" #profesion="ngModel"
                                [(ngModel)]="descOcupation.profesion" class="form-control" required /> 
                                <span *ngIf="!profesion.valid && profesion.touched" class="text-alert">
                                   <h6>*Profecion de persona requerido.</h6>
                              </span>
                             </p> 
-                            <p *ngIf="ocupSelected == 'profesional'">
+                            <p *ngIf="ocupacion == 'profesional'">
                               <input type="text" placeholder="Empresa" name="empresa" #empresa="ngModel"
                                [(ngModel)]="descOcupation.empresa" class="form-control"  required /> 
                                <span *ngIf="!empresa.valid && empresa.touched" class="text-alert">
                                   <h6>*Nombre de Empresa requerido.</h6>
                               </span>
                             </p> 
-                            <p *ngIf="ocupSelected == 'profesional'">
+                            <p *ngIf="ocupacion == 'profesional'">
                               <input type="text" placeholder="Cargo" name="cargo" #cargo="ngModel" 
                               [(ngModel)]="descOcupation.cargo" class="form-control" required />
                               <span *ngIf="!cargo.valid && cargo.touched" class="text-alert">
@@ -164,7 +164,10 @@
                             </select>
                     </div> -->
                      <div class="form-group col-sm-8" style="text-align:center ">
+<<<<<<< HEAD
                         <button type="button" class="btn btn-info" (click)="addPerson.reset()">Limpiar</button>
+=======
+>>>>>>> 63becf60bba9e808456843dd326a64e43c92dbf8
                         <button type="submit" class="btn btn-success" [disabled]="!addPerson.form.valid" >Registrar</button>
                         <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
                         <!-- <button type="button" class="btn btn-danger" (click)="addPerson.reset()">Cancelar</button> -->

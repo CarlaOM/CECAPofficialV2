@@ -16,7 +16,7 @@
                  required
                  [(ngModel)]="egresoTitulo" name="titulo"
                  #titulo="ngModel">
-          <div [hidden]="titulo?.pristine"
+          <div [hidden]="titulo?.pristine || titulo.valid"
                class="text-alert">
             El Titulo es requerido
           <!-- <div [hidden]="titulo?.valid"
