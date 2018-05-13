@@ -57,13 +57,33 @@
 
 
    </table>
+   <section>
+    <form (ngSubmit)="onSubmit()" #AmountDeliveredForm="ngForm">
+      
+      <div class="form-group">
+          <label for="delivered">Dinero entregado</label>
+          <input type="number" class="form-control" id="delivered"
+                 required
+                 [(ngModel)]="amountDelivered" name="delivered"
+                 #delivered="ngModel">
+          <div [hidden]="delivered?.valid || delivered?.pristine"
+               class="text-alert">
+               el monto is required
+          </div>
+        </div> 
+ 
+      <button type="submit" class="btn btn-success" [disabled]="!AmountDeliveredForm.form.valid||btnInactiveConfirm">COnfirmar</button>
+
+      <button type="button" class="btn btn-primary" (click)="goPendingCash()">Cancelar</button>
+    </form>
+
+   </section>
 
    
-      <a class="btn btn-primary" (click)="goPendingCash()">Cancelar</a>
+      <!-- <a class="btn btn-primary" (click)="goPendingCash()">Cancelar</a>
 
-      <!-- <a class="btn btn-danger" (click)="confirmPendingCash()">Confirmar</a> -->
       <button class="btn btn-danger" [disabled]="btnInactiveConfirm" (click)="confirmPendingCash()">Confirmar</button>
-
+ -->
 
    
 </section>

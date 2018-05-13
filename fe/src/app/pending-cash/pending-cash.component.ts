@@ -26,9 +26,11 @@ export class PendingCashComponent implements OnInit {
   public confirmedCashUser;
   public btnInactive=true;
 
-  public cashOffice:CashFlowOffices;
+  public cashOffice;
   public currentCashFlowOffice;
 
+
+  public cashFlowOfficeAmount;
 
 
   
@@ -39,9 +41,14 @@ export class PendingCashComponent implements OnInit {
     private route: ActivatedRoute,
     private location:Location,
   ) {
-    this.cashOffice=new CashFlowOffices(null,null,null,null,'',null,'')
-        ///cashFlowOffice(date_start,date_end,amount,amount_delivered,cashFLOWuSER,DATECLOSECASH,OFFICES)
-   }
+
+    // this.cashOffice=new CashFlowOffices(new Date(),new Date(),null,null,'',new Date(),'','');
+    ///cashFlowOffice(date_start,date_end,amount,amount_delivered,cashFLOWuSER,DATECLOSECASH,OFFICES)
+
+
+     }
+
+    
 
   ngOnInit() {
 
@@ -61,9 +68,7 @@ export class PendingCashComponent implements OnInit {
 
       this.currentCashFlowOffice=response;
 
-      console.log(this.currentCashFlowOffice);
-      console.log(this.cashOffice);
-      // this.cashOffice.=this.currentCashFlowOffice._id;
+      this.cashFlowOfficeAmount=this.currentCashFlowOffice.amount;     
 
     })
   }
@@ -85,6 +90,7 @@ export class PendingCashComponent implements OnInit {
       infoCaja.fechaInicio=caja.date_start;
       infoCaja.fechaFin=caja.date_end;
       infoCaja.monto=caja.amount;
+      infoCaja.montoEntregado=caja.amount_delivered;
       infoCaja.idCaja=caja._id;
       infoCaja.estado=caja.state;
       this.nuevasCajas.push(infoCaja);
@@ -97,34 +103,31 @@ export class PendingCashComponent implements OnInit {
 
 
   }
-  confirmarCaja(idCaja){
+  // confirmarCaja(idCaja){
 
-    this._peticionesService.confirmCashFlowUser(idCaja).subscribe(response=>{
+  //   this._peticionesService.confirmCashFlowUser(idCaja).subscribe(response=>{
 
-      this.confirmedCashUser=response;
+  //     this.confirmedCashUser=response;
+
+  //     this.cashOffice.offices=this.currentCashFlowOffice._id;
+  //     this.cashOffice.cashFlowUser=this.confirmedCashUser;
+  //     this.cashOffice.dateCloseCash=this.cashOffice.date_end;
+  //     console.log("hihihihihihihihi")
+  //     console.log(this.cashOffice);
 
      
-      this._peticionesService.addDetailCashFlowOffice(this.cashOffice).subscribe(response=>{
-
-
-
-      })
-      this.router.navigate(['home/pendientes']);
-      this.router.navigate(['home/pendientes']);
-      this.router.navigate(['home/pendientes']);
-      this.router.navigate(['home/pendientes']);
+      
+  //     this.router.navigate(['home/pendientes']);
+  //     this.router.navigate(['home/pendientes']);
+  //     this.router.navigate(['home/pendientes']);
+  //     this.router.navigate(['home/pendientes']);
 
       
       
-    })
-    // this.router.navigateByUrl('/home/programs', {skipLocationChange: true}).then(()=>
-    //   this.router.navigate(["/home/reports"])).then(()=>this.router.navigate(['home/pendientes']));
+  //   })
+    
 
-        // this.router.navigateByUrl('/home/pendientes', {skipLocationChange: true})
-      
-
-
-  }
+  // }
   
 
 }
@@ -136,6 +139,7 @@ export interface InfoCaja{
   fechaInicio:Date,
   fechaFin:Date,
   monto:number,
+  montoEntregado:number,
   idCaja:string,
   estado:number
 }

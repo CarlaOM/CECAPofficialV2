@@ -127,7 +127,7 @@ var _cashFlowUser2 = {
     date_start: '2018-05-25',
       date_end: '',
       amount: 500,
-      amount_delivered: 500,
+      amount_delivered: 0,
       details: [{
          receipt: 1,
          description: 'ingresos por inscripcion',
@@ -192,6 +192,7 @@ var _cashFlowOffices_stc={
   ],
   offices: _offices_stc,
   active:true,
+  state:-1,
   
 
   _id: new mongoose.Types.ObjectId,

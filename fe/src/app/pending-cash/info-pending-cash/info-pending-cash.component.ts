@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import {PeticionesService } from '../../services/peticiones.service';
 import { Identity, } from "../../services/global";
+import { CashFlowOffices } from "./../../modelo/cashFlowOffices";
 
 
 
@@ -25,11 +26,23 @@ export class InfoPendingCashComponent implements OnInit {
 
   public confirmedCash;
 
+  public cashOffice;
+
+  public confirmedDetailCashOffice;
+
+  public amountDeliveredCash;
+  public amountDelivered;
+
   constructor(
     private _peticionesService:PeticionesService,
     private route: ActivatedRoute,
     private router: Router,
-  ) { }
+  ) { 
+
+    this.cashOffice=new CashFlowOffices(new Date(),new Date(),null,null,'',new Date(),'','');
+
+
+  }
 
   ngOnInit() {
 
@@ -48,6 +61,10 @@ export class InfoPendingCashComponent implements OnInit {
 
      })
   }
+  onSubmit(){
+
+    this.confirmPendingCash();
+  }
   goPendingCash(){
 
     this.router.navigate(['home/pendientes']);
@@ -55,17 +72,49 @@ export class InfoPendingCashComponent implements OnInit {
 
   confirmPendingCash(){
 
-    this._peticionesService.confirmCashFlowUser(this.pendingCashId).subscribe(response=>{
-      this.confirmedCash=response;
-      console.log(this.confirmedCash);
-      this.router.navigate(['home/pendientes']);
-      this.router.navigate(['home/pendientes']);
+    
 
-      this.router.navigate(['home/pendientes']);
+      this.cash.amount_delivered=this.amountDelivered;
+      this._peticionesService.setAmountDeliveredCashFlowUser(this.cash).subscribe(response=>{
 
-      this.router.navigate(['home/pendientes']);
+               this.amountDeliveredCash=response;
+
+              this._peticionesService.confirmCashFlowUser(this.pendingCashId).subscribe(response=>{
+                      this.confirmedCash=response;
+                      console.log(this.confirmedCash);
 
 
+                    this.cashOffice.cashFlowUser=this.confirmedCash._id;
+                    this.cashOffice.dateCloseCash=this.confirmedCash.date_end;
+                    this.cashOffice.userOfCash=this.confirmedCash.user;
+                    this._peticionesService.addDetailCashFlowOffice(this.cashOffice).subscribe(response=>{
+                          this.confirmedDetailCashOffice=response;
+
+                          this.router.navigate(['home/pendientes']);
+                          this.router.navigate(['home/pendientes']);
+                
+                          this.router.navigate(['home/pendientes']);
+                
+                          this.router.navigate(['home/pendientes']);
+                          this.router.navigate(['home/pendientes']);
+                
+                          this.router.navigate(['home/pendientes']);
+
+                      })
+            
+          
+
+
+              })
+
+    })
+  }
+  setAmountDelivered(){
+
+    this.cash.amount_delivered=this.amountDelivered;
+    this._peticionesService.setAmountDeliveredCashFlowUser(this.cash).subscribe(response=>{
+
+      this.amountDeliveredCash=response;
     })
   }
 }
