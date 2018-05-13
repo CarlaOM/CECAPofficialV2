@@ -94,6 +94,7 @@ captOcupation(){
   this.person.phone=this.phone;
   this.person.email=this.email;
   this.person.ocupation=this.ocupacion;
+  this.person.descOcupation=this.descOcupation;
 
   console.log(this.person);
   this._peticionesService.updatePerson(this.person).subscribe(
