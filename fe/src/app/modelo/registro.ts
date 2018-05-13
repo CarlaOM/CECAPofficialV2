@@ -1,8 +1,7 @@
 export class Registro {
     constructor(
-        public idEvent: string,
-        public idUser:string,
+        public inscription:{},
         public persona:{},
-        public montCancel: number
+        public eventId:string
     ) { }
  }
