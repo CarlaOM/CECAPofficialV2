@@ -27,6 +27,15 @@ router
         return res.status(200).send(modules);
       });
    })
+   .get('/eventoModuls/:id', function (req, res) {
+    console.log(req.params.id);
+    db.events.find({}, function (err, event) {
+      if (err) return res.status(400).send(err);
+        console.log(event);
+         return res.status(200).send(modules);
+    }); 
+ })
+   
    .post('/add', function(req, res){
       console.log(req.body);
       var modulo = new db.modules(req.body);
