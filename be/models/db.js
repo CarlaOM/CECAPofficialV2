@@ -80,7 +80,9 @@ module.exports = {
       }],
       offices: ObjectId,
       active:Boolean,
-      
+      state:Number,////////-1 sin cerrar
+      //////// 0  pendiente
+      ////////  1 cerrado
 
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } },

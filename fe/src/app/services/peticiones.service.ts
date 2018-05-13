@@ -292,5 +292,13 @@ export class PeticionesService {
    
     
     }
+    setAmountDeliveredCashFlowUser(cash){
+
+        let body = JSON.stringify(cash);
+        //console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'cajaUsuario/setAmountDelivered', body, { headers: headers }).map((res: Response) => res);
+  
+    }
 
 }
