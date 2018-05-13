@@ -180,7 +180,6 @@ router
             return res.status(200).send(event);
          });
       }
-
    })
    ///////////////////////////////////
    .get('/:id', function (req, res) {

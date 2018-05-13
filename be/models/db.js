@@ -189,6 +189,7 @@ module.exports = {
          dolares_price: Number,
          canceled_price: Number,
          price_event: Number,
+         receipt: String,
       //    name: String,
       //    ci: String,
       //    cellphone: Number,
@@ -233,7 +234,7 @@ module.exports = {
       number: Number,
       name: String,
       content: [String],
-      program: ObjectId,
+      programs: ObjectId,
 
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } },

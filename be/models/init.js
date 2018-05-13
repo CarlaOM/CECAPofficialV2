@@ -272,7 +272,7 @@ var _modulo_1_seguridad = {
       '2. induccion',
       '3. capacitacion'
    ],
-   program: _program_seguridad,
+   programs: _program_seguridad,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
@@ -286,7 +286,7 @@ var _modulo_2_seguridad = {
       '2. motivacion',
       '3. clima laboral'
    ],
-   program: _program_seguridad,
+   programs: _program_seguridad,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
@@ -300,7 +300,7 @@ var _modulo_1_rrhh = {
       '2. motivacion2',
       '3. clima laboral3'
    ],
-   program: _program_rrhh,
+   programs: _program_rrhh,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
@@ -551,6 +551,7 @@ var _event_seg = {
          dolares_price: 300,
          canceled_price: 300,
          price_event: 2000,
+         receipt: '4567',
         //  name: _person_1.name,
         //  ci: _person_1.ci,
         //  cellphone: _person_1.cellphone,
@@ -564,6 +565,7 @@ var _event_seg = {
          dolares_price: 300,
          canceled_price: 300,
          price_event: 1400,
+         receipt: '4568',
         //  name: _person_2.name,
         //  ci: _person_2.ci,
         //  cellphone: _person_2.cellphone,
@@ -577,6 +579,7 @@ var _event_seg = {
          dolares_price: 0,
          canceled_price: 300,
          price_event: 2000,
+         receipt: '4569',
         //  name: _person_3.name,
         //  ci: _person_3.ci,
         //  cellphone: _person_3.cellphone,

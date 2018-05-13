@@ -19,18 +19,16 @@ export class AddPersonComponent implements OnInit {
     @Output() messageEvent = new EventEmitter();
     
     public person: Person;//colection
+    public descOcupation: DescOcupation;//collection
+    public inscription: Inscription;//collection
     public ocupSelected;
-    public descOcupation: DescOcupation;
     public eventos;//colection
     public programs;//colection
-    public montoCan=0;
-    public priceDef=0;
     public IdEvent;
     public cartera;
 
     public registro: Registro;
 
-    public inscription;
     submitted= false;
 
     constructor(
@@ -40,10 +38,10 @@ export class AddPersonComponent implements OnInit {
     ) {
         this.person = new Person('', '', null, null, null,'','', null, '');
         //first_name,last_name,ci,phone,cellphone,email,ocupation,descOcupation:{ },carteras
-       // this.inscription = new Inscription('', null, null,null,'', '');
+        this.inscription = new Inscription(null, null, null,null,0,0,'0','');
         //this.identy=Identity._id;
         this.descOcupation = new DescOcupation('','','','','','','');
-        this.registro = new Registro(null,null, null,null);//idEvent,idUser,persona:{}, montCancel
+        this.registro = new Registro(null,null,'');//idEvent,idUser,persona:{}, montCancel
         
     }
     onSubmit() { 
@@ -55,15 +53,15 @@ export class AddPersonComponent implements OnInit {
         this.queryCartera();
         }
     guardar(){
-        //console.log(this.IdEvent);
-        //console.log(this.montoCan);
+        // console.log(this.IdEvent);
+        // console.log(this.montoCan);
         // console.log(this.descOcupation);
+        // console.log(this.inscription);
         this.person.descOcupation = this.descOcupation;
-        //console.log(this.person);
-        this.registro.idEvent = this.IdEvent;
-        this.registro.idUser = Identity._id;
+        this.inscription.users = Identity._id;
+        this.registro.inscription = this.inscription;
+        this.registro.eventId = this.IdEvent;
         this.registro.persona = this.person;
-        this.registro.montCancel= this.montoCan;
         console.log(this.registro);
         this._peticionesService.addPerson(this.registro).subscribe(
           result => {
@@ -76,7 +74,7 @@ export class AddPersonComponent implements OnInit {
           error => {
             var errorMessage = <any>error;
             console.log(errorMessage);
-            alert('Error al registrar persona verifique los datos');
+            alert('Error al registrar, Persona existente');
           }
         );
     }
