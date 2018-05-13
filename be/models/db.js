@@ -80,9 +80,7 @@ module.exports = {
       }],
       offices: ObjectId,
       active:Boolean,
-      state:Number,////////-1 sin cerrar
-      //////// 0  pendiente
-      ////////  1 cerrado
+      
 
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } },
@@ -143,13 +141,17 @@ module.exports = {
                print_certificate: Boolean,
             }],
             final_work: {
-               stade: Number,
+               stade: Number, // entregado=1, no entrego=2
                observations: String,
             },
-            requirements: [],
+            requirements: { // true=entrego, false=no entrego
+               photograpy: Boolean,
+               photocopy_ci: Boolean,
+               photocopy_titule: Boolean
+            },
             total_price: Number,
-            payed: Number,
-            debt: Number,  //deuda
+            payed: Number, //cancelado
+            debt: Number,  // deuda
             print_diploma: Boolean
          }]
       },
@@ -190,11 +192,6 @@ module.exports = {
          bolivianos_price: Number,
          dolares_price: Number,
          canceled_price: Number,
-         price_event: Number,
-         receipt: String,
-      //    name: String,
-      //    ci: String,
-      //    cellphone: Number,
          persons: ObjectId,
          users: ObjectId
       }],

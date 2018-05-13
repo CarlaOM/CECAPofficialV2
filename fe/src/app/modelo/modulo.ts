@@ -3,6 +3,6 @@ export class Modulo {
         public number: number,
         public name: string,
         public content: string,
-        public program: string
+        public programs: string
     ){}
 }

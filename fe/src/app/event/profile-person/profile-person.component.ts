@@ -3,8 +3,9 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { PeticionesService } from '../../services/peticiones.service';
 import { Person } from '../../modelo/person';
 import { DescOcupation } from '../../modelo/descOcupation';
-import { Inscription } from '../../modelo/inscription';
-import { Registro } from '../../modelo/registro';
+import { Profile } from '../../modelo/profile';
+// import { Inscription } from '../../modelo/inscription';
+// import { Registro } from '../../modelo/registro';
 
 @Component({
   selector: 'app-profile-person',
@@ -20,11 +21,13 @@ export class ProfilePersonComponent implements OnInit {
   public carteraReturned;
   public ocupation;
   public ocupations: DescOcupation;
-  public program;
-  public programId;
-  public finalWork;
-  //public registro: Registro;
-  //public inscription;
+  public profilePerson;  
+  // public profile: Profile;
+  public programs: Array<any> = [];
+  // public programId;
+  // public finalWork;
+  // public registro: Registro;
+  // public inscription;
 
 
   constructor(
@@ -40,8 +43,8 @@ export class ProfilePersonComponent implements OnInit {
     });
     this.queryPersonId();
     this.findPerson();
-    this.queryProgram();
-    this.findProgram();
+    //this.queryProgram();
+    //this.findProgram();
   }
   queryPersonId(){
     this.route.params.subscribe(params => {
@@ -54,13 +57,20 @@ export class ProfilePersonComponent implements OnInit {
       result => {
          this.person = result;
          console.log(result)
+        
          this.findCartera(this.personId);
+        
          this.ocupation = this.person.ocupation;
-         console.log(this.ocupation)
+         //console.log(this.ocupation)
          this.ocupations = this.person.descOcupation;
-         console.log(this.ocupations)
+         //console.log(this.ocupations)
+         this.profilePerson = this.person.profile.programs;
+         console.log(this.profilePerson)
+
+         this.fillPrograms();
       },
       error => {
+        
          console.log(<any>error);
       });
   }
@@ -74,32 +84,40 @@ export class ProfilePersonComponent implements OnInit {
       console.log(<any>error);
     });
   }
-  queryProgram(){
-    this.route.params.subscribe(params => {
-    this.programId=params.id;
-    });
+  fillPrograms(){
+    for (let i = 0; i <= this.programs.length; i++) {
+      this.programs.pop(); i = 0;
+    }
+    for (let i of this.profilePerson) {
+      this.programs.push(i);
+    }
   }
-  findProgram(){
-    this._peticionesService.getProgram(this.programId).subscribe(
-      result => {
-         this.program = result;
-         console.log(result)
-      },
-      error => {
-         console.log(<any>error);
-      });
-      this.fillFinalWork(this.programId);
-  }
-  fillFinalWork(programId){
-      this._peticionesService.getPerson(this.personId).subscribe(
-         result => {
-            this.finalWork = result;
-            console.log(this.finalWork);
-         },
-         error => {
-            console.log(<any>error);
-         });
-  }
-  fillModulars(){}
-  fillRequirements(){}
+  // queryProgram(){
+  //   this.route.params.subscribe(params => {
+  //   this.programId=params.id;
+  //   });
+  // }
+  // findProgram(){
+  //   this._peticionesService.getProgram(this.programId).subscribe(
+  //     result => {
+  //        this.program = result;
+  //        console.log(result)
+  //     },
+  //     error => {
+  //        console.log(<any>error);
+  //     });
+  //     this.fillFinalWork(this.programId);
+  // }
+  // fillFinalWork(programId){
+  //     this._peticionesService.getPerson(this.personId).subscribe(
+  //        result => {
+  //           this.finalWork = result;
+  //           console.log(this.finalWork);
+  //        },
+  //        error => {
+  //           console.log(<any>error);
+  //        });
+  // }
+  // fillModulars(){}
+  // fillRequirements(){}
 }

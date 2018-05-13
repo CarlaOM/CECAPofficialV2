@@ -22,7 +22,7 @@ router
    })
    .get('/lista/:id', function (req, res) {
       console.log('hola')
-      db.modules.find({ program: req.params.id }, function (err, modules) {
+      db.modules.find({ programs: req.params.id }, function (err, modules) {
         if (err) return res.status(400).send(err);
         return res.status(200).send(modules);
       });
