@@ -56,9 +56,10 @@ export class EventComponent implements AfterViewInit {
          }
       );
    }
-   edit(personId, personName) {
+   edit(personId){//, personName) {
       // console.log('antes de enviar', personId)
-      this.router.navigate(['home/editPerson', personId + '-' + this.eventId]);
+      //this.router.navigate(['home/editPerson', personId + '-' + this.eventId]);
+      this.router.navigate(['home/persons/edit', personId])
    }
    viewProfile(personId){
     this.router.navigate(['home/profilePerson', personId]);
