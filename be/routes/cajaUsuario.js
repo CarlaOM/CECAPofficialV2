@@ -211,6 +211,20 @@ router
 
 
     })
+    .get('/closeFromManager/:id',function(req,res){
+        db.cashFlowUsers.findOne({_id:req.params.id},function(err,cajaForClose){
+            if(err) return res.status(400).send(err);
+            cajaForClose.active=false;
+            cajaForClose.save(function(err,caja){
+
+                if(err) return res.status(404).send(err);
+                res.status(200).send(caja);
+            });
+
+
+        })
+
+    })
    
     .get('/confirm/:id', function (req, res) {
         //////confirmar caja usuario /cambiar de estdo de 0 a 1 ///

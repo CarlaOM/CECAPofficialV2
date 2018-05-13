@@ -13,6 +13,14 @@ router
 
         })
     })
+    .get('/allActive', function (req, res) {
+        /////lista todas las cajas activas//////
+        db.cashFlowOffices.find({active:true}, function (err, cajas) {
+        if (err) return res.status(400).send(err);
+            return res.status(200).send(cajas);
+        })
+    })
+
 
     .get('/current/:id',function(req,res){
         db.users.findOne({_id:req.params.id},function(err,user){
@@ -69,6 +77,18 @@ router
             })
         })
     })
+    .get('/close/:id',function(req,res){
+        db.cashFlowOffices.findOne({_id:req.params.id},function(err,cashOffice){
+
+
+            cashOffice.state=0;
+            cashOffice.save();
+
+        })
+    })
+
+    
+
 
 ;
 

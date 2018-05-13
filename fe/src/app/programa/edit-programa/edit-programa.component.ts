@@ -12,7 +12,7 @@ import { Programa } from '../../modelo/programa';
 export class EditProgramaComponent implements OnInit {
   @ViewChild('name') nameRef:ElementRef;
   @ViewChild('details') detailsRef:ElementRef;
-  @ViewChild("close", { read: ElementRef }) close: ElementRef;
+  //@ViewChild("close", { read: ElementRef }) close: ElementRef;
   public programId;
   public program;
   public programName;
@@ -52,14 +52,15 @@ export class EditProgramaComponent implements OnInit {
     this.program.details = this.detailsRef.nativeElement.value;
     
     if(this.nameRef.nativeElement.value=='' || this.detailsRef.nativeElement.value==''){
-      window.alert("Asegurese que todos los campos esten llenos");
+      window.alert("Asegurese que todos los campos esten llenados");
     }else{
       this._peticionesService.updateProgram(this.program).subscribe(
         result=>{
           var res=result;
           console.log(res);
-          this.router.navigate(['home/programs']);
           alert('Se Guardo correctamente la edicion');
+          // this.router.navigate(['home/programs']);
+         window.history.back();          
         },
         error=>{
           console.log(<any>error);
