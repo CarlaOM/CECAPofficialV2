@@ -79,7 +79,9 @@ module.exports = {
 
       }],
       offices: ObjectId,
+      users:ObjectId,
       active:Boolean,
+      state:Number,
       
 
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
