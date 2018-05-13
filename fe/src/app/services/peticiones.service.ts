@@ -300,5 +300,27 @@ export class PeticionesService {
         return this._http.post(this.url + 'cajaUsuario/setAmountDelivered', body, { headers: headers }).map((res: Response) => res);
   
     }
+    getCashFlowOffices() {
+        return this._http.get(this.url + 'cajaSucursal/allActive').map((res: Response) => res);
+    }
+
+    closeCashFlowUserFromManager(id){
+
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.get(this.url + 'cajaUsuario/closeFromManager/' + id, { headers: headers }).map((res: Response) => res);
+   
+    }
+    closeCashFlowOffice(id){
+
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.get(this.url + 'cajaSucursal/close/' + id, { headers: headers }).map((res: Response) => res);
+   
+    }
+    addNewCashFlowOffice(idUser){
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.get(this.url + 'cajaSucursal/new/' + idUser, { headers: headers }).map((res: Response) => res);
+   
+
+    }
 
 }

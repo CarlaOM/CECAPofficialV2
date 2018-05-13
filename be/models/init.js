@@ -191,6 +191,7 @@ var _cashFlowOffices_stc={
            },
   ],
   offices: _offices_stc,
+  users:_user_admin,
   active:true,
   state:-1,
   

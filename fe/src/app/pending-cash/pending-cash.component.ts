@@ -31,9 +31,10 @@ export class PendingCashComponent implements OnInit {
 
 
   public cashFlowOfficeAmount;
+  public closeCashFlowOffice;
 
 
-  
+  public closedCashFlowUserFromManager;
 
   constructor(
     private _peticionesService:PeticionesService,
@@ -100,6 +101,34 @@ export class PendingCashComponent implements OnInit {
   }
   infoPendiente(idCash){
     this.router.navigate(['home/pendientes/info/',idCash]);
+
+
+  }
+
+  cerrarCajaSucursal(){
+
+    for(let caja of this.nuevasCajas){
+      this._peticionesService.closeCashFlowUserFromManager(caja.idCaja).subscribe(response=>{
+
+
+        this.closedCashFlowUserFromManager=response;
+      })
+
+
+    }
+    this._peticionesService.closeCashFlowOffice(this.currentCashFlowOffice).subscribe(response=>{
+      this.closeCashFlowOffice=response;
+
+      this._peticionesService.addNewCashFlowOffice(Identity._id).subscribe(response=>{
+
+        var newCashOffice=response;
+      })
+    })
+
+
+
+
+
 
 
   }

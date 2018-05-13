@@ -83,6 +83,7 @@ import { ControlAsistanceComponent } from './event/control-asistance/control-asi
 import { InfoPendingCashComponent } from './pending-cash/info-pending-cash/info-pending-cash.component';
 import { ConfirmCloseCashComponent } from './caja/confirm-close-cash/confirm-close-cash.component';
 import { ConfirmPendingCashComponent } from './pending-cash/confirm-pending-cash/confirm-pending-cash.component';
+import { OfficesCashComponent } from './offices-cash/offices-cash.component';
 
 @NgModule({
   declarations: [
@@ -152,7 +153,8 @@ import { ConfirmPendingCashComponent } from './pending-cash/confirm-pending-cash
     ControlAsistanceComponent,
     InfoPendingCashComponent,
     ConfirmCloseCashComponent,
-    ConfirmPendingCashComponent
+    ConfirmPendingCashComponent,
+    OfficesCashComponent
 
   ],
   imports: [
