@@ -44,6 +44,8 @@ import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-fa
 import { AddCorrelativeComponent } from './correlative/add-correlative/add-correlative.component';
 import { AddEventComponent } from './events/addEvent/addEvent.component';
 import { PendingCashComponent } from "./pending-cash/pending-cash.component";
+import { ControlAsistanceComponent } from './event/control-asistance/control-asistance.component';
+
 import { InfoPendingCashComponent } from "./pending-cash/info-pending-cash/info-pending-cash.component";
 //import { AlertComponent } from './events/alert/alert.component';
 
@@ -68,6 +70,7 @@ const appRoutes: Routes = [
          { path: 'persons', component: PersonaComponent},
          { path: 'persons/add', component: AddPersonComponent},
          { path: 'persons/edit/:id', component: EditComponent},
+         { path: 'persons/asistencia/:id', component: ControlAsistanceComponent},
          { path: 'cartera', component:CarteraComponent},
          { path: 'cartera/add', component:AddCarteraComponent},
          { path: 'cartera/:id',component:InfoCarteraComponent},

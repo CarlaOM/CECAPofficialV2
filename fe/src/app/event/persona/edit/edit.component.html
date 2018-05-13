@@ -1,16 +1,35 @@
+<!-- <div class="content-wrapper">
+  <section class="content">
+     <div style="text-align:center; margin:auto; width:40%;">
+        EDITAR INSCRIPCION
+        
+           <div><label><h1>{{ person.first_name }} {{person.last_name}}</h1></label></div>
+           
+       <div class="jumbotron">
+       
+        <div>
+           <input type="submit" value="GUARDAR" class="btn btn-success" (click)="saveEdition()"/>
+           <input type="submit" value="CANCELAR" class="btn btn-success" (click)="cancelar()"/>
+        </div>
+       </div>
+   </div>
+ </section>
+   
+</div> -->
   
-  <div class="content-wrapper">
+<div class="content-wrapper">
     <br>
-     <div class="">
+     <div class="content">
+        <h4>Registrar Persona</h4>
        <div class="box box-primary">
          <div class="container ">
-             <div [hidden]="submitted">
-                 <h1>Registrar Persona</h1>
-                 <form (ngSubmit)="saveEdition()" #editPerson="ngForm" class="jumbotron">
+             <label><h3>{{ person.first_name }} {{person.last_name}}</h3></label>
+              <div [hidden]="submitted">
+                 <form (ngSubmit)="guardar()" #addPerson="ngForm" class="">
                      <div class="form-group col-sm-8" style="text-align: center">
                          <label for="first_name" class="control-label" >Nombre</label>
                              <input type="text" class="form-control" id="first_name" 
-                             [(ngModel)]="personfirstname" name="first_name" #firstname="ngModel" required />
+                             [(ngModel)]="person.first_name" name="first_name" #firstname="ngModel" required />
                              <span *ngIf="!firstname.valid && firstname.touched" class="text-alert">
                                      *Nombre de persona requerido.
                              </span>
@@ -19,9 +38,9 @@
                          </div> -->
                      </div>
                      <div class="form-group col-sm-8" style="text-align: center">
-                        <label for="lastname" class="control-label" >Apellidos</label>
-                            <input type="text" class="form-control" id="name" 
-                            [(ngModel)]="last_name" name="lastname" #lastname="ngModel" required />
+                        <label for="last_name" class="control-label" >Apellidos</label>
+                            <input type="text" class="form-control" id="last_name" 
+                            [(ngModel)]="person.last_name" name="last_name" #lastname="ngModel" required />
                             <span *ngIf="!lastname.valid && lastname.touched" class="text-alert">
                                     *Apellido de persona requerido.
                             </span>
@@ -66,12 +85,19 @@
                                 </span>
                         </div>
                         <!-- observed-->
-                        
+                        <div class="form-group col-sm-4">
+                            <label for="monto" class="control-label"style="text-align:right" >Pago Inicial</label>
+                                <input type="number" class="form-control" id="monto" 
+                                [(ngModel)]="montoCan" name="monto" #monto="ngModel" required />
+                                <span *ngIf="!monto.valid && monto.touched" class="text-alert">
+                                        *Monto Inicial requerido.
+                                </span>
+                        </div>
                     </div>
                     <div class="form-group col-sm-8">
                         <label for="ocupSelect">
                           <i class="fa fa-tag prefix grey-text"></i>Ocupacion</label>
-                        <select class="form-control" id="ocupSelect" [(ngModel)]="ocupacion" (change)="captOcupation()"
+                        <select class="form-control" id="ocupSelect" [(ngModel)]="ocupSelected" (change)="captOcupation()"
                              name="ocupSelect" #ocupSelect="ngModel" required >
                             <option value="estudiante">Estudiante</option>
                             <option value="profesional">Profesional</option>
@@ -130,7 +156,18 @@
                             </p>
                           </div>
                     </div>
+                    <!-- <div class="form-group col-sm-8">
+                            <label for="evento">Evento</label>
+                            <select class="form-control" id="evento" [(ngModel)]="IdEvent"
+                                    name="evento" #evento="ngModel" required >
+                              <option *ngFor="let evento of eventos" [value]="evento._id">{{evento.name}}</option>
+                            </select>
+                    </div> -->
                      <div class="form-group col-sm-8" style="text-align:center ">
+<<<<<<< HEAD
+                        <button type="button" class="btn btn-info" (click)="addPerson.reset()">Limpiar</button>
+=======
+>>>>>>> 63becf60bba9e808456843dd326a64e43c92dbf8
                         <button type="submit" class="btn btn-success" [disabled]="!addPerson.form.valid" >Registrar</button>
                         <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
                         <!-- <button type="button" class="btn btn-danger" (click)="addPerson.reset()">Cancelar</button> -->
