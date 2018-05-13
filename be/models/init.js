@@ -564,9 +564,9 @@ var _event_seg = {
          canceled_price: 300,
          price_event: 2000,
          receipt: '4567',
-        //  name: _person_1.name,
-        //  ci: _person_1.ci,
-        //  cellphone: _person_1.cellphone,
+         name: _person_1.name,
+         ci: _person_1.ci,
+         cellphone: _person_1.cellphone,
          persons: _person_1._id,
          users: _user_admin._id
       },
@@ -578,9 +578,9 @@ var _event_seg = {
          canceled_price: 300,
          price_event: 1400,
          receipt: '4568',
-        //  name: _person_2.name,
-        //  ci: _person_2.ci,
-        //  cellphone: _person_2.cellphone,
+         name: _person_2.name,
+         ci: _person_2.ci,
+         cellphone: _person_2.cellphone,
          persons: _person_2._id,
          users: _user_ejecutivo1._id
       },
@@ -592,9 +592,9 @@ var _event_seg = {
          canceled_price: 300,
          price_event: 2000,
          receipt: '4569',
-        //  name: _person_3.name,
-        //  ci: _person_3.ci,
-        //  cellphone: _person_3.cellphone,
+         name: _person_3.name,
+         ci: _person_3.ci,
+         cellphone: _person_3.cellphone,
          persons: _person_3._id,
          users: _user_admin._id
       }

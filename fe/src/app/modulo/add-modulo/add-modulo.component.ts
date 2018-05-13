@@ -11,7 +11,8 @@ import { Modulo } from '../../modelo/modulo';
 })
 export class AddModuloComponent implements OnInit {
   public modulo: Modulo; 
-  public programs; 
+  public programs;
+  public programId;
 
   constructor(
     private _peticionesService:PeticionesService,
@@ -23,6 +24,7 @@ export class AddModuloComponent implements OnInit {
 
   ngOnInit() {
     this.queryPrograms();
+    this.queryProgramId();
   }
   queryPrograms(){
     this._peticionesService.getPrograms().subscribe(response => {
@@ -33,6 +35,11 @@ export class AddModuloComponent implements OnInit {
         console.log(<any>error);
        });
   }
+  queryProgramId(){
+    this.route.params.subscribe(params => {
+    this.programId=params.id;
+    });
+  }
   onSubmit() {
     console.log(this.modulo);
     this._peticionesService.addModulo(this.modulo).subscribe(
@@ -40,6 +47,7 @@ export class AddModuloComponent implements OnInit {
         var esperado = result;
         console.log(esperado);
         alert('El Modulo se Creo correctamente');
+        window.history.back();
       },
       error => {
         var errorMessage = <any>error;
@@ -49,6 +57,6 @@ export class AddModuloComponent implements OnInit {
     );
   }
   cancel() {
-    this.router.navigate(['home/modulo']);
+    window.history.back();
   }
 }

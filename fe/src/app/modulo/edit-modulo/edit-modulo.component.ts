@@ -35,7 +35,7 @@ export class EditModuloComponent implements OnInit {
   }
   queryModuloId(){
     this.route.params.subscribe(params => {
-    this.moduloId=params.id;
+      this.moduloId=params.id;
     });
   }
   findModulo(){
@@ -67,8 +67,8 @@ export class EditModuloComponent implements OnInit {
         result=>{
           var res=result;
           console.log(res);
-         this.router.navigate(['home/modulos']);
-         alert('Se Guardo correctamente la edicion');
+          alert('Se Guardo correctamente la edicion');
+          window.history.back();
         },
         error=>{
           console.log(<any>error);
@@ -86,7 +86,9 @@ export class EditModuloComponent implements OnInit {
     //});
   //}
   cancel() {
-    this.router.navigate(['home/modulos'], { replaceUrl: true });
+    // this.router.navigate(['home/modulos']);
+    window.history.back();
+    
 }
 
 }

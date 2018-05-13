@@ -29,16 +29,12 @@
                      required
                      [(ngModel)]="facilitadorjob" name="correo"
                      #correo="ngModel">
-              <div [hidden]="correo?.valid || correo?.pristine"
-              class="">
-              email is required
+              <div [hidden]="correo?.valid || correo?.pristine" class="">
+              trabajo es requerido
               </div>
             </div>
-      
-                   
-     
           <button type="submit" class="btn btn-success" [disabled]="!addEjecutivo.form.valid">Registrar</button>
-          <button type="button" class="btn btn-danger" (click)="addEjecutivo.reset()">Cancelar</button>
+          <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
         </form>
       </div>
      

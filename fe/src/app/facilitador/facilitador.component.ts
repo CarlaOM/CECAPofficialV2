@@ -53,4 +53,5 @@ export class facilitadorComponent implements OnInit {
       console.log(<any>error)
     });
   }
+  
 }
