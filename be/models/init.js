@@ -180,9 +180,9 @@ var _cashFlowOffices_stc={
 
   date_start: '2018-03-10',
   date_end: '',
-  amount: 1000,
+  amount: 0,
   amount_delivered: 0,
-  input:1000,
+  input:0,
   output:0,
   details:[{
             cashFlowUsers:_cashFlowUser1,
