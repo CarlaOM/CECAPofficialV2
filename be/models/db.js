@@ -190,9 +190,10 @@ module.exports = {
          canceled_price: Number,
          price_event: Number,
          receipt: String,
-      //    name: String,
-      //    ci: String,
-      //    cellphone: Number,
+         //////
+         name: String,
+         ci: String,
+         cellphone: Number,
          persons: ObjectId,
          users: ObjectId
       }],

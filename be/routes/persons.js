@@ -48,6 +48,9 @@ router
                      canceled_price: inscri.canceled_price,
                      price_event: inscri.price_event,
                      receipt: inscri.receipt,
+                     name: person.name,
+                    ci: person.ci,
+                    cellphone: person.cellphone,
                      persons: person._id,
                      users: inscri.users 
                   };
