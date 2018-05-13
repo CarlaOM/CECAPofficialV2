@@ -35,7 +35,7 @@ export class EventsComponent implements OnInit {
       this._peticionesService.getEvents().subscribe(
          result => {
             this.events = result;
-           // console.log(this.events)
+           console.log(this.events)
             this.events.map(event => {
                var sum = 0;
                event.inscriptions.forEach(e => {

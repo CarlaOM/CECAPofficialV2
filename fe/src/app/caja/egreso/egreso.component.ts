@@ -75,5 +75,9 @@ export class EgresoComponent implements OnInit {
       console.log(this.eventos);
     })
   }
+  cancelar(){
+
+    this.router.navigate(['home/caja/vistacaja']);
+  }
 
 }

@@ -181,7 +181,7 @@ router
             /////enviar a admin/////
             ////////////////////////////////////
 
-            cajaForClose.amount_delivered=cajaForClose.amount;
+            // cajaForClose.amount_delivered=cajaForClose.amount;/////el monto entregado se lo cambia justo cuando se confirma la caja y se entrega el dinero
 
             cajaForClose.save(function(err,caja){
 
@@ -220,9 +220,40 @@ router
  
           cajaUsuario.state=1;
           cajaUsuario.save();
+          var userId=cajaUsuario.user;////para cuando haya varias sucursales ,buscaar por office
+
+            //  db.cashFlowOffices.findOne({active:true,state:-1},function(err,cashOffice){
+
+            //     if (err) return res.status(400).send(err);
+            //     cashOffice.amount+=cajaUsuario.amount_delivered;
+            //     cashOffice.save()
+
+            //  })
           return res.status(200).send(cajaUsuario);
        });
     })
+
+    .post('/setAmountDelivered', function (req, res) {
+        //console.log(req.body);
+        var caja=req.body;
+   
+       db.cashFlowUsers.findOne({_id:caja._id},function(err,cashFlowUser){
+            cashFlowUser.amount_delivered=caja.amount_delivered;
+            cashFlowUser.save(function(err,cash){
+
+                if(err)return res.status(400).send(err);
+
+                return res.status(200).send(cash);
+            });
+
+
+       })
+       
+   
+     
+    })
+    
+   
 
 
 

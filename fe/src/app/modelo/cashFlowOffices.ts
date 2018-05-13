@@ -8,6 +8,7 @@ export class CashFlowOffices{
         cashFlowUser:string,
         dateCloseCash:Date,
         offices:string,
+        userOfCash:string,
 
       
     ){}

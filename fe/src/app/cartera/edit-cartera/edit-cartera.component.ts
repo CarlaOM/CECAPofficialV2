@@ -100,4 +100,8 @@ export class EditCarteraComponent implements OnInit {
     }
    
   }
+  cancel(){
+
+    window.history.back();
+  }
 }

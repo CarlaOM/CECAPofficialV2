@@ -23,7 +23,7 @@ router
       var person = new db.persons(req.body.persona);
       console.log(req.body);
       db.persons.findOne( {ci: req.body.persona.ci,cellphone: req.body.persona.cellphone}, function(err, existeCellphone){
-        if(existeCellphone == null){console.log('llegue aqui');
+        if(existeCellphone == null){ console.log('llegue aqui');
           //if(person.first_name == '' || person.last_name == '' || person.ci == '' || person.carteras == '') 
             //return res.status(400).send(); 
             // save person
@@ -49,8 +49,8 @@ router
                      price_event: inscri.price_event,
                      receipt: inscri.receipt,
                      name: person.name,
-                    ci: person.ci,
-                    cellphone: person.cellphone,
+                     ci: person.ci,
+                     cellphone: person.cellphone,
                      persons: person._id,
                      users: inscri.users 
                   };
@@ -67,27 +67,27 @@ router
                                     //             return res.status(201).send(event);
                                     //             });
                                     //             //	if (off.nModified == 0) return res.status(406).send();
-                                    //    });
+                                    //       });
                   db.events.update({_id: idEvent}, 
                   { $push: {
-                     inscriptions: inscription
+                        inscriptions: inscription
                   }
                   },{
-                     multi: true
-                   }, function (err, events) {
-                     if(err) return res.status(400).send(err);
-                        console.log(events);
-                        // if (events == null) return res.status(404).send();
-                        return res.status(200).send(person);
+                        multi: true
+                  }, function (err, events) {
+                        if(err) return res.status(400).send(err);
+                              console.log(events);
+                              // if (events == null) return res.status(404).send();
+                              return res.status(200).send(person);
                         });
-                });//fin module
-              });//fin Event
-             }
-            }else{
+              });//fin module
+            });//fin Event
+            }
+         }else{
              if (err) return res.status(400).send(err);
                   console.log('La Persona ya existe');
-             }
-      });
+                  }
+             });
       //       }else{
       //             if (err) return res.status(400).send(err);
       //             console.log('El numero de CI de la Persona ya existe')

@@ -127,7 +127,7 @@ var _cashFlowUser2 = {
     date_start: '2018-05-25',
       date_end: '',
       amount: 500,
-      amount_delivered: 500,
+      amount_delivered: 0,
       details: [{
          receipt: 1,
          description: 'ingresos por inscripcion',
@@ -180,9 +180,9 @@ var _cashFlowOffices_stc={
 
   date_start: '2018-03-10',
   date_end: '',
-  amount: 1000,
+  amount: 0,
   amount_delivered: 0,
-  input:1000,
+  input:0,
   output:0,
   details:[{
             cashFlowUsers:_cashFlowUser1,
@@ -192,6 +192,7 @@ var _cashFlowOffices_stc={
   ],
   offices: _offices_stc,
   active:true,
+  state:-1,
   
 
   _id: new mongoose.Types.ObjectId,
@@ -262,7 +263,6 @@ var _programs = [_program_seguridad, _program_rrhh];
 var _modulo_1_seguridad = {
    number: 1,
    name: 'modulo 1',
-   program: _program_rrhh,
    content: [
       '1. reclutamiento y seleccion',
       '2. induccion',
@@ -276,7 +276,6 @@ var _modulo_1_seguridad = {
 var _modulo_2_seguridad = {
    number: 2,
    name: 'modulo 2',
-   program: _program_rrhh,
    content: [
       '1. remuneracion',
       '2. motivacion',
@@ -337,10 +336,10 @@ var _person_1 = {
                date: '2018-03-31',
                amount: 150
             }],
-            debt: 150,
-            assistance: true,
-            //events: _event_seg,////////////////////duad???????
-            inscriptions: '',////////////////////dudaÇ??????
+            //debt: 150,
+            assist: true,
+            events: _event_seg,////////////////////duda???????
+            //inscriptions: '',////////////////////duda??????
             modules: _modulo_1_rrhh,
             print_certificate: false,
          }],
@@ -348,10 +347,14 @@ var _person_1 = {
             stade: 2,  // entregado = 1, no entrego = 2
             observations: 'aun no entrego el proyecto',
          },
-         requirements: [
-            'asistir a todos los modulos',
-            'entregar trabajo'
-         ],
+         requirements: {
+            photograpy: true,
+            photocopy_ci: true,
+            photocopy_titule: false
+         },
+         total_price: 1200,
+         payed: 1000, //cancelado
+         debt: 200,  // deuda
          print_diploma: false
       }]
    },
@@ -391,10 +394,10 @@ var _person_2 = {
                date: '2018-03-31',
                amount: 150
             }],
-            debt: 150,
-            assistance: true,
-            //events: _event_seg,////////////////////duad???????
-            inscriptions: '',////////////////////dudaÇ??????
+            //debt: 150,
+            assist: true,
+            events: _event_seg,////////////////////duda???????
+            //inscriptions: '',////////////////////duda??????
             modules: _modulo_1_rrhh,
             print_certificate: false,
          }],
@@ -402,10 +405,14 @@ var _person_2 = {
             stade: 2,  // entregado = 1, no entrego = 2
             observations: 'aun no entrego el proyecto',
          },
-         requirements: [
-            'asistir a todos los modulos',
-            'entregar trabajo'
-         ],
+         requirements: {
+            photograpy: true,
+            photocopy_ci: true,
+            photocopy_titule: true
+         },
+         total_price: 2000,
+         payed: 2000, //cancelado
+         debt: 0,  // deuda
          print_diploma: false
       }]
    },
@@ -445,10 +452,10 @@ var _person_3 = {
                date: '2018-03-31',
                amount: 150
             }],
-            debt: 150,
-            assistance: true,
-            //events: _event_seg,////////////////////duad???????
-            inscriptions: '',////////////////////dudaÇ??????
+            //debt: 150,
+            assist: true,
+            events: _event_seg,////////////////////duad???????
+            //inscriptions: '',////////////////////dudaÇ??????
             modules: _modulo_1_rrhh,
             print_certificate: false,
          }],
@@ -456,10 +463,14 @@ var _person_3 = {
             stade: 2,  // entregado = 1, no entrego = 2
             observations: 'aun no entrego el proyecto',
          },
-         requirements: [
-            'asistir a todos los modulos',
-            'entregar trabajo'
-         ],
+         requirements: {
+            photograpy: true,
+            photocopy_ci: true,
+            photocopy_titule: false
+         },
+         total_price: 1500,
+         payed: 1000, //cancelado
+         debt: 500,  // deuda
          print_diploma: false
       }]
    },
@@ -500,10 +511,10 @@ var _person_4 = {
                date: '2018-03-31',
                amount: 150
             }],
-            debt: 150,
-            assistance: true,
-            //events: _event_seg,////////////////////duad???????
-            inscriptions: '',////////////////////dudaÇ??????
+            //debt: 150,
+            assist: true,
+            events: _event_seg,////////////////////duad???????
+            //inscriptions: '',////////////////////dudaÇ??????
             modules: _modulo_1_rrhh,
             print_certificate: false,
          }],
@@ -511,10 +522,14 @@ var _person_4 = {
             stade: 2,  // entregado = 1, no entrego = 2
             observations: 'aun no entrego el proyecto',
          },
-         requirements: [
-            'asistir a todos los modulos',
-            'entregar trabajo'
-         ],
+         requirements: {
+            photograpy: false,
+            photocopy_ci: false,
+            photocopy_titule: false
+         },
+         total_price: 1200,
+         payed: 1000, //cancelado
+         debt: 200,  // deuda
          print_diploma: false
       }]
    },
