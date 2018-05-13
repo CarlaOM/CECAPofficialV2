@@ -21,37 +21,33 @@ router
    })
    .post('/', function (req, res) {
       var person = new db.persons(req.body.persona);
-      console.log(req.body);
-      db.persons.findOne( {ci: req.body.persona.ci,cellphone: req.body.persona.cellphone}, function(err, existeCellphone){
-        if(existeCellphone == null){console.log('llegue aqui');
-          //if(person.first_name == '' || person.last_name == '' || person.ci == '' || person.carteras == '') 
-            //return res.status(400).send(); 
-            // save person
-            person.save(function (err, person){console.log('persona guardada');
-              if(err){return res.status(400).send(err);}
-             addInscription(person, req.body.inscription, req.body.eventId);
-            });
-            function addInscription(person, inscri, idEvent) {
-              db.events.findOne({_id: idEvent}, function(err, events){
-                  console.log(events);
-                db.modules.find({programs: events.programs}).count().exec(function(err, moduls){
-                  console.log(moduls);
-                  console.log('llegue al la cantidad de modulos');
-                  var modulPrice = inscri.price_event / moduls;///////DIVISION
-                  console.log(modulPrice); 
-                  var inscription = {
-                     // segun al numero de asistencias sacar el precio total q tiene q pagar
-                     total_price: 0,//sumatorio por asistencia de cada modulo
-                     module_price: modulPrice,
-                     bolivianos_price: inscri.canceled_price,
-                     dolares_price: 0,
-                     canceled_price: inscri.canceled_price,
-                     price_event: inscri.price_event,
-                     receipt: inscri.receipt,
-                     persons: person._id,
-                     users: inscri.users 
-                  };
-                  var d = new Date();
+      console.log(person);
+      //    db.persons.findOne({ci: req.body.ci,cellphone: req.body.cellphone}, function(err, existeCi){
+      //       if (existeCi == null) {
+                  db.persons.findOne({ci: req.body.persona.ci,cellphone: req.body.persona.cellphone}, function(err, existeCellphone){
+                        if(existeCellphone == null){
+                              if (person.first_name == '' || person.last_name == '' || person.ci == '' || person.carteras == '') 
+                              return res.status(400).send();
+                              // save person
+                          
+                              person.save(function (err, person) {
+                              if (err) return res.status(400).send(err);
+                              addInscription(person,0,0,req.body.montCancel, req.body.idUser, req.body.idEvent);//enviar Tp, Mp, Cp
+                              });
+                              function addInscription(person, totalPrice, modulPrice, canceledPrice, user,idEvent) {
+                                    
+                                   var inscription = {
+                                          // segun al numero de asistencias sacar el precio total q tiene q pagar
+                                          total_price: totalPrice,
+                                          module_price: modulPrice,
+                                          canceled_price: canceledPrice,
+                                          name: person.first_name + person.last_name,
+                                          phone: person.phone,
+                                          cellphone: person.cellphone,
+                                          persons: person._id,
+                                          users: user
+                                       };
+                                    var d = new Date();
                                     //////////////////////
                                     // db.events.update({ _id: idEvent, 'inscriptions.person': req.body.person },
                                     //       {
@@ -64,27 +60,27 @@ router
                                     //             return res.status(201).send(event);
                                     //             });
                                     //             //	if (off.nModified == 0) return res.status(406).send();
-                                    //    });
-                  db.events.update({_id: idEvent}, 
-                  { $push: {
-                     inscriptions: inscription
-                  }
-                  },{
-                     multi: true
-                   }, function (err, events) {
-                     if(err) return res.status(400).send(err);
-                        console.log(events);
-                        // if (events == null) return res.status(404).send();
-                        return res.status(200).send(person);
-                        });
-                });//fin module
-              });//fin Event
-             }
-            }else{
-             if (err) return res.status(400).send(err);
-                  console.log('La Persona ya existe');
-             }
-      });
+                                    //       });
+                                    db.events.update({_id: idEvent}, 
+                                       {
+                                          $push: {
+                                             inscriptions: inscription
+                                          }
+                                       }, {
+                                          multi: true
+                                       }, function (err, events) {
+                                          if (err) return res.status(400).send(err);
+                                          console.log(events);
+                                          // if (events == null) return res.status(404).send();
+                           
+                                          return res.status(200).send(person);
+                                       });
+                                 }
+                        }else{
+                              if (err) return res.status(400).send(err);
+                              console.log('La Persona ya existe');
+                        }
+                  });
       //       }else{
       //             if (err) return res.status(400).send(err);
       //             console.log('El numero de CI de la Persona ya existe')

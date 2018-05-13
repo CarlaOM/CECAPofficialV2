@@ -82,25 +82,61 @@
                     <td>Empresa</td>                                        
                     <td>{{ocupations?.empresa}}</td>                                     
                   </tr>
-                  <tr *ngIf="ocupation=='profesional'">
+                  <tr *ngIf=
+                  "ocupation=='profesional'">
                     <td>Cargo</td>                                        
                       <td>{{ocupations?.cargo}}</td>                                     
                   </tr>
                 </tbody>
               </table>
-            <strong>Informacion adicional:</strong>
+            <strong>Programas Cursados:</strong>
+              <table class="table table-user-information">
+                <tbody>
+                  <tr *ngFor="let i of programs">
+                    <td>Nombre del Programa</td>
+                    <td>{{i.nameProgram}}</td>
+                  </tr>
+                  <tr>
+                    <td>Asistencias por modulos</td>
+                    <td>{{i.assists}}</td>
+                  </tr>
+                  <tr>
+                    <td>Pagos realizados</td>
+                    <td>{{i.payments}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            <strong>Entrega de Requisitos:</strong>
               <table class="table table-user-information">
                 <tbody>
                   <tr>
-                    <td>Trabajo Final</td>
+                    <td>Fotografias</td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td>Requisitos</td>
+                    <td>Fotocopia de carnet de identidad</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Fotocopia de titulo profesional</td>
                     <td></td>
                   </tr>
                 </tbody>
-              </table> 
+              </table>
+            <strong>Solicitud de diploma y presentacion de Proyecto:</strong>
+              <table class="table table-user-information">
+                <tbody>
+                  <tr *ngFor="let i of programs">
+                    <td>Trabajo Final</td>
+                    <td>{{i.final_work["stade"]}</td>
+                    <td>{{i.final_work["observations"]}</td>
+                  </tr>
+                  <tr *ngFor="let i of programs">
+                    <td>Diploma impreso</td>
+                    <td>{{i.print_diploma}}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>  
