@@ -130,6 +130,7 @@ router
          nuevaCaja.amount=0;
          nuevaCaja.amount_delivered=0;
          nuevaCaja.active=true;
+         nuevaCaja.state=-1;
          nuevaCaja.user=user._id;
 
          nuevaCaja.save();
