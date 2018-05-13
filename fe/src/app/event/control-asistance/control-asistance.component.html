@@ -1,26 +1,46 @@
-<div class="content-wrapper">
-  <section class="content">
-     <div style="text-align:center; margin:auto; width:40%;">
-        CONTROL ASISTENCIA
-           <div><label><h1>{{ person.first_name }} {{person.last_name}}</h1></label></div>
-       <div >
-          <div class="form-group col-sm-8" style="text-align: center">
-              <label for="first_name" class="control-label" >Nombre</label>
-                  <input type="text" class="form-control" id="first_name" 
-                  [(ngModel)]="person.first_name" name="first_name" #firstname="ngModel" required />
-                  <span *ngIf="!firstname.valid && firstname.touched" class="text-alert">
-                          *Nombre de persona requerido.
-                  </span>
-              <!-- <div [hidden]="first_name?.valid || first_name?.pristine" class="text-alert">
-                  kjknkasdkjhjask
-              </div> -->
-          </div>
-          <div class="jumbotron">
-            <input type="submit" value="GUARDAR" class="btn btn-success" (click)="saveEdition()"/>
-            <input type="submit" value="CANCELAR" class="btn btn-success" (click)="cancelar()"/>
-          </div>
-       </div>
-   </div>
- </section>
-   
-</div>
+<div class="modal fade" id="modalAddProgram" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+           <div class="modal-content">
+              <div class="modal-header text-center">
+                 <h4 class="modal-title w-100 font-weight-bold">Asistencia</h4>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" #close>
+                    <span aria-hidden="true">&times;</span>
+                 </button>
+              </div>
+     
+              <div class="modal-body mx-3">
+     
+                 <!-- <form (ngSubmit)="onSubmit(contactForm);" #contactForm="ngForm" > -->
+                <div class="md-form">
+                    <label class="container">One
+                        <input type="checkbox" checked="checked">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">One
+                            <input type="checkbox" checked="checked">
+                            <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="md-form mb-5">
+                    <label data-error="wrong" data-success="right" for="form34">
+                     <i class="fa fa-pencil prefix grey-text"></i> Monto Cancelado</label>
+                    <input type="number" class="form-control validate" #nameInput>
+                 </div>
+                 <br>
+                 <div class="md-form mb-5">
+                        <label data-error="wrong" data-success="right" for="form34">
+                         <i class="fa fa-pencil prefix grey-text"></i> Nro de recibo</label>
+                        <input type="text" class="form-control validate" #nameInput>
+                </div>
+              </div>
+              <div class="modal-footer d-flex justify-content-center">
+                 <button class="btn btn-unique" (click)="save()">Guardar
+                    <i class="fa fa-paper-plane-o ml-1"></i>
+                 </button>
+              </div>
+              <!-- </form> -->
+           </div>
+        </div>
+     </div>
+        <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalAddProgram">Asistencia</a>
+     

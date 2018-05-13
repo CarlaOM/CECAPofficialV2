@@ -141,13 +141,17 @@ module.exports = {
                print_certificate: Boolean,
             }],
             final_work: {
-               stade: Number,
+               stade: Number, // entregado=1, no entrego=2
                observations: String,
             },
-            requirements: [],
+            requirements: { // true=entrego, false=no entrego
+               photograpy: Boolean,
+               photocopy_ci: Boolean,
+               photocopy_titule: Boolean
+            },
             total_price: Number,
-            payed: Number,
-            debt: Number,  //deuda
+            payed: Number, //cancelado
+            debt: Number,  // deuda
             print_diploma: Boolean
          }]
       },
@@ -190,9 +194,10 @@ module.exports = {
          canceled_price: Number,
          price_event: Number,
          receipt: String,
-      //    name: String,
-      //    ci: String,
-      //    cellphone: Number,
+         //////
+         name: String,
+         ci: String,
+         cellphone: Number,
          persons: ObjectId,
          users: ObjectId
       }],

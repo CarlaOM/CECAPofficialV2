@@ -40,7 +40,7 @@ export class AddSucursalComponent implements OnInit {
         alert('Error al Crear Sucursal verifique los datos');
       }
     );
-  }
+  } 
   queryCompany(){
     this._peticionSucursalService.getCompanys().subscribe(
       result => {
