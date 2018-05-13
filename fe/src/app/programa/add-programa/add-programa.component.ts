@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { Router,ActivatedRoute } from "@angular/router";
-import {PeticionesService } from '../../services/peticiones.service';
+import { Router, ActivatedRoute } from "@angular/router";
+import { PeticionesService } from '../../services/peticiones.service';
 import { Programa } from '../../modelo/programa';
 
 @Component({
   selector: 'app-add-programa',
   templateUrl: './add-programa.component.html',
   styleUrls: ['./add-programa.component.css'],
-  providers: [ PeticionesService]
+  providers: [PeticionesService]
 })
 export class AddProgramaComponent implements OnInit {
   public program: Programa;
-  
+
   constructor(
-    private _peticionesService:PeticionesService,
+    private _peticionesService: PeticionesService,
     private router: Router,
     private route: ActivatedRoute,
   ) {
-      this.program = new Programa('', '');//name, details
-    }
+    this.program = new Programa('', '');//name, details
+  }
 
   ngOnInit() {
     this.query();
@@ -30,15 +30,17 @@ export class AddProgramaComponent implements OnInit {
         var esperado = result;
         console.log(esperado);
         alert('El Programa se Creo correctamente');
+        this.router.navigate(['home/programs']);
       },
       error => {
         var errorMessage = <any>error;
         console.log(errorMessage);
         alert('Error al Crear Programa verifique los datos');
+
       }
     );
   }
-  query() {}
+  query() { }
   cancel() {
     this.router.navigate(['home/programs']);
   }
