@@ -6,7 +6,7 @@
       <div>     
             <ol class="breadcrumb">
                 <li><a class="btn btn-primary" [routerLink]="['/home/persons/add']"><i class="fa fa-book"></i>Registrar Persona</a></li>
-               
+                <!-- <li><app-control-asistance></app-control-asistance></li> -->
             </ol>
         </div> 
       <!-- <table class="table">
@@ -43,8 +43,8 @@
          <thead>
             <tr>
                <th>Nombre</th>
+               <th>CI</th>
                <th>Celular</th>
-               <th>Telefono</th>
                <th>Monto Cancelado</th>
                <th>Perfil</th>
                <th colspan="2">Ajustes</th>
@@ -54,8 +54,8 @@
             <!--<tr *ngFor="let i of inscriptions | buscarPersona: busqueda">-->
             <tr *ngFor="let i of states">
                <td>{{ i.name }}</td>
+               <td>{{ i.ci }}</td>
                <td>{{ i.cellphone }}</td>
-               <td>{{ i.phone }}</td>
                <td>{{ i.canceled_price }}</td>
                <td>
                   <a class="btn btn-info" (click)="viewProfile(i.persons)">VER</a>

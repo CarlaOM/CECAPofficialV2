@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PeticionesService } from '../../services/peticiones.service';
+import { ActivatedRoute, Router } from "@angular/router";
+
 import {Cartera} from '../../modelo/cartera';
 import { Identity } from "../../services/global";
 // import {User} from '../../modelo/user';
@@ -20,7 +22,11 @@ export class AddFacilitadorComponent implements OnInit {
   public sucursales;
   public facilitador;
   public facilitadorNuevo;
-  constructor(private _peticionesService:PeticionesService) { }
+  constructor(
+    private _peticionesService:PeticionesService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
 
   submitted = false;
@@ -29,11 +35,17 @@ export class AddFacilitadorComponent implements OnInit {
   model = [, '','', ,"",'', ''];
   onSubmit() { this.submitted = true;
     this.facilitador = new facilitador(this.facilitadorName, this.facilitadorjob);
-    this._peticionesService.addFacilitador(this.facilitador).subscribe(response=>{
-      this.facilitadorNuevo=response;
-      console.log(this.facilitadorNuevo);
+    this._peticionesService.addFacilitador(this.facilitador).subscribe(
+      response=>{
+         this.facilitadorNuevo=response;
+        console.log(this.facilitadorNuevo);
+        this.router.navigate(['/home/facilitador']);
+        alert('se creo facilitador');
       // this.MessageEvent.emit();
-    })
+    },error => {
+      console.log(<any>error)
+      alert('error al crear facilitador, verifique los datos');
+    });
   }
   ngOnInit() {
     this._peticionesService.getSucursales().subscribe(response=>{
@@ -41,5 +53,7 @@ export class AddFacilitadorComponent implements OnInit {
       console.log(this.sucursales)
     });
   }
-
+  cancel() {
+    this.router.navigate(['/home/facilitador']);
+   }
 }

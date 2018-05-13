@@ -31,6 +31,6 @@ export class SucursalService {
     return this._http.post(this.url + 'offices/add', body, { headers: headers }).map((res: Response) => res);
    }
    getCompanys(){
-     return this._http.get(this.url + 'companies').map((res: Response) => res);
+     return this._http.get(this.url + 'company').map((res: Response) => res);
    }
 }
