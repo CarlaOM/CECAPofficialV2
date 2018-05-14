@@ -92,21 +92,28 @@
             <strong>Programas Cursados:</strong>
               <table class="table table-user-information">
                 <tbody>
-                  <tr *ngFor="let i of programs">
-                    <td>Nombre del Programa</td>
-                    <td>{{i.nameProgram}}</td>
-                  </tr>
                   <tr>
+                    <td>Nombre del programa</td>
+                    <td>{{program.name}}</td>
+                  </tr>
+                  <!--<tr>
                     <td>Asistencias por modulos</td>
                     <td>{{i.assists}}</td>
+                  </tr>-->
+                  <tr *ngFor="let i of programs">
+                    <td>Costo total</td>
+                    <td>{{i.total_price}}</td>
                   </tr>
-                  <tr>
-                    <td>Pagos realizados</td>
-                    <td>{{i.payments}}</td>
+                  <tr *ngFor="let i of programs">
+                    <td>Monto cancelado</td>
+                    <td>{{i.payed}}</td>
+                  </tr><tr *ngFor="let i of programs">
+                    <td>Deuda</td>
+                    <td>{{i.debt}}</td>
                   </tr>
                 </tbody>
               </table>
-            <strong>Entrega de Requisitos:</strong>
+            <strong>Entrega de requisitos:</strong>
               <table class="table table-user-information">
                 <tbody>
                   <tr>
@@ -123,7 +130,7 @@
                   </tr>
                 </tbody>
               </table>
-            <strong>Solicitud de diploma y presentacion de Proyecto:</strong>
+            <strong>Solicitud de diploma y presentacion de proyecto:</strong>
               <table class="table table-user-information">
                 <tbody>
                   <tr *ngFor="let i of programs">
