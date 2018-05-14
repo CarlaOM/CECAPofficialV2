@@ -324,8 +324,15 @@ export class PeticionesService {
     addNewCashFlowOffice(idUser){
         var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
         return this._http.get(this.url + 'cajaSucursal/new/' + idUser, { headers: headers }).map((res: Response) => res);
-   
-
+    }
+///////////////////////////////////////////////////////////////////////////7
+    addAssitance(lists){
+        let body = JSON.stringify(lists);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'lists', body, { headers: headers }).map((res: Response) => res);
+    }
+    getList(id){
+        return this._http.get(this.url + 'lists/person/' + id).map((res: Response) => res);
     }
 
 }

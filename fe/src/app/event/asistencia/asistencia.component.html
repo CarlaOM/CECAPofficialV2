@@ -21,10 +21,10 @@
                         </fieldset> -->
                           <br>
                           <div class="form-group col-sm-6" style="text-align: center">
-                                  <label for="montos" class="control-label" >Monto Cancelado</label>
-                                      <input type="text" class="form-control" id="montos" 
-                                      [(ngModel)]="monto" name="montos" #montos="ngModel" required />
-                                      <span *ngIf="!montos.valid && montos.touched" class="text-alert">
+                                  <label for="monto" class="control-label" >Monto Cancelado</label>
+                                      <input type="text" class="form-control" id="monto" 
+                                      [(ngModel)]="lists.bolivianos" name="monto" #monto="ngModel" required />
+                                      <span *ngIf="!monto.valid && monto.touched" class="text-alert">
                                               *Monto requerido.
                                       </span>
                                   <!-- <div [hidden]="first_name?.valid || first_name?.pristine" class="text-alert">
@@ -32,10 +32,10 @@
                                   </div> -->
                               </div>
                               <div class="form-group col-sm-6" style="text-align: center">
-                                 <label for="receip" class="control-label" >Recibo de factura</label>
-                                     <input type="text" class="form-control" id="receip" 
-                                     [(ngModel)]="receipt" name="receip" #receip="ngModel" required />
-                                     <span *ngIf="!receip.valid && receip.touched" class="text-alert">
+                                 <label for="receipt" class="control-label" >Recibo de factura</label>
+                                     <input type="text" class="form-control" id="receipt" 
+                                     [(ngModel)]="lists.receipt" name="receipt" #receipt="ngModel" required />
+                                     <span *ngIf="!receipt.valid && receipt.touched" class="text-alert">
                                              *Recivo requerido.
                                      </span>
                                  <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
@@ -45,14 +45,14 @@
                              <br>
                              <div class="form-group col-sm-8">
                                     <label for="modulo">Modulo del Evento de Hoy</label>
-                                    <select class="form-control" id="modulo" [(ngModel)]="moduloSel"
+                                    <select class="form-control" id="modulo" [(ngModel)]="lists.modulars"
                                             name="modulo" #modulo="ngModel" required >
                                       <option *ngFor="let i of modulos" [value]="i._id">{{i.name}}</option>
                                     </select>
                             </div>
                      </div>
                      <div class="form-group col-sm-8" style="text-align:center ">
-                        <button type="submit" class="btn btn-success" [disabled]="!addAsistance.form.valid" >Registrar</button>
+                        <button type="submit" class="btn btn-success" [disabled]="!addAsistance.form.valid" >Marcar Asistencia</button>
                         <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
                         <!-- <button type="button" class="btn btn-danger" (click)="addPerson.reset()">Cancelar</button> -->
                     </div>

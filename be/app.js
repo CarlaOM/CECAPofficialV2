@@ -43,7 +43,8 @@ app
    .use('/offices', require('./routes/offices'))
    .use('/roles', require('./routes/roles'))   
    .use('/cajaUsuario', require('./routes/cajaUsuario'))
-   .use('/company', require('./routes/company'))  
+   .use('/company', require('./routes/company'))
+   .use('/lists', require('./routes/lists'))  
    .use('/correlatives', require('./routes/correlatives'))
    .use('/cajaSucursal',require('./routes/cajaSucursal'))
    .use(function (err, req, res, next) { 
