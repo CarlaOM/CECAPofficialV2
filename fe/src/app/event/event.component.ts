@@ -16,7 +16,10 @@ export class EventComponent implements AfterViewInit {
    public inscriptions;
    public ocupation;
    public states: Array<any> = [];
-   public color='rojo';
+   public personId;
+
+   public list;
+   public color;
    constructor(
       private route: ActivatedRoute,
       private router: Router,
@@ -29,16 +32,31 @@ export class EventComponent implements AfterViewInit {
    // }
    ngAfterViewInit() {
       this.query();
+      this.controlAssist()
       // this.todos();
    }
    receiveMessage() {
-      this.query();
+      this.query(); 
    }
    asistence(_id){//enviar eventId
-    var idEvenUser = _id +'-'+ this.eventId ;
-    this.router.navigate(['home/event/asistencia', idEvenUser]);
+    this.personId=_id;
+    var idEvenPers = _id +'-'+ this.eventId ;
+    this.router.navigate(['home/event/asistencia', idEvenPers]);
   }
-
+  controlAssist(){
+    this._peticionesService.getList(this.personId).subscribe(
+      result => {
+         this.list = result;
+         console.log(this.list);
+        //  if(personList == null){
+        //  }
+      },
+      error => {
+         var errorMessage = <any>error;
+         console.log(errorMessage);
+      }
+   );
+  }
    butonv(_id){
     if(this.color == 'rojo') {
       this.router.navigate(['home/event/asistencia', _id]);

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { PeticionesService } from '../../services/peticiones.service';
+import { Identity } from '../../services/global';
+import { Lists } from '../../modelo/lists';
 
 @Component({
   selector: 'app-asistencia',
@@ -9,24 +11,43 @@ import { PeticionesService } from '../../services/peticiones.service';
   providers: [PeticionesService]
 })
 export class AsistenciaComponent implements OnInit {
+  public lists: Lists;
   public personId;
   public eventId;
   public modulos;
 
-  public monto;
-  public receipt;
-  public select;
-  public moduloSel;
+  submitted= false;
   constructor(
-    private _peticionesService: PeticionesService,
+        private _peticionesService: PeticionesService,
         private route: ActivatedRoute,
         private router: Router
-  ) { }
+  ) { 
+    this.lists = new Lists(null,0,'',null,null, '','','');//(bol, dol,receipt,assist,type,per,event,mod)
+  }
 
   ngOnInit(){
     this.queryModulos();
   }
   guardar(){
+    console.log(this.lists);
+    this.lists.events = this.eventId;
+    this.lists.person = this.personId;
+
+    this._peticionesService.addAssitance(this.lists).subscribe(
+      result => {
+        var esperado = result;
+        console.log(esperado);
+        alert('Registrado correctamente');
+        var _id =this.eventId;
+        this.router.navigate(['home/event', _id]);
+      },
+      error => {
+        var errorMessage = <any>error;
+        console.log(errorMessage);
+        alert('Error al registrar Asistencia');
+        
+      }
+    );
 
   }
   queryModulos(){

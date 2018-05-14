@@ -62,17 +62,19 @@
                   <a class="btn btn-info" (click)="viewProfile(i.persons)">VER</a>
                </td>
                <td>
-                    <p *ngIf="color == 'verde'">
-                      <a class=" btn btn-success" (click)="butonv(i._id)">ok</a>
+                    <!-- <p *ngIf="list.assist == 'true'"> -->
+                      <p *ngIf="list != null ">
+                      <!-- <a class=" btn btn-success" (click)="butonv(i._id)">ok</a> -->
+                      <a class=" btn btn-danger">OK</a>
                     </p>
-                    <p *ngIf="color == 'rojo'">
-                      <a class=" btn btn-danger" (click)="butonv(i._id)">not</a>
+                    <p *ngIf="list == null ">
+                      <a class=" btn btn-danger">NOT</a>
                     </p>
                 </td>
                <td>
                   <!-- <app-editPerson [editPerson]="event"></app-editPerson> -->
                   <a class="btn btn-warning" (click)="edit(i.persons)">EDITAR</a>
-                  <a class="btn btn-info" (click)="asistence(i.persons)">Asistand</a>
+                  <a class="btn btn-success" (click)="asistence(i.persons)">Asistand</a>
                </td>
             </tr>
          </tbody>
