@@ -37,54 +37,54 @@
         <form (ngSubmit)="onSubmit()" #editEjecutivo="ngForm" >
           <div class="form-group">
             <label for="name">Nombres</label>
-            <input type="text" class="form-control" id="name"
+            <input type="text" pattern="[a-zA-Z]{3,10}[ ]{0,1}[a-zA-Z]{0,10}" class="form-control" id="name"
                    required
                    [(ngModel)]="ejecutivoName" name="name" 
                    #name="ngModel"
                    >
             <div [hidden]="name?.valid || name?.pristine"
                  class="text-alert">
-              first Name is required
+              Nombre es invalido
             </div>
           </div>
           <div class="form-group">
             <label for="lastname">Apellidos</label>
-            <input type="text" class="form-control" id="lastname"
+            <input type="text" pattern="[a-zA-Z]{3,20}[ ]{0,1}[a-zA-Z]{0,20}" class="form-control" id="lastname"
                    required
                    [(ngModel)]="ejecutivoLastName" name="lastname"
                    #lastname="ngModel">
             <div [hidden]="lastname?.valid || lastname?.pristine"
             class="text-alert">
-            last Name is required
+            Apellido es invalido
             </div>
           </div>
           <div class="form-group">
             <label for="cell">Celular</label>
-            <input type="number" class="form-control" id="cell"
+            <input type="number" pattern="[6-7][0-9]{7}" class="form-control" id="cell"
                    required
                    [(ngModel)]="ejecutivoCell" name="cell"
                    #cell="ngModel">
             <div [hidden]="cell?.valid || cell?.pristine"
             class="text-alert">
-            cell is required
+            Celular es invalido
             </div>
           </div>
   
           <div class="form-group">
               <label for="correo">Correo</label>
-              <input type="correo" class="form-control" id="correo"
+              <input type="correo" pattern="[a-zA-Z.0-9]*[@][a-z]{3,15}[.][a-z]{3,15}" class="form-control" id="correo"
                      required
                      [(ngModel)]="ejecutivoCorreo" name="correo"
                      #correo="ngModel">
               <div [hidden]="correo?.valid || correo?.pristine"
               class="text-alert">
-              email is required
+              email es invalido
               </div>
             </div>
         
             
             <div class="form-group">
-                    <label for="rol"> rol</label>
+                    <label for="rol"> Rol</label>
                     <select class="form-control" id="rol"
                             required
                             [(ngModel)]="ejecutivoRol" name="rol"
