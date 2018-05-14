@@ -34,16 +34,19 @@ export class EventComponent implements AfterViewInit {
    receiveMessage() {
       this.query();
    }
-   asistence(_id){
-    this.router.navigate(['home/event/asistencia', _id]);
+   asistence(_id){//enviar eventId
+    var idEvenUser = _id +'-'+ this.eventId ;
+    this.router.navigate(['home/event/asistencia', idEvenUser]);
   }
-butonv(_id){
+
+   butonv(_id){
     if(this.color == 'rojo') {
       this.router.navigate(['home/event/asistencia', _id]);
       this.color='verde'
     }
     else{this.color = 'rojo'}
    }
+   
    query(){
       this.route.params.subscribe(params => {
          this.eventId = params.id
