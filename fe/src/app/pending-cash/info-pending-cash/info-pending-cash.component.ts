@@ -39,7 +39,7 @@ export class InfoPendingCashComponent implements OnInit {
     private router: Router,
   ) { 
 
-    this.cashOffice=new CashFlowOffices(new Date(),new Date(),null,null,'',new Date(),'','');
+    this.cashOffice=new CashFlowOffices(new Date(),new Date(),null,null,'',new Date(),'','','');
 
 
   }

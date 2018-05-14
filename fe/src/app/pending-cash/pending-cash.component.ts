@@ -48,7 +48,7 @@ export class PendingCashComponent implements OnInit {
     // this.cashOffice=new CashFlowOffices(new Date(),new Date(),null,null,'',new Date(),'','');
     ///cashFlowOffice(date_start,date_end,amount,amount_delivered,cashFLOWuSER,DATECLOSECASH,OFFICES)
 
-      this.newCashOffice=new CashFlowOffices(new Date(),new Date(),null,null,'',null,'','');
+      this.newCashOffice=new CashFlowOffices(new Date(),new Date(),null,null,'',null,'','','');
      }
 
     
@@ -70,6 +70,7 @@ export class PendingCashComponent implements OnInit {
     this._peticionesService.getCurrentCashFlowOffice(Identity._id).subscribe(response=>{
 
       this.currentCashFlowOffice=response;
+      console.log(this.currentCashFlowOffice);
 
       this.cashFlowOfficeAmount=this.currentCashFlowOffice.amount;     
 
@@ -121,18 +122,21 @@ export class PendingCashComponent implements OnInit {
     this._peticionesService.closeCashFlowOffice(this.currentCashFlowOffice._id).subscribe(response=>{
       this.closeCashFlowOffice=response;
 
-      this.newCashOffice.userOfCash=Identity._id;
+      this.newCashOffice.user=Identity._id;
+      console.log(this.newCashOffice);
+      
       this._peticionesService.addNewCashFlowOffice(this.newCashOffice).subscribe(response=>{
 
         var newCashOffice=response;
+        // this.router.navigate(['home/pendientes']);
+        // this.router.navigate(['home/pendientes']);
+        // this.router.navigate(['home/pendientes']);
+        // this.router.navigate(['home/pendientes']);
+        // this.router.navigate(['home/pendientes']);
+        this.router.navigate(['home/persons']);
       })
 
-      this.router.navigate(['home/pendientes']);
-      this.router.navigate(['home/pendientes']);
-      this.router.navigate(['home/pendientes']);
-      this.router.navigate(['home/pendientes']);
-      this.router.navigate(['home/pendientes']);
-      this.router.navigate(['home/pendientes']);
+      
 
     })
 
