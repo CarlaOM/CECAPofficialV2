@@ -14,6 +14,7 @@ export class EventsComponent implements OnInit {
    
    public events;
    public role;
+   
    constructor(
       private router: Router,
       private _peticionesService: PeticionesService
@@ -24,6 +25,7 @@ export class EventsComponent implements OnInit {
        this.queryEvents(); 
        //   console.log(this.role);
     }
+    
     addPerson(){
      this.router.navigate(['home/event/persons/add']);
     }

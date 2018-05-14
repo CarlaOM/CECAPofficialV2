@@ -1,3 +1,60 @@
-<p>
-  asistencia works!
-</p>
+<div class="content-wrapper">
+    <br>
+     <div class="content">
+       <div class="box box-primary">
+         <div class="container ">
+             <div [hidden]="submitted">
+                 <h1>Asistencia y cobro</h1>
+                 <form (ngSubmit)="guardar()" #addPerson="ngForm" class="jumbotron">
+                     <div class="form-group col-sm-8">
+                        <fieldset>
+                            <legend>Elige el Modulo del evento de hoy</legend>
+                             <label>
+                                <input type="radio" name="numero" [(ngModel)]="inscription.state" value=0> En duda</label>
+                             <label>
+                                <input type="radio" name="numero" [(ngModel)]="inscription.state" value=1> Inscrito</label>
+                             <label>
+                                <input type="radio" name="numero" [(ngModel)]="inscription.state" value=2> Interesado</label>
+                             <label>
+                                <input type="radio" name="numero" [(ngModel)]="inscription.state" value=3> Confirmar</label>
+                             <label>
+                                <input type="radio" name="numero" [(ngModel)]="inscription.state" value=4> Sin Interes</label>
+                             <label>
+                                <input type="radio" name="numero" [(ngModel)]="inscription.state" value=5> Proximo Evento</label>
+                            </fieldset>
+                          <br>
+                          <div class="form-group col-sm-6" style="text-align: center">
+                                  <label for="first_name" class="control-label" >Monto Cancelado</label>
+                                      <input type="text" class="form-control" id="first_name" 
+                                      [(ngModel)]="person.first_name" name="first_name" #firstname="ngModel" required />
+                                      <span *ngIf="!firstname.valid && firstname.touched" class="text-alert">
+                                              *Nombre de persona requerido.
+                                      </span>
+                                  <!-- <div [hidden]="first_name?.valid || first_name?.pristine" class="text-alert">
+                                      kjknkasdkjhjask
+                                  </div> -->
+                              </div>
+                              <div class="form-group col-sm-6" style="text-align: center">
+                                 <label for="last_name" class="control-label" >Recibo de factura</label>
+                                     <input type="text" class="form-control" id="last_name" 
+                                     [(ngModel)]="person.last_name" name="last_name" #lastname="ngModel" required />
+                                     <span *ngIf="!lastname.valid && lastname.touched" class="text-alert">
+                                             *Apellido de persona requerido.
+                                     </span>
+                                 <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
+                                     kjkn
+                                 </div>-->
+                             </div>
+                     </div>
+                     <div class="form-group col-sm-8" style="text-align:center ">
+                        <button type="submit" class="btn btn-success" [disabled]="!addPerson.form.valid" >Registrar</button>
+                        <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
+                        <!-- <button type="button" class="btn btn-danger" (click)="addPerson.reset()">Cancelar</button> -->
+                    </div>
+                 </form>
+             </div>
+         </div>
+       </div> 
+     </div>
+
+ </div>

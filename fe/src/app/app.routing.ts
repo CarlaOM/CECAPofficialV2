@@ -49,6 +49,7 @@ import { ControlAsistanceComponent } from './event/control-asistance/control-asi
 import { InfoPendingCashComponent } from "./pending-cash/info-pending-cash/info-pending-cash.component";
 import { OfficesCashComponent } from "./offices-cash/offices-cash.component";
 //import { AlertComponent } from './events/alert/alert.component';
+import { AsistenciaComponent } from './event/asistencia/asistencia.component';
 
 
 
@@ -64,6 +65,7 @@ const appRoutes: Routes = [
          //{ path: 'events/alert', component: AlertComponent },
          { path: 'events/add', component:AddEventComponent},
          { path: 'event/:id', component: EventComponent },
+         { path: 'event/asistencia/:id', component: AsistenciaComponent},
          { path: 'profilePerson/:id', component:ProfilePersonComponent},
          { path: 'reports', component: ReportsComponent },
          { path: 'trimestral', component: ReportTrimestralComponent },
@@ -71,7 +73,7 @@ const appRoutes: Routes = [
          { path: 'persons', component: PersonaComponent},
          { path: 'persons/add', component: AddPersonComponent},
          { path: 'persons/edit/:id', component: EditComponent},
-         { path: 'persons/asistencia/:id', component: ControlAsistanceComponent},
+         { path: 'persons/asistencia/:id', component: AsistenciaComponent},
          { path: 'cartera', component:CarteraComponent},
          { path: 'cartera/add', component:AddCarteraComponent},
          { path: 'cartera/:id',component:InfoCarteraComponent},

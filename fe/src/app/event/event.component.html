@@ -47,7 +47,8 @@
                <th>Celular</th>
                <th>Monto Cancelado</th>
                <th>Perfil</th>
-               <th colspan="2">Ajustes</th>
+               <th>Asistencia</th>
+               <th colspan="2">Opciones</th>
             </tr>
          </thead>
          <tbody> 
@@ -61,8 +62,17 @@
                   <a class="btn btn-info" (click)="viewProfile(i.persons)">VER</a>
                </td>
                <td>
+                    <p *ngIf="color == 'verde'">
+                      <a class=" btn btn-success" (click)="butonv(i._id)">ok</a>
+                    </p>
+                    <p *ngIf="color == 'rojo'">
+                      <a class=" btn btn-danger" (click)="butonv(i._id)">not</a>
+                    </p>
+                </td>
+               <td>
                   <!-- <app-editPerson [editPerson]="event"></app-editPerson> -->
                   <a class="btn btn-warning" (click)="edit(i.persons)">EDITAR</a>
+                  <a class="btn btn-info" (click)="asistence(i.persons)">asist</a>
                </td>
             </tr>
          </tbody>
