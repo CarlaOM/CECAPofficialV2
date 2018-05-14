@@ -316,9 +316,10 @@ export class PeticionesService {
         return this._http.get(this.url + 'cajaSucursal/close/' + id, { headers: headers }).map((res: Response) => res);
    
     }
-    addNewCashFlowOffice(idUser){
+    addNewCashFlowOffice(cashFlowOffice){
+        let body = JSON.stringify(cashFlowOffice);
         var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-        return this._http.get(this.url + 'cajaSucursal/new/' + idUser, { headers: headers }).map((res: Response) => res);
+        return this._http.post(this.url + 'cajaSucursal/new', body, { headers: headers }).map((res: Response) => res);
    
 
     }

@@ -80,13 +80,24 @@ router
     .get('/close/:id',function(req,res){
         db.cashFlowOffices.findOne({_id:req.params.id},function(err,cashOffice){
 
+            if(err)return res.status(400).send(err);
 
             cashOffice.state=0;
-            cashOffice.save();
+            cashOffice.save(function(err,cash){
+                if(err)return res.status(400).send(err);
+                return res.status(200).send(cash);
+
+            });
 
         })
     })
+    .post('/new', function (req, res) {
+        var cashOffice=new db.cashFlowOffices(req.body);
 
+        console.log(cashOffice);
+       
+      
+     })
     
 
 
