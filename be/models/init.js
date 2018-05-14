@@ -331,12 +331,12 @@ var _person_1 = {
       programs: [{
          programs: _program_rrhh,
          modulars: [{
-            amount: [{
+            amount: {
                detail: 'String',
                receipt: 1001,
                date: '2018-03-31',
-               amount: 150
-            }],
+               amount: 150,
+            },
             //debt: 150,
             assist: true,
             events: _event_seg,////////////////////duda???????
@@ -389,12 +389,12 @@ var _person_2 = {
       programs: [{
          program: _program_rrhh,
          modulars: [{
-            amount: [{
+            amount: {
                detail: 'modulo 1 rrhh',
                receipt: 1001,
                date: '2018-03-31',
-               amount: 150
-            }],
+               amount: 150,
+            },
             //debt: 150,
             assist: true,
             events: _event_seg,////////////////////duda???????
@@ -447,12 +447,12 @@ var _person_3 = {
       programs: [{
          programs: _program_rrhh,
          modulars: [{
-            amount: [{
+            amount: {
                detail: 'modulo 1 rrhh',
                receipt: 1001,
                date: '2018-03-31',
-               amount: 150
-            }],
+               amount: 150,
+            },
             //debt: 150,
             assist: true,
             events: _event_seg,////////////////////duad???????
@@ -506,12 +506,12 @@ var _person_4 = {
       programs: [{
          programs: _program_rrhh,//modificado de program a programs
          modulars: [{
-            amount: [{
+            amount: {
                detail: 'modulo 1 rrhh',
                receipt: 1001,
                date: '2018-03-31',
-               amount: 150
-            }],
+               amount: 150,
+            },
             //debt: 150,
             assist: true,
             events: _event_seg,////////////////////duad???????

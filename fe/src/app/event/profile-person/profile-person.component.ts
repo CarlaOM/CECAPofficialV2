@@ -24,7 +24,10 @@ export class ProfilePersonComponent implements OnInit {
   public profilePerson;  
   // public profile: Profile;
   public programs: Array<any> = [];
-  // public programId;
+  public programName;
+  public program;
+  public programId;
+  public oneProgram;
   // public finalWork;
   // public registro: Registro;
   // public inscription;
@@ -43,8 +46,6 @@ export class ProfilePersonComponent implements OnInit {
     });
     this.queryPersonId();
     this.findPerson();
-    //this.queryProgram();
-    //this.findProgram();
   }
   queryPersonId(){
     this.route.params.subscribe(params => {
@@ -68,6 +69,7 @@ export class ProfilePersonComponent implements OnInit {
          console.log(this.profilePerson)
 
          this.fillPrograms();
+         this.findProgram(this.programId);
       },
       error => {
         
@@ -91,23 +93,25 @@ export class ProfilePersonComponent implements OnInit {
     for (let i of this.profilePerson) {
       this.programs.push(i);
     }
+    this.getOneProgram(this.programs);
   }
-  // queryProgram(){
-  //   this.route.params.subscribe(params => {
-  //   this.programId=params.id;
-  //   });
-  // }
-  // findProgram(){
-  //   this._peticionesService.getProgram(this.programId).subscribe(
-  //     result => {
-  //        this.program = result;
-  //        console.log(result)
-  //     },
-  //     error => {
-  //        console.log(<any>error);
-  //     });
-  //     this.fillFinalWork(this.programId);
-  // }
+  getOneProgram(programs){
+    this.oneProgram = this.programs[0];
+    console.log(this.oneProgram)
+    this.programId = this.oneProgram.programs
+    // this.findProgram();
+  }
+  findProgram(programId){ 
+    this._peticionesService.getProgram(this.programId).subscribe(
+      result => {
+         this.program = result;
+         console.log(result)
+      },
+      error => {
+         console.log(<any>error);
+      });
+      // this.fillFinalWork(this.programId);
+  }
   // fillFinalWork(programId){
   //     this._peticionesService.getPerson(this.personId).subscribe(
   //        result => {

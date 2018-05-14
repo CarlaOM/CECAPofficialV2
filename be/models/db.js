@@ -130,15 +130,15 @@ module.exports = {
          programs: [{
             programs: ObjectId,
             modulars: [{
-               amount: {  ///observation
+               amount: {  // observation
                   detail: String,
                   receipt: String,// nro factura
                   date: Date,
-                  amount: Number
+                  amount: Number,
                },
                assist: Boolean, //cambio
                events: ObjectId,
-               // inscription: ObjectId,
+            //    inscription: ObjectId,
                modules: ObjectId,
                print_certificate: Boolean,
             }],
