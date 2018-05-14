@@ -15,7 +15,7 @@
             <div class="md-form mb-5">
                <label data-error="wrong" data-success="right" for="form34">
                 <i class="fa fa-pencil prefix grey-text"></i> Nombre</label>
-               <input type="text" class="form-control validate" #nameInput>
+               <input type="text" pattern="[a-zA-Z]{3,20}[ ]{0,1}[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" class="form-control validate" #nameInput>
             </div>
             <br>
             <div class="md-form">
@@ -28,7 +28,7 @@
             <div class="md-form">
                <label data-error="wrong" data-success="right" for="form8">
                 <i class="fa fa-comment prefix grey-text"></i> Descripcion</label>
-               <textarea type="text" class="md-textarea form-control" rows="4" #detailsArea></textarea>
+               <textarea type="text" pattern="[a-zA-Z ]{3,150}" class="md-textarea form-control" rows="4" #detailsArea></textarea>
             </div>
          </div>
          <div class="modal-footer d-flex justify-content-center">

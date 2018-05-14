@@ -5,13 +5,13 @@
       <div class="md-form">
           <i class="fa fa-pencil prefix grey-text"></i>
           <label data-error="wrong" data-success="right" for="form8">Nombre del Programa</label>
-          <input type="text" id="form34" class="form-control validate" value="{{programName}}" #name>
+          <input type="text" pattern="[a-zA-Z]{3,20}[ ]{0,1}[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" id="form34" class="form-control validate" value="{{programName}}" #name>
       </div>
       <br>
       <div class="md-form">
         <i class="fa fa-comment prefix grey-text"></i>
         <label data-error="wrong" data-success="right" for="form8">Detalles</label>
-        <textarea type="text" class="md-textarea form-control" rows="4" value="{{programDetails}}" #details>Detalles</textarea>
+        <textarea type="text" pattern="[a-zA-Z0-9 ]{3,150}" class="md-textarea form-control" rows="4" value="{{programDetails}}" #details>Detalles</textarea>
         <!--<input type="text" id="form34" class="form-control validate" value="{{programDetails}}" #details>-->
       </div>
 
