@@ -4,9 +4,9 @@ var db = require('./db');
 ///////////////////////////////////////
 
 var _offices_stc = {
-   name: 'cecap Cochabamba',
+   name: 'cecap Santa Cruz',
    //nit:'7012323123424',
-   ubicacion: 'santa Cruz entre padilla',
+   ubicacion: 'Beni',
    caja: 1000,
    departament: 'Sta. Cruz',
    company_id: _company,
@@ -289,7 +289,7 @@ var _modulo_2_seguridad = {
 }
 
 var _modulo_1_rrhh = {
-   number: 2,
+   number: 1,
    name: 'modulo 1',
    content: [
       '1. remuneracion1',
@@ -301,7 +301,98 @@ var _modulo_1_rrhh = {
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
-var _modulos = [_modulo_1_seguridad, _modulo_2_seguridad, _modulo_1_rrhh];
+var _modulo_2_rrhh = {
+   number: 2,
+   name: 'modulo 2',
+   content: [
+      '1. remuneracion1',
+      '2. motivacion2',
+      '3. clima laboral3'
+   ],
+   programs: _program_rrhh,
+
+   _id: new mongoose.Types.ObjectId,
+   record_date: new Date()
+}
+var _modulo_3_rrhh = {
+   number: 3,
+   name: 'modulo 3',
+   content: [
+      '1. remuneracion1',
+      '2. motivacion2',
+      '3. clima laboral3'
+   ],
+   programs: _program_rrhh,
+
+   _id: new mongoose.Types.ObjectId,
+   record_date: new Date()
+}
+var _modulo_4_rrhh = {
+   number: 4,
+   name: 'modulo 4',
+   content: [
+      '1. remuneracion1',
+      '2. motivacion2',
+      '3. clima laboral3'
+   ],
+   programs: _program_rrhh,
+
+   _id: new mongoose.Types.ObjectId,
+   record_date: new Date()
+}
+var _modulo_5_rrhh = {
+   number: 5,
+   name: 'modulo 5',
+   content: [
+      '1. remuneracion1',
+      '2. motivacion2',
+      '3. clima laboral3'
+   ],
+   programs: _program_rrhh,
+
+   _id: new mongoose.Types.ObjectId,
+   record_date: new Date()
+}
+var _modulo_6_rrhh = {
+   number: 6,
+   name: 'modulo 6',
+   content: [
+      '1. remuneracion1',
+      '2. motivacion2',
+      '3. clima laboral3'
+   ],
+   programs: _program_rrhh,
+
+   _id: new mongoose.Types.ObjectId,
+   record_date: new Date()
+}
+var _modulo_7_rrhh = {
+   number: 7,
+   name: 'modulo 7',
+   content: [
+      '1. remuneracion1',
+      '2. motivacion2',
+      '3. clima laboral3'
+   ],
+   programs: _program_rrhh,
+
+   _id: new mongoose.Types.ObjectId,
+   record_date: new Date()
+}
+var _modulo_8_rrhh = {
+   number: 8,
+   name: 'modulo 8',
+   content: [
+      '1. remuneracion1',
+      '2. motivacion2',
+      '3. clima laboral3'
+   ],
+   programs: _program_rrhh,
+
+   _id: new mongoose.Types.ObjectId,
+   record_date: new Date()
+}
+var _modulos = [_modulo_1_seguridad, _modulo_2_seguridad, _modulo_1_rrhh, _modulo_2_rrhh, _modulo_3_rrhh, _modulo_4_rrhh, _modulo_5_rrhh, _modulo_6_rrhh, _modulo_7_rrhh, _modulo_8_rrhh];
 
 /////////////////////////////////////////////////////////7
 var _person_1 = {
@@ -311,7 +402,7 @@ var _person_1 = {
    phone: 4653126,
    cellphone: 76543218,
    email: 'gallardo@gmail.com',
-   ocupation: 'universitario',//1 = universitario, 2=Profesional, 3=particular
+   ocupation: 'Estudiante',//1 = Estudiante, 2=Profesional, 3=particular
    descOcupation: {
       //universitario
       carrera: 'Sistemas',
@@ -369,7 +460,7 @@ var _person_2 = {
    phone: 431241514,
    cellphone: 79452311,
    email: 'laura@laura.com',
-   ocupation: 'profesional',
+   ocupation: 'Profesional',
    descOcupation: {
       //universitario
       carrera: '',
@@ -427,7 +518,7 @@ var _person_3 = {
    phone: 49879878,
    cellphone: 60121234,
    email: 'juan@juan.com',
-   ocupation: 'particular',
+   ocupation: 'Particular',
    descOcupation: {
       //universitario
       carrera: '',
@@ -486,7 +577,7 @@ var _person_4 = {
    phone: 41234314,
    cellphone: 79121232,
    email: 'lucia@lucia.com',
-   ocupation: 'estudiante',
+   ocupation: 'Estudiante',
    descOcupation: {
       //universitario
       carrera: 'Ing Sistemas',

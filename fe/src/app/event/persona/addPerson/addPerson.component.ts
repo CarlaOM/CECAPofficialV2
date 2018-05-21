@@ -74,28 +74,29 @@ export class AddPersonComponent implements OnInit {
 
         /////////////   Ingreso por inscripcin a caja Chica////////////////
 
-            this.ingresoPorInscripcion.receipt=this.inscription.receipt;
-            this.ingresoPorInscripcion.title='Inscripcion';
-            this.ingresoPorInscripcion.description=this.person.first_name+' '+this.person.last_name;
-            this.ingresoPorInscripcion.detail_amount=this.inscription.canceled_price;
-            this.ingresoPorInscripcion.user=Identity._id;
-            this.ingresoPorInscripcion.events=this.IdEvent;
-            this._peticionesService.addCashFlowUserIngreso(this.ingresoPorInscripcion).subscribe(
-                result => {
-                  var returned = result;
-                },
-                error => {
-                  var errorMessage = <any>error;
-                  console.log(errorMessage);
-                  alert('Error al Crear cashflowuseringreso');
-                }
-              );
+            // this.ingresoPorInscripcion.receipt=this.inscription.receipt;
+            // this.ingresoPorInscripcion.title='Inscripcion';
+            // this.ingresoPorInscripcion.description=this.person.first_name+' '+this.person.last_name;
+            // this.ingresoPorInscripcion.detail_amount=this.inscription.canceled_price;
+            // this.ingresoPorInscripcion.user=Identity._id;
+            // this.ingresoPorInscripcion.events=this.IdEvent;
+            // ////////////////////////////////////
+            // this._peticionesService.addCashFlowUserIngreso(this.ingresoPorInscripcion).subscribe(
+            //     result => {
+            //       var returned = result;
+            //     },
+            //     error => {
+            //       var errorMessage = <any>error;
+            //       console.log(errorMessage);
+            //       alert('Error al Crear cashflowuseringreso');
+            //     }
+            //   );
 
         ///////////////////////////////////////////////////////////////////
 
 
 
-           // this.router.navigate(['home/event', this.eventId]);
+           this.router.navigate(['home/events']);
             alert('Se Registro a la persona de manera correcta');
             //this.router.navigate(['home/persons']);
             

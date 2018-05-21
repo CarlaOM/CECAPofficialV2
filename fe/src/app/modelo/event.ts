@@ -10,7 +10,7 @@ export class Event {
       //    description: string
       // }],
       public total: number,
-      public program: string,
+      public programs: string,
       //public modulo: string
    ) { }
 }
