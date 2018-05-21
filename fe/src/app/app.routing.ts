@@ -7,7 +7,7 @@ import { EventsComponent } from './events/events.component';
 import { EventComponent } from './event/event.component';
 import { ProfilePersonComponent } from './event/profile-person/profile-person.component';
 import { ReportsComponent } from './graphicReports/reports/reports.component';
-import { ReportTrimestralComponent} from './graphicReports/report-trimestral/report-trimestral.component';
+import { ReportTrimestralComponent } from './graphicReports/report-trimestral/report-trimestral.component';
 import { ReportEventComponent } from './graphicReports/report-event/report-event.component';
 import { CarteraComponent } from "./cartera/cartera.component";
 import { AddCarteraComponent } from './cartera/add-cartera/add-cartera.component';
@@ -50,6 +50,7 @@ import { InfoPendingCashComponent } from "./pending-cash/info-pending-cash/info-
 import { OfficesCashComponent } from "./offices-cash/offices-cash.component";
 //import { AlertComponent } from './events/alert/alert.component';
 import { AsistenciaComponent } from './event/asistencia/asistencia.component';
+import { InscriptionComponent } from './event/inscription/inscription.component';
 
 
 
@@ -63,47 +64,48 @@ const appRoutes: Routes = [
          { path: 'home', redirectTo: 'home', pathMatch: 'full' },
          { path: 'events', component: EventsComponent },
          //{ path: 'events/alert', component: AlertComponent },
-         { path: 'events/add', component:AddEventComponent},
+         { path: 'events/add', component: AddEventComponent },
          { path: 'event/:id', component: EventComponent },
-         { path: 'event/asistencia/:id', component: AsistenciaComponent},
-         { path: 'profilePerson/:id', component:ProfilePersonComponent},
+         { path: 'event/asistencia/:id', component: AsistenciaComponent },
+         { path: 'profilePerson/:id', component: ProfilePersonComponent },
          { path: 'reports', component: ReportsComponent },
          { path: 'trimestral', component: ReportTrimestralComponent },
          { path: 'reportEvent/:id', component: ReportEventComponent },
-         { path: 'persons', component: PersonaComponent},
-         { path: 'persons/add', component: AddPersonComponent},
-         { path: 'persons/edit/:id', component: EditComponent},
-         { path: 'persons/asistencia/:id', component: AsistenciaComponent},
-         { path: 'cartera', component:CarteraComponent},
-         { path: 'cartera/add', component:AddCarteraComponent},
-         { path: 'cartera/:id',component:InfoCarteraComponent},
-         { path: 'cartera/edit/:name',component:EditCarteraComponent},
-         { path: 'ejecutivo', component:EjecutivoComponent},
-         { path: 'ejecutivo/add',component:AddEjecutivoComponent},
-         { path: 'ejecutivo/:id',component:InfoEjecutivoComponent},
-         { path: 'ejecutivo/edit/:active', component:EditEjecutivoComponent},
+         { path: 'persons', component: PersonaComponent },
+         { path: 'persons/add', component: AddPersonComponent },
+         { path: 'persons/edit/:id', component: EditComponent },
+         { path: 'persons/asistencia/:id', component: AsistenciaComponent },
+         { path: 'cartera', component: CarteraComponent },
+         { path: 'cartera/add', component: AddCarteraComponent },
+         { path: 'cartera/:id', component: InfoCarteraComponent },
+         { path: 'cartera/edit/:name', component: EditCarteraComponent },
+         { path: 'ejecutivo', component: EjecutivoComponent },
+         { path: 'ejecutivo/add', component: AddEjecutivoComponent },
+         { path: 'ejecutivo/:id', component: InfoEjecutivoComponent },
+         { path: 'ejecutivo/edit/:active', component: EditEjecutivoComponent },
          { path: 'sucursal', component: SucursalComponent },
-         { path: 'sucursal/add', component: AddSucursalComponent},
-         { path: 'sucursal/detalleCaja', component: DetalleCajaComponent},
-         { path: 'sucursal/detalleCaja/:id', component: DetalleCajaComponent},
-         { path: 'sucursal/personal', component: DetallePersonalComponent},
-         { path: 'formulariobase',component:HeroFormComponent},
-         { path: 'programs', component: ProgramaComponent},
-         { path: 'program/edit/:id', component: EditProgramaComponent},
-         { path: 'program/add',component:AddProgramaComponent},
-         { path: 'modulos/:id', component: ModuloComponent},
-         { path: 'modulo/edit/:id', component: EditModuloComponent},
-         { path: 'modulo/add',component:AddModuloComponent},
-         { path: 'caja/vistacaja', component:VistaCajaComponent},
-         { path: 'caja/ingreso', component:IngresoComponent},
-         { path: 'caja/egreso', component:EgresoComponent},
-         { path: 'facilitador', component:facilitadorComponent},
-         { path: 'facilitador/add', component:AddFacilitadorComponent},
-         { path: 'facilitador/edit/:id', component:EditFacilitadorComponent},
-         { path: 'correlative/add', component:AddCorrelativeComponent},
-         { path: 'pendientes',component:PendingCashComponent},
-         { path: 'pendientes/info/:id',component:InfoPendingCashComponent},
-         { path: 'officesCash',component:OfficesCashComponent},
+         { path: 'sucursal/add', component: AddSucursalComponent },
+         { path: 'sucursal/detalleCaja', component: DetalleCajaComponent },
+         { path: 'sucursal/detalleCaja/:id', component: DetalleCajaComponent },
+         { path: 'sucursal/personal', component: DetallePersonalComponent },
+         { path: 'formulariobase', component: HeroFormComponent },
+         { path: 'programs', component: ProgramaComponent },
+         { path: 'program/edit/:id', component: EditProgramaComponent },
+         { path: 'program/add', component: AddProgramaComponent },
+         { path: 'modulos/:id', component: ModuloComponent },
+         { path: 'modulo/edit/:id', component: EditModuloComponent },
+         { path: 'modulo/add/:id', component: AddModuloComponent },
+         { path: 'caja/vistacaja', component: VistaCajaComponent },
+         { path: 'caja/ingreso', component: IngresoComponent },
+         { path: 'caja/egreso', component: EgresoComponent },
+         { path: 'facilitador', component: facilitadorComponent },
+         { path: 'facilitador/add', component: AddFacilitadorComponent },
+         { path: 'facilitador/edit/:id', component: EditFacilitadorComponent },
+         { path: 'correlative/add', component: AddCorrelativeComponent },
+         { path: 'pendientes', component: PendingCashComponent },
+         { path: 'pendientes/info/:id', component: InfoPendingCashComponent },
+         { path: 'officesCash', component: OfficesCashComponent },
+         { path: 'inscription/:id', component: InscriptionComponent },
 
       ]
    },

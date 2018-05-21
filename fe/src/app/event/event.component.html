@@ -3,43 +3,36 @@
       <!-- <app-addPerson (messageEvent)="receiveMessage()"></app-addPerson> -->
       <!-- <a class="btn btn-primary" (click)="addPerson()">Registrar Persona</a> -->
       <!-- <app-persona></app-persona> -->
-      <div>     
-            <ol class="breadcrumb">
-                <li><a class="btn btn-primary" [routerLink]="['/home/persons/add']"><i class="fa fa-book"></i>Registrar Persona</a></li>
-                <!-- <li><app-control-asistance></app-control-asistance></li> -->
-            </ol>
-        </div> 
-      <!-- <table class="table">
-         <thead>
-            <th>Filtros</th>
-         </thead>
-         <tbody>
-            <tr>
-               <td>
-                  <a class="btn btn-primary"(click)="inscritos()" >Inscritos</a>
-               </td>
-               <td>
-                  <a class="btn btn-primary"(click)="confirmados()">Confirmados</a>
-               </td>
-               <td>
-                  <a class="btn btn-primary" (click)="interesados()">Interesados</a>
-               </td>
-               <td>
-                        <a class="btn btn-primary"(click)="enDuda()">En-Duda</a>
-               </td>
-               <td>
-                  <a class="btn btn-primary"(click)="noParticipa()">No-participa</a>
-               </td>
-               <td>
-                  <a class="btn btn-primary"(click)="proximo()">Proximo</a>
-               </td>
-               <td>
-                  <a class="btn btn-primary"(click)="todos()">Todos</a>
-               </td>
-            </tr>
-         </tbody>
-      </table> -->
-      <table class="table table-hover" >
+      <div>
+         <ol class="breadcrumb">
+            <!-- <br> -->
+            <li>
+               <a class="btn btn-primary" [routerLink]="['/home/inscription/'+event._id]">
+                  <i class="fa fa-book"></i>Inscribir Persona</a>
+            </li>
+            <!-- <li><app-control-asistance></app-control-asistance></li> -->
+         </ol>
+      </div>
+      <div>
+         <h1>{{event.name}}</h1>
+      </div>
+      <div class="btn-group" data-toggle="buttons">
+
+         <label *ngFor="let m of modules" class="btn btn-default form-check-label" (click)="filter(m._id)">
+            <input class="form-check-input" type="radio" autocomplete="off"> {{m.name}}
+         </label>
+
+         <!-- <label class="btn btn-default form-check-label">
+            <input class="form-check-input" type="radio" autocomplete="off"> radio 2
+         </label>
+
+         <label class="btn btn-default form-check-label">
+            <input class="form-check-input" type="radio" autocomplete="off"> radio 3
+         </label> -->
+
+      </div>
+
+      <table class="table table-hover">
          <thead>
             <tr>
                <th>Nombre</th>
@@ -51,7 +44,7 @@
                <th colspan="2">Opciones</th>
             </tr>
          </thead>
-         <tbody> 
+         <tbody>
             <!--<tr *ngFor="let i of inscriptions | buscarPersona: busqueda">-->
             <tr *ngFor="let i of states">
                <td>{{ i.name }}</td>
@@ -62,22 +55,24 @@
                   <a class="btn btn-info" (click)="viewProfile(i.persons)">VER</a>
                </td>
                <td>
-                    <p *ngIf="color == 'verde'">
-                      <a class=" btn btn-success" (click)="butonv(i._id)">ok</a>
-                    </p>
-                    <p *ngIf="color == 'rojo'">
-                      <a class=" btn btn-danger" (click)="butonv(i._id)">not</a>
-                    </p>
-                </td>
+                  <!-- <p *ngIf="list.assist == 'true'"> -->
+                  <p *ngIf="list != null ">
+                     <!-- <a class=" btn btn-success" (click)="butonv(i._id)">ok</a> -->
+                     <a class=" btn btn-danger">OK</a>
+                  </p>
+                  <p *ngIf="list == null ">
+                     <a class=" btn btn-danger">NOT</a>
+                  </p>
+               </td>
                <td>
                   <!-- <app-editPerson [editPerson]="event"></app-editPerson> -->
                   <a class="btn btn-warning" (click)="edit(i.persons)">EDITAR</a>
-                  <a class="btn btn-info" (click)="asistence(i.persons)">asist</a>
+                  <a class="btn btn-success" (click)="asistence(i.persons)">Asistand</a>
                </td>
             </tr>
          </tbody>
       </table>
-      
+
    </section>
    <router-outlet></router-outlet>
 </div>

@@ -9,13 +9,13 @@ var router = express.Router();
 router 
    .get('/', function (req, res) {
         db.company.find({}, function (err, companys) {
-          console.log(companys);
+         //  console.log(companys);
           if (err) return res.status(400).send(err);
           return res.status(200).send(companys);
         });
      }) 
    .get('/:id', function (req, res) {
-      console.log(req.params);
+      // console.log(req.params);
       db.company.findOne({ _id: req.params.id }, function (err, company) {
          if (err) return res.status(400).send(err);
          if (company == null) return res.status(404).send();

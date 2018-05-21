@@ -5,49 +5,54 @@
          <div class="container ">
              <div [hidden]="submitted">
                  <h1>Asistencia y cobro</h1>
-                 <form (ngSubmit)="guardar()" #addPerson="ngForm" class="jumbotron">
+                 <form (ngSubmit)="guardar()" #addAsistance="ngForm" class="jumbotron">
                      <div class="form-group col-sm-8">
-                        <fieldset>
+                            
+                        <!-- <fieldset>
                             <legend>Elige el Modulo del evento de hoy</legend>
+                            <label *ngFor="let i of modulos"><input type="radio" name="numero" [(ngModel)]="select" value=0>{{modulos.name}}</label>
                              <label>
-                                <input type="radio" name="numero" [(ngModel)]="inscription.state" value=0> En duda</label>
+                                <input type="radio" name="numero" [(ngModel)]="select" value=0> En duda</label>
                              <label>
-                                <input type="radio" name="numero" [(ngModel)]="inscription.state" value=1> Inscrito</label>
+                                <input type="radio" name="numero" [(ngModel)]="select" value=1> Inscrito</label>
                              <label>
-                                <input type="radio" name="numero" [(ngModel)]="inscription.state" value=2> Interesado</label>
-                             <label>
-                                <input type="radio" name="numero" [(ngModel)]="inscription.state" value=3> Confirmar</label>
-                             <label>
-                                <input type="radio" name="numero" [(ngModel)]="inscription.state" value=4> Sin Interes</label>
-                             <label>
-                                <input type="radio" name="numero" [(ngModel)]="inscription.state" value=5> Proximo Evento</label>
-                            </fieldset>
+                                <input type="radio" name="numero" [(ngModel)]="select" value=2> Interesado</label>
+                             
+                        </fieldset> -->
                           <br>
                           <div class="form-group col-sm-6" style="text-align: center">
-                                  <label for="first_name" class="control-label" >Monto Cancelado</label>
-                                      <input type="text" class="form-control" id="first_name" 
-                                      [(ngModel)]="person.first_name" name="first_name" #firstname="ngModel" required />
-                                      <span *ngIf="!firstname.valid && firstname.touched" class="text-alert">
-                                              *Nombre de persona requerido.
+                                  <label for="monto" class="control-label" >Monto Cancelado</label>
+                                      <input type="text" class="form-control" id="monto" 
+                                      [(ngModel)]="lists.bolivianos" name="monto" #monto="ngModel" required />
+                                      <span *ngIf="!monto.valid && monto.touched" class="text-alert">
+                                              *Monto requerido.
                                       </span>
                                   <!-- <div [hidden]="first_name?.valid || first_name?.pristine" class="text-alert">
                                       kjknkasdkjhjask
                                   </div> -->
                               </div>
                               <div class="form-group col-sm-6" style="text-align: center">
-                                 <label for="last_name" class="control-label" >Recibo de factura</label>
-                                     <input type="text" class="form-control" id="last_name" 
-                                     [(ngModel)]="person.last_name" name="last_name" #lastname="ngModel" required />
-                                     <span *ngIf="!lastname.valid && lastname.touched" class="text-alert">
-                                             *Apellido de persona requerido.
+                                 <label for="receipt" class="control-label" >Recibo de factura</label>
+                                     <input type="text" class="form-control" id="receipt" 
+                                     [(ngModel)]="lists.receipt" name="receipt" #receipt="ngModel" required />
+                                     <span *ngIf="!receipt.valid && receipt.touched" class="text-alert">
+                                             *Recivo requerido.
                                      </span>
                                  <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
                                      kjkn
                                  </div>-->
                              </div>
+                             <br>
+                             <div class="form-group col-sm-8">
+                                    <label for="modulo">Modulo del Evento de Hoy</label>
+                                    <select class="form-control" id="modulo" [(ngModel)]="lists.modulars"
+                                            name="modulo" #modulo="ngModel" required >
+                                      <option *ngFor="let i of modulos" [value]="i._id">{{i.name}}</option>
+                                    </select>
+                            </div>
                      </div>
                      <div class="form-group col-sm-8" style="text-align:center ">
-                        <button type="submit" class="btn btn-success" [disabled]="!addPerson.form.valid" >Registrar</button>
+                        <button type="submit" class="btn btn-success" [disabled]="!addAsistance.form.valid" >Marcar Asistencia</button>
                         <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
                         <!-- <button type="button" class="btn btn-danger" (click)="addPerson.reset()">Cancelar</button> -->
                     </div>

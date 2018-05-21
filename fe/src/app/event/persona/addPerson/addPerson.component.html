@@ -84,7 +84,7 @@
                                   </span>
                           </div>
                         </div>
-                        <div class="form-group col-sm-8" >
+                        <!-- <div class="form-group col-sm-8" >
                             <div class="form-group col-sm-3">
                                 <label for="difinePrice" class="control-label"style="text-align:right" >Precio Definido</label>
                                     <input type="number" pattern="[0-9]{0,5}" class="form-control" id="difinePrice" 
@@ -115,7 +115,7 @@
                                             *Numero de Recibo invalido.
                                     </span>
                             </div>
-                      </div>
+                      </div> -->
                       <div class="form-group col-sm-8">
                           <label for="ocupSelect">
                             <i class="fa fa-tag prefix grey-text"></i>Ocupacion</label>
@@ -178,13 +178,13 @@
                               </p>
                             </div>
                       </div>
-                      <div class="form-group col-sm-8">
+                      <!-- <div class="form-group col-sm-8">
                               <label for="evento">Evento</label>
                               <select class="form-control" id="evento" [(ngModel)]="IdEvent"
                                       name="evento" #evento="ngModel" required >
                                 <option *ngFor="let evento of eventos" [value]="evento._id">{{evento.name}}</option>
                               </select>
-                      </div>
+                      </div> -->
                        <div class="form-group col-sm-8" style="text-align:center ">
                           <button type="button" class="btn btn-info" (click)="addPerson.reset()">Limpiar</button>
                           <button type="submit" class="btn btn-success" [disabled]="!addPerson.form.valid" >Registrar</button>

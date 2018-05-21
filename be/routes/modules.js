@@ -27,14 +27,19 @@ router
         return res.status(200).send(modules);
       });
    })
-//    .get('/eventoModuls/:id', function (req, res) {
-//     console.log(req.params.id);
-//     db.events.find({}, function (err, event) {
-//       if (err) return res.status(400).send(err);
-//         console.log(event);
-//          return res.status(200).send(modules);
-//     }); 
-//  })
+   .get('/eventoModuls/:id', function (req, res) {
+    console.log(req.params.id);
+    db.events.findOne({_id: req.params.id}, function(err, events){
+      //console.log(events);
+      if(err){return res.status(400).send(err);}
+      db.modules.find({programs: events.programs},function(err, moduls){
+          if(err){return res.status(400).send(err);}
+          console.log(moduls);
+          return res.status(200).send(moduls);
+
+      });//F module
+    });//F EVENTS
+ })
    
    .post('/add', function(req, res){
       console.log(req.body);

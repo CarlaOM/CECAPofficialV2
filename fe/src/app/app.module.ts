@@ -85,6 +85,7 @@ import { ConfirmCloseCashComponent } from './caja/confirm-close-cash/confirm-clo
 import { ConfirmPendingCashComponent } from './pending-cash/confirm-pending-cash/confirm-pending-cash.component';
 import { OfficesCashComponent } from './offices-cash/offices-cash.component';
 import { AsistenciaComponent } from './event/asistencia/asistencia.component';
+import { InscriptionComponent } from './event/inscription/inscription.component';
 
 @NgModule({
   declarations: [
@@ -156,7 +157,8 @@ import { AsistenciaComponent } from './event/asistencia/asistencia.component';
     ConfirmCloseCashComponent,
     ConfirmPendingCashComponent,
     OfficesCashComponent,
-    AsistenciaComponent
+    AsistenciaComponent,
+    InscriptionComponent
 
   ],
   imports: [

@@ -5,51 +5,53 @@ var mongoose = require('mongoose');
 
 router
    .get('/', function (req, res) {
-//       var d = new Date();
-//       db.events.find({ date_start: { $gt: d } }, {name: 1,description:1,date_start: 1,modulars:1, inscriptions: 1, total: 1 , program: 1}, function (err, events) {
-//          if (err) return res.status(400).send(err);
-//          let programs = [];
-//          //let modulos = [];
-//          var j = 0; 
-//          let insert = true;
-//          var today = new Date;
-//          for (let i = 0; i < events.length; i++) {
-//             j = 0;
-//             insert = true;
+      var d = new Date();
+      db.events.find({ date_start: { $gt: d } }, { name: 1, description: 1, date_start: 1, modulars: 1, inscriptions: 1, total: 1, programs: 1 }, function (err, events) {
+         if (err) return res.status(400).send(err);
+         // let programs = [];
+         //let modulos = [];
+         //    var j = 0;
+         //    let insert = true;
+         //    var today = new Date;
+         //    for (let i = 0; i < events.length; i++) {
+         //       j = 0;
+         //       insert = true;
 
-//             do {
-//                if (programs.length == 0) { insert = false; programs.push(events[i].program); }
-//                else if (JSON.stringify(programs[j]) == JSON.stringify(events[i].program)) insert = false;
-//                if (today > events[i].date_start) { insert = false; }
-//                j++;
-//             } while (j < programs.length);
-//             if (insert) programs.push(events[i].program);
-//          }
-//          getPrograms(programs, events);
-//       });
-//       function getPrograms(programs, events) {
-//          db.programs.find({ _id: { $in: programs } }, { name: 1 }, function (err, programs) {
-//             if (err) return res.status(400).send(err);
-//             events.forEach(event => {
-//                programs.forEach(program => {
-//                   if (JSON.stringify(event.program) == JSON.stringify(program._id)) {
-//                      event.name = program.name;
-//                   }
-//                });
-//             });
-//             return res.status(200).send(events);
-//          });
-//       }
-      db.events.find({},function(err,events){
+         //       do {
+         //          if (programs.length == 0) { insert = false; programs.push(events[i].program); }
+         //          else if (JSON.stringify(programs[j]) == JSON.stringify(events[i].program)) insert = false;
+         //          if (today > events[i].date_start) { insert = false; }
+         //          j++;
+         //       } while (j < programs.length);
+         //       if (insert) programs.push(events[i].program);
+         //    }
+         //    getPrograms(programs, events);
          return res.status(200).send(events);
       });
+      // function getPrograms(programs, events) {
+      //    db.programs.find({ _id: { $in: programs } }, { name: 1 }, function (err, programs) {
+      //       if (err) return res.status(400).send(err);
+      //       console.log(programs)
+      //       events.forEach(event => {
+      //          programs.forEach(program => {
+      //             if (JSON.stringify(event.program) == JSON.stringify(program._id)) {
+      //                event.name = program.name;
+      //             }
+      //          });
+      //       });
+      //       return res.status(200).send(events);
+      //    });
+      // }
+      // db.events.find({},function(err,events){
+      //    return res.status(200).send(events);
+      // });
    })
    .get('/lists', function (req, res) {
-      db.lists.find({},function(err,lists){
+      db.lists.find({}, function (err, lists) {
          return res.status(200).send(lists);
       })
    })
-   
+
    .get('/trimestral', function (req, res) {
       var d = new Date();
       var d1 = new Date(d.getFullYear(), d.getMonth() - 3, d.getDate()); //menos 3 meses
@@ -145,7 +147,7 @@ router
       }
    })
    //////////get personas por evento
-   .get('/interes/:id', function (req, res) {
+   .get('/inscriptions/:id', function (req, res) {
       db.events.findOne({ _id: req.params.id }, function (err, event) {
          if (err) return res.status(400).send(err);
          if (event == null) return res.status(404).send();
@@ -164,18 +166,18 @@ router
       //    });
       // }
       function getPerson(persons, event) {
-            db.persons.find({ _id: { $in: persons } }, function (err, persons) {
-               if (err) return res.status(400).send(err);
-               // console.log(persons)
-               event.inscriptions.forEach(i => {
-                  persons.forEach(person => { 
-                        if (JSON.stringify(i.persons) == JSON.stringify(person._id)) {
-                           i.name = person.first_name + ' ' + person.last_name;
-                           i.phone= person.phone;
-                           i.cellphone=person.cellphone;
-                        }
-                     });
+         db.persons.find({ _id: { $in: persons } }, function (err, persons) {
+            if (err) return res.status(400).send(err);
+            // console.log(persons)
+            event.inscriptions.forEach(i => {
+               persons.forEach(person => {
+                  if (JSON.stringify(i.persons) == JSON.stringify(person._id)) {
+                     i.name = person.first_name + ' ' + person.last_name;
+                     i.phone = person.phone;
+                     i.cellphone = person.cellphone;
+                  }
                });
+            });
             //console.log(event);
             return res.status(200).send(event);
          });
@@ -189,9 +191,10 @@ router
          // return res.status(200).send(event);
          getProgram(event);
       });
-      function getProgram(event){
+      function getProgram(event) {
          db.programs.findOne({ _id: event.programs }, { name: 1 }, function (err, program) {
             if (err) return res.status(400).send(err);
+            console.log(program)
             event.name = program.name;
             // return res.status(200).send(event);
             var persons = event.inscriptions.map(i => i.person);
@@ -294,26 +297,20 @@ router
             return res.status(200).send(persons);
          });
       }
-   }) 
+   })
 
    .post('/', function (req, res) {
       var event = new db.events(req.body);
       var d = new Date();
-      if ((event.date_start == undefined || event.date_start < d) || event.description == '' || event.total == '' || event.program == '') return res.status(400).send();
-      db.persons.find({}, { _id: 1, user: 1 }, function (err, persons) {
+      console.log(event);
+      if ((event.date_start == undefined || event.date_start < d) || event.description == '' || event.total == '' || event.programs == '') return res.status(400).send();
+      event.save(function (err, event) {
          if (err) return res.status(400).send(err);
-         saveEvent(persons);
-      });
-      function saveEvent(persons) {
-         event.inscriptions = persons.map(res => {
-            return { state: 0, person: res._id, user: res.user }
-         });
-         event.save(function (err, event) {
-            if (err) return res.status(400).send(err);
 
-            return res.status(201).send(event);
-         });
-      }
+         return res.status(201).send(event);
+         // });
+         // }
+      })
    })
 
    .post('/edit', function (req, res) {
@@ -339,8 +336,8 @@ router
          }).exec(function (err, off) {
             if (err) return res.status(400).send(err);
             //db.events.find({ _id: req.body.name, _id: { $in: req.body.person } }, function (err, event) {
-             db.events.find({ _id: req.body.name }, function (err, event) {
-                  if (err) return res.status(401).send(err);
+            db.events.find({ _id: req.body.name }, function (err, event) {
+               if (err) return res.status(401).send(err);
                return res.status(201).send(event);
             });
             //	if (off.nModified == 0) return res.status(406).send();
