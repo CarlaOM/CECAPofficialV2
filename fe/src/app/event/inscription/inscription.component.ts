@@ -28,7 +28,7 @@ export class InscriptionComponent implements OnInit {
    public eventId;
    public cartera;
    public ingresoPorInscripcion;
-
+   public modulos;
    public registro: Registro;
 
    submitted = false;
@@ -50,9 +50,10 @@ export class InscriptionComponent implements OnInit {
    onSubmit() {
    }
    ngOnInit() {
-      console.log(Identity._id);
+      console.log(Identity._id); 
       //this.queryPrograms();
       this.queryEventId();
+      this.queryModulos();
       // this.queryEvents();
       // this.queryCartera();
    }
@@ -68,8 +69,8 @@ export class InscriptionComponent implements OnInit {
          if (this.person.ci > 999999) {
             this._peticionesService.getCi(this.person.ci).subscribe(result => {
                // console.log(result);
-               this.person.first_name = result.first_name;
-               this.person.last_name = result.last_name;
+               this.person.first_name = result.first_name;     
+               this.person.last_name = result.last_name;          
 
             })
          }
@@ -88,48 +89,48 @@ export class InscriptionComponent implements OnInit {
       this.inscription.users = Identity._id;
       this.registro.inscription = this.inscription;
       this.registro.eventId = this.eventId;
-      this.registro.persona = this.person;
+      this.registro.persona = this.person;//opcional
       console.log(this.registro);
-      // this._peticionesService.addPerson(this.registro).subscribe(
-      //    result => {
-      //       var esperado = result;
-      //       console.log(esperado);
+    //   this._peticionesService.addInscriptPerson(this.registro).subscribe(
+    //      result => {
+    //         var esperado = result;
+    //         console.log(esperado);
 
-      //       /////////////   Ingreso por inscripcin a caja Chica////////////////
+    //   //       /////////////   Ingreso por inscripcin a caja Chica////////////////
 
-      //       // this.ingresoPorInscripcion.receipt=this.inscription.receipt;
-      //       // this.ingresoPorInscripcion.title='Inscripcion';
-      //       // this.ingresoPorInscripcion.description=this.person.first_name+' '+this.person.last_name;
-      //       // this.ingresoPorInscripcion.detail_amount=this.inscription.canceled_price;
-      //       // this.ingresoPorInscripcion.user=Identity._id;
-      //       // this.ingresoPorInscripcion.events=this.IdEvent;
-      //       // ////////////////////////////////////
-      //       // this._peticionesService.addCashFlowUserIngreso(this.ingresoPorInscripcion).subscribe(
-      //       //     result => {
-      //       //       var returned = result;
-      //       //     },
-      //       //     error => {
-      //       //       var errorMessage = <any>error;
-      //       //       console.log(errorMessage);
-      //       //       alert('Error al Crear cashflowuseringreso');
-      //       //     }
-      //       //   );
+    //   //       // this.ingresoPorInscripcion.receipt=this.inscription.receipt;
+    //   //       // this.ingresoPorInscripcion.title='Inscripcion';
+    //   //       // this.ingresoPorInscripcion.description=this.person.first_name+' '+this.person.last_name;
+    //   //       // this.ingresoPorInscripcion.detail_amount=this.inscription.canceled_price;
+    //   //       // this.ingresoPorInscripcion.user=Identity._id;
+    //   //       // this.ingresoPorInscripcion.events=this.IdEvent;
+    //   //       // ////////////////////////////////////
+    //   //       // this._peticionesService.addCashFlowUserIngreso(this.ingresoPorInscripcion).subscribe(
+    //   //       //     result => {
+    //   //       //       var returned = result;
+    //   //       //     },
+    //   //       //     error => {
+    //   //       //       var errorMessage = <any>error;
+    //   //       //       console.log(errorMessage);
+    //   //       //       alert('Error al Crear cashflowuseringreso');
+    //   //       //     }
+    //   //       //   );
 
-      //       ///////////////////////////////////////////////////////////////////
+    //   //       ///////////////////////////////////////////////////////////////////
 
 
 
-      //       this.router.navigate(['home/events']);
-      //       alert('Se Registro a la persona de manera correcta');
-      //       //this.router.navigate(['home/persons']);
+    //   //       this.router.navigate(['home/events']);
+    //   //       alert('Se Registro a la persona de manera correcta');
+    //   //       //this.router.navigate(['home/persons']);
 
-      //    },
-      //    error => {
-      //       var errorMessage = <any>error;
-      //       console.log(errorMessage);
-      //       alert('Error al registrar, Persona existente');
-      //    }
-      // );
+    //      },
+    //      error => {
+    //         var errorMessage = <any>error;
+    //         console.log(errorMessage);
+    //         alert('Error al registrar, Persona existente');
+    //      }
+    //   );
    }
    // captOcupation() {
    //    console.log(this.ocupSelected);
@@ -165,6 +166,22 @@ export class InscriptionComponent implements OnInit {
    //          console.log(errorMessage);
    //       });
    // }
+
+   queryModulos(){
+    this.route.params.subscribe(params => {
+        this.eventId = params.id;
+        // console.log(this.eventId)
+     });
+    this._peticionesService.getEventModuls(this.eventId).subscribe(//consulta para obt todo modulos
+      result => {
+          this.modulos = result;
+          console.log(this.modulos);
+      },
+      error => {
+          var errorMessage = <any>error;
+          console.log(errorMessage);
+      });
+  }
    cancel() {
       // this.router.navigate(['home/events']);
       window.history.back();

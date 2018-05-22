@@ -21,7 +21,7 @@ export class EventsComponent implements OnInit {
       //,private _userService: UserService
    ) { }
    ngOnInit() {
-       this.queryRol();
+      // this.queryRol();
        this.queryEvents(); 
        //   console.log(this.role);
     }
@@ -52,18 +52,18 @@ export class EventsComponent implements OnInit {
          }
       );
    }
-   queryRol(){
-       //console.log(Identity.rol)
-    this._peticionesService.getRole(Identity.rol).subscribe(
-        result => {
-         this.role = result;
-        },
-        error=>{
-         var errorMessage = <any>error;
-         console.log(errorMessage);
-        }
-    );
-    }
+//    queryRol(){
+//        //console.log(Identity.rol)
+//     this._peticionesService.getRole(Identity.rol).subscribe(
+//         result => {
+//          this.role = result;
+//         },
+//         error=>{
+//          var errorMessage = <any>error;
+//          console.log(errorMessage);
+//         }
+//     );
+//     }
 }
 
 
