@@ -236,6 +236,80 @@ router
       }
 
    })
+   ///inscripcion de personas antes y en el evento
+  .post('/inscriptPerson/:id', function (req, res) {
+      ///GUARDAR EN LISTS PRIMERO
+   db.persons.findOne({ ci: req.body.persona.ci }, function (err, person) {
+      if (person == null){
+        console.log('consulta de persona');
+        db.events.findOne({_id: rer.body.eventId},{date_start: 1 },function(err, date){
+            if (err) { return res.status(400).send(err); }
+            var asistencia = false;
+            if( date == new Date()){ asistencia = true; }
+            //Generando lista
+            var list = {
+                  bolivianos: req.body.inscription.canceled_price,
+                  dolares: req.body.inscription.canceled_price/ (6.96),
+                  receipt: req.body.inscription.receipt, // varios recibos
+                  assist: asistencia, //controlar por fecha de inscription ****************
+                  type: 1, //nuevo // nivelacion
+                  person: person._id,
+                  events: req.body.eventId,
+                  //modulars: ObjectId
+            };
+            var lists = new db.lists(list);
+            lists.save(function (err, lists) {
+                  console.log('lista guardada');
+                  if (err) { return res.status(400).send(err); }
+                  addInscription(person, req.body.inscription, req.body.eventId);
+                  //**controlar fecha y modulars*/
+            });
+            function addInscription(person, inscri, idEvent) {
+              db.events.findOne({ _id: idEvent }, function (err, events) {
+                console.log(events);
+                db.modules.find({ programs: events.programs }).count().exec(function (err, moduls) {
+                  console.log(moduls);
+                  console.log('llegue al la cantidad de modulos');
+                  var modulPrice = inscri.price_event / moduls;///////DIVISION
+                  console.log(modulPrice);
+                  var inscription = {
+                        // segun al numero de asistencias sacar el precio total q tiene q pagar
+                        total_price: 0,//sumatorio por asistencia de cada modulo
+                        module_price: modulPrice,
+                        bolivianos_price: inscri.canceled_price,
+                        dolares_price: inscri.canceled_price/(6.96),
+                        canceled_price: inscri.canceled_price,
+                        price_event: inscri.price_event,
+                        receipt: inscri.receipt,
+                        name: person.name,
+                        ci: person.ci,
+                        cellphone: person.cellphone,
+                        persons: person._id,
+                        users: inscri.users
+                  };
+                        var d = new Date();
+                        ///////////
+                        db.events.update({ _id: idEvent },
+                        {
+                              $push: {
+                              inscriptions: inscription
+                              }
+                        }, {
+                              multi: true
+                        }, function (err, events) {
+                              if (err) return res.status(400).send(err);
+                              console.log(events);
+                              // if (events == null) return res.status(404).send();
+                              return res.status(200).send(person);
+                        });
+                  });//fin module
+                });//fin Event
+            }
+       });//F Qevents
+      } else{}
+    })
+   })
+
    //post person event 
    .post('/:id', function (req, res) {
       db.events.findOne({ _id: req.params.id }, function (err, event) {
@@ -306,11 +380,59 @@ router
       if ((event.date_start == undefined || event.date_start < d) || event.description == '' || event.total == '' || event.programs == '') return res.status(400).send();
       event.save(function (err, event) {
          if (err) return res.status(400).send(err);
+         //return res.status(201).send(event);
+         addModulars(event);
+       });
+       function addModulars(event){
+         db.events.findOne({ _id: event._id }, function (err, event) {
+            console.log(event);
+            db.modules.find({ programs: event.programs },{_id: 1},function (err, moduls) {
+                  console.log(moduls);
+                  for (let i = 0; i < moduls.length; i++) {
+                        modular = {
+                              date_start:'',
+                              date_end: '',
+                              facilitators: null,
+                              modules: moduls[i],
+                              lists: null,
+                              _id: new mongoose.Types.ObjectId
+                        };
+                        db.events.update({ _id: event._id },
+                              {
+                                    $push: {
+                                    modulars: modular
+                                    }
+                              }, {
+                                    multi: true
+                              }, function(err, events) {
+                                    if (err) return res.status(400).send(err);
+                                   // console.log(events);
+                              });
+                  }
+                  modular = {
+                        date_start:'',
+                        date_end: '',
+                        facilitators: null,
+                        modules: null,
+                        lists: null,
+                        _id: new mongoose.Types.ObjectId
+                  };
+                  db.events.update({ _id: event._id },
+                        {
+                              $push: {
+                              modulars: modular
+                              }
+                        }, {
+                              multi: true
+                        }, function (err, event) {
+                              if (err) return res.status(400).send(err);
+                              console.log(event);
+                              return res.status(200).send(event);
+                        });
+            });//fin module
+          });//fin Event
 
-         return res.status(201).send(event);
-         // });
-         // }
-      })
+       }//fin Function
    })
 
    .post('/edit', function (req, res) {

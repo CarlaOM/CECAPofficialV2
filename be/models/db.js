@@ -184,8 +184,8 @@ module.exports = {
          date_end: Date,
          facilitators: ObjectId,
          modules: ObjectId,
-         lists: [ObjectId],
-         _id: ObjectId///////////////duda?????
+         lists: [ObjectId],////existe Modulars en Lists!!!!
+         _id: ObjectId////
       }],
       inscriptions: [{
          // segun al numero de asistencias sacar el precio total q tiene q pagar
