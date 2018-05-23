@@ -418,8 +418,7 @@ var _person_1 = {
    //////////////
    carteras: _cartera_user_2,
    /////////////
-   profile: {
-      programs: [{
+   profile: [{
          programs: _program_rrhh,
          modulars: [{
             amount: {
@@ -448,8 +447,7 @@ var _person_1 = {
          payed: 1000, //cancelado
          debt: 200,  // deuda
          print_diploma: false
-      }]
-   },
+      }],
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
@@ -476,8 +474,7 @@ var _person_2 = {
    //////////////
    carteras: _cartera_user_2,
    /////////////
-   profile: {
-      programs: [{
+   profile: [{
          program: _program_rrhh,
          modulars: [{
             amount: {
@@ -506,8 +503,7 @@ var _person_2 = {
          payed: 2000, //cancelado
          debt: 0,  // deuda
          print_diploma: false
-      }]
-   },
+      }],
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
@@ -534,8 +530,7 @@ var _person_3 = {
    //////////////
    carteras: _cartera_user_2,
    /////////////
-   profile: {
-      programs: [{
+   profile:[{
          programs: _program_rrhh,
          modulars: [{
             amount: {
@@ -564,8 +559,7 @@ var _person_3 = {
          payed: 1000, //cancelado
          debt: 500,  // deuda
          print_diploma: false
-      }]
-   },
+      }],
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
@@ -593,8 +587,7 @@ var _person_4 = {
    //////////////
    carteras: _cartera_user_2,
    /////////////
-   profile: {
-      programs: [{
+   profile: [{
          programs: _program_rrhh,//modificado de program a programs
          modulars: [{
             amount: {
@@ -623,8 +616,7 @@ var _person_4 = {
          payed: 1000, //cancelado
          debt: 200,  // deuda
          print_diploma: false
-      }]
-   },
+      }],
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }; 
@@ -633,7 +625,7 @@ var _persons = [_person_1, _person_2, _person_3, _person_4];
 var _event_seg = {
    name: 'seguridad imformatica y redes sociales',
    description: 'solo para ejecutivos',
-   date_start: '2018-03-25',
+   date_start: '2018-06-25',
         // interes:[{
         //     events: _person_1,
         //     record_date: new Date()
