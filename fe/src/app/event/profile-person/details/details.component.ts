@@ -29,16 +29,16 @@ export class DetailsComponent implements OnInit {
     });
   }
   findPP(){
-    console.log(this.ppId)
-    this._peticionesService.getProgramPerson(this.ppId).subscribe(
-      result => {
-         this.program = result;
-         console.log(result)
-        //  this.programPerson = this.person.profile.programs;
-        //  console.log(this.programPerson)
-      },
-      error => {
-         console.log(<any>error);
-      });
+    // console.log(this.ppId)
+    // this._peticionesService.getProgramPerson(this.ppId).subscribe(
+    //   result => {
+    //      this.program = result;
+    //      console.log(result)
+    //     //  this.programPerson = this.person.profile.programs;
+    //     //  console.log(this.programPerson)
+    //   },
+    //   error => {
+    //      console.log(<any>error);
+    //   });
   }
 }

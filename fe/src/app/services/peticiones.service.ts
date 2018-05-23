@@ -77,20 +77,17 @@ export class PeticionesService {
       var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
       return this._http.post(this.url + 'persons', body, { headers: headers }).map((res: Response) => res);
    }
-   addInscriptPerson(registro){
-    let body = JSON.stringify(registro);
-    var idEvent = registro.idEvent;
-    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-    return this._http.post(this.url + 'events/inscriptPerson/' + idEvent, body, { headers: headers }).map((res: Response) => res);
-   }
    getPerson(_id) {
       return this._http.get(this.url + 'persons/' + _id).map((res: Response) => res);
    }
    getCi(ci) {
       return this._http.get(this.url + 'persons/existCi/' + ci).map((res: Response) => res);
    }
-   getProgramPerson(id) {
-    return this._http.get(this.url + 'persons/program/' + id).map((res: Response) => res);
+   getProgramPerson(person_object, idProgram) {
+    var idPerson = person_object._id;
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    let body = JSON.stringify({programId:idProgram});
+    return this._http.post(this.url + 'persons/program/' + idPerson, body).map((res: Response) => res);
  }
    getPersons() {
       return this._http.get(this.url + 'persons').map((res: Response) => res);

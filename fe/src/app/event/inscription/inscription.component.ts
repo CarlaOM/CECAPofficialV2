@@ -69,13 +69,8 @@ export class InscriptionComponent implements OnInit {
          if (this.person.ci > 999999) {
             this._peticionesService.getCi(this.person.ci).subscribe(result => {
                // console.log(result);
-<<<<<<< HEAD
-               //this.person.first_name = result.first_name;
-               //this.person.last_name = result.last_name;
-=======
                this.person.first_name = result.first_name;     
                this.person.last_name = result.last_name;          
->>>>>>> a914363fe20e22b205e7d718d506412bf0eb1bae
 
             })
          }
