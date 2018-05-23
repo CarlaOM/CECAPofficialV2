@@ -52,7 +52,7 @@ export class ProfilePersonComponent implements OnInit {
         //  console.log(this.ocupation)
          this.ocupations = this.person.descOcupation;
         //  console.log(this.ocupations)
-         this.programsPerson = this.person.profile.programs;
+         this.programsPerson = this.person.profile;
          console.log(this.programsPerson)
          this.viewPrograms();
       },
@@ -91,7 +91,8 @@ export class ProfilePersonComponent implements OnInit {
       }
     console.log(this.listPrograms)
   }
-  viewDetails(ppId){
+  viewDetails(_id){
+    var ppId = _id + '-' + this.personId;
     this.router.navigate(['home/detailsProfile', ppId]);
   }
 }

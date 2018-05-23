@@ -104,19 +104,21 @@ router
       });
    })
   ////////////////////////////////////////////////////////////////////////////
-   .get('/program/:id', function (req, res) {
-      db.persons.findOne({ _id: req.params.id }, { "profile.programs": 1 }, function (err, person) {
+   .post('/profile/:id', function (req, res) {
+      db.persons.findOne({ _id: req.params.id }, function (err, person) {
         if (err) return res.status(400).send(err);
         if (person == null) return res.status(404).send();
         console.log(person)
-        var programs = person.profile.programs.map((i) => i.persons);
-        getProgramPerson(programs);
+        console.log(req.body)
+        var idProfile = req.body;
+        var profile = person.profile.map((i) => i.person);
+        getProfilePerson(profile);
     });
-    function getProgramPerson(programs) {
-      db.persons.findOne({ _id: person.profile.programs }, { programs: 1 }, function (err, program) {
+    function getProfilePerson(profile) {
+      db.persons.findOne({ _id: profile}, { profile: 1 }, function (err, profile) {
          if (err) return res.status(400).send(err);
-          console.log(program)
-         return res.status(200).send(program);
+         console.log(profile)
+         return res.status(200).send(profile);
       })
    }   
 })
