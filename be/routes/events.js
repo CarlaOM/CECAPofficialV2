@@ -240,12 +240,14 @@ router
   .post('/inscriptPerson/:id', function (req, res) {
       ///GUARDAR EN LISTS PRIMERO
    db.persons.findOne({ ci: req.body.persona.ci }, function (err, person) {
-      if (person == null){
+      if (person != null){
         console.log('consulta de persona');
-        db.events.findOne({_id: rer.body.eventId},{date_start: 1 },function(err, date){
+        //console.log(res)
+        db.events.findOne({_id: req.body.eventId},{date_start: 1, programs:1 },function(err, date){
             if (err) { return res.status(400).send(err); }
             var asistencia = false;
-            if( date == new Date()){ asistencia = true; }
+            //controlando fecha del dia del evento para asistencia
+            if( date.date_start == new Date()){ asistencia = true; }
             //Generando lista
             var list = {
                   bolivianos: req.body.inscription.canceled_price,
@@ -259,10 +261,10 @@ router
             };
             var lists = new db.lists(list);
             lists.save(function (err, lists) {
-                  console.log('lista guardada');
-                  if (err) { return res.status(400).send(err); }
-                  addInscription(person, req.body.inscription, req.body.eventId);
-                  //**controlar fecha y modulars*/
+              console.log('lista guardada');
+              if (err) { return res.status(400).send(err); }
+              addInscription(person, req.body.inscription, req.body.eventId);//**controlar fecha y modulars*/
+              addProfile(person, date.programs,req.body.eventId,req.body.moduleId, req.body.inscription, asistencia);
             });
             function addInscription(person, inscri, idEvent) {
               db.events.findOne({ _id: idEvent }, function (err, events) {
@@ -305,8 +307,116 @@ router
                   });//fin module
                 });//fin Event
             }
+            function addProfile(person, programId,idEvent,moduleId, inscri , asistencia){
+                  var perfil = {
+                        programs: programId,
+                        modulars: null,
+                        final_work:null,
+                        requirements:null,
+                        total_price: inscri.price_event,
+                        payed: inscri.canceled_price, //cancelado
+                        debt: inscri.price_event - inscri.canceled_price ,  // deuda
+                        print_diploma: false
+                  }
+                  var d = new Date();
+                  ///////////
+                  db.persons.update({ _id: person._id },
+                        {
+                          $push: {
+                              profile: perfil
+                          }
+                        }, {
+                              multi: true
+                        }, function (err, person){
+                              if (err) return res.status(400).send(err);
+                              console.log(person);
+                              // if (events == null) return res.status(404).send();
+                              //return res.status(200).send(person);
+                        });
+                   //aniadir el modular del Profile 
+                   multiplicarModular(person,programId);    
+                  addModular(person, inscri,idEvent,moduleId,asistencia );
+            }
+            function multiplicarModular(person,programId){
+                  db.modules.find({ programs: programId },{_id: 1},function (err, moduls) {
+                        //console.log(moduls);
+                        for (let i = 0; i < moduls.length; i++) {
+                              modular = {
+                                    amount:null,
+                                    assist: null, //cambio
+                                    events: null,
+                                    modules: null,
+                                    print_certificate: null,
+                              };
+                              console.log('guardado modulars   '+ i);
+                              db.persons.update({_id: person._id},
+                                    {
+                                       $addToSet: {
+                                          profile: {
+                                              // _id: req.params.id,
+                                              modulars:modular
+                                          }
+                                       }
+                                    }).exec(function (err, person) {
+                                          if (err) return res.status(400).send(err);
+                                            if (person.nModified == 0) return res.status(404).send();
+                                          //else return res.status(200).send(persons);
+                                    });
+                        }
+                  });//fin module
+            }
+            function addModular(person, inscri,idEvent,moduleId, asistencia){
+                  var modula = {
+                        amount: {  // observation
+                              detail: null,
+                              receipt: inscri.receipt,// nro factura
+                              date: new Date(),
+                              amount: inscri.canceled_price,
+                           },
+                           assist: asistencia, //cambio
+                           events: idEvent,
+                           // inscription: ObjectId,
+                           modules: moduleId,
+                           print_certificate: false,
+                  }
+                  var d = new Date();
+                        // db.persons.update({ _id: person._id },
+                        //       {
+                        //         $push: {
+                        //             profile: perfil
+                        //         }
+                        //       }, {
+                        //             multi: true
+                        //       }, function (err, person) {
+                        //             if (err) return res.status(400).send(err);
+                        //             console.log(person);
+                        // });
+                  db.persons.update(
+                        {
+                         _id: person._id, 'profile._id': person.profile._id 
+                        },
+                        {
+                          $set: { 
+                              'profile.$.number_quotas': req.body.profile.number_quotas,
+                              'profile.$.total': req.body.profile.total,
+                              'profile.$.amounts_quotas': req.body.profile.amounts_quotas,
+                              'profile.$.disacount': req.body.profile.disacount,
+                              'profile.$.paid': req.body.profile.paid,
+                              'profile.$.pays': req.body.profile.pays,
+                              'profile.$.amount_paid': req.body.profile.amount_paid,                 
+                          }
+                        }
+                        ).exec(function (err, off) {
+                              if (err) return res.status(400).send(err);
+                              if (off.nModified == 0) return res.status(404).send();
+                              return res.status(200).send();
+                        })      
+            }
        });//F Qevents
-      } else{}
+      } else{
+            if (err) return res.status(400).send(err);
+            console.log('No existe la persona');
+      }
     })
    })
 
@@ -372,7 +482,7 @@ router
          });
       }
    })
-
+//guardar Evento
    .post('/', function (req, res) {
       var event = new db.events(req.body);
       var d = new Date();
