@@ -126,8 +126,7 @@ module.exports = {
       //////////////
       carteras: ObjectId,
       /////////////
-      profile: {
-         programs: [{
+      profile: [{
             programs: ObjectId,
             modulars: [{
                amount: {  // observation
@@ -155,8 +154,7 @@ module.exports = {
             payed: Number, //cancelado
             debt: Number,  // deuda
             print_diploma: Boolean
-         }]
-      },
+         }],
       // user: ObjectId,
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } },

@@ -18,7 +18,59 @@ router
 
          return res.status(200).send(person);
       });
+   })   
+///////////////////////////////////
+.get('/:id', function (req, res) {
+   db.events.findOne({ _id: req.params.id }, function (err, event) {
+      if (err) return res.status(400).send(err);
+      if (event == null) return res.status(404).send();
+      // return res.status(200).send(event);
+      getProgram(event);
+   });
+   function getProgram(event) {
+      db.programs.findOne({ _id: event.programs }, { name: 1 }, function (err, program) {
+         if (err) return res.status(400).send(err);
+         console.log(program)
+         event.name = program.name;
+         // return res.status(200).send(event);
+         var persons = event.inscriptions.map(i => i.person);
+         getPerson(persons, event);
+      });
+   }
+   function getPerson(persons, event) {
+      db.persons.find({ _id: { $in: persons } }, function (err, persons) {
+         if (err) return res.status(400).send(err);
+         // console.log(persons)
+         event.inscriptions.forEach(i => {
+            persons.forEach(person => {
+               if (JSON.stringify(i.person) == JSON.stringify(person._id)) {
+                  i.persons = person.first_name + ' ' + person.last_name;
+               }
+            });
+         });
+         // console.log(event);
+         return res.status(200).send(event);
+      });
+   }
+
+})
+.get('/listPersons/:id', function (req, res) {
+   db.events.findOne({ _id: req.params.id }, { inscriptions: 1 }, function (err, event) {
+      if (err) return res.status(400).send(err);
+      if (event == null) return res.status(404).send();
+      if (event.inscriptions.length > 0) return res.status(404).send();
+      var persons = event.inscriptions.map((p) => p.person)
+      Persons(persons);
+      // return res.status(200).send(event);
    })
+   function Persons(p) {
+      db.persons.find({ _id: { $in: p } }, function (err, persons) {
+         if (err) return res.status(400).send(err);
+
+         return res.status(200).send(persons);
+      })
+   }
+ })
 
    .post('/', function (req, res, next) {
       db.persons.findOne({ ci: req.body.persona.ci }, function (err, ciExist) {
@@ -43,7 +95,7 @@ router
          // addInscription(person, req.body.inscription, req.body.eventId);
       });
    })
-   
+  ///////////////////////////////////////////////////////////////////////////////////////////////// 
    .get('/existCi/:id', function (req, res) {
       db.persons.findOne({ ci: req.params.id }, { first_name: 1, last_name: 1 }, function (err, user) {
          if (err) return console.log(err);
@@ -51,6 +103,23 @@ router
          return res.status(200).send(user);
       });
    })
+  ////////////////////////////////////////////////////////////////////////////
+   .get('/program/:id', function (req, res) {
+      db.persons.findOne({ _id: req.params.id }, { "profile.programs": 1 }, function (err, person) {
+        if (err) return res.status(400).send(err);
+        if (person == null) return res.status(404).send();
+        console.log(person)
+        var programs = person.profile.programs.map((i) => i.persons);
+        getProgram(programs);
+    });
+    function getProgram(programs) {
+      db.persons.findOne({ _id: person.profile.programs }, { programs: 1 }, function (err, program) {
+         if (err) return res.status(400).send(err);
+          console.log(program)
+         return res.status(200).send(program);
+      })
+   }   
+})
    // .post('/', function (req, res) {
    //    var person = new db.persons(req.body.persona);
    //    console.log(req.body);

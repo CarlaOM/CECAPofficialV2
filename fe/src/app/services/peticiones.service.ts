@@ -83,6 +83,9 @@ export class PeticionesService {
    getCi(ci) {
       return this._http.get(this.url + 'persons/existCi/' + ci).map((res: Response) => res);
    }
+   getProgramPerson(id) {
+    return this._http.get(this.url + 'persons/program/' + id).map((res: Response) => res);
+ }
    getPersons() {
       return this._http.get(this.url + 'persons').map((res: Response) => res);
    }
