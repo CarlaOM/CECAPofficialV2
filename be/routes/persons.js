@@ -103,6 +103,7 @@ router
          return res.status(200).send(user);
       });
    })
+<<<<<<< HEAD
   ////////////////////////////////////////////////////////////////////////////
    .get('/program/:id', function (req, res) {
       db.persons.findOne({ _id: req.params.id }, { "profile.programs": 1 }, function (err, person) {
@@ -198,6 +199,86 @@ router
    //    //       }
    //    //    });      
    // })
+=======
+//    .post('/', function (req, res) {
+//       var person = new db.persons(req.body.persona);
+//       console.log(req.body);
+//       db.persons.findOne({ ci: req.body.persona.ci, cellphone: req.body.persona.cellphone }, function (err, existeCellphone) {
+//          if (existeCellphone == null) {
+//             console.log('llegue aqui');
+//             //if(person.first_name == '' || person.last_name == '' || person.ci == '' || person.carteras == '') 
+//             //return res.status(400).send(); 
+//             // save person
+//             person.save(function (err, person) {
+//                console.log('persona guardada');
+//                if (err) { return res.status(400).send(err); }
+//                addInscription(person, req.body.inscription, req.body.eventId);
+//             });
+//             function addInscription(person, inscri, idEvent) {
+//                db.events.findOne({ _id: idEvent }, function (err, events) {
+//                   console.log(events);
+//                   db.modules.find({ programs: events.programs }).count().exec(function (err, moduls) {
+//                      console.log(moduls);
+//                      console.log('llegue al la cantidad de modulos');
+//                      var modulPrice = inscri.price_event / moduls;///////DIVISION
+//                      console.log(modulPrice);
+//                      var inscription = {
+//                         // segun al numero de asistencias sacar el precio total q tiene q pagar
+//                         total_price: 0,//sumatorio por asistencia de cada modulo
+//                         module_price: modulPrice,
+//                         bolivianos_price: inscri.canceled_price,
+//                         dolares_price: 0,
+//                         canceled_price: inscri.canceled_price,
+//                         price_event: inscri.price_event,
+//                         receipt: inscri.receipt,
+//                         name: person.name,
+//                         ci: person.ci,
+//                         cellphone: person.cellphone,
+//                         persons: person._id,
+//                         users: inscri.users
+//                      };
+//                      var d = new Date();
+//                      //////////////////////
+//                      // db.events.update({ _id: idEvent, 'inscriptions.person': req.body.person },
+//                      //       {
+//                      //             $set: { 'inscriptions.$.state': req.body.state, 'inscriptions.$.description': req.body.description }
+//                      //       }).exec(function (err, off) {
+//                      //             if (err) return res.status(400).send(err);
+//                      //             //db.events.find({ _id: req.body.name, _id: { $in: req.body.person } }, function (err, event) {
+//                      //             db.events.find({ _id: req.body.name }, function (err, event) {
+//                      //                   if (err) return res.status(401).send(err);
+//                      //             return res.status(201).send(event);
+//                      //             });
+//                      //             //	if (off.nModified == 0) return res.status(406).send();
+//                      //       });
+//                      db.events.update({ _id: idEvent },
+//                         {
+//                            $push: {
+//                               inscriptions: inscription
+//                            }
+//                         }, {
+//                            multi: true
+//                         }, function (err, events) {
+//                            if (err) return res.status(400).send(err);
+//                            console.log(events);
+//                            // if (events == null) return res.status(404).send();
+//                            return res.status(200).send(person);
+//                         });
+//                   });//fin module
+//                });//fin Event
+//             }
+//          } else {
+//             if (err) return res.status(400).send(err);
+//             console.log('La Persona ya existe');
+//          }
+//       });
+//       //       }else{
+//       //             if (err) return res.status(400).send(err);
+//       //             console.log('El numero de CI de la Persona ya existe')
+//       //       }
+//       //    });      
+//    })
+>>>>>>> a914363fe20e22b205e7d718d506412bf0eb1bae
 
    .put('/:id', function (req, res) {
       console.log("exito");
