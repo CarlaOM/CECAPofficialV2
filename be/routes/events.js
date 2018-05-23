@@ -176,11 +176,11 @@ router
                      i.phone = person.phone;
                      i.cellphone = person.cellphone;
                   }
-               });
+               })
             });
             //console.log(event);
             return res.status(200).send(event);
-         });
+         })
       }
    })
    ///////////////////////////////////

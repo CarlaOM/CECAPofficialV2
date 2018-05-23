@@ -83,11 +83,12 @@ export class PeticionesService {
    getCi(ci) {
       return this._http.get(this.url + 'persons/existCi/' + ci).map((res: Response) => res);
    }
-   getProgramPerson(person_object, idProgram) {
-    var idPerson = person_object._id;
+   getProfilePerson(idPerson, idProfile) {
+    // var idPerson = person_object._id;
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-    let body = JSON.stringify({programId:idProgram});
-    return this._http.post(this.url + 'persons/program/' + idPerson, body).map((res: Response) => res);
+    let body = JSON.stringify({profileId:idProfile});
+    console.log(body)
+    return this._http.post(this.url + 'persons/profile/' + idPerson, body).map((res: Response) => res);
  }
    getPersons() {
       return this._http.get(this.url + 'persons').map((res: Response) => res);
