@@ -1,6 +1,38 @@
 var express = require('express');
 var db = require('../models/db');
 var router = express.Router();
+////////////////////////////////
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
+
+// var multer = require('multer');
+// var xlstojson = require("xls-to-json-lc");
+// var xlsxtojson = require("xlsx-to-json-lc");
+
+// var storage = multer.diskStorage({ //multers disk storage settings
+//     destination: function (req, file, cb) {
+//         cb(null, './uploads/')
+//     },
+//     filename: function (req, file, cb) {
+//         var datetimestamp = Date.now();
+//         cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalFilename.split('.')[file.originalFilename.split('.').length -1])
+//     }
+// });
+// var upload = multer({ //multer settings
+//                 storage: storage,
+//                 fileFilter : function(req, file, callback) { //file filter
+//                     if (['xls', 'xlsx'].indexOf(file.originalFilename.split('.')[file.originalFilename.split('.').length-1]) === -1) {
+//                         return callback(new Error('Wrong extension type'));
+//                     }
+//                     callback(null, true);
+//                 }
+//             }).single('file');
+
+///////////other//////////
+
+var XLSX = require('xlsx')
+
+///////////////////////////
 
 router
    .get('/', function (req, res) {
@@ -122,6 +154,53 @@ router
       })
    }   
 })
+//////////////////////////////////////////////////////////////////////////
+.post('/upload', multipartMiddleware, function (req, res) {
+
+  console.log(req.body, req.files);
+  console.log(req.files.fileKey.path);
+//   var workbook = XLSX.readFile(req.files.fileKey.path);
+//   var sheet_name_list = workbook.SheetNames;
+//   var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
+//   console.log(xlData); 
+  
+//   for(let contact of xlData){
+//       let newPerson=new db.persons(req.body);
+
+//       if(contact.Mobile!=undefined){
+//           newPerson.first_name=contact.Firstname;
+//           if(contact.Lastname!=null){
+//               newPerson.last_name=contact.Lastname;
+//           }else{
+//               newPerson.last_name='';
+//           }
+//           newPerson.ci=0;
+//           newPerson.phone=0;
+//           let numero='s'+contact.Mobile;
+//           if(numero.length==9){
+//               newPerson.cellphone=numero.substring(1,9);
+//           }else{
+//               newPerson.cellphone=numero.substring(6,numero.length);
+//           }
+//           newPerson.whatsapp_group='Importados del celular';
+//           newPerson.city='';
+//           newPerson.email='';
+//           newPerson.ocupation='Particular';
+//           newPerson.descOcupation={carrera:'',
+//                                   universidad:'',
+//                                   semestre:'',
+//                                   areaTrabajo:'Otro',
+//                                   profesion:'',
+//                                   empresa:'',
+//                                   cargo:''};
+ 
+//           newPerson.save(function(err,person){
+//               if (err) return res.status(400).send(err);
+//               return res.status(200).send();
+//           })
+//       }
+//   }
+}) 
    // .post('/', function (req, res) {
    //    var person = new db.persons(req.body.persona);
    //    console.log(req.body);

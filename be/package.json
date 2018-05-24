@@ -9,6 +9,7 @@
    "dependencies": {
       "body-parser": "*",
       "compression": "*",
+      "connect-multiparty": "^2.1.0",
       "content-filter": "*",
       "cookie-parser": "*",
       "cors": "^2.8.4",
@@ -19,6 +20,8 @@
       "mongoose": "*",
       "morgan": "*",
       "nodemon": "^1.17.3",
-      "serve-favicon": "*"
+      "save": "^2.3.2",
+      "serve-favicon": "*",
+      "xlsx": "^0.12.13"
    }
 }
