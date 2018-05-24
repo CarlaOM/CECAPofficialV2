@@ -87,6 +87,7 @@ import { OfficesCashComponent } from './offices-cash/offices-cash.component';
 import { AsistenciaComponent } from './event/asistencia/asistencia.component';
 import { InscriptionComponent } from './event/inscription/inscription.component';
 import { DetailsComponent } from './event/profile-person/details/details.component';
+import { ImportFromExcelComponent } from './import-from-excel/import-from-excel.component';
 
 @NgModule({
   declarations: [
@@ -160,7 +161,8 @@ import { DetailsComponent } from './event/profile-person/details/details.compone
     OfficesCashComponent,
     AsistenciaComponent,
     InscriptionComponent,
-    DetailsComponent
+    DetailsComponent,
+    ImportFromExcelComponent
 
   ],
   imports: [

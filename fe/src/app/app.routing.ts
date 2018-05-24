@@ -52,6 +52,7 @@ import { OfficesCashComponent } from "./offices-cash/offices-cash.component";
 //import { AlertComponent } from './events/alert/alert.component';
 import { AsistenciaComponent } from './event/asistencia/asistencia.component';
 import { InscriptionComponent } from './event/inscription/inscription.component';
+import { ImportFromExcelComponent } from './import-from-excel/import-from-excel.component';
 
 
 
@@ -108,6 +109,7 @@ const appRoutes: Routes = [
          { path: 'pendientes/info/:id', component: InfoPendingCashComponent },
          { path: 'officesCash', component: OfficesCashComponent },
          { path: 'inscription/:id', component: InscriptionComponent },
+         { path: 'importFromExcel', component: ImportFromExcelComponent },
 
       ]
    },
