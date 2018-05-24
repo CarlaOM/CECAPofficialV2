@@ -3,19 +3,18 @@ import { Router,ActivatedRoute } from "@angular/router";
 import {PeticionesService } from '../../services/peticiones.service';
 import { Identity, } from "../../services/global";
 import { Cashflowusers } from "../../modelo/cashflowusers";
-
+// import { DescOcupation } from "../../modelo/codeDescription";
 
 @Component({
   selector: 'app-egreso',
   templateUrl: './egreso.component.html',
   styleUrls: ['./egreso.component.css'],
-  providers:[PeticionesService]
-  
+  providers:[PeticionesService] 
 })
 export class EgresoComponent implements OnInit {
 
   public egresoTitulo;
-  public egresoDescripcion;
+  public egresoDescripcion;//: codeDescription;
   public egresoEvent;
   public egresoRecibo;
   public egresoMonto;
@@ -29,17 +28,9 @@ export class EgresoComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
   ) { 
-
     this.egreso=new Cashflowusers(new Date(),new Date(),0,0,0,"","","","","")///(datestart,dateend,amount,amountdelivered,receipt,description,detailamount)
-
   }
-
-
-
-
-
   submitted = false;
-  
 
   onSubmit() {
     
@@ -68,7 +59,6 @@ export class EgresoComponent implements OnInit {
     );
   }
   ngOnInit() {
-
     this._peticionesService.getEvents().subscribe(response =>{
 
       this.eventos=response;
@@ -76,8 +66,6 @@ export class EgresoComponent implements OnInit {
     })
   }
   cancelar(){
-
     this.router.navigate(['home/caja/vistacaja']);
   }
-
 }
