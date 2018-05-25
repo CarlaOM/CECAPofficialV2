@@ -47,6 +47,7 @@ app
    .use('/lists', require('./routes/lists'))  
    .use('/correlatives', require('./routes/correlatives'))
    .use('/cajaSucursal',require('./routes/cajaSucursal'))
+   .use('/categoriaEgresos',require('./routes/categoriaEgresos'))
    .use(function (err, req, res, next) { 
       console.error(err.stack);
       return res.status(err.status || 500).send('Not Found');
@@ -56,7 +57,7 @@ app
 //If need initialize db 
 if (false){ 
    var init = require('./models/init');
-   // init.clearCollections();
+//    init.clearCollections();
    init.initializer();
 }
 db.connection();

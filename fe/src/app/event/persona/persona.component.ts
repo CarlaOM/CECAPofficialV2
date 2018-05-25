@@ -24,9 +24,6 @@ export class PersonaComponent implements OnInit {
      private route: ActivatedRoute,
      private _personaService: PersonaService,
      private _peticionesService: PeticionesService
-     
-    
-
   ) {}
 
   ngOnInit() {
@@ -53,6 +50,9 @@ export class PersonaComponent implements OnInit {
   }
   asistence(_id){
     this.router.navigate(['home/persons/asistencia', _id]);
+  }
+  viewFinalWork(_id){
+    this.router.navigate(['home/finalWork', _id]);
   }
   // butonv(){
   //  if(this.color == 'rojo') this.color='verde'

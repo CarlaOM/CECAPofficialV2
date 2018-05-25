@@ -58,4 +58,7 @@ export class ListRequirementsComponent implements OnInit {
       this.states.push(i);
     }
   }
+  catchRequeriment(){
+    
+  }
 }
