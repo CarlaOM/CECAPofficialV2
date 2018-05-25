@@ -17,21 +17,25 @@
       <table class="table table-hover">
          <thead>
             <tr class="text-info cabecera hover">
-
                <th><h4 class="text-center font-family-serif">Nombre</h4></th>
                <th><h4 class="text-center">Fecha de Inicio</h4></th>
                <th><h4 class="text-center">Cupos</h4></th>
-               <th colspan="2"><h4 class="text-center">Estado</h4></th>
-               
+               <th><h4 class="text-center">Lista de Inscritos</h4></th>
+               <th><h4 class="text-center">Lista de Requisitos</h4></th>
+               <th colspan="2"><h4 class="text-center">Estado</h4></th>  
             </tr>
          </thead>
-
          <tbody>
-
             <tr *ngFor="let event of events" class="bg-info text-center">
                <td>{{ event.name }}</td>
                <td>{{ event.date_start | date }}</td>
                <td>{{ event.total }}</td>
+               <td>
+                  <a class="btn btn-info" (click)="viewPrint(event._id)">VER IMPRESION</a>
+               </td>
+               <td>
+                  <a class="btn btn-info" (click)="viewRequirements(event._id)">VER REQUISITOS</a>
+               </td>
                <td>
                   <a class="btn btn-primary" (click)="send(event._id)">INFORMACION</a>
                </td>
