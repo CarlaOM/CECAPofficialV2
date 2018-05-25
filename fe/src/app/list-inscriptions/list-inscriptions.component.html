@@ -15,16 +15,16 @@
           <thead>
              <tr>
                 <th>Nombre</th>
-                <th *ngFor="let i of modulos">{{i}}</th>
+                <th *ngFor="let i of modulos">{{i.name}}</th>
                 <!--<th colspan="2">Opciones</th>-->
              </tr>
           </thead>
           <tbody>
              <tr *ngFor="let i of states">
                 <td>{{ i.name }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td *ngFor="let i of modulos"><input></td>
+                <!-- <td></td>
+                <td></td> -->
              </tr>
           </tbody>
        </table>
