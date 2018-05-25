@@ -253,6 +253,7 @@ router
    
        db.cashFlowUsers.findOne({_id:caja._id},function(err,cashFlowUser){
             cashFlowUser.amount_delivered=caja.amount_delivered;
+            cashFlowUser.debt=cashFlowUser.amount-cashFlowUser.amount_delivered;
             cashFlowUser.save(function(err,cash){
 
                 if(err)return res.status(400).send(err);
