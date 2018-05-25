@@ -720,107 +720,28 @@ var _list_2 = {
 var _lists = [_list_1, _list_2];
 _event_seg.modulars[0].lists.push(_list_1);
 _event_seg.modulars[0].lists.push(_list_2);
-////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
 var _categoriaEgresos_1 = {
-   //PROGRAMAS PROFESIONALES Y FINANCIEROS
-   refrigerio: [{
-    comida: 500,
-    bebida: 200,
-    insumos: 100,
-    transporte: 150,                 
-}],
-salon: [{
-    alquiler: 400,
-    equiposOtros: 100,
-    limpieza: 50,
-    transporte: 150,                 
-}],
-publicidad: [{
-    periodico: 100,
-    radio: 200,
-    tv: 250,
-    internet: 150,                 
-    transporte: 100,                 
-    afiches: 50,                 
-}],
-facilitadores: [{
-    honorarios: 2000,
-    viaticos: 500,
-    hospedaje: 300,                 
-    transporte: 100,                                
-}],
-material: [{
-    escritorio: 50,
-    fotocopias: 10,
-    adicional: 100,                 
-    transporte: 30,                                  
-}],
-otros: [{
-    devInscripcion: 1800,               
-}],
-//ADMINISTRATIVA
-oficina: [{
-    alquiler: 1200,
-    expensas: 900,
-    luz: 50,
-    agua: 30,                 
-    telefono: 20,                 
-    celular: 30,                 
-    escritorio: 80,                 
-    limpieza: 50,                 
-    movilidades: 50,                 
-}],
-rrhhConsultorias: [{
-    sueldo: 2500,
-    anticipos: 1500,
-    viaticos: 300,
-    hospedaje: 500,                 
-    pasajes: 200,                 
-    finiquito: 400,                 
-    honorarios: 500,                                 
-}],
-obligaciones: [{
-    impuestos: 250,
-    patentes: 150,
-    afp: 130,
-    cajaSalud: 100,                 
-    ministerioTrabajo: 200,                 
-    fundaEmpresa: 300,                 
-    auditorias: 0,                                 
-}],
-equipos: [{
-    mantenimiento: 100,
-    compras: 0,                                
-    repuestos: 0,                                
-}],
-imprenta: [{
-    afiches: 10,
-    folders: 15,                                
-    tarjetas: 20,                                
-    boligrafos: 15,                                
-    tapas: 60,                                
-    certificados: 30,                                
-}],
-fotocopiadora: [{
-    hojas: 25,
-    toner: 20,
-    anillos: 15,                                
-    repuestos: 20,                                
-    mantenimiento: 0,                                                                
-}],
-otros: [{
-    alimentacion: 80,
-    periodico: 10,
-    avisos: 10,                                
-    transporte: 20,                                
-    correccionTrabajo: 50,                                                                
-    arregloJardin: 0,                                                                
-    mantenimientoOficina: 0,                                                                
-    fondosSucursales: 0,                                                                
-}], 
-extras: [{
-    varios: 100,                                                              
-}],
+    //PROGRAMAS PROFESIONALES Y FINANCIEROS
+    refrigerio: ['Comida', 'Bebida', 'Insumos', 'Transporte'],
+    salon: ['Alquiler', 'Alquiler equipos y otros', 'Limpieza', 'Transporte ida y vuelta'],
+    publicidad: ['Periodico', 'Radio', 'Television', 'Internet/facebook', 'Transporte', 'Pegado de afiches'],
+    facilitadores: ['Honorarios', 'Viaticos', 'Hospedaje', 'Transporte'],
+    material: ['Escritorio', 'Fotocopias', 'Adicional para clases', 'Transporte'],
+    otros: ['Devolucion inscripcion'],
+
+    //ADMINISTRATIVA
+    oficina: ['Alquiler', 'Expensas', 'Luz', 'Agua', 'Telefono', 'Celulares', 'Material de escritorio',
+            'Material de limpieza', 'Gastos Movilidades'],
+    rrhhConsultorias: ['Sueldo', 'Anticipos', 'Viaticos', 'Hospedaje', 'Pasajes viajes', 'Finiquito',
+                    'Honorarios Consultorias'],
+    obligaciones: ['Impuestos', 'Patentes', 'AFP', 'Caja de salud', 'Ministerio trabajo', 'FUNDAEMPRESA', 'Auditorias'],
+    equipos: ['Manteniminiento', 'Compra', 'Repuestos'],
+    imprenta: ['Afiches y volantes', 'Folders', 'Tarjetas', 'Boligrafos', 'Tapas', 'Certificados'],
+    fotocopiadora: ['Compra de hojas', 'Compra de toner', 'Compra de anillos', 'Repuestos', 'Mantenimiento'],
+    otrosGastos: ['Alimentacion', 'Periodico', 'Avisos clasificados', 'Transporte, peaje, parqueo', 
+                'Correccion de trabajos', 'Arreglo jardin', 'Mantenimiento oficina', 'Fondo a sucursales'], 
+    extras: ['Varios (Dra/Ing)'],
   _id: new mongoose.Types.ObjectId,
   record_date: new Date()
 }
