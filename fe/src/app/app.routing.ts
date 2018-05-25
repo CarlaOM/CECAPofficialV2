@@ -8,6 +8,7 @@ import { ListInscriptionsComponent } from './list-inscriptions/list-inscriptions
 import { ListRequirementsComponent } from './list-requirements/list-requirements.component';
 import { EventComponent } from './event/event.component';
 import { ProfilePersonComponent } from './event/profile-person/profile-person.component';
+import { FinalWorkComponent } from './event/final-work/final-work.component';
 import { DetailsComponent } from './event/profile-person/details/details.component';
 import { ReportsComponent } from './graphicReports/reports/reports.component';
 import { ReportTrimestralComponent } from './graphicReports/report-trimestral/report-trimestral.component';
@@ -74,6 +75,7 @@ const appRoutes: Routes = [
          { path: 'event/:id', component: EventComponent },
          { path: 'event/asistencia/:id', component: AsistenciaComponent },
          { path: 'profilePerson/:id', component: ProfilePersonComponent },
+         { path: 'finalWork/:id', component: FinalWorkComponent },
          { path: 'detailsProfile/:id', component: DetailsComponent },
          { path: 'reports', component: ReportsComponent },
          { path: 'trimestral', component: ReportTrimestralComponent },
@@ -114,7 +116,6 @@ const appRoutes: Routes = [
          { path: 'officesCash', component: OfficesCashComponent },
          { path: 'inscription/:id', component: InscriptionComponent },
          { path: 'importFromExcel', component: ImportFromExcelComponent },
-
       ]
    },
 

@@ -90,6 +90,7 @@ import { DetailsComponent } from './event/profile-person/details/details.compone
 import { ImportFromExcelComponent } from './import-from-excel/import-from-excel.component';
 import { ListRequirementsComponent } from './list-requirements/list-requirements.component';
 import { ListInscriptionsComponent } from './list-inscriptions/list-inscriptions.component';
+import { FinalWorkComponent } from './event/final-work/final-work.component';
 
 @NgModule({
   declarations: [
@@ -166,7 +167,8 @@ import { ListInscriptionsComponent } from './list-inscriptions/list-inscriptions
     DetailsComponent,
     ImportFromExcelComponent,
     ListRequirementsComponent,
-    ListInscriptionsComponent
+    ListInscriptionsComponent,
+    FinalWorkComponent
 
   ],
   imports: [
