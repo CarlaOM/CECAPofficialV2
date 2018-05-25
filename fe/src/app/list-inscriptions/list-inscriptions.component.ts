@@ -11,8 +11,12 @@ import { PeticionesService } from '../services/peticiones.service';
 export class ListInscriptionsComponent implements OnInit {
   public eventId;
   public event;
+  public eventPro;
+  public programId;
+  public programa = this.eventPro.programs;
   public inscriptions;
   public states: Array<any> = [];
+  public modulos: Array<any> = ['mod','mod','mod'];
 
   constructor(
     private route: ActivatedRoute,
@@ -22,12 +26,29 @@ export class ListInscriptionsComponent implements OnInit {
 
   ngOnInit() {
     this.findEventId();
+    this.findEventPro();
+    this.findProgramaId();
     this.query();
+
   }
   findEventId() {
     this.route.params.subscribe(params => {
        this.eventId = params.id;
        console.log(this.eventId)
+    });
+  }
+  findEventPro(){
+    this._peticionesService.getEvent(this.eventId).subscribe(result => {
+      this.eventPro = result;
+      console.log(this.eventPro);
+    },
+    error => {
+      console.log(<any>error);
+    });
+  }
+  findProgramaId(){
+    this.route.params.subscribe(params =>{
+
     });
   }
   query() {
