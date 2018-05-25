@@ -435,8 +435,23 @@ var _person_1 = {
             print_certificate: false,
          }],
          final_work: {
-            stade: 2,  // entregado = 1, no entrego = 2
-            observations: 'aun no entrego el proyecto',
+          date_start: '2018-06-25',
+          name: 'Trabajo 1', // nombre del trabajo final
+          origin: 'cbba',
+          facilitator: _facilitator_1._id,
+          revisions: [{
+             state: 1, // 9 posibles estados
+             observations: 'Esperando respuesta',
+             date_review: '2018-07-01',
+          }],
+          date_end: '2018-07-25',
+          empastado: false,
+          copy_1: false,
+          copy_2: false,
+          form: false,
+          certificate: false,
+          letter_review: false,
+          company_certificate: false
          },
          requirements: {
             photograpy: true,
@@ -491,8 +506,23 @@ var _person_2 = {
             print_certificate: false,
          }],
          final_work: {
-            stade: 2,  // entregado = 1, no entrego = 2
-            observations: 'aun no entrego el proyecto',
+          date_start: '2018-06-25',
+          name: 'Trabajo 2', // nombre del trabajo final
+          origin: 'cbba',
+          facilitator: _facilitator_1._id,
+          revisions: [{
+             state: 3, // 9 posibles estados
+             observations: 'En espera',
+             date_review: '2018-07-01',
+          }],
+          date_end: '2018-07-25',
+          empastado: false,
+          copy_1: false,
+          copy_2: false,
+          form: false,
+          certificate: false,
+          letter_review: false,
+          company_certificate: false
          },
          requirements: {
             photograpy: true,
@@ -547,8 +577,23 @@ var _person_3 = {
             print_certificate: false,
          }],
          final_work: {
-            stade: 2,  // entregado = 1, no entrego = 2
-            observations: 'aun no entrego el proyecto',
+          date_start: '2018-06-25',
+          name: 'Trabajo 3', // nombre del trabajo final
+          origin: 'cbba',
+          facilitator: _facilitator_1._id,
+          revisions: [{
+             state: 6, // 9 posibles estados
+             observations: 'Finalizado',
+             date_review: '2018-07-01',
+          }],
+          date_end: '2018-07-25',
+          empastado: false,
+          copy_1: false,
+          copy_2: false,
+          form: false,
+          certificate: false,
+          letter_review: false,
+          company_certificate: false
          },
          requirements: {
             photograpy: true,
@@ -604,8 +649,23 @@ var _person_4 = {
             print_certificate: false,
          }],
          final_work: {
-            stade: 2,  // entregado = 1, no entrego = 2
-            observations: 'aun no entrego el proyecto',
+          date_start: '2018-06-25',
+          name: 'Trabajo 4', // nombre del trabajo final
+          origin: 'cbba',
+          facilitator: _facilitator_1._id,
+          revisions: [{
+             state: 8, // 9 posibles estados
+             observations: 'En espera de resultado',
+             date_review: '2018-07-01',
+          }],
+          date_end: '2018-07-25',
+          empastado: false,
+          copy_1: false,
+          copy_2: false,
+          form: false,
+          certificate: false,
+          letter_review: false,
+          company_certificate: false
          },
          requirements: {
             photograpy: false,
