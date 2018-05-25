@@ -48,6 +48,9 @@ export class PersonaComponent implements OnInit {
   edit(_id) {
     this.router.navigate(['home/persons/edit', _id]);
   }
+  viewProfile(_id) {
+    this.router.navigate(['home/profilePerson', _id]);
+  }
   asistence(_id){
     this.router.navigate(['home/persons/asistencia', _id]);
   }

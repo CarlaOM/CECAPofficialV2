@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { EventsComponent } from './events/events.component';
 import { EventComponent } from './event/event.component';
 import { ProfilePersonComponent } from './event/profile-person/profile-person.component';
+import { DetailsComponent } from './event/profile-person/details/details.component';
 import { ReportsComponent } from './graphicReports/reports/reports.component';
 import { ReportTrimestralComponent } from './graphicReports/report-trimestral/report-trimestral.component';
 import { ReportEventComponent } from './graphicReports/report-event/report-event.component';
@@ -51,6 +52,7 @@ import { OfficesCashComponent } from "./offices-cash/offices-cash.component";
 //import { AlertComponent } from './events/alert/alert.component';
 import { AsistenciaComponent } from './event/asistencia/asistencia.component';
 import { InscriptionComponent } from './event/inscription/inscription.component';
+import { ImportFromExcelComponent } from './import-from-excel/import-from-excel.component';
 
 
 
@@ -68,6 +70,7 @@ const appRoutes: Routes = [
          { path: 'event/:id', component: EventComponent },
          { path: 'event/asistencia/:id', component: AsistenciaComponent },
          { path: 'profilePerson/:id', component: ProfilePersonComponent },
+         { path: 'detailsProfile/:id', component: DetailsComponent },
          { path: 'reports', component: ReportsComponent },
          { path: 'trimestral', component: ReportTrimestralComponent },
          { path: 'reportEvent/:id', component: ReportEventComponent },
@@ -106,6 +109,7 @@ const appRoutes: Routes = [
          { path: 'pendientes/info/:id', component: InfoPendingCashComponent },
          { path: 'officesCash', component: OfficesCashComponent },
          { path: 'inscription/:id', component: InscriptionComponent },
+         { path: 'importFromExcel', component: ImportFromExcelComponent },
 
       ]
    },
