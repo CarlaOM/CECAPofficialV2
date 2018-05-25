@@ -88,6 +88,8 @@ import { AsistenciaComponent } from './event/asistencia/asistencia.component';
 import { InscriptionComponent } from './event/inscription/inscription.component';
 import { DetailsComponent } from './event/profile-person/details/details.component';
 import { ImportFromExcelComponent } from './import-from-excel/import-from-excel.component';
+import { ListRequirementsComponent } from './list-requirements/list-requirements.component';
+import { ListInscriptionsComponent } from './list-inscriptions/list-inscriptions.component';
 
 @NgModule({
   declarations: [
@@ -162,7 +164,9 @@ import { ImportFromExcelComponent } from './import-from-excel/import-from-excel.
     AsistenciaComponent,
     InscriptionComponent,
     DetailsComponent,
-    ImportFromExcelComponent
+    ImportFromExcelComponent,
+    ListRequirementsComponent,
+    ListInscriptionsComponent
 
   ],
   imports: [

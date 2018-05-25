@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { EventsComponent } from './events/events.component';
+import { ListInscriptionsComponent } from './list-inscriptions/list-inscriptions.component';
+import { ListRequirementsComponent } from './list-requirements/list-requirements.component';
 import { EventComponent } from './event/event.component';
 import { ProfilePersonComponent } from './event/profile-person/profile-person.component';
 import { DetailsComponent } from './event/profile-person/details/details.component';
@@ -67,6 +69,8 @@ const appRoutes: Routes = [
          { path: 'events', component: EventsComponent },
          //{ path: 'events/alert', component: AlertComponent },
          { path: 'events/add', component: AddEventComponent },
+         { path: 'listPrint/:id', component: ListInscriptionsComponent },
+         { path: 'listRequeriments/:id', component: ListRequirementsComponent },
          { path: 'event/:id', component: EventComponent },
          { path: 'event/asistencia/:id', component: AsistenciaComponent },
          { path: 'profilePerson/:id', component: ProfilePersonComponent },

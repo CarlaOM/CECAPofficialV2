@@ -29,9 +29,15 @@ export class EventsComponent implements OnInit {
     addPerson(){
      this.router.navigate(['home/event/persons/add']);
     }
-   send(_id: string) {
+    viewPrint(_id: string) {
+        this.router.navigate(['home/listPrint', _id]);
+    }
+    viewRequirements(_id: string) {
+        this.router.navigate(['home/listRequeriments', _id]);
+    }
+    send(_id: string) {
       this.router.navigate(['home/event', _id]);
-   }
+    }
    
    queryEvents() {
       this._peticionesService.getEvents().subscribe(

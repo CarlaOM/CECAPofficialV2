@@ -13,7 +13,7 @@ import { Cashflowusers } from "../../modelo/cashflowusers";
 })
 export class EgresoComponent implements OnInit {
 
-  public egresoTitulo;
+  // public egresoTitulo;
   public egresoDescripcion;//: codeDescription;
   public egresoEvent;
   public egresoRecibo;
@@ -36,14 +36,14 @@ export class EgresoComponent implements OnInit {
     
     this.submitted = true; 
 
-    this.egreso.title=this.egresoTitulo;
+    // this.egreso.title=this.egresoTitulo;
     this.egreso.description=this.egresoDescripcion;
     this.egreso.events=this.egresoEvent;
     this.egreso.detail_amount=this.egresoMonto;
     this.egreso.receipt=this.egresoRecibo;
     this.egreso.user=Identity._id;
 
-    // console.log(this.egreso);
+    console.log(this.egreso);
 
     this._peticionesService.addCashFlowUserEgreso(this.egreso).subscribe(
       result => {
