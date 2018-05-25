@@ -80,13 +80,48 @@ router
     .get('/close/:id',function(req,res){
         db.cashFlowOffices.findOne({_id:req.params.id},function(err,cashOffice){
 
+            if(err)return res.status(400).send(err);
 
             cashOffice.state=0;
-            cashOffice.save();
+            cashOffice.save(function(err,cash){
+                if(err)return res.status(400).send(err);
+                return res.status(200).send(cash);
+
+            });
 
         })
     })
+    .post('/new', function (req, res) {
+        var office=req.body;
+        // console.log(req.body);
+        // console.log("asdfasdfadfhasgdfl")
+        let cashOffice=new db.cashFlowOffices(req.body);
+        cashOffice.users=office.user;
+        cashOffice.date_start=new Date();
+        db.users.findOne({_id:office.user},function(err,user){
+            if(err)return res.status(400).send(err);
+            console.log(user);
+            cashOffice.offices=user.offices;
+            console.log(cashOffice);
 
+            cashOffice.state=-1;
+            cashOffice.active=true;
+            cashOffice.amount=0;
+            cashOffice.amount_delivered=0;
+            console.log(cashOffice)
+            cashOffice.save(function(err,newCashOffice){
+                if(err)return res.status(400).send(err);
+                return res.status(200).send(newCashOffice);
+
+
+        })
+
+        });
+        
+        console.log(cashOffice);
+       
+      
+     })
     
 
 
