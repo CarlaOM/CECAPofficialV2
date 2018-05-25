@@ -144,8 +144,23 @@ module.exports = {
                print_certificate: Boolean,
             }],
             final_work: {
-               stade: Number, // entregado=1, no entrego=2
-               observations: String,
+               date_start: Date,
+               name: String, // nombre del trabajo final
+               origin: String,
+               facilitator: ObjectId,
+               revisions: [{
+                  state: Number, // 9 posibles estados
+                  observations: String,
+                  date_review: Date,
+               }],
+               date_end: Date,
+               empastado: Boolean,
+               copy_1: Boolean,
+               copy_2: Boolean,
+               form: Boolean,
+               certificate: Boolean,
+               letter_review: Boolean,
+               company_certificate: Boolean
             },
             requirements: { // true=entrego, false=no entrego
                photograpy: Boolean,
@@ -295,104 +310,22 @@ module.exports = {
 
    categoriaEgresos: mongoose.model('categoriaEgreso', new Schema({
       //PROGRAMAS PROFESIONALES Y FINANCIEROS
-      refrigerio: [{
-            comida: Number,
-            bebida: Number,
-            insumos: Number,
-            transporte: Number,                 
-      }],
-      salon: [{
-            alquiler: Number,
-            equiposOtros: Number,
-            limpieza: Number,
-            transporte: Number,                 
-      }],
-      publicidad: [{
-            periodico: Number,
-            radio: Number,
-            tv: Number,
-            internet: Number,                 
-            transporte: Number,                 
-            afiches: Number,                 
-      }],
-      facilitadores: [{
-            honorarios: Number,
-            viaticos: Number,
-            hospedaje: Number,                 
-            transporte: Number,                                
-      }],
-      material: [{
-            escritorio: Number,
-            fotocopias: Number,
-            adicional: Number,                 
-            transporte: Number,                                  
-      }],
-      otros: [{
-            devInscripcion: Number,               
-      }],
+      refrigerio: [ String ],
+      salon: [ String ],
+      publicidad: [ String ],
+      facilitadores: [ String ],
+      material: [ String ],
+      otros: [String ],
+
       //ADMINISTRATIVA
-      oficina: [{
-            alquiler: Number,
-            expensas: Number,
-            luz: Number,
-            agua: Number,                 
-            telefono: Number,                 
-            celular: Number,                 
-            escritorio: Number,                 
-            limpieza: Number,                 
-            movilidades: Number,                 
-      }],
-      rrhhConsultorias: [{
-            sueldo: Number,
-            anticipos: Number,
-            viaticos: Number,
-            hospedaje: Number,                 
-            pasajes: Number,                 
-            finiquito: Number,                 
-            honorarios: Number,                                 
-      }],
-      obligaciones: [{
-            impuestos: Number,
-            patentes: Number,
-            afp: Number,
-            cajaSalud: Number,                 
-            ministerioTrabajo: Number,                 
-            fundaEmpresa: Number,                 
-            auditorias: Number,                                 
-      }],
-      equipos: [{
-            mantenimiento: Number,
-            compras: Number,                                
-            repuestos: Number,                                
-      }],
-      imprenta: [{
-            afiches: Number,
-            folders: Number,                                
-            tarjetas: Number,                                
-            boligrafos: Number,                                
-            tapas: Number,                                
-            certificados: Number,                                
-      }],
-      fotocopiadora: [{
-            hojas: Number,
-            toner: Number,
-            anillos: Number,                                
-            repuestos: Number,                                
-            mantenimiento: Number,                                                                
-      }],
-      otros: [{
-            alimentacion: Number,
-            periodico: Number,
-            avisos: Number,                                
-            transporte: Number,                                
-            correccionTrabajo: Number,                                                                
-            arregloJardin: Number,                                                                
-            mantenimientoOficina: Number,                                                                
-            fondosSucursales: Number,                                                                
-      }], 
-      extras: [{
-            varios: Number,                                                              
-      }],
+      oficina: [ String ],
+      rrhhConsultorias: [ String ],
+      obligaciones: [ String ],
+      equipos: [ String ],
+      imprenta: [ String ],
+      fotocopiadora: [ String ],
+      otrosGastos: [ String ], 
+      extras: [ String ],
             
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } },
