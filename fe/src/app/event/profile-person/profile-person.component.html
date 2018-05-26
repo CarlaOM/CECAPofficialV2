@@ -33,6 +33,10 @@
                     <td>{{person?.last_name}}</td>
                   </tr>
                   <tr>
+                    <td>CI</td>
+                    <td>{{person?.ci}}</td>
+                  </tr>
+                  <tr>
                     <td>Telefono</td>
                     <td>{{person?.phone}}</td>
                   </tr>
@@ -97,8 +101,7 @@
               <table class="table table-user-information">
                 <tbody>
                   <tr *ngFor="let i of person.profile">
-                    <td>Programa</td>
-                    <td>{{i.name}}</td>
+                    <td><li>{{i.name}}</li></td>
                     <td>
                       <a class="btn btn-primary" (click)="viewDetails(i._id)">Detalles</a>
                     </td>

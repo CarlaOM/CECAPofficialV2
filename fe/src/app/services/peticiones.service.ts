@@ -90,13 +90,13 @@ export class PeticionesService {
    getPerson(_id) {
       return this._http.get(this.url + 'persons/' + _id).map((res: Response) => res);
    }
-   getPersonProgram(_id) {
+   getPersonProfile(_id) {
       return this._http.get(this.url + 'persons/programs/' + _id).map((res: Response) => res);
    }
    getCi(ci) {
       return this._http.get(this.url + 'persons/existCi/' + ci).map((res: Response) => res);
    }
-   getProfilePerson(idPerson, idProfile) {
+   getPersonProgram(idPerson, idProfile) {
     // var idPerson = person_object._id;
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     let body = JSON.stringify({ profileId: idProfile });

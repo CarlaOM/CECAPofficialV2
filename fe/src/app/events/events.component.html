@@ -22,6 +22,7 @@
                <th><h4 class="text-center">Cupos</h4></th>
                <th><h4 class="text-center">Lista de Inscritos</h4></th>
                <th><h4 class="text-center">Lista de Requisitos</h4></th>
+               <th><h4 class="text-center">Cuentas por Cobrar</h4></th>
                <th colspan="2"><h4 class="text-center">Estado</h4></th>  
             </tr>
          </thead>
@@ -31,10 +32,13 @@
                <td>{{ event.date_start | date }}</td>
                <td>{{ event.total }}</td>
                <td>
-                  <a class="btn btn-info" (click)="viewPrint(event._id)">VER IMPRESION</a>
+                  <a class="btn btn-info" (click)="viewPrint(event._id)">IMPRIMIR</a>
                </td>
                <td>
-                  <a class="btn btn-info" (click)="viewRequirements(event._id)">VER REQUISITOS</a>
+                  <a class="btn btn-info" (click)="viewRequirements(event._id)">VER</a>
+               </td>
+               <td>
+                  <a class="btn btn-warning" (click)="accountsRec(event._id)">CUENTAS</a>
                </td>
                <td>
                   <a class="btn btn-primary" (click)="send(event._id)">INFORMACION</a>

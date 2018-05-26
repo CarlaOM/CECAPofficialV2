@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { EventsComponent } from './events/events.component';
 import { ListInscriptionsComponent } from './list-inscriptions/list-inscriptions.component';
 import { ListRequirementsComponent } from './list-requirements/list-requirements.component';
+import { AccountsReceivableComponent } from './accounts-receivable/accounts-receivable.component';
 import { EventComponent } from './event/event.component';
 import { ProfilePersonComponent } from './event/profile-person/profile-person.component';
 import { FinalWorkComponent } from './event/final-work/final-work.component';
@@ -55,6 +56,7 @@ import { OfficesCashComponent } from "./offices-cash/offices-cash.component";
 //import { AlertComponent } from './events/alert/alert.component';
 import { AsistenciaComponent } from './event/asistencia/asistencia.component';
 import { InscriptionComponent } from './event/inscription/inscription.component';
+import { AccountsModularsComponent } from './accounts-modulars/accounts-modulars.component';
 import { ImportFromExcelComponent } from './import-from-excel/import-from-excel.component';
 
 
@@ -72,6 +74,7 @@ const appRoutes: Routes = [
          { path: 'events/add', component: AddEventComponent },
          { path: 'listPrint/:id', component: ListInscriptionsComponent },
          { path: 'listRequeriments/:id', component: ListRequirementsComponent },
+         { path: 'accountsReceivable/:id', component: AccountsReceivableComponent },
          { path: 'event/:id', component: EventComponent },
          { path: 'event/asistencia/:id', component: AsistenciaComponent },
          { path: 'profilePerson/:id', component: ProfilePersonComponent },
@@ -115,6 +118,7 @@ const appRoutes: Routes = [
          { path: 'pendientes/info/:id', component: InfoPendingCashComponent },
          { path: 'officesCash', component: OfficesCashComponent },
          { path: 'inscription/:id', component: InscriptionComponent },
+         { path: 'reportsModulars/:id', component: AccountsModularsComponent },
          { path: 'importFromExcel', component: ImportFromExcelComponent },
       ]
    },

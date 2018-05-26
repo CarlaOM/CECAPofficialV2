@@ -36,7 +36,7 @@ export class DetailsComponent implements OnInit {
     console.log(this.profileId + ' este es el ID del perfil')
     console.log(this.personId + ' este es el ID de persona')
   
-    this._peticionesService.getProfilePerson(this.personId, this.profileId,).subscribe(
+    this._peticionesService.getPersonProgram(this.personId, this.profileId,).subscribe(
       result => {
          this.program = result;
          console.log(result)

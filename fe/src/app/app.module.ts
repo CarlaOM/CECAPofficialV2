@@ -92,6 +92,8 @@ import { ListRequirementsComponent } from './list-requirements/list-requirements
 import { ListInscriptionsComponent } from './list-inscriptions/list-inscriptions.component';
 import { FinalWorkComponent } from './event/final-work/final-work.component';
 import { AddFinalWorkComponent } from './event/final-work/add-final-work/add-final-work.component';
+import { AccountsReceivableComponent } from './accounts-receivable/accounts-receivable.component';
+import { AccountsModularsComponent } from './accounts-modulars/accounts-modulars.component';
 
 @NgModule({
   declarations: [
@@ -171,6 +173,8 @@ import { AddFinalWorkComponent } from './event/final-work/add-final-work/add-fin
     ListInscriptionsComponent,
     FinalWorkComponent,
     AddFinalWorkComponent,
+    AccountsReceivableComponent,
+    AccountsModularsComponent,
 
   ],
   imports: [

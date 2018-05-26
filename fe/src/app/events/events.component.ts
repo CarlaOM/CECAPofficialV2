@@ -35,6 +35,9 @@ export class EventsComponent implements OnInit {
     viewRequirements(_id: string) {
         this.router.navigate(['home/listRequeriments', _id]);
     }
+    accountsRec(_id: string) {
+        this.router.navigate(['home/accountsReceivable', _id]);
+    }
     send(_id: string) {
       this.router.navigate(['home/event', _id]);
     }
