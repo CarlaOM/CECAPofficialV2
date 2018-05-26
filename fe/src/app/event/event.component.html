@@ -7,14 +7,18 @@
          <ol class="breadcrumb">
             <!-- <br> -->
             <li>
-               <a class="btn btn-primary" [routerLink]="['/home/inscription/'+event._id]">
+               <a class="btn btn-primary" [routerLink]="['/home/inscription/'+event?._id]">
                   <i class="fa fa-book"></i>Inscribir Persona</a>
+            </li>
+            <li>
+               <a class="btn btn-info" [routerLink]="['/home/accountsModulars/'+event?._id]">
+                  <i class="fa fa-book"></i>Reportes Modulares</a>
             </li>
             <!-- <li><app-control-asistance></app-control-asistance></li> -->
          </ol>
       </div>
       <div>
-         <h1>{{event.name}}</h1>
+         <h1>{{event?.name}}</h1>
       </div>
       <div class="btn-group" data-toggle="buttons">
 

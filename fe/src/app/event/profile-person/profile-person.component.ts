@@ -43,7 +43,7 @@ export class ProfilePersonComponent implements OnInit {
   }
   findPerson() {
     // console.log(this.personId)
-    this._peticionesService.getPersonProgram(this.personId).subscribe(
+    this._peticionesService.getPersonProfile(this.personId).subscribe(
       result => {
         this.person = result;
         this.findCartera();
@@ -68,7 +68,6 @@ export class ProfilePersonComponent implements OnInit {
         console.log(this.person.profile);
         // console.log(this.);
         this.programsPerson = this.person.profile;
-
         //  this.viewPrograms();
       },
       error => {
@@ -85,36 +84,36 @@ export class ProfilePersonComponent implements OnInit {
         console.log(<any>error);
       });
   }
-  findProgram() {
-    this._peticionesService.getProgram(this.programsId).subscribe(
-      result => {
-        this.programReturned = result;
-        console.log(result)
-      },
-      error => {
-        console.log(<any>error);
-      });
-  }
-  viewPrograms() {
-    // console.log(this.personId)
-    this._peticionesService.getPersonProgram(this.personId).subscribe(
-      result => {
-        this.programs = result;
-        console.log(result)
-      },
-      error => {
-        console.log(<any>error);
-      });
-    // for (let i = 0; i <= this.listPrograms.length; i++) {
-    //   this.listPrograms.pop(); i = 0;
-    // }
-    // for(let i of this.programsPerson){
-    //     // if(i.programsPerson.programs == i.allPrograms.id){
-    //       this.listPrograms.push(i);
-    //     // }
-    //   }
-    // console.log(this.listPrograms)
-  }
+  // findProgram() {
+  //   this._peticionesService.getProgram(this.programsId).subscribe(
+  //     result => {
+  //       this.programReturned = result;
+  //       console.log(result)
+  //     },
+  //     error => {
+  //       console.log(<any>error);
+  //     });
+  // }
+  // viewPrograms() {
+  //   // console.log(this.personId)
+  //   this._peticionesService.getPersonProfile(this.personId).subscribe(
+  //     result => {
+  //       this.programs = result;
+  //       console.log(result)
+  //     },
+  //     error => {
+  //       console.log(<any>error);
+  //     });
+  //   // for (let i = 0; i <= this.listPrograms.length; i++) {
+  //   //   this.listPrograms.pop(); i = 0;
+  //   // }
+  //   // for(let i of this.programsPerson){
+  //   //     // if(i.programsPerson.programs == i.allPrograms.id){
+  //   //       this.listPrograms.push(i);
+  //   //     // }
+  //   //   }
+  //   // console.log(this.listPrograms)
+  // }
   viewDetails(_id) {
     var ppId = _id + '-' + this.personId;
     this.router.navigate(['home/detailsProfile', ppId]);
