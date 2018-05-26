@@ -28,7 +28,8 @@ router
       });
    })
    .get('/eventoModuls/:id', function (req, res) {
-    console.log(req.params.id);
+     console.log(req.params.id);
+     console.log('el id del evento para modulos'); 
     db.events.findOne({_id: req.params.id}, function(err, events){
       //console.log(events);
       if(err){return res.status(400).send(err);}

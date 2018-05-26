@@ -104,6 +104,25 @@ module.exports = {
    })),
 
    //////////////////////////////////////////////////
+   modulars: mongoose.model('modulars', new Schema({
+      amount: {  // observation
+            detail: String,
+            receipt: String,// nro factura
+            date: Date,
+            amount: Number,
+      },
+      assist: Boolean, //cambio
+      persons:ObjectId,//a la persona que pertenece
+      profile: ObjectId,
+      events: ObjectId,
+      //    inscription: ObjectId,
+      modules: ObjectId,
+      print_certificate: Boolean,
+
+      _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
+      record_date: { type: Date, default: function () { return new Date(); } },
+   })),
+   /////////////////////////////////////////////////
 
    persons: mongoose.model('persons', new Schema({
       first_name: String,
@@ -130,19 +149,19 @@ module.exports = {
       /////////////
       profile: [{
             programs: ObjectId,
-            modulars: [{
-               amount: {  // observation
-                  detail: String,
-                  receipt: String,// nro factura
-                  date: Date,
-                  amount: Number,
-               },
-               assist: Boolean, //cambio
-               events: ObjectId,
-            //    inscription: ObjectId,
-               modules: ObjectId,
-               print_certificate: Boolean,
-            }],
+            // modulars: [{
+            //    amount: {  // observation
+            //       detail: String,
+            //       receipt: String,// nro factura
+            //       date: Date,
+            //       amount: Number,
+            //    },
+            //    assist: Boolean, //cambio
+            //    events: ObjectId,
+            // //    inscription: ObjectId,
+            //    modules: ObjectId,
+            //    print_certificate: Boolean,
+            // }],
             final_work: {
                date_start: Date,
                name: String, // nombre del trabajo final
