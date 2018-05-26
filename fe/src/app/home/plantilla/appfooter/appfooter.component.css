@@ -1,0 +1,18 @@
+@media print {
+    body * {
+        visibility: collapse;
+        
+    } 
+    #printable{
+      visibility: visible;
+       
+
+    }
+    #printable * {
+        visibility:visible;
+    }
+      /* aligning the printable area */
+    .noprint { 
+        display: none;
+    }
+}
