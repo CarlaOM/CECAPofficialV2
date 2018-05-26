@@ -90,6 +90,9 @@ export class PeticionesService {
    getPerson(_id) {
       return this._http.get(this.url + 'persons/' + _id).map((res: Response) => res);
    }
+   getPersonProgram(_id) {
+      return this._http.get(this.url + 'persons/programs/' + _id).map((res: Response) => res);
+   }
    getCi(ci) {
       return this._http.get(this.url + 'persons/existCi/' + ci).map((res: Response) => res);
    }
