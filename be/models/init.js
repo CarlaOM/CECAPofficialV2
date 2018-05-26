@@ -420,6 +420,7 @@ var _person_1 = {
    /////////////
    profile: [{
          programs: _program_rrhh,
+         name:'',
          modulars: [{
             amount: {
                detail: 'String',
@@ -491,6 +492,7 @@ var _person_2 = {
    /////////////
    profile: [{
          program: _program_rrhh,
+         name:'',
          modulars: [{
             amount: {
                detail: 'modulo 1 rrhh',
@@ -562,6 +564,7 @@ var _person_3 = {
    /////////////
    profile:[{
          programs: _program_rrhh,
+         name:'',
          modulars: [{
             amount: {
                detail: 'modulo 1 rrhh',
@@ -634,6 +637,7 @@ var _person_4 = {
    /////////////
    profile: [{
          programs: _program_rrhh,//modificado de program a programs
+         name:'',
          modulars: [{
             amount: {
                detail: 'modulo 1 rrhh',

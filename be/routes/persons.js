@@ -1,6 +1,7 @@
 var express = require('express');
 var db = require('../models/db');
 var router = express.Router();
+var mongoose = require('mongoose');
 ////////////////////////////////
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
@@ -51,41 +52,60 @@ router
       return res.status(200).send(person);
     });
   })
-  ///////////////////////////////////
-  .get('/:id', function (req, res) {
-    db.events.findOne({ _id: req.params.id }, function (err, event) {
-      if (err) return res.status(400).send(err);
-      if (event == null) return res.status(404).send();
-      // return res.status(200).send(event);
-      getProgram(event);
-    });
-    function getProgram(event) {
-      db.programs.findOne({ _id: event.programs }, { name: 1 }, function (err, program) {
-        if (err) return res.status(400).send(err);
-        console.log(program)
-        event.name = program.name;
-        // return res.status(200).send(event);
-        var persons = event.inscriptions.map(i => i.person);
-        getPerson(persons, event);
-      });
-    }
-    function getPerson(persons, event) {
-      db.persons.find({ _id: { $in: persons } }, function (err, persons) {
-        if (err) return res.status(400).send(err);
-        // console.log(persons)
-        event.inscriptions.forEach(i => {
-          persons.forEach(person => {
-            if (JSON.stringify(i.person) == JSON.stringify(person._id)) {
-              i.persons = person.first_name + ' ' + person.last_name;
-            }
-          });
-        });
-        // console.log(event);
-        return res.status(200).send(event);
-      });
-    }
-
+  .get('/programs/:id', function (req, res) {
+    db.persons.aggregate([
+      { $match: { _id: mongoose.Types.ObjectId(req.params.id) } },
+      // { $unwind: '$profile' },
+      // { $match: { 'profile.programs': { $eq: req.body.filter } } },
+      {
+        $lookup:
+          {
+            from: "programs",
+            localField: "profile.programs",    // field in the orders collection
+            foreignField: "_id",  // field in the items collection
+            as: "programDetails"
+          }
+      }
+    ]).exec(function (err, person) {
+      if(err) return res.status(404).send(err)
+      return res.status(200).send(person[0]);
+    })
   })
+  ///////////////////////////////////
+  // .get('/:id', function (req, res) {
+  //   db.events.findOne({ _id: req.params.id }, function (err, event) {
+  //     if (err) return res.status(400).send(err);
+  //     if (event == null) return res.status(404).send();
+  //     // return res.status(200).send(event);
+  //     getProgram(event);
+  //   });
+  //   function getProgram(event) {
+  //     db.programs.findOne({ _id: event.programs }, { name: 1 }, function (err, program) {
+  //       if (err) return res.status(400).send(err);
+  //       console.log(program)
+  //       event.name = program.name;
+  //       // return res.status(200).send(event);
+  //       var persons = event.inscriptions.map(i => i.person);
+  //       getPerson(persons, event);
+  //     });
+  //   }
+  //   function getPerson(persons, event) {
+  //     db.persons.find({ _id: { $in: persons } }, function (err, persons) {
+  //       if (err) return res.status(400).send(err);
+  //       // console.log(persons)
+  //       event.inscriptions.forEach(i => {
+  //         persons.forEach(person => {
+  //           if (JSON.stringify(i.person) == JSON.stringify(person._id)) {
+  //             i.persons = person.first_name + ' ' + person.last_name;
+  //           }
+  //         });
+  //       });
+  //       // console.log(event);
+  //       return res.status(200).send(event);
+  //     });
+  //   }
+
+  // })
   .get('/listPersons/:id', function (req, res) {
     db.events.findOne({ _id: req.params.id }, { inscriptions: 1 }, function (err, event) {
       if (err) return res.status(400).send(err);
@@ -315,25 +335,37 @@ router
       }).exec(function (err, off) {
         if (err) return res.status(400).send(err);
       })
-    // db.events.update({ _id: req.body.name, 'inscriptions.person': req.body.person },
-    //    {
-    //       $set: { 'inscriptions.$.state': req.body.state, 'inscriptions.$.description': req.body.description }
-    //    }).exec(function (err, off) {
-    //       if (err) return res.status(400).send(err);
-    //       db.events.find({ _id: req.body.name, _id: { $in: req.body.person } }, function (err, event) {
-    //          if (err) return res.status(401).send(err);
-    //          return res.status(201).send(event);
-    //       });
-    //       //	if (off.nModified == 0) return res.status(406).send();
-    //    });
-  })
+      .put('/finalWork', function (req, res) {
+        console.log(req.body);
+        // db.persons.update({ _id: req.params.id },
+        //   {
+        //     $set: {//Universitario
+        //       'descOcupation.carrera': req.body.carrera,
+        //       'descOcupation.universidad': req.body.universidad,
+        //     }
+        //   }).exec(function (err, off) {
+        //     if (err) return res.status(400).send(err);
+        })
 
-  .delete('/:id', function (req, res) {
-    db.persons.remove({ _id: req.params.id }, function (err, person) {
-      if (err) return res.status(400).send(err);
+        // db.events.update({ _id: req.body.name, 'inscriptions.person': req.body.person },
+        //    {
+        //       $set: { 'inscriptions.$.state': req.body.state, 'inscriptions.$.description': req.body.description }
+        //    }).exec(function (err, off) {
+        //       if (err) return res.status(400).send(err);
+        //       db.events.find({ _id: req.body.name, _id: { $in: req.body.person } }, function (err, event) {
+        //          if (err) return res.status(401).send(err);
+        //          return res.status(201).send(event);
+        //       });
+        //       //	if (off.nModified == 0) return res.status(406).send();
+        //    });
+      })
 
-      return res.status(200).send(person);
-    });
-  });
+      .delete('/:id', function (req, res) {
+        db.persons.remove({ _id: req.params.id }, function (err, person) {
+          if (err) return res.status(400).send(err);
 
-module.exports = router;
+          return res.status(200).send(person);
+        });
+      });
+    
+    module.exports = router;

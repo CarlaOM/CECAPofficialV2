@@ -130,6 +130,7 @@ module.exports = {
       /////////////
       profile: [{
             programs: ObjectId,
+            name: String,
             modulars: [{
                amount: {  // observation
                   detail: String,
