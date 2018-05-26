@@ -176,11 +176,11 @@ router
                      i.phone = person.phone;
                      i.cellphone = person.cellphone;
                   }
-               });
+               })
             });
             //console.log(event);
             return res.status(200).send(event);
-         });
+         })
       }
    })
    ///////////////////////////////////
@@ -249,77 +249,98 @@ router
             //controlando fecha del dia del evento para asistencia
             if( date.date_start == new Date()){ asistencia = true; }
             //Generando lista
-            var list = {
-                  bolivianos: req.body.inscription.canceled_price,
-                  dolares: req.body.inscription.canceled_price/ (6.96),
-                  receipt: req.body.inscription.receipt, // varios recibos
-                  assist: asistencia, //controlar por fecha de inscription ****************
-                  type: 1, //nuevo // nivelacion
-                  person: person._id,
-                  events: req.body.eventId,
-                  //modulars: ObjectId
-            };
-            var lists = new db.lists(list);
-            lists.save(function (err, lists) {
-              console.log('lista guardada');
-              if (err) { return res.status(400).send(err); }
-              addInscription(person, req.body.inscription, req.body.eventId);//**controlar fecha y modulars*/
-              addProfile(person, date.programs,req.body.eventId,req.body.moduleId, req.body.inscription, asistencia);
-            });
-            function addInscription(person, inscri, idEvent) {
+            console.log(req.body.eventId)
+            console.log(person._id)
+            db.events.aggregate([
+                  { $match: { _id: mongoose.Types.ObjectId(req.body.eventId ) } },
+                  { $project: { inscriptions: 1 } },
+                  { $unwind: '$inscriptions' },
+                  { $match: { 'inscriptions.persons': { $eq: person._id } } },
+                  { $group: { _id: {persons: '$inscriptions.persons' }, total: { $sum: 1 } }}
+               ], function (err, events){
+                  if (err) return res.status(400).send(err);
+                  console.log('EL INSCRIPTION DE LA PERSONA ES ESTA ::::  ');
+                  console.log(events);
+                  if (events.length == 0){
+                        //return res.status(404).send();
+                        console.log('Inscrito correctameste');
+                        var list = {
+                              bolivianos: req.body.inscription.canceled_price,
+                              dolares: req.body.inscription.canceled_price/ (6.96),
+                              receipt: req.body.inscription.receipt, // varios recibos
+                              assist: asistencia, //controlar por fecha de inscription ****************
+                              type: 1, //nuevo // nivelacion
+                              person: person._id,
+                              events: req.body.eventId,
+                              //modulars: ObjectId
+                        };
+                        var lists = new db.lists(list);
+                        lists.save(function (err, lists) {
+                          console.log('lista guardada');
+                          if (err) { return res.status(400).send(err); }
+                          addInscription(person, req.body.inscription, req.body.eventId,  date.programs, req.body.moduleId,asistencia);//**controlar fecha y modulars*/
+                          //addProfile(person, date.programs, req.body.eventId, req.body.moduleId, req.body.inscription, asistencia);
+                          //   inscriptionEvent(person, programId, idEvent, moduleId, inscri, asistencia );
+                        });
+                  }else{
+                     if (err) return res.status(404).send(err);
+                     console.log('La persona ya se inscribio');
+                  }
+                        //return res.status(200).send(person);
+              });
+            function addInscription(person, inscri, idEvent, programId,moduleId, asistencia) {
               db.events.findOne({ _id: idEvent }, function (err, events) {
-                console.log(events);
+                //console.log(events);
                 db.modules.find({ programs: events.programs }).count().exec(function (err, moduls) {
-                  console.log(moduls);
+                 // console.log(moduls);
                   console.log('llegue al la cantidad de modulos');
                   var modulPrice = inscri.price_event / moduls;///////DIVISION
                   console.log(modulPrice);
-                  var inscription = {
-                        // segun al numero de asistencias sacar el precio total q tiene q pagar
-                        total_price: 0,//sumatorio por asistencia de cada modulo
-                        module_price: modulPrice,
-                        bolivianos_price: inscri.canceled_price,
-                        dolares_price: inscri.canceled_price/(6.96),
-                        canceled_price: inscri.canceled_price,
-                        price_event: inscri.price_event,
-                        receipt: inscri.receipt,
-                        name: person.name,
-                        ci: person.ci,
-                        cellphone: person.cellphone,
-                        persons: person._id,
-                        users: inscri.users
-                  };
-                        var d = new Date();
-                        ///////////
-                        db.events.update({ _id: idEvent },
-                        {
-                              $push: {
-                              inscriptions: inscription
-                              }
-                        }, {
-                              multi: true
-                        }, function (err, events) {
-                              if (err) return res.status(400).send(err);
-                              console.log(events);
-                              // if (events == null) return res.status(404).send();
-                              return res.status(200).send(person);
-                        });
+                   var inscription = {
+                              // segun al numero de asistencias sacar el precio total q tiene q pagar
+                              total_price: 0,//sumatorio por asistencia de cada modulo
+                              module_price: modulPrice,
+                              bolivianos_price: inscri.canceled_price,
+                              dolares_price: inscri.canceled_price/(6.96),
+                              canceled_price: inscri.canceled_price,
+                              price_event: inscri.price_event,
+                              receipt: inscri.receipt,
+                              name: person.name,
+                              ci: person.ci,
+                              cellphone: person.cellphone,
+                              persons: person._id,
+                              users: inscri.users
+                        };
+                   var d = new Date();
+                              ///////////
+                   db.events.update({ _id: idEvent },{
+                                    $push: {
+                                    inscriptions: inscription
+                                    }
+                              }, {
+                                    multi: true
+                              }, function (err, events) {
+                                    if (err) return res.status(400).send(err);
+                                    //console.log(events);
+                                    // if (events == null) return res.status(404).send();
+                                    //return res.status(200).send(person);
+                     });
+                  addProfile(person, programId, idEvent, moduleId, inscri, asistencia );
                   });//fin module
                 });//fin Event
             }
             function addProfile(person, programId,idEvent,moduleId, inscri , asistencia){
                   var perfil = {
                         programs: programId,
-                        modulars: null,
+                        //modulars: null,
                         final_work:null,
                         requirements:null,
                         total_price: inscri.price_event,
                         payed: inscri.canceled_price, //cancelado
                         debt: inscri.price_event - inscri.canceled_price ,  // deuda
                         print_diploma: false
-                  }
+                  };
                   var d = new Date();
-                  ///////////
                   db.persons.update({ _id: person._id },
                         {
                           $push: {
@@ -330,96 +351,108 @@ router
                         }, function (err, person){
                               if (err) return res.status(400).send(err);
                               console.log(person);
-                              // if (events == null) return res.status(404).send();
+                              console.log('este es el id del PERFIL @@@@@');
                               //return res.status(200).send(person);
+                              agregar();
                         });
-                   //aniadir el modular del Profile 
-                   multiplicarModular(person,programId);    
-                  addModular(person, inscri,idEvent,moduleId,asistencia );
+                         function agregar(){
+                              db.persons.findOne({ _id: person._id }, function (err, ps) {
+                                    if (err) return res.status(400).send(err);
+                                    if (ps == null) return res.status(404).send();
+                                    console.log(ps);
+                              multiplicarModular(person, idEvent,programId,moduleId, ps.profile,inscri,asistencia);
+                             // addModular(person, inscri,idEvent,moduleId,asistencia );
+                              });
+                         }           
+                        //aniadir el modular del Profile
+                  //multiplicarModular(person,programId);    
+                  //addModular(person, inscri,idEvent,moduleId,asistencia );
             }
-            function multiplicarModular(person,programId){
+            function multiplicarModular(person,idEvent, programId, moduleId, profiles, inscri,asistencia){//** no recupera el PROFILE de person */
+                  console.log(profiles);
+                  console.log('aqui la persona con sus datos EEEEEE');
+
                   db.modules.find({ programs: programId },{_id: 1},function (err, moduls) {
                         //console.log(moduls);
-                        for (let i = 0; i < moduls.length; i++) {
-                              modular = {
+                        var i = 0,m=0;
+                        recursivo(i);///Function recursive
+                        function recursivo(i){
+                              if(i == moduls.length){
+                                    return;// addModular(person, inscri,idEvent,moduleId,asistencia ) ;
+                                    
+                              }else{
+                                 console.log(moduls[i]._id);
+                                 var modular = {
                                     amount:null,
-                                    assist: null, //cambio
-                                    events: null,
-                                    modules: null,
-                                    print_certificate: null,
-                              };
+                                    assist: false, //cambio
+                                    persons:person._id,//a la persona que pertenece
+                                    profile: profiles[0]._id,
+                                    events: idEvent,
+                                    modules: moduls[i]._id,
+                                    print_certificate: false,
+                                 };
                               console.log('guardado modulars   '+ i);
-                              db.persons.update({_id: person._id},
-                                    {
-                                       $addToSet: {
-                                          profile: {
-                                              // _id: req.params.id,
-                                              modulars:modular
-                                          }
+                              console.log('el ID de PERFIL  '+ profiles[0]._id );
+                              var modulares = new db.modulars(modular);
+                              //console.log(modulares);
+                              modulares.save(function (err, modular) {
+                                    try{
+                                       //return res.status(200).send(modular);
+                                       console.log(i)
+                                       m++;
+                                       if(m== moduls.length){
+                                       addModular(person, inscri,idEvent,moduleId,asistencia );
                                        }
-                                    }).exec(function (err, person) {
-                                          if (err) return res.status(400).send(err);
-                                            if (person.nModified == 0) return res.status(404).send();
-                                          //else return res.status(200).send(persons);
-                                    });
+                                    }catch(err){
+                                          console.error(err);
+                                       //console.log(err);
+                                    }
+                              });
+                             return recursivo(i+1);
+                            }
                         }
-                  });//fin module
+                    if (err) return res.status(400).send(err);
+                    //addModular(person, inscri,idEvent,moduleId,asistencia );
+                  });//Fin modules
             }
             function addModular(person, inscri,idEvent,moduleId, asistencia){
-                  var modula = {
-                        amount: {  // observation
+                  console.log('este es el ID de MODULO::  '+moduleId);
+                  console.log(idEvent);
+                  console.log(person._id);
+                  var amount = {  // observation
                               detail: null,
                               receipt: inscri.receipt,// nro factura
                               date: new Date(),
                               amount: inscri.canceled_price,
-                           },
-                           assist: asistencia, //cambio
-                           events: idEvent,
-                           // inscription: ObjectId,
-                           modules: moduleId,
-                           print_certificate: false,
-                  }
-                  var d = new Date();
-                        // db.persons.update({ _id: person._id },
-                        //       {
-                        //         $push: {
-                        //             profile: perfil
-                        //         }
-                        //       }, {
-                        //             multi: true
-                        //       }, function (err, person) {
-                        //             if (err) return res.status(400).send(err);
-                        //             console.log(person);
+                           };
+                  
+                        // db.modulars.findOne({ persons: person._id,events: idEvent,  modules: moduleId}, function (err, modulars) {
+                        //       if (err) return res.status(400).send(err);
+                        //       if (modulars == null) return res.status(404).send();
+                        //       console.log(modulars);
                         // });
-                  db.persons.update(
-                        {
-                         _id: person._id, 'profile._id': person.profile._id 
-                        },
+                  db.modulars.update(
+                        {persons: person._id,events: idEvent,  modules: moduleId },
                         {
                           $set: { 
-                              'profile.$.number_quotas': req.body.profile.number_quotas,
-                              'profile.$.total': req.body.profile.total,
-                              'profile.$.amounts_quotas': req.body.profile.amounts_quotas,
-                              'profile.$.disacount': req.body.profile.disacount,
-                              'profile.$.paid': req.body.profile.paid,
-                              'profile.$.pays': req.body.profile.pays,
-                              'profile.$.amount_paid': req.body.profile.amount_paid,                 
+                              'amount': amount,
+                              'assist': asistencia   
                           }
                         }
                         ).exec(function (err, off) {
                               if (err) return res.status(400).send(err);
-                              if (off.nModified == 0) return res.status(404).send();
+                              console.log(off)
+                              //if (off.nModified == 0) return res.status(404).send();
                               return res.status(200).send();
-                        })      
+                        });      
             }
        });//F Qevents
       } else{
             if (err) return res.status(400).send(err);
             console.log('No existe la persona');
       }
-    })
+    });
    })
-
    //post person event 
    .post('/:id', function (req, res) {
       db.events.findOne({ _id: req.params.id }, function (err, event) {
@@ -516,7 +549,8 @@ router
                                     multi: true
                               }, function(err, events) {
                                     if (err) return res.status(400).send(err);
-                                   // console.log(events);
+                                          // console.log(events);
+                                          //return res.status(200).send(events);
                               });
                   }
                   modular = {

@@ -131,7 +131,7 @@ export class InscriptionComponent implements OnInit {
          error => {
             var errorMessage = <any>error;
             console.log(errorMessage);
-            alert('Error al registrar, Persona existente');
+            alert('Error al registrar, Persona ');
          }
       );
    }
