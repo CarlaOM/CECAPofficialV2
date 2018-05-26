@@ -370,4 +370,9 @@ export class PeticionesService {
     // .catch((e) => Observable.throw(e))
     // .subscribe();
   }
+  addFinalWork(event) {
+    let body = JSON.stringify(event);
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return this._http.put(this.url + 'persons/finalWork', body, { headers: headers }).map((res: Response) => res);
+  }
 }

@@ -149,6 +149,20 @@ module.exports = {
       /////////////
       profile: [{
             programs: ObjectId,
+            name: String,
+            modulars: [{
+               amount: {  // observation
+                  detail: String,
+                  receipt: String,// nro factura
+                  date: Date,
+                  amount: Number,
+               },
+               assist: Boolean, //cambio
+               events: ObjectId,
+            //    inscription: ObjectId,
+               modules: ObjectId,
+               print_certificate: Boolean,
+            }],
             // modulars: [{
             //    amount: {  // observation
             //       detail: String,
