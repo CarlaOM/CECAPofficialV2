@@ -118,7 +118,7 @@ const appRoutes: Routes = [
          { path: 'pendientes/info/:id', component: InfoPendingCashComponent },
          { path: 'officesCash', component: OfficesCashComponent },
          { path: 'inscription/:id', component: InscriptionComponent },
-         { path: 'reportsModulars/:id', component: AccountsModularsComponent },
+         { path: 'accountsModulars/:id', component: AccountsModularsComponent },
          { path: 'importFromExcel', component: ImportFromExcelComponent },
       ]
    },
