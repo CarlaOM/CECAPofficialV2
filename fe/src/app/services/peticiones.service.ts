@@ -9,18 +9,19 @@ import { CATCH_ERROR_VAR } from "@angular/compiler/src/output/abstract_emitter";
 
 @Injectable()
 export class PeticionesService {
-  public url: string = GLOBAL.url;
+   public url: string = GLOBAL.url;
 
-  constructor(
-    // private _httpClient: HttpClient,
-    private _http: HttpClient
+   constructor(
+      // private _httpClient: HttpClient,
+      private _http: HttpClient
 
-  ) {
-    // this.url = "https://jsonplaceholder.typicode.com/users";
+   ) {
+      // this.url = "https://jsonplaceholder.typicode.com/users";
 
-  }
-  getCatEgresos() {
+   }
+   getCatEgresos() {
     return this._http.get(this.url + 'categoriaEgresos').map((res: Response) => res);
+<<<<<<< HEAD
   }
   getEvents() {
     return this._http.get(this.url + 'events').map((res: Response) => res);
@@ -90,6 +91,81 @@ export class PeticionesService {
     return this._http.get(this.url + 'persons/existCi/' + ci).map((res: Response) => res);
   }
   getProfilePerson(idPerson, idProfile) {
+=======
+   }
+   getEvents() {
+      return this._http.get(this.url + 'events').map((res: Response) => res);
+   }
+   getEvent(id) {
+      return this._http.get(this.url + 'events/' + id).map((res: Response) => res);
+   }
+   //prueba
+   getEventInscriptions(id) {
+      return this._http.get(this.url + 'events/inscriptions/' + id).map((res: Response) => res);
+   }
+   getTrimestral() {
+      return this._http.get(this.url + 'events/trimestral').map((res: Response) => res);
+   }
+   addProgram(program) {
+      let body = JSON.stringify(program);
+      var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+      return this._http.post(this.url + 'programs/add', body, { headers: headers }).map((res: Response) => res);
+   }
+   getPrograms() {
+
+      return this._http.get(this.url + 'programs').map((res: Response) => res);
+   }
+   getProgram(_id) {
+      return this._http.get(this.url + 'programs/' + _id).map((res: Response) => res);
+   }
+   addModulo(modulo) {
+      let body = JSON.stringify(modulo);
+      var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+      return this._http.post(this.url + 'modules/add', body, { headers: headers }).map((res: Response) => res);
+   }
+   getModulos(idProgram) {
+      console.log(idProgram)
+      var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+      return this._http.get(this.url + 'modules/lista/' + idProgram, { headers: headers }).map((res: Response) => res);
+   }
+   getEventModuls(eventId) {
+      console.log(eventId)
+      var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+      return this._http.get(this.url + 'modules/eventoModuls/' + eventId, { headers: headers }).map((res: Response) => res);
+   }
+   getModulo(_id) {
+      return this._http.get(this.url + 'modules/' + _id).map((res: Response) => res);
+   }
+   //    getIdProgram(nomProgram){
+   //     let body = JSON.stringify(nomProgram);
+   //      var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+   //       return this._http.post(this.url + 'programs/id', body, { headers: headers }).map((res: Response) => res);
+   //    }
+   addEvent(event) {
+      let body = JSON.stringify(event);
+      var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+      return this._http.post(this.url + 'events', body, { headers: headers }).map((res: Response) => res);
+   }
+   addPerson(person) {
+      let body = JSON.stringify(person);
+      var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+      return this._http.post(this.url + 'persons', body, { headers: headers }).map((res: Response) => res);
+   }
+   addInscriptPerson(registro){
+    let body = JSON.stringify(registro);
+    var id = registro.eventId;
+    console.log(id);
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return this._http.post(this.url + 'events/inscriptPerson/' + id, body, { headers: headers }).map((res: Response) => res);
+   }
+   getPerson(_id) {
+      return this._http.get(this.url + 'persons/' + _id).map((res: Response) => res);
+   }
+   getCi(ci) {
+      return this._http.get(this.url + 'persons/existCi/' + ci).map((res: Response) => res);
+   }
+   getProfilePerson(idPerson, idProfile) {
+>>>>>>> 4898e6703b04e392cfc6ba25541bd7081639de82
     // var idPerson = person_object._id;
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     let body = JSON.stringify({ profileId: idProfile });
