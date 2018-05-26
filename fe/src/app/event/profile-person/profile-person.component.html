@@ -5,19 +5,23 @@
       <br>
       <p class="text-info">Fecha: {{date | date}}</p>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-4 col-lg-offset-4 toppad" >
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-4 col-lg-offset-4 toppad">
       <h3 class="text-info" align="center">Perfil de Persona</h3>
       <br>
       <div class="panel panel-info">
         <div class="panel-heading">
-          <h3 class="panel-title"><strong>{{person?.first_name}} {{person?.last_name}}</strong></h3>
+          <h3 class="panel-title">
+            <strong>{{person?.first_name}} {{person?.last_name}}</strong>
+          </h3>
         </div>
         <div class="panel-body">
           <div class="row">
-            <div class="col-md-2 col-lg-2 " align="center"><img  class="profile-img img-circle img-responsive" src="assets/dist/img/line.png" alt=""></div>
-              
+            <div class="col-md-2 col-lg-2 " align="center">
+              <img class="profile-img img-circle img-responsive" src="assets/dist/img/line.png" alt="">
+            </div>
+
             <div class=" col-md-10 col-lg-10 ">
-                <strong>Datos personales:</strong>
+              <strong>Datos personales:</strong>
               <table class="table table-user-information">
                 <tbody>
                   <tr>
@@ -29,6 +33,10 @@
                     <td>{{person?.last_name}}</td>
                   </tr>
                   <tr>
+                    <td>CI</td>
+                    <td>{{person?.ci}}</td>
+                  </tr>
+                  <tr>
                     <td>Telefono</td>
                     <td>{{person?.phone}}</td>
                   </tr>
@@ -38,7 +46,9 @@
                   </tr>
                   <tr>
                     <td>Correo Electronico</td>
-                    <td><a href="mailto:email">{{person?.email}}</a></td>
+                    <td>
+                      <a href="mailto:email">{{person?.email}}</a>
+                    </td>
                   </tr>
                   <tr>
                     <td>Cartera</td>
@@ -46,53 +56,52 @@
                   </tr>
                 </tbody>
               </table>
-            <strong>Estado laboral de la Persona:</strong>
+              <strong>Estado laboral de la Persona:</strong>
               <table class="table table-user-information">
                 <tbody>
                   <tr>
                     <td>Ocupacion</td>
-                    <td>{{person?.ocupation}}</td>                                                                                        
+                    <td>{{person?.ocupation}}</td>
                   </tr>
-                <!--Estudiante-->
+                  <!--Estudiante-->
                   <tr *ngIf="ocupation=='Estudiante'">
-                      <td>Carrera</td>                                        
-                      <td>{{ocupations?.carrera}}</td>                                      
-                  </tr>
-                  <tr *ngIf="ocupation=='Estudiante'"> 
-                      <td>Universidad</td>                                        
-                      <td>{{ocupations?.universidad}}</td>                                   
+                    <td>Carrera</td>
+                    <td>{{ocupations?.carrera}}</td>
                   </tr>
                   <tr *ngIf="ocupation=='Estudiante'">
-                      <td>Semestre</td>                                        
-                      <td>{{ocupations?.semestre}}</td>                                     
+                    <td>Universidad</td>
+                    <td>{{ocupations?.universidad}}</td>
                   </tr>
-                <!--Particular-->
+                  <tr *ngIf="ocupation=='Estudiante'">
+                    <td>Semestre</td>
+                    <td>{{ocupations?.semestre}}</td>
+                  </tr>
+                  <!--Particular-->
                   <tr *ngIf="ocupation=='Particular'">
-                      <td>Area de Trabajo</td>                                        
-                      <td>{{ocupations?.areaTrabajo}}</td>                                     
+                    <td>Area de Trabajo</td>
+                    <td>{{ocupations?.areaTrabajo}}</td>
                   </tr>
                   <tr>
-                <!--Profesional-->
-                  <tr *ngIf="ocupation=='Profesional'">
-                    <td>Profesion</td>                                        
-                    <td>{{ocupations?.profesion}}</td>                                     
-                  </tr>
-                  <tr *ngIf="ocupation=='Profesional'">
-                    <td>Empresa</td>                                        
-                    <td>{{ocupations?.empresa}}</td>                                     
-                  </tr>
-                  <tr *ngIf="ocupation=='Profesional'">
-                    <td>Cargo</td>                                        
-                    <td>{{ocupations?.cargo}}</td>                                     
-                  </tr>
+                    <!--Profesional-->
+                    <tr *ngIf="ocupation=='Profesional'">
+                      <td>Profesion</td>
+                      <td>{{ocupations?.profesion}}</td>
+                    </tr>
+                    <tr *ngIf="ocupation=='Profesional'">
+                      <td>Empresa</td>
+                      <td>{{ocupations?.empresa}}</td>
+                    </tr>
+                    <tr *ngIf="ocupation=='Profesional'">
+                      <td>Cargo</td>
+                      <td>{{ocupations?.cargo}}</td>
+                    </tr>
                 </tbody>
               </table>
-            <strong>Programas Cursados:</strong>
+              <strong>Programas Cursados:</strong>
               <table class="table table-user-information">
                 <tbody>
-                  <tr *ngFor="let i of listPrograms">
-                    <td>Programa</td>
-                    <td>{{i.programs}}</td>
+                  <tr *ngFor="let i of person.profile">
+                    <td><li>{{i.name}}</li></td>
                     <td>
                       <a class="btn btn-primary" (click)="viewDetails(i._id)">Detalles</a>
                     </td>
@@ -147,7 +156,7 @@
               </table>
             </div>
           </div>
-        </div>  
+        </div>
       </div>
     </div>
   </div>

@@ -7,7 +7,7 @@ import { Inscription } from '../../modelo/inscription';
 import { Registro } from '../../modelo/registro';
 import { DescOcupation } from '../../modelo/descOcupation';
 import { Cashflowusers } from "../../modelo/cashflowusers";
-
+import { Lists } from '../../modelo/lists';
 
 @Component({
    selector: 'app-inscription',
@@ -22,14 +22,16 @@ export class InscriptionComponent implements OnInit {
    public person: Person;//colection
    public descOcupation: DescOcupation;//collection
    public inscription: Inscription;//collection
-   public ocupSelected;
    public eventos;//colection
    public programs;//colection
    public eventId;
+   //public moduleId;
+   public ocupSelected;
    public cartera;
    public ingresoPorInscripcion;
    public modulos;
    public registro: Registro;
+   public lists: Lists;
 
    submitted = false;
 
@@ -43,10 +45,11 @@ export class InscriptionComponent implements OnInit {
       this.inscription = new Inscription(null, null, null, null, 0, 0, '0', '');
       //this.identy=Identity._id;
       this.descOcupation = new DescOcupation('', '', '', '', '', '', '');
-      this.registro = new Registro(null, null, '');//idEvent,idUser,persona:{}, montCancel
+      this.registro = new Registro(null, null, '', '');//idEvent,idUser,persona:{}, montCancel
 
       this.ingresoPorInscripcion = new Cashflowusers(new Date(), new Date(), 0, 0, 0, "", "", "", "", "");
-   }
+      this.lists = new Lists(null,0,'',null,null, '','','');//(bol, dol,receipt,assist,type,per,event,mod)
+    }
    onSubmit() {
    }
    ngOnInit() {
@@ -69,8 +72,8 @@ export class InscriptionComponent implements OnInit {
          if (this.person.ci > 999999) {
             this._peticionesService.getCi(this.person.ci).subscribe(result => {
                // console.log(result);
-            //    this.person.first_name = result.first_name;     
-            //    this.person.last_name = result.last_name;          
+               this.person.first_name = result.first_name;     
+               this.person.last_name = result.last_name;          
 
             })
          }
@@ -91,81 +94,81 @@ export class InscriptionComponent implements OnInit {
       this.registro.eventId = this.eventId;
       this.registro.persona = this.person;//opcional
       console.log(this.registro);
-    //   this._peticionesService.addInscriptPerson(this.registro).subscribe(
-    //      result => {
-    //         var esperado = result;
-    //         console.log(esperado);
+      this._peticionesService.addInscriptPerson(this.registro).subscribe(
+         result => {
+            var esperado = result;
+            console.log(esperado);
+            alert('control correcto');
+      //       /////////////   Ingreso por inscripcin a caja Chica////////////////
 
-    //   //       /////////////   Ingreso por inscripcin a caja Chica////////////////
+      //       // this.ingresoPorInscripcion.receipt=this.inscription.receipt;
+      //       // this.ingresoPorInscripcion.title='Inscripcion';
+      //       // this.ingresoPorInscripcion.description=this.person.first_name+' '+this.person.last_name;
+      //       // this.ingresoPorInscripcion.detail_amount=this.inscription.canceled_price;
+      //       // this.ingresoPorInscripcion.user=Identity._id;
+      //       // this.ingresoPorInscripcion.events=this.IdEvent;
+      //       // ////////////////////////////////////
+      //       // this._peticionesService.addCashFlowUserIngreso(this.ingresoPorInscripcion).subscribe(
+      //       //     result => {
+      //       //       var returned = result;
+      //       //     },
+      //       //     error => {
+      //       //       var errorMessage = <any>error;
+      //       //       console.log(errorMessage);
+      //       //       alert('Error al Crear cashflowuseringreso');
+      //       //     }
+      //       //   );
 
-    //   //       // this.ingresoPorInscripcion.receipt=this.inscription.receipt;
-    //   //       // this.ingresoPorInscripcion.title='Inscripcion';
-    //   //       // this.ingresoPorInscripcion.description=this.person.first_name+' '+this.person.last_name;
-    //   //       // this.ingresoPorInscripcion.detail_amount=this.inscription.canceled_price;
-    //   //       // this.ingresoPorInscripcion.user=Identity._id;
-    //   //       // this.ingresoPorInscripcion.events=this.IdEvent;
-    //   //       // ////////////////////////////////////
-    //   //       // this._peticionesService.addCashFlowUserIngreso(this.ingresoPorInscripcion).subscribe(
-    //   //       //     result => {
-    //   //       //       var returned = result;
-    //   //       //     },
-    //   //       //     error => {
-    //   //       //       var errorMessage = <any>error;
-    //   //       //       console.log(errorMessage);
-    //   //       //       alert('Error al Crear cashflowuseringreso');
-    //   //       //     }
-    //   //       //   );
-
-    //   //       ///////////////////////////////////////////////////////////////////
+      //       ///////////////////////////////////////////////////////////////////
 
 
 
-    //   //       this.router.navigate(['home/events']);
-    //   //       alert('Se Registro a la persona de manera correcta');
-    //   //       //this.router.navigate(['home/persons']);
+      //       this.router.navigate(['home/events']);
+      //       alert('Se Registro a la persona de manera correcta');
+      //       //this.router.navigate(['home/persons']);
 
-    //      },
-    //      error => {
-    //         var errorMessage = <any>error;
-    //         console.log(errorMessage);
-    //         alert('Error al registrar, Persona existente');
-    //      }
-    //   );
+         },
+         error => {
+            var errorMessage = <any>error;
+            console.log(errorMessage);
+            alert('Error al registrar, Persona ya esta inscrito');
+         }
+      );
    }
-   // captOcupation() {
-   //    console.log(this.ocupSelected);
-   //    this.descOcupation.universidad = ''; this.descOcupation.carrera = '';
-   //    this.descOcupation.semestre = ''; this.descOcupation.areaTrabajo = '';
-   //    this.descOcupation.profesion = ''; this.descOcupation.cargo = '';
-   //    this.descOcupation.empresa = '';
-   //    this.person.ocupation = this.ocupSelected;
-   // }
-   // queryCartera() {
-   //    //console.log(Identity._id)
-   //    this._peticionesService.getCarteraFromUserId(Identity._id).subscribe(
-   //       result => {
-   //          this.cartera = result;
-   //          this.person.carteras = this.cartera._id
-   //          // console.log('aqui la cartera del usuario::::');
-   //          // console.log(this.cartera);
-   //       },
-   //       error => {
-   //          var errorMessage = <any>error;
-   //          console.log(errorMessage);
-   //       }
-   //    );
-   // }
-   // queryEvents() {
-   //    this._peticionesService.getEvents().subscribe(
-   //       result => {
-   //          this.eventos = result;
-   //          //console.log(this.eventos);
-   //       },
-   //       error => {
-   //          var errorMessage = <any>error;
-   //          console.log(errorMessage);
-   //       });
-   // }
+   captOcupation() {
+      console.log(this.ocupSelected);
+      this.descOcupation.universidad = ''; this.descOcupation.carrera = '';
+      this.descOcupation.semestre = ''; this.descOcupation.areaTrabajo = '';
+      this.descOcupation.profesion = ''; this.descOcupation.cargo = '';
+      this.descOcupation.empresa = '';
+      this.person.ocupation = this.ocupSelected;
+   }
+   queryCartera() {
+      //console.log(Identity._id)
+      this._peticionesService.getCarteraFromUserId(Identity._id).subscribe(
+         result => {
+            this.cartera = result;
+            this.person.carteras = this.cartera._id
+            // console.log('aqui la cartera del usuario::::');
+            // console.log(this.cartera);
+         },
+         error => {
+            var errorMessage = <any>error;
+            console.log(errorMessage);
+         }
+      );
+   }
+   queryEvents() {
+      this._peticionesService.getEvents().subscribe(
+         result => {
+            this.eventos = result;
+            //console.log(this.eventos);
+         },
+         error => {
+            var errorMessage = <any>error;
+            console.log(errorMessage);
+         });
+   }
 
    queryModulos(){
     this.route.params.subscribe(params => {

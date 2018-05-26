@@ -420,6 +420,7 @@ var _person_1 = {
    /////////////
    profile: [{
          programs: _program_rrhh,
+         name:'',
          modulars: [{
             amount: {
                detail: 'String',
@@ -465,7 +466,7 @@ var _person_1 = {
       }],
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _person_2 = {
    first_name: 'laura',
    last_name: 'estrada',
@@ -491,6 +492,7 @@ var _person_2 = {
    /////////////
    profile: [{
          program: _program_rrhh,
+         name:'',
          modulars: [{
             amount: {
                detail: 'modulo 1 rrhh',
@@ -562,6 +564,7 @@ var _person_3 = {
    /////////////
    profile:[{
          programs: _program_rrhh,
+         name:'',
          modulars: [{
             amount: {
                detail: 'modulo 1 rrhh',
@@ -634,6 +637,7 @@ var _person_4 = {
    /////////////
    profile: [{
          programs: _program_rrhh,//modificado de program a programs
+         name:'',
          modulars: [{
             amount: {
                detail: 'modulo 1 rrhh',
@@ -748,7 +752,6 @@ var _event_seg = {
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 };
-
 var _events = [_event_seg];
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -780,6 +783,27 @@ var _list_2 = {
 var _lists = [_list_1, _list_2];
 _event_seg.modulars[0].lists.push(_list_1);
 _event_seg.modulars[0].lists.push(_list_2);
+//////////////////////////////////////////////////
+var _modulars_1={
+    amount: {  // observation
+        detail: 'gsgdh',
+        receipt: 123400,// nro factura
+        date: new Date(),
+        amount: 500,
+    },
+    assist: true, //cambio
+    persons: _person_1._id,//a la persona que pertenece
+    profile: null,
+    events: _event_seg._id,
+    //    inscription: ObjectId,
+    modules: _modulo_1_seguridad,
+    print_certificate: false,
+
+    _id: new mongoose.Types.ObjectId,
+    record_date: new Date()
+}
+var _modulars = [_modulars_1];
+////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
 var _categoriaEgresos_1 = {
     //PROGRAMAS PROFESIONALES Y FINANCIEROS
@@ -842,6 +866,8 @@ module.exports = {
      saveData(_persons, db.persons);
      saveData(_lists, db.lists);
      saveData(_cashFlowOffices,db.cashFlowOffices);
+     saveData(_modulars, db.modulars);
+
      saveData(_categoriaEgresos,db.categoriaEgresos);
   },
 
@@ -860,6 +886,7 @@ module.exports = {
      clearCollections(db.correlatives);
      clearCollections(db.lists);
      clearCollections(db.cashFlowOffices);
+     clearCollections(db.modulars);
      clearCollections(db.categoriaEgresos);
   }
 };
