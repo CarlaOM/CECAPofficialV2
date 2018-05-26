@@ -15,6 +15,7 @@ export class OfficesCashComponent implements OnInit {
 
   public offices;
   public nuevasCajasOffices=[];
+  public btnInactive=true;
 
   constructor(
     private _peticionesService:PeticionesService,

@@ -58,6 +58,8 @@ module.exports = {
                   //////// 0  pendiente
                   ////////  1 cerrado
 
+      debt:Number,
+
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } },
    })),
@@ -161,8 +163,23 @@ module.exports = {
             //    print_certificate: Boolean,
             // }],
             final_work: {
-               stade: Number, // entregado=1, no entrego=2
-               observations: String,
+               date_start: Date,
+               name: String, // nombre del trabajo final
+               origin: String,
+               facilitator: ObjectId,
+               revisions: [{
+                  state: Number, // 9 posibles estados
+                  observations: String,
+                  date_review: Date,
+               }],
+               date_end: Date,
+               empastado: Boolean,
+               copy_1: Boolean,
+               copy_2: Boolean,
+               form: Boolean,
+               certificate: Boolean,
+               letter_review: Boolean,
+               company_certificate: Boolean
             },
             requirements: { // true=entrego, false=no entrego
                photograpy: Boolean,
@@ -307,6 +324,30 @@ module.exports = {
 
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } }
+   })),
+   /////////////////////////////////////////////////
+
+   categoriaEgresos: mongoose.model('categoriaEgreso', new Schema({
+      //PROGRAMAS PROFESIONALES Y FINANCIEROS
+      refrigerio: [ String ],
+      salon: [ String ],
+      publicidad: [ String ],
+      facilitadores: [ String ],
+      material: [ String ],
+      otros: [String ],
+
+      //ADMINISTRATIVA
+      oficina: [ String ],
+      rrhhConsultorias: [ String ],
+      obligaciones: [ String ],
+      equipos: [ String ],
+      imprenta: [ String ],
+      fotocopiadora: [ String ],
+      otrosGastos: [ String ], 
+      extras: [ String ],
+            
+      _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
+      record_date: { type: Date, default: function () { return new Date() } },
    })),
 
    // registers: mongoose.model('registers', new Schema({

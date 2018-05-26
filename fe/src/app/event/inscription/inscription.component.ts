@@ -72,8 +72,8 @@ export class InscriptionComponent implements OnInit {
          if (this.person.ci > 999999) {
             this._peticionesService.getCi(this.person.ci).subscribe(result => {
                // console.log(result);
-               this.person.first_name = result.first_name;     
-               this.person.last_name = result.last_name;          
+            //    this.person.first_name = result.first_name;     
+            //    this.person.last_name = result.last_name;          
 
             })
          }
@@ -131,7 +131,7 @@ export class InscriptionComponent implements OnInit {
          error => {
             var errorMessage = <any>error;
             console.log(errorMessage);
-            alert('Error al registrar, Persona ');
+            alert('Error al registrar, Persona ya esta inscrito');
          }
       );
    }

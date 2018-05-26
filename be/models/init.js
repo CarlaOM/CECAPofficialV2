@@ -435,8 +435,23 @@ var _person_1 = {
             print_certificate: false,
          }],
          final_work: {
-            stade: 2,  // entregado = 1, no entrego = 2
-            observations: 'aun no entrego el proyecto',
+          date_start: '2018-06-25',
+          name: 'Trabajo 1', // nombre del trabajo final
+          origin: 'cbba',
+          facilitator: _facilitator_1._id,
+          revisions: [{
+             state: 1, // 9 posibles estados
+             observations: 'Esperando respuesta',
+             date_review: '2018-07-01',
+          }],
+          date_end: '2018-07-25',
+          empastado: false,
+          copy_1: false,
+          copy_2: false,
+          form: false,
+          certificate: false,
+          letter_review: false,
+          company_certificate: false
          },
          requirements: {
             photograpy: true,
@@ -491,8 +506,23 @@ var _person_2 = {
             print_certificate: false,
          }],
          final_work: {
-            stade: 2,  // entregado = 1, no entrego = 2
-            observations: 'aun no entrego el proyecto',
+          date_start: '2018-06-25',
+          name: 'Trabajo 2', // nombre del trabajo final
+          origin: 'cbba',
+          facilitator: _facilitator_1._id,
+          revisions: [{
+             state: 3, // 9 posibles estados
+             observations: 'En espera',
+             date_review: '2018-07-01',
+          }],
+          date_end: '2018-07-25',
+          empastado: false,
+          copy_1: false,
+          copy_2: false,
+          form: false,
+          certificate: false,
+          letter_review: false,
+          company_certificate: false
          },
          requirements: {
             photograpy: true,
@@ -547,8 +577,23 @@ var _person_3 = {
             print_certificate: false,
          }],
          final_work: {
-            stade: 2,  // entregado = 1, no entrego = 2
-            observations: 'aun no entrego el proyecto',
+          date_start: '2018-06-25',
+          name: 'Trabajo 3', // nombre del trabajo final
+          origin: 'cbba',
+          facilitator: _facilitator_1._id,
+          revisions: [{
+             state: 6, // 9 posibles estados
+             observations: 'Finalizado',
+             date_review: '2018-07-01',
+          }],
+          date_end: '2018-07-25',
+          empastado: false,
+          copy_1: false,
+          copy_2: false,
+          form: false,
+          certificate: false,
+          letter_review: false,
+          company_certificate: false
          },
          requirements: {
             photograpy: true,
@@ -604,8 +649,23 @@ var _person_4 = {
             print_certificate: false,
          }],
          final_work: {
-            stade: 2,  // entregado = 1, no entrego = 2
-            observations: 'aun no entrego el proyecto',
+          date_start: '2018-06-25',
+          name: 'Trabajo 4', // nombre del trabajo final
+          origin: 'cbba',
+          facilitator: _facilitator_1._id,
+          revisions: [{
+             state: 8, // 9 posibles estados
+             observations: 'En espera de resultado',
+             date_review: '2018-07-01',
+          }],
+          date_end: '2018-07-25',
+          empastado: false,
+          copy_1: false,
+          copy_2: false,
+          form: false,
+          certificate: false,
+          letter_review: false,
+          company_certificate: false
          },
          requirements: {
             photograpy: false,
@@ -740,6 +800,33 @@ var _modulars_1={
 }
 var _modulars = [_modulars_1];
 ////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+var _categoriaEgresos_1 = {
+    //PROGRAMAS PROFESIONALES Y FINANCIEROS
+    refrigerio: ['Comida', 'Bebida', 'Insumos', 'Transporte'],
+    salon: ['Alquiler', 'Alquiler equipos y otros', 'Limpieza', 'Transporte ida y vuelta'],
+    publicidad: ['Periodico', 'Radio', 'Television', 'Internet/facebook', 'Transporte', 'Pegado de afiches'],
+    facilitadores: ['Honorarios', 'Viaticos', 'Hospedaje', 'Transporte'],
+    material: ['Escritorio', 'Fotocopias', 'Adicional para clases', 'Transporte'],
+    otros: ['Devolucion inscripcion'],
+
+    //ADMINISTRATIVA
+    oficina: ['Alquiler', 'Expensas', 'Luz', 'Agua', 'Telefono', 'Celulares', 'Material de escritorio',
+            'Material de limpieza', 'Gastos Movilidades'],
+    rrhhConsultorias: ['Sueldo', 'Anticipos', 'Viaticos', 'Hospedaje', 'Pasajes viajes', 'Finiquito',
+                    'Honorarios Consultorias'],
+    obligaciones: ['Impuestos', 'Patentes', 'AFP', 'Caja de salud', 'Ministerio trabajo', 'FUNDAEMPRESA', 'Auditorias'],
+    equipos: ['Manteniminiento', 'Compra', 'Repuestos'],
+    imprenta: ['Afiches y volantes', 'Folders', 'Tarjetas', 'Boligrafos', 'Tapas', 'Certificados'],
+    fotocopiadora: ['Compra de hojas', 'Compra de toner', 'Compra de anillos', 'Repuestos', 'Mantenimiento'],
+    otrosGastos: ['Alimentacion', 'Periodico', 'Avisos clasificados', 'Transporte, peaje, parqueo', 
+                'Correccion de trabajos', 'Arreglo jardin', 'Mantenimiento oficina', 'Fondo a sucursales'], 
+    extras: ['Varios (Dra/Ing)'],
+  _id: new mongoose.Types.ObjectId,
+  record_date: new Date()
+}
+var _categoriaEgresos = [_categoriaEgresos_1 ]
+//////////////////////////////////////////////////////////////////////////////
 
 function saveData(collection, schema) {
    for (var i = 0; i < collection.length; i++) {
@@ -777,6 +864,7 @@ module.exports = {
      saveData(_cashFlowOffices,db.cashFlowOffices);
      saveData(_modulars, db.modulars);
 
+     saveData(_categoriaEgresos,db.categoriaEgresos);
   },
 
   clearCollections: function () {
@@ -795,5 +883,6 @@ module.exports = {
      clearCollections(db.lists);
      clearCollections(db.cashFlowOffices);
      clearCollections(db.modulars);
+     clearCollections(db.categoriaEgresos);
   }
 };
