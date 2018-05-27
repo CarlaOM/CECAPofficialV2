@@ -276,19 +276,19 @@ router
                         };
                         var lists = new db.lists(list);
                         lists.save(function (err, lists) {
-                          console.log('lista guardada');
                           if (err) { return res.status(400).send(err); }
-                          addInscription(person, req.body.inscription, req.body.eventId,  date.programs, req.body.moduleId,asistencia);//**controlar fecha y modulars*/
+                              console.log('lista guardada');
+                          addInscription(person, req.body.inscription, req.body.eventId,  date.programs, req.body.moduleId,asistencia, lists);//**controlar fecha y modulars*/
                           //addProfile(person, date.programs, req.body.eventId, req.body.moduleId, req.body.inscription, asistencia);
                           //   inscriptionEvent(person, programId, idEvent, moduleId, inscri, asistencia );
                         });
-                  }else{
+                   }else{
                      if (err) return res.status(404).send(err);
                      console.log('La persona ya se inscribio');
-                  }
+                   }
                         //return res.status(200).send(person);
               });
-            function addInscription(person, inscri, idEvent, programId,moduleId, asistencia) {
+            function addInscription(person, inscri, idEvent, programId,moduleId, asistencia, lists) {
               db.events.findOne({ _id: idEvent }, function (err, events) {
                 //console.log(events);
                 db.modules.find({ programs: events.programs }).count().exec(function (err, moduls) {
@@ -321,11 +321,10 @@ router
                                     multi: true
                               }, function (err, events) {
                                     if (err) return res.status(400).send(err);
-                                    //console.log(events);
-                                    // if (events == null) return res.status(404).send();
                                     //return res.status(200).send(person);
+                                    //addListsId(person, programId, idEvent, moduleId, inscri, asistencia, lists);
+                                    addProfile(person, programId, idEvent, moduleId, inscri, asistencia );
                      });
-                  addProfile(person, programId, idEvent, moduleId, inscri, asistencia );
                   });//fin module
                 });//fin Event
             }
@@ -382,20 +381,20 @@ router
                                     
                               }else{
                                  console.log(moduls[i]._id);
-                                 var modular = {
-                                    amount:null,
-                                    assist: false, //cambio
-                                    persons:person._id,//a la persona que pertenece
-                                    profile: profiles[0]._id,
-                                    events: idEvent,
-                                    modules: moduls[i]._id,
-                                    print_certificate: false,
-                                 };
-                              console.log('guardado modulars   '+ i);
-                              console.log('el ID de PERFIL  '+ profiles[0]._id );
-                              var modulares = new db.modulars(modular);
-                              //console.log(modulares);
-                              modulares.save(function (err, modular) {
+                                    var modular = {
+                                          amount:null,
+                                          assist: false, //cambio
+                                          persons:person._id,//a la persona que pertenece
+                                          profile: profiles[0]._id,
+                                          events: idEvent,
+                                          modules: moduls[i]._id,
+                                          print_certificate: false,
+                                    };
+                                    console.log('guardado modulars   '+ i);
+                                    console.log('el ID de PERFIL  '+ profiles[0]._id );
+                                    var modulares = new db.modulars(modular);
+                                    //console.log(modulares);
+                                    modulares.save(function (err, modular) {
                                     try{
                                        //return res.status(200).send(modular);
                                        console.log(i)
@@ -425,17 +424,11 @@ router
                               date: new Date(),
                               amount: inscri.canceled_price,
                            };
-                  
-                        // db.modulars.findOne({ persons: person._id,events: idEvent,  modules: moduleId}, function (err, modulars) {
-                        //       if (err) return res.status(400).send(err);
-                        //       if (modulars == null) return res.status(404).send();
-                        //       console.log(modulars);
-                        // });
                   db.modulars.update(
                         {persons: person._id,events: idEvent,  modules: moduleId },
                         {
                           $set: { 
-                              'amount': amount,
+                              'amount': amount,//'amount.0: amount,'
                               'assist': asistencia   
                           }
                         }
@@ -634,3 +627,16 @@ router
 //     });
 
 module.exports = router;
+// function addListsId(person, programId, idEvent, moduleId, inscri, asistencia, lists){
+                  //       db.events.update({ _id: idEvent },{
+                  //             $push: {
+                  //             inscriptions: inscription
+                  //             }
+                  //       }, {
+                  //             multi: true
+                  //       },function(err, res){
+
+
+                  //       });
+                  // }
+                  // addProfile(person, programId, idEvent, moduleId, inscri, asistencia );
