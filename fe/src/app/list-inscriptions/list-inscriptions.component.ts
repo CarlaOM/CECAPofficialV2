@@ -34,6 +34,9 @@ export class ListInscriptionsComponent implements OnInit {
     this.query();
 
   }
+  imprimir(){
+    window.print();
+  }
   findEventId() {
     this.route.params.subscribe(params => {
        this.eventId = params.id;

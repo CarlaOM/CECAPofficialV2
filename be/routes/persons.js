@@ -1,6 +1,7 @@
 var express = require('express');
 var db = require('../models/db');
 var router = express.Router();
+var mongoose = require('mongoose');
 ////////////////////////////////
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
@@ -51,41 +52,86 @@ router
       return res.status(200).send(person);
     });
   })
-  ///////////////////////////////////
-  .get('/:id', function (req, res) {
-    db.events.findOne({ _id: req.params.id }, function (err, event) {
-      if (err) return res.status(400).send(err);
-      if (event == null) return res.status(404).send();
-      // return res.status(200).send(event);
-      getProgram(event);
-    });
-    function getProgram(event) {
-      db.programs.findOne({ _id: event.programs }, { name: 1 }, function (err, program) {
-        if (err) return res.status(400).send(err);
-        console.log(program)
-        event.name = program.name;
-        // return res.status(200).send(event);
-        var persons = event.inscriptions.map(i => i.person);
-        getPerson(persons, event);
-      });
-    }
-    function getPerson(persons, event) {
-      db.persons.find({ _id: { $in: persons } }, function (err, persons) {
-        if (err) return res.status(400).send(err);
-        // console.log(persons)
-        event.inscriptions.forEach(i => {
-          persons.forEach(person => {
-            if (JSON.stringify(i.person) == JSON.stringify(person._id)) {
-              i.persons = person.first_name + ' ' + person.last_name;
-            }
-          });
-        });
-        // console.log(event);
-        return res.status(200).send(event);
-      });
-    }
-
+  .get('/programs/:id', function (req, res) {
+    db.persons.aggregate([
+      { $match: { _id: mongoose.Types.ObjectId(req.params.id) } },
+      {
+        $lookup:
+          {
+            from: "programs",
+            localField: "profile.programs",    // field in the orders collection
+            foreignField: "_id",  // field in the items collection
+            as: "programDetails"
+          }
+      }
+    ]).exec(function (err, person) {
+      if (err) return res.status(404).send(err)
+      return res.status(200).send(person[0]);
+    })
   })
+  .post('/descriptionProfile/:id', function (req, res) {
+    db.persons.aggregate([
+      { $match: { _id: mongoose.Types.ObjectId(req.params.id) } },
+      { $project: { profile: 1 } },
+      { $unwind: '$profile' },
+      { $match: { 'profile._id': mongoose.Types.ObjectId(req.body.profileId) } },
+      {
+        $lookup: {
+          from: "modulars",
+          let: { person_id: "$_id", person_profile: "$profile._id" },
+          pipeline: [{
+            $match: {
+              $expr: {
+                $and: [
+                  { $eq: ["$persons", "$$person_id"] },
+                  { $gte: ["$profile", "$$person_profile"] }]
+              }
+            }
+          }],
+          as: "modulars"
+        }
+      }
+    ]).exec(function (err, person) {
+      if (err) return res.status(404).send(err);
+      console.log(person[0])
+      return res.status(200).send(person[0]);
+    })
+  })
+  ///////////////////////////////////
+  // .get('/:id', function (req, res) {
+  //   db.events.findOne({ _id: req.params.id }, function (err, event) {
+  //     if (err) return res.status(400).send(err);
+  //     if (event == null) return res.status(404).send();
+  //     // return res.status(200).send(event);
+  //     getProgram(event);
+  //   });
+  //   function getProgram(event) {
+  //     db.programs.findOne({ _id: event.programs }, { name: 1 }, function (err, program) {
+  //       if (err) return res.status(400).send(err);
+  //       console.log(program)
+  //       event.name = program.name;
+  //       // return res.status(200).send(event);
+  //       var persons = event.inscriptions.map(i => i.person);
+  //       getPerson(persons, event);
+  //     });
+  //   }
+  //   function getPerson(persons, event) {
+  //     db.persons.find({ _id: { $in: persons } }, function (err, persons) {
+  //       if (err) return res.status(400).send(err);
+  //       // console.log(persons)
+  //       event.inscriptions.forEach(i => {
+  //         persons.forEach(person => {
+  //           if (JSON.stringify(i.person) == JSON.stringify(person._id)) {
+  //             i.persons = person.first_name + ' ' + person.last_name;
+  //           }
+  //         });
+  //       });
+  //       // console.log(event);
+  //       return res.status(200).send(event);
+  //     });
+  //   }
+
+  // })
   .get('/listPersons/:id', function (req, res) {
     db.events.findOne({ _id: req.params.id }, { inscriptions: 1 }, function (err, event) {
       if (err) return res.status(400).send(err);
@@ -326,6 +372,36 @@ router
     //       });
     //       //	if (off.nModified == 0) return res.status(406).send();
     //    });
+  })
+  .put('/finalWork/:id', function (req, res) {
+    console.log(req.body);
+    //   final_work: {
+    //     date_start: Date,
+    //     name: String, // nombre del trabajo final
+    //     origin: String,
+    //     facilitator: ObjectId,
+    //     revisions: [{
+    //        state: Number, // 9 posibles estados
+    //        observations: String,
+    //        date_review: Date,
+    //     }],
+    //     date_end: Date,
+    //     empastado: Boolean,
+    //     copy_1: Boolean,
+    //     copy_2: Boolean,
+    //     form: Boolean,
+    //     certificate: Boolean,
+    //     letter_review: Boolean,
+    //     company_certificate: Boolean
+    //  },
+    db.persons.update({ _id: req.params.id, 'profile._id': req.body.profileId },
+      {
+        $set: {//Universitario
+          'profile.$.finalWork': req.body.finalWork,
+        }
+      }).exec(function (err, off) {
+        if (err) return res.status(400).send(err);
+      });
   })
 
   .delete('/:id', function (req, res) {

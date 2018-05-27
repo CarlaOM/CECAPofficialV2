@@ -13,6 +13,7 @@ export class DetailsComponent implements OnInit {
   public profileId;
   public personId;
   public program;
+  public programName;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,7 +23,7 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.queryProfilePersonId();
-    this.findPP();
+    this.findProgramPerson();
   }
   queryProfilePersonId(){
     this.route.params.subscribe(params => {
@@ -31,12 +32,13 @@ export class DetailsComponent implements OnInit {
       this.personId = arrayIds[1];
     });
   }
-  findPP(){
+  findProgramPerson(){
     console.log(this.profileId + ' este es el ID del perfil')
     console.log(this.personId + ' este es el ID de persona')
-    this._peticionesService.getProfilePerson(this.personId, this.profileId,).subscribe(
+  
+    this._peticionesService.postPersonProgramDetails(this.personId, this.profileId,).subscribe(
       result => {
-         this.program = result;
+        //  this.program = result;
          console.log(result)
         //  this.programPerson = this.person.profile.programs;
         //  console.log(this.programPerson)
