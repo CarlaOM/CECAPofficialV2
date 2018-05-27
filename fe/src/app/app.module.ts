@@ -94,6 +94,7 @@ import { FinalWorkComponent } from './event/final-work/final-work.component';
 import { AddFinalWorkComponent } from './event/final-work/add-final-work/add-final-work.component';
 import { AccountsReceivableComponent } from './accounts-receivable/accounts-receivable.component';
 import { AccountsModularsComponent } from './accounts-modulars/accounts-modulars.component';
+import { ControlPagoComponent } from './event/control-pago/control-pago.component';
 
 @NgModule({
   declarations: [
@@ -167,6 +168,7 @@ import { AccountsModularsComponent } from './accounts-modulars/accounts-modulars
     OfficesCashComponent,
     AsistenciaComponent,
     InscriptionComponent,
+    ControlPagoComponent,
     DetailsComponent,
     ImportFromExcelComponent,
     ListRequirementsComponent,

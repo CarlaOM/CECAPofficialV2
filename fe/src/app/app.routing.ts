@@ -56,6 +56,7 @@ import { OfficesCashComponent } from "./offices-cash/offices-cash.component";
 //import { AlertComponent } from './events/alert/alert.component';
 import { AsistenciaComponent } from './event/asistencia/asistencia.component';
 import { InscriptionComponent } from './event/inscription/inscription.component';
+import { ControlPagoComponent } from './event/control-pago/control-pago.component';
 import { AccountsModularsComponent } from './accounts-modulars/accounts-modulars.component';
 import { ImportFromExcelComponent } from './import-from-excel/import-from-excel.component';
 
@@ -118,6 +119,7 @@ const appRoutes: Routes = [
          { path: 'pendientes/info/:id', component: InfoPendingCashComponent },
          { path: 'officesCash', component: OfficesCashComponent },
          { path: 'inscription/:id', component: InscriptionComponent },
+         { path: 'event/controPago/:id', component: ControlPagoComponent },
          { path: 'accountsModulars/:id', component: AccountsModularsComponent },
          { path: 'importFromExcel', component: ImportFromExcelComponent },
       ]

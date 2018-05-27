@@ -36,7 +36,7 @@ router
       if (events) {
         db.modules.find({ programs: events.programs }, function (err, moduls) {
           if (err) { return res.status(400).send(err); }
-          console.log(moduls);
+          //console.log(moduls);
           return res.status(200).send(moduls);
 
         });//F module
