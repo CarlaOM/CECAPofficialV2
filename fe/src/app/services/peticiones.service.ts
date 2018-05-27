@@ -389,7 +389,7 @@ export class PeticionesService {
     let body = JSON.stringify(ObjId);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.post(this.url + 'modulars/getAsistencia', body, { headers: headers }).map((res: Response) => res);
- 
+  }
 
   addFinalWork(personId, final) {
     let body = JSON.stringify(final);
