@@ -31,6 +31,10 @@ export class EgresoComponent implements OnInit {
   public catEspecifica;
   public dimSuc = " ";
   public dimEvent = " ";
+
+  public nomSucursal;
+  public suc;
+
   constructor(
     private _peticionesService: PeticionesService,
     private router: Router,
@@ -42,22 +46,24 @@ export class EgresoComponent implements OnInit {
 
   onSubmit() {
     console.log("entra");
+    // this.nomSucursal = this.egresoSucursal.name;
+    // console.log(this.nomSucursal);
     this.submitted = true;
-    if(this.egresoSucursal == 'Santa Cruz'){
-      this.dimSuc = 'SC';
-    }
-    if(this.egresoSucursal == 'Cochabamba'){
-      this.dimSuc = 'C';
-    }
-    if(this.egresoSucursal == 'Sucre'){
-      this.dimSuc = 'S';
-    }
-    if(this.egresoSucursal == 'La Paz'){
-      this.dimSuc = 'L';
-    }
-    if(this.egresoSucursal == 'Tarija'){
-      this.dimSuc = 'T';
-    }
+    // if(this.egresoSucursal == 'Santa Cruz'){
+    //   this.dimSuc = 'SC';
+    // }
+    // if(this.egresoSucursal == 'Cochabamba'){
+    //   this.dimSuc = 'C';
+    // }
+    // if(this.egresoSucursal == 'Sucre'){
+    //   this.dimSuc = 'S';
+    // }
+    // if(this.egresoSucursal == 'La Paz'){
+    //   this.dimSuc = 'L';
+    // }
+    // if(this.egresoSucursal == 'Tarija'){
+    //   this.dimSuc = 'T';
+    // }
     if(this.egresoEvent == 'Seguridad Industrial'){
       this.dimEvent = 'H';
     }
@@ -82,19 +88,34 @@ export class EgresoComponent implements OnInit {
     if(this.egresoEvent == 'Talleres'){
       this.dimEvent = 'T';
     }
+    // this._peticionesService.getSucursal(this.egresoSucursal).subscribe(
+    //   response => {
+    //   this.suc = response;
+    //   this.nomSucursal = this.suc.name;
+    //   console.log(this.nomSucursal)
+    //   console.log(this.suc);
+    //   },
+    //   error => {
+    //     var errorMessage = <any>error;
+    //     console.log(errorMessage);
+    //     alert('Error sucursal');
+    //   });
     var inic;
+    var coma = ',';
     if(this.areaSelected == 'P' || this.areaSelected == 'F'){
-      inic = this.dimSuc.concat(this.areaSelected);
+      inic = this.egresoSucursal.concat(coma);
+      inic = inic.concat(this.areaSelected)
       inic = inic.concat(this.catGeneral);
       inic = inic.concat(this.catEspecifica);
       inic = inic.concat(this.dimEvent);
     }else{
-      inic = this.dimSuc.concat(this.areaSelected);
+      inic = this.egresoSucursal.concat(coma);
+      inic = inic.concat(this.areaSelected)
       inic = inic.concat(this.catGeneral2);
       inic = inic.concat(this.catEspecifica);
 
     }
-    console.log(inic);
+    
     // this.egreso.title=this.egresoTitulo;
     // this.egreso.description = this.egresoDescripcion;
     this.egreso.description = inic;    
@@ -131,6 +152,9 @@ export class EgresoComponent implements OnInit {
         })
       })
     })
+  }
+  idSuc(idSucur){
+    console.log(idSucur);
   }
   captArea(){
     if(this.areaSelected == 'P' || this.areaSelected == 'F'){
