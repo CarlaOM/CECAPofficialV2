@@ -14,6 +14,10 @@
                <a class="btn btn-info" [routerLink]="['/home/accountsModulars/'+event?._id]">
                   <i class="fa fa-book"></i>Reportes Modulares</a>
             </li>
+            <!-- <li>
+                  <a class="btn btn-primary" [routerLink]="['/home/inscription/'+event?._id]">
+                     <i class="glyphicon glyphicon-usd"></i>Control</a>
+               </li> -->
             <!-- <li><app-control-asistance></app-control-asistance></li> -->
          </ol>
       </div>
@@ -76,6 +80,7 @@
                   <!-- <app-editPerson [editPerson]="event"></app-editPerson> -->
                   <a class="btn btn-warning" (click)="edit(i.persons)">EDITAR</a>
                   <a class="btn btn-success" (click)="asistence(i.persons)">Asistand</a>
+                  <!-- <a class="btn btn-primary" (click)="control(i.persons)">Control</a> -->
                </td>
             </tr>
          </tbody>
@@ -109,6 +114,10 @@
                            <!-- <app-editPerson [editPerson]="event"></app-editPerson> -->
                            <a class="btn btn-warning" (click)="edit(i.persons)">EDITAR</a>
                            <a class="btn btn-success" (click)="asistence(i.persons)">Asistand</a>
+                           <a class="btn btn-primary" (click)="control(i.persons)">Control</a>
+                           <!-- <a class="btn btn-primary" [routerLink]="['/home/controPago/'+event?._id]">
+                                 <i class="glyphicon glyphicon-usd"></i> Control</a> -->
+                           
                         </td>
                      </tr>
                   </tbody>

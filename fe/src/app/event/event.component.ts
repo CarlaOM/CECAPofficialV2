@@ -113,6 +113,11 @@ export class EventComponent implements OnInit, AfterViewInit {
                   var idEvenPers = _id + '-' + this.eventId;
                   this.router.navigate(['home/event/asistencia', idEvenPers]);
       }
+      control(_id){
+                  this.personId = _id;
+                  var idEvenPers = _id + '-' + this.eventId;
+                  this.router.navigate(['home/event/controPago/', idEvenPers]);
+      }
       marcarAsistencia(idperson){
             let personEventModule={}as PersonEventModule;
             personEventModule.personId=idperson;

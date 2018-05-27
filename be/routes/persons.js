@@ -67,8 +67,49 @@ router
     ]).exec(function (err, person) {
       if (err) return res.status(404).send(err)
       return res.status(200).send(person[0]);
-    })
+    });
   })
+  /////////////////////////////////////////////////////////////////7
+  .get('/inscriptionPerson/:id', function(req, res){
+    var arrayIds = req.params.id.split('-');
+      this.personId = arrayIds[0];
+      this.eventId = arrayIds[1];
+      console.log(this.eventId);
+      console.log(this.personId);
+      db.events.aggregate([
+        { $match: { _id: mongoose.Types.ObjectId(eventId) } },
+        { $project: { inscriptions: 1 } },
+        { $unwind: '$inscriptions' },
+        { $match: { 'inscriptions.persons': { $eq: mongoose.Types.ObjectId(personId) } } },
+        //{ $group: { _id: { persons: '$inscriptions.persons' }, total: { $sum: 1 } } }
+      ], function (err, events) {
+        if (err) return res.status(400).send(err);
+        console.log(events);
+        console.log('aqui el inscription de persona');
+        return res.status(200).send(events);
+        // for(var i =0 ; i<=events.length-1; i++){
+        //   if(events[i].persons == personId){
+        //     return res.status(200).send(events[i]);
+        //     console.log(events[i]);
+        //     i = events.length+1;
+        //   }
+        // }
+      });
+  })
+  .post('/controlPago',function(req, res){
+    console.log(req.body.moduleId);
+    var pago = req.body.inscription.canceled_price;
+
+    db.events.update({ _id: req.body.eventId, 'inscriptions.persons': req.body.persona._id },
+    {
+      $set: { 'inscriptions.$.canceled_price': pago }
+     }).exec(function (err, event) {
+      if (err) return res.status(400).send(err);
+      console.log(event);
+      return res.status(200).send(event);
+    });                     
+  })
+  ////////////////////////////////////////////////////
   .post('/descriptionProfile/:id', function (req, res) {
     db.persons.aggregate([
       { $match: { _id: mongoose.Types.ObjectId(req.params.id) } },

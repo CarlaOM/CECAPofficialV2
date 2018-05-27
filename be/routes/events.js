@@ -684,3 +684,16 @@ router
 //     });
 
 module.exports = router;
+// function addListsId(person, programId, idEvent, moduleId, inscri, asistencia, lists){
+                  //       db.events.update({ _id: idEvent },{
+                  //             $push: {
+                  //             inscriptions: inscription
+                  //             }
+                  //       }, {
+                  //             multi: true
+                  //       },function(err, res){
+
+
+                  //       });
+                  // }
+                  // addProfile(person, programId, idEvent, moduleId, inscri, asistencia );
