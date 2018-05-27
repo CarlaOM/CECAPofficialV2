@@ -1,0 +1,44 @@
+<div class="content-wrapper">
+  <section class="content">
+     <!--<div>
+        <ol class="breadcrumb">
+           <li>
+              <a class="btn btn-primary" [routerLink]="['/home/inscription/'+event._id]">
+                 <i class="fa fa-book"></i>Inscribir Persona</a>
+           </li>
+        </ol>
+     </div>-->
+     <div>
+        <h3>Reportes modulares del evento: {{event?.name}}</h3>
+     </div>
+     <div class="btn-group" data-toggle="buttons">
+        <label *ngFor="let m of modules" class="btn btn-success form-check-label" (click)="filterModular(m._id)">
+          <input class="form-check-input" type="radio" autocomplete="off"> {{m.name}}
+        </label>
+      </div>
+     <table class="table table-hover">
+        <thead>
+           <tr>
+              <th>Ingresos</th>
+              <th>Egresos</th>
+              <th>Total de Asistencias</th>
+              <th>Cantidad de Estudiantes</th>
+              <th>Cantidad de Profesionales</th>
+              <th>Cantidad de Particulares</th>
+              <!--<th colspan="2">Actualizar</th>-->
+           </tr>
+        </thead>
+        <tbody>
+           <tr *ngFor="let i of states">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+           </tr>
+        </tbody>
+     </table>
+  </section>
+  <router-outlet></router-outlet>
+</div>

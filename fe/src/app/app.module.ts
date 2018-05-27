@@ -91,6 +91,9 @@ import { ImportFromExcelComponent } from './import-from-excel/import-from-excel.
 import { ListRequirementsComponent } from './list-requirements/list-requirements.component';
 import { ListInscriptionsComponent } from './list-inscriptions/list-inscriptions.component';
 import { FinalWorkComponent } from './event/final-work/final-work.component';
+import { AddFinalWorkComponent } from './event/final-work/add-final-work/add-final-work.component';
+import { AccountsReceivableComponent } from './accounts-receivable/accounts-receivable.component';
+import { AccountsModularsComponent } from './accounts-modulars/accounts-modulars.component';
 
 @NgModule({
   declarations: [
@@ -168,7 +171,10 @@ import { FinalWorkComponent } from './event/final-work/final-work.component';
     ImportFromExcelComponent,
     ListRequirementsComponent,
     ListInscriptionsComponent,
-    FinalWorkComponent
+    FinalWorkComponent,
+    AddFinalWorkComponent,
+    AccountsReceivableComponent,
+    AccountsModularsComponent,
 
   ],
   imports: [
