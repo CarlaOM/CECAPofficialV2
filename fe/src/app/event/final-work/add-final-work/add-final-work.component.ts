@@ -17,7 +17,7 @@ export class AddFinalWorkComponent implements OnInit {
     private _peticionesService: PeticionesService,
     private route: ActivatedRoute,
     private router: Router
-  ) { 
+  ) {
     this.model = new FinalWork(null, "", "", "");
   }
 
@@ -26,35 +26,36 @@ export class AddFinalWorkComponent implements OnInit {
   }
   queryFacilitators() {
     this._peticionesService.getPrograms().subscribe(response => {
-       this.facilitators = response;
-       console.log(this.facilitators);
+      this.facilitators = response;
+      console.log(this.facilitators);
     },
-       error => {
-          console.log(<any>error);
-       });
- }
- cancel() {
+      error => {
+        console.log(<any>error);
+      });
+  }
+  cancel() {
     this.router.navigate(['home/finalWork']);
- }
- onSubmit() {
+  }
+  onSubmit() {
     console.log(this.model);
- }
- save() {
+  }
+  save() {
     if ((this.model.name == '') || (this.model.origin == '')) {
-       window.alert("Asegurese de llenar todos los campos")
+      window.alert("Asegurese de llenar todos los campos")
     } else {
-       if (this.model.date_start < new Date()) {
-          window.alert("Asegurese que la fecha sea mayor a la de hoy")
-       } else {
-          console.log(this.model);
-          this._peticionesService.addFinalWork(this.model).subscribe(response => {
-             //this.messageEvent.emit();
-             //this.close.nativeElement.click();
-             this.router.navigate(['/home/events']);
-             alert("El evento se creo con exito");
-          });
+      if (this.model.date_start < new Date()) {
+        window.alert("Asegurese que la fecha sea mayor a la de hoy")
+      } else {
+        console.log(this.model);
+        // envia el id de la persona q recibes como parametro al entrar a esta ventana, y el finalwork q llenaste en la vista
+        this._peticionesService.addFinalWork('this.personId', FinalWork).subscribe(response => {
+          //this.messageEvent.emit();
+          //this.close.nativeElement.click();
+          this.router.navigate(['/home/events']);
+          alert("El evento se creo con exito");
+        });
 
-       }
+      }
     }
- }
+  }
 }

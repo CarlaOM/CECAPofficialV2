@@ -55,8 +55,6 @@ router
   .get('/programs/:id', function (req, res) {
     db.persons.aggregate([
       { $match: { _id: mongoose.Types.ObjectId(req.params.id) } },
-      // { $unwind: '$profile' },
-      // { $match: { 'profile.programs': { $eq: req.body.filter } } },
       {
         $lookup:
           {
@@ -67,7 +65,35 @@ router
           }
       }
     ]).exec(function (err, person) {
-      if(err) return res.status(404).send(err)
+      if (err) return res.status(404).send(err)
+      return res.status(200).send(person[0]);
+    })
+  })
+  .post('/descriptionProfile/:id', function (req, res) {
+    db.persons.aggregate([
+      { $match: { _id: mongoose.Types.ObjectId(req.params.id) } },
+      { $project: { profile: 1 } },
+      { $unwind: '$profile' },
+      { $match: { 'profile._id': mongoose.Types.ObjectId(req.body.profileId) } },
+      {
+        $lookup: {
+          from: "modulars",
+          let: { person_id: "$_id", person_profile: "$profile._id" },
+          pipeline: [{
+            $match: {
+              $expr: {
+                $and: [
+                  { $eq: ["$persons", "$$person_id"] },
+                  { $gte: ["$profile", "$$person_profile"] }]
+              }
+            }
+          }],
+          as: "modulars"
+        }
+      }
+    ]).exec(function (err, person) {
+      if (err) return res.status(404).send(err);
+      console.log(person[0])
       return res.status(200).send(person[0]);
     })
   })
@@ -335,37 +361,55 @@ router
       }).exec(function (err, off) {
         if (err) return res.status(400).send(err);
       })
-      .put('/finalWork', function (req, res) {
-        console.log(req.body);
-        // db.persons.update({ _id: req.params.id },
-        //   {
-        //     $set: {//Universitario
-        //       'descOcupation.carrera': req.body.carrera,
-        //       'descOcupation.universidad': req.body.universidad,
-        //     }
-        //   }).exec(function (err, off) {
-        //     if (err) return res.status(400).send(err);
-        })
-
-        // db.events.update({ _id: req.body.name, 'inscriptions.person': req.body.person },
-        //    {
-        //       $set: { 'inscriptions.$.state': req.body.state, 'inscriptions.$.description': req.body.description }
-        //    }).exec(function (err, off) {
-        //       if (err) return res.status(400).send(err);
-        //       db.events.find({ _id: req.body.name, _id: { $in: req.body.person } }, function (err, event) {
-        //          if (err) return res.status(401).send(err);
-        //          return res.status(201).send(event);
-        //       });
-        //       //	if (off.nModified == 0) return res.status(406).send();
-        //    });
-      })
-
-      .delete('/:id', function (req, res) {
-        db.persons.remove({ _id: req.params.id }, function (err, person) {
-          if (err) return res.status(400).send(err);
-
-          return res.status(200).send(person);
-        });
+    // db.events.update({ _id: req.body.name, 'inscriptions.person': req.body.person },
+    //    {
+    //       $set: { 'inscriptions.$.state': req.body.state, 'inscriptions.$.description': req.body.description }
+    //    }).exec(function (err, off) {
+    //       if (err) return res.status(400).send(err);
+    //       db.events.find({ _id: req.body.name, _id: { $in: req.body.person } }, function (err, event) {
+    //          if (err) return res.status(401).send(err);
+    //          return res.status(201).send(event);
+    //       });
+    //       //	if (off.nModified == 0) return res.status(406).send();
+    //    });
+  })
+  .put('/finalWork/:id', function (req, res) {
+    console.log(req.body);
+    //   final_work: {
+    //     date_start: Date,
+    //     name: String, // nombre del trabajo final
+    //     origin: String,
+    //     facilitator: ObjectId,
+    //     revisions: [{
+    //        state: Number, // 9 posibles estados
+    //        observations: String,
+    //        date_review: Date,
+    //     }],
+    //     date_end: Date,
+    //     empastado: Boolean,
+    //     copy_1: Boolean,
+    //     copy_2: Boolean,
+    //     form: Boolean,
+    //     certificate: Boolean,
+    //     letter_review: Boolean,
+    //     company_certificate: Boolean
+    //  },
+    db.persons.update({ _id: req.params.id, 'profile._id': req.body.profileId },
+      {
+        $set: {//Universitario
+          'profile.$.finalWork': req.body.finalWork,
+        }
+      }).exec(function (err, off) {
+        if (err) return res.status(400).send(err);
       });
-    
-    module.exports = router;
+  })
+
+  .delete('/:id', function (req, res) {
+    db.persons.remove({ _id: req.params.id }, function (err, person) {
+      if (err) return res.status(400).send(err);
+
+      return res.status(200).send(person);
+    });
+  });
+
+module.exports = router;
