@@ -370,4 +370,18 @@ export class PeticionesService {
     // .catch((e) => Observable.throw(e))
     // .subscribe();
   }
+  marcarAsistencia(ObjId){
+
+    let body = JSON.stringify(ObjId);
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return this._http.post(this.url + 'modulars/asistencia', body, { headers: headers }).map((res: Response) => res);
+ 
+  }
+  getAsistenciaOfPerson(ObjId){
+
+    let body = JSON.stringify(ObjId);
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return this._http.post(this.url + 'modulars/getAsistencia', body, { headers: headers }).map((res: Response) => res);
+ 
+  }
 }
