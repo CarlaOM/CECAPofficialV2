@@ -9,7 +9,7 @@
       <br>
       <div class="panel panel-info">
         <div class="panel-heading">
-          <h3 class="panel-title"><strong>Programa</strong></h3>
+          <h3 class="panel-title"><strong>{{program?.name}}</strong></h3>
         </div>
         <div class="panel-body">
           <div class="row">
@@ -17,26 +17,29 @@
                 <strong>Asistencia por modulos:</strong>
               <table class="table table-user-information">
                 <tbody>
-                  <tr>
-                    <td>Modulo</td>
-                    <td></td>
+                  <tr *ngFor="let i of modulars">
+                    <td>{{i.modules}}</td>
+                    <td *ngIf="i.assist==true">Asistio</td>
+                    <td *ngIf="i.assist==false">No asistio</td>
+                    <td *ngIf="i.print_certificate==true">Certificado impreso</td>
+                    <td *ngIf="i.print_certificate==false">Falta imprimir certificado</td>
                   </tr>
                 </tbody>
               </table>
-            <strong>Pagos:</strong>
+            <strong>Detalles de pago:</strong>
               <table class="table table-user-information">
                 <tbody>
                   <tr>
                     <td>Costo total</td>
-                    <!--<td>{{program?.total_price}}</td>-->                                                                                        
+                    <td>{{profile?.total_price}}</td>                                                                                       
                   </tr>
                   <tr>
                       <td>Monto cancelado</td>                                        
-                      <!--<td>{{program?.payed}}</td>-->                                      
+                      <td>{{profile?.payed}}</td>                                      
                   </tr>                  
                   <tr> 
                       <td>Deuda</td>                                        
-                      <!--<td>{{program?.debt}}</td>-->
+                      <td>{{profile?.debt}}</td>
                   </tr>                                  
                 </tbody>
               </table>
@@ -45,29 +48,54 @@
                 <tbody>
                   <tr>
                     <td>Fotografias</td>
-                    <td></td>
+                    <td *ngIf="requirements?.photograpy==true">Entregado</td>
+                    <td *ngIf="requirements?.photograpy==false">No entrego</td>
                   </tr>
                   <tr>
                     <td>Fotocopia de carnet de identidad</td>
-                    <td></td>
+                    <td *ngIf="requirements?.photocopy_ci==true">Entregado</td>                    
+                    <td *ngIf="requirements?.photocopy_ci==false">No entrego</td>                    
                   </tr>
                   <tr>
                     <td>Fotocopia de titulo profesional</td>
-                    <td></td>
+                    <td *ngIf="requirements?.photocopy_titule==true">Entregado</td>                                        
+                    <td *ngIf="requirements?.photocopy_titule==false">No entrego</td>                                        
                   </tr>
                 </tbody>
               </table>
-            <strong>Solicitud de diploma y presentacion de proyecto:</strong>
+            <strong>Trabajo Final y Entrega de Diploma:</strong>
               <table class="table table-user-information">
                 <tbody>
-                  <tr *ngFor="let i of final_work">
-                    <td>Trabajo Final</td>
-                    <td>{{i.stade}}</td>
-                    <td>{{i.observations}}</td>
+                  <tr>
+                    <td>
+                      <a class="btn btn-success" (click)="viewProfile(i.persons)">Trabajo Final</a>
+                    </td>
                   </tr>
                   <tr>
-                    <td>Diploma impreso</td>
-                    <!--<td>{{i.print_diploma}}</td>-->
+                    <td>Fecha de inicio</td>
+                    <td>{{finalWork?.date_start | date}}</td>
+                  </tr>
+                  <tr>
+                    <td>Nombre del trabajo final</td>
+                    <td>{{finalWork?.name}}</td>
+                  </tr>
+                  <tr>
+                    <td>Procedencia</td>
+                    <td>{{finalWork?.origin}}</td>
+                  </tr>
+                  <tr>
+                      <td>Facilitador asignado</td>
+                      <td>{{facilitator?.name}}</td>
+                    </tr>
+                  <tr>
+                  <tr>
+                    <td>Fecha final</td>
+                    <td>{{finalWork?.date_end | date}}</td>
+                  </tr>
+                  <tr>
+                    <td>Entrega de Diploma</td>
+                    <td *ngIf="profile?.print_diploma==true">Impreso</td>
+                    <td *ngIf="profile?.print_diploma==false">Falta imprimir </td>
                   </tr>
                 </tbody>
               </table>
