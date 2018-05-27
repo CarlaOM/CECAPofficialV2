@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { PeticionesService } from '../services/peticiones.service';
-import { Identity } from '../services/global';
 
 @Component({
   selector: 'app-accounts-modulars',
@@ -11,7 +10,8 @@ import { Identity } from '../services/global';
 })
 export class AccountsModularsComponent implements OnInit {
   public eventId;
-  public modulos;
+  public event;
+  public modules;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,29 +20,35 @@ export class AccountsModularsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(Identity._id); 
-      this.queryEventId();
-      this.queryModulos();
-  }
-  queryEventId() {
-    this.route.params.subscribe(params => {
-       this.eventId = params.id;
-       // console.log(this.eventId)
-    });
+    this.queryModulos();
   }
   queryModulos(){
     this.route.params.subscribe(params => {
         this.eventId = params.id;
         // console.log(this.eventId)
     });
-    this._peticionesService.getEventModuls(this.eventId).subscribe(//consulta para obt todo modulos
+    this._peticionesService.getEventModuls(this.eventId).subscribe(
       result => {
-        this.modulos = result;
-        console.log(this.modulos);
+        this.modules = result;
+        console.log(this.modules);
+
+        this.queryEvent();
         },
         error => {
-          var errorMessage = <any>error;
-          console.log(errorMessage);
+          console.log(<any>error);
         });
   }
+  queryEvent() {
+    this._peticionesService.getEvent(this.eventId).subscribe(
+       result => {
+          this.event = result;
+          // console.log(this.event);
+       },
+       error => {
+          console.log(<any>error);
+       });
+  }
+  filterModular(modular_id){
+    console.log(modular_id);
+ }
 }

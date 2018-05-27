@@ -33,10 +33,8 @@ app.get('/', function (req, res) {
 app
    .use('/users', require('./routes/users'))
    .use('/events', require('./routes/events'))
-   // .use('/registers', require('./routes/registers'))
    .use('/carteras', require('./routes/carteras'))
    .use('/facilitators', require('./routes/facilitators'))
-   
    .use('/persons', require('./routes/persons'))
    .use('/programs', require('./routes/programs'))
    .use('/modules', require('./routes/modules'))
@@ -48,6 +46,7 @@ app
    .use('/correlatives', require('./routes/correlatives'))
    .use('/cajaSucursal',require('./routes/cajaSucursal'))
    .use('/categoriaEgresos',require('./routes/categoriaEgresos'))
+   .use('/modulars',require('./routes/modulars'))
    .use(function (err, req, res, next) { 
       console.error(err.stack);
       return res.status(err.status || 500).send('Not Found');
