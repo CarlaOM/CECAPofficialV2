@@ -20,9 +20,9 @@
                     </span>
                  </div> -->
                 <div class="form-group col-sm-4" style="text-align: right">
-                   <label for="deu" class="control-label" style="text-align: right">Total Costo Evento: 500</label>
-                    <label for="can" class="control-label" style="text-align: right">Total Cancelado : 500</label>
-                    <label for="deu" class="control-label" style="text-align: right">Deuda           : 500</label>
+                   <label for="deu" class="control-label" style="text-align: right">Total Costo Evento: {{inscriPer.inscriptions.price_event}}</label>
+                    <label for="can" class="control-label" style="text-align: right">Total Cancelado : {{inscriPer.inscriptions.canceled_price}}</label>
+                    <label for="deu" class="control-label" style="text-align: right">Deuda           : {{inscriPer.inscriptions.price_event - inscriPer.inscriptions.canceled_price }}</label>
                  </div>
               </div>
               <!-- <div class="form-group col-sm-8">

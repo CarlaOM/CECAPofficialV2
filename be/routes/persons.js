@@ -80,8 +80,8 @@ router
         { $match: { _id: mongoose.Types.ObjectId(eventId) } },
         { $project: { inscriptions: 1 } },
         { $unwind: '$inscriptions' },
-        //{ $match: { 'inscriptions.persons': { $eq: personId } } },
-        //{ $group: { _id: { persons: '$inscriptions' } } }
+        { $match: { 'inscriptions.persons': { $eq: mongoose.Types.ObjectId(personId) } } },
+        //{ $group: { _id: { persons: '$inscriptions.persons' }, total: { $sum: 1 } } }
       ], function (err, events) {
         if (err) return res.status(400).send(err);
         console.log(events);
@@ -99,7 +99,7 @@ router
   .post('/controlPago',function(req, res){
     console.log(req.body.moduleId);
     var pago = req.body.inscription.canceled_price;
-    
+
     db.events.update({ _id: req.body.eventId, 'inscriptions.persons': req.body.persona._id },
     {
       $set: { 'inscriptions.$.canceled_price': pago }

@@ -28,6 +28,7 @@ export class ControlPagoComponent implements OnInit {
   public personId;
   public eventId;
   public persona;
+  public inscriPer;
   //public moduleId;
   public ocupSelected;
   public cartera;
@@ -116,8 +117,8 @@ export class ControlPagoComponent implements OnInit {
     var idPersonEvent = this.personId +'-'+ this.eventId;
     this._peticionesService.getInscriptionPerson(idPersonEvent).subscribe(
       result => {
-          var esperado = result;
-          console.log(esperado);;
+          this.inscriPer = result[0];
+          console.log(this.inscriPer);;
       },
       error => {
           var errorMessage = <any>error;
