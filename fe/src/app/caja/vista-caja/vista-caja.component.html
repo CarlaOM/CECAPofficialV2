@@ -24,12 +24,13 @@
             
          </tr>
       </thead>
-      <tbody> 
-         <tr *ngFor="let detalle of detalles">
+      <tbody>
+         
+         <tr  *ngFor="let desc of listaDescripcion; let detalle of detalles">
 
 
-                <td class="">{{detalle.title }}</td>
-                <td class="">{{detalle.description}}</td>
+                <td class="">{{detalle.title}}</td>
+                <td class="">{{desc}} </td>
                 <td class="">{{detalle.receipt}}</td>
                 <td class="">{{detalle.date_detail|date}}</td>
                 <td class="" *ngIf="detalle.input==true; else vacio "> {{detalle.amount}}</td>
