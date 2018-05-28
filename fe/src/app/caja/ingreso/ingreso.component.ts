@@ -90,6 +90,9 @@ export class IngresoComponent implements OnInit {
 
   
   }
+  cancelar(){
+    window.history.back();
+  }
  
 
 }

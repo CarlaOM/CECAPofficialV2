@@ -53,21 +53,21 @@
                                   <input type="number" pattern="[6-7][0-9]{7}" class="form-control" id="cellphone" 
                                   [(ngModel)]="person.cellphone" name="cellphone" #cellphone="ngModel" required />
                                   <span *ngIf="!cellphone.valid && cellphone.touched" class="text-alert">
-                                          *Celular de persona requerido o es invalido.
+                                          *Celular de persona requerido o es inválido.
                                   </span>
                                   <span *ngIf=" cellphone?.pattern && cellphone.touched" class="text-alert">
-                                    *Celular de persona invalido.
+                                    *Celular de persona inválido.
                                   </span>
                           </div>
                           <div class="form-group col-sm-4">
-                              <label for="phone" class="control-label" style="text-align: right">Telefono</label>
+                              <label for="phone" class="control-label" style="text-align: right">Teléfono</label>
                                   <input type="number" patter="[4][0-9]{6}" class="form-control" id="phone" 
                                   [(ngModel)]="person.phone" name="phone" #phone="ngModel" />
                                   <span *ngIf="!phone.valid && phone.touched" class="text-alert">
                                           *Telefono de persona requerido o es invalido.
                                   </span>
                                   <span *ngIf="phone?.pattern && phone.touched" class="text-alert">
-                                    *Telefono de persona es invalido.
+                                    *Teléfono de persona es inválido.
                                 </span>
                           </div>
                       </div>
@@ -118,7 +118,7 @@
                       </div> -->
                       <div class="form-group col-sm-8">
                           <label for="ocupSelect">
-                            <i class="fa fa-tag prefix grey-text"></i>Ocupacion</label>
+                            <i class="fa fa-tag prefix grey-text"></i>Ocupación</label>
                           <select class="form-control" id="ocupSelect" [(ngModel)]="ocupSelected" (change)="captOcupation()"
                                name="ocupSelect" #ocupSelect="ngModel">
                               <option value="estudiante">Estudiante</option>
@@ -159,7 +159,7 @@
                                 <input type="text" pattern="[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" placeholder="Profesion" name="profesion" #profesion="ngModel"
                                  [(ngModel)]="descOcupation.profesion" class="form-control"  /> 
                                  <span *ngIf="!profesion.valid && profesion.touched" class="text-alert">
-                                    <h6>*Profecion de persona requerido.</h6>
+                                    <h6>*Profesión de persona requerido.</h6>
                                </span>
                               </p> 
                               <p *ngIf="ocupSelected == 'profesional'">

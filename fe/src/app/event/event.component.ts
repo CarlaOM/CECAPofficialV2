@@ -131,6 +131,9 @@ export class EventComponent implements OnInit, AfterViewInit {
 
 
       }
+      cancelar(){
+            window.history.back();
+      }
             
       ngAfterViewInit(){}
 

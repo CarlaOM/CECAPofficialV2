@@ -42,6 +42,6 @@ export class AddProgramaComponent implements OnInit {
   }
   query() { }
   cancel() {
-    this.router.navigate(['home/programs']);
+    window.history.back();
   }
 }

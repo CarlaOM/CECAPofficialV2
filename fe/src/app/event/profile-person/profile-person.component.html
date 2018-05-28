@@ -100,7 +100,7 @@
               <strong>Programas Cursados:</strong>
               <table class="table table-user-information">
                 <tbody>
-                  <tr *ngFor="let i of person.profile">
+                  <tr *ngFor="let i of person?.profile">
                     <td><li>{{i.name}}</li></td>
                     <td>
                       <a class="btn btn-primary" (click)="viewDetails(i._id)">Detalles</a>
@@ -154,10 +154,20 @@
                   </tr>-->
                 </tbody>
               </table>
+
+             
             </div>
           </div>
         </div>
       </div>
+
+      <br>
+      
+      <div align="center">
+        <button class="btn btn-primary"  (click)="cancelar()">Cancelar</button>
+      </div>
+      
+
     </div>
   </div>
 </div>

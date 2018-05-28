@@ -58,7 +58,7 @@
               </div>
               <div class="form-group col-sm-8">                  
                   <p *ngIf="areaSelected == 'P' || areaSelected == 'F'">
-                    <label for="general"><i class="grey-text"></i>General</label>
+                    <label for="general" style="font-size: small"><i class="grey-text"></i>General</label>
                     <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
                     [(ngModel)]="catGeneral"> -->
                     <select class="form-control" id="general" [(ngModel)]="catGeneral" (change)="captArea()" name="general" #general="ngModel">
@@ -74,7 +74,7 @@
               
                 
                 <p *ngIf="catGeneral == '1'">
-                  <label>especifica</label>
+                  <label  style="font-size: small">Especifica</label>
                   <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
                   [(ngModel)]="catGeneral"> -->
                   <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
@@ -88,7 +88,7 @@
             
               
               <p *ngIf="catGeneral == '2'">
-                <label>especifica</label>
+                <label  style="font-size: small">Especifica</label>
                 <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
                 [(ngModel)]="catGeneral"> -->
                 <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
@@ -103,7 +103,7 @@
           
             
             <p *ngIf="catGeneral == '3'">
-              <label>especifica</label>
+              <label  style="font-size: small">Especifica</label>
               <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
               [(ngModel)]="catGeneral"> -->
               <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
@@ -119,7 +119,7 @@
        
           
           <p *ngIf="catGeneral == '4'">
-            <label>especifica</label>
+            <label  style="font-size: small">Especifica</label>
             <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
             [(ngModel)]="catGeneral"> -->
             <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
@@ -133,7 +133,7 @@
       
         
         <p *ngIf="catGeneral == '5'">
-          <label>especifica</label>
+          <label  style="font-size: small">Especifica</label>
           <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
           [(ngModel)]="catGeneral"> -->
           <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
@@ -147,7 +147,7 @@
      
         
         <p *ngIf="catGeneral == '6'">
-          <label>especifica</label>
+          <label  style="font-size: small">Especifica</label>
           <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
           [(ngModel)]="catGeneral"> -->
           <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
@@ -156,7 +156,7 @@
           </select>
         </p>
               <p *ngIf="areaSelected == 'A'">
-                <label for="general"><i class="fa grey-text"></i>General</label>
+                <label for="general"  style="font-size: small"><i class="fa grey-text"></i>General</label>
                 <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
                 [(ngModel)]="catGeneral"> -->
                 <select class="form-control" id="general" [(ngModel)]="catGeneral2" (change)="captA()" name="general" #general="ngModel">
@@ -174,7 +174,7 @@
          
               
               <p *ngIf="catGeneral2 == '1' && areaSelected == 'A'">
-                <label>especifica</label>
+                <label  style="font-size: small">Especifica</label>
                 <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
                 [(ngModel)]="catGeneral"> -->
                 <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
@@ -190,7 +190,7 @@
                   </select>
               </p>
               <p *ngIf="catGeneral2 == '2' && areaSelected == 'A'">
-                <label>especifica</label>
+                <label  style="font-size: small">Especifica</label>
                 <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
                 [(ngModel)]="catGeneral"> -->
                 <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
@@ -204,7 +204,7 @@
                   </select>
               </p>
               <p *ngIf="catGeneral2 == '3' && areaSelected == 'A'">
-                <label>especifica</label>
+                <label  style="font-size: small">Especifica</label>
                 <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
                 [(ngModel)]="catGeneral"> -->
                 <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
@@ -218,7 +218,7 @@
                   </select>
               </p>
               <p *ngIf="catGeneral2 == '4' && areaSelected == 'A'">
-                <label>especifica</label>
+                <label  style="font-size: small">Especifica</label>
                 <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
                 [(ngModel)]="catGeneral"> -->
                 <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
@@ -228,7 +228,7 @@
                   </select>
               </p>
               <p *ngIf="catGeneral2 == '5' && areaSelected == 'A'">
-                <label>especifica</label>
+                <label  style="font-size: small">Especifica</label>
                 <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
                 [(ngModel)]="catGeneral"> -->
                 <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
@@ -241,7 +241,7 @@
                   </select>
               </p>
               <p *ngIf="catGeneral2 == '6' && areaSelected == 'A'">
-                <label>especifica</label>
+                <label  style="font-size: small">Especifica</label>
                 <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
                 [(ngModel)]="catGeneral"> -->
                 <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
@@ -253,7 +253,7 @@
                   </select>
               </p>
               <p *ngIf="catGeneral2 == '7' && areaSelected == 'A'">
-                <label>especifica</label>
+                <label  style="font-size: small">Especifica</label>
                 <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
                 [(ngModel)]="catGeneral"> -->
                 <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
@@ -268,13 +268,13 @@
                   </select>
               </p>
               <p *ngIf="catGeneral2 == '8' && areaSelected == 'A'">
-                <label>Especifica</label>
+                <label  style="font-size: small">Especifica</label>
                 <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
                   <option value="1">Varios(Dra/Ing)</option>
                 </select>
               </p>
               <p *ngIf="areaSelected == 'P' || areaSelected == 'F'">
-                <label for="events">Eventos</label>
+                <label for="events"  style="font-size: small">Eventos</label>
                 <select class="form-control" id="events" [(ngModel)]="egresoEvent" name="events" #events="ngModel" required>
                   <option *ngFor="let event of eventos" [value]="event._id">{{event.name}}</option>
                 </select>
