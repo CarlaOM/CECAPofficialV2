@@ -104,12 +104,12 @@ export class ControlPagoComponent implements OnInit {
         result => {
             var esperado = result;
             console.log(esperado);
-            alert('control correcto');
+            alert('Control Correcto');
         },
         error => {
             var errorMessage = <any>error;
             console.log(errorMessage);
-            alert('Error al registrar, Persona ya esta inscrito');
+            alert('Error al guardar, el modulo ya fue electo o pagado');
         }
      );
   }
