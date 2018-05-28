@@ -393,11 +393,16 @@ export class PeticionesService {
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.post(this.url + 'modulars/getAsistencia', body, { headers: headers }).map((res: Response) => res);
   }
-
   addFinalWork(personId, final) {
     let body = JSON.stringify(final);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.put(this.url + 'persons/finalWork/' + personId, body, { headers: headers }).map((res: Response) => res);
+
+  }
+  addReview(personId, rev) {
+    let body = JSON.stringify(rev);
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return this._http.put(this.url + 'persons/review/' + personId, body, { headers: headers }).map((res: Response) => res);
 
   }
   getInscriptionPerson(_id){		

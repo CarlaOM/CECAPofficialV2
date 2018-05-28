@@ -4,6 +4,7 @@ export class FinalWork {
         public name: String, // nombre del trabajo final
         public origin: String,
         public facilitator: String,
+        public profileId: String,
         // public revisions: [String],
         // public date_end: Date,
         // public empastado: Boolean,

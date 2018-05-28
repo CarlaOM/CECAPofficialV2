@@ -68,7 +68,9 @@
                 <tbody>
                   <tr>
                     <td>
-                      <a class="btn btn-success fa fa-plus" (click)="addFinalWork()"> Trabajo Final</a>
+                      <a class="btn btn-success fa fa-plus" (click)="addFinalWork(ppId)"> Trabajo Final</a>
+                        <!-- <a class="btn btn-success" [routerLink]="['/home/finalWork/add'+ personId]">
+                           <i class="fa fa-plus"></i>Trabajo Final</a> -->
                     </td>
                   </tr>
                   <tr>
@@ -89,9 +91,16 @@
                   </tr>
                   <tr>
                     <td>
-                      <a class="btn btn-success fa fa-plus" (click)="addReview()"> Añadir Revision</a>
-                    </td>
+                      <a class="btn btn-success fa fa-plus" (click)="addReview(ppId)"> Añadir Revision</a>
+                    </td> 
                   </tr>
+                <tbody>
+                  <tr *ngFor="let i of reviews">
+                    <td>{{ i.state }}</td>
+                    <td>{{ i.ovservations }}</td>
+                    <td>{{ i.date_review | date}}</td>
+                  </tr>
+                </tbody>
                   <tr>
                     <td>Fecha final</td>
                     <td>{{finalWork?.date_end | date}}</td>
