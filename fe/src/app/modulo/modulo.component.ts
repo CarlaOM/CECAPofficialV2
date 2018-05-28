@@ -55,4 +55,7 @@ export class ModuloComponent implements OnInit {
    addModulo() {
       this.router.navigate(['/home/modulo/add', this.programId]);
    }
+   cancelar(){
+         window.history.back();
+   }
 }

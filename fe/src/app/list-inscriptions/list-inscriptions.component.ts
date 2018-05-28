@@ -104,4 +104,9 @@ export class ListInscriptionsComponent implements OnInit {
       this.states.push(i);
     }
   }
+
+  cancelar(){
+
+    window.history.back();
+  }
 }

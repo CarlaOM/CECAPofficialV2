@@ -118,4 +118,7 @@ export class ProfilePersonComponent implements OnInit {
     var ppId = _id + '-' + this.personId;
     this.router.navigate(['home/detailsProfile', ppId]);
   }
+  cancelar(){
+    window.history.back();
+  }
 }

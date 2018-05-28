@@ -6,7 +6,7 @@
         </h1>
      </section>
   <section class="content">
-        <a class="btn btn-primary a" (click)="addEjecutivo()">registrar ejecutivo</a>
+        <a class="btn btn-primary a" (click)="addEjecutivo()">Registrar Ejecutivo</a>
        
      <table class="table table-hover" >
         <thead>
@@ -24,10 +24,10 @@
               <td *ngIf="ejecutivo.active==true">Activo</td>
               <td *ngIf="ejecutivo.active==false">Inactivo</td>
               <td>
-                 <a class="btn btn-primary" (click)="infoEjecutivo(ejecutivo._id)" >ver</a>
+                 <a class="btn btn-primary" (click)="infoEjecutivo(ejecutivo._id)" >Ver</a>
               </td>
               <td>
-                <a class="btn btn-warning" (click)="editEjecutivo(ejecutivo._id)">EDITAR</a>
+                <a class="btn btn-warning" (click)="editEjecutivo(ejecutivo._id)">Editar</a>
              </td>
              <td>
                 <!-- <a class="btn btn-danger" (click)="deleteEjecutivo(ejecutivo._id)" >eliminar</a> -->
