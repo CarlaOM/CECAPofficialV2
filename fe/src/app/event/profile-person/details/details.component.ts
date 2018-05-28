@@ -88,4 +88,7 @@ export class DetailsComponent implements OnInit {
           console.log(<any>error);
        })
   }
+  cancelar(){
+    window.history.back();
+  }
 }
