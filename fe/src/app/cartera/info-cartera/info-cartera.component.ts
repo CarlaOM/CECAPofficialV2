@@ -84,4 +84,7 @@ export class InfoCarteraComponent implements OnInit {
     
     
    }
+   cancelar(){
+     window.history.back();
+   }
 }

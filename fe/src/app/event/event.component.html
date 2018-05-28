@@ -85,6 +85,7 @@
             </tr>
          </tbody>
       </table>
+      
 
 
       <table class="table table-hover" *ngIf="moduleName==null">
@@ -121,7 +122,10 @@
                         </td>
                      </tr>
                   </tbody>
-               </table>
+      </table>
+      <br>
+      <button class="btn btn-primary" (click)="cancelar()">Cancelar</button>
+
 
    </section>
    <router-outlet></router-outlet>

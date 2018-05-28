@@ -56,5 +56,10 @@ export class AccountsReceivableComponent implements OnInit {
     for (let i of this.inscriptions) {
       this.states.push(i);
     }
+
+   
+  }
+  cancelar(){
+    window.history.back();
   }
 }
