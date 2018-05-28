@@ -6,7 +6,9 @@
            <div [hidden]="submitted">
               <h1>Control Pago de Persona</h1>
               <!-- <form (ngSubmit)="guardar()" #addPerson="ngForm" class="jumbotron"> -->
-                <div> <h3>{{persona.first_name}} {{persona.last_name}}</h3></div>
+                <div class="form-group col-sm-8">
+                    <label class="" style="align-content: center"> <h3>{{persona.first_name}} {{persona.last_name}}</h3></label>
+                </div>
                 <div class="form-group col-sm-8">
                  <!-- <div class="form-group col-sm-4">
                     <label for="ci" class="control-label" style="text-align: left">Cedula de Identidad</label>
@@ -19,10 +21,10 @@
                        *CI de persona es invalido.
                     </span>
                  </div> -->
-                <div class="form-group col-sm-4" style="text-align: right">
-                   <label for="deu" class="control-label" style="text-align: right">Total Costo Evento: {{inscriPer.inscriptions.price_event}}</label>
-                    <label for="can" class="control-label" style="text-align: right">Total Cancelado : {{inscriPer.inscriptions.canceled_price}}</label>
-                    <label for="deu" class="control-label" style="text-align: right">Deuda           : {{inscriPer.inscriptions.price_event - inscriPer.inscriptions.canceled_price }}</label>
+                <div class="form-group col-sm-8 " style="text-align: right">
+                   <label for="deu" class="control-label col-sm-5" style="text-align: right">Total Costo Evento: {{inscriPer.inscriptions.price_event}}</label>
+                    <label for="can" class="control-label col-sm-4" style="text-align: right">Total Cancelado   : <p style="color: green">{{inscriPer.inscriptions.canceled_price}}</p></label>
+                    <label for="deu" class="control-label col-sm-3" style="text-align: right">Deuda             : <p style=" color: red">{{inscriPer.inscriptions.price_event - inscriPer.inscriptions.canceled_price }}</p></label>
                  </div>
               </div>
               <!-- <div class="form-group col-sm-8">

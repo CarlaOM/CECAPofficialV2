@@ -82,7 +82,7 @@ export class DetailsComponent implements OnInit {
     this._peticionesService.getFacilitador(this.finalWork.facilitator).subscribe(
        result => {
           this.facilitator = result;
-          console.log(this.facilitator)
+          // console.log(this.facilitator)
        },
        error => {
           console.log(<any>error);
@@ -90,5 +90,11 @@ export class DetailsComponent implements OnInit {
   }
   cancelar(){
     window.history.back();
+  }
+  addFinalWork(){
+    this.router.navigate(['/home/finalWork/add']);
+  }
+  addReview(){
+    this.router.navigate(['/home/review/add']);
   }
 }

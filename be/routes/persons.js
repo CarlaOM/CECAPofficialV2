@@ -84,30 +84,108 @@ router
         //{ $group: { _id: { persons: '$inscriptions.persons' }, total: { $sum: 1 } } }
       ], function (err, events) {
         if (err) return res.status(400).send(err);
-        console.log(events);
-        console.log('aqui el inscription de persona');
+       // console.log(events);
+       // console.log('aqui el inscription de persona');
         return res.status(200).send(events);
-        // for(var i =0 ; i<=events.length-1; i++){
-        //   if(events[i].persons == personId){
-        //     return res.status(200).send(events[i]);
-        //     console.log(events[i]);
-        //     i = events.length+1;
-        //   }
-        // }
       });
   })
   .post('/controlPago',function(req, res){
     console.log(req.body.moduleId);
-    var pago = req.body.inscription.canceled_price;
 
-    db.events.update({ _id: req.body.eventId, 'inscriptions.persons': req.body.persona._id },
-    {
-      $set: { 'inscriptions.$.canceled_price': pago }
-     }).exec(function (err, event) {
+    db.events.aggregate([
+      { $match: { _id: mongoose.Types.ObjectId(req.body.eventId) } },
+      { $project: { inscriptions: 1 } },
+      { $unwind: '$inscriptions' },
+      { $match: { 'inscriptions.persons': { $eq: mongoose.Types.ObjectId(req.body.persona._id) } } },
+      //{ $group: { _id: { persons: '$inscriptions.persons' }, total: { $sum: 1 } } }
+    ], function (err, events) {
       if (err) return res.status(400).send(err);
-      console.log(event);
-      return res.status(200).send(event);
-    });                     
+      console.log(events);
+      console.log('aqui el inscription de persona');
+      //return res.status(200).send(events);
+      var eventInscripton = events[0];
+      var total_cancelado =  eventInscripton.inscriptions.total_price;
+      var price_event = eventInscripton.inscriptions.price_event;
+
+      addLists(req.body, total_cancelado, price_event);
+      //editInscription(req.body, total_cancelado, price_event );
+    });
+    function addLists(registro, total_cancelado, price_event){
+      var pagoActual = registro.inscription.canceled_price;
+      db.lists.findOne({ person: registro.persona._id,
+                         events: registro.eventId,
+                           modulars:registro.moduleId},function(err, lista){
+          if (err) return res.status(400).send(err);
+              console.log(lista);
+          if(lista == null){
+                var list = {
+                  bolivianos: registro.inscription.canceled_price,
+                  dolares: registro.inscription.canceled_price / (6.96),
+                  receipt: registro.inscription.receipt, // varios recibos
+                  assist: false, //controlar por fecha de inscription *******?????
+                  type: 2, //1=nuevo //2=nivelacion
+                  person: registro.persona._id,
+                  events: registro.eventId,
+                  modulars: registro.moduleId//duda????
+                };
+                var lists = new db.lists(list);
+                lists.save(function (err, lists) {
+                      console.log('lista guardada en Pagos');
+                      if (err) { return res.status(400).send(err); }
+                      console.log('finalizado');
+                      //return res.status(200).send(lists);
+                      editInscription(req.body, total_cancelado, price_event , pagoActual);
+                });
+          }else{//caso que exista obtener el modulo y el pago anterior y si debe enviar mensaje,sino 
+            console.log('El modulo ya se cancelo, o sino debe realizar un Correlativo');
+            return res.status(400).send(err);
+            
+          }
+      });
+
+     }  
+    function editInscription(registro, total_cancelado, price_event,pagoActual){
+      
+      console.log(pagoActual);
+      console.log(registro.persona._id);
+      console.log(total_cancelado);
+      console.log(price_event);
+      //var total_price = total_precio + pagoActual;
+      db.events.update({ _id: registro.eventId, 'inscriptions.persons': registro.persona._id },
+      {
+        $set: { 
+        'inscriptions.$.total_price': total_cancelado + pagoActual,
+        'inscriptions.$.bolivianos_price': total_cancelado  + pagoActual,
+        'inscriptions.$.dolares_price': ((total_cancelado + pagoActual) / (6.96)),
+        'inscriptions.$.canceled_price':  total_cancelado + pagoActual
+        }
+       }).exec(function (err, inscri) {
+          if (err) return res.status(400).send(err);
+          console.log(inscri);
+          //return res.status(200).send(event);
+          editProfile( registro, pagoActual, total_cancelado,price_event);
+        });
+     }
+     function editProfile(registro, pagoActual, total_cancelado, price_event){
+       db.events.findOne({_id: registro.eventId},{ programs: 1},function(err, event){
+        if (err) return res.status(400).send(err);
+        console.log('aqui el id de program ::');
+        console.log(event.programs);
+        db.persons.update({ _id: registro.persona._id, 'profile.programs': event.programs},
+          {
+            $set: { 
+            'profile.$.payed': total_cancelado + pagoActual,
+            'profile.$.debt': price_event - (total_cancelado  + pagoActual),
+            }
+          }).exec(function (err, profile) {
+              if (err) return res.status(400).send(err);
+              console.log(profile);
+              return res.status(200).send(profile);
+              //addLists(registro, pagoActual, total_cancelado, price_event);
+            });
+        });
+     }
+                   
   })
   ////////////////////////////////////////////////////
   .post('/descriptionProfile/:id', function (req, res) {

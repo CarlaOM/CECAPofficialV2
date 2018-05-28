@@ -272,7 +272,7 @@ router
                                                 type: 1, //nuevo // nivelacion
                                                 person: person._id,
                                                 events: req.body.eventId,
-                                                //modulars: ObjectId
+                                                modulars: req.body.moduleId//duda????
                                           };
                                           var lists = new db.lists(list);
                                           lists.save(function (err, lists) {
@@ -299,7 +299,7 @@ router
                                           console.log(modulPrice);
                                           var inscription = {
                                                 // segun al numero de asistencias sacar el precio total q tiene q pagar
-                                                total_price: 0,//sumatorio por asistencia de cada modulo
+                                                total_price: inscri.canceled_price,//sumatorio por asistencia de cada modulo
                                                 module_price: modulPrice,
                                                 bolivianos_price: inscri.canceled_price,
                                                 dolares_price: inscri.canceled_price / (6.96),

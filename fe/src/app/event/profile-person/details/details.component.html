@@ -68,7 +68,7 @@
                 <tbody>
                   <tr>
                     <td>
-                      <a class="btn btn-success" (click)="viewProfile(i.persons)">Trabajo Final</a>
+                      <a class="btn btn-success fa fa-plus" (click)="addFinalWork()"> Trabajo Final</a>
                     </td>
                   </tr>
                   <tr>
@@ -86,8 +86,12 @@
                   <tr>
                       <td>Facilitador asignado</td>
                       <td>{{facilitator?.name}}</td>
-                    </tr>
+                  </tr>
                   <tr>
+                    <td>
+                      <a class="btn btn-success fa fa-plus" (click)="addReview()"> Añadir Revision</a>
+                    </td>
+                  </tr>
                   <tr>
                     <td>Fecha final</td>
                     <td>{{finalWork?.date_end | date}}</td>

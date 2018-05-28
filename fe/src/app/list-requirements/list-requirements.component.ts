@@ -62,7 +62,6 @@ export class ListRequirementsComponent implements OnInit {
     
   }
   cancelar(){
-
     window.history.back();
   }
 }
