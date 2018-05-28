@@ -20,21 +20,17 @@ export class AddFinalWorkComponent implements OnInit {
   ) {
     this.model = new FinalWork(null, "", "", "");
   }
-
   ngOnInit() {
     this.queryFacilitators();
   }
   queryFacilitators() {
-    this._peticionesService.getPrograms().subscribe(response => {
+    this._peticionesService.getFacilitadores().subscribe(response => {
       this.facilitators = response;
-      console.log(this.facilitators);
+      // console.log(this.facilitators);
     },
       error => {
         console.log(<any>error);
       });
-  }
-  cancel() {
-    this.router.navigate(['home/finalWork']);
   }
   onSubmit() {
     console.log(this.model);
@@ -51,11 +47,14 @@ export class AddFinalWorkComponent implements OnInit {
         this._peticionesService.addFinalWork('this.personId', FinalWork).subscribe(response => {
           //this.messageEvent.emit();
           //this.close.nativeElement.click();
-          this.router.navigate(['/home/events']);
-          alert("El evento se creo con exito");
+          this.router.navigate(['/home/detailsProfile']);
+          alert("El Trabajo Final se creo con exito");
         });
-
       }
     }
+  }
+  cancel() {
+    // this.router.navigate(['home/finalWork']);
+    window.history.back();
   }
 }

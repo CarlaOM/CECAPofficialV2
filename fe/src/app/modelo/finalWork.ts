@@ -1,4 +1,4 @@
-export class FinalWork{
+export class FinalWork {
     constructor(
         public date_start: Date,
         public name: String, // nombre del trabajo final
