@@ -31,7 +31,7 @@ export class ListRequirementsComponent implements OnInit {
     });
   }
   query() {
-    this._peticionesService.getEventInscriptions(this.eventId).subscribe(
+    this._peticionesService.getRequirement(this.eventId).subscribe(
        result => {
           this.event = result;
           // this.queryModules();

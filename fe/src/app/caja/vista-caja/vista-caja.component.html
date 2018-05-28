@@ -26,15 +26,15 @@
       </thead>
       <tbody>
          
-         <tr  *ngFor="let desc of listaDescripcion; let detalle of detalles">
+         <tr  *ngFor=" let detalle of listaDetalles">
 
 
                 <td class="">{{detalle.title}}</td>
-                <td class="">{{desc}} </td>
+                <td class="">{{detalle.description}} </td>
                 <td class="">{{detalle.receipt}}</td>
                 <td class="">{{detalle.date_detail|date}}</td>
-                <td class="" *ngIf="detalle.input==true; else vacio "> {{detalle.amount}}</td>
-                <td class="" *ngIf="detalle.input==false; else vacio">{{detalle.amount}}</td>
+                <td class="" *ngIf="detalle.Input==true; else vacio "> {{detalle.amount}}</td>
+                <td class="" *ngIf="detalle.Input==false; else vacio">{{detalle.amount}}</td>
                 <ng-template #vacio class="">
                   ---
     
