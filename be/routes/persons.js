@@ -91,7 +91,6 @@ router
   })
   .post('/controlPago',function(req, res){
     console.log(req.body.moduleId);
-
     db.events.aggregate([
       { $match: { _id: mongoose.Types.ObjectId(req.body.eventId) } },
       { $project: { inscriptions: 1 } },
@@ -103,10 +102,9 @@ router
       console.log(events);
       console.log('aqui el inscription de persona');
       //return res.status(200).send(events);
-      var eventInscripton = events[0];
-      var total_cancelado =  eventInscripton.inscriptions.total_price;
-      var price_event = eventInscripton.inscriptions.price_event;
-
+        var eventInscripton = events[0];
+        var total_cancelado =  eventInscripton.inscriptions.total_price;
+        var price_event = eventInscripton.inscriptions.price_event;
       addLists(req.body, total_cancelado, price_event);
       //editInscription(req.body, total_cancelado, price_event );
     });
@@ -114,38 +112,45 @@ router
       var pagoActual = registro.inscription.canceled_price;
       db.lists.findOne({ person: registro.persona._id,
                          events: registro.eventId,
-                           modulars:registro.moduleId},function(err, lista){
+                         modulars:registro.modularsId},function(err, lista){
           if (err) return res.status(400).send(err);
               console.log(lista);
-          if(lista == null){ 
+          if(lista == null ){ 
                 var list = {
-                  bolivianos: registro.inscription.canceled_price,
-                  dolares: registro.inscription.canceled_price / (6.96),
-                  receipt: registro.inscription.receipt, // varios recibos
-                  assist: false, //controlar por fecha de inscription *******?????
-                  type: 2, //1=nuevo //2=nivelacion
-                  person: registro.persona._id,
-                  events: registro.eventId,
-                  modulars: registro.moduleId//duda????
+                      bolivianos: registro.inscription.canceled_price,
+                      dolares: registro.inscription.canceled_price / (6.96),
+                      receipt: registro.inscription.receipt, // varios recibos
+                      assist: false, //controlar por fecha de inscription *******?????
+                      type: 2, //1=nuevo //2=nivelacion
+                      person: registro.persona._id,
+                      events: registro.eventId,
+                      modulars: registro.modularsId//duda????
                 };
                 var lists = new db.lists(list);
                 lists.save(function (err, lists) {
                       console.log('lista guardada en Pagos');
                       if (err) { return res.status(400).send(err); }
                       console.log('finalizado');
-                      //return res.status(200).send(lists);
-                      editInscription(req.body, total_cancelado, price_event , pagoActual);
+                      return res.status(200).send(lists);
+                      //editInscription(req.body, total_cancelado, price_event , pagoActual);
                 });
-          }else{//caso que exista obtener el modulo y el pago anterior y si debe enviar mensaje,sino 
-            console.log('El modulo ya se cancelo, o sino debe realizar un Correlativo');
-            return res.status(400).send(err);
-            
+          }else{//caso que exista obtener el modulo y el pago anterior y si debe enviar mensaje,sino    
+            if( lista.bolivianos == 0 || lista.bolivianos == undefined ){
+              db.lists.update({ },
+                {
+                  $set: {  }
+                }).exec(function (err, off) {
+                  if (err) return res.status(400).send(err);
+                  return res.status(400).send(off);
+                });
+              }else{
+                console.log('El modulo ya se cancelo, o sino debe realizar un Correlativo');
+                return res.status(400).send(err);
+            }
           }
       });
-
      }  
     function editInscription(registro, total_cancelado, price_event,pagoActual){
-      
       console.log(pagoActual);
       console.log(registro.persona._id);
       console.log(total_cancelado);

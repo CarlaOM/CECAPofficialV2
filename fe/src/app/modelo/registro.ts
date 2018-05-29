@@ -3,6 +3,7 @@ export class Registro {
         public inscription:{},
         public persona:{},
         public eventId:string,
-        public moduleId:string
+        public moduleId:string,
+        public modularsId:string
     ) { }
  }
