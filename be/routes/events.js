@@ -334,7 +334,7 @@ router
                                                 type: 1, //nuevo // nivelacion
                                                 person: person._id,
                                                 events: req.body.eventId,
-                                                modulars: req.body.moduleId//duda????
+                                                //modulars: ObjectId
                                           };
                                           var lists = new db.lists(list);
                                           lists.save(function (err, lists) {
@@ -361,7 +361,7 @@ router
                                           console.log(modulPrice);
                                           var inscription = {
                                                 // segun al numero de asistencias sacar el precio total q tiene q pagar
-                                                total_price: inscri.canceled_price,//sumatorio por asistencia de cada modulo
+                                                total_price: 0,//sumatorio por asistencia de cada modulo
                                                 module_price: modulPrice,
                                                 bolivianos_price: inscri.canceled_price,
                                                 dolares_price: inscri.canceled_price / (6.96),
@@ -613,16 +613,40 @@ router
             }
       })
       .post('/requirements/:id', function (req, res) {
+            // console.log(req.params.id);
+            // db.events.aggregate([
+            //       { $match: { _id: mongoose.Types.ObjectId(req.params.id) } },
+            //       { $unwind: '$inscriptions' },
+            //       // { $match: { 'inscriptions.state': { $eq: req.body.filter } } },
+            //       { $group: { _id: '$_id', persons: { $push: '$inscriptions.persons' } } },
+            //       { $lookup: { from: "persons", localField: "persons", foreignField: "_id", as: "inscribed" } },
+            // ], function (err, events) {
+            //       if (err) return res.status(400).send(err);
+            //       // var persons = events.map((p) => p.persons);
+            //       // Persons(persons);
+            //       return res.status(200).send(events);
+            // })
+            console.log(req.body.programId)
+            console.log(req.params.id)
+            // db.events.findOne({_id: req.params.id},function (err,ev) {
+            //       console.log(ev.programs, req.body.programId);
+                  
+            // })
             db.events.aggregate([
                   { $match: { _id: mongoose.Types.ObjectId(req.params.id) } },
                   { $unwind: '$inscriptions' },
-                  // { $match: { 'inscriptions.state': { $eq: req.body.filter } } },
-                  { $group: { _id: '$_id', persons: { $push: '$inscriptions.person' } } },
+                  { $group: { _id: '$_id', persons: { $push: '$inscriptions.persons' }, programId: { $first: '$programs' } } },
                   { $lookup: { from: "persons", localField: "persons", foreignField: "_id", as: "inscribed" } },
+                  { $unwind: '$inscribed' },
+                  { $project: { _id: 1, 'inscribed._id': 1, 'inscribed.profile._id': 1, 'inscribed.profile.programs': 1, 'inscribed.profile.requirements': 1, programId: 1 } },
+                  { $unwind: '$inscribed.profile' },
+                  { $match: { 'inscribed.profile.programs': mongoose.Types.ObjectId(req.body.programId) } },
             ], function (err, events) {
                   if (err) return res.status(400).send(err);
-                  // var persons = events.map((p) => p.persons);
-                  // Persons(persons);
+                  console.log(events)
+                  // console.log(events[0].inscribed.profile);
+                  // console.log(events[1].inscribed.profile);
+                  // console.log(events[2].inscribed.profile);
                   return res.status(200).send(events);
             })
 

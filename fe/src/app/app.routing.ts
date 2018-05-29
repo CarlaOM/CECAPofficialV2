@@ -9,7 +9,8 @@ import { ListRequirementsComponent } from './list-requirements/list-requirements
 import { AccountsReceivableComponent } from './accounts-receivable/accounts-receivable.component';
 import { EventComponent } from './event/event.component';
 import { ProfilePersonComponent } from './event/profile-person/profile-person.component';
-import { FinalWorkComponent } from './event/final-work/final-work.component';
+import { AddFinalWorkComponent } from './event/profile-person/add-final-work/add-final-work.component';
+import { AddReviewComponent } from './event/profile-person/add-review/add-review.component';
 import { DetailsComponent } from './event/profile-person/details/details.component';
 import { ReportsComponent } from './graphicReports/reports/reports.component';
 import { ReportTrimestralComponent } from './graphicReports/report-trimestral/report-trimestral.component';
@@ -79,7 +80,8 @@ const appRoutes: Routes = [
          { path: 'event/:id', component: EventComponent },
          { path: 'event/asistencia/:id', component: AsistenciaComponent },
          { path: 'profilePerson/:id', component: ProfilePersonComponent },
-         { path: 'finalWork/:id', component: FinalWorkComponent },
+         { path: 'finalWork/add/:id', component: AddFinalWorkComponent },         
+         { path: 'review/add/:id', component: AddReviewComponent },         
          { path: 'detailsProfile/:id', component: DetailsComponent },
          { path: 'reports', component: ReportsComponent },
          { path: 'trimestral', component: ReportTrimestralComponent },

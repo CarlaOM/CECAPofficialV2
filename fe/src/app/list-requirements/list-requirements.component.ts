@@ -11,8 +11,9 @@ import { PeticionesService } from '../services/peticiones.service';
 export class ListRequirementsComponent implements OnInit {
   public eventId;
   public event;
-  public inscriptions;
+  public inscriptions = [];
   public states: Array<any> = [];
+  public idProgram;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,7 +23,8 @@ export class ListRequirementsComponent implements OnInit {
 
   ngOnInit() {
     this.findEventId();
-    this.query();
+    this.findProgramId();
+    // this.query();
   }
   findEventId() {
     this.route.params.subscribe(params => {
@@ -30,39 +32,95 @@ export class ListRequirementsComponent implements OnInit {
        console.log(this.eventId)
     });
   }
+  findProgramId(){
+    this._peticionesService.getEvent(this.eventId).subscribe(
+      response => {
+        var resultado = response;
+        this.idProgram = resultado.programs;
+        this.query();
+        console.log(resultado);
+      }
+    )
+  }
   query() {
-    this._peticionesService.getEventInscriptions(this.eventId).subscribe(
+    this._peticionesService.postRequirement(this.eventId, this.idProgram).subscribe(
        result => {
           this.event = result;
           // this.queryModules();
 
           console.log(this.event);
-          this.inscriptions = this.event.inscriptions;
-
+          // this.inscriptions = this.event[0].inscribed;          
+          
           //prueba total
           // var total = this.event.total;
-          //console.log(this.inscriptions);
-          this.todos();
+          // console.log(this.inscriptions);
+          // this.todos();
           // console.log(total);
+          this.llenarRequirement();
        },
        error => {
           var errorMessage = <any>error;
           console.log(errorMessage);
        });
   }
-  todos() {
-    for (let i = 0; i <= this.states.length; i++) {
-      this.states.pop(); i = 0;
-    }
-    for (let i of this.inscriptions) {
-      this.states.push(i);
+  llenarRequirement(){
+    
+    for(let i of this.event){
+      console.log("entra")
+      console.log(i);
+      
+      let personaR = {} as Requirement;
+      personaR.name = "";
+      personaR.photocopy_ci = false;
+      personaR.photocopy_titule = false;
+      personaR.photograpy = false;
+      console.log(personaR);
+      this._peticionesService.getPerson(i.inscribed._id).subscribe(
+        response =>{
+          let res = response;
+          console.log(res);
+          personaR.name = res.first_name;
+        } 
+      )
+      console.log(personaR.name);
+      if(i.inscribed.profile.requirements != undefined){
+        if(i.inscribed.profile.requirements.photocopy_ci != undefined){
+          personaR.photocopy_ci = true;
+        }
+        if(i.inscribed.profile.requirements.photocopy_titule != undefined){
+        personaR.photocopy_titule = true;
+        }
+        if(i.inscribed.profile.requirements.photograpy != undefined){
+          personaR.photograpy = true;
+        }  
+        // console.log("entra43eads")
+      }
+
+       
+      this.inscriptions.push(personaR);
+      console.log(personaR);
+      // personaR.photocopy_ci = 
+
     }
   }
+  // todos() {
+  //   for (let i = 0; i <= this.states.length; i++) {
+  //     this.states.pop(); i = 0;
+  //   }
+  //   for (let i of this.inscriptions) {
+  //     this.states.push(i);
+  //   }
+  // }
   catchRequeriment(){
     
   }
   cancelar(){
-
     window.history.back();
   }
+}
+export interface Requirement{
+    name: string,
+    photograpy: Boolean,
+    photocopy_ci: Boolean,
+    photocopy_titule: Boolean
 }

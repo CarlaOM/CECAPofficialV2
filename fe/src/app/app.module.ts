@@ -90,11 +90,11 @@ import { DetailsComponent } from './event/profile-person/details/details.compone
 import { ImportFromExcelComponent } from './import-from-excel/import-from-excel.component';
 import { ListRequirementsComponent } from './list-requirements/list-requirements.component';
 import { ListInscriptionsComponent } from './list-inscriptions/list-inscriptions.component';
-import { FinalWorkComponent } from './event/final-work/final-work.component';
-import { AddFinalWorkComponent } from './event/final-work/add-final-work/add-final-work.component';
+import { AddFinalWorkComponent } from './event/profile-person/add-final-work/add-final-work.component';
 import { AccountsReceivableComponent } from './accounts-receivable/accounts-receivable.component';
 import { AccountsModularsComponent } from './accounts-modulars/accounts-modulars.component';
 import { ControlPagoComponent } from './event/control-pago/control-pago.component';
+import { AddReviewComponent } from './event/profile-person/add-review/add-review.component';
 
 @NgModule({
   declarations: [
@@ -173,11 +173,10 @@ import { ControlPagoComponent } from './event/control-pago/control-pago.componen
     ImportFromExcelComponent,
     ListRequirementsComponent,
     ListInscriptionsComponent,
-    FinalWorkComponent,
     AddFinalWorkComponent,
     AccountsReceivableComponent,
     AccountsModularsComponent,
-
+    AddReviewComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import {PeticionesService } from '../../services/peticiones.service';
 import { Identity, } from "../../services/global";
@@ -23,6 +23,7 @@ export class VistaCajaComponent implements OnInit {
   public sucursales;
   public sucursal;
   public nameSucursal;
+  public listaDetalles = [];
 
   constructor(
     private _peticionesService:PeticionesService,
@@ -46,25 +47,42 @@ export class VistaCajaComponent implements OnInit {
       this.detalles=this.cash.details;
       this.total=this.cash.amount;
       console.log(this.detalles);
-      for(var i = 0 ; i < this.detalles.length ; i++){
-        console.log(i);
-        console.log("entraaaa");
-      this.det = this.detalles[i].description.split(',');
-      console.log(this.det);
-      
-      for(var a = 0; a <this.sucursales.length ; a++){
-        console.log("entra");
-        if(this.sucursales[a]._id == this.det[0] ){
-          console.log("enceutra");
-          this.listaDescripcion[i] = this.sucursales[a].name.concat(this.det[1]);
+      for(let detalle of this.detalles){
+        let dets = {} as detalleS;
+        this.det = detalle.description.split(',');
+        for(var a = 0; a <this.sucursales.length ; a++){
+          console.log("entra");
+          if(this.sucursales[a]._id == this.det[0] ){
+            console.log("enceutra");
+            dets.description = this.sucursales[a].name.concat(this.det[1]);
+          }
         }
+        dets.title = detalle.title;
+        dets.amount = detalle.amount;
+        dets.date_detail = detalle.date_detail;
+        dets.Input = detalle.input;
+        dets.receipt = detalle.receipt;
+        this.listaDetalles.push(dets);        
       }
-      console.log(this.listaDescripcion);  
       
-      }
-      console.log(this.listaDescripcion[1]);          
+      // for(var i = 0 ; i < this.detalles.length ; i++){
+      //   console.log(i);
+      //   console.log("entraaaa");
+      // this.det = this.detalles[i].description.split(',');
+      // console.log(this.det);
+      
+      // for(var a = 0; a <this.sucursales.length ; a++){
+      //   console.log("entra");
+      //   if(this.sucursales[a]._id == this.det[0] ){
+      //     console.log("enceutra");
+      //     this.listaDescripcion[i] = this.sucursales[a].name.concat(this.det[1]);
+      //   }
+      // }
+      // console.log(this.listaDescripcion);  
+      
+      // }
     });
-    console.log(this.listaDescripcion); 
+    console.log(this.listaDetalles); 
   }
   goIngreso(){
     this.router.navigate(['/home/caja/ingreso']);
@@ -87,4 +105,13 @@ export class VistaCajaComponent implements OnInit {
 
   }
 
+
+}
+export interface detalleS{
+  amount: number,
+  description: string,  
+  receipt:number,
+  date_detail:Date,
+  Input: boolean,
+  title: string,
 }

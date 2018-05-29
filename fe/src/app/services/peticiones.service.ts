@@ -106,6 +106,11 @@ export class PeticionesService {
     let body = JSON.stringify({ profileId: idProfile });
     return this._http.post(this.url + 'persons/descriptionProfile/' + idPerson, body, { headers: headers }).map((res: Response) => res);
   }
+  postRequirement(id,idProgram){
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    let body = JSON.stringify({ programId: idProgram });
+    return this._http.post(this.url + 'events/requirements/'+id, body, { headers: headers }).map((res: Response) => res);    
+  }
   getPersons() {
     return this._http.get(this.url + 'persons').map((res: Response) => res);
   }
@@ -390,11 +395,16 @@ export class PeticionesService {
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.post(this.url + 'modulars/getAsistencia', body, { headers: headers }).map((res: Response) => res);
   }
-
   addFinalWork(personId, final) {
     let body = JSON.stringify(final);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.put(this.url + 'persons/finalWork/' + personId, body, { headers: headers }).map((res: Response) => res);
+
+  }
+  addReview(personId, rev) {
+    let body = JSON.stringify(rev);
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return this._http.put(this.url + 'persons/review/' + personId, body, { headers: headers }).map((res: Response) => res);
 
   }
   getInscriptionPerson(_id){		

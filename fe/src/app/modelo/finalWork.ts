@@ -1,9 +1,10 @@
-export class FinalWork{
+export class FinalWork {
     constructor(
         public date_start: Date,
         public name: String, // nombre del trabajo final
         public origin: String,
         public facilitator: String,
+        public profileId: String,
         // public revisions: [String],
         // public date_end: Date,
         // public empastado: Boolean,
