@@ -63,7 +63,7 @@ export class ControlPagoComponent implements OnInit {
      //this.queryPrograms();
      this.queryEventId();
      this.queryPerson();
-     this.queryModulos();
+     this.queryModulars();//modulars
      this.queryInscriptionPerson();
      // this.queryEvents();
      // this.queryCartera();
@@ -162,6 +162,18 @@ export class ControlPagoComponent implements OnInit {
          var errorMessage = <any>error;
          console.log(errorMessage);
      });
+  }
+  queryModulars(){
+    this._peticionesService.getModulars(this.eventId).subscribe(
+      result => {
+        this.modulos = result;
+         console.log(this.modulos);
+      },
+      error=>{
+        var errorMessage = <any>error;
+         console.log(errorMessage);
+      }
+    );
   }
   cancel() {
      // this.router.navigate(['home/events']);

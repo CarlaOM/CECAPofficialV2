@@ -117,7 +117,7 @@ router
                            modulars:registro.moduleId},function(err, lista){
           if (err) return res.status(400).send(err);
               console.log(lista);
-          if(lista == null){
+          if(lista == null){ 
                 var list = {
                   bolivianos: registro.inscription.canceled_price,
                   dolares: registro.inscription.canceled_price / (6.96),
