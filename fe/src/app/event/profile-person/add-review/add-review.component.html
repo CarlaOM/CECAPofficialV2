@@ -8,6 +8,11 @@
                 <h1>Añadir Revision</h1>
                 <br>
                 <form (ngSubmit)="save()" #addReview="ngForm" class="jumbotron">
+                  <!-- <div class="form-group col-sm-8">
+                      <label data-error="wrong" data-success="right" for="form8">
+                         <i class="fa fa-calendar prefix grey-text"></i> Fecha de Revision</label>
+                      <input type="date" id="form34" class="form-control validate" [(ngModel)]="model.date_review" name="date" #date required>
+                  </div> -->
                   <div class="form-group col-sm-8">
                       <label for="state">Estado</label>
                       <select class="form-control" id="state" [(ngModel)]="model.state" name="state" #state="ngModel">
@@ -35,11 +40,6 @@
                       <!--<div [hidden]="descripcion?.valid || descripcion?.pristine" class="">
                                   descripcion requerida
                               </div>-->
-                  </div>
-                  <div class="form-group col-sm-8">
-                      <label data-error="wrong" data-success="right" for="form8">
-                         <i class="fa fa-calendar prefix grey-text"></i> Fecha de Revision</label>
-                      <input type="date" id="form34" class="form-control validate" [(ngModel)]="model.date_review" name="date" #date required>
                   </div>
                   <div class="form-group col-sm-8" style="text-align:center ">
                       <button type="submit" class="btn btn-success" [disabled]="!addReview?.form.valid">Registrar</button>

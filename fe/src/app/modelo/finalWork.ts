@@ -6,7 +6,7 @@ export class FinalWork {
         public facilitator: String,
         public profileId: String,
         // public revisions: [String],
-        // public date_end: Date,
+        public date_end: Date,
         // public empastado: Boolean,
         // public copy_1: Boolean,
         // public copy_2: Boolean,
