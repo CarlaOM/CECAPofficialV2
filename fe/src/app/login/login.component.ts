@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
          response => {
             this.identity = response;
             if (!this.identity || !this.identity._id) {
+                console.log("usuario incorrecto");
                alert('Usuario Incorrecto');
             } else {
                Identity._id = this.identity._id;
@@ -54,11 +55,13 @@ export class LoginComponent implements OnInit {
          },
          error => {
             //console.log(<any>error);
+            alert('Usuario Incorrecto');
             var errorMessage = <any>error;
             if (errorMessage != null) {
                var body = JSON.parse(error.body);
                this.status = 'error';
             }
+            
          }
       );
    }

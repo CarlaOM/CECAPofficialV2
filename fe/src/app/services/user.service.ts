@@ -33,6 +33,9 @@ export class UserService {
       return this._http.post(this.url + 'login', params, { headers: headers })
          .map(res => res.json());
    }
+   getUser(_id) {
+      return this._http.get(this.url + 'users/' + _id).map((res: Response) => res);
+    }
    signin(user_to_login) {
 
       let body = JSON.stringify(user_to_login);//get interface

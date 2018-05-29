@@ -106,8 +106,10 @@ export class PeticionesService {
     let body = JSON.stringify({ profileId: idProfile });
     return this._http.post(this.url + 'persons/descriptionProfile/' + idPerson, body, { headers: headers }).map((res: Response) => res);
   }
-  getRequirement(id){
-    return this._http.get(this.url + 'events/requirements/'+id).map((res: Response) => res);    
+  postRequirement(id,idProgram){
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    let body = JSON.stringify({ programId: idProgram });
+    return this._http.post(this.url + 'events/requirements/'+id, body, { headers: headers }).map((res: Response) => res);    
   }
   getPersons() {
     return this._http.get(this.url + 'persons').map((res: Response) => res);
