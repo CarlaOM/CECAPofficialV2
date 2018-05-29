@@ -28,12 +28,13 @@ export class ControlPagoComponent implements OnInit {
   public personId;
   public eventId;
   public persona;
+  public modulos;
+  public modulsObject;
   public inscriPer;
   //public moduleId;
   public ocupSelected;
   public cartera;
   public ingresoPorInscripcion;
-  public modulos;
   public registro: Registro;
   public lists: Lists;
    public personRecived;
@@ -53,7 +54,7 @@ export class ControlPagoComponent implements OnInit {
     //  this.ingresoPorInscripcion = new Cashflowusers(new Date(), new Date(), 0, 0, 0, "", "", "", "", "");
     //  this.lists = new Lists(null,0,'',null,null, '','','');//(bol, dol,receipt,assist,type,per,event,mod)
      
-     this.registro = new Registro(null, null, '', '');//idEvent,idUser,persona:{}, montCancel
+     this.registro = new Registro(null, null, '', '','');//inscription,persona:{},idEvent,moduleId,modularsId 
 
    }
   onSubmit() {
@@ -63,8 +64,8 @@ export class ControlPagoComponent implements OnInit {
      //this.queryPrograms();
      this.queryEventId();
      this.queryPerson();
-     this.queryModulars();//modulars
      this.queryInscriptionPerson();
+     this.queryModulars();//modulars
      // this.queryEvents();
      // this.queryCartera();
   }
@@ -99,6 +100,9 @@ export class ControlPagoComponent implements OnInit {
      this.registro.inscription = this.inscription;
      this.registro.eventId = this.eventId;
      this.registro.persona = this.persona;//opcional
+     var arrayIds = this.modulsObject.split('-');
+      this.registro.modularsId= arrayIds[0];
+      this.registro.moduleId= arrayIds[1];
      console.log(this.registro);
      this._peticionesService.addControlPago(this.registro).subscribe(
         result => {
@@ -167,6 +171,7 @@ export class ControlPagoComponent implements OnInit {
     this._peticionesService.getModulars(this.eventId).subscribe(
       result => {
         this.modulos = result;
+        console.log('aqui los modulos Objedts');
          console.log(this.modulos);
       },
       error=>{

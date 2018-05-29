@@ -43,7 +43,7 @@ export class AddPersonComponent implements OnInit {
         this.inscription = new Inscription(null, null, null,null,0,0,'0','');
         //this.identy=Identity._id;
         this.descOcupation = new DescOcupation('','','','','','','');
-        this.registro = new Registro(null,null,'','');//idEvent,idUser,persona:{}, montCancel
+        this.registro = new Registro(null,null,'','','');//idEvent,idUser,persona:{}, montCancel
         
         this.ingresoPorInscripcion=new Cashflowusers(new Date(),new Date(),0,0,0,"","","","","");
     }
