@@ -236,6 +236,68 @@ router
             }
 
       })
+      .get('/getModulars/:id', function(req, res){
+            console.log(req.params.id);
+         db.events.find({_id: req.params.id }, {modulars: 1},function(err, modulars){
+            if (err) return res.status(400).send(err);
+            if (modulars == null) return res.status(404).send();
+            //console.log(modulars[0]);
+            var modulares = modulars[0];
+            //return res.status(200).send(modulars);
+            getEventModules(modulares, req.params.id);
+         });
+
+         function getEventModules(modulares, eventId){
+            db.events.findOne({ _id: eventId}, function (err, events) {
+                  //console.log(events);
+                  if (err) { return res.status(400).send(err); }
+                  if (events) {
+                    db.modules.find({ programs: events.programs }, function (err, moduls) {
+                      if (err) { return res.status(400).send(err); }
+                      //console.log(moduls);
+                        //return res.status(200).send(moduls);
+                        newGenerateModulars(modulares, moduls, eventId);
+                    });//F module
+                  } else return res.status(404).send();
+                });//F EVENTS
+          }
+          function newGenerateModulars(modulares, moduls, eventId){
+            // console.log(modulares.modulars.length);
+            // console.log(moduls.length);
+            // console.log(moduls[0]._id);
+            var listModuls= [];
+            for(var e=0; e<= modulares.modulars.length-1; e++){
+                  for(var j=0; j <= moduls.length - 1; j++){
+                        console.log(j,e)
+                        if(JSON.stringify(null) == JSON.stringify(modulares.modulars[e].modules)){
+                              //console.log(e + ' '+ JSON.stringify(modulares.modulars[e].modules))
+                              var modulars = {
+                                    name: 'Pago Extra',
+                                    _id: modulares.modulars[e]._id,
+                                    modules: null
+                              };
+                              listModuls.push(modulars);
+                              j = moduls.length;
+                        }else{
+                              var mod = moduls[j]._id;
+                              if(JSON.stringify(modulares.modulars[e].modules)==JSON.stringify(mod)) {
+                                          var modulars1 = {
+                                                name: moduls[j].name,
+                                                _id: modulares.modulars[e]._id,
+                                                modules: moduls[j]._id
+                                          };
+                                          listModuls.push(modulars1);
+                                          console.log('ingreso  '+ moduls[j]._id);
+                              }else{
+                                    console.log('falla  '+ moduls[j]._id);
+                              }
+                        }
+                  }
+            }
+            console.log(listModuls);
+            return res.status(200).send(listModuls);
+         }
+      })
       ///inscripcion de personas antes y en el evento
       .post('/inscriptPerson/:id', function (req, res) {
             ///GUARDAR EN LISTS PRIMERO
