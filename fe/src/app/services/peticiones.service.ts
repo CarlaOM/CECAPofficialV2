@@ -415,4 +415,9 @@ export class PeticionesService {
      var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
      return this._http.post(this.url + 'persons/controlPago/', body, { headers: headers }).map((res: Response) => res);		
    }
+   getModulars(eventId) {
+    console.log(eventId)
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return this._http.get(this.url + 'events/getModulars/' + eventId, { headers: headers }).map((res: Response) => res);
+  }
 }

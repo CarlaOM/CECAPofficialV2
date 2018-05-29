@@ -14,12 +14,13 @@ export class DetailsComponent implements OnInit {
   public personId;
   public details;
   public program;
-  // public modulars: Array<any> = [];
+  public modulars: Array<any> = [];
   public profile;
   public requirements;
   public finalWork;
   public facilitator;
   public reviews;
+  public close;
 
   constructor(
     private route: ActivatedRoute,
@@ -42,7 +43,7 @@ export class DetailsComponent implements OnInit {
     // console.log(this.profileId + ' este es el ID del perfil')
     // console.log(this.personId + ' este es el ID de persona')
   
-    this._peticionesService.postPersonProgramDetails(this.personId, this.profileId,).subscribe(
+    this._peticionesService.postPersonProgramDetails(this.personId, this.profileId).subscribe(
       result => {
         this.details = result
          console.log(result)
@@ -50,11 +51,12 @@ export class DetailsComponent implements OnInit {
          this.profile = this.details.profile;
          this.requirements = this.details.profile.requirements; //console.log(this.requirements)
          this.finalWork = this.details.profile.final_work; //console.log(this.finalWork)
-         this.reviews = this.details.profile.final_work.revisions;
+         this.reviews = this.details.profile.final_work.revisions; //console.log(this.reviews)
         
-        //  this.modules();
+         this.modules();
          this.findProgram();
          this.findFacilitator();
+         this.closeWork();
       },
       error => {
          console.log(<any>error);
@@ -71,14 +73,14 @@ export class DetailsComponent implements OnInit {
           console.log(<any>error);
        })
   }
-  // modules() {
-  //   for (let i = 0; i <= this.modulars.length; i++) {
-  //     this.modulars.pop(); i = 0;
-  //   }
-  //   for (let i of this.details.modulars) {
-  //     this.modulars.push(i);
-  //   }
-  // }
+  modules() {
+    for (let i = 0; i <= this.modulars.length; i++) {
+      this.modulars.pop(); i = 0;
+    }
+    for (let i of this.details.modulars) {
+      this.modulars.push(i);
+    }
+  }
   findFacilitator() {
     // console.log(this.programId)
     this._peticionesService.getFacilitador(this.finalWork.facilitator).subscribe(
@@ -89,6 +91,18 @@ export class DetailsComponent implements OnInit {
        error => {
           console.log(<any>error);
        })
+  }
+  closeWork(){
+    console.log(":3")
+    if(this.reviews != undefined){
+      for(let i = 0; i < this.reviews.length; i++){
+        if(this.reviews[i].state == 6){
+          this.close = true;
+          this.finalWork.date_end = this.reviews[i].date_review;
+          this.profile.print_diploma = true;
+        }
+      }
+    }
   }
   addFinalWork(){
     var ppId = this.profileId + '-' + this.personId;
