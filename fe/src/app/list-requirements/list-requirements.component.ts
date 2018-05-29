@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { PeticionesService } from '../services/peticiones.service';
+import { Person } from '../modelo/person';
 
 @Component({
   selector: 'app-list-requirements',
@@ -14,6 +15,7 @@ export class ListRequirementsComponent implements OnInit {
   public inscriptions = [];
   public states: Array<any> = [];
   public idProgram;
+  public res;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,6 +24,7 @@ export class ListRequirementsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.res = new Person("","",null,null,null,"","",null,"");
     this.findEventId();
     this.findProgramId();
     // this.query();
@@ -68,6 +71,8 @@ export class ListRequirementsComponent implements OnInit {
     for(let i of this.event){
       console.log("entra")
       console.log(i);
+      console.log(i);
+      console.log(i);
       
       let personaR = {} as Requirement;
       personaR.name = "";
@@ -77,9 +82,9 @@ export class ListRequirementsComponent implements OnInit {
       console.log(personaR);
       this._peticionesService.getPerson(i.inscribed._id).subscribe(
         response =>{
-          let res = response;
-          console.log(res);
-          personaR.name = res.first_name;
+          this.res = response;
+          console.log(this.res);
+          personaR.name = this.res.first_name;
         } 
       )
       console.log(personaR.name);
