@@ -38,7 +38,7 @@
                 <div class="form-group col-sm-8">
                     <label for="nomFacilitator">Facilitador</label>
                     <select class="form-control" id="nomFacilitator" required [(ngModel)]="model.facilitator" name="nomFacilitator" #nomFacilitator="ngModel">
-                       <option *ngFor="let facilitator of facilitators" [value]="facilitator._id">{{facilitator.name}}</option>
+                       <option *ngFor="let facilitator of facilitators" [value]="facilitator._id">{{facilitator?.name}}</option>
                     </select>
                     <!-- <div [hidden]="offices.valid || offices.pristine" class="">
                                sucursal is required

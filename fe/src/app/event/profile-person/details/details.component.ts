@@ -14,11 +14,12 @@ export class DetailsComponent implements OnInit {
   public personId;
   public details;
   public program;
-  public modulars: Array<any> = [];
+  // public modulars: Array<any> = [];
   public profile;
   public requirements;
   public finalWork;
   public facilitator;
+  public reviews;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,8 +39,8 @@ export class DetailsComponent implements OnInit {
     });
   }
   findProgramPerson(){
-    console.log(this.profileId + ' este es el ID del perfil')
-    console.log(this.personId + ' este es el ID de persona')
+    // console.log(this.profileId + ' este es el ID del perfil')
+    // console.log(this.personId + ' este es el ID de persona')
   
     this._peticionesService.postPersonProgramDetails(this.personId, this.profileId,).subscribe(
       result => {
@@ -48,9 +49,10 @@ export class DetailsComponent implements OnInit {
 
          this.profile = this.details.profile;
          this.requirements = this.details.profile.requirements; //console.log(this.requirements)
-         this.finalWork = this.details.profile.final_work; console.log(this.finalWork)
+         this.finalWork = this.details.profile.final_work; //console.log(this.finalWork)
+         this.reviews = this.details.profile.final_work.revisions;
         
-         this.modules();
+        //  this.modules();
          this.findProgram();
          this.findFacilitator();
       },
@@ -69,14 +71,14 @@ export class DetailsComponent implements OnInit {
           console.log(<any>error);
        })
   }
-  modules() {
-    for (let i = 0; i <= this.modulars.length; i++) {
-      this.modulars.pop(); i = 0;
-    }
-    for (let i of this.details.modulars) {
-      this.modulars.push(i);
-    }
-  }
+  // modules() {
+  //   for (let i = 0; i <= this.modulars.length; i++) {
+  //     this.modulars.pop(); i = 0;
+  //   }
+  //   for (let i of this.details.modulars) {
+  //     this.modulars.push(i);
+  //   }
+  // }
   findFacilitator() {
     // console.log(this.programId)
     this._peticionesService.getFacilitador(this.finalWork.facilitator).subscribe(
@@ -89,9 +91,11 @@ export class DetailsComponent implements OnInit {
        })
   }
   addFinalWork(){
-    this.router.navigate(['/home/finalWork/add']);
+    var ppId = this.profileId + '-' + this.personId;
+    this.router.navigate(['/home/finalWork/add', ppId]);
   }
   addReview(){
-    this.router.navigate(['/home/review/add']);
+    var ppId = this.profileId + '-' + this.personId;
+    this.router.navigate(['/home/review/add', ppId]);
   }
 }

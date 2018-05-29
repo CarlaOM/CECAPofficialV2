@@ -10,22 +10,30 @@ import { Review } from '../../../modelo/review';
   providers: [PeticionesService]
 })
 export class AddReviewComponent implements OnInit {
+  public profileId;  
+  public personId;
   public model: Review;
-  public states;  
+  public states;   
 
   constructor(
     private _peticionesService: PeticionesService,
     private route: ActivatedRoute,
     private router: Router
   ) { 
-    this.model = new Review(null, "", null);
+    this.model = new Review(null, "", null, "");
   }
-
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      var arrayIds = params.id.split('-');
+      this.profileId = arrayIds[0];
+      this.personId = arrayIds[1];
+
+      this.model.profileId = this.profileId;
+    });
+
     this.selectStates();
   }
-  selectStates(){
-    
+  selectStates(){  
   }
   onSubmit() {
     console.log(this.model);
@@ -38,12 +46,16 @@ export class AddReviewComponent implements OnInit {
         window.alert("Asegurese que la fecha sea mayor a la de hoy")
       } else {
         console.log(this.model);
-        // envia el id de la persona q recibes como parametro al entrar a esta ventana, y el finalwork q llenaste en la vista
-        this._peticionesService.addFinalWork('this.personId', Review).subscribe(response => {
-          //this.messageEvent.emit();
-          //this.close.nativeElement.click();
-          this.router.navigate(['/home/detailsProfile']);
-          alert("La revision se creo con exito");
+        // envia el id de la persona q recibes como parametro al entrar a esta ventana, y el review q llenaste en la vista
+        this._peticionesService.addReview(this.personId, this.model).subscribe(response => {
+            var esperado = response;
+            console.log(esperado);
+            alert("La Revision se creo con exito");
+            // this.router.navigate(['/home/detailsProfile']);
+            window.history.back()
+            },
+            error => {
+              console.log(<any>error);
         });
       }
     }

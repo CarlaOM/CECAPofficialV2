@@ -492,37 +492,33 @@ router
     //       //	if (off.nModified == 0) return res.status(406).send();
     //    });
   })
+  //////////////////////////////////////////////////////////////////////////////////////
   .put('/finalWork/:id', function (req, res) {
-    console.log(req.body);
-    //   final_work: {
-    //     date_start: Date,
-    //     name: String, // nombre del trabajo final
-    //     origin: String,
-    //     facilitator: ObjectId,
-    //     revisions: [{
-    //        state: Number, // 9 posibles estados
-    //        observations: String,
-    //        date_review: Date,
-    //     }],
-    //     date_end: Date,
-    //     empastado: Boolean,
-    //     copy_1: Boolean,
-    //     copy_2: Boolean,
-    //     form: Boolean,
-    //     certificate: Boolean,
-    //     letter_review: Boolean,
-    //     company_certificate: Boolean
-    //  },
     db.persons.update({ _id: req.params.id, 'profile._id': req.body.profileId },
       {
-        $set: {//Universitario
-          'profile.$.finalWork': req.body.finalWork,
+        $set: {
+          'profile.$.final_work': req.body,
         }
       }).exec(function (err, off) {
         if (err) return res.status(400).send(err);
+        console.log(off)                
+        return res.status(200).send(off)
       });
   })
-
+  //////////////////////////////////////////////////////////////////////////////////////
+  .put('/review/:id', function (req, res) {
+    db.persons.update({ _id: req.params.id, 'profile._id': req.body.profileId },
+      {
+        $push: {
+          'profile.$.final_work.revisions': req.body,
+        }
+      }).exec(function (err, off) {
+        if (err) return res.status(400).send(err);
+        console.log(off)                
+        return res.status(200).send(off)
+      });
+  })
+  //////////////////////////////////////////////////////////////////////////////////////
   .delete('/:id', function (req, res) {
     db.persons.remove({ _id: req.params.id }, function (err, person) {
       if (err) return res.status(400).send(err);

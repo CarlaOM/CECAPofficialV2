@@ -18,9 +18,9 @@ export class ProfilePersonComponent implements OnInit {
   public ocupations;
   public programs;
   public programsPerson;
-  public programReturned;
-  public programsId: Array<any> = [];
-  public listPrograms: Array<any> = [];
+  // public programReturned;
+  // public programsId: Array<any> = [];
+  // public listPrograms: Array<any> = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -54,12 +54,12 @@ export class ProfilePersonComponent implements OnInit {
         //  console.log(this.ocupations)
         //  console.log(this.programsPerson)
         
-        console.log(this.person)
-        console.log(this.person.programDetails)
+        // console.log(this.person)
+        // console.log(this.person.programDetails)
         for (let i = 0; i < this.person.profile.length; i++) {
           for (let j = 0; j < this.person.programDetails.length; j++) {
-            console.log(this.person.profile[i].programs)
-            console.log(this.person.programDetails[j].name)
+            // console.log(this.person.profile[i].programs)
+            // console.log(this.person.programDetails[j].name)
             if (this.person.profile[i].programs == this.person.programDetails[j]._id) {
               this.person.profile[i].name = this.person.programDetails[j].name;
             }
