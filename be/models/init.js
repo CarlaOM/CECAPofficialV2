@@ -855,18 +855,18 @@ module.exports = {
      saveData(_roles, db.roles);
      saveData(_users, db.users);
      saveData(_company, db.company);
-     saveData(_correlatives, db.correlatives);
+    //  saveData(_correlatives, db.correlatives);
      saveData(_carteras, db.carteras);
      saveData(_programs, db.programs);
      saveData(_modulos, db.modules);
      saveData(_facilitators, db.facilitators);
-     saveData(_cashFlowUser, db.cashFlowUsers);
+    //  saveData(_cashFlowUser, db.cashFlowUsers);
      saveData(_offices, db.offices);
-     saveData(_events, db.events);
+    //  saveData(_events, db.events);
      saveData(_persons, db.persons);
-     saveData(_lists, db.lists);
-     saveData(_cashFlowOffices,db.cashFlowOffices);
-     saveData(_modulars, db.modulars);
+    //  saveData(_lists, db.lists);
+    //  saveData(_cashFlowOffices,db.cashFlowOffices);
+    //  saveData(_modulars, db.modulars);
 
      saveData(_categoriaEgresos,db.categoriaEgresos);
   },
