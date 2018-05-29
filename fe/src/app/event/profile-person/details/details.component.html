@@ -47,7 +47,7 @@
               <table class="table table-user-information">
                 <tbody>
                   <tr>
-                    <td>Fotografias</td>
+                    <td>Fotografias</td>*
                     <td *ngIf="requirements?.photograpy==true">Entregado</td>
                     <td *ngIf="requirements?.photograpy==false">No entrego</td>
                   </tr>
@@ -78,7 +78,7 @@
                     <td>{{finalWork?.date_start | date}}</td>
                   </tr>
                   <tr>
-                    <td>Nombre del trabajo final</td>
+                    <td>Nombre del trabajo</td>
                     <td>{{finalWork?.name}}</td>
                   </tr>
                   <tr>
@@ -86,29 +86,41 @@
                     <td>{{finalWork?.origin}}</td>
                   </tr>
                   <tr>
-                      <td>Facilitador asignado</td>
-                      <td>{{facilitator?.name}}</td>
+                    <td>Facilitador asignado</td>
+                    <td>{{facilitator?.name}}</td>
                   </tr>
-                  <tr>
-                    <td>
-                      <a class="btn btn-success fa fa-plus" (click)="addReview(ppId)"> Añadir Revision</a>
-                    </td> 
-                  </tr>
-                <tbody>
-                  <tr *ngFor="let i of reviews">
-                    <td>{{ i.state }}</td>
-                    <td>{{ i.ovservations }}</td>
-                    <td>{{ i.date_review | date}}</td>
-                  </tr>
-                </tbody>
                   <tr>
                     <td>Fecha final</td>
+                    <td *ngIf="finalWork?.date_end==null">Trabajo no finalizado...</td>
                     <td>{{finalWork?.date_end | date}}</td>
                   </tr>
                   <tr>
                     <td>Entrega de Diploma</td>
-                    <td *ngIf="profile?.print_diploma==true">Impreso</td>
-                    <td *ngIf="profile?.print_diploma==false">Falta imprimir </td>
+                    <td *ngIf="profile?.print_diploma==true">Listo</td>
+                    <td *ngIf="profile?.print_diploma==false">Pendiente</td>
+                  </tr>
+                </tbody>
+              </table>
+            <strong>Revisiones:</strong>
+              <table class="table table-user-information">
+                <tbody>
+                  <tr>
+                    <td *ngIf="close==null">
+                      <a class="btn btn-success fa fa-plus" (click)="addReview(ppId)"> Añadir Revision</a>
+                    </td> 
+                  </tr>
+                  <tr *ngFor="let i of reviews">
+                    <td>{{ i.date_review | date}}</td>
+                    <td *ngIf="i.state==1">Recepcionado para correccion</td>
+                    <td *ngIf="i.state==2">Entregado a facilitador para 1ra correccion</td>
+                    <td *ngIf="i.state==3">Trabajo pendiente de entrega a alumno</td>
+                    <td *ngIf="i.state==4">Entregado a alumno / enviado a sucursal</td>
+                    <td *ngIf="i.state==5">Trabajo final recepcionado (Diploma pendiente)</td>
+                    <td *ngIf="i.state==6">Con diploma realizado</td>
+                    <td *ngIf="i.state==7">Entregados</td>
+                    <td *ngIf="i.state==8">Recepcion para 2da revision</td>
+                    <td *ngIf="i.state==9">Entregado a facilitador para 2da correccion</td>
+                    <td>{{ i.observations }}</td>
                   </tr>
                 </tbody>
               </table>

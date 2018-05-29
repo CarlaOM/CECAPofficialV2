@@ -20,7 +20,7 @@ export class AddReviewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) { 
-    this.model = new Review(null, "", null, "");
+    this.model = new Review(new Date(), null, "", "");
   }
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -42,14 +42,14 @@ export class AddReviewComponent implements OnInit {
     if ((this.model.observations == '')) {
       window.alert("Asegurese de llenar todos los campos")
     } else {
-      if (this.model.date_review < new Date()) {
-        window.alert("Asegurese que la fecha sea mayor a la de hoy")
-      } else {
+      // if (this.model.date_review < new Date()) {
+      //   window.alert("Asegurese que la fecha sea mayor a la de hoy")
+      // } else {
         console.log(this.model);
         // envia el id de la persona q recibes como parametro al entrar a esta ventana, y el review q llenaste en la vista
         this._peticionesService.addReview(this.personId, this.model).subscribe(response => {
             var esperado = response;
-            console.log(esperado);
+            // console.log(esperado);
             alert("La Revision se creo con exito");
             // this.router.navigate(['/home/detailsProfile']);
             window.history.back()
@@ -58,7 +58,6 @@ export class AddReviewComponent implements OnInit {
               console.log(<any>error);
         });
       }
-    }
   }
   cancel() {
     // this.router.navigate(['home/review']);

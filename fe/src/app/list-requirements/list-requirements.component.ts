@@ -36,7 +36,7 @@ export class ListRequirementsComponent implements OnInit {
     this._peticionesService.getEvent(this.eventId).subscribe(
       response => {
         var resultado = response;
-        this.idProgram = resultado.programs;
+        // this.idProgram = resultado.programs; ?????
         this.query();
         console.log(resultado);
       }
@@ -79,7 +79,7 @@ export class ListRequirementsComponent implements OnInit {
         response =>{
           let res = response;
           console.log(res);
-          personaR.name = res.first_name;
+          // personaR.name = res.first_name; ????????????????????????????????
         } 
       )
       console.log(personaR.name);
