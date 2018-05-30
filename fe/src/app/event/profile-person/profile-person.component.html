@@ -50,10 +50,10 @@
                       <a href="mailto:email">{{person?.email}}</a>
                     </td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                     <td>Cartera</td>
                     <td>{{carteraReturned?.name}}</td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
               <strong>Estado laboral de la Persona:</strong>
@@ -64,37 +64,37 @@
                     <td>{{person?.ocupation}}</td>
                   </tr>
                   <!--Estudiante-->
-                  <tr *ngIf="ocupation=='Estudiante'">
+                  <tr *ngIf="ocupation=='estudiante'">
                     <td>Carrera</td>
                     <td>{{ocupations?.carrera}}</td>
                   </tr>
-                  <tr *ngIf="ocupation=='Estudiante'">
+                  <tr *ngIf="ocupation=='estudiante'">
                     <td>Universidad</td>
                     <td>{{ocupations?.universidad}}</td>
                   </tr>
-                  <tr *ngIf="ocupation=='Estudiante'">
+                  <tr *ngIf="ocupation=='estudiante'">
                     <td>Semestre</td>
                     <td>{{ocupations?.semestre}}</td>
                   </tr>
                   <!--Particular-->
-                  <tr *ngIf="ocupation=='Particular'">
+                  <tr *ngIf="ocupation=='particular'">
                     <td>Area de Trabajo</td>
                     <td>{{ocupations?.areaTrabajo}}</td>
                   </tr>
                   <tr>
-                    <!--Profesional-->
-                    <tr *ngIf="ocupation=='Profesional'">
-                      <td>Profesion</td>
-                      <td>{{ocupations?.profesion}}</td>
-                    </tr>
-                    <tr *ngIf="ocupation=='Profesional'">
-                      <td>Empresa</td>
-                      <td>{{ocupations?.empresa}}</td>
-                    </tr>
-                    <tr *ngIf="ocupation=='Profesional'">
-                      <td>Cargo</td>
-                      <td>{{ocupations?.cargo}}</td>
-                    </tr>
+                  <!--Profesional-->
+                  <tr *ngIf="ocupation=='profesional'">
+                    <td>Profesion</td>
+                    <td>{{ocupations?.profesion}}</td>
+                  </tr>
+                  <tr *ngIf="ocupation=='profesional'">
+                    <td>Empresa</td>
+                    <td>{{ocupations?.empresa}}</td>
+                  </tr>
+                  <tr *ngIf="ocupation=='profesional'">
+                    <td>Cargo</td>
+                    <td>{{ocupations?.cargo}}</td>
+                  </tr>
                 </tbody>
               </table>
               <strong>Programas Cursados:</strong>

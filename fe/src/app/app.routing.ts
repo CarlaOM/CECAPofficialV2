@@ -11,6 +11,7 @@ import { EventComponent } from './event/event.component';
 import { ProfilePersonComponent } from './event/profile-person/profile-person.component';
 import { AddFinalWorkComponent } from './event/profile-person/add-final-work/add-final-work.component';
 import { AddReviewComponent } from './event/profile-person/add-review/add-review.component';
+import { PrintCertificateComponent } from './event/profile-person/print-certificate/print-certificate.component';
 import { DetailsComponent } from './event/profile-person/details/details.component';
 import { ReportsComponent } from './graphicReports/reports/reports.component';
 import { ReportTrimestralComponent } from './graphicReports/report-trimestral/report-trimestral.component';
@@ -83,6 +84,7 @@ const appRoutes: Routes = [
          { path: 'profilePerson/:id', component: ProfilePersonComponent },
          { path: 'finalWork/add/:id', component: AddFinalWorkComponent },         
          { path: 'review/add/:id', component: AddReviewComponent },         
+         { path: 'printCertificate/:id', component: PrintCertificateComponent },         
          { path: 'detailsProfile/:id', component: DetailsComponent },
          { path: 'reports', component: ReportsComponent },
          { path: 'trimestral', component: ReportTrimestralComponent },

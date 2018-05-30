@@ -105,6 +105,7 @@ module.exports = {
 
       //////////////////////////////////////////////////
       modulars: mongoose.model('modulars', new Schema({
+            name: String, //nombre del modulo
             amount: {  // observation
                   detail: String,
                   receipt: String,// nro factura
@@ -145,12 +146,12 @@ module.exports = {
                   cargo: String,
             },
             //////////////
-            carteras: ObjectId,
+            // carteras: ObjectId,
             /////////////
             profile: [{
                   _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
                   programs: ObjectId,
-                  name: String,
+                  name: String, // nombre del programa
                   // modulars: [{
                   //       amount: {  // observation
                   //             detail: String,

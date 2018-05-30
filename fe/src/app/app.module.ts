@@ -97,6 +97,7 @@ import { ControlPagoComponent } from './event/control-pago/control-pago.componen
 import { AddReviewComponent } from './event/profile-person/add-review/add-review.component';
 import { SendToPrincipalComponent } from './pending-cash/send-to-principal/send-to-principal.component';
 import { PrincipalCashComponent } from './principal-cash/principal-cash.component';
+import { PrintCertificateComponent } from './event/profile-person/print-certificate/print-certificate.component';
 
 @NgModule({
   declarations: [
@@ -181,6 +182,7 @@ import { PrincipalCashComponent } from './principal-cash/principal-cash.componen
     AddReviewComponent,
     SendToPrincipalComponent,
     PrincipalCashComponent,
+    PrintCertificateComponent,
   ],
   imports: [
     BrowserModule,

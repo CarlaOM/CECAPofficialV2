@@ -10,8 +10,8 @@ import { PeticionesService } from '../../../services/peticiones.service';
 })
 export class DetailsComponent implements OnInit {
   public date;
-  public profileId;
   public personId;
+  public profileId;
   public details;
   public program;
   public modulars: Array<any> = [];
@@ -21,6 +21,7 @@ export class DetailsComponent implements OnInit {
   public facilitator;
   public reviews;
   public close;
+  public modulesReceived;
 
   constructor(
     private route: ActivatedRoute,
@@ -74,12 +75,27 @@ export class DetailsComponent implements OnInit {
        })
   }
   modules() {
+    var x =[];
     for (let i = 0; i <= this.modulars.length; i++) {
       this.modulars.pop(); i = 0;
     }
     for (let i of this.details.modulars) {
+      x.push(i.modules)      
       this.modulars.push(i);
     }
+
+    this._peticionesService.postModules(x).subscribe(
+      result => {
+         this.modulesReceived = result;
+         console.log(this.modulesReceived)
+
+        for(let i of this.modulars){
+          this.modulars[i].name = this.modulesReceived.name;
+        }
+      },
+      error => {
+         console.log(<any>error);
+      })
   }
   findFacilitator() {
     // console.log(this.programId)
@@ -115,4 +131,25 @@ export class DetailsComponent implements OnInit {
     var ppId = this.profileId + '-' + this.personId;
     this.router.navigate(['/home/review/add', ppId]);
   }
+  printCertificate(moduleId){
+    var ppmId = this.personId + '-' + this.profileId + '-' + moduleId;
+    this.router.navigate(['/home/printCertificate', ppmId]);
+
+    let personProfileModule={} as PersonProfileModule;
+            personProfileModule.personId = this.personId;
+            personProfileModule.profileId = this.profileId;
+            personProfileModule.moduleId = moduleId;
+            console.log(personProfileModule);
+            
+    this._peticionesService.markPrintCertificate(personProfileModule).subscribe(response=>{
+      var res = response
+      console.log(res)
+      // this.setListInscriptions(this.moduleId,this.moduleName);
+    });
+  }
+}
+export interface PersonProfileModule{
+  personId:string,
+  profileId:string,
+  moduleId:string,
 }

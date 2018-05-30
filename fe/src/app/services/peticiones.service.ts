@@ -410,18 +410,26 @@ export class PeticionesService {
     let body = JSON.stringify(ObjId);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.post(this.url + 'modulars/getAsistencia', body, { headers: headers }).map((res: Response) => res);
+  
   }
   addFinalWork(personId, final) {
     let body = JSON.stringify(final);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.put(this.url + 'persons/finalWork/' + personId, body, { headers: headers }).map((res: Response) => res);
-
+  
   }
   addReview(personId, rev) {
     let body = JSON.stringify(rev);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.put(this.url + 'persons/review/' + personId, body, { headers: headers }).map((res: Response) => res);
-
+  
+  }
+  markPrintCertificate(ObjId){
+    let body = JSON.stringify(ObjId);
+    console.log(body)
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return this._http.post(this.url + 'modulars/printCertificate', body, { headers: headers }).map((res: Response) => res);
+  
   }
   getInscriptionPerson(_id){		
       return this._http.get(this.url + 'persons/inscriptionPerson/' + _id).map((res: Response) => res);		
@@ -465,9 +473,15 @@ export class PeticionesService {
   }	
 
 
-   getModulars(eventId) {
+  
+  getModulars(eventId) {
     console.log(eventId)
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.get(this.url + 'events/getModulars/' + eventId, { headers: headers }).map((res: Response) => res);
+  }
+  postModules(modules){		
+    let body = JSON.stringify(modules);		
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
+    return this._http.post(this.url + 'modules/modules/', body, { headers: headers }).map((res: Response) => res);		
   }
 }
