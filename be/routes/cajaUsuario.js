@@ -125,7 +125,7 @@ router
         events:cajaEgreso.events,
     };
     db.cashFlowUsers.findOne({active:true,state:-1,user:cajaEgreso.user},function(err,caja){
-
+        console.log(caja)
         if(err) return res.status(400).send(err);
         caja.details.push(detailEgreso),function(err,detail){
             if(err) return res.status(400).send(err);
