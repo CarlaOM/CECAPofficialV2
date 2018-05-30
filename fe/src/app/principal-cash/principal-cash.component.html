@@ -10,13 +10,15 @@
    <table class="table table-hover" >
       <thead>
          <tr>
-            <th>Usuario</th>
-            <th>sucursal</th>
-            <th>Fecha de Inicio</th>
+            <!-- <th>Usuario</th> -->
+            <th>Titulo</th>
+            
+            <th>Sucursal</th>
+            <!-- <th>Fecha de Inicio</th> -->
             <th>Fecha de Cierre</th>
             <th>Monto</th>
             <th>Estado</th>
-            <th>Confirmar</th>
+            <th>Descripcion</th>
            
             
                
@@ -25,14 +27,14 @@
       </thead>
       <tbody> 
          <tr *ngFor="let det of details">
-
-
-                <td class="">{{det.cashFlowOffice}}</td>
-                <td>{{det.dateCloseCash}}</td>
-                <td class="">{{det.amount}}</td>
-                <td class="">{{det.description}}</td>
-                <td class="">{{det.input}}</td>
                 <td>{{det.title}}</td>
+                <td>{{det.officeName}}</td>
+                <!-- <td class="">{{det.cashFlowOffice}}</td> -->
+                <td>{{det.dateCloseCash|date}}</td>
+                <td class="">{{det.amount}}</td>
+                <td class="">{{det.input}}</td>
+
+                <td class="">{{det.description}}</td>
                 <!-- <td *ngIf="office.active==true">
                   <button class="btn btn-primary" (click)="confirmarCajaSucursal(office)" >Confirmar</button>
                 </td> -->
