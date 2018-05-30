@@ -52,6 +52,14 @@ router
       return res.status(200).send(modulo);
     });
   })
+  .post('/modules', function (req, res) {
+    db.modules.find({ _id: { $in: req.body } },{name:1}, function (err, moduls) {
+      if (err) { return res.status(400).send(err); }
+      //console.log(moduls);
+      return res.status(200).send(moduls);
+
+    })
+  })
   .put('/:id', function (req, res) {
     db.modules.findOne({ _id: req.params.id }, function (err, modulo) {
       if (err) return res.status(400).send(err);

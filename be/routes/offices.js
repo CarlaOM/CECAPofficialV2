@@ -30,6 +30,17 @@ router
         return res.status(200).send(office);
      });
    })
+   .get('/officeFromUser/:id',function(req,res){
+      db.users.findOne({_id:req.params.id},function(err,user){
+        if (err){return res.status(400).send(err);} 
+        db.offices.findOne({_id:user.offices},function(err,office){
+          if (err){return res.status(400).send(err);} 
+          return res.status(200).send(office);
+        })
+
+      })
+
+   })
    ;
 
    module.exports = router; 

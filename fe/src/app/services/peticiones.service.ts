@@ -299,9 +299,11 @@ export class PeticionesService {
   getCashFlowUsers() {
     return this._http.get(this.url + 'cajaUsuario').map((res: Response) => res);
   }
-  getCashFlowUsersPending() {
-    return this._http.get(this.url + 'cajaUsuario/pending').map((res: Response) => res);
-  }
+  getCashFlowUsersPending(idUser) {
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return this._http.get(this.url + 'cajaUsuario/pending/' + idUser, { headers: headers }).map((res: Response) => res);
+
+    }
 
 
   closeCashFlowUser(id) {
@@ -351,15 +353,24 @@ export class PeticionesService {
     return this._http.get(this.url + 'cajaUsuario/closeFromManager/' + id, { headers: headers }).map((res: Response) => res);
 
   }
-  closeCashFlowOffice(id) {
+  closeCashFlowOffice(cashFlowOffice) {
 
+    let body = JSON.stringify(cashFlowOffice);
+    //console.log(body);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-    return this._http.get(this.url + 'cajaSucursal/close/' + id, { headers: headers }).map((res: Response) => res);
+    return this._http.post(this.url + 'cajaSucursal/close', body, { headers: headers }).map((res: Response) => res);
+
+
+
+
+    // var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    // return this._http.get(this.url + 'cajaSucursal/close/' + id, { headers: headers }).map((res: Response) => res);
 
   }
   addNewCashFlowOffice(idUser) {
+    let body=JSON.stringify(idUser)
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-    return this._http.get(this.url + 'cajaSucursal/new/' + idUser, { headers: headers }).map((res: Response) => res);
+    return this._http.post(this.url + 'cajaSucursal/new/' , body, { headers: headers }).map((res: Response) => res);
   }
   ///////////////////////////////////////////////////////////////////////////7
   addAssitance(lists) {
@@ -399,18 +410,26 @@ export class PeticionesService {
     let body = JSON.stringify(ObjId);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.post(this.url + 'modulars/getAsistencia', body, { headers: headers }).map((res: Response) => res);
+  
   }
   addFinalWork(personId, final) {
     let body = JSON.stringify(final);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.put(this.url + 'persons/finalWork/' + personId, body, { headers: headers }).map((res: Response) => res);
-
+  
   }
   addReview(personId, rev) {
     let body = JSON.stringify(rev);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.put(this.url + 'persons/review/' + personId, body, { headers: headers }).map((res: Response) => res);
-
+  
+  }
+  markPrintCertificate(ObjId){
+    let body = JSON.stringify(ObjId);
+    console.log(body)
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return this._http.post(this.url + 'modulars/printCertificate', body, { headers: headers }).map((res: Response) => res);
+  
   }
   getInscriptionPerson(_id){		
       return this._http.get(this.url + 'persons/inscriptionPerson/' + _id).map((res: Response) => res);		
@@ -420,9 +439,49 @@ export class PeticionesService {
      var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
      return this._http.post(this.url + 'persons/controlPago/', body, { headers: headers }).map((res: Response) => res);		
    }
-   getModulars(eventId) {
+
+   confirmCajaSucursal(idCajaSucursal){
+    let body = JSON.stringify(idCajaSucursal);	
+    console.log(body);	
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
+    return this._http.post(this.url + 'cajaSucursal/confirm/', body, { headers: headers }).map((res: Response) => res);		
+
+
+
+   }
+   getOfficeFromUser(_id){		
+    return this._http.get(this.url + 'offices/officeFromUser/' + _id).map((res: Response) => res);		
+  }	
+
+  addDetailToPrincipal(detail){
+    let body = JSON.stringify(detail);	
+    console.log(body);
+    console.log('desde peticiones');	
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
+    return this._http.post(this.url + 'cajaPrincipal/addDetail/', body, { headers: headers }).map((res: Response) => res);		
+
+
+  }
+  getPrincipalCash(_id){	
+    let body = JSON.stringify(_id);	
+    console.log(body);
+    console.log('desde peticiones');	
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
+    return this._http.post(this.url + 'cajaPrincipal/getPrincipal/', body, { headers: headers }).map((res: Response) => res);		
+	
+    // return this._http.get(this.url + 'cajaPrincipal/getPrincipal/' + _id).map((res: Response) => res);		
+  }	
+
+
+  
+  getModulars(eventId) {
     console.log(eventId)
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.get(this.url + 'events/getModulars/' + eventId, { headers: headers }).map((res: Response) => res);
+  }
+  postModules(modules){		
+    let body = JSON.stringify(modules);		
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
+    return this._http.post(this.url + 'modules/modules/', body, { headers: headers }).map((res: Response) => res);		
   }
 }
