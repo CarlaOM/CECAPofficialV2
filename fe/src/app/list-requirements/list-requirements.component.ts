@@ -82,15 +82,9 @@ export class ListRequirementsComponent implements OnInit {
       console.log(personaR);
       this._peticionesService.getPerson(i.inscribed._id).subscribe(
         response =>{
-<<<<<<< HEAD
           this.res = response;
           console.log(this.res);
           personaR.name = this.res.first_name;
-=======
-          let res = response;
-          console.log(res);
-          // personaR.name = res.first_name; ????????????????????????????????
->>>>>>> 323ee7fc9257e9ac836074c7c7a9ce2c64962498
         } 
       )
       console.log(personaR.name);
