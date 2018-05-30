@@ -33,6 +33,12 @@ export class UserService {
       return this._http.post(this.url + 'login', params, { headers: headers })
          .map(res => res.json());
    }
+   getNombre(password) {
+      return this._http.get(this.url + 'users/password' + password).map((res: Response) => res);
+    }
+    getPassword(name) {
+      return this._http.get(this.url + 'users/name' + name).map((res: Response) => res);
+    }
    getUser(_id) {
       return this._http.get(this.url + 'users/' + _id).map((res: Response) => res);
     }
