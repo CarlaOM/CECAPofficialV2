@@ -25,6 +25,7 @@ export class InscriptionComponent implements OnInit {
    public eventos;//colection
    public programs;//colection
    public eventId;
+   public modulsObject;
    //public moduleId;
    public ocupSelected;
    public cartera;
@@ -45,7 +46,7 @@ export class InscriptionComponent implements OnInit {
       this.inscription = new Inscription(null, null, null, null, 0, 0, '0', '');
       //this.identy=Identity._id;
       this.descOcupation = new DescOcupation('', '', '', '', '', '', '');
-      this.registro = new Registro(null, null, '', '');//idEvent,idUser,persona:{}, montCancel
+      this.registro = new Registro(null, null, '', '','');//idEvent,idUser,persona:{}, montCancel
 
       this.ingresoPorInscripcion = new Cashflowusers(new Date(), new Date(), 0, 0, 0, "", "", "", "", "");
       this.lists = new Lists(null,0,'',null,null, '','','');//(bol, dol,receipt,assist,type,per,event,mod)
@@ -56,7 +57,8 @@ export class InscriptionComponent implements OnInit {
       console.log(Identity._id); 
       //this.queryPrograms();
       this.queryEventId();
-      this.queryModulos();
+      this.queryModulars();
+      //this.queryModulos();
       // this.queryEvents();
       // this.queryCartera();
    }
@@ -94,6 +96,9 @@ export class InscriptionComponent implements OnInit {
       this.registro.inscription = this.inscription;
       this.registro.eventId = this.eventId;
       this.registro.persona = this.person;//opcional
+      var arrayIds = this.modulsObject.split('-');
+      this.registro.modularsId= arrayIds[0];
+      this.registro.moduleId= arrayIds[1];
       console.log(this.registro);
       this._peticionesService.addInscriptPerson(this.registro).subscribe(
          result => {
@@ -121,9 +126,6 @@ export class InscriptionComponent implements OnInit {
       //       //   );
 
       //       ///////////////////////////////////////////////////////////////////
-
-
-
       //       this.router.navigate(['home/events']);
       //       alert('Se Registro a la persona de manera correcta');
       //       //this.router.navigate(['home/persons']);
@@ -185,6 +187,24 @@ export class InscriptionComponent implements OnInit {
           var errorMessage = <any>error;
           console.log(errorMessage);
       });
+  }
+  queryModulars(){
+    this._peticionesService.getModulars(this.eventId).subscribe(
+      result => {
+        this.modulos = result;
+        for( let i of this.modulos ){
+            if(i.modules == null){
+                this.modulos.pop();
+            }
+        }
+        console.log('aqui los modulos Objedts');
+         console.log(this.modulos);
+      },
+      error=>{
+        var errorMessage = <any>error;
+         console.log(errorMessage);
+      }
+    );
   }
    cancel() {
       // this.router.navigate(['home/events']);

@@ -236,6 +236,7 @@ router
             }
 
       })
+      //*****************Obtener los modulars de Events **********************
       .get('/getModulars/:id', function(req, res){
             console.log(req.params.id);
          db.events.find({_id: req.params.id }, {modulars: 1},function(err, modulars){
@@ -262,9 +263,6 @@ router
                 });//F EVENTS
           }
           function newGenerateModulars(modulares, moduls, eventId){
-            // console.log(modulares.modulars.length);
-            // console.log(moduls.length);
-            // console.log(moduls[0]._id);
             var listModuls= [];
             for(var e=0; e<= modulares.modulars.length-1; e++){
                   for(var j=0; j <= moduls.length - 1; j++){
@@ -334,7 +332,7 @@ router
                                                 type: 1, //nuevo // nivelacion
                                                 person: person._id,
                                                 events: req.body.eventId,
-                                                //modulars: ObjectId
+                                                modulars: req.body.modularsId
                                           };
                                           var lists = new db.lists(list);
                                           lists.save(function (err, lists) {
@@ -770,16 +768,3 @@ router
 //     });
 
 module.exports = router;
-// function addListsId(person, programId, idEvent, moduleId, inscri, asistencia, lists){
-                  //       db.events.update({ _id: idEvent },{
-                  //             $push: {
-                  //             inscriptions: inscription
-                  //             }
-                  //       }, {
-                  //             multi: true
-                  //       },function(err, res){
-
-
-                  //       });
-                  // }
-                  // addProfile(person, programId, idEvent, moduleId, inscri, asistencia );
