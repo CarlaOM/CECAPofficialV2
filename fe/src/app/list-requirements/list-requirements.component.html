@@ -23,21 +23,22 @@
         </thead>
         <tbody>
            <tr *ngFor="let i of inscriptions">
-              <td>{{ i.name }}</td>
+              <!-- <td>{{ i.name }}</td>
               <td>{{i.photograpy}}</td>
               <td>{{i.photocopy_ci}}</td>
-              <td>{{i.photocopy_titule}}</td>
-              <!-- <td>
-                <label class="checkbox-inline"><input type="checkbox" value="">Entregado</label>
+              <td>{{i.photocopy_titule}}</td> -->
+              <td>{{ i.name }}</td>
+              <td>
+                  <label class="checkbox-inline"><input type="checkbox" value="yes" class="check" [defaultChecked]="i.photograpy"></label>
               </td>
               <td>
-                  <label class="checkbox-inline"><input type="checkbox" value="">Entregado</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="" class="check" [defaultChecked]="i.photocopy_ci"></label>
               </td>
               <td>
-                  <label class="checkbox-inline"><input type="checkbox" value="">Entregado</label>
-              </td> -->
+                <label class="checkbox-inline"><input type="checkbox" value="" class="check" [defaultChecked]="i.photocopy_titule"></label>
+            </td>
               <td>
-                  <a class="btn btn-success" (click)="update(person._id)">GUARDAR</a>
+                  <a class="btn btn-success" (click)="update(i.position, i.idPerson, i.idProfile)">GUARDAR</a>
               </td>
            </tr>
         </tbody>

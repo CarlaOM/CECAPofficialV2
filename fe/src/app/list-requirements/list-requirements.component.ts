@@ -16,6 +16,11 @@ export class ListRequirementsComponent implements OnInit {
   public states: Array<any> = [];
   public idProgram;
   public res;
+  public check;
+  public photo;
+  public checks;
+  public resultado;
+  public a;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,93 +29,85 @@ export class ListRequirementsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.res = new Person("","",null,null,null,"","",null,"");
+    this.res = new Person("", "", null, null, null, "", "", null, "");
     this.findEventId();
     this.findProgramId();
     // this.query();
   }
   findEventId() {
     this.route.params.subscribe(params => {
-       this.eventId = params.id;
-       console.log(this.eventId)
+      this.eventId = params.id;
     });
   }
-  findProgramId(){
+  findProgramId() {
     this._peticionesService.getEvent(this.eventId).subscribe(
       response => {
-        var resultado = response;
-        // this.idProgram = resultado.programs; ?????
+        this.resultado = response;
+        this.idProgram = this.resultado.programs;
         this.query();
-        console.log(resultado);
       }
     )
   }
   query() {
     this._peticionesService.postRequirement(this.eventId, this.idProgram).subscribe(
-       result => {
-          this.event = result;
-          // this.queryModules();
+      result => {
+        this.event = result;
+        // this.queryModules();
 
-          console.log(this.event);
-          // this.inscriptions = this.event[0].inscribed;          
-          
-          //prueba total
-          // var total = this.event.total;
-          // console.log(this.inscriptions);
-          // this.todos();
-          // console.log(total);
-          this.llenarRequirement();
-       },
-       error => {
-          var errorMessage = <any>error;
-          console.log(errorMessage);
-       });
+        console.log(this.event);
+        // this.inscriptions = this.event[0].inscribed;          
+
+        //prueba total
+        // var total = this.event.total;
+        // console.log(this.inscriptions);
+        // this.todos();
+        // console.log(total);
+        this.llenarRequirement();
+      },
+      error => {
+        var errorMessage = <any>error;
+        console.log(errorMessage);
+      });
   }
-  llenarRequirement(){
-    
-    for(let i of this.event){
-      console.log("entra")
-      console.log(i);
-      console.log(i);
-      console.log(i);
-      
+  llenarRequirement() {
+    this.a = 0;
+    for (let i of this.event) {
+
       let personaR = {} as Requirement;
+      personaR.position = this.a;
       personaR.name = "";
       personaR.photocopy_ci = false;
       personaR.photocopy_titule = false;
       personaR.photograpy = false;
-      console.log(personaR);
+      personaR.idProfile = i.inscribed.profile._id;
+      // console.log(personaR);
       this._peticionesService.getPerson(i.inscribed._id).subscribe(
-        response =>{
-<<<<<<< HEAD
+        response => {
           this.res = response;
-          console.log(this.res);
+          // console.log(this.res);
           personaR.name = this.res.first_name;
-=======
-          let res = response;
-          console.log(res);
-          // personaR.name = res.first_name; ????????????????????????????????
->>>>>>> 323ee7fc9257e9ac836074c7c7a9ce2c64962498
-        } 
+          personaR.idPerson = this.res._id;
+        }
       )
-      console.log(personaR.name);
-      if(i.inscribed.profile.requirements != undefined){
-        if(i.inscribed.profile.requirements.photocopy_ci != undefined){
+      if (i.inscribed.profile.requirements != undefined) {
+        if (i.inscribed.profile.requirements.photocopy_ci != false) {
           personaR.photocopy_ci = true;
         }
-        if(i.inscribed.profile.requirements.photocopy_titule != undefined){
-        personaR.photocopy_titule = true;
+        if (i.inscribed.profile.requirements.photocopy_titule != false) {
+          personaR.photocopy_titule = true;
+          // document.getElementsByClassName('check')[this.a+1].defaultChecked = true;
         }
-        if(i.inscribed.profile.requirements.photograpy != undefined){
+        if (i.inscribed.profile.requirements.photograpy != false) {
+          // document.getElementsByClassName('check')[this.a + 2].defaultChecked = true;
           personaR.photograpy = true;
-        }  
-        // console.log("entra43eads")
+        }
       }
 
-       
+
       this.inscriptions.push(personaR);
       console.log(personaR);
       // personaR.photocopy_ci = 
+      this.a++;
 
     }
   }
@@ -122,16 +119,26 @@ export class ListRequirementsComponent implements OnInit {
   //     this.states.push(i);
   //   }
   // }
-  catchRequeriment(){
-    
+  update(a, id, profileId) {
+    this.checks = document.getElementsByClassName('check');
+    var photo = this.checks[(a * 3)].checked;
+    var ci = this.checks[(a * 3) + 1].checked;
+    var titulo = this.checks[(a * 3) + 2].checked;
+    console.log(this.checks);
+    this._peticionesService.updateProfilePerson(id, profileId, photo, ci, titulo).subscribe(r => {
+      console.log(r);
+    });
   }
-  cancelar(){
+  cancelar() {
     window.history.back();
   }
 }
-export interface Requirement{
-    name: string,
-    photograpy: Boolean,
-    photocopy_ci: Boolean,
-    photocopy_titule: Boolean
+export interface Requirement {
+  idPerson: string;
+  idProfile: string;
+  position: number;
+  name: string,
+  photograpy: Boolean,
+  photocopy_ci: Boolean,
+  photocopy_titule: Boolean
 }

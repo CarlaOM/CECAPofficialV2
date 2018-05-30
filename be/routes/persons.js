@@ -89,6 +89,21 @@ router
         return res.status(200).send(events);
       });
   })
+  .put('/profile/:id',function(req, res){
+    console.log(req.body);
+    db.persons.update({ _id: req.params.id , 'profile._id': req.body.profileId},
+      {
+        $set: {
+          'profile.$.requirements.photograpy': req.body.photo,
+          'profile.$.requirements.photocopy_ci': req.body.ci,
+          'profile.$.requirements.photocopy_titule': req.body.titulo,        
+        }
+      },function(err, persons){
+        if(err) return res.status(404).send();
+        console.log(persons);
+        return res.status(200).send(persons);
+      })
+  })
   .post('/controlPago',function(req, res){
     console.log(req.body.moduleId);
 
