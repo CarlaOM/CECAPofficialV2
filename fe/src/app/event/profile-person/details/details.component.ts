@@ -19,6 +19,8 @@ export class DetailsComponent implements OnInit {
   public requirements;
   public finalWork;
   public facilitator;
+  public reviews;
+  public close;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,21 +40,23 @@ export class DetailsComponent implements OnInit {
     });
   }
   findProgramPerson(){
-    console.log(this.profileId + ' este es el ID del perfil')
-    console.log(this.personId + ' este es el ID de persona')
+    // console.log(this.profileId + ' este es el ID del perfil')
+    // console.log(this.personId + ' este es el ID de persona')
   
-    this._peticionesService.postPersonProgramDetails(this.personId, this.profileId,).subscribe(
+    this._peticionesService.postPersonProgramDetails(this.personId, this.profileId).subscribe(
       result => {
         this.details = result
          console.log(result)
 
          this.profile = this.details.profile;
          this.requirements = this.details.profile.requirements; //console.log(this.requirements)
-         this.finalWork = this.details.profile.final_work; console.log(this.finalWork)
+         this.finalWork = this.details.profile.final_work; //console.log(this.finalWork)
+         this.reviews = this.details.profile.final_work.revisions; //console.log(this.reviews)
         
          this.modules();
          this.findProgram();
          this.findFacilitator();
+         this.closeWork();
       },
       error => {
          console.log(<any>error);
@@ -91,10 +95,24 @@ export class DetailsComponent implements OnInit {
   cancelar(){
     window.history.back();
   }
+  closeWork(){
+    console.log(":3")
+    if(this.reviews != undefined){
+      for(let i = 0; i < this.reviews.length; i++){
+        if(this.reviews[i].state == 6){
+          this.close = true;
+          this.finalWork.date_end = this.reviews[i].date_review;
+          this.profile.print_diploma = true;
+        }
+      }
+    }
+  }
   addFinalWork(){
-    this.router.navigate(['/home/finalWork/add']);
+    var ppId = this.profileId + '-' + this.personId;
+    this.router.navigate(['/home/finalWork/add', ppId]);
   }
   addReview(){
-    this.router.navigate(['/home/review/add']);
+    var ppId = this.profileId + '-' + this.personId;
+    this.router.navigate(['/home/review/add', ppId]);
   }
 }

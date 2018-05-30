@@ -236,6 +236,66 @@ router
             }
 
       })
+      //*****************Obtener los modulars de Events **********************
+      .get('/getModulars/:id', function(req, res){
+            console.log(req.params.id);
+         db.events.find({_id: req.params.id }, {modulars: 1},function(err, modulars){
+            if (err) return res.status(400).send(err);
+            if (modulars == null) return res.status(404).send();
+            //console.log(modulars[0]);
+            var modulares = modulars[0];
+            //return res.status(200).send(modulars);
+            getEventModules(modulares, req.params.id);
+         });
+
+         function getEventModules(modulares, eventId){
+            db.events.findOne({ _id: eventId}, function (err, events) {
+                  //console.log(events);
+                  if (err) { return res.status(400).send(err); }
+                  if (events) {
+                    db.modules.find({ programs: events.programs }, function (err, moduls) {
+                      if (err) { return res.status(400).send(err); }
+                      //console.log(moduls);
+                        //return res.status(200).send(moduls);
+                        newGenerateModulars(modulares, moduls, eventId);
+                    });//F module
+                  } else return res.status(404).send();
+                });//F EVENTS
+          }
+          function newGenerateModulars(modulares, moduls, eventId){
+            var listModuls= [];
+            for(var e=0; e<= modulares.modulars.length-1; e++){
+                  for(var j=0; j <= moduls.length - 1; j++){
+                        console.log(j,e)
+                        if(JSON.stringify(null) == JSON.stringify(modulares.modulars[e].modules)){
+                              //console.log(e + ' '+ JSON.stringify(modulares.modulars[e].modules))
+                              var modulars = {
+                                    name: 'Pago Extra',
+                                    _id: modulares.modulars[e]._id,
+                                    modules: null
+                              };
+                              listModuls.push(modulars);
+                              j = moduls.length;
+                        }else{
+                              var mod = moduls[j]._id;
+                              if(JSON.stringify(modulares.modulars[e].modules)==JSON.stringify(mod)) {
+                                          var modulars1 = {
+                                                name: moduls[j].name,
+                                                _id: modulares.modulars[e]._id,
+                                                modules: moduls[j]._id
+                                          };
+                                          listModuls.push(modulars1);
+                                          console.log('ingreso  '+ moduls[j]._id);
+                              }else{
+                                    console.log('falla  '+ moduls[j]._id);
+                              }
+                        }
+                  }
+            }
+            console.log(listModuls);
+            return res.status(200).send(listModuls);
+         }
+      })
       ///inscripcion de personas antes y en el evento
       .post('/inscriptPerson/:id', function (req, res) {
             ///GUARDAR EN LISTS PRIMERO
@@ -272,7 +332,7 @@ router
                                                 type: 1, //nuevo // nivelacion
                                                 person: person._id,
                                                 events: req.body.eventId,
-                                                modulars: req.body.moduleId//duda????
+                                                modulars: req.body.modularsId
                                           };
                                           var lists = new db.lists(list);
                                           lists.save(function (err, lists) {
@@ -299,7 +359,7 @@ router
                                           console.log(modulPrice);
                                           var inscription = {
                                                 // segun al numero de asistencias sacar el precio total q tiene q pagar
-                                                total_price: inscri.canceled_price,//sumatorio por asistencia de cada modulo
+                                                total_price: 0,//sumatorio por asistencia de cada modulo
                                                 module_price: modulPrice,
                                                 bolivianos_price: inscri.canceled_price,
                                                 dolares_price: inscri.canceled_price / (6.96),
@@ -551,16 +611,40 @@ router
             }
       })
       .post('/requirements/:id', function (req, res) {
+            // console.log(req.params.id);
+            // db.events.aggregate([
+            //       { $match: { _id: mongoose.Types.ObjectId(req.params.id) } },
+            //       { $unwind: '$inscriptions' },
+            //       // { $match: { 'inscriptions.state': { $eq: req.body.filter } } },
+            //       { $group: { _id: '$_id', persons: { $push: '$inscriptions.persons' } } },
+            //       { $lookup: { from: "persons", localField: "persons", foreignField: "_id", as: "inscribed" } },
+            // ], function (err, events) {
+            //       if (err) return res.status(400).send(err);
+            //       // var persons = events.map((p) => p.persons);
+            //       // Persons(persons);
+            //       return res.status(200).send(events);
+            // })
+            console.log(req.body.programId)
+            console.log(req.params.id)
+            // db.events.findOne({_id: req.params.id},function (err,ev) {
+            //       console.log(ev.programs, req.body.programId);
+                  
+            // })
             db.events.aggregate([
                   { $match: { _id: mongoose.Types.ObjectId(req.params.id) } },
                   { $unwind: '$inscriptions' },
-                  // { $match: { 'inscriptions.state': { $eq: req.body.filter } } },
-                  { $group: { _id: '$_id', persons: { $push: '$inscriptions.person' } } },
+                  { $group: { _id: '$_id', persons: { $push: '$inscriptions.persons' }, programId: { $first: '$programs' } } },
                   { $lookup: { from: "persons", localField: "persons", foreignField: "_id", as: "inscribed" } },
+                  { $unwind: '$inscribed' },
+                  { $project: { _id: 1, 'inscribed._id': 1, 'inscribed.profile._id': 1, 'inscribed.profile.programs': 1, 'inscribed.profile.requirements': 1, programId: 1 } },
+                  { $unwind: '$inscribed.profile' },
+                  { $match: { 'inscribed.profile.programs': mongoose.Types.ObjectId(req.body.programId) } },
             ], function (err, events) {
                   if (err) return res.status(400).send(err);
-                  // var persons = events.map((p) => p.persons);
-                  // Persons(persons);
+                  console.log(events)
+                  // console.log(events[0].inscribed.profile);
+                  // console.log(events[1].inscribed.profile);
+                  // console.log(events[2].inscribed.profile);
                   return res.status(200).send(events);
             })
 
@@ -684,16 +768,3 @@ router
 //     });
 
 module.exports = router;
-// function addListsId(person, programId, idEvent, moduleId, inscri, asistencia, lists){
-                  //       db.events.update({ _id: idEvent },{
-                  //             $push: {
-                  //             inscriptions: inscription
-                  //             }
-                  //       }, {
-                  //             multi: true
-                  //       },function(err, res){
-
-
-                  //       });
-                  // }
-                  // addProfile(person, programId, idEvent, moduleId, inscri, asistencia );

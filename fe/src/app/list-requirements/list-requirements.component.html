@@ -12,7 +12,7 @@
         <h3>Lista de requisitos del evento: {{event?.name}}</h3>
      </div>
      <table class="table table-hover">
-        <thead>
+        <thead class="text-center">
            <tr>
               <th>Nombre</th>
               <th>Fotografias</th>
@@ -22,19 +22,23 @@
            </tr>
         </thead>
         <tbody>
-           <tr *ngFor="let i of states">
+           <tr *ngFor="let i of inscriptions" class="text-center">
+              <!-- <td>{{ i.name }}</td>
+              <td>{{i.photograpy}}</td>
+              <td>{{i.photocopy_ci}}</td>
+              <td>{{i.photocopy_titule}}</td> -->
               <td>{{ i.name }}</td>
               <td>
-                <label class="checkbox-inline"><input type="checkbox" value="">Entregado</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="yes" class="check" [defaultChecked]="i.photograpy"></label>
               </td>
               <td>
-                  <label class="checkbox-inline"><input type="checkbox" value="">Entregado</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="" class="check" [defaultChecked]="i.photocopy_ci"></label>
               </td>
               <td>
-                  <label class="checkbox-inline"><input type="checkbox" value="">Entregado</label>
-              </td>
+                <label class="checkbox-inline"><input type="checkbox" value="" class="check" [defaultChecked]="i.photocopy_titule"></label>
+            </td>
               <td>
-                  <a class="btn btn-success" (click)="update(person._id)">GUARDAR</a>
+                  <a class="btn btn-success" (click)="update(i.position, i.idPerson, i.idProfile)">GUARDAR</a>
               </td>
            </tr>
         </tbody>
