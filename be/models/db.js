@@ -151,19 +151,19 @@ module.exports = {
                   _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
                   programs: ObjectId,
                   name: String,
-                  modulars: [{
-                        amount: {  // observation
-                              detail: String,
-                              receipt: String,// nro factura
-                              date: Date,
-                              amount: Number,
-                        },
-                        assist: Boolean, //cambio
-                        events: ObjectId,
-                        //    inscription: ObjectId,
-                        modules: ObjectId,
-                        print_certificate: Boolean,
-                  }],
+                  // modulars: [{
+                  //       amount: {  // observation
+                  //             detail: String,
+                  //             receipt: String,// nro factura
+                  //             date: Date,
+                  //             amount: Number,
+                  //       },
+                  //       assist: Boolean, //cambio
+                  //       events: ObjectId,
+                  //       //    inscription: ObjectId,
+                  //       modules: ObjectId,
+                  //       print_certificate: Boolean,
+                  // }],
                   final_work: {
                         date_start: Date,
                         name: String, // nombre del trabajo final

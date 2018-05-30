@@ -82,7 +82,7 @@ export class ListRequirementsComponent implements OnInit {
       personaR.idProfile = i.inscribed.profile._id;
       // console.log(personaR);
       this._peticionesService.getPerson(i.inscribed._id).subscribe(
-        response => {
+        response =>{
           this.res = response;
           // console.log(this.res);
           personaR.name = this.res.first_name;
