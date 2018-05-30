@@ -10,6 +10,7 @@ var _offices_stc = {
    caja: 1000,
    departament: 'Sta. Cruz',
    company_id: _company,
+   principal:true,
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 };
@@ -180,7 +181,7 @@ var _cashFlowOffices_stc={
 
   date_start: '2018-03-10',
   date_end: '',
-  amount: 0,
+  amount: 1000,
   amount_delivered: 0,
   input:0,
   output:0,
@@ -202,6 +203,29 @@ var _cashFlowOffices_stc={
 
 var _cashFlowOffices=[_cashFlowOffices_stc];
 /////////////////////////////////////////////////////////
+
+var _cashFlowPrincipal_stc={
+  date_start:'2018-03-10',
+  date_end:'',
+  amount:0,
+  amount_delivered:0,
+  details:[
+   
+  ],
+  offices:_offices_stc,
+  users:_user_admin,
+  active:true,
+  state:-1,
+  debt:0,
+  _id: new mongoose.Types.ObjectId,
+  record_date: new Date()
+
+
+};
+var _cashFlowPrincipal=[_cashFlowPrincipal_stc]
+
+
+//////////////////////////////////////////////////////////
 
 var _correlative1 = {
    year: '2018-03-04',
@@ -869,6 +893,7 @@ module.exports = {
      saveData(_modulars, db.modulars);
 
      saveData(_categoriaEgresos,db.categoriaEgresos);
+     saveData(_cashFlowPrincipal,db.cashFlowPrincipal);
   },
 
   clearCollections: function () {
@@ -888,5 +913,6 @@ module.exports = {
      clearCollections(db.cashFlowOffices);
      clearCollections(db.modulars);
      clearCollections(db.categoriaEgresos);
+     clearCollections(db.cashFlowPrincipal);
   }
 };

@@ -76,6 +76,7 @@ module.exports = {
       input:Number,
       output:Number,
       details:[{
+            input:Boolean,
             cashFlowUsers:ObjectId,
             dateCloseCash:Date,
 
@@ -85,6 +86,33 @@ module.exports = {
       active:Boolean,
       state:Number,
       
+
+      _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
+      record_date: { type: Date, default: function () { return new Date() } },
+   })),
+   ////////////////////////////////////////////////////////////////////////////
+   cashFlowPrincipal:  mongoose.model('cashFlowPrincipal', new Schema({
+      date_start: Date,
+      date_end: Date,
+      amount: Number,
+      amount_delivered: Number,
+      details: [{
+            cashFlowOffices:ObjectId,
+            dateCloseCash:Date,
+            amount:Number,
+            description:String,
+            input:Boolean,
+            title:String,
+         
+      }],
+      offices:ObjectId,
+      users: ObjectId,
+      active:Boolean,
+      state:Number,////////-1 sin cerrar
+                  //////// 0  pendiente
+                  ////////  1 cerrado
+
+      debt:Number,
 
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } },
@@ -292,6 +320,7 @@ module.exports = {
       caja: Number,
       departament: String,
       company_id: ObjectId,
+      principal:Boolean,
 
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } }

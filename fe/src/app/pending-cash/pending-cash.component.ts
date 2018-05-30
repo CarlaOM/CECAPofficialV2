@@ -37,6 +37,9 @@ export class PendingCashComponent implements OnInit {
   public closedCashFlowUserFromManager;
 
   public newCashOffice;
+  public currentOffice;
+  public amountDelivered;
+  public principal;
 
   constructor(
     private _peticionesService:PeticionesService,
@@ -54,18 +57,26 @@ export class PendingCashComponent implements OnInit {
     
 
   ngOnInit() {
+    console.log(Identity._id);
 
+    this._peticionesService.getOfficeFromUser(Identity._id).subscribe(response=>{
+      this.currentOffice=response;
 
-    this._peticionesService.getCashFlowUsersPending().subscribe(response=>{
+      this._peticionesService.getCashFlowUsersPending(Identity._id).subscribe(response=>{
 
-      this.cajas=response;
-      this.llenarCajasNuevas();
-      console.log(this.cajas);
+        this.cajas=response;
+        console.log(this.cajas)
+        this.llenarCajasNuevas();
+        console.log(this.cajas);
+  
+  
+  
+        
+      })
 
-
-
-      
     })
+
+   
   ///////obtenemos  cashflowoffice  de nuestro usuario que tiene su sucursal////
     this._peticionesService.getCurrentCashFlowOffice(Identity._id).subscribe(response=>{
 
@@ -79,6 +90,15 @@ export class PendingCashComponent implements OnInit {
   
 
   llenarCajasNuevas(){
+    let infoCajaSaldo={}as InfoCaja;
+    infoCajaSaldo.estado=4;
+    infoCajaSaldo.fechaFin=new Date();
+    infoCajaSaldo.fechaInicio=new Date();
+    infoCajaSaldo.idCaja='';
+    infoCajaSaldo.monto=0;
+    infoCajaSaldo.montoEntregado=this.currentOffice.caja;
+    infoCajaSaldo.usuario="Saldo Caja";
+    this.nuevasCajas.push(infoCajaSaldo);
 
     for(let caja of this.cajas){
 
@@ -89,7 +109,6 @@ export class PendingCashComponent implements OnInit {
         user=response;
         username=user.name;
         infoCaja.usuario=username;
-
       })
       infoCaja.fechaInicio=caja.date_start;
       infoCaja.fechaFin=caja.date_end;
@@ -103,26 +122,34 @@ export class PendingCashComponent implements OnInit {
     console.log(this.nuevasCajas);
   }
   infoPendiente(idCash){
-    this.router.navigate(['home/pendientes/info/',idCash]);
+    var IdUserCashIdOfficeCash=idCash+'-'+this.currentCashFlowOffice._id
+    this.router.navigate(['home/pendientes/info/',IdUserCashIdOfficeCash]);
 
 
   }
 
   cerrarCajaSucursal(){
-
-    for(let caja of this.nuevasCajas){
-      this._peticionesService.closeCashFlowUserFromManager(caja.idCaja).subscribe(response=>{
-
-
-        this.closedCashFlowUserFromManager=response;
-      })
-
-
+    if(this.cajas.length>0){
+      for(let caja of this.nuevasCajas){
+        this._peticionesService.closeCashFlowUserFromManager(caja.idCaja).subscribe(response=>{
+  
+  
+          this.closedCashFlowUserFromManager=response;
+        });
+      }
     }
-    this._peticionesService.closeCashFlowOffice(this.currentCashFlowOffice._id).subscribe(response=>{
-      this.closeCashFlowOffice=response;
+    
+    this.currentCashFlowOffice.amount_delivered=this.amountDelivered;
+    this._peticionesService.closeCashFlowOffice(this.currentCashFlowOffice).subscribe(response=>{
+      this.currentOffice=response;
 
+      console.log(this.currentCashFlowOffice);
+      this._peticionesService.addDetailToPrincipal(this.currentCashFlowOffice).subscribe(res=>{
+        this.principal=res;
+
+      })
       this.newCashOffice.user=Identity._id;
+      this.newCashOffice.offices=this.currentOffice;
       console.log(this.newCashOffice);
       
       this._peticionesService.addNewCashFlowOffice(this.newCashOffice).subscribe(response=>{
@@ -140,12 +167,16 @@ export class PendingCashComponent implements OnInit {
 
     })
 
+  }
+  sendToPrincipal(){
 
+  }
+  onSubmit(){
+    this.cerrarCajaSucursal();
 
-
-
-
-
+  }
+  cancelar(){
+    window.history.back();
   }
   // confirmarCaja(idCaja){
 
