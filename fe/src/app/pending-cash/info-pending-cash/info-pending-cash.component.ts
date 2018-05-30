@@ -32,7 +32,7 @@ export class InfoPendingCashComponent implements OnInit {
 
   public amountDeliveredCash;
   public amountDelivered;
-
+  public currentOfficeCash;
   constructor(
     private _peticionesService:PeticionesService,
     private route: ActivatedRoute,
@@ -47,7 +47,8 @@ export class InfoPendingCashComponent implements OnInit {
   ngOnInit() {
 
     this.route.params.subscribe(params => {
-      this.pendingCashId = params.id;
+      this.pendingCashId = params.id.split('-')[0];
+      this.currentOfficeCash=params.id.split('-')[1];
      });
 
      this._peticionesService.getCashFlowUser(this.pendingCashId).subscribe(response=>{
@@ -83,11 +84,14 @@ export class InfoPendingCashComponent implements OnInit {
                       this.confirmedCash=response;
                       console.log(this.confirmedCash);
 
-
-                    this.cashOffice.cashFlowUser=this.confirmedCash._id;
-                    this.cashOffice.dateCloseCash=this.confirmedCash.date_end;
-                    this.cashOffice.userOfCash=this.confirmedCash.user;
-                    this._peticionesService.addDetailCashFlowOffice(this.cashOffice).subscribe(response=>{
+                    let cashFlowOfficeDetail={} as DetailCashFlowOffice;
+                    cashFlowOfficeDetail.cashFlowUser=this.confirmedCash._id;
+                    cashFlowOfficeDetail.dateCloseCash=this.confirmedCash.date_end;
+                    cashFlowOfficeDetail.idCashFlowOffice=this.currentOfficeCash;
+                    // this.cashOffice.cashFlowUser=this.confirmedCash._id;
+                    // this.cashOffice.dateCloseCash=this.confirmedCash.date_end;
+                    // this.cashOffice.userOfCash=this.confirmedCash.user;
+                    this._peticionesService.addDetailCashFlowOffice(cashFlowOfficeDetail).subscribe(response=>{
                           this.confirmedDetailCashOffice=response;
 
                           this.router.navigate(['home/pendientes']);
@@ -117,4 +121,11 @@ export class InfoPendingCashComponent implements OnInit {
       this.amountDeliveredCash=response;
     })
   }
+}
+
+export interface DetailCashFlowOffice{
+
+  cashFlowUser:string,
+  dateCloseCash:string,
+  idCashFlowOffice:string,
 }
