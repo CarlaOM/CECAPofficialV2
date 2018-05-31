@@ -21,6 +21,10 @@ export class LoginComponent implements OnInit {
    public identity; //para guardar la identificacion
    public token;
    public status: string;
+   public passO;
+   public pass;
+   public nameO;
+   public name;
 
    constructor(
       private _route: ActivatedRoute,
@@ -38,11 +42,21 @@ export class LoginComponent implements OnInit {
    }
    onSubmit() {
       // console.log(this.user);//sadas
+      
+      this._userService.getPassword(this.user.name).subscribe(
+          Response => {
+            this.passO = Response;
+            this.pass = this.passO.password_hash;
+          },
+          error => {
+            var err = error;  
+          }
+      )
+
       this._userService.signin(this.user).subscribe(
          response => {
             this.identity = response;
             if (!this.identity || !this.identity._id) {
-                console.log("usuario incorrecto");
                alert('Usuario Incorrecto');
             } else {
                Identity._id = this.identity._id;

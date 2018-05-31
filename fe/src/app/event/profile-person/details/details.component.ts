@@ -47,14 +47,14 @@ export class DetailsComponent implements OnInit {
     this._peticionesService.postPersonProgramDetails(this.personId, this.profileId).subscribe(
       result => {
         this.details = result
-         console.log(result)
+         console.log(this.details)
 
          this.profile = this.details.profile;
          this.requirements = this.details.profile.requirements; //console.log(this.requirements)
          this.finalWork = this.details.profile.final_work; //console.log(this.finalWork)
          this.reviews = this.details.profile.final_work.revisions; //console.log(this.reviews)
         
-         this.modules();
+         this.listModules();
          this.findProgram();
          this.findFacilitator();
          this.closeWork();
@@ -74,7 +74,7 @@ export class DetailsComponent implements OnInit {
           console.log(<any>error);
        })
   }
-  modules() {
+  listModules() {
     var x =[];
     for (let i = 0; i <= this.modulars.length; i++) {
       this.modulars.pop(); i = 0;
@@ -83,14 +83,15 @@ export class DetailsComponent implements OnInit {
       x.push(i.modules)      
       this.modulars.push(i);
     }
-
+    // console.log(x)
     this._peticionesService.postModules(x).subscribe(
       result => {
-         this.modulesReceived = result;
-         console.log(this.modulesReceived)
+        this.modulesReceived = result;
+        // console.log(this.modulesReceived)
+        // console.log(this.modulars)
 
-        for(let i of this.modulars){
-          this.modulars[i].name = this.modulesReceived.name;
+        for(let i=0; i < this.modulars.length; i++){
+          this.modulars[i].name = this.modulesReceived[i].name;
         }
       },
       error => {

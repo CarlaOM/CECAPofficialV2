@@ -32,7 +32,20 @@ router
          return res.status(200).send(user);
       });
    })
-
+   .get('/:name', function(req, res){
+      db.users.findOne({_id: req.params.name}, function(err, user){
+          if(err) return res.status(400).send(err);
+          if(user == null) return res.status(404).send();
+          return res.status(200).send(user);
+      })
+   })
+   .get('/:password', function(req, res){
+    db.users.findOne({_id: req.params.password_hash}, function(err, user){
+        if(err) return res.status(400).send(err);
+        if(user == null) return res.status(404).send();
+        return res.status(200).send(user);
+    })
+    })
    .delete('/:id', function (req, res) {
 
       db.users.deleteOne({ _id: req.params.id }, function (err, user) {
