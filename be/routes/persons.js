@@ -303,6 +303,7 @@ router
   })
   ////////////////////////////////////////////////////
   .post('/descriptionProfile/:id', function (req, res) {
+    // console.log(req.params.id, req.body.profileId)
     db.persons.aggregate([
       { $match: { _id: mongoose.Types.ObjectId(req.params.id) } },
       { $project: { profile: 1 } },
@@ -317,7 +318,7 @@ router
               $expr: {
                 $and: [
                   { $eq: ["$persons", "$$person_id"] },
-                  { $gte: ["$profile", "$$person_profile"] }]
+                  { $eq: ["$profile", "$$person_profile"] }]
               }
             }
           }],
@@ -326,7 +327,7 @@ router
       }
     ]).exec(function (err, person) {
       if (err) return res.status(404).send(err);
-      console.log(person[0])
+      // console.log(person[0])
       return res.status(200).send(person[0]);
     })
   })
