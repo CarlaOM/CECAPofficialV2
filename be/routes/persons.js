@@ -226,7 +226,7 @@ router
                 person: registro.persona._id,
                 events: registro.eventId,
                 modulars: registro.modularsId//duda????
-            };
+          };
           var lists = new db.lists(list);
           lists.save(function (err, lists) {
                 if (err) { return res.status(400).send(err); }
@@ -399,12 +399,8 @@ router
   })
   .post('/', function (req, res) {
     if (req.body.found) return res.status(404).send('Persona Existente');
-    // console.log('est/a')
-    // console.log(req.body.persona, '1')
     var person = new db.persons(req.body.persona);
-    // console.log(person,'2')
     person.save(function (err, person) {
-      console.log(err)
       if (err) { return res.status(400).send(err); }
       return res.status(200).send(person);
       // addInscription(person, req.body.inscription, req.body.eventId);
