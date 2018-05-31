@@ -266,7 +266,8 @@ router
             var listModuls= [];
             for(var e=0; e<= modulares.modulars.length-1; e++){
                   for(var j=0; j <= moduls.length - 1; j++){
-                        console.log(j,e)
+                        console.log(j,e);
+                       // console.log(JSON.stringify(null) , typeof modulares.modulars[e].modules);
                         if(JSON.stringify(null) == JSON.stringify(modulares.modulars[e].modules)){
                               //console.log(e + ' '+ JSON.stringify(modulares.modulars[e].modules))
                               var modulars = {
@@ -359,7 +360,7 @@ router
                                           console.log(modulPrice);
                                           var inscription = {
                                                 // segun al numero de asistencias sacar el precio total q tiene q pagar
-                                                total_price: 0,//sumatorio por asistencia de cada modulo
+                                                total_price: inscri.canceled_price,//sumatorio por asistencia de cada modulo
                                                 module_price: modulPrice,
                                                 bolivianos_price: inscri.canceled_price,
                                                 dolares_price: inscri.canceled_price / (6.96),
@@ -381,46 +382,7 @@ router
                                                       if (err) return res.status(400).send(err);
                                                 });
                                           addProfile(person, programId, idEvent, moduleId, inscri, asistencia);
-                                    })
-                                    //   db.events.findOne({ _id: idEvent }, function (err, events) {
-                                    //     //console.log(events);
-                                    //     db.modules.find({ programs: events.programs }).count().exec(function (err, moduls) {
-                                    //      // console.log(moduls);
-                                    //       console.log('llegue al la cantidad de modulos');
-                                    //       var modulPrice = inscri.price_event / moduls;///////DIVISION
-                                    //       console.log(modulPrice);
-                                    //        var inscription = {
-                                    //                   // segun al numero de asistencias sacar el precio total q tiene q pagar
-                                    //                   total_price: 0,//sumatorio por asistencia de cada modulo
-                                    //                   module_price: modulPrice,
-                                    //                   bolivianos_price: inscri.canceled_price,
-                                    //                   dolares_price: inscri.canceled_price/(6.96),
-                                    //                   canceled_price: inscri.canceled_price,
-                                    //                   price_event: inscri.price_event,
-                                    //                   receipt: inscri.receipt,
-                                    //                   name: person.name,
-                                    //                   ci: person.ci,
-                                    //                   cellphone: person.cellphone,
-                                    //                   persons: person._id,
-                                    //                   users: inscri.users
-                                    //             };
-                                    //        var d = new Date();
-                                    //                   ///////////
-                                    //        db.events.update({ _id: idEvent },{
-                                    //                         $push: {
-                                    //                         inscriptions: inscription
-                                    //                         }
-                                    //                   }, {
-                                    //                         multi: true
-                                    //                   }, function (err, events) {
-                                    //                         if (err) return res.status(400).send(err);
-                                    //                         //console.log(events);
-                                    //                         // if (events == null) return res.status(404).send();
-                                    //                         //return res.status(200).send(person);
-                                    //          });
-                                    //       addProfile(person, programId, idEvent, moduleId, inscri, asistencia );
-                                    //       });//fin module
-                                    //     });//fin Event
+                                    });
                               }
                               function addProfile(person, programId, idEvent, moduleId, inscri, asistencia) {
                                     var perfil = {
@@ -478,6 +440,7 @@ router
                                                 } else {
                                                       console.log(moduls[i]._id);
                                                       var modular = {
+                                                            name: null,
                                                             amount: null,
                                                             assist: false, //cambio
                                                             persons: person._id,//a la persona que pertenece
@@ -496,7 +459,7 @@ router
                                                                   console.log(i)
                                                                   m++;
                                                                   if (m == moduls.length) {
-                                                                        addModular(person, inscri, idEvent, moduleId, asistencia);
+                                                                        addModularsAmount(person, inscri, idEvent, moduleId, asistencia);
                                                                   }
                                                             } catch (err) {
                                                                   console.error(err);
@@ -510,7 +473,7 @@ router
                                           //addModular(person, inscri,idEvent,moduleId,asistencia );
                                     });//Fin modules
                               }
-                              function addModular(person, inscri, idEvent, moduleId, asistencia) {
+                              function addModularsAmount(person, inscri, idEvent, moduleId, asistencia) {
                                     console.log('este es el ID de MODULO::  ' + moduleId);
                                     console.log(idEvent);
                                     console.log(person._id);
