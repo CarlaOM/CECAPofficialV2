@@ -65,7 +65,7 @@ router
     
             //     modular.save();
             // })
-            var print = true;
+            // var print = true;
             db.modulars.update(
                 { persons:personId, profile:profileId, modules: moduleId },
                 {
