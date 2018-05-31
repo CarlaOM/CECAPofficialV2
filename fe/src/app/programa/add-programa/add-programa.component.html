@@ -10,10 +10,13 @@
                <form (ngSubmit)="onSubmit()" #addProgram="ngForm" class="jumbotron">
                    <div class="form-group col-sm-8">
                        <label for="name" class="control-label" >Nombre del Programa</label>
-                           <input type="text" pattern="[a-zA-Z]{3,20}[ ]{0,1}[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" class="form-control" id="name" 
+                           <input type="text" pattern="[a-zA-Z]{3,20}([ ]{0,1}[a-zA-Z]{0,20}){0,4}" class="form-control" id="name" 
                            [(ngModel)]="program.name" name="name" #name="ngModel" required />
-                           <span *ngIf="!name.valid && name.touched" class="text-alert">
-                                   *Nombre de Programa requerido.
+                           <span *ngIf="!name.untouched && !name.valid && program.name == ''" class="text-alert">
+                                   *Nombre Requerido.
+                           </span>
+                           <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && program.name != ''" class="text-alert">
+                            *Nombre de Programa invalido sobre paso el limite de digitos o tiene menos de 3.
                            </span>
                        <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
                            kjkn
@@ -25,6 +28,9 @@
                                    [(ngModel)]="program.details" name="details" #details="ngModel" required >
                                <span *ngIf="!details.valid && details.touched" class="text-alert">
                                            *Detalles de Programa requerido.
+                               </span>
+                               <span *ngIf="!details?.pattern && details.dirty && details.touched && !details.valid" class="text-alert">
+                                *Detalles de Programa invalido sobre paso el limite de digitos.
                                </span>
                            <!--<div [hidden]="ubicacion?.valid || ubicacion?.pristine" class="">
                                Ubicacion requerida
