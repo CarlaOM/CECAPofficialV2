@@ -109,6 +109,9 @@ export class DetailsComponent implements OnInit {
           console.log(<any>error);
        })
   }
+  cancelar(){
+    window.history.back();
+  }
   closeWork(){
     console.log(":3")
     if(this.reviews != undefined){

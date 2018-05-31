@@ -16,15 +16,56 @@ router
         return res.status(200).send(cajas);
         });
     })
-    .get('/pending', function (req, res) {
+    .get('/pending/:id', function (req, res) {
+
+            ////// lista todas las cajas que estan en el etado pendientes////
+            /////// para el gerente////
+            // db.cashFlowUsers.find({state:0,active:true,state:1}, function (err, cajas) {
+            db.cashFlowUsers.find({$or:[{active:true,state:0},{active:true,state:1}]}, function (err, cajas) {
+    
+            if (err) return res.status(400).send(err);
+            return res.status(200).send(cajas);
+            });
+        // // let cashFLowUsers=[];
+        // db.users.findOne({_id:req.params.id},function(err,user){
+        //     if (err) return res.status(400).send(err);
+        //     db.users.find({offices:user.offices},function(err,usersOfSucursal){
+        //         if (err) return res.status(400).send(err);
+        //         let listCashFLowUsers=[];
+        //         // listCashFLowUsers= llenar(listCashFLowUsers,usersOfSucursal);
+               
+        //         // console.log(listCashFLowUsers);
+        //         // console.log("despues antest de devolver lalista")
+        //         return  res.status(200).send(llenar(listCashFLowUsers,usersOfSucursal,user));
+        //     })
+
+        // })
+        // function llenar(listCashFLowUsers,usersOfSucursal,u){
+        //     for(let u of usersOfSucursal){
+        //         db.cashFlowUsers.findOne({user:u._id,$or:[{active:true,state:0},{active:true,state:1}]},function(err,cashFlowU){
+        //             if (err) return res.status(400).send(err);
+        //             // console.log('entra al acashflowwusersdf');
+        //             // console.log(cashFlowU)
+        //             if(cashFlowU!=null){
+        //                 listCashFLowUsers.push(cashFlowU);
+        //                 // console.log(listCashFLowUsers);
+        //                 // console.log("entraasdrjisdfasjflasjfl;ajsf")
+        //             }
+                    
+        //         })
+        //     }
+        //     console.log(listCashFLowUsers);
+        //     return listCashFLowUsers;
+
+        // }
         ////// lista todas las cajas que estan en el etado pendientes////
         /////// para el gerente////
         // db.cashFlowUsers.find({state:0,active:true,state:1}, function (err, cajas) {
-        db.cashFlowUsers.find({$or:[{active:true,state:0},{active:true,state:1}]}, function (err, cajas) {
+        // db.cashFlowUsers.find({$or:[{active:true,state:0},{active:true,state:1}]}, function (err, cajas) {
 
-        if (err) return res.status(400).send(err);
-        return res.status(200).send(cajas);
-        });
+        // if (err) return res.status(400).send(err);
+        // return res.status(200).send(cajas);
+        // });
     })
    .get('/:id', function (req, res) {
        /////////busca una caja con el id de la caja ////////
@@ -125,7 +166,7 @@ router
         events:cajaEgreso.events,
     };
     db.cashFlowUsers.findOne({active:true,state:-1,user:cajaEgreso.user},function(err,caja){
-
+        console.log(caja)
         if(err) return res.status(400).send(err);
         caja.details.push(detailEgreso),function(err,detail){
             if(err) return res.status(400).send(err);
@@ -235,14 +276,14 @@ router
           cajaUsuario.state=1;
           cajaUsuario.save();
           var userId=cajaUsuario.user;////para cuando haya varias sucursales ,buscaar por office
+            // db.users.findOne({_id:userId},function(err,user){
+            //     db.offices.findOne({_id:user.offices},function(err,office){
 
-            //  db.cashFlowOffices.findOne({active:true,state:-1},function(err,cashOffice){
-
-            //     if (err) return res.status(400).send(err);
-            //     cashOffice.amount+=cajaUsuario.amount_delivered;
-            //     cashOffice.save()
-
-            //  })
+            //         office.caja+=cajaUsuario.amount_delivered;
+            //         office.save();
+            //     })
+            // })
+           
           return res.status(200).send(cajaUsuario);
        });
     })

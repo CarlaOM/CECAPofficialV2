@@ -276,7 +276,7 @@
               <p *ngIf="areaSelected == 'P' || areaSelected == 'F'">
                 <label for="events"  style="font-size: small">Eventos</label>
                 <select class="form-control" id="events" [(ngModel)]="egresoEvent" name="events" #events="ngModel" required>
-                  <option *ngFor="let event of eventos" [value]="event._id">{{event.name}}</option>
+                  <option *ngFor="let event of eventos" [value]="event._name">{{event.name}}</option>
                 </select>
               </p>
             </div>  

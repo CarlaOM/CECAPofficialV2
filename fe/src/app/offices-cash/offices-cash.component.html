@@ -15,6 +15,8 @@
             <th>Fecha de Inicio</th>
             <th>Fecha de Cierre</th>
             <th>Monto</th>
+            <th>Estado</th>
+            <th>Confirmar</th>
             <!-- <th>Monto entregado</th> -->
             <!-- <th>ver</th> -->
             <!-- <th>Confirmar</th> -->
@@ -32,6 +34,11 @@
                 <td class="">{{office.fechaInicio|date}}</td>
                 <td class="">{{office.fechaFin|date}}</td>
                 <td class="">{{office.monto}}</td>
+                <td>{{office.active}}</td>
+                <td *ngIf="office.active==true">
+                  <button class="btn btn-primary" (click)="confirmarCajaSucursal(office)" >Confirmar</button>
+                </td>
+
                 <!-- <td>{{office.montoEntregado}}</td> -->
                 <!-- <td class=""> <a class="btn btn-warning" >Ver Detalle y confirmar</a></td> -->
                 <!-- <td class="" *ngSwitchCase="-1">

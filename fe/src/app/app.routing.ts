@@ -61,7 +61,8 @@ import { InscriptionComponent } from './event/inscription/inscription.component'
 import { ControlPagoComponent } from './event/control-pago/control-pago.component';
 import { AccountsModularsComponent } from './accounts-modulars/accounts-modulars.component';
 import { ImportFromExcelComponent } from './import-from-excel/import-from-excel.component';
-
+import { SendToPrincipalComponent } from "./pending-cash/send-to-principal/send-to-principal.component";
+import { PrincipalCashComponent } from "./principal-cash/principal-cash.component";
 
 
 
@@ -126,6 +127,8 @@ const appRoutes: Routes = [
          { path: 'event/controPago/:id', component: ControlPagoComponent },
          { path: 'accountsModulars/:id', component: AccountsModularsComponent },
          { path: 'importFromExcel', component: ImportFromExcelComponent },
+         { path: 'sucursal/sendToPrincipal',component:SendToPrincipalComponent},
+         { path: 'cajaPrincipal',component:PrincipalCashComponent},
       ]
    },
 

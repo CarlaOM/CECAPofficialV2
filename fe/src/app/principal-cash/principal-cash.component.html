@@ -1,0 +1,74 @@
+<div class="content-wrapper">
+  <section class="content-header">
+      <h1>
+         Administrar Cajas de Sucursales
+         <small></small>
+      </h1>
+   </section>
+<section class="content">
+      
+   <table class="table table-hover" >
+      <thead>
+         <tr>
+            <!-- <th>Usuario</th> -->
+            <th>Titulo</th>
+            
+            <th>Sucursal</th>
+            <!-- <th>Fecha de Inicio</th> -->
+            <th>Fecha de Cierre</th>
+            <th>Monto</th>
+            <th>Estado</th>
+            <th>Descripcion</th>
+           
+            
+               
+            
+         </tr>
+      </thead>
+      <tbody> 
+         <tr *ngFor="let det of details">
+                <td>{{det.title}}</td>
+                <td>{{det.officeName}}</td>
+                <!-- <td class="">{{det.cashFlowOffice}}</td> -->
+                <td>{{det.dateCloseCash|date}}</td>
+                <td class="">{{det.amount}}</td>
+                <td class="">{{det.input}}</td>
+
+                <td class="">{{det.description}}</td>
+                <!-- <td *ngIf="office.active==true">
+                  <button class="btn btn-primary" (click)="confirmarCajaSucursal(office)" >Confirmar</button>
+                </td> -->
+
+                
+           
+
+
+         </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+
+          <td></td>   
+          <td></td>          
+
+          <td></td>          
+          <!-- <td><strong>TOTAL</strong></td>    -->
+          <td></td>       
+          <td></td>          
+          <td></td>          
+          <!-- <td></td>           -->
+          <td></td>          
+
+        </tr>
+      </tfoot>
+
+
+   </table>
+
+   
+      <!-- <a class="btn btn-danger a" >Confirmar</a> -->
+
+   
+</section>
+<!-- <router-outlet></router-outlet> -->
+</div>
