@@ -47,6 +47,7 @@ app
    .use('/cajaSucursal',require('./routes/cajaSucursal'))
    .use('/categoriaEgresos',require('./routes/categoriaEgresos'))
    .use('/modulars',require('./routes/modulars'))
+   .use('/cajaPrincipal',require('./routes/cajaPrincipal'))
    .use(function (err, req, res, next) { 
       console.error(err.stack);
       return res.status(err.status || 500).send('Not Found');

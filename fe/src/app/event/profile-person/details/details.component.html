@@ -17,12 +17,18 @@
                 <strong>Asistencia por modulos:</strong>
               <table class="table table-user-information">
                 <tbody>
-                  <tr *ngFor="let i of modulars">
+                  <tr *ngFor="let i of modulars" [ngSwitch]="i.print_certificate">
                     <td>{{i.modules}}</td>
                     <td *ngIf="i.assist==true">Asistio</td>
                     <td *ngIf="i.assist==false">No asistio</td>
-                    <td *ngIf="i.print_certificate==true">Certificado impreso</td>
-                    <td *ngIf="i.print_certificate==false">Falta imprimir certificado</td>
+                    <!-- <td *ngIf="i.print_certificate==true">Certificado impreso</td>
+                    <td *ngIf="i.print_certificate==false">Falta imprimir certificado</td> -->
+                    <td *ngSwitchCase="false">
+                      <button *ngIf="i.assist==true" class="btn btn-warning" (click)="printCertificate(i.modules)">Imprimir Certificado</button> 
+                    </td>
+                    <td *ngSwitchCase="true">
+                      <button *ngIf="i.assist==true" class="btn btn-success" disabled>Certificado Impreso</button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -127,6 +133,11 @@
             </div>
           </div>
         </div>  
+      </div>
+      <br>
+      <div align="center">
+
+        <button class="btn btn-primary" (click)="cancelar()">Cancelar</button>
       </div>
     </div>
   </div>

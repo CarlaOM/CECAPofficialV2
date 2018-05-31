@@ -11,6 +11,7 @@ import { EventComponent } from './event/event.component';
 import { ProfilePersonComponent } from './event/profile-person/profile-person.component';
 import { AddFinalWorkComponent } from './event/profile-person/add-final-work/add-final-work.component';
 import { AddReviewComponent } from './event/profile-person/add-review/add-review.component';
+import { PrintCertificateComponent } from './event/profile-person/print-certificate/print-certificate.component';
 import { DetailsComponent } from './event/profile-person/details/details.component';
 import { ReportsComponent } from './graphicReports/reports/reports.component';
 import { ReportTrimestralComponent } from './graphicReports/report-trimestral/report-trimestral.component';
@@ -60,7 +61,8 @@ import { InscriptionComponent } from './event/inscription/inscription.component'
 import { ControlPagoComponent } from './event/control-pago/control-pago.component';
 import { AccountsModularsComponent } from './accounts-modulars/accounts-modulars.component';
 import { ImportFromExcelComponent } from './import-from-excel/import-from-excel.component';
-
+import { SendToPrincipalComponent } from "./pending-cash/send-to-principal/send-to-principal.component";
+import { PrincipalCashComponent } from "./principal-cash/principal-cash.component";
 
 
 
@@ -82,6 +84,7 @@ const appRoutes: Routes = [
          { path: 'profilePerson/:id', component: ProfilePersonComponent },
          { path: 'finalWork/add/:id', component: AddFinalWorkComponent },         
          { path: 'review/add/:id', component: AddReviewComponent },         
+         { path: 'printCertificate/:id', component: PrintCertificateComponent },         
          { path: 'detailsProfile/:id', component: DetailsComponent },
          { path: 'reports', component: ReportsComponent },
          { path: 'trimestral', component: ReportTrimestralComponent },
@@ -124,6 +127,8 @@ const appRoutes: Routes = [
          { path: 'event/controPago/:id', component: ControlPagoComponent },
          { path: 'accountsModulars/:id', component: AccountsModularsComponent },
          { path: 'importFromExcel', component: ImportFromExcelComponent },
+         { path: 'sucursal/sendToPrincipal',component:SendToPrincipalComponent},
+         { path: 'cajaPrincipal',component:PrincipalCashComponent},
       ]
    },
 

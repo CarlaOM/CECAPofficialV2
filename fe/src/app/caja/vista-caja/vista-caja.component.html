@@ -26,11 +26,11 @@
       </thead>
       <tbody>
          
-         <tr  *ngFor=" let detalle of listaDetalles">
+         <tr  *ngFor=" let detalle of detalles">
 
 
                 <td class="">{{detalle.title}}</td>
-                <td class="">{{detalle.description}} </td>
+                <td class=""> </td>
                 <td class="">{{detalle.receipt}}</td>
                 <td class="">{{detalle.date_detail|date}}</td>
                 <td class="" *ngIf="detalle.Input==true; else vacio "> {{detalle.amount}}</td>

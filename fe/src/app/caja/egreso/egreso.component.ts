@@ -45,9 +45,9 @@ export class EgresoComponent implements OnInit {
   submitted = false;
 
   onSubmit() {
-    console.log("entra");
     // this.nomSucursal = this.egresoSucursal.name;
     // console.log(this.nomSucursal);
+    console.log(this.egresoEvent);
     this.submitted = true;
     // if(this.egresoSucursal == 'Santa Cruz'){
     //   this.dimSuc = 'SC';
@@ -65,6 +65,7 @@ export class EgresoComponent implements OnInit {
     //   this.dimSuc = 'T';
     // }
     if(this.egresoEvent == 'Seguridad Industrial'){
+      
       this.dimEvent = 'H';
     }
     if(this.egresoEvent == 'Comercio Exterior'){

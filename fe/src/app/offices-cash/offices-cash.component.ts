@@ -57,6 +57,8 @@ export class OfficesCashComponent implements OnInit {
       infoCajaSucursal.montoEntregado=caja.amount_delivered;
       infoCajaSucursal.idCajaSucursal=caja._id;
       infoCajaSucursal.idSucursal=caja.offices;
+      infoCajaSucursal.userId=Identity._id;
+      infoCajaSucursal.active=caja.active;
 
       var office;
       this._peticionesService.getSucursal(caja.offices).subscribe(response=>{
@@ -73,11 +75,29 @@ export class OfficesCashComponent implements OnInit {
     // console.log(this.nuevasCajasOffices);
   }
 
+  confirmarCajaSucursal(idCajaSucursal){
+
+    this._peticionesService.confirmCajaSucursal(idCajaSucursal).subscribe(response=>{
+      this.nuevasCajasOffices=[];
+      this._peticionesService.getCashFlowOffices().subscribe(result=>{
+
+        this.offices=result;
+        this.llenarCajasNuevas();
+  
+        console.log(this.offices)
+      })
+
+      
+    });
+
+  }
+
 }
 
 
 export interface InfoSucursal{
 
+  
   usuario:string,
   fechaInicio:Date,
   fechaFin:Date,
@@ -87,5 +107,7 @@ export interface InfoSucursal{
   idSucursal:string,
   nameSucursal:string,
   estado:number,
+  active:boolean,
+  userId:string,
 }
 

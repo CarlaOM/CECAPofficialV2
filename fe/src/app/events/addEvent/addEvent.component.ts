@@ -29,7 +29,7 @@ export class AddEventComponent implements OnInit {
    }
 
    ngOnInit() {
-      this.queryPrograms();
+      this.queryPrograms();  
    }
    queryPrograms() {
       this._peticionesService.getPrograms().subscribe(response => {
@@ -49,13 +49,13 @@ export class AddEventComponent implements OnInit {
       console.log(this.model);
    }
    save() {
+      
       if ((this.model.description == '') || (this.model.total == 0)) {
          window.alert("Asegurese de llenar todos los campos")
       } else {
          // if(this.dateRef.nativeElement.value <new Date()){
-         if (this.model.date_start < new Date()) {
+         if (new Date(this.model.date_start) < new Date()) {
             window.alert("Asegurese que la fecha sea mayor a la de hoy")
-
          } else {
             console.log(this.model);
             this._peticionesService.addEvent(this.model).subscribe(response => {
@@ -68,8 +68,9 @@ export class AddEventComponent implements OnInit {
          }
 
 
-      }
-
+      
+    }
+      console.log(this.model.date_start)
    }
 
 }

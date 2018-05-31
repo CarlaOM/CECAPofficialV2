@@ -95,6 +95,9 @@ import { AccountsReceivableComponent } from './accounts-receivable/accounts-rece
 import { AccountsModularsComponent } from './accounts-modulars/accounts-modulars.component';
 import { ControlPagoComponent } from './event/control-pago/control-pago.component';
 import { AddReviewComponent } from './event/profile-person/add-review/add-review.component';
+import { SendToPrincipalComponent } from './pending-cash/send-to-principal/send-to-principal.component';
+import { PrincipalCashComponent } from './principal-cash/principal-cash.component';
+import { PrintCertificateComponent } from './event/profile-person/print-certificate/print-certificate.component';
 
 @NgModule({
   declarations: [
@@ -177,6 +180,9 @@ import { AddReviewComponent } from './event/profile-person/add-review/add-review
     AccountsReceivableComponent,
     AccountsModularsComponent,
     AddReviewComponent,
+    SendToPrincipalComponent,
+    PrincipalCashComponent,
+    PrintCertificateComponent,
   ],
   imports: [
     BrowserModule,

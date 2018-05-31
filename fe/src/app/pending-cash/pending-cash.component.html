@@ -31,20 +31,20 @@
                 <td class="">{{caja.fechaFin|date}}</td>
                 <td class="">{{caja.monto}}</td>
                 <td>{{caja.montoEntregado}}</td>
-                <td class=""> <a class="btn btn-warning" (click)="infoPendiente(caja.idCaja)">Ver Detalle y confirmar</a></td>
-                <td class="" *ngSwitchCase="-1">
+                <td class="" *ngIf="caja.estado!=4"> <a class="btn btn-warning" (click)="infoPendiente(caja.idCaja)">Ver Detalle y confirmar</a></td>
+                <td class="" *ngSwitchCase="-1" >
                     Caja sin Confirmar
                 </td>
                 <td class="" *ngSwitchCase="0">
                     <!-- <a class="btn btn-warning" (click)="confirmarCaja(caja.idCaja)">caja por confirmar</a> -->
                     <!-- caja por confirmar -->
-                    <button class="btn btn-danger" [disabled]="btnInactive">caja por confirmar </button>
+                    <button *ngIf="caja.estado!=4" class="btn btn-danger" [disabled]="btnInactive">caja por confirmar </button>
 
                 </td>
                 <td class="" *ngSwitchCase="1">
                     <!-- <a class="btn btn-success" >Caja Confirmada</a> -->
                     <!-- caja  confirmada -->
-                    <button class="btn btn-success" [disabled]="btnInactive">caja confirmada </button>
+                    <button *ngIf="caja.estado!=4" class="btn btn-success" [disabled]="btnInactive">caja confirmada </button>
 
                 </td>
                 <ng-template #vacio class="">
@@ -77,8 +77,27 @@
 
    </table>
 
+   <form (ngSubmit)="onSubmit()" #sendToPrincipalForm="ngForm">
+      
+    <div class="form-group">
+        <label for="sendToPrincipal">Dinero entregado</label>
+        <input type="number" class="form-control" id="sendToPrincipal"
+               required
+               [(ngModel)]="amountDelivered" name="sendToPrincipal"
+               #sendToPrincipal="ngModel">
+        <div [hidden]="sendToPrincipal?.valid || sendToPrincipal?.pristine"
+             class="text-alert">
+             el monto is required
+        </div>
+      </div> 
+
+    <button type="submit" class="btn btn-success" [disabled]="!sendToPrincipalForm.form.valid">Cerrar Caja y enviar a Sucursal Principal</button>
+
+    <button type="button" class="btn btn-primary" (click)="cancelar()">Cancelar</button>
+  </form>
+
+
    
-      <a class="btn btn-danger a" (click)="cerrarCajaSucursal()">Confirmar</a>
 
    
 </section>
