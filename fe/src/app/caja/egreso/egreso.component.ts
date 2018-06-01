@@ -35,18 +35,22 @@ export class EgresoComponent implements OnInit {
   public nomSucursal;
   public suc;
 
+  public modulos;
+  public moduloId;
+
   constructor(
     private _peticionesService: PeticionesService,
     private router: Router,
     private route: ActivatedRoute,
   ) {
-    this.egreso = new Cashflowusers(new Date(), new Date(), 0, 0, 0, "", "", "", "", "")///(datestart,dateend,amount,amountdelivered,receipt,description,detailamount)
+    this.egreso = new Cashflowusers(new Date(), new Date(), 0, 0, 0, "", "", "", "", "", "")///(datestart,dateend,amount,amountdelivered,receipt,description,detailamount)
   }
   submitted = false;
 
   onSubmit() {
     // this.nomSucursal = this.egresoSucursal.name;
     // console.log(this.nomSucursal);
+    
     console.log(this.egresoEvent);
     this.submitted = true;
     // if(this.egresoSucursal == 'Santa Cruz'){
@@ -108,7 +112,8 @@ export class EgresoComponent implements OnInit {
       inic = inic.concat(this.areaSelected)
       inic = inic.concat(this.catGeneral);
       inic = inic.concat(this.catEspecifica);
-      inic = inic.concat(this.dimEvent);
+      inic = inic.concat(coma);
+      inic = inic.concat(this.egresoEvent);
     }else{
       inic = this.egresoSucursal.concat(coma);
       inic = inic.concat(this.areaSelected)
@@ -124,6 +129,7 @@ export class EgresoComponent implements OnInit {
     this.egreso.detail_amount = this.egresoMonto;
     this.egreso.receipt = this.egresoRecibo;
     this.egreso.user = Identity._id;
+    this.egreso.modulars = this.moduloId;
 
     console.log(this.egreso);
 
@@ -153,6 +159,13 @@ export class EgresoComponent implements OnInit {
         })
       })
     })
+  }
+  capModu(){
+    this._peticionesService.getModulars(this.egresoEvent).subscribe(
+      response => {
+        this.modulos = response;
+      }
+    )
   }
   idSuc(idSucur){
     console.log(idSucur);

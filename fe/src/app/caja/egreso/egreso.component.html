@@ -275,8 +275,14 @@
               </p>
               <p *ngIf="areaSelected == 'P' || areaSelected == 'F'">
                 <label for="events"  style="font-size: small">Eventos</label>
-                <select class="form-control" id="events" [(ngModel)]="egresoEvent" name="events" #events="ngModel" required>
-                  <option *ngFor="let event of eventos" [value]="event._name">{{event.name}}</option>
+                <select class="form-control" id="events" [(ngModel)]="egresoEvent" name="events" (change)="capModu()" #events="ngModel" required>
+                  <option *ngFor="let event of eventos" [value]="event._id">{{event.name}}</option>
+                </select>
+              </p>
+              <p *ngIf=" areaSelected == 'P' || areaSelected == 'F' &&  egresoEvent != null">
+                <label for="moduls"  style="font-size: small">Modulos</label>
+                <select class="form-control" id="moduls" [(ngModel)]="moduloId" name="moduls" #moduls="ngModel" required>
+                  <option *ngFor="let modulo of modulos" [value]="modulo.modules">{{modulo.name}}</option>
                 </select>
               </p>
             </div>  

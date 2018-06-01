@@ -24,9 +24,13 @@
                      <label for="descripcion" class=" control-label">Descripción</label>
                      <input type="text" pattern="[a-zA-Z ]{3,280}" class="form-control" id="descripcion" [(ngModel)]="model.description" name="descripcion"
                         #descripcion="ngModel" required>
-                     <span *ngIf="!descripcion.valid && descripcion.touched" class="text-alert">
+                     <span *ngIf="!descripcion.valid && descripcion.touched && descripcion.name == ''" class="text-alert">
                         *Descripción de Evento requerido.
                      </span>
+                     <span *ngIf="!descripcion?.pattern && descripcion.dirty && descripcion.touched && !descripcion.valid && descripcion.name != ''" class="text-alert">
+                        *Sobre paso el limite de caracteres.
+                     </span>
+                     
                      <!--<div [hidden]="descripcion?.valid || descripcion?.pristine" class="">
                                  descripcion requerida
                              </div>-->

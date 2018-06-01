@@ -11,6 +11,7 @@ export class Cashflowusers{
         user:string,
         title:string,
         events:string,
+        modulars: string,
       
     ){}
 }

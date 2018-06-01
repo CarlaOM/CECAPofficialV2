@@ -22,8 +22,8 @@ export class VistaCajaComponent implements OnInit {
   public listaDescripcion=[];
   public sucursales;
   public sucursal;
-  public nameSucursal;
   public listaDetalles = [];
+  public eventos;
 
   constructor(
     private _peticionesService:PeticionesService,
@@ -32,13 +32,8 @@ export class VistaCajaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._peticionesService.getSucursales().subscribe(response => {
-      this.sucursales = response;
-      console.log(this.sucursales);
-    },error => {
-      var mensage = error;
-      console.log(mensage);
-    });
+    this.getSucursales();
+    this.getEventos();
     this._peticionesService.getCashFlowUserByUser(Identity._id).subscribe(response=>{
       this.cash=response;
 
@@ -50,39 +45,44 @@ export class VistaCajaComponent implements OnInit {
       for(let detalle of this.detalles){
         let dets = {} as detalleS;
         this.det = detalle.description.split(',');
+        if(detalle.input == false){
+          
         for(var a = 0; a <this.sucursales.length ; a++){
-          console.log("entra");
           if(this.sucursales[a]._id == this.det[0] ){
-            console.log("enceutra");
             dets.description = this.sucursales[a].name.concat(this.det[1]);
           }
+          }
+          for(var a = 0; a <this.eventos.length ; a++){
+            if(this.eventos[a]._id == this.det[2] ){
+              dets.description = dets.description.concat(this.eventos[a].name);
+            }
+            } 
+          console.log(dets.description)
         }
         dets.title = detalle.title;
         dets.amount = detalle.amount;
         dets.date_detail = detalle.date_detail;
         dets.Input = detalle.input;
         dets.receipt = detalle.receipt;
+        // dets.eventId = detalle.events;
         this.listaDetalles.push(dets);        
       }
-      
-      // for(var i = 0 ; i < this.detalles.length ; i++){
-      //   console.log(i);
-      //   console.log("entraaaa");
-      // this.det = this.detalles[i].description.split(',');
-      // console.log(this.det);
-      
-      // for(var a = 0; a <this.sucursales.length ; a++){
-      //   console.log("entra");
-      //   if(this.sucursales[a]._id == this.det[0] ){
-      //     console.log("enceutra");
-      //     this.listaDescripcion[i] = this.sucursales[a].name.concat(this.det[1]);
-      //   }
-      // }
-      // console.log(this.listaDescripcion);  
-      
-      // }
     });
     console.log(this.listaDetalles); 
+  }
+  getSucursales(){
+    this._peticionesService.getSucursales().subscribe(response => {
+      this.sucursales = response;
+      console.log(this.sucursales);
+    },error => {
+      var mensage = error;
+      console.log(mensage);
+    });
+  }
+  getEventos(){
+    this._peticionesService.getEvents().subscribe(response =>{
+      this.eventos = response;
+    })
   }
   goIngreso(){
     this.router.navigate(['/home/caja/ingreso']);
