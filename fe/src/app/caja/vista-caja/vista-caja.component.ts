@@ -22,10 +22,8 @@ export class VistaCajaComponent implements OnInit {
   public listaDescripcion=[];
   public sucursales;
   public sucursal;
-  public nameSucursal;
   public listaDetalles = [];
-  public evento;
-  public a;
+  public eventos;
 
   constructor(
     private _peticionesService:PeticionesService,
@@ -34,13 +32,8 @@ export class VistaCajaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._peticionesService.getSucursales().subscribe(response => {
-      this.sucursales = response;
-      console.log(this.sucursales);
-    },error => {
-      var mensage = error;
-      console.log(mensage);
-    });
+    this.getSucursales();
+    this.getEventos();
     this._peticionesService.getCashFlowUserByUser(Identity._id).subscribe(response=>{
       this.cash=response;
 
@@ -52,14 +45,18 @@ export class VistaCajaComponent implements OnInit {
       for(let detalle of this.detalles){
         let dets = {} as detalleS;
         this.det = detalle.description.split(',');
-        if(this.det.length > 1){
+        if(detalle.input == false){
+          
         for(var a = 0; a <this.sucursales.length ; a++){
           if(this.sucursales[a]._id == this.det[0] ){
             dets.description = this.sucursales[a].name.concat(this.det[1]);
-
           }
           }
-          dets.description = dets.description.concat(this.getEvento(detalle.events));
+          for(var a = 0; a <this.eventos.length ; a++){
+            if(this.eventos[a]._id == this.det[2] ){
+              dets.description = dets.description.concat(this.eventos[a].name);
+            }
+            } 
           console.log(dets.description)
         }
         dets.title = detalle.title;
@@ -70,31 +67,22 @@ export class VistaCajaComponent implements OnInit {
         // dets.eventId = detalle.events;
         this.listaDetalles.push(dets);        
       }
-      
-      // for(var i = 0 ; i < this.detalles.length ; i++){
-      //   console.log(i);
-      //   console.log("entraaaa");
-      // this.det = this.detalles[i].description.split(',');
-      // console.log(this.det);
-      
-      // for(var a = 0; a <this.sucursales.length ; a++){
-      //   console.log("entra");
-      //   if(this.sucursales[a]._id == this.det[0] ){
-      //     console.log("enceutra");
-      //     this.listaDescripcion[i] = this.sucursales[a].name.concat(this.det[1]);
-      //   }
-      // }
-      // console.log(this.listaDescripcion);  
-      
-      // }
     });
     console.log(this.listaDetalles); 
   }
-  getEvento(idEvent){
-    this._peticionesService.getEvent(idEvent).subscribe(response =>{
-      this.a = response;
+  getSucursales(){
+    this._peticionesService.getSucursales().subscribe(response => {
+      this.sucursales = response;
+      console.log(this.sucursales);
+    },error => {
+      var mensage = error;
+      console.log(mensage);
+    });
+  }
+  getEventos(){
+    this._peticionesService.getEvents().subscribe(response =>{
+      this.eventos = response;
     })
-    return this.a.name;
   }
   goIngreso(){
     this.router.navigate(['/home/caja/ingreso']);
@@ -126,5 +114,4 @@ export interface detalleS{
   date_detail:Date,
   Input: boolean,
   title: string,
-  eventId: string,
 }
