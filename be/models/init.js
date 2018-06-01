@@ -276,13 +276,13 @@ var _program_seguridad = {
    details: 'para industrias.',
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _program_rrhh = {
    name: 'recursos humanos',
    details: 'para empresas.',
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _programs = [_program_seguridad, _program_rrhh];
 ////////////////////////////////////////////
 var _modulo_1_seguridad = {
@@ -297,7 +297,7 @@ var _modulo_1_seguridad = {
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _modulo_2_seguridad = {
    number: 2,
    name: 'modulo 2',
@@ -310,7 +310,7 @@ var _modulo_2_seguridad = {
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};;
 
 var _modulo_1_rrhh = {
    number: 1,
@@ -324,7 +324,7 @@ var _modulo_1_rrhh = {
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _modulo_2_rrhh = {
    number: 2,
    name: 'modulo 2',
@@ -337,7 +337,7 @@ var _modulo_2_rrhh = {
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _modulo_3_rrhh = {
    number: 3,
    name: 'modulo 3',
@@ -350,7 +350,7 @@ var _modulo_3_rrhh = {
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _modulo_4_rrhh = {
    number: 4,
    name: 'modulo 4',
@@ -363,7 +363,7 @@ var _modulo_4_rrhh = {
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _modulo_5_rrhh = {
    number: 5,
    name: 'modulo 5',
@@ -376,7 +376,7 @@ var _modulo_5_rrhh = {
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _modulo_6_rrhh = {
    number: 6,
    name: 'modulo 6',
@@ -389,7 +389,7 @@ var _modulo_6_rrhh = {
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _modulo_7_rrhh = {
    number: 7,
    name: 'modulo 7',
@@ -402,7 +402,7 @@ var _modulo_7_rrhh = {
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _modulo_8_rrhh = {
    number: 8,
    name: 'modulo 8',
@@ -415,7 +415,7 @@ var _modulo_8_rrhh = {
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _modulos = [_modulo_1_seguridad, _modulo_2_seguridad, _modulo_1_rrhh, _modulo_2_rrhh, _modulo_3_rrhh, _modulo_4_rrhh, _modulo_5_rrhh, _modulo_6_rrhh, _modulo_7_rrhh, _modulo_8_rrhh];
 
 /////////////////////////////////////////////////////////7
@@ -562,7 +562,7 @@ var _person_2 = {
       }],
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _person_3 = {
    first_name: 'juan',
    last_name: 'perez',
@@ -634,7 +634,7 @@ var _person_3 = {
       }],
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _person_4 = {
    first_name: 'lucia',
    last_name: 'galarza',
@@ -791,7 +791,7 @@ var _list_1 = {
    
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _list_2 = {
    amount: 300,
    receipt: 102,
@@ -803,7 +803,7 @@ var _list_2 = {
    
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _lists = [_list_1, _list_2];
 _event_seg.modulars[0].lists.push(_list_1);
 _event_seg.modulars[0].lists.push(_list_2);
@@ -825,7 +825,7 @@ var _modulars_1={
 
     _id: new mongoose.Types.ObjectId,
     record_date: new Date()
-}
+};
 var _modulars = [_modulars_1];
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
@@ -852,8 +852,8 @@ var _categoriaEgresos_1 = {
     extras: ['Varios (Dra/Ing)'],
   _id: new mongoose.Types.ObjectId,
   record_date: new Date()
-}
-var _categoriaEgresos = [_categoriaEgresos_1 ]
+};
+var _categoriaEgresos = [_categoriaEgresos_1 ];
 //////////////////////////////////////////////////////////////////////////////
 
 function saveData(collection, schema) {
@@ -891,7 +891,6 @@ module.exports = {
      saveData(_lists, db.lists);
      saveData(_cashFlowOffices,db.cashFlowOffices);
      saveData(_modulars, db.modulars);
-
      saveData(_categoriaEgresos,db.categoriaEgresos);
      saveData(_cashFlowPrincipal,db.cashFlowPrincipal);
   },
