@@ -18,7 +18,7 @@
               <table class="table table-user-information">
                 <tbody>
                   <tr *ngFor="let i of modulars" [ngSwitch]="i.print_certificate">
-                    <td>{{i.modules}}</td>
+                    <td>{{i.name}}</td>
                     <td *ngIf="i.assist==true">Asistio</td>
                     <td *ngIf="i.assist==false">No asistio</td>
                     <!-- <td *ngIf="i.print_certificate==true">Certificado impreso</td>
@@ -74,7 +74,7 @@
                 <tbody>
                   <tr>
                     <td>
-                      <a class="btn btn-success fa fa-plus" (click)="addFinalWork(ppId)"> Trabajo Final</a>
+                      <a class="btn btn-primary fa fa-plus" (click)="addFinalWork(ppId)"> Trabajo Final</a>
                         <!-- <a class="btn btn-success" [routerLink]="['/home/finalWork/add'+ personId]">
                            <i class="fa fa-plus"></i>Trabajo Final</a> -->
                     </td>
@@ -98,12 +98,12 @@
                   <tr>
                     <td>Fecha final</td>
                     <td *ngIf="finalWork?.date_end==null">Trabajo no finalizado...</td>
-                    <td>{{finalWork?.date_end | date}}</td>
+                    <td><strong>{{finalWork?.date_end | date}}</strong></td>
                   </tr>
                   <tr>
                     <td>Entrega de Diploma</td>
-                    <td *ngIf="profile?.print_diploma==true">Listo</td>
-                    <td *ngIf="profile?.print_diploma==false">Pendiente</td>
+                    <td *ngIf="profile?.print_diploma==true"><strong>Realizado!!!</strong></td>
+                    <td *ngIf="profile?.print_diploma==false">Pendiente...</td>
                   </tr>
                 </tbody>
               </table>
@@ -112,7 +112,7 @@
                 <tbody>
                   <tr>
                     <td *ngIf="close==null">
-                      <a class="btn btn-success fa fa-plus" (click)="addReview(ppId)"> Añadir Revision</a>
+                      <a class="btn btn-primary fa fa-plus" (click)="addReview(ppId)"> Añadir Revision</a>
                     </td> 
                   </tr>
                   <tr *ngFor="let i of reviews">
