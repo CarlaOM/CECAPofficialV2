@@ -12,7 +12,8 @@
         <h3>Reportes modulares del evento {{event?.name}}</h3>
      </div>
      <div class="btn-group" data-toggle="buttons">
-        <label *ngFor="let m of modules" class="btn btn-success form-check-label" (click)="filterModular(m._id)">
+        <label *ngFor="let m of modules" class="btn btn-success form-check-label" 
+               (click)="filterModular(m._id +'-'+ m.modules)">
           <input class="form-check-input" type="radio" autocomplete="off"> {{m.name}}
         </label>
       </div>
@@ -40,5 +41,7 @@
         </tbody>
      </table>
   </section>
+  <br>
+      <button class="btn btn-primary" (click)="cancelar()">Cancelar</button>
   <router-outlet></router-outlet>
 </div>
