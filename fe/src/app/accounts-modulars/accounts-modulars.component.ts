@@ -12,6 +12,7 @@ export class AccountsModularsComponent implements OnInit {
   public eventId;
   public event;
   public modules;
+  public account;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,24 +20,31 @@ export class AccountsModularsComponent implements OnInit {
     private _peticionesService: PeticionesService
   ) { }
 
-  ngOnInit() {
-    this.queryModulos();
+  ngOnInit() { 
+    //this.queryModulos();
+    this.queryModulars();
   }
-  queryModulos(){
+  queryModulars(){
     this.route.params.subscribe(params => {
-        this.eventId = params.id;
-        // console.log(this.eventId)
+      this.eventId = params.id;
+      // console.log(this.eventId)
     });
-    this._peticionesService.getEventModuls(this.eventId).subscribe(
+    this._peticionesService.getModulars(this.eventId).subscribe(
       result => {
         this.modules = result;
-        console.log(this.modules);
-
-        this.queryEvent();
-        },
-        error => {
-          console.log(<any>error);
-        });
+        // for( let i of this.modules ){
+        //     if(i.modules == null){
+        //         this.modules.pop();
+        //     }
+        // }
+         console.log('aqui los modules Objedts');
+         console.log(this.modules);
+      },
+      error=>{
+        var errorMessage = <any>error;
+         console.log(errorMessage);
+      }
+    );
   }
   queryEvent() {
     this._peticionesService.getEvent(this.eventId).subscribe(
@@ -50,5 +58,18 @@ export class AccountsModularsComponent implements OnInit {
   }
   filterModular(modular_id){
     console.log(modular_id);
- }
+    //returned object 
+    this._peticionesService.getAcconutsModulars(modular_id+'-'+this.eventId).subscribe(
+      res =>{
+          this.account = res;
+          console.log(this.account);
+      },
+      error =>{
+        console.error(<any>error());
+        
+    }); 
+  }
+  cancelar(){
+    window.history.back();
+  }
 }
