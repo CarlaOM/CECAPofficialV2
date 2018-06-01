@@ -26,10 +26,10 @@
                        <label for="ubicacion" class=" control-label">Detalles</label>
                                <input type="text" pattern="[a-zA-Z0-9 ]{3,150}" class="form-control" id="ubicacion" 
                                    [(ngModel)]="program.details" name="details" #details="ngModel" required >
-                               <span *ngIf="!details.valid && details.touched" class="text-alert">
+                               <span *ngIf="!details.valid && details.touched && program.name == ''" class="text-alert">
                                            *Detalles de Programa requerido.
                                </span>
-                               <span *ngIf="!details?.pattern && details.dirty && details.touched && !details.valid" class="text-alert">
+                               <span *ngIf="!details?.pattern && details.dirty && details.touched && !details.valid && details.name != ''" class="text-alert">
                                 *Detalles de Programa invalido sobre paso el limite de digitos.
                                </span>
                            <!--<div [hidden]="ubicacion?.valid || ubicacion?.pristine" class="">

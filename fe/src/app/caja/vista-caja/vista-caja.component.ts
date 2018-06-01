@@ -24,6 +24,8 @@ export class VistaCajaComponent implements OnInit {
   public sucursal;
   public nameSucursal;
   public listaDetalles = [];
+  public evento;
+  public a;
 
   constructor(
     private _peticionesService:PeticionesService,
@@ -50,18 +52,22 @@ export class VistaCajaComponent implements OnInit {
       for(let detalle of this.detalles){
         let dets = {} as detalleS;
         this.det = detalle.description.split(',');
+        if(this.det.length > 1){
         for(var a = 0; a <this.sucursales.length ; a++){
-          console.log("entra");
           if(this.sucursales[a]._id == this.det[0] ){
-            console.log("enceutra");
             dets.description = this.sucursales[a].name.concat(this.det[1]);
+
           }
+          }
+          dets.description = dets.description.concat(this.getEvento(detalle.events));
+          console.log(dets.description)
         }
         dets.title = detalle.title;
         dets.amount = detalle.amount;
         dets.date_detail = detalle.date_detail;
         dets.Input = detalle.input;
         dets.receipt = detalle.receipt;
+        // dets.eventId = detalle.events;
         this.listaDetalles.push(dets);        
       }
       
@@ -83,6 +89,12 @@ export class VistaCajaComponent implements OnInit {
       // }
     });
     console.log(this.listaDetalles); 
+  }
+  getEvento(idEvent){
+    this._peticionesService.getEvent(idEvent).subscribe(response =>{
+      this.a = response;
+    })
+    return this.a.name;
   }
   goIngreso(){
     this.router.navigate(['/home/caja/ingreso']);
@@ -114,4 +126,5 @@ export interface detalleS{
   date_detail:Date,
   Input: boolean,
   title: string,
+  eventId: string,
 }

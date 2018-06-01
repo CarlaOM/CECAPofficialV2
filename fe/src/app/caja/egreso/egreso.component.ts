@@ -108,7 +108,8 @@ export class EgresoComponent implements OnInit {
       inic = inic.concat(this.areaSelected)
       inic = inic.concat(this.catGeneral);
       inic = inic.concat(this.catEspecifica);
-      inic = inic.concat(this.dimEvent);
+      inic = inic.concat(coma);
+      inic = inic.concat(this.egresoEvent);
     }else{
       inic = this.egresoSucursal.concat(coma);
       inic = inic.concat(this.areaSelected)
