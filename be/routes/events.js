@@ -247,9 +247,8 @@ router
             //return res.status(200).send(modulars);
             getEventModules(modulares, req.params.id);
          });
-
          function getEventModules(modulares, eventId){
-            db.events.findOne({ _id: eventId}, function (err, events) {
+            db.events.findOne({ _id: eventId }, function (err, events) {
                   //console.log(events);
                   if (err) { return res.status(400).send(err); }
                   if (events) {
@@ -264,6 +263,18 @@ router
           }
           function newGenerateModulars(modulares, moduls, eventId){
             var listModuls= [];
+            // for(var e=0; e<= modulares.modulars.length-1; e++){
+            //       for(var j=0; j <= moduls.length - 1; j++){
+            //       console.log(modulares.modulars[e]._id,modulares.modulars[e].modules, moduls[j]._id);
+                 
+            //       var modulars1 = {
+            //             name: moduls[j].name,
+            //             _id: modulares.modulars[e]._id,
+            //             modules: moduls[j]._id
+            //             };
+            //             listModuls.push(modulars1);                                          
+            //       }
+            // }
             for(var e=0; e<= modulares.modulars.length-1; e++){
                   for(var j=0; j <= moduls.length - 1; j++){
                         console.log(j,e);

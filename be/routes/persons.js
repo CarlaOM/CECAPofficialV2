@@ -128,8 +128,9 @@ router
                          events: registro.eventId,
                          modulars:registro.modularsId},function(err, lista){
           if (err) return res.status(400).send(err);
-              console.log(lista);
-              addModularsAmount(registro, pagoActual, total_cancelado, price_event, lista);
+          console.log('aqui la lista del get:: ');
+          console.log(lista);
+          addModularsAmount(registro, pagoActual, total_cancelado, price_event, lista);
       });
     }  
     function addModularsAmount(registro, pagoActual, total_cancelado, price_event, lista){
@@ -137,12 +138,12 @@ router
       console.log('Event ID:  '+registro.eventId);
       console.log('Persona ID:  '+registro.persona._id);
       //console.log('PROGRAMA ID:  '+programsId);
-      var id = JSON.parse(registro.moduleId);
+      //var id = JSON.parse(registro.moduleId);
       // console.log(JSON.stringify(null), typeof registro.moduleId);
       // console.log( null, id);
       // console.log( null,typeof id);
       // console.log(JSON.stringify("null"), JSON.stringify( registro.moduleId));
-      if(JSON.stringify(null) == JSON.stringify(id)){
+      if(JSON.stringify(null) == JSON.stringify(registro.moduleId)){
           //crear nuevo (Modulars) del Profile Person
           console.log('LLEGUE AQUI');
           if(pagoActual == 0 ){
@@ -158,6 +159,7 @@ router
                   if (err) return res.status(400).send(err);
                   var profileId = null;
                   for (let i = 0; i < ps.profile.length; i++) {
+                    console.log('bucando el profileID'+ i);
                         if (JSON.stringify(ps.profile[i].programs) == JSON.stringify(event.programs)) {
                               profileId = ps.profile[i]._id;
                         }
@@ -191,11 +193,12 @@ router
             });
           } 
       }else{
+        console.log('########## control pago Amount #########')
         var amount = {  // observation
           detail: 'Control Pago',
           receipt: registro.inscription.receipt,// nro factura
           date: new Date(),
-          amount: pagoActual,
+          amount: pagoActual
         };
         db.modulars.update({ persons: registro.persona._id, 
                             events: registro.eventId, 
@@ -205,17 +208,17 @@ router
                           'amount': amount,
                         // 'assist': asistencia
                     }
-              }).exec(function (err, off) {
+              }).exec(function (err, off){
               if (err) return res.status(400).send(err);
               console.log(off)
               //if (off.nModified == 0) return res.status(404).send();
-              console.log('CONTROL ACTUALIZADO CORRECTAMENTE')
+              console.log('CONTROL en modulars Actualizado')
               //return res.status(200).send(off);
               crearLists(registro, pagoActual, total_cancelado, price_event, lista);
         });
       }
     }
-  function crearLists(registro, pagoActual, total_cancelado, price_event, lista){
+   function crearLists(registro, pagoActual, total_cancelado, price_event, lista){
     if(lista == null ){ 
           var list = {
                 bolivianos: registro.inscription.canceled_price,
@@ -231,11 +234,11 @@ router
           lists.save(function (err, lists) {
                 if (err) { return res.status(400).send(err); }
                 console.log('Lista nueva creada del nuevo Pago en el modulo');
-              // return res.status(200).send(lists);
+                // return res.status(200).send(lists);
                 editInscription(req.body, total_cancelado, price_event , pagoActual);
           });
     }else{//caso que exista obtener el modulo y el pago anterior y si debe enviar mensaje,sino
-        console.log('monto bolibianos = '+lista.bolivianos)    
+        console.log('Lista el monto bolibianos = '+lista.bolivianos)    
         if( lista.bolivianos == 0 || lista.bolivianos == undefined ){
             db.lists.update({ person: registro.persona._id, 
                               events: registro.eventId, 
@@ -250,7 +253,8 @@ router
                 }
               }).exec(function (err, off) {
                 if (err) return res.status(400).send(err);
-                console.log(off)
+                //console.log(off)
+                console.log('Lista actualizada de pago = 0.00 : ');
                 //return res.status(200).send(off);
                 editInscription(req.body, total_cancelado, price_event , pagoActual);
               });
@@ -259,7 +263,7 @@ router
             return res.status(400).send(lista);
         }
     }
-  }
+   }
     function editInscription(registro, total_cancelado, price_event, pagoActual){
       console.log('Pago Actual: '+ pagoActual);
       console.log('Total Canceled: '+total_cancelado);
@@ -276,7 +280,8 @@ router
         }
        }).exec(function (err, inscri) {
           if (err) return res.status(400).send(err);
-          console.log(inscri);
+         console.log(inscri);
+         console.log('Inscripcion Actualizado: ')
           //return res.status(200).send(event);
           editProfile( registro, pagoActual, total_cancelado, price_event);
         });
@@ -284,7 +289,7 @@ router
     function editProfile(registro, pagoActual, total_cancelado, price_event){
        db.events.findOne({_id: registro.eventId},{ programs: 1},function(err, event){
         if (err) return res.status(400).send(err);
-        console.log('aqui el id de program ::  '+ event.programs);
+        console.log('aqui el id de program para el profile::  '+ event.programs);
         db.persons.update({ _id: registro.persona._id, 'profile.programs': event.programs},
           {
             $set: { 
@@ -294,9 +299,9 @@ router
           }).exec(function (err, profile) {
               if (err) return res.status(400).send(err);
               console.log(profile);
+              console.log('Profile Actualizado: ')
               var progra = event.programs;
               return res.status(200).send(profile);
-              //addModularsAmount(registro, pagoActual, total_cancelado, price_event,progra );
             });
         });
      }    
