@@ -16,7 +16,7 @@
                                    *Nombre Requerido.
                            </span>
                            <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && program.name != ''" class="text-alert">
-                            *Nombre de Programa invalido sobre paso el limite de digitos o tiene menos de 3.
+                            *Nombre del Programa inválido, sobrepasó el límite de dígitos o tiene menos de 3.
                            </span>
                        <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
                            kjkn
@@ -26,18 +26,18 @@
                        <label for="ubicacion" class=" control-label">Detalles</label>
                                <input type="text" pattern="[a-zA-Z0-9 ]{3,150}" class="form-control" id="ubicacion" 
                                    [(ngModel)]="program.details" name="details" #details="ngModel" required >
-                               <span *ngIf="!details.valid && details.touched" class="text-alert">
+                               <span *ngIf="!details.valid && details.touched && program.name == ''" class="text-alert">
                                            *Detalles de Programa requerido.
                                </span>
-                               <span *ngIf="!details?.pattern && details.dirty && details.touched && !details.valid" class="text-alert">
-                                *Detalles de Programa invalido sobre paso el limite de digitos.
+                               <span *ngIf="!details?.pattern && details.dirty && details.touched && !details.valid && details.name != ''" class="text-alert">
+                                *Detalles del Programa inválido, sobrepasó el límite de dígitos.
                                </span>
                            <!--<div [hidden]="ubicacion?.valid || ubicacion?.pristine" class="">
                                Ubicacion requerida
                            </div>-->
                    </div>
                    <div class="form-group col-sm-8" style="text-align:center ">
-                       <button type="submit" class="btn btn-success" [disabled]="!addProgram.form.valid">Registrar</button>
+                       <button type="submit" class="btn btn-success" [disabled]="!addProgram.form.valid">Guardar</button>
                        <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
                     </div>
                </form>

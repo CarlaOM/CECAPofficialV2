@@ -26,16 +26,14 @@
 <div class="content-wrapper">
     <br>
     <div class="">
-  
-  
    
     <div class="box box-primary">
   
   <div class="container">
       <div >
-        <h1>Registrar Ejecutio</h1>
-        <form (ngSubmit)="onSubmit()" #editEjecutivo="ngForm" >
-          <div class="form-group">
+        <h1>Editar Ejecutivo</h1>
+        <form (ngSubmit)="onSubmit()" #editEjecutivo="ngForm" class="jumbotron">
+          <div class="form-group col-sm-8">
             <label for="name">Nombres</label>
             <input type="text" pattern="[a-zA-Z]{3,10}[ ]{0,1}[a-zA-Z]{0,10}" class="form-control" id="name"
                    required
@@ -44,10 +42,10 @@
                    >
             <div [hidden]="name?.valid || name?.pristine"
                  class="text-alert">
-              Nombre es invalido
+              *El Nombre es inválido
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group col-sm-8">
             <label for="lastname">Apellidos</label>
             <input type="text" pattern="[a-zA-Z]{3,20}[ ]{0,1}[a-zA-Z]{0,20}" class="form-control" id="lastname"
                    required
@@ -55,10 +53,10 @@
                    #lastname="ngModel">
             <div [hidden]="lastname?.valid || lastname?.pristine"
             class="text-alert">
-            Apellido es invalido
+            *El Apellido es inválido
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group col-sm-8">
             <label for="cell">Celular</label>
             <input type="number" pattern="[6-7][0-9]{7}" class="form-control" id="cell"
                    required
@@ -66,11 +64,11 @@
                    #cell="ngModel">
             <div [hidden]="cell?.valid || cell?.pristine"
             class="text-alert">
-            Celular es invalido
+            *El Celular es inválido
             </div>
           </div>
   
-          <div class="form-group">
+          <div class="form-group col-sm-8">
               <label for="correo">Correo</label>
               <input type="correo" pattern="[a-zA-Z.0-9]*[@][a-z]{3,15}[.][a-z]{3,15}" class="form-control" id="correo"
                      required
@@ -78,12 +76,11 @@
                      #correo="ngModel">
               <div [hidden]="correo?.valid || correo?.pristine"
               class="text-alert">
-              email es invalido
+              *El Correo es inválido
               </div>
             </div>
-        
-            
-            <div class="form-group">
+           
+            <div class="form-group col-sm-8">
                     <label for="rol"> Rol</label>
                     <select class="form-control" id="rol"
                             required
@@ -92,13 +89,13 @@
                       <option *ngFor="let ro of roles" [value]="ro._id">{{ro.name}}</option>
                     </select>
                     <div [hidden]="rol.valid || rol.pristine" class="text-alert">
-                      rol is required
+                        *El Rol es requerido
                     </div>
             </div>
            
 
-            <div class="form-group">
-                    <label for="offices">sucursal</label>
+            <div class="form-group col-sm-8">
+                    <label for="offices">Sucursal</label>
                     <select class="form-control" id="offices"
                             required
                             [(ngModel)]="ejecutivoOffice" name="offices"
@@ -106,12 +103,12 @@
                       <option *ngFor="let sucur of sucursales" [value]="sucur._id">{{sucur.name}}</option>
                     </select>
                     <div [hidden]="offices.valid || offices.pristine" class="text-alert">
-                            sucursal is required
+                        *La Sucursal es requerido
                     </div>
             </div>
 
-            <div class="form-group">
-                    <label for="cartera">cartera</label>
+            <div class="form-group col-sm-8">
+                    <label for="cartera">Cartera</label>
                     <select class="form-control" id="cartera"
                             required
                             [(ngModel)]="ejecutivoCartera" name="cartera"
@@ -119,11 +116,11 @@
                       <option *ngFor="let carte of carteras" [value]="carte._id">{{carte.name}}</option>
                     </select>
                     <div [hidden]="cartera?.valid || cartera?.pristine" class="text-alert">
-                            cartera is required
+                        *La Cartera es requerido
                     </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-sm-8">
                 <label for="estado">Elige el nuevo estado del Ejecutivo</label>
                                 
                 <fieldset>
@@ -133,18 +130,14 @@
                     <label>
                         <input type="radio" name="status" [(ngModel)]="ejecutivoActive" value=false > Inactivo</label>
                 </fieldset>
-                <div [hidden]="cartera?.valid || cartera?.pristine" class="">
+                <!-- <div [hidden]="cartera?.valid || cartera?.pristine" class="">
                         cartera is required
-                </div>
+                </div> -->
         </div>
-            
-
-
-     
-          
-     
-          <button type="submit" class="btn btn-success" [disabled]="!editEjecutivo.form.valid">Registrar</button>
-          <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
+        <div class="form-group col-sm-8" style="text-align:center ">
+            <button type="submit" class="btn btn-success" [disabled]="!editEjecutivo.form.valid">Guardar</button>
+            <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
+        </div>
         </form>
       </div>
      

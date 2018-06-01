@@ -8,14 +8,14 @@
                    <form (ngSubmit)="guardar()" #addPerson="ngForm" class="jumbotron">
                        <div class="form-group col-sm-8">
                             <div class="form-group col-sm-6" style="text-align: center">
-                                    <label for="first_name" class="control-label" >Nombre</label>
+                                    <label for="first_name" class="control-label" >Nombres</label>
                                         <input type="text" pattern="[a-zA-Z]{3,15}[ ]{0,1}[a-zA-Z]{0,15}" class="form-control" id="first_name" 
                                         [(ngModel)]="person.first_name" name="first_name" #firstname="ngModel" required />
                                         <span *ngIf="!firstname.valid && firstname.touched" class="text-alert">
                                                 *Nombre de persona requerido.
                                         </span>
                                         <span *ngIf=" firstname?.pattern && firstname.touched" class="text-alert">
-                                            *Nombre invalido
+                                            *Nombre inválido
                                     </span>
                                     <!-- <div [hidden]="first_name?.valid || first_name?.pristine" class="text-alert">
                                         kjknkasdkjhjask
@@ -29,7 +29,7 @@
                                                *Apellido de persona requerido.
                                        </span>
                                        <span *ngIf="lastname?.pattern && lastname.touched" class="text-alert">
-                                        *Apellido invalido.
+                                        *Apellido inválido.
                                 </span>
                                    <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
                                        kjkn
@@ -45,7 +45,7 @@
                                           *CI de persona requerido o es invalido.
                                   </span>
                                   <span *ngIf="ci?.pattern && ci.touched" class="text-alert">
-                                    *CI de persona es invalido.
+                                    *CI de persona es inválido.
                             </span>
                           </div>
                           <div class="form-group col-sm-4">
@@ -73,7 +73,7 @@
                       </div>
                       <div class="form-group col-sm-8" >
                           <div class="form-group col-sm-6">
-                              <label for="email" class="control-label" style="text-align: left">Correo</label>
+                              <label for="email" class="control-label" style="text-align: left">Correo Electrónico</label>
                                   <input type="email" pattern="[a-zA-Z.0-9]*[@][a-z]{3,15}[.][a-z]{3,15}" class="form-control" id="email" 
                                   [(ngModel)]="person.email" name="email" #email="ngModel" />
                                   <span *ngIf="!email.valid && email.touched" class="text-alert">
@@ -121,6 +121,7 @@
                             <i class="fa fa-tag prefix grey-text"></i>Ocupación</label>
                           <select class="form-control" id="ocupSelect" [(ngModel)]="ocupSelected" (change)="captOcupation()"
                                name="ocupSelect" #ocupSelect="ngModel">
+                              <option value="" hidden>Seleccionar...</option>                               
                               <option value="estudiante">Estudiante</option>
                               <option value="profesional">Profesional</option>
                               <option value="particular">Particular</option>                     
@@ -138,21 +139,21 @@
                                 <input type="text" pattern="[a-zA-Z]{3,20}([ ]{0,1}[a-zA-Z]{0,20}){0,3}" placeholder="Carrera" name="carrera" #carrera="ngModel"
                                  [(ngModel)]="descOcupation.carrera" class="form-control"/>
                                  <span *ngIf="!carrera.valid && carrera.touched" class="text-alert">
-                                    <h6>*carrera de persona requerido.</h6>
+                                    <h6>*Carrera de persona requerido.</h6>
                                  </span> 
                               </p> 
                               <p *ngIf="ocupSelected == 'estudiante'">
                                 <input type="text" pattern="[a-zA-Z]{3,20}([ ]{0,1}[a-zA-Z]{0,20}){0,2}" placeholder="Semestre" name="semestre" #semestre="ngModel" 
                                 [(ngModel)]="descOcupation.semestre" class="form-control"  /> 
                                 <span *ngIf="!semestre.valid && semestre.touched" class="text-alert">
-                                    <h6>*semestre de persona requerido.</h6>
+                                    <h6>*Semestre de persona requerido.</h6>
                                 </span>
                               </p>
                               <p *ngIf="ocupSelected == 'particular'">
                                 <input type="text" pattern="[a-zA-Z]{3,20}([ ]{0,1}[a-zA-Z]{0,20}){0,3}" placeholder="Area de Trabajo" name="areaTrabajo" #areaTrabajo="ngModel" 
                                 [(ngModel)]="descOcupation.areaTrabajo" class="form-control"  /> 
                                 <span *ngIf="!areaTrabajo.valid && areaTrabajo.touched" class="text-alert">
-                                    <h6>*Area de trabajo de persona requerido.</h6>
+                                    <h6>*Área de trabajo de persona requerido.</h6>
                                 </span>
                               </p> 
                               <p *ngIf="ocupSelected == 'profesional'">

@@ -17,11 +17,7 @@ router
         var modularsId= arrayIds[0];
         var moduleId= arrayIds[1];
         var eventId = arrayIds[2];
-        db.events.findOne({_id: eventId},function(err, events){
-            if (err) return res.status(400).send(err);
-            //return res.status(200).send(events);
             ingresoModulo(eventId, moduleId, modularsId);
-        });
         function ingresoModulo(eventId, moduleId, modularsId){
             db.lists.find({events:eventId, modulars: modularsId},function (err, listas) {
                 if (err) return res.status(400).send(err);

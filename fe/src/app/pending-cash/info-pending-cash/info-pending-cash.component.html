@@ -2,7 +2,7 @@
   <section class="content-header">
       <h1>
          Detalle Caja Chica Ejecutivo
-         <small>ingresos - egresos</small>
+         <small>Ingresos - Egresos</small>
       </h1>
    </section>
 <section class="content">
@@ -10,20 +10,17 @@
    <table class="table table-hover" >
       <thead>
          <tr>
-            <th>titulo</th>
-            <th>descripcion</th>
-            <th>num recibo</th>
-            <th>fecha</th>
-            <th>ingreso</th>
-            <th>egreso</th>
-            <th>total</th>
-               
-            
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Número recibo</th>
+            <th>Fecha</th>
+            <th>Ingreso</th>
+            <th>Egreso</th>
+            <th>Total</th>                 
          </tr>
       </thead>
       <tbody> 
          <tr *ngFor="let detalle of detalles">
-
 
                 <td class="">{{detalle.title }}</td>
                 <td class="">{{detalle.description}}</td>
@@ -36,8 +33,6 @@
     
                 </ng-template>
                 <td class=""></td>
-           
-
 
          </tr>
       </tbody>
@@ -60,7 +55,7 @@
    <section>
     <form (ngSubmit)="onSubmit()" #AmountDeliveredForm="ngForm">
       
-      <div class="form-group">
+      <div class="form-group col-sm-8">
           <label for="delivered">Dinero entregado</label>
           <input type="number" class="form-control" id="delivered"
                  required
@@ -68,14 +63,14 @@
                  #delivered="ngModel">
           <div [hidden]="delivered?.valid || delivered?.pristine"
                class="text-alert">
-               el monto is required
+               *Monto requerido
           </div>
         </div> 
- 
-      <button type="submit" class="btn btn-success" [disabled]="!AmountDeliveredForm.form.valid||btnInactiveConfirm">Confirmar</button>
-
-      <button type="button" class="btn btn-primary" (click)="goPendingCash()">Cancelar</button>
-    </form>
+      <div class="form-group col-sm-8" style="text-align:center">
+        <button type="submit" class="btn btn-success" [disabled]="!AmountDeliveredForm.form.valid||btnInactiveConfirm">Confirmar</button>
+        <button type="button" class="btn btn-danger" (click)="goPendingCash()">Cancelar</button>
+      </div>
+      </form>
 
    </section>
 

@@ -89,6 +89,34 @@ module.exports = {
             _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
             record_date: { type: Date, default: function () { return new Date() } },
       })),
+      ///////////////////////////////////////////////////////////////////////////
+      cashFlowPrincipal: mongoose.model('cashFlowPrincipal', new Schema({
+
+            date_start: Date,
+            date_end: Date,
+            amount: Number,
+            amount_delivered: Number,
+            
+            details: [{
+                  officeName:String,
+                  cashFlowOffices: ObjectId,
+                  dateCloseCash: Date,
+                  amount:Number,
+                  description:String,
+                  input:Boolean,
+                  title:String,
+
+            }],
+            offices: ObjectId,
+            users: ObjectId,
+            active: Boolean,
+            state: Number,
+            debt:Number,
+
+
+            _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
+            record_date: { type: Date, default: function () { return new Date() } },
+      })),
 
       ////////////////////////////////////////////////////////////////////////////
 
