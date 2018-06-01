@@ -1,8 +1,14 @@
 <div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+           Lista de Personas
+           <!-- <small>Vigentes</small> -->
+        </h1>
+    </section>
   <section class="content">
       <div>     
           <ol class="breadcrumb">
-              <li><a class="btn btn-primary" [routerLink]="['/home/persons/add']"><i class="fa fa-book"></i>Registrar Persona</a></li>
+              <li><a class="btn btn-primary" [routerLink]="['/home/persons/add']"><i class="fa fa-book"></i> Registrar Persona</a></li>
               <!-- <app-addPerson (messageEvent)="receiveMessage()"></app-addPerson> -->
               <li><app-control-asistance></app-control-asistance></li>
           </ol>
@@ -10,7 +16,7 @@
      
      <!-- <app-persona></app-persona> -->
      <table class="table">
-           <th>Filtros Personas</th> 
+           <th>Filtros de Personas</th> 
      </table>
      <!-- <section>
         <div class="col-lg-1">Buscar:</div>
@@ -18,20 +24,21 @@
               <input type="text" [(ngModel)]="busqueda"></div>
      </section> -->
        <div>
-      <div class="filter-wrap">
-        <div class="col-lg-1">Buscar:</div>
+      <div class="filter-wrap col-lg-1">
+        <div>Buscar:</div>
         <input [(ngModel)]="searchText" placeholder="Nombre Persona" class="filter-input">
         <span class="filter-clear" *ngIf="searchText.length>0" (click)="clearFilter()">X</span>
         <!-- <a class="btn btn-primary filter-clear" *ngIf="searchText.length>0" (clic)="clearFilter()">Cancelar</a> -->
       </div>
+      <br>
     </div>
      <table class="table table-hover" >
         <thead >
            <tr>
               <th>Nombre</th>
               <th>Apellido</th>
-              <th>Telefono</th>
-              <th>Ocupacion</th>
+              <th>Teléfono</th>
+              <th>Ocupación</th>
               <th>Perfil</th>
               <!-- <th>Asistencia</th> -->
               <th colspan="2">Opciones</th>         
@@ -64,7 +71,7 @@
                 <a class="btn btn-info" (click)="viewProfile(i._id)">VER</a>
               </td>
               <td>
-                 <a class="btn btn-primary" (click)="edit(i._id)">EDITAR</a>
+                 <a class="btn btn-warning" (click)="edit(i._id)">EDITAR</a>
                  <!-- <a class="btn btn-warning" (click)="asistence(i._id)">asist</a> -->
                  <!-- <app-control-asistance></app-control-asistance> -->
               </td>

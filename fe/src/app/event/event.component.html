@@ -8,11 +8,11 @@
             <!-- <br> -->
             <li>
                <a class="btn btn-primary" [routerLink]="['/home/inscription/'+event?._id]">
-                  <i class="fa fa-book"></i>Inscribir Persona</a>
+                  <i class="fa fa-book"></i> Inscribir Persona</a>
             </li>
             <li>
-               <a class="btn btn-info" [routerLink]="['/home/accountsModulars/'+event?._id]">
-                  <i class="fa fa-book"></i>Reportes Modulares</a>
+               <a class="btn btn-primary" [routerLink]="['/home/accountsModulars/'+event?._id]">
+                  <i class="fa fa-book"></i> Reportes Modulares</a>
             </li>
             <!-- <li>
                   <a class="btn btn-primary" [routerLink]="['/home/inscription/'+event?._id]">
@@ -30,15 +30,13 @@
 
                   <button class="btn btn-primary margin-left"  (click)="setListInscriptions(m._id,m.name)"> {{m.name}}</button> 
             </label>
-       
-
       </div>
       <p>
             
             <label >
                   
                   <h3>{{moduleName}}</h3>
-                  Lista de personas :
+                  Lista de personas
                   
             </label>
       </p>
@@ -53,7 +51,9 @@
                <th>Perfil</th>
                <th>Asistencia</th>
                <!-- <th>asis</th> -->
-               <th colspan="2">Opciones</th>
+               <th>Opciones</th>
+               <th>Control de Pago</th>
+               
             </tr>
          </thead>
          <tbody>
@@ -68,11 +68,11 @@
                </td>
                <td *ngSwitchCase="false">
 
-                  <button class="btn btn-danger" (click)="marcarAsistencia(i.persons)"> No Asistio</button>
+                  <button class="btn btn-danger" (click)="marcarAsistencia(i.persons)"> No Asistió</button>
                  
                </td>
                <td *ngSwitchCase="true">
-                  <button class="btn btn-success" disabled> Asistio</button>
+                  <button class="btn btn-success" disabled> Asistió</button>
 
                </td>
                <!-- <td>{{i.assist}}</td> -->
@@ -80,7 +80,9 @@
                   <!-- <app-editPerson [editPerson]="event"></app-editPerson> -->
                   <a class="btn btn-warning" (click)="edit(i.persons)">EDITAR</a>
                   <!-- <a class="btn btn-success" (click)="asistence(i.persons)">Asistand</a> -->
-                  <a class="btn btn-primary" (click)="control(i.persons)">Control</a>
+               </td>
+               <td>
+                  <a class="btn btn-primary" (click)="control(i.persons)">CONTROL</a>
                   <!-- <a class="btn btn-primary" (click)="control(i.persons)">Control</a> -->
                </td>
             </tr>
@@ -97,8 +99,8 @@
                         <th>Celular</th>
                         <th>Monto Cancelado</th>
                         <th>Perfil</th>
-                        
-                        <th colspan="2">Opciones</th>
+                        <th>Opciones</th>
+                        <th>Control de Pago</th>
                      </tr>
                   </thead>
                   <tbody>
@@ -116,7 +118,9 @@
                            <!-- <app-editPerson [editPerson]="event"></app-editPerson> -->
                            <a class="btn btn-warning" (click)="edit(i.persons)">EDITAR</a>
                            <!-- <a class="btn btn-success" (click)="asistence(i.persons)">Asistand</a> -->
-                           <a class="btn btn-primary" (click)="control(i.persons)">Control</a>
+                        </td>
+                        <td>
+                           <a class="btn btn-success" (click)="control(i.persons)">CONTROL</a>
                            <!-- <a class="btn btn-primary" [routerLink]="['/home/controPago/'+event?._id]">
                                  <i class="glyphicon glyphicon-usd"></i> Control</a> -->
                            
@@ -124,9 +128,10 @@
                      </tr>
                   </tbody>
       </table>
-      <br>
-      <button class="btn btn-primary" (click)="cancelar()">Cancelar</button>
-
+      
+      <div class="" style="text-align: center">
+            <button class="btn btn-primary" (click)="cancelar()">Volver</button>
+      </div>
 
    </section>
    <router-outlet></router-outlet>

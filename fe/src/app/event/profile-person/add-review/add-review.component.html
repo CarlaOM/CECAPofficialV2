@@ -5,7 +5,7 @@
   
           <div class="container ">
              <div [hidden]="submitted">
-                <h1>Añadir Revision</h1>
+                <h1>Añadir Revisión</h1>
                 <br>
                 <form (ngSubmit)="save()" #addReview="ngForm" class="jumbotron">
                   <!-- <div class="form-group col-sm-8">
@@ -16,15 +16,15 @@
                   <div class="form-group col-sm-8">
                       <label for="state">Estado</label>
                       <select class="form-control" id="state" [(ngModel)]="model.state" name="state" #state="ngModel">
-                        <option value="1">Recepcionado para correccion</option>
-                        <option value="2">Entregado a facilitador para 1ra correccion</option>
+                        <option value="1">Recepcionado para corrección</option>
+                        <option value="2">Entregado a facilitador para 1ra corrección</option>
                         <option value="3">Trabajo pendiente de entrega a alumno</option>
                         <option value="4">Entregado a alumno / enviado a sucursal</option>
                         <option value="5">Trabajo final recepcionado (Diploma pendiente)</option>
                         <option value="6">Con diploma realizado</option>
                         <option value="7">Entregados</option>
-                        <option value="8">Recepcion para 2da revision</option>
-                        <option value="9">Entregado a facilitador para 2da correccion</option>
+                        <option value="8">Recepción para 2da revisión</option>
+                        <option value="9">Entregado a facilitador para 2da corrección</option>
                       </select>
                       <!-- <div [hidden]="offices.valid || offices.pristine" class="">
                                  sucursal is required
@@ -35,14 +35,14 @@
                       <input type="text" pattern="[a-zA-Z ]{3,150}" class="form-control" id="observations" [(ngModel)]="model.observations" name="observations"
                          #observations="ngModel" required>
                       <span *ngIf="!observations?.valid && observations?.touched" class="text-alert">
-                         *Observaciones de la Revision requerido.
+                         *Observaciones de la Revisión requerido.
                       </span>
                       <!--<div [hidden]="descripcion?.valid || descripcion?.pristine" class="">
                                   descripcion requerida
                               </div>-->
                   </div>
                   <div class="form-group col-sm-8" style="text-align:center ">
-                      <button type="submit" class="btn btn-success" [disabled]="!addReview?.form.valid">Registrar</button>
+                      <button type="submit" class="btn btn-success" [disabled]="!addReview?.form.valid">Guardar</button>
                       <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
                   </div>
                 </form>
