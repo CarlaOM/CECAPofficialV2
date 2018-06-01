@@ -4,7 +4,7 @@
        <div class="box box-primary">
          <div class="container ">
              <div [hidden]="submitted">
-                 <h1>Asistencia y cobro</h1>
+                 <h1>Asistencia y Cobro</h1>
                  <form (ngSubmit)="guardar()" #addAsistance="ngForm" class="jumbotron">
                      <div class="form-group col-sm-8">
                             
@@ -32,11 +32,11 @@
                                   </div> -->
                               </div>
                               <div class="form-group col-sm-6" style="text-align: center">
-                                 <label for="receipt" class="control-label" >Recibo de factura</label>
+                                 <label for="receipt" class="control-label" >Recibo de Factura</label>
                                      <input type="text" class="form-control" id="receipt" 
                                      [(ngModel)]="lists.receipt" name="receipt" #receipt="ngModel" required />
                                      <span *ngIf="!receipt.valid && receipt.touched" class="text-alert">
-                                             *Recivo requerido.
+                                             *Recibo requerido.
                                      </span>
                                  <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
                                      kjkn
@@ -52,7 +52,7 @@
                             </div>
                      </div>
                      <div class="form-group col-sm-8" style="text-align:center ">
-                        <button type="submit" class="btn btn-success" [disabled]="!addAsistance.form.valid" >Marcar Asistencia</button>
+                        <button type="submit" class="btn btn-success" [disabled]="!addAsistance.form.valid" >Guardar</button>
                         <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
                         <!-- <button type="button" class="btn btn-danger" (click)="addPerson.reset()">Cancelar</button> -->
                     </div>

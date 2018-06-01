@@ -14,13 +14,13 @@
         <div class="panel-body">
           <div class="row">
             <div class=" col-md-12 col-lg-12 ">
-                <strong>Asistencia por modulos:</strong>
+                <strong>Asistencia por Módulos:</strong>
               <table class="table table-user-information">
                 <tbody>
                   <tr *ngFor="let i of modulars" [ngSwitch]="i.print_certificate">
                     <td>{{i.name}}</td>
-                    <td *ngIf="i.assist==true">Asistio</td>
-                    <td *ngIf="i.assist==false">No asistio</td>
+                    <td *ngIf="i.assist==true">Asistió</td>
+                    <td *ngIf="i.assist==false">No asistió</td>
                     <!-- <td *ngIf="i.print_certificate==true">Certificado impreso</td>
                     <td *ngIf="i.print_certificate==false">Falta imprimir certificado</td> -->
                     <td *ngSwitchCase="false">
@@ -32,7 +32,7 @@
                   </tr>
                 </tbody>
               </table>
-            <strong>Detalles de pago:</strong>
+            <strong>Detalles de Pago:</strong>
               <table class="table table-user-information">
                 <tbody>
                   <tr>
@@ -49,21 +49,21 @@
                   </tr>                                  
                 </tbody>
               </table>
-            <strong>Entrega de requisitos para diploma:</strong>
+            <strong>Entrega de Requisitos para Diploma:</strong>
               <table class="table table-user-information">
                 <tbody>
                   <tr>
-                    <td>Fotografias</td>*
+                    <td>Fotografías</td>*
                     <td *ngIf="requirements?.photograpy==true">Entregado</td>
                     <td *ngIf="requirements?.photograpy==false">No entrego</td>
                   </tr>
                   <tr>
-                    <td>Fotocopia de carnet de identidad</td>
+                    <td>Fotocopia de cédula de identidad</td>
                     <td *ngIf="requirements?.photocopy_ci==true">Entregado</td>                    
                     <td *ngIf="requirements?.photocopy_ci==false">No entrego</td>                    
                   </tr>
                   <tr>
-                    <td>Fotocopia de titulo profesional</td>
+                    <td>Fotocopia de título profesional</td>
                     <td *ngIf="requirements?.photocopy_titule==true">Entregado</td>                                        
                     <td *ngIf="requirements?.photocopy_titule==false">No entrego</td>                                        
                   </tr>
@@ -117,15 +117,15 @@
                   </tr>
                   <tr *ngFor="let i of reviews">
                     <td>{{ i.date_review | date}}</td>
-                    <td *ngIf="i.state==1">Recepcionado para correccion</td>
-                    <td *ngIf="i.state==2">Entregado a facilitador para 1ra correccion</td>
+                    <td *ngIf="i.state==1">Recepcionado para corrección</td>
+                    <td *ngIf="i.state==2">Entregado a facilitador para 1ra corrección</td>
                     <td *ngIf="i.state==3">Trabajo pendiente de entrega a alumno</td>
                     <td *ngIf="i.state==4">Entregado a alumno / enviado a sucursal</td>
                     <td *ngIf="i.state==5">Trabajo final recepcionado (Diploma pendiente)</td>
                     <td *ngIf="i.state==6">Con diploma realizado</td>
                     <td *ngIf="i.state==7">Entregados</td>
-                    <td *ngIf="i.state==8">Recepcion para 2da revision</td>
-                    <td *ngIf="i.state==9">Entregado a facilitador para 2da correccion</td>
+                    <td *ngIf="i.state==8">Recepción para 2da revisión</td>
+                    <td *ngIf="i.state==9">Entregado a facilitador para 2da corrección</td>
                     <td>{{ i.observations }}</td>
                   </tr>
                 </tbody>
@@ -136,8 +136,7 @@
       </div>
       <br>
       <div align="center">
-
-        <button class="btn btn-primary" (click)="cancelar()">Cancelar</button>
+        <button class="btn btn-primary" (click)="cancelar()">Volver</button>
       </div>
     </div>
   </div>

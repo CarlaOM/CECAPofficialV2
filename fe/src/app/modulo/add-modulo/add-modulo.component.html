@@ -5,12 +5,12 @@
 
          <div class="container ">
             <div [hidden]="submitted">
-               <h1>Registrar Modulo</h1>
-               <span>{{program.name}}</span>
+               <h1>Registrar Módulo</h1>
+               <span><h3 class="text-info">{{program.name}}</h3></span>
                <br>
                <form (ngSubmit)="onSubmit()" #addModulo="ngForm" class="jumbotron">
                   <div class="form-group col-sm-8">
-                     <label for="number">Numero del Modulo</label>
+                     <label for="number">Número del Módulo</label>
                      <input type="number" class="form-control" id="number" [(ngModel)]="modulo.number" name="number" #number="ngModel" required>
                      <span *ngIf="!number.valid && number.touched" class="text-alert">
                         *Numero del Modulo requerido.
@@ -20,10 +20,10 @@
                       </div>-->
                   </div>
                   <div class="form-group col-sm-8">
-                     <label for="name" class="control-label">Nombre del Modulo</label>
+                     <label for="name" class="control-label">Nombre del Módulo</label>
                      <input type="text" class="form-control" id="name" [(ngModel)]="modulo.name" name="name" #name="ngModel" required />
                      <span *ngIf="!name.valid && name.touched" class="text-alert">
-                        *Nombre del Modulo requerido.
+                        *Nombre del Módulo requerido.
                      </span>
                      <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
                            kjkn
@@ -33,7 +33,7 @@
                      <label for="content" class=" control-label">Contenido</label>
                      <input type="text" class="form-control" id="content" [(ngModel)]="modulo.content" name="content" #content="ngModel" required>
                      <span *ngIf="!content.valid && content.touched" class="text-alert">
-                        *Contenido del Modulo requerido.
+                        *Contenido del Módulo requerido.
                      </span>
                   </div>
                   <!-- <div class="form-group col-sm-8">
@@ -47,7 +47,7 @@
                      </select>
                   </div> -->
                   <div class="form-group col-sm-8" style="text-align:center ">
-                     <button type="submit" class="btn btn-success" [disabled]="!addModulo.form.valid">Registrar</button>
+                     <button type="submit" class="btn btn-success" [disabled]="!addModulo.form.valid">Guardar</button>
                      <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
                   </div>
                </form>

@@ -83,7 +83,7 @@ export class DetailsComponent implements OnInit {
       x.push(i.modules)      
       this.modulars.push(i);
     }
-    // console.log(x)
+    console.log(x)
     this._peticionesService.postModules(x).subscribe(
       result => {
         this.modulesReceived = result;

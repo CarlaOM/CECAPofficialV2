@@ -471,9 +471,6 @@ export class PeticionesService {
 	
     // return this._http.get(this.url + 'cajaPrincipal/getPrincipal/' + _id).map((res: Response) => res);		
   }	
-
-
-  
   getModulars(eventId) {
     console.log(eventId)
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');

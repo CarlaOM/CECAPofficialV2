@@ -2,18 +2,19 @@
     <section class="content-header">
         <h1>
            Ejecutivos
-           <small>Editar</small>
+           <small>Lista</small>
         </h1>
      </section>
   <section class="content">
-        <a class="btn btn-primary a" (click)="addEjecutivo()">Registrar Ejecutivo</a>
+        <a class="btn btn-primary a" (click)="addEjecutivo()"><i class="fa fa-book"></i> Registrar Ejecutivo</a>
        
      <table class="table table-hover" >
         <thead>
            <tr>
               <th>Nombre</th>
               <th>Estado</th>
-              <th colspan="3">Informacion</th>
+              <th>Información</th>
+              <th colspan="2">Editar</th>
                  
               
            </tr>
@@ -24,13 +25,13 @@
               <td *ngIf="ejecutivo.active==true">Activo</td>
               <td *ngIf="ejecutivo.active==false">Inactivo</td>
               <td>
-                 <a class="btn btn-primary" (click)="infoEjecutivo(ejecutivo._id)" >Ver</a>
+                 <a class="btn btn-info" (click)="infoEjecutivo(ejecutivo._id)">INFORMACIÓN</a>
               </td>
               <td>
-                <a class="btn btn-warning" (click)="editEjecutivo(ejecutivo._id)">Editar</a>
+                <a class="btn btn-warning" (click)="editEjecutivo(ejecutivo._id)">EDITAR</a>
              </td>
              <td>
-                <!-- <a class="btn btn-danger" (click)="deleteEjecutivo(ejecutivo._id)" >eliminar</a> -->
+                <!-- <a class="btn btn-danger" (click)="deleteEjecutivo(ejecutivo._id)" >ELIMINAR</a> -->
              </td>
            </tr>
         </tbody>
