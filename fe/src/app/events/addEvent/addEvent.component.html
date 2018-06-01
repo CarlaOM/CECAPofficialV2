@@ -28,9 +28,8 @@
                         *Descripción de Evento requerido.
                      </span>
                      <span *ngIf="!descripcion?.pattern && descripcion.dirty && descripcion.touched && !descripcion.valid && descripcion.name != ''" class="text-alert">
-                        *Sobre paso el limite de caracteres.
-                     </span>
-                     
+                        *Sobrepaso el límite de caracteres.
+                     </span> 
                      <!--<div [hidden]="descripcion?.valid || descripcion?.pristine" class="">
                                  descripcion requerida
                              </div>-->
