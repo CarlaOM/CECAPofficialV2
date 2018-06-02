@@ -10,13 +10,19 @@
                <form (ngSubmit)="onSubmit()" #addProgram="ngForm" class="jumbotron">
                    <div class="form-group col-sm-8">
                        <label for="name" class="control-label" >Nombre del Programa</label>
-                           <input type="text" pattern="[a-zA-Z]{3,20}([ ]{0,1}[a-zA-Z]{0,20}){0,4}" class="form-control" id="name" 
+                           <input type="text" pattern="[a-zA-Z]{3,20}([ ]{0,1}[a-zA-Z]{0,20}){0,2}" class="form-control" id="name" 
                            [(ngModel)]="program.name" name="name" #name="ngModel" required />
                            <span *ngIf="!name.untouched && !name.valid && program.name == ''" class="text-alert">
                                    *Nombre Requerido.
                            </span>
-                           <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && program.name != ''" class="text-alert">
-                            *Nombre del Programa inválido, sobrepasó el límite de dígitos o tiene menos de 3.
+                           <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && program.name != '' && program.name.length > 42" class="text-alert">
+                            *Nombre de Programa invalido sobre paso el limite de caracteres.
+                           </span>
+                           <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && program.name != '' && 3 > program.name.length" class="text-alert">
+                            *Nombre de Programa invalido tiene menos de 3 caracteres.
+                           </span>
+                           <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && program.name != '' && program.name.length < 63 && program.name.length > 2 " class="text-alert">
+                            *Detalle de Programa invalido no se permiten simbolos.
                            </span>
                        <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
                            kjkn
@@ -26,11 +32,17 @@
                        <label for="ubicacion" class=" control-label">Detalles</label>
                                <input type="text" pattern="[a-zA-Z0-9 ]{3,150}" class="form-control" id="ubicacion" 
                                    [(ngModel)]="program.details" name="details" #details="ngModel" required >
-                               <span *ngIf="!details.valid && details.touched && program.name == ''" class="text-alert">
+                               <span *ngIf="!details.valid && details.touched && program.details == ''" class="text-alert">
                                            *Detalles de Programa requerido.
-                               </span>
-                               <span *ngIf="!details?.pattern && details.dirty && details.touched && !details.valid && details.name != ''" class="text-alert">
-                                *Detalles del Programa inválido, sobrepasó el límite de dígitos.
+                               <br></span>
+                               <span *ngIf="details.dirty && details.touched && !details.valid && details.name != '' && program.details.length>150 " class="text-alert">
+                                *Detalle de Programa invalido excedió el limite de caracteres.
+                                <br></span>
+                               <span *ngIf="!details?.pattern && details.dirty && details.touched && !details.valid && program.details != '' && program.details.length<3 " class="text-alert">
+                                *Detalle de Programa invalido tiene menos de 3 caracteres.
+                                <br></span>
+                               <span *ngIf="!details?.pattern && details.dirty && details.touched && !details.valid && program.details != '' && program.details.length < 151 && program.details.length > 2 " class="text-alert">
+                                *Detalle de Programa invalido no se permiten simbolos.
                                </span>
                            <!--<div [hidden]="ubicacion?.valid || ubicacion?.pristine" class="">
                                Ubicacion requerida

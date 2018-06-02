@@ -34,7 +34,7 @@ export class IngresoComponent implements OnInit {
 
 
   ) {
-    this.ingreso=new Cashflowusers(new Date(),new Date(),0,0,0,"","","","","")///(datestart,dateend,amount,amountdelivered,receipt,description,detailamount)
+    this.ingreso=new Cashflowusers(new Date(),new Date(),0,0,0,"","","","","","")///(datestart,dateend,amount,amountdelivered,receipt,description,detailamount)
 
    }
 

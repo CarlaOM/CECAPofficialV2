@@ -289,11 +289,24 @@
             
               <div class="form-group col-sm-8">
                 <label for="recibo">Número de Recibo</label>
-                <input type="number" pattern="[0-9]{0,15}[a-zA-Z]{0,5}" class="form-control" id="recibo" [(ngModel)]="egresoRecibo" 
+                <input type="number" pattern="[0-9]{3,15}" class="form-control" id="recibo" [(ngModel)]="egresoRecibo" 
                 name="recibo" #recibo="ngModel" required>
-                <span *ngIf="!recibo.valid && recibo.touched" class="text-alert">
-                    *El Recibo es requerido o tipo de dato es inválido
+                <span *ngIf="!recibo.untouched && egresoRecibo == null" class="text-alert">
+                    *El número de Recibo es requerido
+                <br>
                 </span>
+                <span *ngIf=" recibo.dirty && recibo.touched && !recibo.valid && egresoRecibo > 999999999999999" class="text-alert">
+                  *El número de Recibo es invalido sobre paso el limite de caracteres.
+                <br>
+                </span>
+                <span *ngIf="recibo.dirty && recibo.touched && !recibo.valid && egresoRecibo != null && 3 > egresoRecibo.length" class="text-alert">
+                  *El número de Recibo es invalido tiene menos de 3 caracteres.
+                <br>
+                </span>
+                <span *ngIf="!recibo?.pattern && recibo.dirty && recibo.touched && !recibo.valid && egresoRecibo != null && egresoRecibo.length < 21 && egresoRecibo.length > 2 " class="text-alert">
+                  *El número de Recibo es invalido no se permiten simbolos.
+                </span>
+                
                 <!--<div [hidden]="recibo.valid || recibo.pristine" class="text-alert">
                   recibo es requerido o el tipo de dato es invalido 
                 </div>-->
@@ -303,8 +316,20 @@
                 <label for="monto">Monto</label>
                 <input type="number" pattern="[0-9]{0,5}" class="form-control" id="monto" [(ngModel)]="egresoMonto" 
                 name="monto" #monto="ngModel" required>
-                <span *ngIf="!recibo.valid && recibo.touched" class="text-alert">
-                    *El Monto es requerido o el tipo de dato es inválido 
+                <span *ngIf="egresoMonto == '' && monto.touched && !monto.valid" class="text-alert">
+                  *El Monto es requerido
+                <br>
+                </span>
+                <span *ngIf="!monto?.pattern && monto.dirty && monto.touched && !monto.valid && egresoMonto != '' && egresoMonto.length > 5" class="text-alert">
+                  *El Monto es invalido sobre paso el limite de caracteres.
+                <br>
+                </span>
+                <!-- <span *ngIf="!monto?.pattern && monto.dirty && monto.touched && !monto.valid && egresoMonto != '' && 3 > egresoMonto.length" class="text-alert">
+                  *El Monto es invalido tiene menos de 3 caracteres.
+                <br>
+                </span> -->
+                <span *ngIf="!monto?.pattern && monto.dirty && monto.touched && !monto.valid && egresoMonto != '' && egresoMonto.length < 6 " class="text-alert">
+                  *El Monto es invalido no se permiten simbolos y letras.
                 </span>
                 <!--<div [hidden]="monto.valid || monto.pristine" class="text-alert">
                   Monto es requerido o el tipo de dato es invalido 
