@@ -3,7 +3,6 @@ import { PeticionesService } from '../../services/peticiones.service';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Modulo } from '../../modelo/modulo';
 
-
 @Component({
    selector: 'app-edit-modulo',
    templateUrl: './edit-modulo.component.html',
@@ -11,12 +10,12 @@ import { Modulo } from '../../modelo/modulo';
    providers: [PeticionesService]
 })
 export class EditModuloComponent implements OnInit {
-   @ViewChild('number') numberRef: ElementRef;
-   @ViewChild('name') nameRef: ElementRef;
-   @ViewChild('content') contentRef: ElementRef;
-   @ViewChild("close", { read: ElementRef }) close: ElementRef;
-   public moduloId;
+//    @ViewChild('number') numberRef: ElementRef;
+//    @ViewChild('name') nameRef: ElementRef;
+//    @ViewChild('content') contentRef: ElementRef;
+//    @ViewChild("close", { read: ElementRef }) close: ElementRef;
    public modulo;
+   public moduloId;
    public moduloNumber;
    public moduloName;
    public moduloContent;
@@ -56,24 +55,29 @@ export class EditModuloComponent implements OnInit {
    }
    saveModulo() {
       //console.log(this.modulo);
-      this.modulo.number = this.numberRef.nativeElement.value;
-      this.modulo.name = this.nameRef.nativeElement.value;
-      this.modulo.content = this.contentRef.nativeElement.value;
+      // this.modulo.number = this.numberRef.nativeElement.value;
+      // this.modulo.name = this.nameRef.nativeElement.value;
+      // this.modulo.content = this.contentRef.nativeElement.value;
+      this.modulo.number=this.moduloNumber;
+      this.modulo.name=this.moduloName;
+      this.modulo.content=this.moduloContent;      
 
-      if (this.numberRef.nativeElement.value == null || this.nameRef.nativeElement.value == '' || this.contentRef.nativeElement.value == '') {
-         window.alert("Asegurese que todos los campos esten llenos");
+      // if (this.numberRef.nativeElement.value == null || this.nameRef.nativeElement.value == '' || this.contentRef.nativeElement.value == '') {
+      //    window.alert("Asegurese que todos los campos esten llenos");
+      if (this.moduloNumber == null || this.moduloName.value == '' || this.moduloContent == '') {
+            window.alert("Asegurese que todos los campos esten llenos");
       } else {
          this._peticionesService.updateModulo(this.modulo).subscribe(
             result => {
                var res = result;
                console.log(res);
                alert('Se Guardo correctamente la edicion');
+               window.history.back();
             },
             error => {
                console.log(<any>error);
                alert('Error al Guardar verifique los datos');
             })
-         window.history.back();
       }
    }
    //save() {
@@ -88,7 +92,6 @@ export class EditModuloComponent implements OnInit {
    cancel() {
       // this.router.navigate(['home/modulos']);
       window.history.back();
-
    }
 
 }

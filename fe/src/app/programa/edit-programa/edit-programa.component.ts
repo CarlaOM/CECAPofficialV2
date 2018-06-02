@@ -10,11 +10,11 @@ import { Programa } from '../../modelo/programa';
    providers: [PeticionesService]
 })
 export class EditProgramaComponent implements OnInit {
-   @ViewChild('name') nameRef: ElementRef;
-   @ViewChild('details') detailsRef: ElementRef;
-   //@ViewChild("close", { read: ElementRef }) close: ElementRef;
-   public programId;
+//    @ViewChild('name') nameRef: ElementRef;
+//    @ViewChild('details') detailsRef: ElementRef;
+//    @ViewChild("close", { read: ElementRef }) close: ElementRef;
    public program;
+   public programId;
    public programName;
    public programDetails;
 
@@ -47,11 +47,15 @@ export class EditProgramaComponent implements OnInit {
          })
    }
    saveProgram() {
-      this.program.name = this.nameRef.nativeElement.value;
-      this.program.details = this.detailsRef.nativeElement.value;
+      // this.program.name = this.nameRef.nativeElement.value;
+      // this.program.details = this.detailsRef.nativeElement.value;
+      this.program.name=this.programName;
+      this.program.details=this.programDetails;
 
-      if (this.nameRef.nativeElement.value == '' || this.detailsRef.nativeElement.value == '') {
-         window.alert("Asegurese que todos los campos esten llenados");
+      // if (this.nameRef.nativeElement.value == '' || this.detailsRef.nativeElement.value == '') {
+      //    window.alert("Asegurese que todos los campos esten llenados");
+      if (this.programName == '' || this.programDetails == '') {
+            window.alert("Asegurese que todos los campos esten llenados");
       } else {
          console.log(this.program);
          this._peticionesService.updateProgram(this.program).subscribe(
@@ -59,19 +63,15 @@ export class EditProgramaComponent implements OnInit {
                console.log(result);
                var res = result;
                alert('Se Guardo correctamente la edicion');
-               // window.history.back();          
+               this.router.navigate(['home/programs']);
+            //    window.history.back();          
             },
             error => {
                console.log(<any>error);
                alert('Error al Guardar verifique los datos');
             })
-         this.router.navigate(['home/programs']);
       }
    }
-   //save() {
-   //console.log(this.program);
-   //this.close.nativeElement.click();
-   //}
    cancel() {
       this.router.navigate(['home/programs']);
    }
