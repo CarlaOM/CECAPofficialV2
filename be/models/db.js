@@ -50,7 +50,8 @@ module.exports = {
                   input: Boolean,
                   date_detail: Date,
                   title: String,
-                  events: ObjectId
+                  events: ObjectId,
+                  modularId: String
             }],
             user: ObjectId,
             active: Boolean,
