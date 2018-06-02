@@ -471,9 +471,6 @@ export class PeticionesService {
 	
     // return this._http.get(this.url + 'cajaPrincipal/getPrincipal/' + _id).map((res: Response) => res);		
   }	
-
-
-  
   getModulars(eventId) {
     console.log(eventId)
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
@@ -483,5 +480,11 @@ export class PeticionesService {
     let body = JSON.stringify(modules);		
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
     return this._http.post(this.url + 'modules/modules/', body, { headers: headers }).map((res: Response) => res);		
+  }
+
+  getAcconutsModulars(modular_id){
+    console.log(modular_id)
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return this._http.get(this.url + 'modulars/accountModulars/' + modular_id, { headers: headers }).map((res: Response) => res);
   }
 }

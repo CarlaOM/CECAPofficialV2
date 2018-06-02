@@ -2,14 +2,11 @@
   <br>
   <div class="">
 
-
- 
         <div class="box box-primary">
 
           <div class="container">
             
-            <h2>Impotar Numeros de WhatsApp</h2>
-
+            <h2>Impotar Números de WhatsApp</h2>
 
             <form (ngSubmit)="onSubmit()" #WhatsNumber="ngForm" >
                 <div class="form-group">
@@ -21,12 +18,12 @@
                          >
                   <div [hidden]="groupname?.valid || groupname?.pristine"
                        class="text-alert">
-                    Nombre es invalido
+                    *Nombre es inválido
                   </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="numbers">Pega los numeros aqui</label>
+                    <label for="numbers">Pega los Números aqui</label>
                     
                     <textarea cols="30" rows="10" class="form-control" id="numbers"
                             required
@@ -43,12 +40,12 @@
                     </textarea>
                     <div [hidden]="numbers?.valid || numbers?.pristine"
                          class="text-alert">
-                      Nombre es invalido
+                      *Nombre es inválido
                     </div>
                   </div>
                       
            
-                <button type="submit" class="btn btn-success" [disabled]="!WhatsNumber.form.valid" >Registrar</button>
+                <button type="submit" class="btn btn-success" [disabled]="!WhatsNumber.form.valid" >Guardar</button>
                 <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
               </form>
            </div>

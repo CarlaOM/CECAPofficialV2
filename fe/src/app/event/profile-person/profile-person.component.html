@@ -21,7 +21,7 @@
             </div>
 
             <div class=" col-md-10 col-lg-10 ">
-              <strong>Datos personales:</strong>
+              <strong>Datos Personales:</strong>
               <table class="table table-user-information">
                 <tbody>
                   <tr>
@@ -33,11 +33,11 @@
                     <td>{{person?.last_name}}</td>
                   </tr>
                   <tr>
-                    <td>CI</td>
+                    <td>Cédula de Identidad</td>
                     <td>{{person?.ci}}</td>
                   </tr>
                   <tr>
-                    <td>Telefono</td>
+                    <td>Teléfono</td>
                     <td>{{person?.phone}}</td>
                   </tr>
                   <tr>
@@ -45,7 +45,7 @@
                     <td>{{person?.cellphone}}</td>
                   </tr>
                   <tr>
-                    <td>Correo Electronico</td>
+                    <td>Correo Electrónico</td>
                     <td>
                       <a href="mailto:email">{{person?.email}}</a>
                     </td>
@@ -56,11 +56,11 @@
                   </tr> -->
                 </tbody>
               </table>
-              <strong>Estado laboral de la Persona:</strong>
+              <strong>Estado Laboral de la Persona:</strong>
               <table class="table table-user-information">
                 <tbody>
                   <tr>
-                    <td>Ocupacion</td>
+                    <td>Ocupación</td>
                     <td>{{person?.ocupation}}</td>
                   </tr>
                   <!--Estudiante-->
@@ -78,13 +78,13 @@
                   </tr>
                   <!--Particular-->
                   <tr *ngIf="ocupation=='particular'">
-                    <td>Area de Trabajo</td>
+                    <td>Área de Trabajo</td>
                     <td>{{ocupations?.areaTrabajo}}</td>
                   </tr>
                   <tr>
                   <!--Profesional-->
                   <tr *ngIf="ocupation=='profesional'">
-                    <td>Profesion</td>
+                    <td>Profesión</td>
                     <td>{{ocupations?.profesion}}</td>
                   </tr>
                   <tr *ngIf="ocupation=='profesional'">
@@ -160,14 +160,9 @@
           </div>
         </div>
       </div>
-
-      <br>
-      
       <div align="center">
-        <button class="btn btn-primary"  (click)="cancelar()">Cancelar</button>
-      </div>
-      
-
+        <button class="btn btn-primary" (click)="cancelar()">Volver</button>
+      </div>  
     </div>
   </div>
 </div>

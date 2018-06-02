@@ -11,7 +11,7 @@
       <thead>
          <tr>
             <th>Usuario</th>
-            <th>sucursal</th>
+            <th>Sucursal</th>
             <th>Fecha de Inicio</th>
             <th>Fecha de Cierre</th>
             <th>Monto</th>
@@ -36,7 +36,7 @@
                 <td class="">{{office.monto}}</td>
                 <td>{{office.active}}</td>
                 <td *ngIf="office.active==true">
-                  <button class="btn btn-primary" (click)="confirmarCajaSucursal(office)" >Confirmar</button>
+                  <button class="btn btn-success" (click)="confirmarCajaSucursal(office)" >CONFIRMAR</button>
                 </td>
 
                 <!-- <td>{{office.montoEntregado}}</td> -->
