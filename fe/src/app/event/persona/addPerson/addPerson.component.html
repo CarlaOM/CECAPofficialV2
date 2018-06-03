@@ -9,28 +9,52 @@
                        <div class="form-group col-sm-8">
                             <div class="form-group col-sm-6" style="text-align: center">
                                     <label for="first_name" class="control-label" >Nombres</label>
-                                        <input type="text" pattern="[a-zA-Z]{3,15}[ ]{0,1}[a-zA-Z]{0,15}" class="form-control" id="first_name" 
+                                        <input type="text" pattern="[a-zA-Z ]{3,25}" class="form-control" id="first_name" 
                                         [(ngModel)]="person.first_name" name="first_name" #firstname="ngModel" required />
-                                        <span *ngIf="!firstname.valid && firstname.touched" class="text-alert">
+                                        <span *ngIf="!firstname.valid && firstname.touched && person.first_name == ''" class="text-alert">
+                                                *Nombre requerido.
+                                        <br></span>
+                                        <span *ngIf="firstname.dirty && firstname.touched && !firstname.valid && firstname.name != '' && person.first_name.length>25 " class="text-alert">
+                                        *Nombre invalido excedió el limite de caracteres.
+                                        <br></span>
+                                        <span *ngIf="!firstname?.pattern && firstname.dirty && firstname.touched && !firstname.valid && person.first_name != '' && person.first_name.length<3 " class="text-alert">
+                                        *Nombre invalido tiene menos de 3 caracteres.
+                                        <br></span>
+                                        <span *ngIf="!firstname?.pattern && firstname.dirty && firstname.touched && !firstname.valid && person.first_name != '' && person.first_name.length < 26 && person.first_name.length > 2 " class="text-alert">
+                                        *Nombre invalido no se permiten simbolos.
+                                        </span>
+                                        <!-- <span *ngIf="!firstname.valid && firstname.touched" class="text-alert">
                                                 *Nombre de persona requerido.
                                         </span>
                                         <span *ngIf=" firstname?.pattern && firstname.touched" class="text-alert">
                                             *Nombre inválido
-                                    </span>
+                                    </span> -->
                                     <!-- <div [hidden]="first_name?.valid || first_name?.pristine" class="text-alert">
                                         kjknkasdkjhjask
                                     </div> -->
                                 </div>
                                 <div class="form-group col-sm-6" style="text-align: center">
                                    <label for="last_name" class="control-label" >Apellidos</label>
-                                       <input type="text" pattern="[a-zA-Z]{3,20}[ ]{0,1}[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" class="form-control" id="last_name" 
+                                       <input type="text" pattern="[a-zA-Z ]{3,60}" class="form-control" id="last_name" 
                                        [(ngModel)]="person.last_name" name="last_name" #lastname="ngModel" required />
-                                       <span *ngIf="!lastname.valid && lastname.touched && lastname?.pattern" class="text-alert">
+                                       <span *ngIf="!lastname.valid && lastname.touched && person.last_name == ''" class="text-alert">
+                                            *Apellido requerido.
+                                        <br></span>
+                                        <span *ngIf="lastname.dirty && lastname.touched && !lastname.valid && lastname.name != '' && person.last_name.length>60 " class="text-alert">
+                                        *Apellido invalido excedió el limite de caracteres.
+                                        <br></span>
+                                        <span *ngIf="!lastname?.pattern && lastname.dirty && lastname.touched && !lastname.valid && person.last_name != '' && person.last_name.length<3 " class="text-alert">
+                                        *Apellido invalido tiene menos de 3 caracteres.
+                                        <br></span>
+                                        <span *ngIf="!lastname?.pattern && lastname.dirty && lastname.touched && !lastname.valid && person.last_name != '' && person.last_name.length < 61 && person.last_name.length > 2 " class="text-alert">
+                                        *Apellido invalido no se permiten simbolos.
+                                        </span>
+                                       <!-- <span *ngIf="!lastname.valid && lastname.touched && lastname?.pattern" class="text-alert">
                                                *Apellido de persona requerido.
                                        </span>
                                        <span *ngIf="lastname?.pattern && lastname.touched" class="text-alert">
                                         *Apellido inválido.
-                                </span>
+                                </span> -->
                                    <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
                                        kjkn
                                    </div>-->
@@ -39,7 +63,7 @@
                        <div class="form-group col-sm-8">
                           <div class="form-group col-sm-4">
                               <label for="ci" class="control-label" style="text-align: left" >Cedula de Identidad</label>
-                                  <input type="number" pattern="[1-9][0-9]{6}[a-z]{0,1}" class="form-control" id="ci" 
+                                  <input type="number" pattern="[1-9][0-9]{6}" class="form-control" id="ci" 
                                   [(ngModel)]="person.ci" name="ci" #ci="ngModel" required/>
                                   <span *ngIf="!ci.valid && ci.touched" class="text-alert">
                                           *CI de persona requerido o es invalido.
@@ -52,12 +76,15 @@
                               <label for="cellphone" class="control-label" style="text-align: center">Celular</label>
                                   <input type="number" pattern="[6-7][0-9]{7}" class="form-control" id="cellphone" 
                                   [(ngModel)]="person.cellphone" name="cellphone" #cellphone="ngModel" required />
-                                  <span *ngIf="!cellphone.valid && cellphone.touched" class="text-alert">
-                                          *Celular de persona requerido o es inválido.
+                                  <span *ngIf=" cellphone.touched && person.cellphone == null" class="text-alert">
+                                          *Celular de persona requerido.
                                   </span>
-                                  <span *ngIf=" cellphone?.pattern && cellphone.touched" class="text-alert">
+                                  <span *ngIf="!cellphone?.pattern && cellphone.touched && !cellphone.valid" class="text-alert">
+                                        *Celular de persona inválido.
+                                </span>
+                                  <!-- <span *ngIf=" cellphone?.pattern && cellphone.touched" class="text-alert">
                                     *Celular de persona inválido.
-                                  </span>
+                                  </span> -->
                           </div>
                           <div class="form-group col-sm-4">
                               <label for="phone" class="control-label" style="text-align: right">Teléfono</label>
@@ -74,7 +101,8 @@
                       <div class="form-group col-sm-8" >
                           <div class="form-group col-sm-6">
                               <label for="email" class="control-label" style="text-align: left">Correo Electrónico</label>
-                                  <input type="email" pattern="[a-zA-Z.0-9]*[@][a-z]{3,15}[.][a-z]{3,15}" class="form-control" id="email" 
+                                  <input type="email" pattern="[a-zA-Z.0-9_]*[@][a-zA-Z]{3,15}[.][a-zA-Z]{2,15}" class="form-control" id="email" 
+                                  
                                   [(ngModel)]="person.email" name="email" #email="ngModel" />
                                   <span *ngIf="!email.valid && email.touched" class="text-alert">
                                           *Email de persona requerido.
