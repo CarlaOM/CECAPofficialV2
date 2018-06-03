@@ -51,7 +51,7 @@ export class InscriptionComponent implements OnInit {
       this.descOcupation = new DescOcupation('', '', '', '', '', '', '');
       this.registro = new Registro(null, null, '', '','');//idEvent,idUser,persona:{}, montCancel
 
-      this.ingresoPorInscripcion = new Cashflowusers(new Date(), new Date(), 0, 0, 0, "", "", "", "", "");
+      this.ingresoPorInscripcion = new Cashflowusers(new Date(), new Date(), 0, 0, 0, "", "", "", "", "","");
       this.lists = new Lists(null,0,'',null,null, '','','');//(bol, dol,receipt,assist,type,per,event,mod)
     }
    onSubmit() {

@@ -13,14 +13,14 @@
                              <input type="date" class="form-control" id="name" 
                              [(ngModel)]="correlativo.year" name="year" #year="ngModel" required />
                              <span *ngIf="!year.valid && year.touched" class="text-alert">
-                                     *Fecha requerida.
+                                     *La Fecha es requerida.
                              </span>
                          <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
                              kjkn
                          </div>-->
                      </div>
                      <div class="form-group col-sm-8" style="text-align:center ">
-                         <button type="submit" class="btn btn-success" [disabled]="!addCorrelative.form.valid">Registrar</button>
+                         <button type="submit" class="btn btn-success" [disabled]="!addCorrelative.form.valid">Guardar</button>
                          <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
                       </div>
                  </form>

@@ -49,10 +49,10 @@
                 </div> -->
               </div>
               <div class="form-group col-sm-8">
-                  <label for="areaSelect"><i class="fa fa-tag prefix grey-text"></i>Area</label>
+                  <label for="areaSelect"><i class="fa fa-tag prefix grey-text"></i>Área</label>
                   <select class="form-control" id="areaSelect" [(ngModel)]="areaSelected" (change)="captArea()" name="areaSelect" #areaSelect="ngModel">
                   <option value="P">Prog. Profesionales</option>
-                  <option value="F">Prog. Financiados(solo Santa Cruz)</option>
+                  <option value="F">Prog. Financiados(sólo Santa Cruz)</option>
                   <option value="A">Administrativa</option>
                   </select>
               </div>
@@ -74,7 +74,7 @@
               
                 
                 <p *ngIf="catGeneral == '1'">
-                  <label  style="font-size: small">Especifica</label>
+                  <label  style="font-size: small">Específica</label>
                   <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
                   [(ngModel)]="catGeneral"> -->
                   <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
@@ -88,12 +88,12 @@
             
               
               <p *ngIf="catGeneral == '2'">
-                <label  style="font-size: small">Especifica</label>
+                <label  style="font-size: small">Específica</label>
                 <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
                 [(ngModel)]="catGeneral"> -->
                 <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
                   <option value="1">Alquiler</option>
-                  <option value="2">Alquiler, Equipos y Otros</option>
+                  <option value="2">Alquiler, equipos y otros</option>
                   <option value="3">Limpieza</option>
                   <option value="4">Transporte ida y vuelta</option>
                   
@@ -103,28 +103,28 @@
           
             
             <p *ngIf="catGeneral == '3'">
-              <label  style="font-size: small">Especifica</label>
+              <label  style="font-size: small">Específica</label>
               <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
               [(ngModel)]="catGeneral"> -->
               <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
-                <option value="1">Periodico</option>
+                <option value="1">Periódico</option>
                 <option value="2">Radio</option>
                 <option value="3">Television</option>
                 <option value="4">Internet/Facebook</option>
                 <option value="5">Transporte</option>
-                <option value="6">Pegado de Afiches</option>
+                <option value="6">Pegado de afiches</option>
                 </select>
             </p>
       
        
           
           <p *ngIf="catGeneral == '4'">
-            <label  style="font-size: small">Especifica</label>
+            <label  style="font-size: small">Específica</label>
             <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
             [(ngModel)]="catGeneral"> -->
             <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
               <option value="1">Honorarios</option>
-              <option value="2">Viaticos</option>
+              <option value="2">Viáticos</option>
               <option value="3">Hospedaje</option>
               <option value="4">Transporte</option>
               
@@ -133,13 +133,13 @@
       
         
         <p *ngIf="catGeneral == '5'">
-          <label  style="font-size: small">Especifica</label>
+          <label  style="font-size: small">Específica</label>
           <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
           [(ngModel)]="catGeneral"> -->
           <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
             <option value="1">Escritorio</option>
             <option value="2">Fotocopias</option>
-            <option value="3">Adicional para Clases</option>
+            <option value="3">Adicional para clases</option>
             <option value="4">Transporte</option>
             
             </select>
@@ -147,11 +147,11 @@
      
         
         <p *ngIf="catGeneral == '6'">
-          <label  style="font-size: small">Especifica</label>
+          <label  style="font-size: small">Específica</label>
           <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
           [(ngModel)]="catGeneral"> -->
           <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
-            <option value="1">Devolucio Inscripcion</option>
+            <option value="1">Devolución inscripción</option>
             
           </select>
         </p>
@@ -161,20 +161,20 @@
                 [(ngModel)]="catGeneral"> -->
                 <select class="form-control" id="general" [(ngModel)]="catGeneral2" (change)="captA()" name="general" #general="ngModel">
                   <option value='1'>Oficina</option>
-                  <option value='2'>Recursos Humanos y Consultoria</option>
+                  <option value='2'>Recursos Humanos y Consultorías</option>
                   <option value='3'>Obligaciones</option>
                   <option value='4'>Equipos</option>
                   <option value='5'>Imprenta</option>
                   <option value='6'>Fotocopias</option>
-                  <option value='7'>Otros Gastos</option>
-                  <option value='8'>Gastos Extras</option>
+                  <option value='7'>Otros gastos</option>
+                  <option value='8'>Gastos extras</option>
                   </select>
               </p>
           
          
               
               <p *ngIf="catGeneral2 == '1' && areaSelected == 'A'">
-                <label  style="font-size: small">Especifica</label>
+                <label  style="font-size: small">Específica</label>
                 <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
                 [(ngModel)]="catGeneral"> -->
                 <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
@@ -182,25 +182,25 @@
                   <option value="2">Expensas</option>
                   <option value="3">Luz</option>
                   <option value="4">Agua</option>
-                  <option value="5">Telefono</option>
+                  <option value="5">Teléfono</option>
                   <option value="6">Celulares</option>
-                  <option value="7">Material de Escritorio</option>
-                  <option value="8">Material de Limpieza</option>
-                  <option value="9">Gastos Movilidades</option>
+                  <option value="7">Material de escritorio</option>
+                  <option value="8">Material de limpieza</option>
+                  <option value="9">Gastos movilidades</option>
                   </select>
               </p>
               <p *ngIf="catGeneral2 == '2' && areaSelected == 'A'">
-                <label  style="font-size: small">Especifica</label>
+                <label  style="font-size: small">Específica</label>
                 <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
                 [(ngModel)]="catGeneral"> -->
                 <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
                   <option value="1">Sueldo</option>
                   <option value="2">Anticipos</option>
-                  <option value="3">Viaticos</option>
+                  <option value="3">Viáticos</option>
                   <option value="4">Hospedaje</option>
-                  <option value="5">Pasajes Viajes</option>
+                  <option value="5">Pasajes viajes</option>
                   <option value="6">Finiquito</option>
-                  <option value="7">Honorarios Consultorias</option>                                 
+                  <option value="7">Honorarios consultorías</option>                                 
                   </select>
               </p>
               <p *ngIf="catGeneral2 == '3' && areaSelected == 'A'">
@@ -212,13 +212,13 @@
                   <option value="2">Patentes</option>
                   <option value="3">AFP</option>
                   <option value="4">Caja de Salud</option>
-                  <option value="5">Ministerio Trabajo</option>
+                  <option value="5">Ministerio de trabajo</option>
                   <option value="6">FUNDAEMPRESA</option>
-                  <option value="7">Auditorias</option>                                 
+                  <option value="7">Auditorías</option>                                 
                   </select>
               </p>
               <p *ngIf="catGeneral2 == '4' && areaSelected == 'A'">
-                <label  style="font-size: small">Especifica</label>
+                <label  style="font-size: small">Específica</label>
                 <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
                 [(ngModel)]="catGeneral"> -->
                 <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
@@ -228,83 +228,114 @@
                   </select>
               </p>
               <p *ngIf="catGeneral2 == '5' && areaSelected == 'A'">
-                <label  style="font-size: small">Especifica</label>
+                <label  style="font-size: small">Específica</label>
                 <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
                 [(ngModel)]="catGeneral"> -->
                 <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
-                  <option value="1">Afiches y Volantes</option>
+                  <option value="1">Afiches y volantes</option>
                   <option value="2">Folders</option>
                   <option value="3">Tarjetas</option>
-                  <option value="4">Boligrafos</option>
+                  <option value="4">Bolígrafos</option>
                   <option value="5">Tapas</option>
                   <option value="6">Certificados</option>                                                   
                   </select>
               </p>
               <p *ngIf="catGeneral2 == '6' && areaSelected == 'A'">
-                <label  style="font-size: small">Especifica</label>
+                <label  style="font-size: small">Específica</label>
                 <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
                 [(ngModel)]="catGeneral"> -->
                 <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
                   <option value="1">Compra de hojas</option>
-                  <option value="2">Compra de Toner</option>
-                  <option value="3">Compra Anillos</option>
+                  <option value="2">Compra de toner</option>
+                  <option value="3">Compra de anillos</option>
                   <option value="4">Repuestos</option>
                   <option value="5">Mantenimiento</option>                  
                   </select>
               </p>
               <p *ngIf="catGeneral2 == '7' && areaSelected == 'A'">
-                <label  style="font-size: small">Especifica</label>
+                <label  style="font-size: small">Específica</label>
                 <!-- <input type="text" placeholder="Refrigerio" name="refrigerio" #refrigerio="ngModel"
                 [(ngModel)]="catGeneral"> -->
                 <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
-                  <option value="1">Alimentacion</option>
-                  <option value="2">Periodico</option>
-                  <option value="3">Avisos Clasificados</option>
+                  <option value="1">Alimentación</option>
+                  <option value="2">Periódico</option>
+                  <option value="3">Avisos clasificados</option>
                   <option value="4">Transporte, peaje, parqueo</option>
-                  <option value="5">Correccion de Trabajos</option>
-                  <option value="6">Arreglo jardin</option>
-                  <option value="7">Mantenimiento Oficina</option> 
+                  <option value="5">Corrección de trabajos</option>
+                  <option value="6">Arreglo de jardín</option>
+                  <option value="7">Mantenimiento de oficina</option> 
                   <option value="8">Fondos a sucursales</option>                                 
                   </select>
               </p>
               <p *ngIf="catGeneral2 == '8' && areaSelected == 'A'">
-                <label  style="font-size: small">Especifica</label>
+                <label  style="font-size: small">Específica</label>
                 <select class="form-control" id="especifica" [(ngModel)]="catEspecifica" (change)="captArea()" name="especifica" #especifica="ngModel">
                   <option value="1">Varios(Dra/Ing)</option>
                 </select>
               </p>
               <p *ngIf="areaSelected == 'P' || areaSelected == 'F'">
                 <label for="events"  style="font-size: small">Eventos</label>
-                <select class="form-control" id="events" [(ngModel)]="egresoEvent" name="events" #events="ngModel" required>
-                  <option *ngFor="let event of eventos" [value]="event._name">{{event.name}}</option>
+                <select class="form-control" id="events" [(ngModel)]="egresoEvent" name="events" (change)="capModu()" #events="ngModel" required>
+                  <option *ngFor="let event of eventos" [value]="event._id">{{event.name}}</option>
+                </select>
+              </p>
+              <p *ngIf=" areaSelected == 'P' || areaSelected == 'F' &&  egresoEvent != null">
+                <label for="moduls"  style="font-size: small">Modulos</label>
+                <select class="form-control" id="moduls" [(ngModel)]="modularsId" name="moduls" #moduls="ngModel" required>
+                  <option *ngFor="let mo of modulos" [value]="mo._id">{{mo.name}}</option>
                 </select>
               </p>
             </div>  
             
               <div class="form-group col-sm-8">
-                <label for="recibo">Num Recibo</label>
-                <input type="number" pattern="[0-9]{0,15}[a-zA-Z]{0,5}" class="form-control" id="recibo" [(ngModel)]="egresoRecibo" 
+                <label for="recibo">Número de Recibo</label>
+                <input type="number" pattern="[0-9]{3,15}" class="form-control" id="recibo" [(ngModel)]="egresoRecibo" 
                 name="recibo" #recibo="ngModel" required>
-                <span *ngIf="!recibo.valid && recibo.touched" class="text-alert">
-                    *El Recibo es requerido o tipo de dato es invalido
+                <span *ngIf="!recibo.untouched && egresoRecibo == null" class="text-alert">
+                    *El número de Recibo es requerido
+                <br>
                 </span>
+                <span *ngIf=" recibo.dirty && recibo.touched && !recibo.valid && egresoRecibo > 999999999999999" class="text-alert">
+                  *El número de Recibo es invalido sobre paso el limite de caracteres.
+                <br>
+                </span>
+                <span *ngIf="recibo.dirty && recibo.touched && !recibo.valid && egresoRecibo != null && 3 > egresoRecibo.length" class="text-alert">
+                  *El número de Recibo es invalido tiene menos de 3 caracteres.
+                <br>
+                </span>
+                <span *ngIf="!recibo?.pattern && recibo.dirty && recibo.touched && !recibo.valid && egresoRecibo != null && egresoRecibo.length < 21 && egresoRecibo.length > 2 " class="text-alert">
+                  *El número de Recibo es invalido no se permiten simbolos.
+                </span>
+                
                 <!--<div [hidden]="recibo.valid || recibo.pristine" class="text-alert">
                   recibo es requerido o el tipo de dato es invalido 
                 </div>-->
               </div>
 
-              <div class="form- col-sm-8">
+              <div class="form-group col-sm-8">
                 <label for="monto">Monto</label>
                 <input type="number" pattern="[0-9]{0,5}" class="form-control" id="monto" [(ngModel)]="egresoMonto" 
                 name="monto" #monto="ngModel" required>
-                <span *ngIf="!recibo.valid && recibo.touched" class="text-alert">
-                    *El Monto es requerido o el tipo de dato es invalido 
+                <span *ngIf="egresoMonto == '' && monto.touched && !monto.valid" class="text-alert">
+                  *El Monto es requerido
+                <br>
+                </span>
+                <span *ngIf="!monto?.pattern && monto.dirty && monto.touched && !monto.valid && egresoMonto != '' && egresoMonto.length > 5" class="text-alert">
+                  *El Monto es invalido sobre paso el limite de caracteres.
+                <br>
+                </span>
+                <!-- <span *ngIf="!monto?.pattern && monto.dirty && monto.touched && !monto.valid && egresoMonto != '' && 3 > egresoMonto.length" class="text-alert">
+                  *El Monto es invalido tiene menos de 3 caracteres.
+                <br>
+                </span> -->
+                <span *ngIf="!monto?.pattern && monto.dirty && monto.touched && !monto.valid && egresoMonto != '' && egresoMonto.length < 6 " class="text-alert">
+                  *El Monto es invalido no se permiten simbolos y letras.
                 </span>
                 <!--<div [hidden]="monto.valid || monto.pristine" class="text-alert">
                   Monto es requerido o el tipo de dato es invalido 
                 </div>-->
               </div>
-              <div class="form-group col-sm-8" style="text-align:center ">
+              <div class="form-group col-sm-8" style="text-align:center">
                 <button type="submit" class="btn btn-success" [disabled]="!EgresoForm.form.valid">Guardar</button>
                 <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
               </div>

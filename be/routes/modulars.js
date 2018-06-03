@@ -12,51 +12,146 @@ router
         return res.status(200).send(modulars);
         });
     })
-   .post('/asistencia',function(req,res){
-    console.log(req.body);
-    let personId=req.body.personId;
-    let eventId=req.body.eventId;
-    let moduleId=req.body.moduleId;
-        // db.modulars.find({modules:moduleId},function(err,allModulars){
-
-        //     for(let oneModular of allModulars){
-                
-        //     }
-        // })
-        db.modulars.findOne({persons:personId,events:eventId,modules:moduleId},function(err,modular){
-
-            if(err)return res.status(400).send(err);
-            console.log(modular)
-            modular.assist=true;
-
-            modular.save();
-            db.lists.findOne({person:personId,events:eventId},function(err,list){
-                if(err)return res.status(400).send(err);
-                if(list!=null){
-                    list.assist=true;
-                    list.save(function(err,lis){
-
-                        if(err)return res.status(400).send(err);
-                        return res.status(200).send(lis);
+    .get('/accountModulars/:id', function(req, res){
+        var arrayIds = req.params.id.split('-');
+        var modularsId= arrayIds[0];
+        var moduleId= arrayIds[1];
+        var eventId = arrayIds[2];
+            ingresoModulo(eventId, moduleId, modularsId);
+        function ingresoModulo(eventId, moduleId, modularsId){
+            db.lists.find({events:eventId, modulars: modularsId},function (err, listas) {
+                if (err) return res.status(400).send(err);
+                //console.log(listas)
+                var cantIngresoMod=0;
+                var cantAssist=0
+                var canStudent=0;
+                var canProf=0;
+                var canParticular=0;
+                var listPerId=[];
+                for (let i = 0; i <= listas.length-1; i++) {
+                    cantIngresoMod = cantIngresoMod + listas[i].bolivianos;
+                    if(listas[i].assist == true){
+                        cantAssist++;
+                        listPerId.push(listas[i].person);
+                    }
+                } 
+                db.persons.find({_id: {$in: listPerId}},function(err, persons){
+                    if (err) return res.status(400).send(err);
+                    for (let j = 0; j < persons.length ; j++) {
+                        if(persons[j].ocupation == 'estudiante'){canStudent++;}
+                        if(persons[j].ocupation == 'profesional'){canProf++;}
+                        if(persons[j].ocupation == 'particular'){canParticular++;}
+                    }
+                    db.cashFlowUsers.find({},{details: 1}, function(err, cashUser){
+                        if (err) return res.status(400).send(err);
+                        var canEgreso=0;
+                        for (let i = 0; i < cashUser.length ; i++) {
+                            for (let j = 0; j < cashUser[i].details.length; j++) {
+                                if(JSON.stringify(cashUser[i].details[j].modulars) == JSON.stringify(modularsId)){
+                                    canEgreso = canEgreso + cashUser[i].details[j].amount; 
+                                }
+                            }
+                        }
+                        // console.log(cashUser.length);
+                        // console.log(cashUser[0].details.length);
+                        console.log('¿¿¿¿¿¿¿¿¿¿¿¿ :) ???????????');
+                        console.log('Total ingreso Modulo: '+ cantIngresoMod);
+                        console.log('Total Assist Modulo:  '+ cantAssist);
+                        console.log('Total estudi Modulo:  '+ canStudent);
+                        console.log('Total profe Modulo:   '+ canProf);
+                        console.log('Total partic Modulo:  '+ canParticular);
+                        console.log('Total Egreso Modulo:  '+ canEgreso);
+                        var accountModulars = {
+                            ingreso: cantIngresoMod,
+                            egreso: canEgreso,
+                            assist:cantAssist,
+                            student:canStudent,
+                            professional:canProf,
+                            particular:canParticular
+                        };
+                        return res.status(200).send(accountModulars);
                     });
+                });
+            });
+        }
 
-                }else{
-                    console.log('lista vacia');
-                    return res.status(200).send('lista vacia');
-                }          
+        function findEgresos(){
+            db.cashFlowUsers.find({},{details: 1}, function(err, cashUser){
+                    if (err) return res.status(400).send(err);
+                    for (let j = 0; j < persons.length ; j++) {
+                        if(persons[j].ocupation == 'estudiante'){canStudent++;}
+                    }
+            });
+        }
+    })
+    .post('/asistencia',function(req,res){
+        //console.log(req.body);
+        let personId=req.body.personId;
+        let eventId=req.body.eventId;
+        let moduleId=req.body.moduleId;
+            db.modulars.findOne({persons:personId,events:eventId,modules:moduleId},function(err,modular){
+                if(err)return res.status(400).send(err);
+                //console.log(modular)
+                modular.assist=true;
+                modular.save();
+
+                db.events.aggregate([
+                    { $match: { _id: mongoose.Types.ObjectId(eventId)} },
+                    { $project: { modulars: 1 } },
+                    { $unwind: '$modulars' },
+                    { $match: { 'modulars.modules': { $eq: mongoose.Types.ObjectId(moduleId) } } },
+                    //{ $group: { _id: { modules: '$modulars.modules' }, total: { $sum: 1 } } }
+                ], function (err, modularEvent) {
+                    if (err) return res.status(400).send(err);
+                    console.log(modularEvent);
+                    console.log('aqui el module ID de events');
+                    var objectModular = modularEvent[0];
+                    var modularsId =  objectModular.modulars._id;
+                    console.log('este es el Id del Modulars:  '+ modularsId);
+                    findLists(personId, eventId, modularsId);
+                });
+            });
+            function findLists(personId, eventId, modularsId){
+                db.lists.findOne({person:personId,events:eventId,modulars: modularsId },function(err,list){
+                    if(err)return res.status(400).send(err);
+                    if(list!=null){
+                        list.assist=true;
+                        list.save(function(err,lis){
+
+                            if(err)return res.status(400).send(err);
+                            return res.status(200).send(lis);
+                        });
+                    }else{
+                        var list = {
+                            bolivianos: 0,
+                            dolares: 0,
+                            receipt: '', //varios recibos
+                            assist: true,
+                            type: 1, //1=nuevo //2=nivelacion
+                            person: personId,
+                            events: eventId,
+                            modulars: modularsId
+                        };
+                        var lists = new db.lists(list);
+                        lists.save(function (err, lis) {
+                                if (err) { return res.status(400).send(err); }
+                                console.log('Lista nueva creada de Asistencia');
+                                return res.status(200).send(lis);
+                        });
+                    }          
+                });
+            }
+    })
+    .post('/getAsistencia',function(req,res){
+        let personId=req.body.personId;
+        let eventId=req.body.eventId;
+        let moduleId=req.body.moduleId;
+            db.modulars.findOne({persons:personId,events:eventId,modules:moduleId},function(err,modular){
+                if(err)return res.status(400).send(err);
+                return res.status(200).send(modular);
             })
-        })
-   })
-   .post('/getAsistencia',function(req,res){
-    let personId=req.body.personId;
-    let eventId=req.body.eventId;
-    let moduleId=req.body.moduleId;
-        db.modulars.findOne({persons:personId,events:eventId,modules:moduleId},function(err,modular){
-            if(err)return res.status(400).send(err);
-            return res.status(200).send(modular);
-        })
-   })
-   .post('/printCertificate',function(req,res){
+    })
+    .post('/printCertificate',function(req,res){
         console.log('HOLA CARLA');
         console.log(req.body);
         let personId=req.body.personId;        
@@ -85,5 +180,6 @@ router
                 return res.status(200).send();
           });
     })
+    
 ;
 module.exports = router;

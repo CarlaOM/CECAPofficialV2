@@ -13,9 +13,9 @@
    <table class="table table-hover" >
       <thead>
          <tr>
-            <th>Titulo</th>
-            <th>Descripcion</th>
-            <th>Numero de Recibo</th>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Número de Recibo</th>
             <th>Fecha</th>
             <th>Ingreso</th>
             <th>Egreso</th>
@@ -26,11 +26,11 @@
       </thead>
       <tbody>
          
-         <tr  *ngFor=" let detalle of detalles">
+         <tr  *ngFor=" let detalle of listaDetalles">
 
 
                 <td class="">{{detalle.title}}</td>
-                <td class=""> </td>
+                <td class=""> {{detalle.description}}</td>
                 <td class="">{{detalle.receipt}}</td>
                 <td class="">{{detalle.date_detail|date}}</td>
                 <td class="" *ngIf="detalle.Input==true; else vacio "> {{detalle.amount}}</td>
@@ -62,7 +62,7 @@
    </table>
 
    
-      <a class="btn btn-danger a" (click)="goCloseCash()">Cerrar Caja</a>
+      <a class="btn btn-warning a" (click)="goCloseCash()">Cerrar Caja</a>
       <!-- <app-confirm-close-cash></app-confirm-close-cash> -->
    
 </section>

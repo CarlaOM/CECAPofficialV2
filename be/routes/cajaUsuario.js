@@ -164,9 +164,10 @@ router
         date_detail:new Date(),
         title:cajaEgreso.title,
         events:cajaEgreso.events,
+        modulars:cajaEgreso.modulars//
     };
     db.cashFlowUsers.findOne({active:true,state:-1,user:cajaEgreso.user},function(err,caja){
-        console.log(caja)
+        //console.log(caja)
         if(err) return res.status(400).send(err);
         caja.details.push(detailEgreso),function(err,detail){
             if(err) return res.status(400).send(err);
