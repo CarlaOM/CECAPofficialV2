@@ -51,7 +51,7 @@ module.exports = {
                   date_detail: Date,
                   title: String,
                   events: ObjectId,
-                  modularId: String
+                  modulars: ObjectId 
             }],
             user: ObjectId,
             active: Boolean,

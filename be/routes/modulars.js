@@ -34,28 +34,53 @@ router
                         cantAssist++;
                         listPerId.push(listas[i].person);
                     }
-                }
+                } 
                 db.persons.find({_id: {$in: listPerId}},function(err, persons){
                     if (err) return res.status(400).send(err);
                     for (let j = 0; j < persons.length ; j++) {
                         if(persons[j].ocupation == 'estudiante'){canStudent++;}
-                        if(persons[j].ocupation == 'profecional'){canProf++;}
+                        if(persons[j].ocupation == 'profesional'){canProf++;}
                         if(persons[j].ocupation == 'particular'){canParticular++;}
                     }
-                    console.log('Total ingreso Modulo: '+ cantIngresoMod);
-                    console.log('Total Assist Modulo: '+ cantAssist);
-                    console.log('Total estudi Modulo: '+ canStudent);
-                    console.log('Total profe Modulo: '+ canProf);
-                    console.log('Total partic Modulo: '+ canParticular);
-                    var accountModulars = {
-                        ingreso:cantIngresoMod,
-                        assist:cantAssist,
-                        student:canStudent,
-                        professional:canProf,
-                        particular:canParticular
-                    };
-                    return res.status(200).send(accountModulars);
+                    db.cashFlowUsers.find({},{details: 1}, function(err, cashUser){
+                        if (err) return res.status(400).send(err);
+                        var canEgreso=0;
+                        for (let i = 0; i < cashUser.length ; i++) {
+                            for (let j = 0; j < cashUser[i].details.length; j++) {
+                                if(JSON.stringify(cashUser[i].details[j].modulars) == JSON.stringify(modularsId)){
+                                    canEgreso = canEgreso + cashUser[i].details[j].amount; 
+                                }
+                            }
+                        }
+                        // console.log(cashUser.length);
+                        // console.log(cashUser[0].details.length);
+                        console.log('¿¿¿¿¿¿¿¿¿¿¿¿ :) ???????????');
+                        console.log('Total ingreso Modulo: '+ cantIngresoMod);
+                        console.log('Total Assist Modulo:  '+ cantAssist);
+                        console.log('Total estudi Modulo:  '+ canStudent);
+                        console.log('Total profe Modulo:   '+ canProf);
+                        console.log('Total partic Modulo:  '+ canParticular);
+                        console.log('Total Egreso Modulo:  '+ canEgreso);
+                        var accountModulars = {
+                            ingreso: cantIngresoMod,
+                            egreso: canEgreso,
+                            assist:cantAssist,
+                            student:canStudent,
+                            professional:canProf,
+                            particular:canParticular
+                        };
+                        return res.status(200).send(accountModulars);
+                    });
                 });
+            });
+        }
+
+        function findEgresos(){
+            db.cashFlowUsers.find({},{details: 1}, function(err, cashUser){
+                    if (err) return res.status(400).send(err);
+                    for (let j = 0; j < persons.length ; j++) {
+                        if(persons[j].ocupation == 'estudiante'){canStudent++;}
+                    }
             });
         }
     })
