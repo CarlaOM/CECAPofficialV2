@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { PeticionesService } from '../services/peticiones.service';
+import { Identity } from "../services/global";
 //import { Identity } from '../services/global';
 
 @Component({
@@ -11,6 +12,7 @@ import { PeticionesService } from '../services/peticiones.service';
 })
 export class ProgramaComponent implements OnInit {
     public programs;
+    public role;
 
   constructor(
       private route: ActivatedRoute,
@@ -19,6 +21,7 @@ export class ProgramaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.queryRol();
     this._peticionesService.getPrograms().subscribe(
       result => {
          this.programs = result;
@@ -37,4 +40,17 @@ export class ProgramaComponent implements OnInit {
   addProgram(){
     this.router.navigate(['/home/program/add']);
   }
+
+  queryRol(){
+        //console.log(Identity.rol)
+      this._peticionesService.getRole(Identity.rol).subscribe(
+          result => {
+            this.role = result;
+          },
+          error=>{
+            var errorMessage = <any>error;
+            console.log(errorMessage);
+          }
+      );
+    }
 }

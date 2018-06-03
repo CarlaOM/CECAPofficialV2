@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PeticionesService } from '../services/peticiones.service';
 //import { UserService } from '../services/user.service';
-import { Identity } from '../services/global';
+import { Identity,Roles } from '../services/global';
 import { ActivatedRoute, Router } from "@angular/router";
 @Component({
    selector: 'app-events',
@@ -21,9 +21,9 @@ export class EventsComponent implements OnInit {
       //,private _userService: UserService
    ) { }
    ngOnInit() {
-      // this.queryRol();
+      this.queryRol();
        this.queryEvents(); 
-       //   console.log(this.role);
+    //    this.role=Roles.name;
     }
     
     addPerson(){
@@ -61,18 +61,18 @@ export class EventsComponent implements OnInit {
          }
       );
    }
-//    queryRol(){
-//        //console.log(Identity.rol)
-//     this._peticionesService.getRole(Identity.rol).subscribe(
-//         result => {
-//          this.role = result;
-//         },
-//         error=>{
-//          var errorMessage = <any>error;
-//          console.log(errorMessage);
-//         }
-//     );
-//     }
+   queryRol(){
+       //console.log(Identity.rol)
+    this._peticionesService.getRole(Identity.rol).subscribe(
+        result => {
+         this.role = result;
+        },
+        error=>{
+         var errorMessage = <any>error;
+         console.log(errorMessage);
+        }
+    );
+    }
 }
 
 
