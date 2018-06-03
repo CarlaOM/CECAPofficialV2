@@ -23,7 +23,7 @@
      </li> -->
   </section>
   <section class="content">
-      <a class="btn btn-primary a" (click)="addCartera()"><i class="fa fa-book"></i> Registrar Cartera</a>
+      <a *ngIf='(role?.name=="Admin")||(role?.name=="Gerente")' class="btn btn-primary a" (click)="addCartera()">Registrar Cartera</a>
      <table class="table table-hover">
         <thead>
            <tr>
@@ -44,7 +44,7 @@
               <td>  
                 <a class="btn btn-info a" (click)="send(cartera._id)">INFORMACIÓN</a>
               </td>
-              <td *ngIf='role?.name == "Admin"'>
+              <td *ngIf='(role?.name=="Admin")||(role?.name=="Gerente")'>
                  <button class="btn btn-warning" (click)="editCartera(cartera._id)">EDITAR</button>
                 
               </td>

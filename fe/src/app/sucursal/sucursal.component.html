@@ -7,8 +7,8 @@
         <small> Cecap</small>
      </h1>
      <div>     
-      <ol class="breadcrumb">
-          <li><a class="btn btn-primary" [routerLink]="['/home/sucursal/add']"><i class="fa fa-book"></i> Registrar Sucursal</a></li>
+      <ol class="breadcrumb" >
+          <li *ngIf='(role?.name=="Admin")||(role?.name=="Gerente")'><a class="btn btn-primary fa fa-book" [routerLink]="['/home/sucursal/add']"><i class="fa fa-book"></i>Registrar Sucursal</a></li>
          
       </ol>
     </div> 
