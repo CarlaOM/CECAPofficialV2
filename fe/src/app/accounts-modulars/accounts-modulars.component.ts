@@ -12,7 +12,7 @@ export class AccountsModularsComponent implements OnInit {
   public eventId;
   public event;
   public modules;
-  public account;
+  public account;//object(assist,egreso,ingreso,particular,professional,student)
 
   constructor(
     private route: ActivatedRoute,

@@ -26,18 +26,27 @@ export class AddModuloComponent implements OnInit {
       this.queryProgramId();
       this.queryProgram();
    }
+   queryProgramId() {
+      this.route.params.subscribe(params => {
+         this.programId = params.id;
+      });
+   }
    queryProgram() {
       this._peticionesService.getProgram(this.programId).subscribe(response => {
          this.program = response;
          // console.log(this.program);
+         this.queryModules();
       },
          error => {
             console.log(<any>error);
          });
    }
-   queryProgramId() {
-      this.route.params.subscribe(params => {
-         this.programId = params.id;
+   queryModules() {
+      this._peticionesService.getModulos(this.programId).subscribe(result => {
+      var modules = result;
+      // console.log(result)
+      var keys = Object.keys(modules);
+      this.modulo.number = keys.length + 1;
       });
    }
    onSubmit() {
@@ -46,13 +55,13 @@ export class AddModuloComponent implements OnInit {
          result => {
             var esperado = result;
             console.log(esperado);
-            alert('El Modulo se Creo correctamente');
+            alert('El Módulo se creo correctamente');
             window.history.back();
          },
          error => {
             var errorMessage = <any>error;
             console.log(errorMessage);
-            alert('Error al Crear Modulo verifique los datos');
+            alert('Error al crear Módulo verifique los datos');
          }
       );
    }

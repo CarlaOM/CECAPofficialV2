@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { PeticionesService } from '../services/peticiones.service';
 import { User } from '../modelo/user';
+import { Identity } from "../services/global";
 import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
@@ -12,6 +13,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 })
 export class EjecutivoComponent implements OnInit {
   public ejecutivos;
+  public role;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,6 +22,7 @@ export class EjecutivoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.queryRol();
     this._peticionesService.getUser().subscribe(
       result => {
          this.ejecutivos = result;
@@ -43,6 +46,19 @@ export class EjecutivoComponent implements OnInit {
     // console.log(_id);
     this.router.navigate(['/home/ejecutivo',_id]);
   }
+
+      queryRol(){
+        //console.log(Identity.rol)
+    this._peticionesService.getRole(Identity.rol).subscribe(
+        result => {
+          this.role = result;
+        },
+        error=>{
+          var errorMessage = <any>error;
+          console.log(errorMessage);
+        }
+    );
+    }
   // deleteEjecutivo(_id:string){
   //   this._peticionesService.deleteUser().subscribe(
   //     result => {

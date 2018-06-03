@@ -6,7 +6,7 @@
       </h1>
   </section>
   <section class="content">
-      <a class="btn btn-primary a" (click)="addProgram()"><i class="fa fa-book"></i> Registrar Programa</a>
+      <a *ngIf='(role?.name=="Admin")||(role?.name=="Gerente")'  class="btn btn-primary a fa fa-book" (click)="addProgram()">Registrar Programa</a>
      
    <table class="table table-hover" >
       <thead>
@@ -24,7 +24,7 @@
             <td>
               <a class="btn btn-info" (click)="send(program._id)">VER MÓDULOS</a>
             </td>
-            <td>
+            <td *ngIf='(role?.name=="Admin")||(role?.name=="Gerente")'>
                <a class="btn btn-warning" (click)="editProgram(program._id)">EDITAR</a>
             </td>
          </tr>

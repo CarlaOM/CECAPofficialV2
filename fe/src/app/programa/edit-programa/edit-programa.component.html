@@ -1,4 +1,4 @@
-<section class="content-wrapper">
+<!-- <section class="content-wrapper">
   <div class="content-wrapper">      
     <section class="content">
       
@@ -12,7 +12,7 @@
         <i class="fa fa-comment prefix grey-text"></i>
         <label data-error="wrong" data-success="right" for="form8">Detalles</label>
         <textarea type="text" pattern="[a-zA-Z0-9 ]{3,150}" class="md-textarea form-control" rows="4" value="{{programDetails}}" #details>Detalles</textarea>
-        <!--<input type="text" id="form34" class="form-control validate" value="{{programDetails}}" #details>-->
+        <!--<input type="text" id="form34" class="form-control validate" value="{{programDetails}}" #details>
       </div>
 
       <div class="modal-footer d-flex justify-content-center">
@@ -27,4 +27,39 @@
     </section>
     <router-outlet></router-outlet>
   </div>
-</section>
+</section> -->
+
+<div class="content-wrapper">
+  <br>
+  <div class="">
+    <div class="box box-primary">
+      <div class="container">
+        <div [hidden]="submitted">
+          <h1>Editar Programa</h1>
+          <form (ngSubmit)=" saveProgram()" #addProgram="ngForm" class="jumbotron" >
+            <div class="form-group col-sm-8">
+                <label for="name">Nombre del Programa</label>
+                <input type="text" pattern="[a-zA-Z0-9]{3,20}[ ]{0,1}[a-zA-Z0-9]{0,20}" class="form-control" id="name"
+                [(ngModel)]="programName" name="name" #name="ngModel" required>
+                <div [hidden]="name?.valid || name?.pristine" class="text-alert">
+                  *El nombre del Programa es requerido
+                </div>
+            </div>
+            <div class="form-group col-sm-8">
+                <label for="details">Detalles</label>
+                <input type="text" pattern="[a-zA-Z0-9 ]{3,150}" class="form-control" id="details"
+                [(ngModel)]="programDetails" name="details" #details="ngModel" required>
+                <div [hidden]="details?.valid || detaisl?.pristine" class="text-alert">
+                  *El detalle del Programa es requerido, máximo 150 caracteres permitidos
+                </div>
+            </div>
+            <div class="form-group col-sm-8" style="text-align:center">
+              <button  type="submit" class="btn btn-success" [disabled]="!addProgram.form.valid">Guardar</button>
+              <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
