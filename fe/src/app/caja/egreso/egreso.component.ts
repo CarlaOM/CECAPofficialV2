@@ -36,7 +36,7 @@ export class EgresoComponent implements OnInit {
   public suc;
 
   public modulos;
-  public moduloId;
+  public modularsId; 
 
   constructor(
     private _peticionesService: PeticionesService,
@@ -129,7 +129,7 @@ export class EgresoComponent implements OnInit {
     this.egreso.detail_amount = this.egresoMonto;
     this.egreso.receipt = this.egresoRecibo;
     this.egreso.user = Identity._id;
-    this.egreso.modulars = this.moduloId;
+    this.egreso.modulars = this.modularsId;
 
     console.log(this.egreso);
 
@@ -160,12 +160,24 @@ export class EgresoComponent implements OnInit {
       })
     })
   }
+  
   capModu(){
     this._peticionesService.getModulars(this.egresoEvent).subscribe(
-      response => {
-        this.modulos = response;
+      result => {
+        this.modulos = result;
+        for( let i of this.modulos ){
+            if(i.modules == null){
+                this.modulos.pop();
+            }
+        }
+        console.log('aqui los modulos Objedts');
+         console.log(this.modulos);
+      },
+      error=>{
+        var errorMessage = <any>error;
+         console.log(errorMessage);
       }
-    )
+    );
   }
   idSuc(idSucur){
     console.log(idSucur);

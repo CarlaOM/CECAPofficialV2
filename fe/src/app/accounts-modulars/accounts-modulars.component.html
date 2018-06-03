@@ -30,16 +30,21 @@
            </tr>
         </thead>
         <tbody>
-           <tr *ngFor="let i of states">
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+            <tr> <!--*ngFor="let ac of account" -->
+              <td>{{account.ingreso}}</td>
+              <td>{{account.egreso}}</td>
+              <td>{{account.assist}}</td>
+              <td>{{account.student}}</td>
+              <td>{{account.professional}}</td>
+              <td>{{account.particular}}</td>
            </tr>
         </tbody>
      </table>
+     <br>
+     <div class="form-group col-sm-12" >
+       Capital Modulo: <h4 style="color:green">{{account.ingreso - account.egreso}}</h4>
+    </div>
+    <br>
   </section>
   <br>
       <button class="btn btn-primary" (click)="cancelar()">Cancelar</button>

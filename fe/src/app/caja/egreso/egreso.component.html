@@ -281,8 +281,8 @@
               </p>
               <p *ngIf=" areaSelected == 'P' || areaSelected == 'F' &&  egresoEvent != null">
                 <label for="moduls"  style="font-size: small">Modulos</label>
-                <select class="form-control" id="moduls" [(ngModel)]="moduloId" name="moduls" #moduls="ngModel" required>
-                  <option *ngFor="let modulo of modulos" [value]="modulo.modules">{{modulo.name}}</option>
+                <select class="form-control" id="moduls" [(ngModel)]="modularsId" name="moduls" #moduls="ngModel" required>
+                  <option *ngFor="let mo of modulos" [value]="mo._id">{{mo.name}}</option>
                 </select>
               </p>
             </div>  
