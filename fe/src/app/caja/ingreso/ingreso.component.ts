@@ -14,7 +14,7 @@ import { Cashflowusers } from "../../modelo/cashflowusers";
 export class IngresoComponent implements OnInit {
 
 
-  public ingresoTitulo;
+  public ingresoTitulo = "";
   public ingresoDescripcion;
   public ingresoEvent;
   // public ingresoNombreInscrito;
@@ -68,7 +68,7 @@ export class IngresoComponent implements OnInit {
                               this.ingresoDescripcion;
     this.ingreso.detail_amount=this.ingresoDetailMonto;
     this.ingreso.user=Identity._id;
-    this.ingreso.title=this.ingresoTitulo;
+    // this.ingreso.title=this.ingresoTitulo;
     this.ingreso.events=this.ingresoEvent;
 
 
