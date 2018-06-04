@@ -20,7 +20,7 @@ export class ControlPagoComponent implements OnInit {
   @ViewChild("close", { read: ElementRef }) close: ElementRef;
   @Output() messageEvent = new EventEmitter();
 
-  public person: Person;//colection
+  public person: Person;//colection No usada
   public descOcupation: DescOcupation;//collection
   public inscription: Inscription;//collection
   public eventos;//colection
@@ -51,7 +51,7 @@ export class ControlPagoComponent implements OnInit {
      this.inscription = new Inscription(null, null, null, null, 0, 0, '0', '');
      //this.identy=Identity._id;
     //  this.descOcupation = new DescOcupation('', '', '', '', '', '', '');
-    //  this.ingresoPorInscripcion = new Cashflowusers(new Date(), new Date(), 0, 0, 0, "", "", "", "", "");
+    this.ingresoPorInscripcion = new Cashflowusers(new Date(), new Date(), 0, 0, 0, "", "", "", "", "","");
     //  this.lists = new Lists(null,0,'',null,null, '','','');//(bol, dol,receipt,assist,type,per,event,mod)
      
      this.registro = new Registro(null, null, '', '','');//inscription,persona:{},idEvent,moduleId,modularsId 
@@ -107,8 +107,34 @@ export class ControlPagoComponent implements OnInit {
      this._peticionesService.addControlPago(this.registro).subscribe(
         result => {
             var esperado = result;
-            console.log(esperado);
-            alert('Control Correcto');
+            // console.log(esperado);
+            // alert('Control Correcto');
+
+            /////////////   Ingreso por inscripcin a caja Chica////////////////
+            this.ingresoPorInscripcion.receipt=this.inscription.receipt;
+            this.ingresoPorInscripcion.title='Inscripcion';
+            this.ingresoPorInscripcion.description=this.persona.first_name+' '+this.persona.last_name;
+            this.ingresoPorInscripcion.detail_amount=this.inscription.canceled_price;
+            this.ingresoPorInscripcion.user=Identity._id;
+            this.ingresoPorInscripcion.events=this.eventId;
+            this.ingresoPorInscripcion.modulars=arrayIds[0];//
+            ////////////////////////////////////
+            this._peticionesService.addCashFlowUserIngreso(this.ingresoPorInscripcion).subscribe(
+                result => {
+                  var returned = result;
+                  //alert('Control Correcto :)');
+                },
+                error => {
+                  var errorMessage = <any>error;
+                  console.log(errorMessage);
+                  alert('Error al Crear cashflowuseringreso');
+                }
+              );
+
+            ///////////////////////////////////////////////////////////////////
+            this.router.navigate(['home/event', this.eventId]);
+            alert('Control Realizado Correctamente');
+            //this.router.navigate(['home/persons']);
         },
         error => {
             var errorMessage = <any>error;

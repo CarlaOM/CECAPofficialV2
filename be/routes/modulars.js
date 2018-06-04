@@ -46,12 +46,12 @@ router
                         if (err) return res.status(400).send(err);
                         var canEgreso=0;
                         for (let i = 0; i < cashUser.length ; i++) {
-                            for (let j = 0; j < cashUser[i].details.length; j++) {
-                                if(JSON.stringify(cashUser[i].details[j].modulars) == JSON.stringify(modularsId)){
+                            for (let j = 0; j < cashUser[i].details.length; j++) {console.log(cashUser[i].details[j].input);
+                                if(JSON.stringify(cashUser[i].details[j].modulars) == JSON.stringify(modularsId) && cashUser[i].details[j].input == false ){
                                     canEgreso = canEgreso + cashUser[i].details[j].amount; 
                                 }
                             }
-                        }
+                        } 
                         // console.log(cashUser.length);
                         // console.log(cashUser[0].details.length);
                         console.log('¿¿¿¿¿¿¿¿¿¿¿¿ :) ???????????');

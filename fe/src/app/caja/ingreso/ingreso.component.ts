@@ -70,13 +70,13 @@ export class IngresoComponent implements OnInit {
     this.ingreso.user=Identity._id;
     // this.ingreso.title=this.ingresoTitulo;
     this.ingreso.events=this.ingresoEvent;
-
+    this.ingreso.modulars=null;//modularsID vacio
 
     // console.log(this.ingreso);
     // console.log(Identity._id);
 
     this._peticionesService.addCashFlowUserIngreso(this.ingreso).subscribe(
-      result => {
+      result => { 
         var returned = result;
       //  console.log(returned)
        this.router.navigate(['home/caja/vistacaja']);

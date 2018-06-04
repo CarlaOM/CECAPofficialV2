@@ -98,7 +98,8 @@ router
         input:true,   
         date_detail:new Date(), 
         title:caja.title,
-        events:caja.events
+        events:caja.events,
+        modulars:caja.modulars//
     };
 
     db.cashFlowUsers.findOne({active:true,state:-1, user:caja.user},function(err,caja){
@@ -164,7 +165,7 @@ router
         date_detail:new Date(),
         title:cajaEgreso.title,
         events:cajaEgreso.events,
-        modulars:cajaEgreso.modulars//
+        modulars:cajaEgreso.modulars//aumentado
     };
     db.cashFlowUsers.findOne({active:true,state:-1,user:cajaEgreso.user},function(err,caja){
         //console.log(caja)
