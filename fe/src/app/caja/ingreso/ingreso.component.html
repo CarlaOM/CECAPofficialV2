@@ -10,25 +10,49 @@
       <form (ngSubmit)="onSubmit()" #IngresoForm="ngForm" class="jumbotron">
         <div class="form-group col-sm-8">
           <label for="titulo">Título</label>
-          <input type="text" pattern="[a-zA-Z]{3,20}[ ]{0,1}[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" class="form-control" id="titulo"
+          <input type="text" pattern="[a-zA-Z0-9]{3,20}[ ]{0,1}[a-zA-Z0-9]{0,20}[ ]{0,1}[a-zA-Z0-9]{0,20}" class="form-control" id="titulo"
                  required
-                 [(ngModel)]="ingresoTitulo" name="titulo"
+                 [(ngModel)]="ingreso.title" name="titulo"
                  #titulo="ngModel">
-          <div [hidden]="titulo?.valid || titulo?.pristine"
+                <span *ngIf=" titulo.touched && ingreso.title == ''" class="text-alert">
+                *Titulo requerido.
+                <br></span>
+                <span *ngIf="titulo.dirty && titulo.touched && !titulo.valid && titulo.name != '' && ingreso.title.length>62 " class="text-alert">
+                *Titulo invalido, excedió el limite de caracteres.
+                <br></span>
+                <span *ngIf="!titulo?.pattern && titulo.dirty && titulo.touched && !titulo.valid && ingreso.title != '' && ingreso.title.length<3 " class="text-alert">
+                *Titulo invalido, tiene menos de 3 caracteres.
+                <br></span>
+                <span *ngIf="!titulo?.pattern && titulo.dirty && titulo.touched && !titulo.valid && ingreso.title != '' && ingreso.title.length < 63 && ingreso.title.length > 2 " class="text-alert">
+                *Titulo invalido, no se permiten simbolos.
+                </span>
+          <!-- <div [hidden]="titulo?.valid || titulo?.pristine"
                class="text-alert">
             *El Título es requerido
-          </div>
+          </div> -->
         </div>
         <div class="form-group col-sm-8">
           <label for="descripcion">Descripción</label>
-          <input type="text" pattern="[a-zA-Z0-9 ]{3,150}" class="form-control" id="descripcion"
+          <input type="text" pattern="[a-zA-Z0-9 ]{3,280}" class="form-control" id="descripcion"
                  required
                  [(ngModel)]="ingresoDescripcion" name="descripcion"
                  #descripcion="ngModel">
-          <div [hidden]="descripcion?.valid || descripcion?.pristine"
+                 <span *ngIf="descripcion.touched && ingresoDescripcion == ''" class="text-alert">
+                  *Descripcion requerido.
+                <br></span>
+                <span *ngIf="descripcion.dirty && descripcion.touched && !descripcion.valid && descripcion.name != '' && ingresoDescripcion.length>280 " class="text-alert">
+                *Descripcion invalido excedió el limite de caracteres.
+                <br></span>
+                <span *ngIf="!descripcion?.pattern && descripcion.dirty && descripcion.touched && !descripcion.valid && ingresoDescripcion != '' && ingresoDescripcion.length<3 " class="text-alert">
+                *Descripcion invalido tiene menos de 3 caracteres.
+                <br></span>
+                <span *ngIf="!descripcion?.pattern && descripcion.dirty && descripcion.touched && !descripcion.valid && ingresoDescripcion != '' && ingresoDescripcion.length < 281 && ingresoDescripcion.length > 2 " class="text-alert">
+                *Descripcion invalido no se permiten simbolos.
+                </span>
+          <!-- <div [hidden]="descripcion?.valid || descripcion?.pristine"
                class="text-alert">
             *La Descripción es requerida
-          </div>
+          </div> -->
         </div>
 
         <div class="form-group col-sm-8">
@@ -69,14 +93,26 @@
    
         <div class="form-group col-sm-8">
           <label for="recibo">Número de Recibo</label>
-          <input type="number" pattern="[0-9]{0,15}[a-zA-Z]{0,5}" class="form-control" id="recibo"
+          <input type="number" pattern="[0-9]{0,15}" class="form-control" id="recibo"
                  required
                  [(ngModel)]="ingresoRecibo" name="recibo"
                  #recibo="ngModel">
-          <div [hidden]="recibo?.valid || recibo?.pristine"
+                 <span *ngIf="!recibo.untouched && ingresoRecibo == undefined" class="text-alert">
+                    *El número de Recibo es requerido no se permiten simbolos y letras
+                <br>
+                </span>
+                <span *ngIf=" recibo.dirty && recibo.touched && !recibo.valid && ingresoRecibo > 999999999999999" class="text-alert">
+                  *El número de Recibo es invalido sobre paso el limite de dígitos.
+                <br>
+                </span>
+                <span *ngIf="recibo.dirty && recibo.touched && !recibo.valid && ingresoRecibo != null && ingresoRecibo < 1000 " class="text-alert">
+                  *El número de Recibo es invalido tiene menos de 3 dígitos.
+                <br>
+                </span>
+          <!-- <div [hidden]="recibo?.valid || recibo?.pristine"
                 class="text-alert">
             *El Número de Recibo es requerido
-          </div>
+          </div> -->
         </div>
         <!-- <div class="form-group">
           <label for="montoBase">Monto Base</label>
@@ -94,9 +130,17 @@
               required
               [(ngModel)]="ingresoDetailMonto" name="monto"
               #monto="ngModel">
-          <div [hidden]="monto.valid || monto.pristine" class="text-alert">
+              <span *ngIf="!monto.untouched && ingresoDetailMonto == undefined" class="text-alert">
+                  *El monto de Recibo es requerido, no se permiten simbolos y letras
+              <br>
+              </span>
+              <span *ngIf=" monto.dirty && monto.touched && !monto.valid && ingresoDetailMonto > 99999" class="text-alert">
+                *El monto de Recibo es invalido, sobre paso el limite de dígitos.
+              <br>
+              </span>
+          <!-- <div [hidden]="monto.valid || monto.pristine" class="text-alert">
             *El Monto es requerido
-          </div>
+          </div> -->
         </div>
         <div class="form-group col-sm-8" style="text-align:center ">
             <button type="submit" class="btn btn-success" [disabled]="!IngresoForm.form.valid">Guardar</button>

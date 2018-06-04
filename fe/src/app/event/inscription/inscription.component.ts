@@ -26,6 +26,7 @@ export class InscriptionComponent implements OnInit {
    public programs;//colection
    public eventId;
    public modulsObject;
+   
    //public moduleId;
    public ocupSelected;
    public cartera;
@@ -35,6 +36,8 @@ export class InscriptionComponent implements OnInit {
    public lists: Lists;
     public personRecived;
    submitted = false;
+
+   public cashFLowUser;
 
    constructor(
       private _peticionesService: PeticionesService,
@@ -56,6 +59,7 @@ export class InscriptionComponent implements OnInit {
    ngOnInit() {
       console.log(Identity._id); 
       //this.queryPrograms();
+      this.currentCashFlow();
       this.queryEventId();
       this.queryModulars();
       //this.queryModulos();
@@ -67,6 +71,13 @@ export class InscriptionComponent implements OnInit {
          this.eventId = params.id;
          // console.log(this.eventId)
       });
+   }
+
+   currentCashFlow(){
+       this._peticionesService.getCashFlowUserByUser(Identity).subscribe(response=>{
+
+            this.cashFLowUser=response;
+       })
    }
    onKeydown(event) {
       if (event.key === "Enter") {
@@ -99,6 +110,7 @@ export class InscriptionComponent implements OnInit {
       var arrayIds = this.modulsObject.split('-');
       this.registro.modularsId= arrayIds[0];
       this.registro.moduleId= arrayIds[1];
+    //   this.registro.cashFlowUser=this.cashFLowUser;
       console.log(this.registro);
       this._peticionesService.addInscriptPerson(this.registro).subscribe(
          result => {

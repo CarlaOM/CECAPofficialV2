@@ -22,7 +22,7 @@
                             *Nombre de Programa invalido tiene menos de 3 caracteres.
                            </span>
                            <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && program.name != '' && program.name.length < 63 && program.name.length > 2 " class="text-alert">
-                            *Detalle de Programa invalido no se permiten simbolos.
+                            *Nombre de Programa invalido no se permiten simbolos.
                            </span>
                        <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
                            kjkn
@@ -33,7 +33,7 @@
                                <input type="text" pattern="[a-zA-Z0-9 ]{3,150}" class="form-control" id="ubicacion" 
                                    [(ngModel)]="program.details" name="details" #details="ngModel" required >
                                <span *ngIf="!details.valid && details.touched && program.details == ''" class="text-alert">
-                                           *Detalles de Programa requerido.
+                                           *Detalle de Programa requerido.
                                <br></span>
                                <span *ngIf="details.dirty && details.touched && !details.valid && details.name != '' && program.details.length>150 " class="text-alert">
                                 *Detalle de Programa invalido excedió el limite de caracteres.

@@ -23,6 +23,8 @@ export class DetailsComponent implements OnInit {
   public close;
   public modulesReceived;
 
+  public personIdProfileId;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -31,13 +33,18 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.queryProfilePersonId();
-    this.findProgramPerson();
+    
   }
   queryProfilePersonId(){
     this.route.params.subscribe(params => {
       var arrayIds = params.id.split('-');
       this.profileId = arrayIds[0];
       this.personId = arrayIds[1];
+      this.personIdProfileId={}as PersonProfileModule;
+      this.personIdProfileId.personId=this.personId;
+      this.personIdProfileId.profileId=this.profileId;
+
+      this.findProgramPerson();
     });
   }
   findProgramPerson(){
@@ -75,6 +82,8 @@ export class DetailsComponent implements OnInit {
        })
   }
   listModules() {
+    console.log('asdfasdfasdfasdfasdfasdfafafasd')
+    console.log(this.details.modulars)
     var x =[];
     for (let i = 0; i <= this.modulars.length; i++) {
       this.modulars.pop(); i = 0;
@@ -154,3 +163,4 @@ export interface PersonProfileModule{
   profileId:string,
   moduleId:string,
 }
+
