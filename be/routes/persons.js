@@ -105,56 +105,36 @@ router
       })
   })
   .post('/controlPago',function(req, res){
-    console.log(req.body.moduleId);
     db.events.aggregate([
       { $match: { _id: mongoose.Types.ObjectId(req.body.eventId) } },
       { $project: { inscriptions: 1 } },
       { $unwind: '$inscriptions' },
       { $match: { 'inscriptions.persons': { $eq: mongoose.Types.ObjectId(req.body.persona._id) } } },
       //{ $group: { _id: { persons: '$inscriptions.persons' }, total: { $sum: 1 } } }
-    ], function (err, events) {
+    ], function (err, inscript) {
       if (err) return res.status(400).send(err);
-      console.log(events);
       console.log('aqui el inscription de persona');
-      var eventInscripton = events[0];
-      var total_cancelado =  eventInscripton.inscriptions.total_price;
-      var price_event = eventInscripton.inscriptions.price_event;
+      var eventInscripton = inscript[0];
       //return res.status(200).send(events);
-      getLists(req.body, total_cancelado, price_event);
+      getLists(req.body, eventInscripton.inscriptions.total_price, eventInscripton.inscriptions.price_event);
     });
     function getLists(registro, total_cancelado, price_event){
       var pagoActual = registro.inscription.canceled_price;
-      db.lists.findOne({ person: registro.persona._id,
-                         events: registro.eventId,
+      db.lists.findOne({ person: registro.persona._id,events: registro.eventId,
                          modulars:registro.modularsId},function(err, lista){
           if (err) return res.status(400).send(err);
-          console.log('aqui la lista del get:: ');
-          console.log(lista);
           addModularsAmount(registro, pagoActual, total_cancelado, price_event, lista);
       });
     }  
     function addModularsAmount(registro, pagoActual, total_cancelado, price_event, lista){
-      console.log('modulo ID:  ' + registro.moduleId);
-      console.log('Event ID:  '+registro.eventId);
-      console.log('Persona ID:  '+registro.persona._id);
-      //console.log('PROGRAMA ID:  '+programsId);
-      //var id = JSON.parse(registro.moduleId);
-      // console.log(JSON.stringify(null), typeof registro.moduleId);
-      // console.log( null, id);
-      // console.log( null,typeof id);
-      // console.log(JSON.stringify("null"), JSON.stringify( registro.moduleId));
+      console.log('modulo ID: '+registro.moduleId+' Event ID: '+registro.eventId+' Persona ID: '+registro.persona._id);
       if(JSON.stringify(null) == JSON.stringify(registro.moduleId)){
-          //crear nuevo (Modulars) del Profile Person
-          console.log('LLEGUE AQUI');
           if(pagoActual == 0 ){
-
-            console.log('No Puede pagar (0.00 Bs) en el pago Extra');
-          
+              console.log('No Puede pagar (0.00 Bs) en el pago Extra');
           }else{
             db.persons.findOne({ _id: registro.persona._id }, function (err, ps) {
               if (err) return res.status(400).send(err);
               if (ps == null) return res.status(404).send();
-              console.log(ps);
               db.events.findOne({_id: registro.eventId},{ programs: 1},function(err, event){
                   if (err) return res.status(400).send(err);
                   var profileId = null;
@@ -164,14 +144,13 @@ router
                               profileId = ps.profile[i]._id;
                         }
                   }
-                /////////////////////////////////////////////////////////////
-                var amount = {  // observation
+                  var amount = {  // observation
                     detail: 'Control Pago Extra',
                     receipt: registro.inscription.receipt,// nro factura
                     date: new Date(),
                     amount: pagoActual,
                   };
-                var modular = {
+                  var modular = {
                           name: 'modular Extra',
                           amount: amount,
                           assist: null, //cambio
@@ -180,8 +159,8 @@ router
                           events: registro.eventId,
                           modules: null,
                           print_certificate: null,
-                    };
-                var modulares = new db.modulars(modular);
+                  };
+                  var modulares = new db.modulars(modular);
                     modulares.save(function (err, modular) {
                       if (err) return res.status(400).send(err);
                       console.log(modular)
@@ -189,7 +168,7 @@ router
                       //return res.status(200).send(modular);
                       crearLists(registro, pagoActual, total_cancelado, price_event, lista);
                     });
-                  });
+                });
             });
           } 
       }else{
