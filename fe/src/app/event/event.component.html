@@ -99,7 +99,7 @@
                         <th>Celular</th>
                         <th>Monto Cancelado</th>
                         <th>Perfil</th>
-                        <th>Opciones</th>
+                        <!-- <th>Opciones</th> -->
                         <th>Control de Pago</th>
                      </tr>
                   </thead>
@@ -112,13 +112,12 @@
                         <td>{{ i.canceled_price }}</td>
                         <td>
                            <a class="btn btn-info" (click)="viewProfile(i.persons)">VER</a>
-                        </td>
-                        
-                        <td>
-                           <!-- <app-editPerson [editPerson]="event"></app-editPerson> -->
+                        </td>  
+                        <!-- <td>
+                           <!-- <app-editPerson [editPerson]="event"></app-editPerson>
                            <a class="btn btn-warning" (click)="edit(i.persons)">EDITAR</a>
-                           <!-- <a class="btn btn-success" (click)="asistence(i.persons)">Asistand</a> -->
-                        </td>
+                           <!-- <a class="btn btn-success" (click)="asistence(i.persons)">Asistand</a>
+                        </td> -->
                         <td>
                            <a class="btn btn-success" (click)="control(i.persons)">CONTROL</a>
                            <!-- <a class="btn btn-primary" [routerLink]="['/home/controPago/'+event?._id]">

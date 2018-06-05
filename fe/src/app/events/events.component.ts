@@ -32,9 +32,9 @@ export class EventsComponent implements OnInit {
     viewPrint(_id: string) {
         this.router.navigate(['home/listPrint', _id]);
     }
-    // viewRequirements(_id: string) {
-    //     this.router.navigate(['home/listRequeriments', _id]);
-    // }
+    viewRequirements(_id: string) {
+        this.router.navigate(['home/listRequeriments', _id]);
+    }
     accountsRec(_id: string) {
         this.router.navigate(['home/accountsReceivable', _id]);
     }
