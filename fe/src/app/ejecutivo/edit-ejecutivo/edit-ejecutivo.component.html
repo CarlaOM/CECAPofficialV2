@@ -125,10 +125,10 @@
                                 
                 <fieldset>
                     <legend></legend>
-                    <label>
-                        <input type="radio" name="status" [(ngModel)]="ejecutivoActive" value=true  [defaultChecked]=""> Activo</label>
-                    <label>
-                        <input type="radio" name="status" [(ngModel)]="ejecutivoActive" value=false > Inactivo</label>
+                    <label class="radio-inline">
+                        <input type="radio" name="status"  value=true  [defaultChecked]="ejecutivoActive"> Activo</label>
+                    <label class="radio-inline">
+                        <input type="radio" name="status"  value=false [defaultChecked]="!ejecutivoActive"> Inactivo</label>
                 </fieldset>
                 <!-- <div [hidden]="cartera?.valid || cartera?.pristine" class="">
                         cartera is required
