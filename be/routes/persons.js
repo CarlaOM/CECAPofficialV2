@@ -105,56 +105,38 @@ router
       })
   })
   .post('/controlPago',function(req, res){
-    console.log(req.body.moduleId);
     db.events.aggregate([
       { $match: { _id: mongoose.Types.ObjectId(req.body.eventId) } },
       { $project: { inscriptions: 1 } },
       { $unwind: '$inscriptions' },
       { $match: { 'inscriptions.persons': { $eq: mongoose.Types.ObjectId(req.body.persona._id) } } },
       //{ $group: { _id: { persons: '$inscriptions.persons' }, total: { $sum: 1 } } }
-    ], function (err, events) {
+    ], function (err, inscript) {
       if (err) return res.status(400).send(err);
-      console.log(events);
       console.log('aqui el inscription de persona');
-      var eventInscripton = events[0];
-      var total_cancelado =  eventInscripton.inscriptions.total_price;
-      var price_event = eventInscripton.inscriptions.price_event;
+      var eventInscripton = inscript[0];
       //return res.status(200).send(events);
-      getLists(req.body, total_cancelado, price_event);
+      getLists(req.body, eventInscripton.inscriptions.total_price, eventInscripton.inscriptions.price_event);
     });
     function getLists(registro, total_cancelado, price_event){
       var pagoActual = registro.inscription.canceled_price;
-      db.lists.findOne({ person: registro.persona._id,
-                         events: registro.eventId,
+      db.lists.findOne({ person: registro.persona._id,events: registro.eventId,
                          modulars:registro.modularsId},function(err, lista){
           if (err) return res.status(400).send(err);
-          console.log('aqui la lista del get:: ');
-          console.log(lista);
           addModularsAmount(registro, pagoActual, total_cancelado, price_event, lista);
       });
     }  
     function addModularsAmount(registro, pagoActual, total_cancelado, price_event, lista){
-      console.log('modulo ID:  ' + registro.moduleId);
-      console.log('Event ID:  '+registro.eventId);
-      console.log('Persona ID:  '+registro.persona._id);
-      //console.log('PROGRAMA ID:  '+programsId);
-      //var id = JSON.parse(registro.moduleId);
-      // console.log(JSON.stringify(null), typeof registro.moduleId);
-      // console.log( null, id);
-      // console.log( null,typeof id);
-      // console.log(JSON.stringify("null"), JSON.stringify( registro.moduleId));
-      if(JSON.stringify(null) == JSON.stringify(registro.moduleId)){
-          //crear nuevo (Modulars) del Profile Person
-          console.log('LLEGUE AQUI');
-          if(pagoActual == 0 ){
-
-            console.log('No Puede pagar (0.00 Bs) en el pago Extra');
-          
+      console.log('modulo ID: '+registro.moduleId+' Event ID: '+registro.eventId+' Persona ID: '+registro.persona._id);
+      console.log(JSON.stringify(null), registro.moduleId)
+      if(JSON.stringify(null) == registro.moduleId){
+          if(pagoActual < 1 ){
+              console.log('No Puede pagar (0.00 Bs) en el pago Extra');
+              return res.status(400).send(lista);
           }else{
             db.persons.findOne({ _id: registro.persona._id }, function (err, ps) {
               if (err) return res.status(400).send(err);
               if (ps == null) return res.status(404).send();
-              console.log(ps);
               db.events.findOne({_id: registro.eventId},{ programs: 1},function(err, event){
                   if (err) return res.status(400).send(err);
                   var profileId = null;
@@ -164,14 +146,13 @@ router
                               profileId = ps.profile[i]._id;
                         }
                   }
-                /////////////////////////////////////////////////////////////
-                var amount = {  // observation
+                  var amount = {  // observation
                     detail: 'Control Pago Extra',
                     receipt: registro.inscription.receipt,// nro factura
                     date: new Date(),
-                    amount: pagoActual,
+                    amount: pagoActual
                   };
-                var modular = {
+                  var modular = {
                           name: 'modular Extra',
                           amount: amount,
                           assist: null, //cambio
@@ -180,108 +161,120 @@ router
                           events: registro.eventId,
                           modules: null,
                           print_certificate: null,
-                    };
-                var modulares = new db.modulars(modular);
-                    modulares.save(function (err, modular) {
+                  };
+                  var modulares = new db.modulars(modular);
+                  modulares.save(function (err, modular) {
                       if (err) return res.status(400).send(err);
-                      console.log(modular)
                       console.log('CONTROL CREADO :) CORRECTAMENTE')
                       //return res.status(200).send(modular);
                       crearLists(registro, pagoActual, total_cancelado, price_event, lista);
-                    });
                   });
+              });
             });
           } 
       }else{
-        console.log('########## control pago Amount #########')
-        var amount = {  // observation
-          detail: 'Control Pago',
-          receipt: registro.inscription.receipt,// nro factura
-          date: new Date(),
-          amount: pagoActual
-        };
-        db.modulars.update({ persons: registro.persona._id, 
-                            events: registro.eventId, 
-                            modules: registro.moduleId },
-              {
-                    $set: {
-                          'amount': amount,
-                        // 'assist': asistencia
-                    }
-              }).exec(function (err, off){
-              if (err) return res.status(400).send(err);
-              console.log(off)
-              //if (off.nModified == 0) return res.status(404).send();
-              console.log('CONTROL en modulars Actualizado')
-              //return res.status(200).send(off);
-              crearLists(registro, pagoActual, total_cancelado, price_event, lista);
-        });
+        console.log('########## control pago Amount #########');
+        crearLists(registro, pagoActual, total_cancelado, price_event, lista);
+        // var amounte = {  // observation
+        //     detail: 'Control Pago',
+        //     receipt: registro.inscription.receipt,// nro factura
+        //     date: new Date(),
+        //     amount: pagoActual
+        // };
+        // db.modulars.update({ persons: registro.persona._id, 
+        //                      events: registro.eventId, 
+        //                      modules: registro.moduleId },
+        //                    { $set: {'amount': amounte}
+        //       }).exec(function (err, off){
+        //       if (err) return res.status(400).send(err);
+        //       console.log(off);
+        //       console.log('CONTROL en modulars Actualizado')
+        //       //return res.status(200).send(off);
+        //       crearLists(registro, pagoActual, total_cancelado, price_event, lista);
+        // });
       }
     }
-   function crearLists(registro, pagoActual, total_cancelado, price_event, lista){
-    if(lista == null ){ 
+    function crearLists(registro, pagoActual, total_cancelado, price_event, lista){
+      if(lista == null ){ 
           var list = {
                 bolivianos: registro.inscription.canceled_price,
-                dolares: registro.inscription.canceled_price / (6.96),
+                dolares: 0,
                 receipt: registro.inscription.receipt, // varios recibos
-                assist: false, //controlar por fecha de inscription *******?????
+                assist: false, //controlar por fecha de inscription 
                 type: 2, //1=nuevo //2=nivelacion
                 person: registro.persona._id,
                 events: registro.eventId,
-                modulars: registro.modularsId//duda????
+                modulars: registro.modularsId
           };
           var lists = new db.lists(list);
           lists.save(function (err, lists) {
                 if (err) { return res.status(400).send(err); }
                 console.log('Lista nueva creada del nuevo Pago en el modulo');
                 // return res.status(200).send(lists);
-                editInscription(req.body, total_cancelado, price_event , pagoActual);
+               // editInscription(registro, total_cancelado, price_event , pagoActual);
+               updateModulars(registro, total_cancelado, price_event , pagoActual);
           });
-    }else{//caso que exista obtener el modulo y el pago anterior y si debe enviar mensaje,sino
-        console.log('Lista el monto bolibianos = '+lista.bolivianos)    
-        if( lista.bolivianos == 0 || lista.bolivianos == undefined ){
-            db.lists.update({ person: registro.persona._id, 
-                              events: registro.eventId, 
-                              modulars: registro.modularsId},
-              {
-                $set: {  
-                    'bolivianos': registro.inscription.canceled_price,
-                    'dolares': registro.inscription.canceled_price / (6.96),
-                    'receipt': registro.inscription.receipt, // varios recibos
-                    //'assist': Boolean,
-                    'type': 2, //nuevo // nivelacion
-                }
+      }else{//caso que exista obtener el modulo y el pago anterior y si debe enviar mensaje,sino
+          console.log('Lista el monto bolibianos = '+lista.bolivianos)    
+          if( lista.bolivianos == 0 || lista.bolivianos == undefined ){
+              db.lists.update({ person: registro.persona._id, 
+                                events: registro.eventId, 
+                                modulars: registro.modularsId},
+                {
+                  $set: {  
+                      'bolivianos': registro.inscription.canceled_price,
+                      'dolares': 0,
+                      'receipt': registro.inscription.receipt, // varios recibos
+                      //'assist': Boolean,
+                      'type': 2, //nuevo // nivelacion
+                  }
               }).exec(function (err, off) {
-                if (err) return res.status(400).send(err);
-                //console.log(off)
-                console.log('Lista actualizada de pago = 0.00 : ');
-                //return res.status(200).send(off);
-                editInscription(req.body, total_cancelado, price_event , pagoActual);
-              });
-        }else{
-            console.log('El modulo ya se cancelo, o sino debe realizar un Correlativo');
-            return res.status(400).send(lista);
-        }
+                      if (err) return res.status(400).send(err);
+                      //return res.status(200).send(off);
+                      console.log('Lista actualizada de pago = 0.00 : ');
+                      updateModulars(registro, total_cancelado, price_event , pagoActual);
+                });
+          }else{
+              console.log('El modulo ya se cancelo, o sino debe realizar un Correlativo');
+              return res.status(400).send(lista);
+          }
+      }
     }
-   }
+    function updateModulars(registro, total_cancelado, price_event , pagoActual){
+      if(JSON.stringify(null) == registro.moduleId){
+        editInscription(registro, total_cancelado, price_event , pagoActual);
+      }else{
+          var amounte = {  // observation
+            detail: 'Control Pago',
+            receipt: registro.inscription.receipt,// nro factura
+            date: new Date(),
+            amount: pagoActual
+          };
+          db.modulars.update({ persons: registro.persona._id, 
+                                events: registro.eventId, 
+                                modules: registro.moduleId },
+                              { $set: {'amount': amounte}
+                  }).exec(function (err, off){
+                  if (err) return res.status(400).send(err);
+                  console.log(off);
+                  console.log('CONTROL en modulars Actualizado')
+                  //return res.status(200).send(off);
+                  editInscription(registro, total_cancelado, price_event , pagoActual);
+          });
+      }
+    }
     function editInscription(registro, total_cancelado, price_event, pagoActual){
-      console.log('Pago Actual: '+ pagoActual);
-      console.log('Total Canceled: '+total_cancelado);
-      console.log('Price Event: '+price_event);
-      console.log('Person ID: '+registro.persona._id);
-      //var total_price = total_precio + pagoActual;
       db.events.update({ _id: registro.eventId, 'inscriptions.persons': registro.persona._id },
       {
         $set: { 
-        'inscriptions.$.total_price': total_cancelado + pagoActual,
-        'inscriptions.$.bolivianos_price': total_cancelado  + pagoActual,
-        'inscriptions.$.dolares_price': ((total_cancelado + pagoActual) / (6.96)),
-        'inscriptions.$.canceled_price':  total_cancelado + pagoActual
+          'inscriptions.$.total_price': total_cancelado + pagoActual,
+          'inscriptions.$.bolivianos_price': total_cancelado  + pagoActual,
+          'inscriptions.$.dolares_price': 0,
+          'inscriptions.$.canceled_price':  total_cancelado + pagoActual
         }
        }).exec(function (err, inscri) {
           if (err) return res.status(400).send(err);
-         console.log(inscri);
-         console.log('Inscripcion Actualizado: ')
+          console.log('Inscripcion Actualizado: ');
           //return res.status(200).send(event);
           editProfile( registro, pagoActual, total_cancelado, price_event);
         });
@@ -289,22 +282,19 @@ router
     function editProfile(registro, pagoActual, total_cancelado, price_event){
        db.events.findOne({_id: registro.eventId},{ programs: 1},function(err, event){
         if (err) return res.status(400).send(err);
-        console.log('aqui el id de program para el profile::  '+ event.programs);
         db.persons.update({ _id: registro.persona._id, 'profile.programs': event.programs},
           {
             $set: { 
-            'profile.$.payed': total_cancelado + pagoActual,
-            'profile.$.debt': price_event - (total_cancelado  + pagoActual),
+              'profile.$.payed': total_cancelado + pagoActual,
+              'profile.$.debt': price_event - (total_cancelado  + pagoActual)
             }
           }).exec(function (err, profile) {
               if (err) return res.status(400).send(err);
-              console.log(profile);
-              console.log('Profile Actualizado: ')
-              var progra = event.programs;
+              console.log('Profile Actualizado: ');
               return res.status(200).send(profile);
             });
         });
-     }    
+    }    
   })
   ////////////////////////////////////////////////////
   .post('/descriptionProfile/:id', function (req, res) {

@@ -51,7 +51,7 @@
                <th>Perfil</th>
                <th>Asistencia</th>
                <!-- <th>asis</th> -->
-               <th>Opciones</th>
+               <!-- <th>Opciones</th> -->
                <th>Control de Pago</th>
                
             </tr>
@@ -67,7 +67,7 @@
                   <a class="btn btn-info" (click)="viewProfile(i.persons)">VER</a>
                </td>
                <td *ngSwitchCase="false">
-
+                  
                   <button class="btn btn-danger" (click)="marcarAsistencia(i.persons)"> No Asistió</button>
                  
                </td>
@@ -76,11 +76,11 @@
 
                </td>
                <!-- <td>{{i.assist}}</td> -->
-               <td>
-                  <!-- <app-editPerson [editPerson]="event"></app-editPerson> -->
+               <!-- <td>
+                   <app-editPerson [editPerson]="event"></app-editPerson>
                   <a class="btn btn-warning" (click)="edit(i.persons)">EDITAR</a>
-                  <!-- <a class="btn btn-success" (click)="asistence(i.persons)">Asistand</a> -->
-               </td>
+                   <a class="btn btn-success" (click)="asistence(i.persons)">Asistand</a>
+               </td> -->
                <td>
                   <a class="btn btn-primary" (click)="control(i.persons)">CONTROL</a>
                   <!-- <a class="btn btn-primary" (click)="control(i.persons)">Control</a> -->
