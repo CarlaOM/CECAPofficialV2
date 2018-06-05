@@ -141,7 +141,8 @@ export class InscriptionComponent implements OnInit {
       //       this.router.navigate(['home/events']);
       //       alert('Se Registro a la persona de manera correcta');
       //       //this.router.navigate(['home/persons']);
-
+            this.router.navigate(['home/events']);
+            alert('La inscripcion fue exitosa');
          },
          error => {
             var errorMessage = <any>error;
