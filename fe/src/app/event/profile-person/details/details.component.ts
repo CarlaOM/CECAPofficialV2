@@ -82,12 +82,12 @@ export class DetailsComponent implements OnInit {
        })
   }
   listModules() {
-    console.log('asdfasdfasdfasdfasdfasdfafafasd')
+    // console.log('asdfasdfasdfasdfasdfasdfafafasd')
     console.log(this.details.modulars)
     var x =[];
-    for (let i = 0; i <= this.modulars.length; i++) {
-      this.modulars.pop(); i = 0;
-    }
+    // for (let i = 0; i <= this.modulars.length; i++) {
+    //   this.modulars.pop(); i = 0;
+    // }
     for (let i of this.details.modulars) {
       x.push(i.modules)      
       this.modulars.push(i);
@@ -96,7 +96,7 @@ export class DetailsComponent implements OnInit {
     this._peticionesService.postModules(x).subscribe(
       result => {
         this.modulesReceived = result;
-        // console.log(this.modulesReceived)
+        console.log(this.modulesReceived)
         // console.log(this.modulars)
 
         for(let i=0; i < this.modulars.length; i++){

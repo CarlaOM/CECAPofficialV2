@@ -53,7 +53,7 @@
               <table class="table table-user-information">
                 <tbody>
                   <tr>
-                    <td>Fotografías</td>*
+                    <td>Fotografías</td>
                     <td *ngIf="requirements?.photograpy==true">Entregado</td>
                     <td *ngIf="requirements?.photograpy==false">No entrego</td>
                   </tr>
@@ -79,28 +79,28 @@
                            <i class="fa fa-plus"></i>Trabajo Final</a> -->
                     </td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="finalWork?.date_start!=null">
                     <td>Fecha de inicio</td>
                     <td>{{finalWork?.date_start | date}}</td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="finalWork?.date_start!=null">
                     <td>Nombre del trabajo</td>
                     <td>{{finalWork?.name}}</td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="finalWork?.date_start!=null">
                     <td>Procedencia</td>
                     <td>{{finalWork?.origin}}</td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="finalWork?.date_start!=null">
                     <td>Facilitador asignado</td>
                     <td>{{facilitator?.name}}</td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="finalWork?.date_start!=null">
                     <td>Fecha final</td>
                     <td *ngIf="finalWork?.date_end==null">Trabajo no finalizado...</td>
                     <td><strong>{{finalWork?.date_end | date}}</strong></td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="finalWork?.date_start !=null">
                     <td>Entrega de Diploma</td>
                     <td *ngIf="profile?.print_diploma==true"><strong>Realizado!!!</strong></td>
                     <td *ngIf="profile?.print_diploma==false">Pendiente...</td>
@@ -112,7 +112,7 @@
                 <tbody>
                   <tr>
                     <td *ngIf="close==null">
-                      <a class="btn btn-primary fa fa-plus" (click)="addReview(ppId)"> Añadir Revision</a>
+                      <a class="btn btn-primary fa fa-plus" (click)="addReview(ppId)"> Añadir Revisión</a>
                     </td> 
                   </tr>
                   <tr *ngFor="let i of reviews">
