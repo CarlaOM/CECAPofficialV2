@@ -38,6 +38,7 @@
                   </tr>
                   <tr>
                     <td>Teléfono</td>
+                    <td *ngIf="person?.phone==null">-----</td>
                     <td>{{person?.phone}}</td>
                   </tr>
                   <tr>
