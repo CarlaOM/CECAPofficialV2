@@ -31,12 +31,13 @@ export class ListRequirementsComponent implements OnInit {
   ngOnInit() {
     this.res = new Person("", "", null, null, null, "", "", null, "");
     this.findEventId();
-    this.findProgramId();
+    
     // this.query();
   }
   findEventId() {
     this.route.params.subscribe(params => {
       this.eventId = params.id;
+      this.findProgramId();
     });
   }
   findProgramId() {
