@@ -16,6 +16,7 @@ export class EditEjecutivoComponent implements OnInit {
   public ejecutivoId;
   public ejecutivoActive;
   public carteras;
+  public listacarteras=[];
   public carteraActual;
   public sucursales;
   public roles;
@@ -39,8 +40,17 @@ export class EditEjecutivoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.route.params.subscribe(params => {
+      this.ejecutivoId=params.active;
+    this.findEjecutivo2();
+      
+      // this.findCarteraFromEjecutivo(); 
+   });
+
     this._peticionesService.getCarterasLibres().subscribe(response=>{
       this.carteras=response;
+      this.listacarteras=this.carteras;
       console.log(this.carteras);
     });
     this._peticionesService.getSucursales().subscribe(response=>{
@@ -52,18 +62,26 @@ export class EditEjecutivoComponent implements OnInit {
       console.log(this.roles);
     });
     
-    this.queryEjecutivoId();
-    this.findEjecutivo();
   }
 
-  queryEjecutivoId(){
-      this.route.params.subscribe(params => {
-      this.ejecutivoId=params.active;
-
-      this.findCarteraFromEjecutivo();
-
      
-   });
+  findEjecutivo2(){
+
+    this._peticionesService.getEjecutivoToEdit(this.ejecutivoId).subscribe(response=>{
+      this.ejecutivo=response;
+      this.ejecutivoActive=this.ejecutivo.active;
+      this.ejecutivoName=this.ejecutivo.name;
+      this.ejecutivoLastName=this.ejecutivo.lastname;
+      this.ejecutivoCell=this.ejecutivo.cell;
+      this.ejecutivoCorreo=this.ejecutivo.correo;
+      this.ejecutivoOffice=this.ejecutivo.offices;
+      this.ejecutivoRol=this.ejecutivo.rol;
+      this.ejecutivoCartera=this.ejecutivo.cartera._id;
+      this.listacarteras.push(this.ejecutivo.cartera)
+      console.log(this.ejecutivo.cartera.name);
+      console.log(this.ejecutivo)
+
+    })
   }
 
   findEjecutivo(){
@@ -78,6 +96,15 @@ export class EditEjecutivoComponent implements OnInit {
           this.ejecutivoCorreo=this.ejecutivo.correo;
           this.ejecutivoOffice=this.ejecutivo.offices;
           this.ejecutivoRol=this.ejecutivo.rol;
+          this._peticionesService.getCarteraFromUserId(this.ejecutivoId).subscribe(result=>{
+            this.carteraActual=result;
+    
+            this.ejecutivoCartera=this.carteraActual;
+            this.listacarteras.push(this.carteraActual);
+
+            console.log(this.carteras);
+        })
+          
         },
         error =>{
           console.log(<any>error);

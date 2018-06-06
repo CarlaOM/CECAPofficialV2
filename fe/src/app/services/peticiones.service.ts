@@ -487,4 +487,10 @@ export class PeticionesService {
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.get(this.url + 'modulars/accountModulars/' + modular_id, { headers: headers }).map((res: Response) => res);
   }
+
+  getEjecutivoToEdit(ejecutivoId){
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return this._http.get(this.url + 'users/getEjecutivoToEdit/' + ejecutivoId, { headers: headers }).map((res: Response) => res);
+
+  }
 }
