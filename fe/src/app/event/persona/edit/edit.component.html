@@ -89,55 +89,55 @@
                           <i class="fa fa-tag prefix grey-text"></i>Ocupación</label>
                         <select class="form-control" id="ocupSelect" [(ngModel)]="ocupacion" (change)="captOcupation()"
                              name="ocupSelect" #ocupSelect="ngModel" required >
-                            <option value="Estudiante">Estudiante</option>
-                            <option value="Profesional">Profesional</option>
-                            <option value="Particular">Particular</option>                     
+                            <option value="estudiante">Estudiante</option>
+                            <option value="profesional">Profesional</option>
+                            <option value="particular">Particular</option>                     
                         </select>
                         <div class="form-group col-sm-6">
                           <br>
-                          <p *ngIf="ocupacion == 'Estudiante'">
+                          <p *ngIf="ocupacion == 'estudiante'">
                             <input type="text" pattern="[a-zA-Z]{0,20}" placeholder="Universidad" name="universidad" #universidad="ngModel" 
                             [(ngModel)]="descOcupation.universidad" class="form-control" required />
                             <span *ngIf="!universidad.valid && universidad.touched" class="text-alert">
                                 <h6>*Nombre de Universidad requerido.</h6> 
                             </span>
                           </p>
-                          <p *ngIf="ocupacion == 'Estudiante'">
+                          <p *ngIf="ocupacion == 'estudiante'">
                               <input type="text" pattern="[a-zA-Z ]{0,20}" placeholder="Carrera" name="carrera" #carrera="ngModel"
                                [(ngModel)]="descOcupation.carrera" class="form-control" required  />
                                <span *ngIf="!carrera.valid && carrera.touched" class="text-alert">
                                   <h6>*Carrera de persona requerido.</h6>
                                </span> 
                             </p> 
-                            <p *ngIf="ocupacion == 'Estudiante'">
+                            <p *ngIf="ocupacion == 'estudiante'">
                               <input type="text" pattern="[a-zA-Z0-9]{0,20}" name="semestre" #semestre="ngModel" 
                               [(ngModel)]="descOcupation.semestre" class="form-control" required /> 
                               <span *ngIf="!semestre.valid && semestre.touched" class="text-alert">
                                   <h6>*Semestre de persona requerido.</h6>
                               </span>
                             </p>
-                            <p *ngIf="ocupacion == 'Particular'">
+                            <p *ngIf="ocupacion == 'particular'">
                               <input type="text" pattern="[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" placeholder="Area de Trabajo" name="areaTrabajo" #areaTrabajo="ngModel" 
                               [(ngModel)]="descOcupation.areaTrabajo" class="form-control" required /> 
                               <span *ngIf="!areaTrabajo.valid && areaTrabajo.touched" class="text-alert">
                                   <h6>*Área de trabajo de persona requerido.</h6>
                               </span>
                             </p> 
-                            <p *ngIf="ocupacion == 'Profesional'">
+                            <p *ngIf="ocupacion == 'profesional'">
                               <input type="text" pattern="[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" placeholder="Profesion" name="profesion" #profesion="ngModel"
                                [(ngModel)]="descOcupation.profesion" class="form-control" required /> 
                                <span *ngIf="!profesion.valid && profesion.touched" class="text-alert">
                                   <h6>*Profesión de persona requerido.</h6>
                              </span>
                             </p> 
-                            <p *ngIf="ocupacion == 'Profesional'">
+                            <p *ngIf="ocupacion == 'profesional'">
                               <input type="text" pattern="[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" placeholder="Empresa" name="empresa" #empresa="ngModel"
                                [(ngModel)]="descOcupation.empresa" class="form-control"  required /> 
                                <span *ngIf="!empresa.valid && empresa.touched" class="text-alert">
                                   <h6>*Nombre de Empresa requerido.</h6>
                               </span>
                             </p> 
-                            <p *ngIf="ocupacion == 'Profesional'">
+                            <p *ngIf="ocupacion == 'profesional'">
                               <input type="text" pattern="[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" placeholder="Cargo" name="cargo" #cargo="ngModel" 
                               [(ngModel)]="descOcupation.cargo" class="form-control" required />
                               <span *ngIf="!cargo.valid && cargo.touched" class="text-alert">
