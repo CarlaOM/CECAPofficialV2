@@ -60,9 +60,17 @@
 
 
    </table>
-
-   
+   <div *ngIf='total<=0'>
+      <h4>
+        El boton Cerrar Caja , se habilitara una vez que el monto sea mayor a cero.Gracias
+      </h4>
+  </div>
+   <div *ngIf='total>0'>  
       <a class="btn btn-warning a" (click)="goCloseCash()">Cerrar Caja</a>
+     
+
+
+   </div>
       <!-- <app-confirm-close-cash></app-confirm-close-cash> -->
    
 </section>

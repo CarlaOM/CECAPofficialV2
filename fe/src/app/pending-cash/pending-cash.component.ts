@@ -40,6 +40,8 @@ export class PendingCashComponent implements OnInit {
   public currentOffice;
   public amountDelivered;
   public principal;
+  public validateCloseCashButton=0;
+  public validateCloseCashButtonBoolean=false;
 
   constructor(
     private _peticionesService:PeticionesService,
@@ -65,11 +67,11 @@ export class PendingCashComponent implements OnInit {
       this._peticionesService.getCashFlowUsersPending(Identity._id).subscribe(response=>{
 
         this.cajas=response;
-        console.log(this.cajas)
+        // console.log(this.cajas)
         this.llenarCajasNuevas();
-        console.log(this.cajas);
+        // console.log(this.cajas);
   
-  
+        
   
         
       })
@@ -116,11 +118,26 @@ export class PendingCashComponent implements OnInit {
       infoCaja.montoEntregado=caja.amount_delivered;
       infoCaja.idCaja=caja._id;
       infoCaja.estado=caja.state;
+      if(infoCaja.estado==1){
+        this.validateCloseCashButton++;
+        console.log(this.validateCloseCashButton+"------aaaaaaaaaaaaaaaaaaaaaa");
+      }
       this.nuevasCajas.push(infoCaja);
 
+      
+      
+
     }
+
+    if(this.nuevasCajas.length-1==this.validateCloseCashButton){
+      this.validateCloseCashButtonBoolean=true;
+      console.log("lo cambiamos a TRUEEEEEE") 
+    }
+    console.log(this.validateCloseCashButtonBoolean)
+    
     console.log(this.nuevasCajas);
   }
+  
   infoPendiente(idCash){
     var IdUserCashIdOfficeCash=idCash+'-'+this.currentCashFlowOffice._id
     this.router.navigate(['home/pendientes/info/',IdUserCashIdOfficeCash]);
