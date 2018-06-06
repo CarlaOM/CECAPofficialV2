@@ -102,12 +102,12 @@ captOcupation(){
         var res = result;
         console.log(res);
         this.router.navigate(['home/persons']);
-        alert('Se Guardo correctamente la edicion');
+        alert('La edición se guardó correctamente');
       },
       error=>{
         var errorMessage = <any>error;
           console.log(errorMessage + "Error al editar");
-          alert("no se edito");
+          alert("Ocurrió un error al editar");
       }
   );
  }
