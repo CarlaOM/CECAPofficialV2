@@ -12,17 +12,18 @@ export class DetailsComponent implements OnInit {
   public date;
   public personId;
   public profileId;
+  public person;
   public details;
   public program;
   public modulars: Array<any> = [];
   public profile;
   public requirements;
+  public completed;  
   public finalWork;
   public facilitator;
   public reviews;
   public close;
   public modulesReceived;
-
   public personIdProfileId;
 
   constructor(
@@ -33,7 +34,7 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.queryProfilePersonId();
-    
+    this.findPerson();
   }
   queryProfilePersonId(){
     this.route.params.subscribe(params => {
@@ -46,6 +47,16 @@ export class DetailsComponent implements OnInit {
 
       this.findProgramPerson();
     });
+  }
+  findPerson(){
+    this._peticionesService.getPerson(this.personId).subscribe(
+      result => {
+         this.person = result;
+         console.log(result)
+      },
+      error => {
+         console.log(<any>error);
+      });
   }
   findProgramPerson(){
     // console.log(this.profileId + ' este es el ID del perfil')
@@ -62,6 +73,7 @@ export class DetailsComponent implements OnInit {
          this.reviews = this.details.profile.final_work.revisions; //console.log(this.reviews)
         
          this.listModules();
+         this.assistCompleted();         
          this.findProgram();
          this.findFacilitator();
          this.closeWork();
@@ -82,17 +94,16 @@ export class DetailsComponent implements OnInit {
        })
   }
   listModules() {
-    console.log('asdfasdfasdfasdfasdfasdfafafasd')
     console.log(this.details.modulars)
     var x =[];
-    for (let i = 0; i <= this.modulars.length; i++) {
-      this.modulars.pop(); i = 0;
-    }
+    // for (let i = 0; i <= this.modulars.length; i++) {
+    //   this.modulars.pop(); i = 0;
+    // }
     for (let i of this.details.modulars) {
       x.push(i.modules)      
       this.modulars.push(i);
     }
-    console.log(x)
+    // console.log(x)
     this._peticionesService.postModules(x).subscribe(
       result => {
         this.modulesReceived = result;
@@ -107,7 +118,20 @@ export class DetailsComponent implements OnInit {
          console.log(<any>error);
       })
   }
-  findFacilitator() {
+  assistCompleted(){
+    var i = 0;
+    var j = 0;
+    while (i < this.details.modulars.length) {
+      if(this.details.modulars[i].assist == true){
+        j ++;
+      }
+      i++;
+    }
+    if(j == this.details.modulars.length){
+      this.completed = true;
+    }
+  }
+  findFacilitator(){
     // console.log(this.programId)
     this._peticionesService.getFacilitador(this.finalWork.facilitator).subscribe(
        result => {

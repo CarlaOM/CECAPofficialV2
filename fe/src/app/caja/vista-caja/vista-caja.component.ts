@@ -95,6 +95,7 @@ export class VistaCajaComponent implements OnInit {
     
   }
   goCloseCash(){
+    this.listaDetalles=[];
     this._peticionesService.closeCashFlowUser(Identity._id).subscribe(response=>{
 
       this.cash=response;

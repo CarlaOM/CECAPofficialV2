@@ -5,11 +5,13 @@
       <p class="text-info">Fecha: {{date | date}}</p>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-4 col-lg-offset-4 toppad" >
-      <h3 class="text-info" align="center">Detalles del Programa</h3>
+      <h3 class="text-info" align="center">Detalles del Programa {{program?.name}}</h3>
       <br>
       <div class="panel panel-info">
         <div class="panel-heading">
-          <h3 class="panel-title"><strong>{{program?.name}}</strong></h3>
+          <h3 class="panel-title">
+              <strong>{{person?.first_name}} {{person?.last_name}}</strong>
+          </h3>       
         </div>
         <div class="panel-body">
           <div class="row">
@@ -53,7 +55,7 @@
               <table class="table table-user-information">
                 <tbody>
                   <tr>
-                    <td>Fotografías</td>*
+                    <td>Fotografías</td>
                     <td *ngIf="requirements?.photograpy==true">Entregado</td>
                     <td *ngIf="requirements?.photograpy==false">No entrego</td>
                   </tr>
@@ -70,49 +72,52 @@
                 </tbody>
               </table>
             <strong>Trabajo Final y Entrega de Diploma:</strong>
-              <table class="table table-user-information">
+              <table class="table table-user-information" >
                 <tbody>
-                  <tr>
+                  <tr *ngIf="completed==null">
+                    <td>Estará disponible cuando haya completado la asistencia a todos los módulos</td>
+                  </tr>
+                  <tr *ngIf="completed==true">
                     <td>
                       <a class="btn btn-primary fa fa-plus" (click)="addFinalWork(ppId)"> Trabajo Final</a>
                         <!-- <a class="btn btn-success" [routerLink]="['/home/finalWork/add'+ personId]">
                            <i class="fa fa-plus"></i>Trabajo Final</a> -->
                     </td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="finalWork?.date_start!=null">
                     <td>Fecha de inicio</td>
                     <td>{{finalWork?.date_start | date}}</td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="finalWork?.date_start!=null">
                     <td>Nombre del trabajo</td>
                     <td>{{finalWork?.name}}</td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="finalWork?.date_start!=null">
                     <td>Procedencia</td>
                     <td>{{finalWork?.origin}}</td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="finalWork?.date_start!=null">
                     <td>Facilitador asignado</td>
                     <td>{{facilitator?.name}}</td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="finalWork?.date_start!=null">
                     <td>Fecha final</td>
                     <td *ngIf="finalWork?.date_end==null">Trabajo no finalizado...</td>
                     <td><strong>{{finalWork?.date_end | date}}</strong></td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="finalWork?.date_start !=null">
                     <td>Entrega de Diploma</td>
                     <td *ngIf="profile?.print_diploma==true"><strong>Realizado!!!</strong></td>
                     <td *ngIf="profile?.print_diploma==false">Pendiente...</td>
                   </tr>
                 </tbody>
               </table>
-            <strong>Revisiones:</strong>
+            <strong *ngIf="finalWork?.date_start!=null">Revisiones:</strong>
               <table class="table table-user-information">
                 <tbody>
                   <tr>
-                    <td *ngIf="close==null">
-                      <a class="btn btn-primary fa fa-plus" (click)="addReview(ppId)"> Añadir Revision</a>
+                    <td *ngIf="finalWork?.date_start!=null && close==null">
+                      <a class="btn btn-primary fa fa-plus" (click)="addReview(ppId)"> Añadir Revisión</a>
                     </td> 
                   </tr>
                   <tr *ngFor="let i of reviews">

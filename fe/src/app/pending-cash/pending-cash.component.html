@@ -73,8 +73,12 @@
 
 
    </table>
+   <div *ngIf='!validateCloseCashButtonBoolean'>
+      <h4>*El boton para cerrar caja se habilitara cuando CONFIRME todas las cuentas.Gracias</h4>
+   </div>
+<div *ngIf='validateCloseCashButtonBoolean'>
 
-   <form (ngSubmit)="onSubmit()" #sendToPrincipalForm="ngForm">
+  <form (ngSubmit)="onSubmit()" #sendToPrincipalForm="ngForm">
       
     <div class="form-group col-sm-8">
         <label for="sendToPrincipal">Dinero entregado</label>
@@ -88,11 +92,16 @@
         </div>
       </div> 
     <div class="form-group col-sm-8" style="text-align:center">
-      <button type="submit" class="btn btn-success" [disabled]="!sendToPrincipalForm.form.valid">Cerrar Caja y enviar a Sucursal Principal</button>
+      <button type="submit" class="btn btn-success" [disabled]="!sendToPrincipalForm.form.valid ">Cerrar Caja y enviar a Sucursal Principal</button>
+      <!-- <button type="submit" class="btn btn-success" [disabled]="true && false">Cerrar Caja y enviar a Sucursal Principal</button> -->
+      
       <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
     </div>
   </form>
 
+
+</div>
+ 
 
    
 
