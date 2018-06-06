@@ -4,6 +4,7 @@ import { ActivatedRoute,Router } from "@angular/router";
 import { User} from '../../modelo/user';
 import { Cartera } from "../../modelo/cartera";
 import { Identity } from "../../services/global";
+import { Ejecutivo } from '../../modelo/Ejecutivo';
 
 @Component({
   selector: 'app-edit-ejecutivo',
@@ -129,7 +130,8 @@ export class EditEjecutivoComponent implements OnInit {
       result=>{
         var res=result;
         console.log(res)
-        this.findCartera();
+        this.reasignarCartera();
+        // this.findCartera();
         this.router.navigate(['home/ejecutivo']);
         alert('Se guardo correctamente el nuevo estado');
       },
@@ -141,54 +143,18 @@ export class EditEjecutivoComponent implements OnInit {
 
   }
 
-  findCartera(){
-    this.carteraSeleccionada=this.ejecutivoCartera;
-    console.log(this.carteraSeleccionada);
-    this._peticionesService.getCartera(this.carteraSeleccionada).subscribe(
-       result =>{
-         this.carteraObject=result;
-        this.asignarCartera(); 
+  reasignarCartera(){
+    let carteraObjEjecutivo={} as CarteraObjEjecutivo
+    carteraObjEjecutivo.carteraAntigua=this.ejecutivo.cartera._id;
+    carteraObjEjecutivo.cartera=this.ejecutivoCartera;
+    carteraObjEjecutivo.ejecutivo=this.ejecutivoId;
 
-        
-       },
-       error =>{
-         var errorMessage=<any>error;
-         console.log(errorMessage);
-       }
-
-    )
-
-
- }
-  asignarCartera(){
-    this.carteraObject.user=this.ejecutivo._id;
-    this._peticionesService.updateCartera(this.carteraObject).subscribe(
-      result=>{
-
-        var res=result;
+    this._peticionesService.reasignarCartera(carteraObjEjecutivo).subscribe(res=>{
       
-
-      },error=>{
-        var errorMessage=<any>error;
-        console.log(errorMessage);
-      }
-    )
-
+    })
   }
 
-
-
-  findCarteraFromEjecutivo(){
-      this._peticionesService.getCarteraFromUserId(this.ejecutivoId).subscribe(result=>{
-          this.carteraActual=result;
-          this.carteras.push(this.carteraActual);
-
-          this.ejecutivoCartera=result;
-
-          console.log(this.carteras);
-      })
-  
-   }
+ 
   onSubmit() { 
    this.saveEjecutivo();
   }
@@ -198,4 +164,10 @@ export class EditEjecutivoComponent implements OnInit {
   }
 
   
+}
+export interface CarteraObjEjecutivo{
+  carteraAntigua:string;
+  cartera:string,
+  ejecutivo:string
+
 }

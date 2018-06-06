@@ -23,6 +23,30 @@ router
        return res.status(200).send(carteras);
     });
  })
+
+    .post('/reasignarCartera',function(req,res){
+        console.log(req.body)
+        db.carteras.findOne({_id:req.body.cartera},function(err,cart){
+            if (err) return res.status(400).send(err);
+
+            cart.user=req.body.ejecutivo;
+            cart.active=true;
+            cart.save();
+            db.carteras.findOne({_id:req.body.carteraAntigua},function(err,carter){
+                if (err) return res.status(400).send(err);
+                carter.user=null;
+                carter.active=false;
+                carter.save(function(err,ca){
+                    if (err) return res.status(400).send(err);
+                    return res.status(200).send(cart);
+                });
+
+
+
+            })
+        })
+        
+    })
   
 //    .post('/', function (req, res) {
 //     var cartera = new db.carteras(req.body);

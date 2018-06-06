@@ -254,18 +254,21 @@ var _correlatives = [_correlative1, _correlative2];
 var _cartera_user_1 = {
    name: 'cartera1',
    user: _user_admin,
+   active:true,
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
 var _cartera_user_2 = {
    name: 'cartera2',
    user: _user_ejecutivo1,
+   active:true,
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
 var _cartera_user_3 = {
    name: 'cartera3',
    user: _user_ejecutivo2,
+   active:true,
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
