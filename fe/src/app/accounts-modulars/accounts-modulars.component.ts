@@ -32,6 +32,11 @@ export class AccountsModularsComponent implements OnInit {
     this._peticionesService.getModulars(this.eventId).subscribe(
       result => {
         this.modules = result;
+        this.modules.sort((left,right)=>{
+          if(left.name<right.name)return -1;
+          if(left.name>right.name)return 1;
+          return 0;
+        });
         // for( let i of this.modules ){
         //     if(i.modules == null){
         //         this.modules.pop();

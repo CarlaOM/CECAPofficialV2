@@ -127,18 +127,19 @@ export class InscriptionComponent implements OnInit {
             this.ingresoPorInscripcion.events=this.eventId;
             this.ingresoPorInscripcion.modulars=arrayIds[0];//
             ////////////////////////////////////
-            this._peticionesService.addCashFlowUserIngreso(this.ingresoPorInscripcion).subscribe(
-                result => {
-                  var returned = result;
-                  //alert('Control Correcto :)');
-                },
-                error => {
-                  var errorMessage = <any>error;
-                  console.log(errorMessage);
-                  alert('Error al Crear cashflowuseringreso');
-                }
-              );
-
+            if(this.inscription.canceled_price > 0){
+                this._peticionesService.addCashFlowUserIngreso(this.ingresoPorInscripcion).subscribe(
+                  result => {
+                    var returned = result;
+                    //alert('Control Correcto :)');
+                  },
+                  error => {
+                    var errorMessage = <any>error;
+                    console.log(errorMessage);
+                    alert('Error al Crear cashflowuseringreso');
+                  }
+                );
+            }
             ///////////////////////////////////////////////////////////////////
             this.router.navigate(['home/event', this.eventId]);
             alert('Se Registro a la persona de manera correcta');
@@ -206,9 +207,15 @@ export class InscriptionComponent implements OnInit {
     this._peticionesService.getModulars(this.eventId).subscribe(
       result => {
         this.modulos = result;
+        this.modulos.sort((left,right)=>{
+          if(left.name<right.name)return -1;
+          if(left.name>right.name)return 1;
+          return 0;
+        });
         for( let i of this.modulos ){
-            if(i.modules == null){
-                this.modulos.pop();
+            if(null == i.modules){
+                this.modulos.splice(i, 1);
+                //this.modulos.pop(i);
             }
         }
         console.log('aqui los modulos Objedts');
