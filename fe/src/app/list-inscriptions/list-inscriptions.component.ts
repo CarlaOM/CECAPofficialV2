@@ -68,6 +68,11 @@ export class ListInscriptionsComponent implements OnInit {
   this._peticionesService.getEventModuls(this.eventId).subscribe(//consulta para obt todo modulos
     result => {
         this.modulos = result;
+        this.modulos.sort((left,right)=>{
+          if(left.name<right.name)return -1;
+          if(left.name>right.name)return 1;
+          return 0;
+        });
         console.log(this.modulos);
     },
     error => {
