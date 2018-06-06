@@ -362,7 +362,7 @@ router
                                                 //   inscriptionEvent(person, programId, idEvent, moduleId, inscri, asistencia );
                                           });
                                     } else {
-                                          if (err) return res.status(404).send(err);
+                                          if (err) return res.status(400).send(err);
                                           console.log('La persona ya se inscribio');
                                     }
                                     //return res.status(200).send(person);
