@@ -311,6 +311,9 @@ router
       ///inscripcion de personas antes y en el evento
       .post('/inscriptPerson/:id', function (req, res) {
             ///GUARDAR EN LISTS PRIMERO
+            let cashFlowUser=req.body.cashFlowUser;
+            let cashFlowUser_description="Inscripcion de Persona";
+
             db.persons.findOne({ ci: req.body.persona.ci }, function (err, person) {
                   if (person != null) {
                         console.log('consulta de persona');
@@ -351,6 +354,10 @@ router
                                                 console.log('lista guardada');
                                                 if (err) { return res.status(400).send(err); }
                                                 addInscription(person, req.body.inscription, req.body.eventId, date.programs, req.body.moduleId, asistencia);//**controlar fecha y modulars*/
+                                                
+                                                addIngreso(cashFlowUser,req.body.inscription.receipt,cashFlowUser_description,req.body.inscription.canceled_price)
+                                                
+                                                
                                                 //addProfile(person, date.programs, req.body.eventId, req.body.moduleId, req.body.inscription, asistencia);
                                                 //   inscriptionEvent(person, programId, idEvent, moduleId, inscri, asistencia );
                                           });
@@ -392,6 +399,10 @@ router
                                                 function (err, events) {
                                                       if (err) return res.status(400).send(err);
                                                 });
+
+                                          
+
+
                                           addProfile(person, programId, idEvent, moduleId, inscri, asistencia);
                                     });
                               }
