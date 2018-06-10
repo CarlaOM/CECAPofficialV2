@@ -4,6 +4,7 @@ import { ActivatedRoute,Router } from "@angular/router";
 import { User} from '../../modelo/user';
 import { Cartera } from "../../modelo/cartera";
 import { Identity } from "../../services/global";
+import { ResourceLoader } from '@angular/compiler';
 
 @Component({
   selector: 'app-edit-ejecutivo',
@@ -82,6 +83,7 @@ export class EditEjecutivoComponent implements OnInit {
         error =>{
           console.log(<any>error);
         });
+ 
   }
 
   saveEjecutivo(){
@@ -155,7 +157,7 @@ export class EditEjecutivoComponent implements OnInit {
       this._peticionesService.getCarteraFromUserId(this.ejecutivoId).subscribe(result=>{
           this.carteraActual=result;
           this.carteras.push(this.carteraActual);
-
+          console.log(this.carteraActual)
           this.ejecutivoCartera=result;
 
           console.log(this.carteras);

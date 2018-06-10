@@ -10,7 +10,7 @@
                <form (ngSubmit)="onSubmit()" #addProgram="ngForm" class="jumbotron">
                    <div class="form-group col-sm-8">
                        <label for="name" class="control-label" >Nombre del Programa</label>
-                           <input type="text" pattern="[a-zA-Z]{3,20}([ ]{0,1}[a-zA-Z]{0,20}){0,2}" class="form-control" id="name" 
+                           <input type="text" pattern="[a-zA-Z]{3,20}([ ]{0,1}[a-zA-Z]{0,20}){0,4}" class="form-control" id="name" 
                            [(ngModel)]="program.name" name="name" #name="ngModel" required />
                            <span *ngIf="!name.untouched && !name.valid && program.name == ''" class="text-alert">
                                    *Nombre Requerido.
