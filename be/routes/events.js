@@ -355,7 +355,7 @@ router
                                                 if (err) { return res.status(400).send(err); }
                                                 addInscription(person, req.body.inscription, req.body.eventId, date.programs, req.body.moduleId, asistencia);//**controlar fecha y modulars*/
                                                 
-                                                addIngreso(cashFlowUser,req.body.inscription.receipt,cashFlowUser_description,req.body.inscription.canceled_price)
+                                                //addIngreso(cashFlowUser,req.body.inscription.receipt,cashFlowUser_description,req.body.inscription.canceled_price)
                                                 
                                                 
                                                 //addProfile(person, date.programs, req.body.eventId, req.body.moduleId, req.body.inscription, asistencia);
