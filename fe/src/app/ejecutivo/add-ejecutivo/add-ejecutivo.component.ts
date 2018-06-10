@@ -21,7 +21,9 @@ export class AddEjecutivoComponent implements OnInit {
   public  rolid;
   public newUser;
   public roles;
-  
+  public personas;
+  public rol;
+
   constructor(
     private _peticionesService:PeticionesService,
     private router: Router,
@@ -56,20 +58,55 @@ export class AddEjecutivoComponent implements OnInit {
   }
   onSubmit() { this.submitted = true;
     console.log(this.model);
+    // this.model.rol = this.rol._id;
+    // this._peticionesService.getUser().subscribe(response => {
+    //   this.personas = response;
+    // })
+    // if(this.rol.name == "Gerente"){
+    //   let ger = false;
+    //   for(let p of this.personas){
+    
+    //     if(p.offices == this.model.offices && p.rol == this.rol._id ){
+    //         ger = true;
+    //     }
+    //   }
+    //   if(ger == false){
+    //       this._peticionesService.addUser(this.model).subscribe(response=>{
+    //       this.newUser=response;
+    //       console.log(this.newUser);
+    //       this.findCartera();
+    //       // this.MessageEvent.emit();
+    //       this.router.navigate(['/home/ejecutivo/']); },error=>{
+  
+    //         var errorMessage=<any>error;
+    //         console.log(errorMessage);
+    //       })
+          
+    //   }else{
+    //     alert("Ya existe un gerente en la sucursal seleccionada")
+    //   }
+    // }else{
+    //     this._peticionesService.addUser(this.model).subscribe(response=>{
+    //     this.newUser=response;
+    //     console.log(this.newUser);
+    //     this.findCartera();
+    //     // this.MessageEvent.emit();
+    //     this.router.navigate(['/home/ejecutivo/']); },error=>{
+
+    //       var errorMessage=<any>error;
+    //       console.log(errorMessage);
+    //     })
+    // }
     this._peticionesService.addUser(this.model).subscribe(response=>{
-            this.newUser=response;
-            console.log(this.newUser);
-            this.findCartera();
-            // this.MessageEvent.emit();
-            this.router.navigate(['/home/ejecutivo/']); 
-            
-
-      },error=>{
-
-        var errorMessage=<any>error;
-        console.log(errorMessage);
-      })
-
+          this.newUser=response;
+          console.log(this.newUser);
+          this.findCartera();
+          // this.MessageEvent.emit();
+          this.router.navigate(['/home/ejecutivo/']); },error=>{
+  
+            var errorMessage=<any>error;
+            console.log(errorMessage);
+          })
       
 
   }

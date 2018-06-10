@@ -43,22 +43,22 @@
             <div [hidden]="submitted">
               <h1>Editar Módulo</h1>
               <form (ngSubmit)=" saveModulo()" #addModulo="ngForm" class="jumbotron" >
-                <div class="form-group col-sm-8">
+                <!-- <div class="form-group col-sm-8">
                     <label for="number">Número del Módulo</label>
                     <input type="text" pattern="[0-9]{1,10}" class="form-control" id="number"
                     [(ngModel)]="moduloNumber" name="number" #number="ngModel" required>
                     <div [hidden]="number?.valid || number?.pristine" class="text-alert">
                       *El número del Módulo es requerido
                     </div>
-                </div>
-                <div class="form-group col-sm-8">
+                </div> -->
+                <!-- <div class="form-group col-sm-8">
                     <label for="name">Nombre del Módulo</label>
                     <input type="text" pattern="[a-zA-Z0-9]{3,20}[ ]{0,1}[a-zA-Z0-9]{0,20}" class="form-control" id="name"
                     [(ngModel)]="moduloName" name="name" #name="ngModel" required>
                     <div [hidden]="name?.valid || name?.pristine" class="text-alert">
                       *El nombre del Módulo es requerido
                     </div>
-                </div>
+                </div> -->
                 <div class="form-group col-sm-8">
                     <label for="content">Contenido</label>
                     <!-- pattern="[a-zA-Z0-9 ]{3,150}" -->

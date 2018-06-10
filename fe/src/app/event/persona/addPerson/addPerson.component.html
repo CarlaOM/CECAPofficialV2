@@ -9,7 +9,7 @@
                        <div class="form-group col-sm-8">
                             <div class="form-group col-sm-6" style="text-align: center">
                                     <label for="first_name" class="control-label" >Nombres</label>
-                                        <input type="text" pattern="[a-zA-Z ]{3,25}" class="form-control" id="first_name" 
+                                        <input type="text" pattern="[a-zA-Z]{3,20}[ ]{0,1}[a-zA-Z]{0,20}" class="form-control" id="first_name" 
                                         [(ngModel)]="person.first_name" name="first_name" #firstname="ngModel" required />
                                         <span *ngIf="!firstname.valid && firstname.touched && person.first_name == ''" class="text-alert">
                                                 *Nombre requerido.
@@ -35,7 +35,7 @@
                                 </div>
                                 <div class="form-group col-sm-6" style="text-align: center">
                                    <label for="last_name" class="control-label" >Apellidos</label>
-                                       <input type="text" pattern="[a-zA-Z ]{3,60}" class="form-control" id="last_name" 
+                                       <input type="text" pattern="[a-zA-Z]{3,20}[ ]{0,1}[a-zA-Z]{0,20}" class="form-control" id="last_name" 
                                        [(ngModel)]="person.last_name" name="last_name" #lastname="ngModel" required />
                                        <span *ngIf="!lastname.valid && lastname.touched && person.last_name == ''" class="text-alert">
                                             *Apellido requerido.
@@ -157,7 +157,7 @@
                           <div class="form-group col-sm-6">
                             <br>
                             <p *ngIf="ocupSelected == 'estudiante'">
-                              <input type="text" pattern="[a-zA-Z]{3,20}([ ]{0,1}[a-zA-Z]{0,20}){0,3}" placeholder="Universidad" name="universidad" #universidad="ngModel" 
+                              <input type="text" pattern="[a-zA-Z]{3,20}([ ]{0,1}[a-zA-Z]{0,20}){0,4}" placeholder="Universidad" name="universidad" #universidad="ngModel" 
                               [(ngModel)]="descOcupation.universidad" class="form-control" />
                               <span *ngIf="!universidad.valid && universidad.touched" class="text-alert">
                                   <h6>*Nombre de Universidad requerido.</h6> 
@@ -171,7 +171,7 @@
                                  </span> 
                               </p> 
                               <p *ngIf="ocupSelected == 'estudiante'">
-                                <input type="text" pattern="[a-zA-Z]{3,20}([ ]{0,1}[a-zA-Z]{0,20}){0,2}" placeholder="Semestre" name="semestre" #semestre="ngModel" 
+                                <input type="text" pattern="[a-zA-Z0-9]{1,20}([ ]{0,1}[a-zA-Z0-9]{0,20}){0,2}" placeholder="Semestre" name="semestre" #semestre="ngModel" 
                                 [(ngModel)]="descOcupation.semestre" class="form-control"  /> 
                                 <span *ngIf="!semestre.valid && semestre.touched" class="text-alert">
                                     <h6>*Semestre de persona requerido.</h6>

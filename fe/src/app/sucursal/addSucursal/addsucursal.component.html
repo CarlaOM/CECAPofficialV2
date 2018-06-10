@@ -21,7 +21,7 @@
                     </div>
                     <div class="form-group col-sm-8">
                         <label for="ubicacion" class=" control-label">Ubicación</label>
-                                <input type="text" pattern="[a-zA-Z0-1# ]{4,40}" class="form-control" id="ubicacion" 
+                                <input type="text" pattern="[a-zA-Z0-9#]{4,20}([ ]{0,1}[a-zA-Z0-9#]{0,20}){0,2}" class="form-control" id="ubicacion" 
                                     [(ngModel)]="office.ubicacion" name="ubicacion" #ubicacion="ngModel" required >
                                 <span *ngIf="!ubicacion.valid && ubicacion.touched" class="text-alert">
                                             *Ubicación de Sucursal invalido.
