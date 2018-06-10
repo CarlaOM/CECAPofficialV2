@@ -6,7 +6,8 @@
         </h1>
      </section>
   <section class="content">
-        <a *ngIf='(role?.name=="Admin")||(role?.name=="Gerente")' class="btn btn-primary a" class="fa fa-book" (click)="addEjecutivo()">Registrar Ejecutivo</a>
+        <button *ngIf='(role?.name=="Admin")||(role?.name=="Gerente")' class="btn btn-primary fa fa-book" (click)="addEjecutivo()">Registrar Ejecutivo</button>
+        
        
      <table class="table table-hover" >
         <thead>

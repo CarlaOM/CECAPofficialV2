@@ -5,6 +5,7 @@ import { User} from '../../modelo/user';
 import { Cartera } from "../../modelo/cartera";
 import { Identity } from "../../services/global";
 import { ResourceLoader } from '@angular/compiler';
+import { Ejecutivo } from '../../modelo/Ejecutivo';
 
 @Component({
   selector: 'app-edit-ejecutivo',
@@ -17,6 +18,7 @@ export class EditEjecutivoComponent implements OnInit {
   public ejecutivoId;
   public ejecutivoActive;
   public carteras;
+  public listacarteras=[];
   public carteraActual;
   public sucursales;
   public roles;
@@ -40,8 +42,17 @@ export class EditEjecutivoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.route.params.subscribe(params => {
+      this.ejecutivoId=params.active;
+    this.findEjecutivo2();
+      
+      // this.findCarteraFromEjecutivo(); 
+   });
+
     this._peticionesService.getCarterasLibres().subscribe(response=>{
       this.carteras=response;
+      this.listacarteras=this.carteras;
       console.log(this.carteras);
     });
     this._peticionesService.getSucursales().subscribe(response=>{
@@ -53,18 +64,26 @@ export class EditEjecutivoComponent implements OnInit {
       console.log(this.roles);
     });
     
-    this.queryEjecutivoId();
-    this.findEjecutivo();
   }
 
-  queryEjecutivoId(){
-      this.route.params.subscribe(params => {
-      this.ejecutivoId=params.active;
-
-      this.findCarteraFromEjecutivo();
-
      
-   });
+  findEjecutivo2(){
+
+    this._peticionesService.getEjecutivoToEdit(this.ejecutivoId).subscribe(response=>{
+      this.ejecutivo=response;
+      this.ejecutivoActive=this.ejecutivo.active;
+      this.ejecutivoName=this.ejecutivo.name;
+      this.ejecutivoLastName=this.ejecutivo.lastname;
+      this.ejecutivoCell=this.ejecutivo.cell;
+      this.ejecutivoCorreo=this.ejecutivo.correo;
+      this.ejecutivoOffice=this.ejecutivo.offices;
+      this.ejecutivoRol=this.ejecutivo.rol;
+      this.ejecutivoCartera=this.ejecutivo.cartera._id;
+      this.listacarteras.push(this.ejecutivo.cartera)
+      console.log(this.ejecutivo.cartera.name);
+      console.log(this.ejecutivo)
+
+    })
   }
 
   findEjecutivo(){
@@ -79,6 +98,15 @@ export class EditEjecutivoComponent implements OnInit {
           this.ejecutivoCorreo=this.ejecutivo.correo;
           this.ejecutivoOffice=this.ejecutivo.offices;
           this.ejecutivoRol=this.ejecutivo.rol;
+          this._peticionesService.getCarteraFromUserId(this.ejecutivoId).subscribe(result=>{
+            this.carteraActual=result;
+    
+            this.ejecutivoCartera=this.carteraActual;
+            this.listacarteras.push(this.carteraActual);
+
+            console.log(this.carteras);
+        })
+          
         },
         error =>{
           console.log(<any>error);
@@ -104,7 +132,8 @@ export class EditEjecutivoComponent implements OnInit {
       result=>{
         var res=result;
         console.log(res)
-        this.findCartera();
+        this.reasignarCartera();
+        // this.findCartera();
         this.router.navigate(['home/ejecutivo']);
         alert('Se guardo correctamente el nuevo estado');
       },
@@ -116,54 +145,28 @@ export class EditEjecutivoComponent implements OnInit {
 
   }
 
-  findCartera(){
-    this.carteraSeleccionada=this.ejecutivoCartera;
-    console.log(this.carteraSeleccionada);
-    this._peticionesService.getCartera(this.carteraSeleccionada).subscribe(
-       result =>{
-         this.carteraObject=result;
-        this.asignarCartera(); 
+  reasignarCartera(){
+    let carteraObjEjecutivo={} as CarteraObjEjecutivo
+    carteraObjEjecutivo.carteraAntigua=this.ejecutivo.cartera._id;
+    carteraObjEjecutivo.cartera=this.ejecutivoCartera;
+    carteraObjEjecutivo.ejecutivo=this.ejecutivoId;
 
-        
-       },
-       error =>{
-         var errorMessage=<any>error;
-         console.log(errorMessage);
-       }
-
-    )
-
-
- }
-  asignarCartera(){
-    this.carteraObject.user=this.ejecutivo._id;
-    this._peticionesService.updateCartera(this.carteraObject).subscribe(
-      result=>{
-
-        var res=result;
+    this._peticionesService.reasignarCartera(carteraObjEjecutivo).subscribe(res=>{
       
-
-      },error=>{
-        var errorMessage=<any>error;
-        console.log(errorMessage);
-      }
-    )
-
+    })
   }
+//   findCarteraFromEjecutivo(){
+//     this._peticionesService.getCarteraFromUserId(this.ejecutivoId).subscribe(result=>{
+//         this.carteraActual=result;
+//         this.carteras.push(this.carteraActual);
+//         console.log(this.carteraActual)
+//         this.ejecutivoCartera=result;
 
+//         console.log(this.carteras);
+//     })
 
-
-  findCarteraFromEjecutivo(){
-      this._peticionesService.getCarteraFromUserId(this.ejecutivoId).subscribe(result=>{
-          this.carteraActual=result;
-          this.carteras.push(this.carteraActual);
-          console.log(this.carteraActual)
-          this.ejecutivoCartera=result;
-
-          console.log(this.carteras);
-      })
-  
-   }
+//  }
+ 
   onSubmit() { 
    this.saveEjecutivo();
   }
@@ -173,4 +176,10 @@ export class EditEjecutivoComponent implements OnInit {
   }
 
   
+}
+export interface CarteraObjEjecutivo{
+  carteraAntigua:string;
+  cartera:string,
+  ejecutivo:string
+
 }
