@@ -19,7 +19,6 @@ export class EditEjecutivoComponent implements OnInit {
   public ejecutivoActive;
   public carteras;
   public listacarteras=[];
-  public carteraActual;
   public sucursales;
   public roles;
   public ejecutivoName;
@@ -29,7 +28,9 @@ export class EditEjecutivoComponent implements OnInit {
   public ejecutivoRol;
   public ejecutivoOffice;
   public ejecutivoCartera;
-  
+
+  public carteraAnti;
+  public carteraActual;
   
 
   public carteraSeleccionada;
@@ -79,6 +80,7 @@ export class EditEjecutivoComponent implements OnInit {
       this.ejecutivoOffice=this.ejecutivo.offices;
       this.ejecutivoRol=this.ejecutivo.rol;
       this.ejecutivoCartera=this.ejecutivo.cartera._id;
+      this.carteraAnti=this.ejecutivo.cartera._id;
       this.listacarteras.push(this.ejecutivo.cartera)
       console.log(this.ejecutivo.cartera.name);
       console.log(this.ejecutivo)
@@ -86,32 +88,35 @@ export class EditEjecutivoComponent implements OnInit {
     })
   }
 
-  findEjecutivo(){
-     this._peticionesService.getOneUser(this.ejecutivoId).subscribe(
-        result =>{
-          this.ejecutivo=result;
-          console.log(this.ejecutivo);
-          this.ejecutivoActive=this.ejecutivo.active;
-          this.ejecutivoName=this.ejecutivo.name;
-          this.ejecutivoLastName=this.ejecutivo.lastname;
-          this.ejecutivoCell=this.ejecutivo.cell;
-          this.ejecutivoCorreo=this.ejecutivo.correo;
-          this.ejecutivoOffice=this.ejecutivo.offices;
-          this.ejecutivoRol=this.ejecutivo.rol;
-          this._peticionesService.getCarteraFromUserId(this.ejecutivoId).subscribe(result=>{
-            this.carteraActual=result;
+  // findEjecutivo(){
+  //    this._peticionesService.getOneUser(this.ejecutivoId).subscribe(
+  //       result =>{
+  //         this.ejecutivo=result;
+  //         console.log(this.ejecutivo);
+  //         this.ejecutivoActive=this.ejecutivo.active;
+  //         this.ejecutivoName=this.ejecutivo.name;
+  //         this.ejecutivoLastName=this.ejecutivo.lastname;
+  //         this.ejecutivoCell=this.ejecutivo.cell;
+  //         this.ejecutivoCorreo=this.ejecutivo.correo;
+  //         this.ejecutivoOffice=this.ejecutivo.offices;
+  //         this.ejecutivoRol=this.ejecutivo.rol;
+  //         this._peticionesService.getCarteraFromUserId(this.ejecutivoId).subscribe(result=>{
+  //           this.carteraActual=result;
     
-            this.ejecutivoCartera=this.carteraActual;
-            this.listacarteras.push(this.carteraActual);
+  //           this.ejecutivoCartera=this.carteraActual;
+  //           this.listacarteras.push(this.carteraActual);
 
-            console.log(this.carteras);
-        })
+  //           console.log(this.carteras);
+  //       })
           
-        },
-        error =>{
-          console.log(<any>error);
-        });
+  //       },
+  //       error =>{
+  //         console.log(<any>error);
+  //       });
  
+  // }
+  cambiarActive(i :boolean){
+    this.ejecutivoActive=i;
   }
 
   saveEjecutivo(){
@@ -119,6 +124,8 @@ export class EditEjecutivoComponent implements OnInit {
     this.ejecutivo.active=this.ejecutivoActive;
     this.ejecutivo.name=this.ejecutivoName;
     this.ejecutivo.lastname=this.ejecutivoLastName;
+    this.ejecutivo.cartera=this.ejecutivoCartera;
+    this.carteraActual=this.ejecutivoCartera;
     this.ejecutivo.cell=this.ejecutivoCell;
     this.ejecutivo.correo=this.ejecutivoCorreo;
     this.ejecutivo.offices=this.ejecutivoOffice;
@@ -147,9 +154,11 @@ export class EditEjecutivoComponent implements OnInit {
 
   reasignarCartera(){
     let carteraObjEjecutivo={} as CarteraObjEjecutivo
-    carteraObjEjecutivo.carteraAntigua=this.ejecutivo.cartera._id;
-    carteraObjEjecutivo.cartera=this.ejecutivoCartera;
+    console.log(this.carteraAnti);
+    carteraObjEjecutivo.carteraAntigua=this.carteraAnti;
+    carteraObjEjecutivo.cartera=this.carteraActual;
     carteraObjEjecutivo.ejecutivo=this.ejecutivoId;
+    console.log(carteraObjEjecutivo);
 
     this._peticionesService.reasignarCartera(carteraObjEjecutivo).subscribe(res=>{
       
@@ -178,8 +187,8 @@ export class EditEjecutivoComponent implements OnInit {
   
 }
 export interface CarteraObjEjecutivo{
-  carteraAntigua:string;
+  carteraAntigua:string,
   cartera:string,
-  ejecutivo:string
+  ejecutivo:string,
 
 }
