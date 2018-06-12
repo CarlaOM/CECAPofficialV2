@@ -272,7 +272,7 @@ module.exports = {
             }],
             total: Number,
             programs: ObjectId,
-            //modulo: [ObjectId],
+            offices: ObjectId, //sucursal
 
             _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
             record_date: { type: Date, default: function () { return new Date() } },

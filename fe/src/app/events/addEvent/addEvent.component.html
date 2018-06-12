@@ -1,14 +1,13 @@
 <div class="content-wrapper">
    <br>
    <!-- <app-alerts></app-alerts> -->
-   <div class="">
+   <div class="content">
       <div class="box box-primary">
-
          <div class="container ">
             <div>
                <h1>Registrar Evento</h1>
                <br>
-               <form (ngSubmit)="save()" #addEvent="ngForm" class="jumbotron">
+               <form (ngSubmit)="save()" #addEvent="ngForm" class="">
                   <div class="form-group col-sm-8">
                      <label for="name" class="control-label">Nombre del Evento</label>
                      <!-- pattern="[a-zA-Z]{3,20}[ ]{0,1}[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" -->
@@ -35,21 +34,20 @@
                              </div>-->
                   </div>
                   <div class="form-group col-sm-8">
-                     <label data-error="wrong" data-success="right" for="form8">
-                        <i class="fa fa-calendar prefix grey-text"></i> Inicio</label>
-                     <input type="date" pattern="[2]{1}[0]{1}[1-9]{1}[0-9]{1}-[0-9]{2}-[0-9]{2}" id="form34" class="form-control validate" [(ngModel)]="model.date_start" name="fecha" required #date>
-                     <!-- "(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d" -->
-                  </div>
-                  <div class="form-group col-sm-8">
-                     <label for="total">Total cupos</label>
-                     <input type="number" pattern="[0-9]{0,3}" class="form-control" id="total" [(ngModel)]="model.total" name="total" #total="ngModel"
-                        required>
-                     <span *ngIf="!total.valid && total.touched" class="text-alert">
-                        *Total cupo de evento inválido.
-                     </span>
-                     <!--<div [hidden]="total?.valid || total?.pristine" class="">
-                                 Monto inicial Requerido
-                         </div>-->
+                        <div class="form-group col-sm-6">
+                                <label data-error="wrong" style="text-align:left" data-success="right" for="form8">
+                                        <i class="fa fa-calendar prefix grey-text"></i> Inicio</label>
+                                <input type="date" pattern="[2]{1}[0]{1}[1-9]{1}[0-9]{1}-[0-9]{2}-[0-9]{2}" id="form34" class="form-control validate" [(ngModel)]="model.date_start" name="fecha" required #date>
+                                <!-- "(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d" -->
+                        </div>
+                        <div class="form-group col-sm-4">
+                                <label for="total" style="text-align:right">Total cupos</label>
+                                <input type="number" pattern="[0-9]{0,3}" class="form-control" id="total" [(ngModel)]="model.total" name="total" #total="ngModel"
+                                        required>
+                                <span *ngIf="!total.valid && total.touched" class="text-alert">
+                                        *Total cupo de evento inválido.
+                                </span>
+                        </div>
                   </div>
                   <div class="form-group col-sm-8">
                      <label for="nomPrograma">Programa</label>
@@ -57,11 +55,18 @@
                         <option value="" hidden>Seleccionar un Programa</option>
                         <option *ngFor="let programa of programs" [value]="programa._id">{{programa.name}}</option>
                      </select>
-
                      <!-- <div [hidden]="offices.valid || offices.pristine" class="">
                                 sucursal is required
                         </div> -->
                   </div>
+                  <div class="form-group col-sm-8">
+                        <label for="nomSucursal">Sucursal</label>
+                        <select class="form-control" id="nomSucursal" required [(ngModel)]="model.offices" name="nomSucursal" #nomSucursal="ngModel">
+                                <option value="" hidden>Seleccionar una Sucursal</option>
+                                <option *ngFor="let s of sucursales" [value]="s._id">{{s.name}}</option>
+                        </select>
+                  </div>
+                  <br>
                   <div class="form-group col-sm-8" style="text-align:center ">
                      <button type="submit" class="btn btn-success" [disabled]="!addEvent.form.valid">Guardar</button>
                      <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>

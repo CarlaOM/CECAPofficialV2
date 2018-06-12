@@ -11,6 +11,6 @@ export class Event {
       // }],
       public total: number,
       public programs: string,
-      //public modulo: string
+      public offices: string
    ) { }
 }

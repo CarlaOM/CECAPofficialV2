@@ -12,24 +12,21 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class AddEventComponent implements OnInit {
    public programs;
-   //@ViewChild('description') descriptionRef: ElementRef;
-   //@ViewChild('date') dateRef: ElementRef;
-   //@ViewChild('total') totalRef: ElementRef;
-   //@ViewChild('program') programRef: ElementRef;
-   //@ViewChild("close", { read: ElementRef }) close: ElementRef;
-   //@Output() messageEvent = new EventEmitter();
    public model: Event;
+   public sucursales; //offices
+
    constructor(
       private _peticionesService: PeticionesService,
       private route: ActivatedRoute,
       private router: Router
       //,private alerts: AlertsService
    ) {
-      this.model = new Event("", "", null, null, "");
+      this.model = new Event("", "", null, null, "","");
    }
 
    ngOnInit() {
-      this.queryPrograms();  
+      this.queryPrograms();
+      this.querySucursal(); 
    }
    queryPrograms() {
       this._peticionesService.getPrograms().subscribe(response => {
@@ -41,6 +38,18 @@ export class AddEventComponent implements OnInit {
             console.log(errorMessage);
          }
       );
+   }
+   querySucursal(){
+     this._peticionesService.getSucursales().subscribe(
+      response => {
+        this.sucursales= response;
+        console.log(this.sucursales);
+      },
+      error => {
+        var errorMessage = <any>error;
+        console.log(errorMessage);
+      }
+     );
    }
    cancelar() {
       this.router.navigate(['home/events']);

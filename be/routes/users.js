@@ -129,7 +129,7 @@ router
       });
    })
 
-   .post('/register', function (req, res, next) {
+   .post('/register', function (req, res, next) { 
       var role_id;
       db.roles.findOne({ name: 'Admin' }, function (err, role) {
          if (err) return res.status(400).send(err);
@@ -137,7 +137,7 @@ router
          role_id = role._id;
          //    console.log(req.body);
          validating();
-      })
+      });
       function validating() {
          db.users.findOne({ _id: req.body._id, rol: role_id }, function (err, user) {
             if (err) return console.log(err);

@@ -61,13 +61,12 @@ export class AddEjecutivoComponent implements OnInit {
             console.log(this.newUser);
             this.findCartera();
             // this.MessageEvent.emit();
-            this.router.navigate(['/home/ejecutivo/']); 
-            
-
+            this.router.navigate(['/home/ejecutivo/']);
+            alert('Se creo Ejecutivo de manera Correcta'); 
       },error=>{
-
         var errorMessage=<any>error;
         console.log(errorMessage);
+        alert('Error al Crear, Gerente ya existe en esta Sucursal');
       })
 
       
