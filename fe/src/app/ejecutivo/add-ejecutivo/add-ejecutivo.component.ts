@@ -52,9 +52,7 @@ export class AddEjecutivoComponent implements OnInit {
     this._peticionesService.getRoles().subscribe(response=>{
       this.roles=response;
       console.log(this.roles);
-    });
-    
-    
+    }); 
   }
   onSubmit() { this.submitted = true;
     console.log(this.model);
@@ -97,57 +95,44 @@ export class AddEjecutivoComponent implements OnInit {
     //       console.log(errorMessage);
     //     })
     // }
-    this._peticionesService.addUser(this.model).subscribe(response=>{
-          this.newUser=response;
-          console.log(this.newUser);
-          this.findCartera();
-          // this.MessageEvent.emit();
-          this.router.navigate(['/home/ejecutivo/']); },error=>{
-  
-            var errorMessage=<any>error;
-            console.log(errorMessage);
-          })
-      
-
-  }
- 
-
+    this._peticionesService.addUser(this.model).subscribe(
+      response=>{
+            this.newUser=response;
+            this.findCartera();
+            this.router.navigate(['home/ejecutivo']);
+            alert('Se guardo correctamente el Ejecutivo');
+      },
+      error=>{
+            console.log(<any>error);
+            alert('Error al guardar, ya existe ejecutivo en esta sucursal');
+      });
+    }
   findCartera(){
     this.carteraSeleccionada=this.model.cartera;
     console.log(this.carteraSeleccionada);
     this._peticionesService.getCartera(this.carteraSeleccionada).subscribe(
        result =>{
-         this.carteraObject=result;
-        this.asignarCartera(); 
-
-        
+          this.carteraObject=result;
+          this.asignarCartera(); 
        },
        error =>{
          var errorMessage=<any>error;
          console.log(errorMessage);
        }
-
     )
-
-
  }
   asignarCartera(){
     this.carteraObject.user=this.newUser._id;
     this._peticionesService.updateCartera(this.carteraObject).subscribe(
       result=>{
-
         var res=result;
-      
-
       },error=>{
         var errorMessage=<any>error;
         console.log(errorMessage);
       }
     )
-
   }
   cancel(){
-
     this.router.navigate(['home/ejecutivo']);
   }
 
