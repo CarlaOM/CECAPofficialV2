@@ -21,7 +21,9 @@ export class AddEjecutivoComponent implements OnInit {
   public  rolid;
   public newUser;
   public roles;
-  
+  public personas;
+  public rol;
+
   constructor(
     private _peticionesService:PeticionesService,
     private router: Router,
@@ -50,66 +52,87 @@ export class AddEjecutivoComponent implements OnInit {
     this._peticionesService.getRoles().subscribe(response=>{
       this.roles=response;
       console.log(this.roles);
-    });
-    
-    
+    }); 
   }
   onSubmit() { this.submitted = true;
     console.log(this.model);
-    this._peticionesService.addUser(this.model).subscribe(response=>{
+    // this.model.rol = this.rol._id;
+    // this._peticionesService.getUser().subscribe(response => {
+    //   this.personas = response;
+    // })
+    // if(this.rol.name == "Gerente"){
+    //   let ger = false;
+    //   for(let p of this.personas){
+    
+    //     if(p.offices == this.model.offices && p.rol == this.rol._id ){
+    //         ger = true;
+    //     }
+    //   }
+    //   if(ger == false){
+    //       this._peticionesService.addUser(this.model).subscribe(response=>{
+    //       this.newUser=response;
+    //       console.log(this.newUser);
+    //       this.findCartera();
+    //       // this.MessageEvent.emit();
+    //       this.router.navigate(['/home/ejecutivo/']); },error=>{
+  
+    //         var errorMessage=<any>error;
+    //         console.log(errorMessage);
+    //       })
+          
+    //   }else{
+    //     alert("Ya existe un gerente en la sucursal seleccionada")
+    //   }
+    // }else{
+    //     this._peticionesService.addUser(this.model).subscribe(response=>{
+    //     this.newUser=response;
+    //     console.log(this.newUser);
+    //     this.findCartera();
+    //     // this.MessageEvent.emit();
+    //     this.router.navigate(['/home/ejecutivo/']); },error=>{
+
+    //       var errorMessage=<any>error;
+    //       console.log(errorMessage);
+    //     })
+    // }
+    this._peticionesService.addUser(this.model).subscribe(
+      response=>{
             this.newUser=response;
-            console.log(this.newUser);
             this.findCartera();
-            // this.MessageEvent.emit();
-            this.router.navigate(['/home/ejecutivo/']);
-            alert('Se creo Ejecutivo de manera Correcta'); 
-      },error=>{
-        var errorMessage=<any>error;
-        console.log(errorMessage);
-        alert('Error al Crear, Gerente ya existe en esta Sucursal');
-      })
-
-      
-
-  }
- 
-
+            this.router.navigate(['home/ejecutivo']);
+            alert('Se guardo correctamente el Ejecutivo');
+      },
+      error=>{
+            console.log(<any>error);
+            alert('Error al guardar, ya existe ejecutivo en esta sucursal');
+      });
+    }
   findCartera(){
     this.carteraSeleccionada=this.model.cartera;
     console.log(this.carteraSeleccionada);
     this._peticionesService.getCartera(this.carteraSeleccionada).subscribe(
        result =>{
-         this.carteraObject=result;
-        this.asignarCartera(); 
-
-        
+          this.carteraObject=result;
+          this.asignarCartera(); 
        },
        error =>{
          var errorMessage=<any>error;
          console.log(errorMessage);
        }
-
     )
-
-
  }
   asignarCartera(){
     this.carteraObject.user=this.newUser._id;
     this._peticionesService.updateCartera(this.carteraObject).subscribe(
       result=>{
-
         var res=result;
-      
-
       },error=>{
         var errorMessage=<any>error;
         console.log(errorMessage);
       }
     )
-
   }
   cancel(){
-
     this.router.navigate(['home/ejecutivo']);
   }
 

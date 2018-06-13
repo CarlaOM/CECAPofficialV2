@@ -136,16 +136,33 @@ router
          if (role == null) return res.sendStatus(404);
          role_id = role._id;
          //    console.log(req.body);
-         validating();
+         validating(role_id);
       });
-      function validating() {
+      function validating(role_id) {
          db.users.findOne({ _id: req.body._id, rol: role_id }, function (err, user) {
             if (err) return console.log(err);
             if (user == null) return res.sendStatus(405);
             // console.log(user);
-            next();
-
-
+            validarGerente();
+         });
+      }
+      function validarGerente(){
+        db.roles.findOne({ name: 'Gerente' }, function (err, role) {
+            if (err) return res.status(400).send(err);
+            if (role == null) return res.sendStatus(404);
+            var roleId = role._id;
+            console.log(JSON.stringify(roleId), req.body.rol);
+            if(roleId == req.body.rol){
+                db.users.findOne({rol: req.body.rol, offices: req.body.offices}, function(err, us){
+                    if (err) return console.log(err);
+                    if (us != null) return res.sendStatus(404);
+                    console.log('Este si es Gerente');
+                    next();
+                });
+            }else{
+                console.log('No es Gerente');
+                next();
+            }
          });
       }
    })

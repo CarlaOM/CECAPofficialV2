@@ -10,7 +10,7 @@
         <form (ngSubmit)="onSubmit()" #addEjecutivo="ngForm" class="jumbotron">
           <div class="form-group col-sm-8">
             <label for="name">Nombre Completo</label>
-            <input type="text" pattern="[a-zA-Z]{3,10}[ ]{0,1}[a-zA-Z]{0,10}" class="form-control" id="name"
+            <input type="text" pattern="[a-zA-Z]{3,15}([ ]{0,1}[a-zA-Z]{0,15}){0,3}" class="form-control" id="name"
                    required
                    [(ngModel)]="facilitadorName" name="name"
                    #name="ngModel"

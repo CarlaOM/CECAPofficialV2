@@ -45,8 +45,7 @@
   
           <div class="form-group col-sm-8">
               <label for="correo">Correo</label>
-              <input type="correo" pattern="[a-zA-Z.0-9]*[@][a-z]{3,15}[.][a-z]{3,15}" class="form-control" id="correo"
-                     required
+              <input type="correo" pattern="[a-zA-Z.0-9_]*[@][a-z]{3,15}[.][a-zA-Z]{2,15}" class="form-control" id="correo"
                      [(ngModel)]="model.correo" name="correo"
                      #correo="ngModel">
               <div [hidden]="correo?.valid || correo?.pristine"
@@ -76,7 +75,7 @@
                             required
                             [(ngModel)]="model.offices" name="offices"
                             #offices="ngModel">
-                      <option *ngFor="let sucur of sucursales" [value]="sucur._id">{{sucur.name}}</option>
+                      <option *ngFor="let sucur of sucursales" [value]="sucur._id" >{{sucur.name}}</option>
                     </select>
                     <div [hidden]="offices.valid || offices.pristine" class="text-alert">
                             *La Sucursal es requerida
