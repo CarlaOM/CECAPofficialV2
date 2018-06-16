@@ -120,7 +120,7 @@ export class AddPersonComponent implements OnInit {
         this.descOcupation.semestre = '';this.descOcupation.areaTrabajo = '';
         this.descOcupation.profesion = '';this.descOcupation.cargo = '';
         this.descOcupation.empresa = '';
-        this.person.ocupation = this.ocupSelected; 
+        this.person.ocupation = this.ocupSelected.toLowerCase(); 
     }
     queryCartera() {
         //console.log(Identity._id)
