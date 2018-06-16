@@ -112,46 +112,50 @@ export class InscriptionComponent implements OnInit {
       this.registro.moduleId= arrayIds[1];
     //   this.registro.cashFlowUser=this.cashFLowUser;
       console.log(this.registro);
-      this._peticionesService.addInscriptPerson(this.registro).subscribe(
-         result => {
-            var esperado = result;
-            // console.log(esperado);
-            // alert('control correcto');
-            /////////////   Ingreso por inscripcin a caja Chica////////////////
+      if(this.inscription.price_event > 0){
+        this._peticionesService.addInscriptPerson(this.registro).subscribe(
+          result => {
+              var esperado = result;
+              // console.log(esperado);
+              // alert('control correcto');
+              /////////////   Ingreso por inscripcin a caja Chica////////////////
 
-            this.ingresoPorInscripcion.receipt=this.inscription.receipt;
-            this.ingresoPorInscripcion.title='Inscripcion';
-            this.ingresoPorInscripcion.description=this.person.first_name+' '+this.person.last_name;
-            this.ingresoPorInscripcion.detail_amount=this.inscription.canceled_price;
-            this.ingresoPorInscripcion.user=Identity._id;
-            this.ingresoPorInscripcion.events=this.eventId;
-            this.ingresoPorInscripcion.modulars=arrayIds[0];//
-            ////////////////////////////////////
-            if(this.inscription.canceled_price > 0){
-                this._peticionesService.addCashFlowUserIngreso(this.ingresoPorInscripcion).subscribe(
-                  result => {
-                    var returned = result;
-                    //alert('Control Correcto :)');
-                  },
-                  error => {
-                    var errorMessage = <any>error;
-                    console.log(errorMessage);
-                    alert('Error al Crear cashflowuseringreso');
-                  }
-                );
-            }
-            ///////////////////////////////////////////////////////////////////
-            this.router.navigate(['home/event', this.eventId]);
-            alert('Se Registro a la persona de manera correcta');
-            //this.router.navigate(['home/persons']);
+              this.ingresoPorInscripcion.receipt=this.inscription.receipt;
+              this.ingresoPorInscripcion.title='Inscripcion';
+              this.ingresoPorInscripcion.description=this.person.first_name+' '+this.person.last_name;
+              this.ingresoPorInscripcion.detail_amount=this.inscription.canceled_price;
+              this.ingresoPorInscripcion.user=Identity._id;
+              this.ingresoPorInscripcion.events=this.eventId;
+              this.ingresoPorInscripcion.modulars=arrayIds[0];//
+              ////////////////////////////////////
+              if(this.inscription.canceled_price > 0){
+                  this._peticionesService.addCashFlowUserIngreso(this.ingresoPorInscripcion).subscribe(
+                    result => {
+                      var returned = result;
+                      //alert('Control Correcto :)');
+                    },
+                    error => { 
+                      var errorMessage = <any>error;
+                      console.log(errorMessage);
+                      alert('Error al Crear cashflowuseringreso');
+                    }
+                  );
+              }
+              ///////////////////////////////////////////////////////////////////
+              this.router.navigate(['home/event', this.eventId]);
+              window.alert("Se Registro a la persona de manera correcta");
+              //this.router.navigate(['home/persons']);
 
-         },
-         error => {
-            var errorMessage = <any>error;
-            console.log(errorMessage);
-            alert('Error al registrar, La Persona ya esta inscrito');
-         }
-      );
+          },
+          error => {
+              var errorMessage = <any>error;
+              console.log(errorMessage);
+              alert('Error al registrar, La Persona ya esta inscrito');
+          }
+        );
+      }else{
+        window.alert("El Precio Definido es obligatorio, no se permite 0");
+      }
    }
    captOcupation() {
       console.log(this.ocupSelected);
