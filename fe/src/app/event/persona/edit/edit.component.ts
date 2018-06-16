@@ -23,10 +23,10 @@ export class EditComponent implements OnInit {
     public cellphone;
     public phone;
     public email;
-    public ocupacion;
+    public ocupacion:String;
     public AreaTrabajo;
 
-    public ocupSelected;
+    public ocupSelected: String;
     public descOcupation: DescOcupation;
     public eventos;//colection
     public programs;//colection
@@ -83,7 +83,7 @@ captOcupation(){
   this.descOcupation.semestre = '';this.descOcupation.areaTrabajo = '';
   this.descOcupation.profesion = '';this.descOcupation.cargo = '';
   this.descOcupation.empresa = '';
-  this.person.ocupation = this.ocupSelected; 
+  this.person.ocupation = this.ocupSelected.toLowerCase(); 
 }
  saveEdition(){
 
@@ -93,7 +93,7 @@ captOcupation(){
   // this.person.cellphone=this.cellphone;
   // this.person.phone=this.phone;
   // this.person.email=this.email;
-  this.person.ocupation=this.ocupacion;
+  this.person.ocupation=this.ocupacion.toLowerCase();
   this.person.descOcupation=this.descOcupation;
 
   console.log(this.person);
