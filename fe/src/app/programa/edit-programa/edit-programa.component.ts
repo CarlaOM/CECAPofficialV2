@@ -62,17 +62,18 @@ export class EditProgramaComponent implements OnInit {
             result => {
                console.log(result);
                var res = result;
-               alert('Se Guardo correctamente la edicion');
+               alert('Se guardó correctamente la edición');
                this.router.navigate(['home/programs']);
             //    window.history.back();          
             },
             error => {
                console.log(<any>error);
-               alert('Error al Guardar verifique los datos');
+               alert('Error al guardar verifique los datos');
             })
       }
    }
    cancel() {
-      this.router.navigate(['home/programs']);
+      // this.router.navigate(['home/programs']);
+      window.history.back();         
    }
 }
