@@ -61,12 +61,17 @@
                 </div> -->
                 <div class="form-group col-sm-8">
                     <label for="content">Contenido</label>
-                    <!-- pattern="[a-zA-Z0-9 ]{3,150}" -->
-                    <input type="text" class="form-control" id="content"
-                    [(ngModel)]="moduloContent" name="content" #content="ngModel" required>
-                    <div [hidden]="content?.valid || content?.pristine" class="text-alert">
-                      *El contenido del Módulo es requerido
-                    </div>
+                    <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9 .,¿?¡!-]{3,150}" class="form-control" id="content" 
+                    [(ngModel)]="moduloContent" name="content" #content="ngModel" required >
+                    <span *ngIf="!content.valid && content.touched && modulo.content== ''" class="text-alert">
+                     *Detalle de Módulo requerido.
+                    <br></span>
+                    <span *ngIf="content.dirty && content.touched && !content.valid && content.name != '' && modulo.content.length>150 " class="text-alert">
+                     *Detalle de Módulo inválido, excedió el límite de 150 caracteres.
+                     <br></span>
+                    <span *ngIf="!content?.pattern && content.dirty && content.touched && !content.valid && modulo.content != '' && modulo.content.length<3 " class="text-alert">
+                     *Detalle de Módulo inválido, tiene menos de 3 caracteres.
+                     <br></span>
                 </div>
                 <div class="form-group col-sm-8" style="text-align:center">
                   <button  type="submit" class="btn btn-success" [disabled]="!addModulo.form.valid">Guardar</button>

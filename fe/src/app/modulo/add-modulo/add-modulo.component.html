@@ -20,21 +20,38 @@
                       </div>
                   </div> -->
                   <div class="form-group col-sm-8">
-                     <label for="name" class="control-label">Nombre del Módulo</label>
-                     <input type="text" class="form-control" id="name" [(ngModel)]="modulo.name" name="name" #name="ngModel" required />
-                     <span *ngIf="!name.valid && name.touched" class="text-alert">
-                        *Nombre del Módulo requerido.
-                     </span>
+                    <label for="name" class="control-label">Nombre del Módulo</label>
+                    <input type="text" pattern="[A-Za-zÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9 ]{3,42}" class="form-control" id="name" 
+                    [(ngModel)]="modulo.name" name="name" #name="ngModel" required />
+                    <span *ngIf="!name.untouched && !name.valid && modulo.name == ''" class="text-alert">
+                    *Nombre de Módulo requerido.
+                    </span>
+                    <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && modulo.name != '' && modulo.name.length>43" class="text-alert">
+                    *Nombre de Módulo inválido, excedió el límite de 42 caracteres.
+                    </span>
+                    <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && modulo.name != '' && 3>modulo.name.length" class="text-alert">
+                    *Nombre de Módulo inválido, tiene menos de 3 caracteres.
+                    </span>
+                    <!-- <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && modulo.name != '' && modulo.name.length<65 && modulo.name.length>2 " class="text-alert">
+                    *Nombre de Módulo inválido, no se permiten símbolos.
+                    </span> -->
                      <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
                            kjkn
                        </div>-->
                   </div>
                   <div class="form-group col-sm-8">
-                     <label for="content" class=" control-label">Contenido</label>
-                     <input type="text" class="form-control" id="content" [(ngModel)]="modulo.content" name="content" #content="ngModel" required>
-                     <span *ngIf="!content.valid && content.touched" class="text-alert">
-                        *Contenido del Módulo requerido.
-                     </span>
+                    <label for="content" class=" control-label">Contenido</label>
+                    <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9 .,¿?¡!-]{3,150}" class="form-control" id="content" 
+                    [(ngModel)]="modulo.content" name="content" #content="ngModel" required >
+                    <span *ngIf="!content.valid && content.touched && modulo.content== ''" class="text-alert">
+                     *Detalle de Módulo requerido.
+                    <br></span>
+                    <span *ngIf="content.dirty && content.touched && !content.valid && content.name != '' && modulo.content.length>150 " class="text-alert">
+                     *Detalle de Módulo inválido, excedió el límite de 150 caracteres.
+                     <br></span>
+                    <span *ngIf="!content?.pattern && content.dirty && content.touched && !content.valid && modulo.content != '' && modulo.content.length<3 " class="text-alert">
+                     *Detalle de Módulo inválido, tiene menos de 3 caracteres.
+                     <br></span>
                   </div>
                   <!-- <div class="form-group col-sm-8">
                      <label for="content" class=" control-label">Programa</label>
