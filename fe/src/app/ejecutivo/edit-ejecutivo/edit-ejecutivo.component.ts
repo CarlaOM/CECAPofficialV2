@@ -21,6 +21,7 @@ export class EditEjecutivoComponent implements OnInit {
   public listacarteras=[];
   public sucursales;
   public roles;
+  public rolesSinAdmin=[];
   public ejecutivoName;
   public ejecutivoLastName;
   public ejecutivoCell;
@@ -63,6 +64,12 @@ export class EditEjecutivoComponent implements OnInit {
     this._peticionesService.getRoles().subscribe(response=>{
       this.roles=response;
       console.log(this.roles);
+      for(let r of this.roles){
+        if(r.name!="Admin"){
+          this.rolesSinAdmin.push(r);
+        }
+      }
+
     });
     
   }

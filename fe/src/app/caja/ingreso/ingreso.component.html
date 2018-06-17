@@ -10,7 +10,7 @@
       <form (ngSubmit)="onSubmit()" #IngresoForm="ngForm" class="jumbotron">
         <div class="form-group col-sm-8">
           <label for="titulo">Título</label>
-          <input type="text" pattern="[a-zA-Z0-9]{3,20}[ ]{0,1}[a-zA-Z0-9]{0,20}[ ]{0,1}[a-zA-Z0-9]{0,20}" class="form-control" id="titulo"
+          <input type="text" pattern="[a-zA-Z0-9-_ñÑáéíóúÁÉÍÓÚ]{3,20}[ ]{0,1}[a-zA-Z0-9-_ñÑáéíóúÁÉÍÓÚ]{0,20}[ ]{0,1}[a-zA-Z0-9-_ñÑáéíóúÁÉÍÓÚ]{0,20}[ ]{0,1}[a-zA-Z0-9-_ñÑáéíóúÁÉÍÓÚ]{0,20}" class="form-control" id="titulo"
                  required
                  [(ngModel)]="ingreso.title" name="titulo"
                  #titulo="ngModel">
@@ -33,7 +33,7 @@
         </div>
         <div class="form-group col-sm-8">
           <label for="descripcion">Descripción</label>
-          <input type="text" pattern="[a-zA-Z0-9 ]{3,280}" class="form-control" id="descripcion"
+          <input type="text" pattern="[a-zA-Z0-9-_ñÑáéíóúÁÉÍÓÚ]{3,280}" class="form-control" id="descripcion"
                  required
                  [(ngModel)]="ingresoDescripcion" name="descripcion"
                  #descripcion="ngModel">
@@ -67,33 +67,10 @@
                     *El Evento es requerido
             </div>
           </div>
-        <!-- <div class="form-group">
-          <label for="inscrito">Nombre del Inscrito</label>
-          <input type="text" class="form-control" id="inscrito"
-                 required
-                 [(ngModel)]="ingresoNombreInscrito" name="inscrito"
-                 #inscrito="ngModel">
-          <div [hidden]="inscrito?.valid || inscrito?.pristine"
-               class="text-alertr">
-            inscrito es requerido
-          </div>
-        </div>
-
-        <div class="form-group">
-            <label for="Ci">Ci</label>
-            <input type="number" class="form-control" id="Ci"
-                   required
-                   [(ngModel)]="ingresoCi" name="Ci"
-                   #Ci="ngModel">
-            <div [hidden]="Ci?.valid || Ci?.pristine"
-                 class="text-alert">
-                 Ci is required
-            </div>
-          </div> -->
-   
+       
         <div class="form-group col-sm-8">
           <label for="recibo">Número de Recibo</label>
-          <input type="number" pattern="[0-9]{0,15}" class="form-control" id="recibo"
+          <input type="text" pattern="[a-zA-Z0-9]{1,25}" class="form-control" id="recibo"
                  required
                  [(ngModel)]="ingresoRecibo" name="recibo"
                  #recibo="ngModel">
@@ -109,21 +86,9 @@
                   *El número de Recibo es invalido tiene menos de 3 dígitos.
                 <br>
                 </span>
-          <!-- <div [hidden]="recibo?.valid || recibo?.pristine"
-                class="text-alert">
-            *El Número de Recibo es requerido
-          </div> -->
+         
         </div>
-        <!-- <div class="form-group">
-          <label for="montoBase">Monto Base</label>
-          <input type="number" class="form-control" id="montoBase"
-              required
-              [(ngModel)]="ingresoMontoBase" name="montoBase"
-              #montoBase="ngModel">
-          <div [hidden]="montoBase.valid || montoBase.pristine" class="alert alert-danger">
-            montobase is required
-          </div>
-        </div> -->
+       
         <div class="form-group col-sm-8">
           <label for="monto">Monto que se está pagando</label>
           <input type="number" pattern="[0-9]{0,5}" class="form-control" id="monto"
@@ -138,9 +103,7 @@
                 *El monto de Recibo es invalido, sobre paso el limite de dígitos.
               <br>
               </span>
-          <!-- <div [hidden]="monto.valid || monto.pristine" class="text-alert">
-            *El Monto es requerido
-          </div> -->
+          
         </div>
         <div class="form-group col-sm-8" style="text-align:center ">
             <button type="submit" class="btn btn-success" [disabled]="!IngresoForm.form.valid">Guardar</button>
@@ -149,27 +112,7 @@
       </form>
     </div>
    
-    <!-- <div [hidden]="!submitted">
-      <h2>You submitted the following:</h2>
-      <div class="row">
-        <div class="col-xs-3">Name</div>
-        <div class="col-xs-9  pull-left">{{ model[1] }}</div>
-      </div>
-      <div class="row">
-          <div class="col-xs-3">Name</div>
-          <div class="col-xs-9  pull-left">{{ model[2] }}</div>
-        </div>
-      <div class="row">
-        <div class="col-xs-3">Alter Ego</div>
-        <div class="col-xs-9 pull-left">{{ model[5] }}</div>
-      </div>
-      <div class="row">
-        <div class="col-xs-3">monto</div>
-        <div class="col-xs-9 pull-left">{{ model[6] }}</div>
-      </div>
-      <br>
-      <button class="btn btn-primary" (click)="submitted=false">Editar</button>
-    </div> -->
+  
   </div>
 
   </div>

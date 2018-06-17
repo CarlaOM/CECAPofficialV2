@@ -95,14 +95,14 @@ export class InfoPendingCashComponent implements OnInit {
                           this.confirmedDetailCashOffice=response;
 
                           this.router.navigate(['home/pendientes']);
-                          this.router.navigate(['home/pendientes']);
+                          // this.router.navigate(['home/pendientes']);
                 
-                          this.router.navigate(['home/pendientes']);
+                          // this.router.navigate(['home/pendientes']);
                 
-                          this.router.navigate(['home/pendientes']);
-                          this.router.navigate(['home/pendientes']);
+                          // this.router.navigate(['home/pendientes']);
+                          // this.router.navigate(['home/pendientes']);
                 
-                          this.router.navigate(['home/pendientes']);
+                          // this.router.navigate(['home/pendientes']);
 
                       })
             

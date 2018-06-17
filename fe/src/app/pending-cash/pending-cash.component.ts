@@ -60,6 +60,16 @@ export class PendingCashComponent implements OnInit {
 
   ngOnInit() {
     console.log(Identity._id);
+    this.cajas=[];
+    this.nuevasCajas=[];
+    this.validateCloseCashButton=0;
+    this.validateCloseCashButtonBoolean=false;
+    this.btnInactive=true;
+    this.cashFlowOfficeAmount=null;
+
+    
+    
+    
 
     this._peticionesService.getOfficeFromUser(Identity._id).subscribe(response=>{
       this.currentOffice=response;
@@ -177,7 +187,8 @@ export class PendingCashComponent implements OnInit {
         // this.router.navigate(['home/pendientes']);
         // this.router.navigate(['home/pendientes']);
         // this.router.navigate(['home/pendientes']);
-        this.router.navigate(['home/persons']);
+        // this.router.navigate(['home/persons']);
+        this.ngOnInit();
       })
 
       
