@@ -9,37 +9,7 @@
           <br>
           <form (ngSubmit)="onSubmit()" #EgresoForm="ngForm" class="jumbotron">
             
-            <!--<div class="form-group col-sm-8">
-              <label for="titulo" class="control-label">Titulo</label>
-              <pattern="[a-zA-Z]{3,20}[ ]{0,1}[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}"
-              <input type="text" class="form-control" id="titulo" [(ngModel)]="egresoTitulo" name="titulo" #titulo="ngModel" required>
-              <div [hidden]="titulo?.pristine || titulo.valid" class="text-alert">
-                *El Titulo es requerido
-              < <div [hidden]="titulo?.valid" class="danger">
-                El titulo requiere letras
-              </div>
-            </div>-->
-
-            <!-- <div class="form-group col-sm-8">
-              <label for="descripcion">Descripcion</label>
-              <input type="text" pattern="[a-zA-Z ]{3,150}" class="form-control" id="descripcion" [(ngModel)]="egresoDescripcion" 
-              name="descripcion" #descripcion="ngModel"  required>
-              <span *ngIf="!descripcion.valid && descripcion.touched" class="text-alert">
-                *La Descripcion es requerida
-              </span>
-              <div [hidden]="descripcion?.valid || descripcion?.pristine" class="text-alert">
-                *La Descripcion es requerida
-              </div>
-              </div> -->
-
-              <!-- <div class="form-group col-sm-8">
-                <label for="events">Evento al que pertenece</label>
-                <select class="form-control" id="events" [(ngModel)]="egresoEvent" name="events" #events="ngModel" required>
-                  <option *ngFor="let event of eventos" [value]="event._id">{{event.name}}</option>
-                </select> 
-                
-              </div> -->
-              <div class="form-group col-sm-8">
+                <div class="form-group col-sm-8">
                 <label>Sucursal al que pertenece</label>
                 <select class="form-control" id="sucursals" [(ngModel)]="egresoSucursal" name="sucursals" #sucursals="ngModel" required>
                   <option *ngFor="let sucursal of sucursales" [value]="sucursal._id">{{sucursal.name}}</option>
@@ -289,7 +259,7 @@
             
               <div class="form-group col-sm-8">
                 <label for="recibo">Número de Recibo</label>
-                <input type="number" pattern="[0-9]{3,15}" class="form-control" id="recibo" [(ngModel)]="egresoRecibo" 
+                <input type="text" pattern="[a-zA-Z0-9]{1,25}" class="form-control" id="recibo" [(ngModel)]="egresoRecibo" 
                 name="recibo" #recibo="ngModel" required>
                 <span *ngIf="!recibo.untouched && egresoRecibo == undefined" class="text-alert">
                     *El número de Recibo es requerido no se permiten simbolos y letras
@@ -312,7 +282,7 @@
 
               <div class="form-group col-sm-8">
                 <label for="monto">Monto</label>
-                <input type="number" pattern="[0-9]{0,5}" class="form-control" id="monto" [(ngModel)]="egresoMonto" 
+                <input type="number" pattern="[0-9]{0,6}" class="form-control" id="monto" [(ngModel)]="egresoMonto" 
                 name="monto" #monto="ngModel" required>
                 <span *ngIf="!monto.untouched && egresoMonto == undefined" class="text-alert">
                     *El monto de Recibo es requerido, no se permiten simbolos y letras

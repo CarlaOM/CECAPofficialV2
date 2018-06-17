@@ -21,6 +21,7 @@ export class AddEjecutivoComponent implements OnInit {
   public  rolid;
   public newUser;
   public roles;
+  public rolesSinAdmin=[];
   public personas;
   public rol;
 
@@ -52,6 +53,12 @@ export class AddEjecutivoComponent implements OnInit {
     this._peticionesService.getRoles().subscribe(response=>{
       this.roles=response;
       console.log(this.roles);
+      for(let r of this.roles){
+        if(r.name!="Admin"){
+          this.rolesSinAdmin.push(r);
+        }
+
+      }
     }); 
   }
   onSubmit() { this.submitted = true;
@@ -105,6 +112,7 @@ export class AddEjecutivoComponent implements OnInit {
       error=>{
             console.log(<any>error);
             alert('Error al guardar, ya existe ejecutivo en esta sucursal');
+            this.router.navigate(['home/ejecutivo']);
       });
     }
   findCartera(){

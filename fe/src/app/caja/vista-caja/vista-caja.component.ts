@@ -46,20 +46,23 @@ export class VistaCajaComponent implements OnInit {
         let dets = {} as detalleS;
         this.det = detalle.description.split(',');
         if(detalle.input == false){
-          
-        for(var a = 0; a <this.sucursales.length ; a++){
-          if(this.sucursales[a]._id == this.det[0] ){
-            dets.description = this.sucursales[a].name.concat(this.det[1]);
-          }
-          }
-          for(var a = 0; a <this.eventos.length ; a++){
-            if(this.eventos[a]._id == this.det[2] ){
-              dets.description = dets.description.concat(this.eventos[a].name);
+          dets.title='Egreso'
+          for(var a = 0; a <this.sucursales.length ; a++){
+            if(this.sucursales[a]._id == this.det[0] ){
+              dets.description = this.sucursales[a].name.concat(this.det[1]);
             }
-            } 
-          console.log(dets.description)
+            }
+            for(var a = 0; a <this.eventos.length ; a++){
+              if(this.eventos[a]._id == this.det[2] ){
+                dets.description = dets.description.concat(this.eventos[a].name);
+              }
+              } 
+            console.log(dets.description)
+        }else{
+          dets.description=detalle.description;
+          dets.title = 'Ingreso: '+detalle.title;
+          
         }
-        dets.title = detalle.title;
         dets.amount = detalle.amount;
         dets.date_detail = detalle.date_detail;
         dets.Input = detalle.input;

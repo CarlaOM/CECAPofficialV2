@@ -58,6 +58,7 @@ var _user_admin = {
    rol: _rol_admin._id,
    offices: _offices_stc,
    amount: 1000,
+   debt: 0,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
@@ -71,6 +72,7 @@ var _user_ejecutivo1 = {
    rol: _rol_ejecutivo._id,
    offices: _offices_stc,
    amount: 2000,
+   debt: 0,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
@@ -84,6 +86,7 @@ var _user_ejecutivo2 = {
    rol: _rol_ejecutivo._id,
    offices: _offices_stc,
    amount: 1500,
+   debt: 0,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
