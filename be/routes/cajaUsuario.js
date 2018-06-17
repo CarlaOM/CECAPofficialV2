@@ -298,10 +298,20 @@ router
             cashFlowUser.amount_delivered=caja.amount_delivered;
             cashFlowUser.debt=cashFlowUser.amount-cashFlowUser.amount_delivered;
             cashFlowUser.save(function(err,cash){
-
                 if(err)return res.status(400).send(err);
+                db.users.findOne({_id:cashFlowUser.user},function(err,user){
+                    if(err)return res.status(400).send(err);
+                    
+                    if((cashFlowUser.amount-cashFlowUser.amount_delivered)>0){
+                        user.debt+=cashFlowUser.amount-cashFlowUser.amount_delivered;
+                        user.save(function(err,us){
+                            if(err)return res.status(400).send(err);
+                        });
 
-                return res.status(200).send(cash);
+                    }
+                    return res.status(200).send(cash);//////////////////////////se envia cash, esta bien/////
+                    
+                })
             });
 
 

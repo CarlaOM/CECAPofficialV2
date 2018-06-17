@@ -175,23 +175,34 @@ router
       var user_model = new db.users(_user);
       user_model.token = jwt.sign(user_model._id + '' + user_model.record_date, 'AltaPrecision'); //FIX
       user_model.tokens = [user_model.token];
-      user_model.save(function (err, user) {
-         if (err) return console.log(err);
+      user_model.amount=0;
+      user_model.debt=0;
+      db.users.findOne({cell:user_model.cell},function(err,us){
+        if (err) return console.log(err);
+        if(us==null){
+            user_model.save(function (err, user) {
+                if (err) return console.log(err);
+       
+       
+                var nuevaCaja = new db.cashFlowUsers();
+                nuevaCaja.date_start = new Date();
+                nuevaCaja.dete_end = '';
+                nuevaCaja.amount = 0;
+                nuevaCaja.amount_delivered = 0;
+                nuevaCaja.active = true;
+                nuevaCaja.state = -1;
+                nuevaCaja.user = user._id;
+       
+                nuevaCaja.save();
+       
+                res.status(201).send(user);
+             });
+        }else{
+            return res.status(404).send('Usuario ya existe')
+        }      
 
-
-         var nuevaCaja = new db.cashFlowUsers();
-         nuevaCaja.date_start = new Date();
-         nuevaCaja.dete_end = '';
-         nuevaCaja.amount = 0;
-         nuevaCaja.amount_delivered = 0;
-         nuevaCaja.active = true;
-         nuevaCaja.state = -1;
-         nuevaCaja.user = user._id;
-
-         nuevaCaja.save();
-
-         res.status(201).send(user);
-      });
+      })
+     
    })
 
    .post('/login', function (req, res) {

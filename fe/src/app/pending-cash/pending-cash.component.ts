@@ -4,6 +4,7 @@ import {PeticionesService } from './../services/peticiones.service';
 import { Identity, } from "./../services/global";
 import { Location } from "@angular/common";
 import { CashFlowOffices } from "./../modelo/cashFlowOffices";
+import { WSAEADDRINUSE } from 'constants';
 
 @Component({
   selector: 'app-pending-cash',
@@ -18,11 +19,8 @@ export class PendingCashComponent implements OnInit {
 
   public cajas;
   public nuevasCajas=[];
-  // public pendienteUsuario;
-  // public pendienteFechaInicio;
-  // public pendieteFechaFin;
-  // public pendienteMonto;
-  // public penditeState;
+ 
+  
   public confirmedCashUser;
   public btnInactive=true;
 
@@ -60,6 +58,16 @@ export class PendingCashComponent implements OnInit {
 
   ngOnInit() {
     console.log(Identity._id);
+    this.cajas=[];
+    this.nuevasCajas=[];
+    this.validateCloseCashButton=0;
+    this.validateCloseCashButtonBoolean=false;
+    this.btnInactive=true;
+    this.cashFlowOfficeAmount=null;
+
+    
+    
+    
 
     this._peticionesService.getOfficeFromUser(Identity._id).subscribe(response=>{
       this.currentOffice=response;
@@ -172,12 +180,8 @@ export class PendingCashComponent implements OnInit {
       this._peticionesService.addNewCashFlowOffice(this.newCashOffice).subscribe(response=>{
 
         var newCashOffice=response;
-        // this.router.navigate(['home/pendientes']);
-        // this.router.navigate(['home/pendientes']);
-        // this.router.navigate(['home/pendientes']);
-        // this.router.navigate(['home/pendientes']);
-        // this.router.navigate(['home/pendientes']);
-        this.router.navigate(['home/persons']);
+       
+        this.ngOnInit();
       })
 
       
@@ -189,38 +193,19 @@ export class PendingCashComponent implements OnInit {
 
   }
   onSubmit(){
+    if(this.amountDelivered<=this.cashFlowOfficeAmount){
     this.cerrarCajaSucursal();
+      
+    }else{
+      window.alert('El monto no debe ser mayot al total');
+      // this.amountDelivered=null;
+    }
 
   }
   cancelar(){
     window.history.back();
   }
-  // confirmarCaja(idCaja){
 
-  //   this._peticionesService.confirmCashFlowUser(idCaja).subscribe(response=>{
-
-  //     this.confirmedCashUser=response;
-
-  //     this.cashOffice.offices=this.currentCashFlowOffice._id;
-  //     this.cashOffice.cashFlowUser=this.confirmedCashUser;
-  //     this.cashOffice.dateCloseCash=this.cashOffice.date_end;
-  //     console.log("hihihihihihihihi")
-  //     console.log(this.cashOffice);
-
-     
-      
-  //     this.router.navigate(['home/pendientes']);
-  //     this.router.navigate(['home/pendientes']);
-  //     this.router.navigate(['home/pendientes']);
-  //     this.router.navigate(['home/pendientes']);
-
-      
-      
-  //   })
-    
-
-  // }
-  
 
 }
 

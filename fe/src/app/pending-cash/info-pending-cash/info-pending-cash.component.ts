@@ -73,45 +73,52 @@ export class InfoPendingCashComponent implements OnInit {
 
   confirmPendingCash(){
 
-    
+    if(this.amountDelivered<=this.total){
 
-      this.cash.amount_delivered=this.amountDelivered;
-      this._peticionesService.setAmountDeliveredCashFlowUser(this.cash).subscribe(response=>{
 
-               this.amountDeliveredCash=response;
+        this.cash.amount_delivered=this.amountDelivered;
+        this._peticionesService.setAmountDeliveredCashFlowUser(this.cash).subscribe(response=>{
 
-              this._peticionesService.confirmCashFlowUser(this.pendingCashId).subscribe(response=>{
-                      this.confirmedCash=response;
-                      console.log(this.confirmedCash);
+                this.amountDeliveredCash=response;
 
-                    let cashFlowOfficeDetail={} as DetailCashFlowOffice;
-                    cashFlowOfficeDetail.cashFlowUser=this.confirmedCash._id;
-                    cashFlowOfficeDetail.dateCloseCash=this.confirmedCash.date_end;
-                    cashFlowOfficeDetail.idCashFlowOffice=this.currentOfficeCash;
-                    // this.cashOffice.cashFlowUser=this.confirmedCash._id;
-                    // this.cashOffice.dateCloseCash=this.confirmedCash.date_end;
-                    // this.cashOffice.userOfCash=this.confirmedCash.user;
-                    this._peticionesService.addDetailCashFlowOffice(cashFlowOfficeDetail).subscribe(response=>{
-                          this.confirmedDetailCashOffice=response;
+                this._peticionesService.confirmCashFlowUser(this.pendingCashId).subscribe(response=>{
+                        this.confirmedCash=response;
+                        console.log(this.confirmedCash);
 
-                          this.router.navigate(['home/pendientes']);
-                          this.router.navigate(['home/pendientes']);
-                
-                          this.router.navigate(['home/pendientes']);
-                
-                          this.router.navigate(['home/pendientes']);
-                          this.router.navigate(['home/pendientes']);
-                
-                          this.router.navigate(['home/pendientes']);
+                      let cashFlowOfficeDetail={} as DetailCashFlowOffice;
+                      cashFlowOfficeDetail.cashFlowUser=this.confirmedCash._id;
+                      cashFlowOfficeDetail.dateCloseCash=this.confirmedCash.date_end;
+                      cashFlowOfficeDetail.idCashFlowOffice=this.currentOfficeCash;
+                      // this.cashOffice.cashFlowUser=this.confirmedCash._id;
+                      // this.cashOffice.dateCloseCash=this.confirmedCash.date_end;
+                      // this.cashOffice.userOfCash=this.confirmedCash.user;
+                      this._peticionesService.addDetailCashFlowOffice(cashFlowOfficeDetail).subscribe(response=>{
+                            this.confirmedDetailCashOffice=response;
 
-                      })
+                            this.router.navigate(['home/pendientes']);
+                            // this.router.navigate(['home/pendientes']);
+                  
+                            // this.router.navigate(['home/pendientes']);
+                  
+                            // this.router.navigate(['home/pendientes']);
+                            // this.router.navigate(['home/pendientes']);
+                  
+                            // this.router.navigate(['home/pendientes']);
+
+                        })
+              
             
-          
 
 
-              })
+                })
 
-    })
+      })
+
+
+    }else{
+      window.alert('El monto no debe ser mayor al total');
+    }
+
   }
   setAmountDelivered(){
 
