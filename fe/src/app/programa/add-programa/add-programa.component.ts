@@ -29,13 +29,13 @@ export class AddProgramaComponent implements OnInit {
       result => {
         var esperado = result;
         console.log(esperado);
-        alert('El Programa se Creo correctamente');
+        alert('El Programa se creó correctamente');
         this.router.navigate(['home/programs']);
       },
       error => {
         var errorMessage = <any>error;
         console.log(errorMessage);
-        alert('Error al Crear Programa verifique los datos');
+        alert('Error al crear Programa verifique los datos');
 
       }
     );
