@@ -78,7 +78,7 @@
                     <td>Estará disponible cuando haya completado la asistencia a todos los módulos</td>
                   </tr>
                   <tr *ngIf="completed==true">
-                    <td>
+                    <td *ngIf="finalWork?.date_start==null">
                       <a class="btn btn-primary fa fa-plus" (click)="addFinalWork(ppId)"> Trabajo Final</a>
                         <!-- <a class="btn btn-success" [routerLink]="['/home/finalWork/add'+ personId]">
                            <i class="fa fa-plus"></i>Trabajo Final</a> -->
