@@ -15,16 +15,17 @@
                   </div> -->
                   <div class="form-group col-sm-8">
                       <label for="state">Estado</label>
-                      <select class="form-control" id="state" [(ngModel)]="model.state" name="state" #state="ngModel">
-                        <option value="1">Recepcionado para corrección</option>
-                        <option value="2">Entregado a facilitador para 1ra corrección</option>
-                        <option value="3">Trabajo pendiente de entrega a alumno</option>
-                        <option value="4">Entregado a alumno / enviado a sucursal</option>
-                        <option value="5">Trabajo final recepcionado (Diploma pendiente)</option>
-                        <option value="6">Con diploma realizado</option>
-                        <option value="7">Entregados</option>
-                        <option value="8">Recepción para 2da revisión</option>
-                        <option value="9">Entregado a facilitador para 2da corrección</option>
+                      <select class="form-control" id="state" [(ngModel)]="model.state" name="state" #state="ngModel" required>
+                        <option value="null" hidden>Seleccionar un Estado</option> 
+                        <option value="1" *ngIf="state1!=true">Recepcionado para corrección</option>
+                        <option value="2" *ngIf="state2!=true">Entregado a facilitador para 1ra corrección</option>
+                        <option value="3" *ngIf="state3!=true">Trabajo pendiente de entrega a alumno</option>
+                        <option value="4" *ngIf="state4!=true">Entregado a alumno / enviado a sucursal</option>
+                        <option value="5" *ngIf="state5!=true">Trabajo final recepcionado (Diploma pendiente)</option>
+                        <option value="6" *ngIf="state6!=true">Con diploma realizado</option>
+                        <option value="7" *ngIf="state7!=true">Entregados</option>
+                        <option value="8" *ngIf="state8!=true">Recepción para 2da revisión</option>
+                        <option value="9" *ngIf="state9!=true">Entregado a facilitador para 2da corrección</option>
                       </select>
                       <!-- <div [hidden]="offices.valid || offices.pristine" class="">
                                  sucursal is required
@@ -32,11 +33,17 @@
                   </div>
                   <div class="form-group col-sm-8">
                       <label for="obsevations" class=" control-label">Observaciones</label>
-                      <input type="text" pattern="[a-zA-Z ]{3,150}" class="form-control" id="observations" [(ngModel)]="model.observations" name="observations"
-                         #observations="ngModel" required>
-                      <span *ngIf="!observations?.valid && observations?.touched" class="text-alert">
-                         *Observaciones de la Revisión requerido.
-                      </span>
+                      <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9 .,¿?¡!-]{3,150}" class="form-control" id="observations" 
+                      [(ngModel)]="model.observations" name="observations" #observations="ngModel" required>
+                      <span *ngIf="!observations.valid && observations.touched && model.observations == ''" class="text-alert">
+                        *Observaciones de la Revisión requerido.
+                       </span>
+                       <span *ngIf="observations.dirty && observations.touched && !observations.valid && model.observations != '' && model.observations.length>150 " class="text-alert">
+                        *Observaciones de la Revisión inválido, excedió el límite de 150 caracteres.
+                       </span>
+                       <span *ngIf="!observations?.pattern && observations.dirty && observations.touched && !observations.valid && model.observations != '' && model.observations.length<3 " class="text-alert">
+                        *Observaciones de la Revisión inválido, tiene menos de 3 caracteres.
+                       </span>
                       <!--<div [hidden]="descripcion?.valid || descripcion?.pristine" class="">
                                   descripcion requerida
                               </div>-->
