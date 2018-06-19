@@ -14,7 +14,8 @@
      <table class="table table-hover">
         <thead>
            <tr>
-              <th>Lista de personas</th>
+              <th>Nombre Completo</th>
+              <th>Celular</th>
               <th>Precio del Evento</th>
               <th>Monto Cancelado</th>
               <th>Deuda</th>
@@ -24,6 +25,7 @@
         <tbody>
            <tr *ngFor="let i of states">
               <td>{{ i.name }}</td>
+              <td>{{ i.cellphone }}</td>
               <td>{{ i.price_event }}</td>
               <td>{{ i.canceled_price }}</td>
               <td>{{ i.price_event - i.canceled_price }}</td>
