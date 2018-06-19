@@ -11,9 +11,9 @@
                   <div class="form-group col-sm-8">
                      <label for="name" class="control-label">Nombre del Evento</label>
                      <!-- pattern="[a-zA-Z]{3,20}[ ]{0,1}[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" -->
-                     <input type="text" class="form-control" id="name" [(ngModel)]="model.name" name="name" #name="ngModel" required />
+                     <input type="text" pattern="[a-zA-Z]{3,20}[ ]{0,1}[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" class="form-control" id="name" [(ngModel)]="model.name" name="name" #name="ngModel" required />
                      <span *ngIf="!name.valid && name.touched" class="text-alert">
-                        *Nombre del Evento requerido.
+                        *Nombre del Evento requerido o nombre invalido.
                         </span>
                      <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
                              kjkn
@@ -21,14 +21,14 @@
                   </div>
                   <div class="form-group col-sm-8">
                      <label for="descripcion" class=" control-label">Descripción</label>
-                     <input type="text" pattern="[a-zA-Z ]{3,280}" class="form-control" id="descripcion" [(ngModel)]="model.description" name="descripcion"
+                     <input type="text" pattern="[a-zA-Z .-_:;',0-9]{3,280}" class="form-control" id="descripcion" [(ngModel)]="model.description" name="descripcion"
                         #descripcion="ngModel" required>
-                     <span *ngIf="!descripcion.valid && descripcion.touched && descripcion.name == ''" class="text-alert">
+                     <span *ngIf="!descripcion.valid && descripcion.touched && model.description == ''" class="text-alert">
                         *Descripción de Evento requerido.
                      </span>
-                     <span *ngIf="!descripcion?.pattern && descripcion.dirty && descripcion.touched && !descripcion.valid && descripcion.name != ''" class="text-alert">
+                     <!-- <span *ngIf="!descripcion?.pattern && descripcion.dirty && descripcion.touched && !descripcion.valid && descripcion.name != ''" class="text-alert">
                         *Sobrepaso el límite de caracteres.
-                     </span> 
+                     </span>  -->
                      <!--<div [hidden]="descripcion?.valid || descripcion?.pristine" class="">
                                  descripcion requerida
                              </div>-->
