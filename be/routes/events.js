@@ -308,6 +308,32 @@ router
             return res.status(200).send(listModuls);
          }
       })
+      //////////////////////////////////////////////////////////////////////////////////77
+      .post('/correlativo/:id', function (req, res){
+            db.events.findOne({_id: req.body.eventId}, function(err, even){
+                  if (err) { return res.status(400).send(err); }
+                  db.persons.findOne({ ci: req.body.persona.ci }, function (err, person) {
+                    if (err) { return res.status(400).send(err); }
+                    console.log(even.date_start)
+                    db.persons.aggregate([
+                      { $match: { _id: mongoose.Types.ObjectId(person._id) } },
+                      { $project: { profile: 1 } },
+                      { $unwind: '$profile' },
+                      { $match: { 'profile.programs': { $eq: even.programs } } },
+                            // { $group: { _id: { persons: '$inscriptions.persons' }, total: { $sum: 1 } } }
+                      ], function (err, pers) {
+                            if (err) { return res.status(400).send(err); }
+                            console.log(pers);
+                            if(pers == null){
+                              //inscribir persona en un nuevo evento
+                              controlPerson();
+                            }else{
+                              nivelacion();
+                            }
+                      });
+                   });
+                 });
+      })
       ///inscripcion de personas antes y en el evento
       .post('/inscriptPerson/:id', function (req, res) {
             ///GUARDAR EN LISTS PRIMERO
