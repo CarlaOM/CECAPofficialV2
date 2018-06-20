@@ -65,6 +65,8 @@ import { SendToPrincipalComponent } from "./pending-cash/send-to-principal/send-
 import { PrincipalCashComponent } from "./principal-cash/principal-cash.component";
 import { ReporteEventosComponent } from './reporte-eventos/reporte-eventos.component';
 
+import { InscriptionWorkshopComponent } from "./event/inscription-workshop/inscription-workshop.component";
+
 
 
 const appRoutes: Routes = [
@@ -131,6 +133,7 @@ const appRoutes: Routes = [
          { path: 'sucursal/sendToPrincipal',component:SendToPrincipalComponent},
          { path: 'cajaPrincipal',component:PrincipalCashComponent},
          { path: 'reporteEvento', component:ReporteEventosComponent},
+         { path: 'workshop/:id', component:InscriptionWorkshopComponent},
       ]
    },
 

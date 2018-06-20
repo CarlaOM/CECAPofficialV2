@@ -100,6 +100,7 @@ import { PrincipalCashComponent } from './principal-cash/principal-cash.componen
 import { PrintCertificateComponent } from './event/profile-person/print-certificate/print-certificate.component';
 import { AlertCreateComponent } from './programa/alert-create/alert-create.component';
 import { ReporteEventosComponent } from './reporte-eventos/reporte-eventos.component';
+import { InscriptionWorkshopComponent } from './event/inscription-workshop/inscription-workshop.component';
 
 @NgModule({
   declarations: [
@@ -187,6 +188,7 @@ import { ReporteEventosComponent } from './reporte-eventos/reporte-eventos.compo
     PrintCertificateComponent,
     AlertCreateComponent,
     ReporteEventosComponent,
+    InscriptionWorkshopComponent,
   ],
   imports: [
     BrowserModule,

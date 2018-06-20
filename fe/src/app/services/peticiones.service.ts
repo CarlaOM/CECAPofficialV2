@@ -507,4 +507,10 @@ export class PeticionesService {
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
     return this._http.post(this.url + 'events/reporteEvento/', body, { headers: headers }).map((res: Response) => res);
   }
+  addNewTaller(taller){
+    let body = JSON.stringify(taller);	
+    console.log(body);
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
+    return this._http.post(this.url + 'events/addNewTaller/', body, { headers: headers }).map((res: Response) => res);		
+  }
 }

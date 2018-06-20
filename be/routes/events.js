@@ -322,8 +322,47 @@ router
                         return res.status(200).send(eventos);
                   })
             
+            })
             
+
+      .post('/addNewTaller',function(req,res){
+            console.log(req.body);
+
+            let personCi=req.body.persona.ci;
+            let events=req.body.events;
+            let modulars=req.body.modulars;
+            let modules=req.body.modules;
+            let receipt=req.body.receipt;
+            let amount=req.body.amount;
+
+            db.persons.findOne({ci:personCi},function(err,person){
+
+
+                  // events:ObjectId,
+                  // modulars:ObjectId,
+                  // modules:ObjectId,
+                  // amount:Number,
+                  // receipt:String,
+                  // assist:Boolean,
+                  // certificate:Boolean,
+                  let taller={};
+                  taller.events=events
+                  taller.modulars=modulars;
+                  taller.modules=modules;
+                  taller.amount=amount;
+                  taller.receipt=receipt;
+                  taller.assist=true;
+                  taller.cetificate=false;
+
+                  person.workshops.push(taller);
+                  person.save(function(err,pers){
+                        if (err) { return res.status(400).send(err); }
+                        return res.status(200).send(pers)                        
+
+                  })
+            })
       })
+
       ///inscripcion de personas antes y en el evento
       .post('/inscriptPerson/:id', function (req, res) {
             ///GUARDAR EN LISTS PRIMERO
@@ -744,6 +783,8 @@ router
                         //	if (off.nModified == 0) return res.status(406).send();
                   });
       })
+
+   
 
       .delete('/:id', function (req, res) {
             db.events.remove({ _id: req.params.id }, function (err, event) {
