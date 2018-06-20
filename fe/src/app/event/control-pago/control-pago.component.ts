@@ -131,6 +131,8 @@ export class ControlPagoComponent implements OnInit {
                       alert('Error al Crear cashflowuseringreso');
                     }
                 );
+            }else{
+              window.alert('El precio cancelado debe ser mayor a cero(0)');//////
             }
             ///////////////////////////////////////////////////////////////////
             this.router.navigate(['home/event', this.eventId]);

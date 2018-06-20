@@ -116,8 +116,6 @@ export class InscriptionComponent implements OnInit {
         this._peticionesService.addInscriptPerson(this.registro).subscribe(
           result => {
               var esperado = result;
-              // console.log(esperado);
-              // alert('control correcto');
               /////////////   Ingreso por inscripcin a caja Chica////////////////
 
               this.ingresoPorInscripcion.receipt=this.inscription.receipt;
@@ -131,7 +129,7 @@ export class InscriptionComponent implements OnInit {
               if(this.inscription.canceled_price > 0){
                   this._peticionesService.addCashFlowUserIngreso(this.ingresoPorInscripcion).subscribe(
                     result => {
-                      var returned = result;
+                      var returned = result; 
                       //alert('Control Correcto :)');
                     },
                     error => { 
