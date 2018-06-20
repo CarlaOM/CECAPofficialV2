@@ -98,6 +98,9 @@ import { AddReviewComponent } from './event/profile-person/add-review/add-review
 import { SendToPrincipalComponent } from './pending-cash/send-to-principal/send-to-principal.component';
 import { PrincipalCashComponent } from './principal-cash/principal-cash.component';
 import { PrintCertificateComponent } from './event/profile-person/print-certificate/print-certificate.component';
+import { AlertCreateComponent } from './programa/alert-create/alert-create.component';
+import { ReporteEventosComponent } from './reporte-eventos/reporte-eventos.component';
+import { InscriptionWorkshopComponent } from './event/inscription-workshop/inscription-workshop.component';
 
 @NgModule({
   declarations: [
@@ -183,6 +186,9 @@ import { PrintCertificateComponent } from './event/profile-person/print-certific
     SendToPrincipalComponent,
     PrincipalCashComponent,
     PrintCertificateComponent,
+    AlertCreateComponent,
+    ReporteEventosComponent,
+    InscriptionWorkshopComponent,
   ],
   imports: [
     BrowserModule,

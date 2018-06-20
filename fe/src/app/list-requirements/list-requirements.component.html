@@ -29,13 +29,13 @@
               <td>{{i.photocopy_titule}}</td> -->
               <td>{{ i.name }}</td>
               <td>
-                  <label class="checkbox-inline"><input type="checkbox" value="yes" class="check" [defaultChecked]="i.photograpy"></label>
+                  <label class="checkbox-inline"><input type="checkbox" value="" class="check" [defaultChecked]="i.photograpy" [disabled]="i.photograpy" ></label>
               </td>
               <td>
-                  <label class="checkbox-inline"><input type="checkbox" value="" class="check" [defaultChecked]="i.photocopy_ci"></label>
+                  <label class="checkbox-inline"><input type="checkbox" value="" class="check" [defaultChecked]="i.photocopy_ci" [disabled]="i.photocopy_ci"></label>
               </td>
               <td>
-                <label class="checkbox-inline"><input type="checkbox" value="" class="check" [defaultChecked]="i.photocopy_titule"></label>
+                <label class="checkbox-inline"><input type="checkbox" value="" class="check" [defaultChecked]="i.photocopy_titule" [disabled]="i.photocopy_titule"></label>
             </td>
               <td>
                   <a class="btn btn-success" (click)="update(i.position, i.idPerson, i.idProfile)">GUARDAR</a>

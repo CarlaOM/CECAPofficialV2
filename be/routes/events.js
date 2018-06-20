@@ -334,6 +334,61 @@ router
                    });
                  });
       })
+      .post('/reporteEvento', function(req,res){
+
+            // let fechaIni = new Date(2018, 3, 24, 10, 33, 30, 0);
+            console.log(req.body.fechaIni)
+            console.log(req.body.fechaFin)
+                  let fechaIni = new Date(req.body.fechaIni);
+                  let fechaFin = new Date(req.body.fechaFin);
+                  console.log(fechaIni)
+                  // db.events.find({ date_start: { $gt: d } }, { name: 1, description: 1, date_start: 1, modulars: 1, inscriptions: 1, total: 1, programs: 1 }, function (err, events) {
+                  db.events.find({date_start: {$gt: fechaIni},date_start:{$lt:fechaFin}},function(err,eventos){
+                        if (err) { return res.status(400).send(err); }
+                        return res.status(200).send(eventos);
+                  })
+            
+            })
+            
+
+      .post('/addNewTaller',function(req,res){
+            console.log(req.body);
+
+            let personCi=req.body.persona.ci;
+            let events=req.body.events;
+            let modulars=req.body.modulars;
+            let modules=req.body.modules;
+            let receipt=req.body.receipt;
+            let amount=req.body.amount;
+
+            db.persons.findOne({ci:personCi},function(err,person){
+
+
+                  // events:ObjectId,
+                  // modulars:ObjectId,
+                  // modules:ObjectId,
+                  // amount:Number,
+                  // receipt:String,
+                  // assist:Boolean,
+                  // certificate:Boolean,
+                  let taller={};
+                  taller.events=events
+                  taller.modulars=modulars;
+                  taller.modules=modules;
+                  taller.amount=amount;
+                  taller.receipt=receipt;
+                  taller.assist=true;
+                  taller.cetificate=false;
+
+                  person.workshops.push(taller);
+                  person.save(function(err,pers){
+                        if (err) { return res.status(400).send(err); }
+                        return res.status(200).send(pers)                        
+
+                  })
+            })
+      })
+
       ///inscripcion de personas antes y en el evento
       .post('/inscriptPerson/:id', function (req, res) {
             ///GUARDAR EN LISTS PRIMERO
@@ -754,6 +809,8 @@ router
                         //	if (off.nModified == 0) return res.status(406).send();
                   });
       })
+
+   
 
       .delete('/:id', function (req, res) {
             db.events.remove({ _id: req.params.id }, function (err, event) {

@@ -63,6 +63,9 @@ import { AccountsModularsComponent } from './accounts-modulars/accounts-modulars
 import { ImportFromExcelComponent } from './import-from-excel/import-from-excel.component';
 import { SendToPrincipalComponent } from "./pending-cash/send-to-principal/send-to-principal.component";
 import { PrincipalCashComponent } from "./principal-cash/principal-cash.component";
+import { ReporteEventosComponent } from './reporte-eventos/reporte-eventos.component';
+
+import { InscriptionWorkshopComponent } from "./event/inscription-workshop/inscription-workshop.component";
 
 
 
@@ -129,6 +132,8 @@ const appRoutes: Routes = [
          { path: 'importFromExcel', component: ImportFromExcelComponent },
          { path: 'sucursal/sendToPrincipal',component:SendToPrincipalComponent},
          { path: 'cajaPrincipal',component:PrincipalCashComponent},
+         { path: 'reporteEvento', component:ReporteEventosComponent},
+         { path: 'workshop/:id', component:InscriptionWorkshopComponent},
       ]
    },
 

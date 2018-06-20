@@ -31,6 +31,7 @@ module.exports = {
             rol: ObjectId,
             offices: ObjectId,
             amount: Number,
+            debt:Number,
 
             _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
             record_date: { type: Date, default: function () { return new Date() } },
@@ -44,7 +45,7 @@ module.exports = {
             amount: Number,
             amount_delivered: Number,
             details: [{
-                  receipt: Number,
+                  receipt: String,
                   description: String,
                   amount: Number,
                   input: Boolean,
@@ -224,6 +225,18 @@ module.exports = {
                   debt: Number,  // deuda
                   print_diploma: Boolean
             }],
+            workshops:[
+                  {
+                  events:ObjectId,
+                  modulars:ObjectId,
+                  modules:ObjectId,
+                  amount:Number,
+                  receipt:String,
+                  assist:Boolean,
+                  certificate:Boolean,
+            
+                  }
+            ],
             // user: ObjectId,
             _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
             record_date: { type: Date, default: function () { return new Date() } },

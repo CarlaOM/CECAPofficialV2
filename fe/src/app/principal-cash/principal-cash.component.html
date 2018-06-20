@@ -18,7 +18,7 @@
             <th>Fecha de Cierre</th>
             <th>Monto</th>
             <th>Estado</th>
-            <th>Descripción</th>
+            <!-- <th>Descripción</th> -->
            
             
                
@@ -26,15 +26,20 @@
          </tr>
       </thead>
       <tbody> 
-         <tr *ngFor="let det of details">
+         <tr *ngFor="let det of details" [ngSwitch]="det.input">
                 <td>{{det.title}}</td>
                 <td>{{det.officeName}}</td>
                 <!-- <td class="">{{det.cashFlowOffice}}</td> -->
                 <td>{{det.dateCloseCash|date}}</td>
                 <td class="">{{det.amount}}</td>
-                <td class="">{{det.input}}</td>
 
-                <td class="">{{det.description}}</td>
+                <td *ngSwitchCase="true" class="">Ingreso</td>
+                <td *ngSwitchCase="false" class="">Egreso</td>
+                
+
+                <!-- <td class="">{{det.description}}</td> -->
+
+
                 <!-- <td *ngIf="office.active==true">
                   <button class="btn btn-primary" (click)="confirmarCajaSucursal(office)" >Confirmar</button>
                 </td> -->
