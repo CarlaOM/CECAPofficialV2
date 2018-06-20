@@ -225,6 +225,18 @@ module.exports = {
                   debt: Number,  // deuda
                   print_diploma: Boolean
             }],
+            workshops:[
+                  {
+                  events:ObjectId,
+                  modulars:ObjectId,
+                  modules:ObjectId,
+                  amount:Number,
+                  receipt:String,
+                  assist:Boolean,
+                  certificate:Boolean,
+            
+                  }
+            ],
             // user: ObjectId,
             _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
             record_date: { type: Date, default: function () { return new Date() } },
