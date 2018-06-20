@@ -99,6 +99,7 @@ import { SendToPrincipalComponent } from './pending-cash/send-to-principal/send-
 import { PrincipalCashComponent } from './principal-cash/principal-cash.component';
 import { PrintCertificateComponent } from './event/profile-person/print-certificate/print-certificate.component';
 import { AlertCreateComponent } from './programa/alert-create/alert-create.component';
+import { InscriptionWorkshopComponent } from './event/inscription-workshop/inscription-workshop.component';
 
 @NgModule({
   declarations: [
@@ -185,6 +186,7 @@ import { AlertCreateComponent } from './programa/alert-create/alert-create.compo
     PrincipalCashComponent,
     PrintCertificateComponent,
     AlertCreateComponent,
+    InscriptionWorkshopComponent,
   ],
   imports: [
     BrowserModule,

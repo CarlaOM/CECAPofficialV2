@@ -64,6 +64,8 @@ import { ImportFromExcelComponent } from './import-from-excel/import-from-excel.
 import { SendToPrincipalComponent } from "./pending-cash/send-to-principal/send-to-principal.component";
 import { PrincipalCashComponent } from "./principal-cash/principal-cash.component";
 
+import { InscriptionWorkshopComponent } from "./event/inscription-workshop/inscription-workshop.component";
+
 
 
 const appRoutes: Routes = [
@@ -129,6 +131,7 @@ const appRoutes: Routes = [
          { path: 'importFromExcel', component: ImportFromExcelComponent },
          { path: 'sucursal/sendToPrincipal',component:SendToPrincipalComponent},
          { path: 'cajaPrincipal',component:PrincipalCashComponent},
+         { path: 'workshop/:id', component:InscriptionWorkshopComponent},
       ]
    },
 
