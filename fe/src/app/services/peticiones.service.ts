@@ -511,4 +511,29 @@ export class PeticionesService {
 	
 
   }
+
+  // getEventTallerInscriptions(event){
+  //   let body = JSON.stringify(event);	
+  //   console.log(body);
+  //   var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
+  //   return this._http.post(this.url + 'events/getEventTallerInscriptions/', body, { headers: headers }).map((res: Response) => res);		
+	
+
+
+  // }
+
+  getEventTallerInscriptions(id) {
+    return this._http.get(this.url + 'events/getEventTallerInscriptions/' + id).map((res: Response) => res);
+  }
+
+  getEvetnModuleTallerInscriptions(moduleTaller){
+    let body = JSON.stringify(moduleTaller);	
+    console.log(body);
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
+    return this._http.post(this.url + 'events/getEvetnModuleTallerInscriptions/', body, { headers: headers }).map((res: Response) => res);		
+	
+
+  }
+
+
 }

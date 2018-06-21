@@ -1,0 +1,90 @@
+<div class="content-wrapper">
+  <section class="content">
+    
+     <div>
+        <ol class="breadcrumb">
+            <h1>Taller</h1>
+           <!-- <li>
+              <a class="btn btn-primary" [routerLink]="['/home/inscription/'+event?._id]">
+                 <i class="fa fa-book"></i> Inscribir Persona</a>
+           </li> -->
+           <li>
+                 <a class="btn btn-primary" [routerLink]="['/home/workshop/'+event?._id]">
+                    <i class="fa fa-book"></i> Inscribir Persona a Taller</a>
+              </li>
+           <!-- <li>
+              <a class="btn btn-primary" [routerLink]="['/home/accountsModulars/'+event?._id]">
+                 <i class="fa fa-book"></i> Reportes Modulares</a>
+           </li> -->
+        
+        </ol>
+     </div>
+     <div>
+        <h2>{{event?.name}}</h2>
+     </div>
+     <div class="btn-group" data-toggle="buttons">
+
+           <label *ngFor="let m of modules">
+
+                 <button class="btn btn-primary margin-left"  (click)="setListInscriptions(m._id,m.name)"> {{m.name}}</button> 
+           </label>
+     </div>
+     <p>
+           
+           <label >
+                 
+                 <h3>{{moduleName}}</h3>
+                 Lista de personas
+                 
+           </label>
+     </p>
+
+     <table class="table table-hover">
+        <thead>
+           <tr>
+              <th>Nombre</th>
+              <th>CI</th>
+              <th>Celular</th>
+              <th>Monto Cancelado</th>
+              <th>Perfil</th>
+              <th>Asistencia</th>
+             
+              
+           </tr>
+        </thead>
+        <tbody>
+           <!--<tr *ngFor="let i of inscriptions | buscarPersona: busqueda">-->
+           <tr *ngFor="let i of lista_personas" [ngSwitch]=i.assist>
+              <td>{{ i.first_name }} {{i.last_name}}</td>
+              <td>{{ i.ci }}</td>
+              <td>{{ i.cellphone }}</td>
+              <td>{{ i.canceled_price }}</td>
+              <td>
+                 <a class="btn btn-info" (click)="viewProfile(i._id)">VER</a>
+              </td>
+              <td *ngSwitchCase="false">
+                 
+                 <button class="btn btn-danger" (click)="marcarAsistencia(i._id)"> No Asistió</button>
+                
+              </td>
+              <td *ngSwitchCase="true">
+                 <button class="btn btn-success" disabled> Asistió</button>
+
+              </td>
+            
+            
+           </tr>
+        </tbody>
+     </table>
+     
+
+
+   
+     
+     <div class="" style="text-align: center">
+           <button class="btn btn-primary" (click)="cancelar()">Volver</button>
+     </div>
+
+  </section>
+  <router-outlet></router-outlet>
+</div>

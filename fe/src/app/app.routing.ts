@@ -65,8 +65,8 @@ import { SendToPrincipalComponent } from "./pending-cash/send-to-principal/send-
 import { PrincipalCashComponent } from "./principal-cash/principal-cash.component";
 
 import { InscriptionWorkshopComponent } from "./event/inscription-workshop/inscription-workshop.component";
-
-
+import { WorkshopComponent } from "./workshop/workshop.component";
+import { PrintBatchCertificatesComponent } from "./event/print-batch-certificates/print-batch-certificates.component";
 
 const appRoutes: Routes = [
    { path: '', component: HomeComponent },//ruta basica
@@ -132,6 +132,8 @@ const appRoutes: Routes = [
          { path: 'sucursal/sendToPrincipal',component:SendToPrincipalComponent},
          { path: 'cajaPrincipal',component:PrincipalCashComponent},
          { path: 'workshop/:id', component:InscriptionWorkshopComponent},
+         { path: 'workshopListP/:id',component:WorkshopComponent},
+         { path: 'imprimirLoteCertificados',component:PrintBatchCertificatesComponent},
       ]
    },
 

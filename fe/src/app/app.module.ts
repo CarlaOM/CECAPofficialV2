@@ -100,6 +100,8 @@ import { PrincipalCashComponent } from './principal-cash/principal-cash.componen
 import { PrintCertificateComponent } from './event/profile-person/print-certificate/print-certificate.component';
 import { AlertCreateComponent } from './programa/alert-create/alert-create.component';
 import { InscriptionWorkshopComponent } from './event/inscription-workshop/inscription-workshop.component';
+import { WorkshopComponent } from './workshop/workshop.component';
+import { PrintBatchCertificatesComponent } from './event/print-batch-certificates/print-batch-certificates.component';
 
 @NgModule({
   declarations: [
@@ -187,6 +189,8 @@ import { InscriptionWorkshopComponent } from './event/inscription-workshop/inscr
     PrintCertificateComponent,
     AlertCreateComponent,
     InscriptionWorkshopComponent,
+    WorkshopComponent,
+    PrintBatchCertificatesComponent,
   ],
   imports: [
     BrowserModule,

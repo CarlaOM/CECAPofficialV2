@@ -107,9 +107,9 @@ export class InscriptionWorkshopComponent implements OnInit {
 
   guardar(){
 
-    var arrayIds = this.modulsObject.split('-');
-    var modularsId= arrayIds[0];
-    var moduleId= arrayIds[1];
+    let arrayIds = this.modulsObject.split('-');
+    let modularsId= arrayIds[0];
+    let moduleId= arrayIds[1];
 
     let nuevoTaller={}as Taller;
     nuevoTaller.events =this.eventId;
@@ -125,27 +125,28 @@ export class InscriptionWorkshopComponent implements OnInit {
 
         /////////////   Ingreso por inscripcin a caja Chica////////////////
 
-        // this.ingresoPorInscripcion.receipt=this.inscription.receipt;
-        // this.ingresoPorInscripcion.title='Inscripcion';
-        // this.ingresoPorInscripcion.description=this.person.first_name+' '+this.person.last_name;
-        // this.ingresoPorInscripcion.detail_amount=this.inscription.canceled_price;
-        // this.ingresoPorInscripcion.user=Identity._id;
-        // this.ingresoPorInscripcion.events=this.eventId;
-        // this.ingresoPorInscripcion.modulars=arrayIds[0];//
-        // ////////////////////////////////////
-        // if(this.inscription.canceled_price > 0){
-        //     this._peticionesService.addCashFlowUserIngreso(this.ingresoPorInscripcion).subscribe(
-        //       result => {
-        //         var returned = result;
-        //         //alert('Control Correcto :)');
-        //       },
-        //       error => { 
-        //         var errorMessage = <any>error;
-        //         console.log(errorMessage);
-        //         alert('Error al Crear cashflowuseringreso');
-        //       }
-        //     );
-        // }
+        this.ingresoPorInscripcion.receipt=this.recibo
+        this.ingresoPorInscripcion.title='Inscripcion Taller';
+        this.ingresoPorInscripcion.description=this.person.first_name+' '+this.person.last_name;
+        this.ingresoPorInscripcion.detail_amount=this.montoPago
+        this.ingresoPorInscripcion.user=Identity._id;
+        this.ingresoPorInscripcion.events=this.eventId;
+        this.ingresoPorInscripcion.modulars=arrayIds[0];//
+        ////////////////////////////////////
+        
+            this._peticionesService.addCashFlowUserIngreso(this.ingresoPorInscripcion).subscribe(
+              result => {
+                var returned = result;
+
+                  this.router.navigate(['home/events']);
+              },
+              error => { 
+                var errorMessage = <any>error;
+                console.log(errorMessage);
+                alert('Error al Crear cashflowuseringreso');
+              }
+            );
+        
         ///////////////////////////////////////////////////////////////////
         
 
