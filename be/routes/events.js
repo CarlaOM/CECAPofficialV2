@@ -183,6 +183,45 @@ router
                   })
             }
       })
+
+      .get('/getEventTallerInscriptions/:id', function (req, res) {
+            db.events.findOne({ _id: req.params.id }, function (err, event) {
+                  if (err) return res.status(400).send(err);
+                  if (event == null) return res.status(404).send();
+                  // return res.status(200).send(event);
+                  // getProgram(event);
+                  // return res.status(200).send(event);
+                  db.persons.find({},function(err,personas){
+                        let listaPersonas=[];
+                        for(let p of personas){
+                              console.log(p.first_name);
+                             for(let taller of p.workshops){
+                                   console.log(taller.events)
+                                   console.log(event._id);
+                                   if(taller.events==req.params.id){
+                                     
+                                         let person={}                                         
+                                         person.first_name=p.first_name;
+                                         person.last_name=p.last_name;
+                                         person.ci=p.ci;
+                                         person.cellphone=p.cellphone;
+                                         person.canceled_price=taller.amount;
+                                         person.assist=taller.assist;
+                                         person._id=p._id;
+
+                                         listaPersonas.push(person);
+                                         console.log(p.first_name);
+                                   }
+                             }
+                        }
+
+                        return res.status(200).send(listaPersonas);
+                  })
+                  
+            });
+          
+           
+      })
       ///////////////////////////////////
       .get('/:id', function (req, res) {
             db.events.findOne({ _id: req.params.id }, function (err, event) {
@@ -351,6 +390,37 @@ router
             })
             
 
+      .post('/getEvetnModuleTallerInscriptions',function(req,res){
+            
+            let event=req.body.event;
+            let moduleId=req.body.module;
+            let listaPersonas=[];
+
+            db.persons.find({},function(err,personas){
+                  if (err) { return res.status(400).send(err); }
+                  for(let p of personas){
+                        for(let taller of p.workshops){
+                              if((taller.events==event)&&(taller.modules==moduleId)){
+                                    let person={}                                         
+                                    person.first_name=p.first_name;
+                                    person.last_name=p.last_name;
+                                    person.ci=p.ci;
+                                    person.cellphone=p.cellphone;
+                                    person.canceled_price=taller.amount;
+                                    person.assist=taller.assist;
+                                    person._id=p._id;
+
+                                    listaPersonas.push(person);
+
+
+                              }
+                        }
+                  }
+                  return res.status(200).send(listaPersonas);
+            })
+
+      })
+
       .post('/addNewTaller',function(req,res){
             console.log(req.body);
 
@@ -362,6 +432,7 @@ router
             let amount=req.body.amount;
 
             db.persons.findOne({ci:personCi},function(err,person){
+                  if (err) { return res.status(400).send(err); }
 
 
                   // events:ObjectId,

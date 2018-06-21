@@ -44,6 +44,10 @@
                   
             </label>
       </p>
+      <div *ngIf="(moduleName!=undefined)">
+
+            <button class="btn btn-primary">Imprimir Certificados de asistentes</button>
+      </div>
 
       <table class="table table-hover" *ngIf="moduleName!=null">
          <thead>
