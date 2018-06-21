@@ -49,7 +49,9 @@ export class EventComponent implements OnInit, AfterViewInit {
                   console.log(this.event);
                   this.inscriptions = this.event.inscriptions;
                   var total = this.event.total;   
-                  this.lista_personasPorModulo=this.inscriptions;       
+                  this.lista_personasPorModulo=this.inscriptions; 
+                  console.log('esta es la inscripcion de la persona');
+                  console.log(this.lista_personasPorModulo);      
             },
             error => {
                   var errorMessage = <any>error;
@@ -67,7 +69,7 @@ export class EventComponent implements OnInit, AfterViewInit {
                                if(left.name>right.name)return 1;
                                return 0;
                          });
-                      }
+                      } 
                    )
       }
       setListInscriptions(_id:string,nameModule:string){
@@ -84,6 +86,7 @@ export class EventComponent implements OnInit, AfterViewInit {
                   persona.ci=i.ci;
                   persona.cellphone=i.cellphone;
                   persona.canceled_price=i.canceled_price;
+                  persona.price_event=i.price_event;
                         let personEventModule={}as PersonEventModule;
                         personEventModule.personId=i.persons
                         personEventModule.moduleId=this.moduleId;
@@ -97,6 +100,7 @@ export class EventComponent implements OnInit, AfterViewInit {
 
                   this.lista_personasPorModulo.push(persona);
             }
+            console.log(this.lista_personasPorModulo);
             console.log(this.moduleId);
 
 
@@ -132,7 +136,8 @@ export class EventComponent implements OnInit, AfterViewInit {
 
       }
       cancelar(){
-            window.history.back();
+            //window.history.back();
+            this.router.navigate(['home/events'])
       }
             
       ngAfterViewInit(){}
@@ -152,5 +157,6 @@ export interface PersonItem{
       ci:number,
       cellphone:number,
       canceled_price:number,
+      price_event:number,
       assist:boolean
 }

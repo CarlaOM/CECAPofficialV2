@@ -347,6 +347,48 @@ router
             return res.status(200).send(listModuls);
          }
       })
+      //////////////////////////////////////////////////////////////////////////////////77
+      .post('/correlativo/:id', function (req, res){
+            db.events.findOne({_id: req.body.eventId}, function(err, even){
+                  if (err) { return res.status(400).send(err); }
+                  db.persons.findOne({ ci: req.body.persona.ci }, function (err, person) {
+                    if (err) { return res.status(400).send(err); }
+                    console.log(even.date_start)
+                    db.persons.aggregate([
+                      { $match: { _id: mongoose.Types.ObjectId(person._id) } },
+                      { $project: { profile: 1 } },
+                      { $unwind: '$profile' },
+                      { $match: { 'profile.programs': { $eq: even.programs } } },
+                            // { $group: { _id: { persons: '$inscriptions.persons' }, total: { $sum: 1 } } }
+                      ], function (err, pers) {
+                            if (err) { return res.status(400).send(err); }
+                            console.log(pers);
+                            if(pers == null){
+                              //inscribir persona en un nuevo evento
+                              controlPerson();
+                            }else{
+                              nivelacion();
+                            }
+                      });
+                   });
+                 });
+      })
+      .post('/reporteEvento', function(req,res){
+
+            // let fechaIni = new Date(2018, 3, 24, 10, 33, 30, 0);
+            console.log(req.body.fechaIni)
+            console.log(req.body.fechaFin)
+                  let fechaIni = new Date(req.body.fechaIni);
+                  let fechaFin = new Date(req.body.fechaFin);
+                  console.log(fechaIni)
+                  // db.events.find({ date_start: { $gt: d } }, { name: 1, description: 1, date_start: 1, modulars: 1, inscriptions: 1, total: 1, programs: 1 }, function (err, events) {
+                  db.events.find({date_start: {$gt: fechaIni},date_start:{$lt:fechaFin}},function(err,eventos){
+                        if (err) { return res.status(400).send(err); }
+                        return res.status(200).send(eventos);
+                  })
+            
+            })
+            
 
       .post('/getEvetnModuleTallerInscriptions',function(req,res){
             
@@ -416,9 +458,8 @@ router
 
                   })
             })
-
-
       })
+
       ///inscripcion de personas antes y en el evento
       .post('/inscriptPerson/:id', function (req, res) {
             ///GUARDAR EN LISTS PRIMERO
