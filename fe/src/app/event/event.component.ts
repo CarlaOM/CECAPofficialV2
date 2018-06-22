@@ -26,6 +26,7 @@ export class EventComponent implements OnInit, AfterViewInit {
       public eventId;
       public moduleName;
       
+      public certificateData;
 //////////////////////////////////////////////
       constructor(
                  private route: ActivatedRoute,
@@ -77,6 +78,9 @@ export class EventComponent implements OnInit, AfterViewInit {
             this.lista_personasPorModulo=[];
             this.moduleId=_id;
             this.moduleName=nameModule;
+
+            this.certificateData=this.eventId+'-'+this.moduleId;
+
             for(let i of this.inscriptions){
 
 

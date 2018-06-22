@@ -135,7 +135,7 @@ const appRoutes: Routes = [
          { path: 'reporteEvento', component:ReporteEventosComponent},
          { path: 'workshop/:id', component:InscriptionWorkshopComponent},
          { path: 'workshopListP/:id',component:WorkshopComponent},
-         { path: 'imprimirLoteCertificados',component:PrintBatchCertificatesComponent},
+         { path: 'imprimirLoteCertificados/:id',component:PrintBatchCertificatesComponent},
       ]
    },
 
