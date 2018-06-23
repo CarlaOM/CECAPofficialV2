@@ -302,18 +302,6 @@ router
           }
           function newGenerateModulars(modulares, moduls, eventId){
             var listModuls= [];
-            // for(var e=0; e<= modulares.modulars.length-1; e++){
-            //       for(var j=0; j <= moduls.length - 1; j++){
-            //       console.log(modulares.modulars[e]._id,modulares.modulars[e].modules, moduls[j]._id);
-                 
-            //       var modulars1 = {
-            //             name: moduls[j].name,
-            //             _id: modulares.modulars[e]._id,
-            //             modules: moduls[j]._id
-            //             };
-            //             listModuls.push(modulars1);                                          
-            //       }
-            // }
             for(var e=0; e<= modulares.modulars.length-1; e++){
                   for(var j=0; j <= moduls.length - 1; j++){
                         console.log(j,e);
@@ -336,9 +324,10 @@ router
                                                 modules: moduls[j]._id
                                           };
                                           listModuls.push(modulars1);
-                                          console.log('ingreso  '+ moduls[j]._id);
+                                          //console.log('ingreso  '+ moduls[j]._id);
                               }else{
                                     console.log('falla  '+ moduls[j]._id);
+                                    //return res.status(404).send();
                               }
                         }
                   }
@@ -348,30 +337,150 @@ router
          }
       })
       //////////////////////////////////////////////////////////////////////////////////77
-      .post('/correlativo/:id', function (req, res){
-            db.events.findOne({_id: req.body.eventId}, function(err, even){
-                  if (err) { return res.status(400).send(err); }
-                  db.persons.findOne({ ci: req.body.persona.ci }, function (err, person) {
+      .post('/nivelacion/:id', function (req, res){
+            db.events.findOne({ _id: req.body.eventId }, function (err, even) {
                     if (err) { return res.status(400).send(err); }
-                    console.log(even.date_start)
                     db.persons.aggregate([
-                      { $match: { _id: mongoose.Types.ObjectId(person._id) } },
-                      { $project: { profile: 1 } },
-                      { $unwind: '$profile' },
-                      { $match: { 'profile.programs': { $eq: even.programs } } },
+                        { $match: { ci: req.body.persona.ci } },
+                        { $project: { profile:1, first_name:1,last_name:1, ci:1, cellphone:1, persons:1} },
+                        { $unwind: '$profile' },
+                        { $match: { 'profile.programs': { $eq: even.programs } } },
                             // { $group: { _id: { persons: '$inscriptions.persons' }, total: { $sum: 1 } } }
-                      ], function (err, pers) {
-                            if (err) { return res.status(400).send(err); }
-                            console.log(pers);
-                            if(pers == null){
+                     ], function (err, pers) {
+                        if (err) { return res.status(400).send(err); }
+                        console.log(pers);
+                        console.log('este es el ID del profile::'+pers[0].profile._id);
+                        if(pers != null){
+                              console.log('34 ifffffffff');
+                              nivelInscription(pers);
+                              //return res.status(400).send(err);
+                        }else{
                               //inscribir persona en un nuevo evento
-                              controlPerson();
-                            }else{
-                              nivelacion();
-                            }
+                              console.log('la Persona no esta inscrito en ningun evento');
+                              return res.status(400).send(err);
+                        }
                       });
-                   });
-                 });
+            });
+            function nivelInscription(pers){
+                  var inscri = req.body.inscription;
+                  db.events.aggregate([
+                        { $match: { _id: mongoose.Types.ObjectId(req.body.eventId) } },
+                        { $project: { inscriptions: 1 } },
+                        { $unwind: '$inscriptions' },
+                        { $match: { 'inscriptions.persons': { $eq: pers[0]._id } } },
+                        { $group: { _id: { persons: '$inscriptions.persons' }, total: { $sum: 1 } } }
+                  ], function (err, events) {
+                        if (err) return res.status(400).send(err);
+                        console.log('La Inscripcon de la persona');
+                        console.log(events.length);
+                        if (events.length == 0 ){
+                              console.log('condicion cumplida');
+                              var inscription = {
+                                    total_price: pers[0].profile.payed + inscri.canceled_price,//sumatorio por asistencia de cada modulo
+                                    module_price: 0,////////////////////////////////
+                                    bolivianos_price: pers[0].profile.payed + inscri.canceled_price,
+                                    dolares_price: 0,
+                                    canceled_price: pers[0].profile.payed + inscri.canceled_price,
+                                    price_event: inscri.price_event,
+                                    receipt: inscri.receipt,
+                                    name: pers[0].first_name+' '+pers[0].last_name,
+                                    ci: pers[0].ci,
+                                    cellphone: pers[0].cellphone,
+                                    persons: pers[0]._id,
+                                    users: inscri.users
+                              };
+                              db.events.update({ _id: req.body.eventId },
+                                    { $push: { inscriptions: inscription } },
+                                    { multi: true },
+                                    function (err, events) {
+                                          if (err) return res.status(400).send(err);
+                                    });
+                              console.log('Inscrito :)');
+                              nivelList(inscri, pers);
+                        }else{
+                              console.log('La persona ya se inscribio');
+                              return res.status(400).send(err);
+                        }
+                  });
+            }
+            //crear nueva Lista Para nivelacion de persona 
+            function nivelList(inscri,pers){
+                  var list = {
+                        bolivianos: inscri.canceled_price,
+                        dolares: 0,
+                        receipt: inscri.receipt, // varios recibos
+                        assist: false, //controlar por fecha de inscription 
+                        type: 3, //1=nuevo //2=controlPago //3=nivelacion
+                        person: pers[0]._id,
+                        events: req.body.eventId,
+                        modulars: req.body.modularsId
+                  };
+                  var lists = new db.lists(list);
+                  lists.save(function (err, lists) {
+                        if (err) { return res.status(400).send(err); }
+                        console.log('Lista nueva creada de Nivelacion :)');
+                        nivelUpdateModulars(inscri, pers);
+                  });
+            }
+            function nivelUpdateModulars(inscri, pers){
+                  db.modulars.findOne({persons: pers[0]._id , profile:pers[0].profile._id ,modules:req.body.moduleId },function(err, modularsPer){
+                    if (err) { return res.status(400).send(err); } 
+                    console.log(modularsPer.amount.amount);
+                     if ( modularsPer != null){
+                        if(modularsPer.amount.amount > 0){
+                              var nivelacion = {  // observation
+                                    detail: 'Inscripcion Nivelacion',
+                                    receipt: inscri.receipt, // nro factura
+                                    date: new Date(),
+                                    amount: inscri.canceled_price,
+                                    events: req.body.eventId
+                              };
+                              // db.modulars.update({ person: pers[0]._id,events: registro.eventId, modulars: registro.modularsId},
+                              db.modulars.update({ person: pers[0]._id,profile:pers[0].profile._id,modules:req.body.moduleId},
+                              {  $set: { 'nivelacion': nivelacion }
+                              }).exec(function (err, off) {
+                                if (err) return res.status(400).send(err);
+                                //return res.status(200).send(off);
+                                console.log('Modulars Update con Ammoun > 0 :)');
+                                nivelPerfil(inscri, pers);
+                              });
+                        }else{
+                               var amounte = {  // observation
+                                     detail: 'Inscripcion Nivelacion',
+                                     receipt: inscri.receipt, // nro factura
+                                     date: new Date(),
+                                     amount: inscri.canceled_price,
+                                     events: req.body.eventId
+                               };
+                               // db.modulars.update({ person: pers[0]._id,events: registro.eventId, modulars: registro.modularsId},
+                               db.modulars.update({ person: pers[0]._id,profile:pers[0].profile._id,modules:req.body.moduleId},
+                               {  $set: {'amount': amounte }
+                               }).exec(function (err, off) {
+                                 if (err) return res.status(400).send(err);
+                                 //return res.status(200).send(off);
+                                 console.log('Modulars Update :)');
+                                 nivelPerfil(inscri, pers);
+                               });
+                        }
+                      }else{
+                        console.log('el Modulars de person no Existe!!!');
+                        return res.status(404).send(err);
+                      }  
+                     
+                  });
+            }
+            function nivelPerfil(inscri, pers){//funciona solo una primera vez
+                  db.persons.update({ _id: pers[0]._id , 'profile.programs': pers[0].profile.programs},
+                  { $set: { 
+                        'profile.$.payed': pers[0].profile.payed + inscri.canceled_price,
+                        'profile.$.debt': pers[0].profile.total_price - (pers[0].profile.payed + inscri.canceled_price)
+                        }
+                  }).exec(function (err, profile) {
+                        if (err) return res.status(400).send(err);
+                        console.log('Profile Actualizado :) ');
+                        return res.status(200).send(profile);
+                  });
+            }
       })
       .post('/reporteEvento', function(req,res){
 
@@ -463,9 +572,6 @@ router
       ///inscripcion de personas antes y en el evento
       .post('/inscriptPerson/:id', function (req, res) {
             ///GUARDAR EN LISTS PRIMERO
-            let cashFlowUser=req.body.cashFlowUser;
-            let cashFlowUser_description="Inscripcion de Persona";
-
             db.persons.findOne({ ci: req.body.persona.ci }, function (err, person) {
                   if (person != null) {
                         console.log('consulta de persona');
@@ -523,7 +629,7 @@ router
                                     db.events.aggregate([{ $match: { _id: mongoose.Types.ObjectId(idEvent) } },
                                     { $lookup: { from: "modules", localField: "programs", foreignField: "programs", as: "moduls" } },
                                     { $group: { _id: "$moduls._id", "numOfmoduls": { $sum: 1 } } }
-                                    ]).exec(function (err, moduls) {
+                                    ]).exec(function (err, moduls){
                                           // if (err) return res.status(404).send(err)
                                           console.log(typeof moduls, moduls);
                                           var modulPrice = inscri.price_event / moduls[0]._id.length;///////DIVISION
@@ -551,10 +657,6 @@ router
                                                 function (err, events) {
                                                       if (err) return res.status(400).send(err);
                                                 });
-
-                                          
-
-
                                           addProfile(person, programId, idEvent, moduleId, inscri, asistencia);
                                     });
                               }
@@ -595,9 +697,6 @@ router
                                                 // addModular(person, inscri,idEvent,moduleId,asistencia );
                                           });
                                     }
-                                    //aniadir el modular del Profile
-                                    //multiplicarModular(person,programId);    
-                                    //addModular(person, inscri,idEvent,moduleId,asistencia );
                               }
                               function multiplicarModular(person, idEvent, programId, moduleId, profileId, inscri, asistencia) {//** no recupera el PROFILE de person */
                                     // console.log(profiles);

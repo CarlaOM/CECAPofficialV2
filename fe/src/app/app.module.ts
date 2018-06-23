@@ -101,6 +101,7 @@ import { PrintCertificateComponent } from './event/profile-person/print-certific
 import { AlertCreateComponent } from './programa/alert-create/alert-create.component';
 import { ReporteEventosComponent } from './reporte-eventos/reporte-eventos.component';
 import { InscriptionWorkshopComponent } from './event/inscription-workshop/inscription-workshop.component';
+import { NivelacionComponent } from './event/nivelacion/nivelacion.component';
 import { WorkshopComponent } from './workshop/workshop.component';
 import { PrintBatchCertificatesComponent } from './event/print-batch-certificates/print-batch-certificates.component';
 
@@ -191,8 +192,12 @@ import { PrintBatchCertificatesComponent } from './event/print-batch-certificate
     AlertCreateComponent,
     ReporteEventosComponent,
     InscriptionWorkshopComponent,
+<<<<<<< HEAD
+    NivelacionComponent,
+=======
     WorkshopComponent,
     PrintBatchCertificatesComponent,
+>>>>>>> c7a0638634dd425e43c9fe23eefc2cb7f436fae9
   ],
   imports: [
     BrowserModule,
