@@ -21,7 +21,7 @@ export class AddEventComponent implements OnInit {
       private router: Router
       //,private alerts: AlertsService
    ) {
-      this.model = new Event("", "", null, null, "","");
+      this.model = new Event("", "", null, null, "","",null,true);
    }
 
    ngOnInit() {
