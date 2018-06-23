@@ -374,7 +374,7 @@ router
                         console.log('La Inscripcon de la persona');
                         console.log(events.length);
                         if (events.length == 0 ){
-                              console.log('condicion cumplida');
+                              console.log('condicion cumplida para inscribir la persona al evento');
                               var inscription = {
                                     total_price: pers[0].profile.payed + inscri.canceled_price,//sumatorio por asistencia de cada modulo
                                     module_price: 0,////////////////////////////////
@@ -425,9 +425,10 @@ router
             function nivelUpdateModulars(inscri, pers){
                   db.modulars.findOne({persons: pers[0]._id , profile:pers[0].profile._id ,modules:req.body.moduleId },function(err, modularsPer){
                     if (err) { return res.status(400).send(err); } 
-                    console.log(modularsPer.amount.amount);
+                    console.log(modularsPer);
+                    console.log('El ammount de modulars: '+modularsPer.amount.amount);
                      if ( modularsPer != null){
-                        if(modularsPer.amount.amount > 0){
+                        if(modularsPer.amount.amount > 0 || modularsPer.amount.amount!=undefined){
                               var nivelacion = {  // observation
                                     detail: 'Inscripcion Nivelacion',
                                     receipt: inscri.receipt, // nro factura
@@ -436,7 +437,7 @@ router
                                     events: req.body.eventId
                               };
                               // db.modulars.update({ person: pers[0]._id,events: registro.eventId, modulars: registro.modularsId},
-                              db.modulars.update({ person: pers[0]._id,profile:pers[0].profile._id,modules:req.body.moduleId},
+                              db.modulars.update({ persons: pers[0]._id,profile:pers[0].profile._id,modules:req.body.moduleId},
                               {  $set: { 'nivelacion': nivelacion }
                               }).exec(function (err, off) {
                                 if (err) return res.status(400).send(err);
@@ -453,11 +454,13 @@ router
                                      events: req.body.eventId
                                };
                                // db.modulars.update({ person: pers[0]._id,events: registro.eventId, modulars: registro.modularsId},
-                               db.modulars.update({ person: pers[0]._id,profile:pers[0].profile._id,modules:req.body.moduleId},
+                               console.log(pers[0]._id,pers[0].profile._id,mongoose.Types.ObjectId(req.body.moduleId));
+                               db.modulars.update({ persons: pers[0]._id,profile:pers[0].profile._id,modules: req.body.moduleId},
                                {  $set: {'amount': amounte }
                                }).exec(function (err, off) {
                                  if (err) return res.status(400).send(err);
                                  //return res.status(200).send(off);
+                                 console.log(off)
                                  console.log('Modulars Update :)');
                                  nivelPerfil(inscri, pers);
                                });

@@ -434,7 +434,7 @@ router
                             if(JSON.stringify(modularsPerf[e].modules)==JSON.stringify(mod)) {
                               var modulars1 = {
                                 name: moduls[j].name,
-                                _id: modularsPerf[e]._id,
+                                //_id: modularsPerf[e]._id,
                                 modules: moduls[j]._id,
                                 assist:modularsPerf[e].assist
                               };
@@ -445,14 +445,38 @@ router
                             }
                         }
                       }
-                      var result = {
-                        first_name:pers[0].first_name ,
-                        last_name: pers[0].last_name,
-                        profile:pers[0].profile,
-                        modularsPer: listModuls
-                      };
-                      console.log(result);
-                      return res.status(200).send(result);
+                      db.events.find({_id: eventId}, {modulars: 1},function(err, modulars){
+                        if (err) return res.status(400).send(err);
+                        if (modulars == null) return res.status(404).send();
+                        var modulares = modulars[0];
+                        /////////////////////////////////////////////////////////////////////////////7
+                        var listModuls2= [];
+                        for(var e=0; e<= modulares.modulars.length-1; e++){
+                          for(var j=0; j <= listModuls.length - 1; j++){
+                            var mod2 = listModuls[j].modules;
+                              if(JSON.stringify(modulares.modulars[e].modules)==JSON.stringify(mod2)) {
+                                          var modulars2 = {
+                                              name: listModuls[j].name,
+                                              _id: modulares.modulars[e]._id,
+                                              modules: listModuls[j].modules,
+                                              assist:listModuls[j].assist
+                                          };
+                                          listModuls2.push(modulars2);
+                              }else{
+                                    console.log('falla doss '+ listModuls[j].modules);
+                              }
+                          }
+                        }
+                        //////////////////////////////////////////////////////////////////////////7
+                        var result = {
+                          first_name:pers[0].first_name ,
+                          last_name: pers[0].last_name,
+                          profile:pers[0].profile,
+                          modularsPer: listModuls2
+                        };
+                        console.log(result);
+                        return res.status(200).send(result);
+                      });
                     });
                 });
           });
