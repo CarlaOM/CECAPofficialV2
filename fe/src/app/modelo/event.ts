@@ -11,6 +11,8 @@ export class Event {
       // }],
       public total: number,
       public programs: string,
-      public offices: string
+      public offices: string,
+      public date_end:Date,
+      public active:boolean,
    ) { }
 }
