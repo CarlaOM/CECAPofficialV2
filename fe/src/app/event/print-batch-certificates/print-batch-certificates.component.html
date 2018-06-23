@@ -1,0 +1,138 @@
+<div class="content-wrapper">
+    <div class="container">
+     
+
+
+          <label for="escudo">Seleccione la imagen para el escudo</label>
+          <img [src]="escudo" height="200"> 
+          <br>
+          <input type='file' (change)="onSelectFileEscu($event)">
+
+          <label for="logo">Seleccione la imagen para el logo</label>
+          <img [src]="logo" height="200"> 
+          <br>
+          <input type='file' (change)="onSelectFileLogo($event)">
+
+          <div class="form-group col-sm-8">
+            <label for="nombreEventoCertificado">Nombre del Evento - Modulo</label>
+            
+            <input type="text"  class="form-control" id="nombreEventoCertificado"
+                   required
+                   [(ngModel)]="nombreEventoModulo" name="nombreEventoCertificado"
+                   #nombreEventoCertificado="ngModel">
+            <div [hidden]="nombreEventoCertificado?.valid || nombreEventoCertificado?.pristine"
+            class="text-alert">
+            *El nombre es requerido
+            </div>
+            <div class="text-alert">
+              Ejemplo : HIDROPONIA :CULTIVO Y PROYECTO DE INNOVACION
+            </div>
+          </div>
+          <br>
+
+          <div class="form-group col-sm-8">
+            <label for="fechaCertificado">Fecha de los Certificados</label>
+            
+            <input type="text"  class="form-control" id="fechaCertificado"
+                   required
+                   [(ngModel)]="nombreFechaCertificado" name="fechaCertificado"
+                   #fechaCertificado="ngModel">
+            <div [hidden]="fechaCertificado?.valid || fechaCertificado?.pristine"
+            class="text-alert">
+            *La Fecha es requerido
+            </div>
+            <div class="text-alert">
+              Ejemplo : el dia viernes 21 de julio (7 horas)
+            </div>
+          </div>
+          <br>
+
+          <div class="form-group col-sm-8">
+            <label for="fechaDepartamento">Fecha y Departamento</label>
+            
+            <input type="text"  class="form-control" id="fechaCertificado"
+                   required
+                   [(ngModel)]="nombreFechaDepartamento" name="fechaDepartamento"
+                   #fechaDepartamento="ngModel">
+            <div [hidden]="fechaDepartamento?.valid || fechaDepartamento?.pristine"
+            class="text-alert">
+            *La Fecha y Departeamento es requerido
+            </div>
+            <div class="text-alert">
+              Ejemplo : Cochabamba - Bolivia,2017
+            </div>
+          </div>
+          <br>
+
+
+
+          <!-- <div class="col-md-12 mt-3">
+            <button (click)="printCertificates()" class="btn btn-primary">Download PDF</button>
+          </div> -->
+
+
+
+          <div class="form-group col-sm-8" style="text-align:center">
+            <label for="descargar">Descargue los certificados en pdf</label>
+            <button type="submit" class="btn btn-success" (click)="onSubmit()" >Guardar</button>
+            <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
+          </div>
+
+
+
+        <!-- <form (ngSubmit)="onSubmit()" #addEjecutivo="ngForm" class="jumbotron">
+          <div class="form-group col-sm-8">
+            <label for="escudo">Seleccione la imagen para el escudo</label>
+            <img [src]="escudo" height="200"> 
+            <input type='file' (change)="onSelectFileEscu($event)"  required>
+            <div [hidden]="esc?.valid || esc?.pristine"
+                 class="text-alert">
+              *La Imagen es requerida
+            </div>
+          </div>
+          <div class="form-group col-sm-8">
+            <label for="lastname">Apellidos</label>
+            <input type="text" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ]{3,20}[ ]{0,1}[a-zA-ZñÑáéíóúÁÉÍÓÚ]{0,20}" class="form-control" id="lastname"
+                   required
+                   [(ngModel)]="model.lastname" name="lastname"
+                   #lastname="ngModel">
+            <div [hidden]="lastname?.valid || lastname?.pristine"
+            class="text-alert">
+            *El Apellido es inválido
+            </div>
+          </div>
+          
+           
+
+            <div class="form-group col-sm-8">
+                    <label for="offices">Sucursal</label>
+                    <select class="form-control" id="offices"
+                            required
+                            [(ngModel)]="model.offices" name="offices"
+                            #offices="ngModel">
+                      <option *ngFor="let sucur of sucursales" [value]="sucur._id" >{{sucur.name}}</option>
+                    </select>
+                    <div [hidden]="offices.valid || offices.pristine" class="text-alert">
+                            *La Sucursal es requerida
+                    </div>
+            </div>
+
+            <div class="form-group col-sm-8">
+                    <label for="cartera">Carteras Libres</label>
+                    <select class="form-control" id="cartera"
+                            required
+                            [(ngModel)]="model.cartera" name="cartera"
+                            #cartera="ngModel">
+                      <option *ngFor="let carte of carteras" [value]="carte._id">{{carte.name}}</option>
+                    </select>
+                    <div [hidden]="cartera.valid || cartera.pristine" class="text-alert">
+                        *La Cartera es requerida
+                    </div>
+            </div>
+            <div class="form-group col-sm-8" style="text-align:center">
+              <button type="submit" class="btn btn-success" [disabled]="!addEjecutivo.form.valid" >Guardar</button>
+              <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
+            </div>
+        </form> -->
+      </div>
+</div>

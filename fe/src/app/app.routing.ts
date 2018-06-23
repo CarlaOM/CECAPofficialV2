@@ -68,6 +68,8 @@ import { ReporteEventosComponent } from './reporte-eventos/reporte-eventos.compo
 import { InscriptionWorkshopComponent } from "./event/inscription-workshop/inscription-workshop.component";
 import { NivelacionComponent } from './event/nivelacion/nivelacion.component';
 
+import { WorkshopComponent } from "./workshop/workshop.component";
+import { PrintBatchCertificatesComponent } from "./event/print-batch-certificates/print-batch-certificates.component";
 
 const appRoutes: Routes = [
    { path: '', component: HomeComponent },//ruta basica
@@ -135,6 +137,8 @@ const appRoutes: Routes = [
          { path: 'cajaPrincipal',component:PrincipalCashComponent},
          { path: 'reporteEvento', component:ReporteEventosComponent},
          { path: 'workshop/:id', component:InscriptionWorkshopComponent},
+         { path: 'workshopListP/:id',component:WorkshopComponent},
+         { path: 'imprimirLoteCertificados/:id',component:PrintBatchCertificatesComponent},
       ]
    },
 
