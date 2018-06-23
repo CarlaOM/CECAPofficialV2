@@ -22,7 +22,7 @@ var multipartMiddleware = multipart();
 // var upload = multer({ //multer settings
 //                 storage: storage,
 //                 fileFilter : function(req, file, callback) { //file filter
-//                     if (['xls', 'xlsx'].indexOf(file.originalFilename.split('.')[file.originalFilename.split('.').length-1]) === -1) {
+//                     if (['xls', 'xlsx'].iOf(file.originalFilename.split('.')[file.originalFilename.split('.').length-1]) === -1) {
 //                         return callback(new Error('Wrong extension type'));
 //                     }
 //                     callback(null, true);
@@ -175,23 +175,6 @@ router
       }else{
         console.log('########## control pago Amount #########');
         crearLists(registro, pagoActual, total_cancelado, price_event, lista);
-        // var amounte = {  // observation
-        //     detail: 'Control Pago',
-        //     receipt: registro.inscription.receipt,// nro factura
-        //     date: new Date(),
-        //     amount: pagoActual
-        // };
-        // db.modulars.update({ persons: registro.persona._id, 
-        //                      events: registro.eventId, 
-        //                      modules: registro.moduleId },
-        //                    { $set: {'amount': amounte}
-        //       }).exec(function (err, off){
-        //       if (err) return res.status(400).send(err);
-        //       console.log(off);
-        //       console.log('CONTROL en modulars Actualizado')
-        //       //return res.status(200).send(off);
-        //       crearLists(registro, pagoActual, total_cancelado, price_event, lista);
-        // });
       }
     }
     function crearLists(registro, pagoActual, total_cancelado, price_event, lista){
@@ -408,6 +391,72 @@ router
       if (err) return console.log(err);
       if (user == null) return res.sendStatus(404);
       return res.status(200).send(user);
+    });
+  })
+  //////////////////////////////////////////////////////////////
+  //**esta consulta obtine el perfil y los modulars de la persona con su assistencia */
+  .get('/existCiAmount/:id', function (req, res) {
+    var arrayIds = req.params.id.split('-');
+        var ci = arrayIds[0];
+        var eventId= arrayIds[1];
+    db.persons.findOne({ ci: ci }, { _id:1, first_name: 1, last_name: 1 }, function (err, user) {
+      if (err) return console.log(err);
+      if (user == null) return res.sendStatus(404);
+        db.events.findOne({_id: eventId},{programs:1},function(err,event){
+          if (err) return console.log(err);
+          if (event == null) return res.sendStatus(404);
+          db.persons.aggregate([
+            { $match: { _id: mongoose.Types.ObjectId(user._id) } },
+            { $project: { profile: 1 ,first_name:1, last_name:1} },
+            { $unwind: '$profile' },
+            { $match: { 'profile.programs': { $eq: event.programs } } },
+                // { $group: { _id: { persons: '$inscriptions.persons' }, total: { $sum: 1 } } }
+          ], function (err, pers) {
+                if (err) { return res.status(400).send(err); }
+                if (pers == null) return res.sendStatus(404);
+                //console.log(pers);
+                let modules = [];
+                var modulesName=[];
+                db.modules.find({ programs: event.programs }, function (err, moduls) {
+                    if (err) { return res.status(400).send(err); }
+                    if (moduls == null) return res.sendStatus(404);
+                    for (let i = 0; i < moduls.length; i++) {
+                        modules.push(moduls[i]._id);
+                    }
+                    db.modulars.find({persons: user._id, modules: { $in: modules },assist:false},function(err, modularsPerf){
+                      if (err) { return res.status(400).send(err); }
+                      if (modularsPerf == null) return res.sendStatus(404);//cuando la persona no tiene faltas en modulos
+                      console.log('el modulars del perfil');
+                      var listModuls= [];
+                      for(var e=0; e<= modularsPerf.length-1; e++){
+                        for(var j=0; j <= moduls.length-1; j++){
+                            var mod = moduls[j]._id;
+                            if(JSON.stringify(modularsPerf[e].modules)==JSON.stringify(mod)) {
+                              var modulars1 = {
+                                name: moduls[j].name,
+                                _id: modularsPerf[e]._id,
+                                modules: moduls[j]._id,
+                                assist:modularsPerf[e].assist
+                              };
+                              listModuls.push(modulars1);  
+                            }else{
+                              console.log('falla  '+ moduls[j]._id);
+                              //return res.status(404).send();
+                            }
+                        }
+                      }
+                      var result = {
+                        first_name:pers[0].first_name ,
+                        last_name: pers[0].last_name,
+                        profile:pers[0].profile,
+                        modularsPer: listModuls
+                      };
+                      console.log(result);
+                      return res.status(200).send(result);
+                    });
+                });
+          });
+        });
     });
   })
   ////////////////////////////////////////////////////////////////////////////

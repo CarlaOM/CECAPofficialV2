@@ -146,7 +146,8 @@ router
         let personId=req.body.personId;
         let eventId=req.body.eventId;
         let moduleId=req.body.moduleId;
-            db.modulars.findOne({persons:personId,events:eventId,modules:moduleId},function(err,modular){
+            //db.modulars.findOne({persons:personId,events:eventId,modules:moduleId},function(err,modular){
+            db.modulars.findOne({persons:personId,modules:moduleId},function(err,modular){
                 if(err)return res.status(400).send(err);
                 return res.status(200).send(modular);
             })
