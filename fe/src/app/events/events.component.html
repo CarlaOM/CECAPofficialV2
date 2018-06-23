@@ -23,7 +23,9 @@
                <th><h4 class="text-center">Lista de Inscritos</h4></th>
                <th><h4 class="text-center">Lista de Requisitos</h4></th>
                <th><h4 class="text-center">Cuentas por Cobrar</h4></th>
-               <th colspan="2"><h4 class="text-center">Estado</h4></th>  
+               <th ><h4 class="text-center">Estado</h4></th>  
+               <th ><h4 class="text-center">Taller</h4></th>  
+               
             </tr>
          </thead>
          <tbody>
@@ -42,6 +44,9 @@
                </td>
                <td>
                   <a class="btn btn-primary" (click)="send(event._id)">INFORMACIÓN</a>
+               </td>
+               <td>
+                  <a class="btn btn-primary" (click)="sendTaller(event._id)">INF. TALLER</a>
                </td>
             </tr>
          </tbody>

@@ -41,6 +41,10 @@ export class EventsComponent implements OnInit {
     send(_id: string) {
       this.router.navigate(['home/event', _id]);
     }
+    sendTaller(_id:string){
+      this.router.navigate(['home/workshopListP', _id]);
+        
+    }
    
    queryEvents() {
       this._peticionesService.getEvents().subscribe(

@@ -10,13 +10,14 @@ import { Cashflowusers } from "../../modelo/cashflowusers";
 import { Lists } from '../../modelo/lists';
 
 @Component({
-   selector: 'app-inscription',
-   templateUrl: './inscription.component.html',
-   styleUrls: ['./inscription.component.css'],
-   providers: [PeticionesService]
+  selector: 'app-nivelacion',
+  templateUrl: './nivelacion.component.html',
+  styleUrls: ['./nivelacion.component.css'],
+  providers: [PeticionesService]
 })
-export class InscriptionComponent implements OnInit {
-   @ViewChild("close", { read: ElementRef }) close: ElementRef;
+export class NivelacionComponent implements OnInit {
+
+  @ViewChild("close", { read: ElementRef }) close: ElementRef;
    @Output() messageEvent = new EventEmitter();
 
    public person: Person;//colection
@@ -34,17 +35,21 @@ export class InscriptionComponent implements OnInit {
    public modulos;
    public registro: Registro;
    public lists: Lists;
-    public personRecived;
+   public personRecived;
    submitted = false;
 
    public cashFLowUser;
 
-   constructor(
-      private _peticionesService: PeticionesService,
+   public canceledprice;
+   public debtPrice;
+   public modulsNot;
+
+  constructor(
+    private _peticionesService: PeticionesService,
       private route: ActivatedRoute,
       private router: Router
-   ) {
-      this.person = new Person('', '', null, null, null, '', '', null, '');
+  ) { 
+    this.person = new Person('', '', null, null, null, '', '', null, '');
       //first_name,last_name,ci,phone,cellphone,email,ocupation,descOcupation:{ },carteras
       this.inscription = new Inscription(null, null, null, null, 0, 0, '0', '');
       //this.identy=Identity._id;
@@ -57,14 +62,10 @@ export class InscriptionComponent implements OnInit {
    onSubmit() {
    }
    ngOnInit() {
-      console.log(Identity._id); 
-      //this.queryPrograms();
+      console.log(Identity._id);
       this.currentCashFlow();
       this.queryEventId();
       this.queryModulars();
-      //this.queryModulos();
-      // this.queryEvents();
-      // this.queryCartera();
    }
    queryEventId() {
       this.route.params.subscribe(params => {
@@ -72,10 +73,8 @@ export class InscriptionComponent implements OnInit {
          // console.log(this.eventId)
       });
    }
-
    currentCashFlow(){
        this._peticionesService.getCashFlowUserByUser(Identity).subscribe(response=>{
-
             this.cashFLowUser=response;
        })
    }
@@ -83,25 +82,22 @@ export class InscriptionComponent implements OnInit {
       if (event.key === "Enter") {
          // console.log(this.person.ci > 999999);
          if (this.person.ci > 999999) {
-            this._peticionesService.getCi(this.person.ci).subscribe(result => {
+            this._peticionesService.getCiAmount(this.person.ci +'-'+ this.eventId).subscribe(result => {
                // console.log(result);
                this.personRecived=result;
                this.person.first_name = this.personRecived.first_name;     
                this.person.last_name = this.personRecived.last_name;          
-
+               this.inscription.price_event=this.personRecived.profile.total_price;
+               this.canceledprice= this.personRecived.profile.payed;
+               this.debtPrice= this.personRecived.profile.debt;
+               this.modulsNot=this.personRecived.modularsPer;
+               console.log(this.modulsNot);
             })
          }
 
       }
    }
    guardar() {
-      /////registrar inscripcion
-      /////primero tiene q crearce el pago en ingreso a caja chica
-      /////se registra en modulars list del evento
-      /////se registra en inscription del evento
-      /////se registra en perfil de la persona la inscripcion al evento
-      
-
       this.person.descOcupation = this.descOcupation;
       this.inscription.users = Identity._id;
       this.registro.inscription = this.inscription;
@@ -110,10 +106,9 @@ export class InscriptionComponent implements OnInit {
       var arrayIds = this.modulsObject.split('-');
       this.registro.modularsId= arrayIds[0];
       this.registro.moduleId= arrayIds[1];
-    //   this.registro.cashFlowUser=this.cashFLowUser;
       console.log(this.registro);
       if(this.inscription.price_event > 0){
-        this._peticionesService.addInscriptPerson(this.registro).subscribe(
+        this._peticionesService.addNivelacion(this.registro).subscribe(
           result => {
               var esperado = result;
               /////////////   Ingreso por inscripcin a caja Chica////////////////
@@ -163,48 +158,6 @@ export class InscriptionComponent implements OnInit {
       this.descOcupation.empresa = '';
       this.person.ocupation = this.ocupSelected;
    }
-   queryCartera() {
-      //console.log(Identity._id)
-      this._peticionesService.getCarteraFromUserId(Identity._id).subscribe(
-         result => {
-            this.cartera = result;
-            this.person.carteras = this.cartera._id
-            // console.log('aqui la cartera del usuario::::');
-            // console.log(this.cartera);
-         },
-         error => {
-            var errorMessage = <any>error;
-            console.log(errorMessage);
-         }
-      );
-   }
-   queryEvents() {
-      this._peticionesService.getEvents().subscribe(
-         result => {
-            this.eventos = result;
-            //console.log(this.eventos);
-         },
-         error => {
-            var errorMessage = <any>error;
-            console.log(errorMessage);
-         });
-   }
-
-   queryModulos(){
-    this.route.params.subscribe(params => {
-        this.eventId = params.id;
-        // console.log(this.eventId)
-     });
-    this._peticionesService.getEventModuls(this.eventId).subscribe(//consulta para obt todo modulos
-      result => {
-          this.modulos = result;
-          console.log(this.modulos);
-      },
-      error => {
-          var errorMessage = <any>error;
-          console.log(errorMessage);
-      });
-  }
   queryModulars(){
     this._peticionesService.getModulars(this.eventId).subscribe(
       result => {
@@ -233,4 +186,5 @@ export class InscriptionComponent implements OnInit {
       // this.router.navigate(['home/events']);
       window.history.back();
    }
+
 }

@@ -141,6 +141,14 @@ module.exports = {
                   receipt: String,// nro factura
                   date: Date,
                   amount: Number,
+                  events: ObjectId
+            },
+            nivelacion: {  // observation
+                  detail: String,
+                  receipt: String,// nro factura
+                  date: Date,
+                  amount: Number,
+                  events: ObjectId
             },
             assist: Boolean, //cambio
             persons: ObjectId,//a la persona que pertenece
