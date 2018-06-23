@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 router
       .get('/', function (req, res) {
             var d = new Date();
-            db.events.find({ date_start: { $gt: d } }, { name: 1, description: 1, date_start: 1, modulars: 1, inscriptions: 1, total: 1, programs: 1 }, function (err, events) {
+            db.events.find({ date_start: { $gt: d },active:true }, { name: 1, description: 1, date_start: 1, modulars: 1, inscriptions: 1, total: 1, programs: 1 }, function (err, events) {
                   if (err) return res.status(400).send(err);
                   // let programs = [];
                   //let modulos = [];
@@ -45,6 +45,18 @@ router
             // db.events.find({},function(err,events){
             //    return res.status(200).send(events);
             // });
+      })
+      .get('/getEventsActiveOfSucursal/:id',function(req,res){
+            var d = new Date();
+            
+            db.users.findOne({_id:req.params.id},function(err,user){
+                  db.events.find({offices:user.offices, active:true, date_start: { $gt: d }},{ name: 1, description: 1, date_start: 1, modulars: 1, inscriptions: 1, total: 1, programs: 1 },function(err,event){
+                  if (err) return res.status(400).send(err);
+                  return res.status(200).send(events);
+                  
+
+                  })
+            })
       })
       .get('/lists', function (req, res) {
             db.lists.find({}, function (err, lists) {
@@ -221,6 +233,19 @@ router
             });
           
            
+      })
+      ////////////////////////
+      .get('/cerrarEvento/:id',function(req,res){
+            db.events.findOne({_id:req.params.id},function(err,event){
+                  if (err) return res.status(400).send(err);
+                  
+                  event.date_end=new Date();
+                  event.active=false;
+                  event.save(function(err,event){
+                        if (err) return res.status(400).send(err);
+                        return res.status(200).send(event);                  
+                  })
+            })
       })
       ///////////////////////////////////
       .get('/:id', function (req, res) {

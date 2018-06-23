@@ -8,10 +8,28 @@
           <br>
           <input type='file' (change)="onSelectFileEscu($event)">
 
-          <label for="logo">Seleccione la imagen para el logo</label>
-          <img [src]="logo" height="200"> 
+
+
+
+          <label for="logoCecap">Seleccione la imagen para el logo (Esquina Superior Izquierda)</label>
+          <img [src]="logoCecap" height="200"> 
           <br>
-          <input type='file' (change)="onSelectFileLogo($event)">
+          <input type='file' (change)="onSelectFileLogo1($event)">
+
+
+
+          <label for="coaching">Seleccione la imagen para el logo (Esquina Superior Derecha)</label>
+          <img [src]="coaching" height="200"> 
+          <br>
+          <input type='file' (change)="onSelectFileLogo2($event)">
+
+          <label for="imagenEvento">Seleccione la imagen para el logo del Evento</label>
+          <img [src]="imagenEvento" height="200"> 
+          <br>
+          <input type='file' (change)="onSelectFileLogo2($event)">
+
+
+
 
           <div class="form-group col-sm-8">
             <label for="nombreEventoCertificado">Nombre del Evento - Modulo</label>

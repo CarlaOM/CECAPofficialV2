@@ -294,6 +294,8 @@ module.exports = {
             total: Number,
             programs: ObjectId,
             offices: ObjectId, //sucursal
+            date_end: Date,
+            active:Boolean,
 
             _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
             record_date: { type: Date, default: function () { return new Date() } },
