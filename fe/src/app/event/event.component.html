@@ -22,10 +22,10 @@
                <a class="btn btn-primary" [routerLink]="['/home/accountsModulars/'+event?._id]">
                   <i class="fa fa-book"></i> Reportes Modulares</a>
             </li>
-            <!-- <li>
-                  <a class="btn btn-primary" [routerLink]="['/home/inscription/'+event?._id]">
-                     <i class="glyphicon glyphicon-usd"></i>Control</a>
-               </li> -->
+            <li *ngIf='role?.name=="Admin"'>
+                  <button class="btn btn-danger fa fa-book" (click)="cerrarEvento(event?._id)" [disabled]="!activeEvent">Cerrar Evento </button>
+
+               </li>
             <!-- <li><app-control-asistance></app-control-asistance></li> -->
          </ol>
       </div>

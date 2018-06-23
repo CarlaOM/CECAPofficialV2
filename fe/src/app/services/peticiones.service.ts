@@ -546,6 +546,14 @@ export class PeticionesService {
 	
 
   }
+  cerrarEvento(id){
+    return this._http.get(this.url + 'events/cerrarEvento/' + id).map((res: Response) => res);
+    
+  }
+  getEventsActiveOfSucursal(id){
+    return this._http.get(this.url + 'events/getEventsActiveOfSucursal/' + id).map((res: Response) => res);
+    
+  }
 
 
 }

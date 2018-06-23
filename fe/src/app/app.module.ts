@@ -192,12 +192,9 @@ import { PrintBatchCertificatesComponent } from './event/print-batch-certificate
     AlertCreateComponent,
     ReporteEventosComponent,
     InscriptionWorkshopComponent,
-<<<<<<< HEAD
     NivelacionComponent,
-=======
     WorkshopComponent,
     PrintBatchCertificatesComponent,
->>>>>>> c7a0638634dd425e43c9fe23eefc2cb7f436fae9
   ],
   imports: [
     BrowserModule,
