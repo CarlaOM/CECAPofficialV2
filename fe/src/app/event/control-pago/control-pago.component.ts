@@ -107,9 +107,6 @@ export class ControlPagoComponent implements OnInit {
      this._peticionesService.addControlPago(this.registro).subscribe(
         result => {
             var esperado = result;
-            // console.log(esperado);
-            // alert('Control Correcto');
-
             /////////////   Ingreso por inscripcin a caja Chica////////////////
             this.ingresoPorInscripcion.receipt=this.inscription.receipt;
             this.ingresoPorInscripcion.title='Inscripcion';
