@@ -1,36 +1,44 @@
 <div class="content-wrapper"> <!-- Content Header (Page header) -->
-    <section class="content-header">
-       <h1>
-          Facilitadores
-          <small>Vigentes</small>
-       </h1>
+  <div class="content">
+
+    <div class="box box-primary">
+
+
+        <section class="content-header">
+            <h1>
+               Facilitadores
+               <small>Vigentes</small>
+            </h1>
+            
+         </section>
+         <section class="content">
+             <a class="btn btn-primary a" (click)="addfacilitador()"><i class="fa fa-book"></i> Registrar Facilitador</a>
+            <table class="table table-hover">
+               <thead>
+                  <tr>
+                     <th>Nombre de Facilitador</th>
+                     <th>Trabajo</th>
+                     <!-- <th>Editar Facilitador</th> -->
+                     <!-- <th colspan="2">estado</th> -->
+                  </tr>
+               </thead>
        
-    </section>
-    <section class="content">
-        <a class="btn btn-primary a" (click)="addfacilitador()"><i class="fa fa-book"></i> Registrar Facilitador</a>
-       <table class="table table-hover">
-          <thead>
-             <tr>
-                <th>Nombre de Facilitador</th>
-                <th>Trabajo</th>
-                <!-- <th>Editar Facilitador</th> -->
-                <!-- <th colspan="2">estado</th> -->
-             </tr>
-          </thead>
+               <tbody>
+       
+                  <tr *ngFor="let facilitador of facilitadores">
+                     <td>{{ facilitador.name }}</td>
+                     <!-- <td>{{ eventcd fedate_start | date }}</td> -->
+                     <td>{{ facilitador.job }}</td>
+                     <!-- <td>{{ event.date_start | date }}</td> -->
+                     <!-- <td>
+                        <!-- <button class="btn btn-warning" (click)="editfacilitador(facilitador._id)">EDITAR</button> -->
+                       <!-- <a class="btn btn-primary" (click)="editFacilitador(facilitador._id)">Editar</a>
+                     </td> -->
+                  </tr>
+               </tbody>
+            </table>
+         </section>
+    </div>
+  </div>
   
-          <tbody>
-  
-             <tr *ngFor="let facilitador of facilitadores">
-                <td>{{ facilitador.name }}</td>
-                <!-- <td>{{ eventcd fedate_start | date }}</td> -->
-                <td>{{ facilitador.job }}</td>
-                <!-- <td>{{ event.date_start | date }}</td> -->
-                <!-- <td>
-                   <!-- <button class="btn btn-warning" (click)="editfacilitador(facilitador._id)">EDITAR</button> -->
-                  <!-- <a class="btn btn-primary" (click)="editFacilitador(facilitador._id)">Editar</a>
-                </td> -->
-             </tr>
-          </tbody>
-       </table>
-    </section>
   </div>

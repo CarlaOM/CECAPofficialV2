@@ -1,125 +1,133 @@
 <div class="content-wrapper">
-  <section class="content-header">
-      <h1>
-         Cajas Pendientes por Confirmar
-         <small>Ingresos - Egresos</small>
-      </h1>
-   </section>
-<section class="content">
+
+  <div class="content">
+
+    <div class="box box-primary">
+        <section class="content-header">
+            <h1>
+               Cajas Pendientes por Confirmar
+               <small>Ingresos - Egresos</small>
+            </h1>
+         </section>
+      <section class="content">
+            
+         <table class="table table-hover" >
+            <thead>
+               <tr>
+                  <th>Usuario</th>
+                  <th>Fecha de Inicio</th>
+                  <th>Fecha de Cierre</th>
+                  <th>Monto</th>
+                  <th>Monto entregado</th>
+                  <th>Ver</th>
+                  <th>Confirmar</th>   
+               </tr>
+            </thead>
+            <tbody> 
+               <tr *ngFor="let caja of nuevasCajas" [ngSwitch]="caja.estado">
       
-   <table class="table table-hover" >
-      <thead>
-         <tr>
-            <th>Usuario</th>
-            <th>Fecha de Inicio</th>
-            <th>Fecha de Cierre</th>
-            <th>Monto</th>
-            <th>Monto entregado</th>
-            <th>Ver</th>
-            <th>Confirmar</th>   
-         </tr>
-      </thead>
-      <tbody> 
-         <tr *ngFor="let caja of nuevasCajas" [ngSwitch]="caja.estado">
+      
+                      <td class="">{{caja.usuario}}</td>
+                      <td class="">{{caja.fechaInicio|date}}</td>
+                      <td class="">{{caja.fechaFin|date}}</td>
+                      <td class="">{{caja.monto}}</td>
+                      <td>{{caja.montoEntregado}}</td>
+                      <td class="" *ngIf="caja.estado!=4"> <a class="btn btn-warning" (click)="infoPendiente(caja.idCaja)">Ver Detalle y confirmar</a></td>
+                      <td class="" *ngSwitchCase="-1" >
+                          Caja sin Confirmar
+                      </td>
+                      <td class="" *ngSwitchCase="0">
+                          <!-- <a class="btn btn-warning" (click)="confirmarCaja(caja.idCaja)">caja por confirmar</a> -->
+                          <!-- caja por confirmar -->
+                          <button *ngIf="caja.estado!=4" class="btn btn-danger" [disabled]="btnInactive">Caja por Confirmar </button>
+      
+                      </td>
+                      <td class="" *ngSwitchCase="1">
+                          <!-- <a class="btn btn-success" >Caja Confirmada</a> -->
+                          <!-- caja  confirmada -->
+                          <button *ngIf="caja.estado!=4" class="btn btn-success" [disabled]="btnInactive">Caja Confirmada </button>
+      
+                      </td>
+                      <ng-template #vacio class="">
+                        ---
+          
+                      </ng-template>
+                      <td class=""></td>
+                 
+      
+      
+               </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+      
+                <td></td>   
+                <td></td>          
+      
+                <td></td>          
+                <td><strong>TOTAL</strong></td>   
+                <td>{{cashFlowOfficeAmount}}</td>       
+                <td></td>          
+                <td></td>          
+                <td></td>          
+                <td></td>          
+      
+              </tr>
+            </tfoot>
+      
+      
+         </table>
+         <div *ngIf='cashFlowOfficeAmount>0'>
+      
+      
+            <div *ngIf='!validateCloseCashButtonBoolean'>
+                <h4>*El boton para cerrar caja se habilita cuando CONFIRME todas las cuentas.Gracias</h4>
+             </div>
+            <div *ngIf='validateCloseCashButtonBoolean'>
+          
+              <form (ngSubmit)="onSubmit()" #sendToPrincipalForm="ngForm">
+                  
+                <div class="form-group col-sm-8">
+                    <label for="sendToPrincipal">Dinero entregado</label>
+                    <input type="number" pattern="[1-9]{1}[0-9]{0,6}" class="form-control" id="sendToPrincipal"
+                          required
+                          [(ngModel)]="amountDelivered" name="sendToPrincipal"
+                          #sendToPrincipal="ngModel">
+                    <div [hidden]="sendToPrincipal?.valid || sendToPrincipal?.pristine"
+                        class="text-alert">
+                        *Monto requerido
+                    </div>
+                  </div> 
+                <div class="form-group col-sm-8" style="text-align:center">
+                  <button type="submit" class="btn btn-success" [disabled]="!sendToPrincipalForm.form.valid ">Cerrar Caja y enviar a Sucursal Principal</button>
+                  <!-- <button type="submit" class="btn btn-success" [disabled]="true && false">Cerrar Caja y enviar a Sucursal Principal</button> -->
+                  
+                  <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+                  <br>
+                  <br>
+                  <br>
+                </div>
+              </form>
+          
+          
+            </div>
+      
+         </div>
+         <div *ngIf='cashFlowOfficeAmount<=0'>
+           <h4>El monto en caja debe ser mayor a cero.Gracias</h4>
+      
+         </div>
+      
+        
+       
+      
+         
+      
+         
+      </section>
 
-
-                <td class="">{{caja.usuario}}</td>
-                <td class="">{{caja.fechaInicio|date}}</td>
-                <td class="">{{caja.fechaFin|date}}</td>
-                <td class="">{{caja.monto}}</td>
-                <td>{{caja.montoEntregado}}</td>
-                <td class="" *ngIf="caja.estado!=4"> <a class="btn btn-warning" (click)="infoPendiente(caja.idCaja)">Ver Detalle y confirmar</a></td>
-                <td class="" *ngSwitchCase="-1" >
-                    Caja sin Confirmar
-                </td>
-                <td class="" *ngSwitchCase="0">
-                    <!-- <a class="btn btn-warning" (click)="confirmarCaja(caja.idCaja)">caja por confirmar</a> -->
-                    <!-- caja por confirmar -->
-                    <button *ngIf="caja.estado!=4" class="btn btn-danger" [disabled]="btnInactive">Caja por Confirmar </button>
-
-                </td>
-                <td class="" *ngSwitchCase="1">
-                    <!-- <a class="btn btn-success" >Caja Confirmada</a> -->
-                    <!-- caja  confirmada -->
-                    <button *ngIf="caja.estado!=4" class="btn btn-success" [disabled]="btnInactive">Caja Confirmada </button>
-
-                </td>
-                <ng-template #vacio class="">
-                  ---
-    
-                </ng-template>
-                <td class=""></td>
-           
-
-
-         </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-
-          <td></td>   
-          <td></td>          
-
-          <td></td>          
-          <td><strong>TOTAL</strong></td>   
-          <td>{{cashFlowOfficeAmount}}</td>       
-          <td></td>          
-          <td></td>          
-          <td></td>          
-          <td></td>          
-
-        </tr>
-      </tfoot>
-
-
-   </table>
-   <div *ngIf='cashFlowOfficeAmount>0'>
-
-
-      <div *ngIf='!validateCloseCashButtonBoolean'>
-          <h4>*El boton para cerrar caja se habilita cuando CONFIRME todas las cuentas.Gracias</h4>
-       </div>
-      <div *ngIf='validateCloseCashButtonBoolean'>
-    
-        <form (ngSubmit)="onSubmit()" #sendToPrincipalForm="ngForm">
-            
-          <div class="form-group col-sm-8">
-              <label for="sendToPrincipal">Dinero entregado</label>
-              <input type="number" pattern="[1-9]{1}[0-9]{0,6}" class="form-control" id="sendToPrincipal"
-                    required
-                    [(ngModel)]="amountDelivered" name="sendToPrincipal"
-                    #sendToPrincipal="ngModel">
-              <div [hidden]="sendToPrincipal?.valid || sendToPrincipal?.pristine"
-                  class="text-alert">
-                  *Monto requerido
-              </div>
-            </div> 
-          <div class="form-group col-sm-8" style="text-align:center">
-            <button type="submit" class="btn btn-success" [disabled]="!sendToPrincipalForm.form.valid ">Cerrar Caja y enviar a Sucursal Principal</button>
-            <!-- <button type="submit" class="btn btn-success" [disabled]="true && false">Cerrar Caja y enviar a Sucursal Principal</button> -->
-            
-            <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
-            <br>
-            <br>
-            <br>
-          </div>
-        </form>
-    
-    
-      </div>
-
-   </div>
-   <div *ngIf='cashFlowOfficeAmount<=0'>
-     <h4>El monto en caja debe ser mayor a cero.Gracias</h4>
-
-   </div>
-
+    </div>
+  </div>
   
- 
-
-   
-
-   
-</section>
 <!-- <router-outlet></router-outlet> -->
 </div>
