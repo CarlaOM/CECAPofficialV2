@@ -1,138 +1,145 @@
 <div class="content-wrapper">
-   <section class="content">
-      <!-- <app-addPerson (messageEvent)="receiveMessage()"></app-addPerson> -->
-      <!-- <a class="btn btn-primary" (click)="addPerson()">Registrar Persona</a> -->
-      <!-- <app-persona></app-persona> -->
-      <div>
-         <ol class="breadcrumb">
-            <!-- <br> -->
-            <li>
-               <a class="btn btn-primary" [routerLink]="['/home/inscription/'+event?._id]">
-                  <i class="fa fa-book"></i> Inscribir Persona</a>
-            </li>
-            <li>
-                  <a class="btn btn-primary" [routerLink]="['/home/nivelacion/'+event?._id]">
-                  <i class="fa fa-book"></i> Nivelacion </a>
-            </li>
-            <li>
-                  <a class="btn btn-primary" [routerLink]="['/home/workshop/'+event?._id]">
-                     <i class="fa fa-book"></i> Inscribir Persona a Taller</a>
-               </li>
-            <li>
-               <a class="btn btn-primary" [routerLink]="['/home/accountsModulars/'+event?._id]">
-                  <i class="fa fa-book"></i> Reportes Modulares</a>
-            </li>
-            <li *ngIf='role?.name=="Admin"'>
-                  <button class="btn btn-danger fa fa-book" (click)="cerrarEvento(event?._id)" [disabled]="!activeEvent">Cerrar Evento </button>
+      <div class="content">
 
-               </li>
-            <!-- <li><app-control-asistance></app-control-asistance></li> -->
-         </ol>
+            <div class="box box-primary">
+                        <section class="content">
+                                    <!-- <app-addPerson (messageEvent)="receiveMessage()"></app-addPerson> -->
+                                    <!-- <a class="btn btn-primary" (click)="addPerson()">Registrar Persona</a> -->
+                                    <!-- <app-persona></app-persona> -->
+                                    <div>
+                                       <ol class="breadcrumb">
+                                          <!-- <br> -->
+                                          <li>
+                                             <a class="btn btn-primary" [routerLink]="['/home/inscription/'+event?._id]">
+                                                <i class="fa fa-book"></i> Inscribir Persona</a>
+                                          </li>
+                                          <li>
+                                                <a class="btn btn-primary" [routerLink]="['/home/nivelacion/'+event?._id]">
+                                                <i class="fa fa-book"></i> Nivelacion </a>
+                                          </li>
+                                          <li>
+                                                <a class="btn btn-primary" [routerLink]="['/home/workshop/'+event?._id]">
+                                                   <i class="fa fa-book"></i> Inscribir Persona a Taller</a>
+                                             </li>
+                                          <li>
+                                             <a class="btn btn-primary" [routerLink]="['/home/accountsModulars/'+event?._id]">
+                                                <i class="fa fa-book"></i> Reportes Modulares</a>
+                                          </li>
+                                          <li *ngIf='role?.name=="Admin"'>
+                                                <button class="btn btn-danger fa fa-book" (click)="cerrarEvento(event?._id)" [disabled]="!activeEvent">Cerrar Evento </button>
+                              
+                                             </li>
+                                          <!-- <li><app-control-asistance></app-control-asistance></li> -->
+                                       </ol>
+                                    </div>
+                                    <div>
+                                       <h1>{{event?.name}}</h1>
+                                    </div>
+                                    <div class="btn-group" data-toggle="buttons">
+                              
+                                          <label *ngFor="let m of modules">
+                              
+                                                <button class="btn btn-primary margin-left"  (click)="setListInscriptions(m._id,m.name)"> {{m.name}}</button> 
+                                          </label>
+                                    </div>
+                                    <p>
+                                          
+                                          <label >
+                                                
+                                                <h3>{{moduleName}}</h3>
+                                                Lista de personas
+                                                
+                                          </label>
+                                    </p>
+                                    <div *ngIf="(moduleName!=undefined)">
+                              
+                                          <button class="btn btn-primary" [routerLink]="['/home/imprimirLoteCertificados/'+certificateData]">Imprimir Certificados de asistentes</button>
+                                    </div>
+                              
+                                    <table class="table table-hover" *ngIf="moduleName!=null">
+                                       <thead>
+                                          <tr>
+                                             <th>Nombre</th>
+                                             <th>CI</th>
+                                             <th>Celular</th>
+                                             <th>Monto Cancelado</th>
+                                             <th>Perfil</th>
+                                             <th>Asistencia</th>
+                                             <!-- <th>asis</th> -->
+                                             <!-- <th>Opciones</th> -->
+                                             <th>Control de Pago</th>
+                                             
+                                          </tr>
+                                       </thead>
+                                       <tbody>
+                                          <!--<tr *ngFor="let i of inscriptions | buscarPersona: busqueda">-->
+                                          <tr *ngFor="let i of lista_personasPorModulo" [ngSwitch]="i.assist">
+                                             <td>{{ i.name }}</td>
+                                             <td>{{ i.ci }}</td>
+                                             <td>{{ i.cellphone }}</td>
+                                             <td>{{ i.canceled_price }}</td>
+                                             <td>
+                                                <a class="btn btn-info" (click)="viewProfile(i.persons)">VER</a>
+                                             </td>
+                                             <td *ngSwitchCase="false">
+                                                <button class="btn btn-danger" (click)="marcarAsistencia(i.persons)"> No Asistió</button>
+                                             </td>
+                                             <td *ngSwitchCase="true">
+                                                <button class="btn btn-success" disabled> Asistió</button>
+                                             </td>
+                              
+                                             <td>
+                                                <!-- <a class="btn btn-success" (click)="control(i.persons)">CONTROL</a> -->
+                                                <button *ngIf="0 >= (i.price_event)- (i.canceled_price)" disabled class="btn btn-primary" (click)="control(i.persons)">CONTROL</button>
+                                                <button *ngIf="0 < (i.price_event)-(i.canceled_price) " class="btn btn-primary" (click)="control(i.persons)">CONTROL</button>
+                                             </td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                    <table class="table table-hover" *ngIf="moduleName==null">
+                                                <thead>
+                                                   <tr>
+                                                      <th>Nombre</th>
+                                                      <th>CI</th>
+                                                      <th>Celular</th>
+                                                      <th>Monto Cancelado</th>
+                                                      <th>Perfil</th>
+                                                      <!-- <th>Opciones</th> -->
+                                                      <th>Control de Pago</th>
+                                                   </tr>
+                                                </thead>
+                                                <tbody>
+                                                   <!--<tr *ngFor="let i of inscriptions | buscarPersona: busqueda">-->
+                                                   <tr *ngFor="let i of lista_personasPorModulo" [ngSwitch]="i.assist">
+                                                      <td>{{ i.name }}</td>
+                                                      <td>{{ i.ci }}</td>
+                                                      <td>{{ i.cellphone }}</td>
+                                                      <td>{{ i.canceled_price }}</td>
+                                                      <td>
+                                                         <a class="btn btn-info" (click)="viewProfile(i.persons)">VER</a>
+                                                      </td>  
+                                                      <!-- <td>
+                                                         <!-- <app-editPerson [editPerson]="event"></app-editPerson>
+                                                         <a class="btn btn-warning" (click)="edit(i.persons)">EDITAR</a>
+                                                         <!-- <a class="btn btn-success" (click)="asistence(i.persons)">Asistand</a>
+                                                      </td> -->
+                                                      <td>
+                                                         <!-- <a class="btn btn-success" (click)="control(i.persons)">CONTROL</a> -->
+                                                         <button *ngIf="0 >= (i.price_event)- (i.canceled_price)" disabled class="btn btn-primary" (click)="control(i.persons)">CONTROL</button>
+                                                         <button *ngIf="0 < (i.price_event)-(i.canceled_price) " class="btn btn-primary" (click)="control(i.persons)">CONTROL</button>
+                                                      </td>
+                                                   </tr>
+                                                </tbody>
+                                    </table>
+                                    
+                                    <div class="" style="text-align: center">
+                                          <button class="btn btn-primary" (click)="cancelar()">Volver</button>
+                                    </div>
+                              
+                                 </section>
+
+            </div>
       </div>
-      <div>
-         <h1>{{event?.name}}</h1>
-      </div>
-      <div class="btn-group" data-toggle="buttons">
-
-            <label *ngFor="let m of modules">
-
-                  <button class="btn btn-primary margin-left"  (click)="setListInscriptions(m._id,m.name)"> {{m.name}}</button> 
-            </label>
-      </div>
-      <p>
-            
-            <label >
-                  
-                  <h3>{{moduleName}}</h3>
-                  Lista de personas
-                  
-            </label>
-      </p>
-      <div *ngIf="(moduleName!=undefined)">
-
-            <button class="btn btn-primary" [routerLink]="['/home/imprimirLoteCertificados/'+certificateData]">Imprimir Certificados de asistentes</button>
-      </div>
-
-      <table class="table table-hover" *ngIf="moduleName!=null">
-         <thead>
-            <tr>
-               <th>Nombre</th>
-               <th>CI</th>
-               <th>Celular</th>
-               <th>Monto Cancelado</th>
-               <th>Perfil</th>
-               <th>Asistencia</th>
-               <!-- <th>asis</th> -->
-               <!-- <th>Opciones</th> -->
-               <th>Control de Pago</th>
-               
-            </tr>
-         </thead>
-         <tbody>
-            <!--<tr *ngFor="let i of inscriptions | buscarPersona: busqueda">-->
-            <tr *ngFor="let i of lista_personasPorModulo" [ngSwitch]="i.assist">
-               <td>{{ i.name }}</td>
-               <td>{{ i.ci }}</td>
-               <td>{{ i.cellphone }}</td>
-               <td>{{ i.canceled_price }}</td>
-               <td>
-                  <a class="btn btn-info" (click)="viewProfile(i.persons)">VER</a>
-               </td>
-               <td *ngSwitchCase="false">
-                  <button class="btn btn-danger" (click)="marcarAsistencia(i.persons)"> No Asistió</button>
-               </td>
-               <td *ngSwitchCase="true">
-                  <button class="btn btn-success" disabled> Asistió</button>
-               </td>
-
-               <td>
-                  <!-- <a class="btn btn-success" (click)="control(i.persons)">CONTROL</a> -->
-                  <button *ngIf="0 >= (i.price_event)- (i.canceled_price)" disabled class="btn btn-primary" (click)="control(i.persons)">CONTROL</button>
-                  <button *ngIf="0 < (i.price_event)-(i.canceled_price) " class="btn btn-primary" (click)="control(i.persons)">CONTROL</button>
-               </td>
-            </tr>
-         </tbody>
-      </table>
-      <table class="table table-hover" *ngIf="moduleName==null">
-                  <thead>
-                     <tr>
-                        <th>Nombre</th>
-                        <th>CI</th>
-                        <th>Celular</th>
-                        <th>Monto Cancelado</th>
-                        <th>Perfil</th>
-                        <!-- <th>Opciones</th> -->
-                        <th>Control de Pago</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <!--<tr *ngFor="let i of inscriptions | buscarPersona: busqueda">-->
-                     <tr *ngFor="let i of lista_personasPorModulo" [ngSwitch]="i.assist">
-                        <td>{{ i.name }}</td>
-                        <td>{{ i.ci }}</td>
-                        <td>{{ i.cellphone }}</td>
-                        <td>{{ i.canceled_price }}</td>
-                        <td>
-                           <a class="btn btn-info" (click)="viewProfile(i.persons)">VER</a>
-                        </td>  
-                        <!-- <td>
-                           <!-- <app-editPerson [editPerson]="event"></app-editPerson>
-                           <a class="btn btn-warning" (click)="edit(i.persons)">EDITAR</a>
-                           <!-- <a class="btn btn-success" (click)="asistence(i.persons)">Asistand</a>
-                        </td> -->
-                        <td>
-                           <!-- <a class="btn btn-success" (click)="control(i.persons)">CONTROL</a> -->
-                           <button *ngIf="0 >= (i.price_event)- (i.canceled_price)" disabled class="btn btn-primary" (click)="control(i.persons)">CONTROL</button>
-                           <button *ngIf="0 < (i.price_event)-(i.canceled_price) " class="btn btn-primary" (click)="control(i.persons)">CONTROL</button>
-                        </td>
-                     </tr>
-                  </tbody>
-      </table>
-      
-      <div class="" style="text-align: center">
-            <button class="btn btn-primary" (click)="cancelar()">Volver</button>
-      </div>
-
-   </section>
+  
    <router-outlet></router-outlet>
 </div>
