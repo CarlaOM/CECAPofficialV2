@@ -373,7 +373,7 @@ module.exports = {
             company_id: ObjectId,
             //user_id: ObjectId,
             receipts: [{
-                  receipt: Number,
+                  receipt: String,
                   amount: Number,
                   description: String
             }],

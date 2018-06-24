@@ -46,7 +46,7 @@ export class InscriptionComponent implements OnInit {
    ) {
       this.person = new Person('', '', null, null, null, '', '', null, '');
       //first_name,last_name,ci,phone,cellphone,email,ocupation,descOcupation:{ },carteras
-      this.inscription = new Inscription(null, null, null, null, 0, 0, '0', '');
+      this.inscription = new Inscription(null, null, null, null, null, null, '', '');
       //this.identy=Identity._id;
       this.descOcupation = new DescOcupation('', '', '', '', '', '', '');
       this.registro = new Registro(null, null, '', '','');//idEvent,idUser,persona:{}, montCancel
