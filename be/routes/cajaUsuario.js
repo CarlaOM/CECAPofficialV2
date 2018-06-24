@@ -98,7 +98,7 @@ router
         input:true,   
         date_detail:new Date(), 
         title:caja.title,
-        events:caja.events,
+        events:caja.events,/////////////////////////////////IDevent
         modulars:caja.modulars//
     };
 
