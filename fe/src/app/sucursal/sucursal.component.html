@@ -1,45 +1,52 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   
-  <section class="content-header">
-     <h1>
-       Sucursales
-        <small> Cecap</small>
-     </h1>
-     <div>     
-      <ol class="breadcrumb" >
-          <li *ngIf='(role?.name=="Admin")||(role?.name=="Gerente")'><a class="btn btn-primary fa fa-book" [routerLink]="['/home/sucursal/add']"><i class="fa fa-book"></i>Registrar Sucursal</a></li>
-         
-      </ol>
-    </div> 
-  </section>
-  <section class="content h">
-     <table class="table table-hover">
-        <thead>
-           <tr class="text-info cabecera hover">
+  <div class="content">
 
-              <th><h4 class="text-center font-family-serif"><strong>Nombre de Sucursal</strong> </h4></th>
-              <th><h4 class="text-center"><strong>Departamento</strong></h4></th>
-              <th><h4 class="text-center"><strong>Dirección</strong></h4></th>
-              <th><h4 class="text-center"><strong>Caja</strong></h4></th>
-              <!-- <th colspan="2"><h4 class="text-center"><strong>Opciones</strong></h4></th> -->
-              
-           </tr>
-        </thead>
+    <div class="box box-primary">
 
-        <tbody>
-
-           <tr *ngFor="let i of sucursales" class="bg-info text-center">
-              <td> {{i.name}}</td>
-              <td>{{i.departament}}</td>
-              <td>{{i.ubicacion}}</td>
-              <td>{{i.caja}}</td>
-              <!-- <td>
-                 <a class="btn btn-primary" (click)="verSucursal(i._id)">Ver</a>
-                 <a class="btn btn-warning" (click)="sendEdit(i._id)">Editar</a>
-              </td> -->
-           </tr>
-        </tbody>
-     </table>
-  </section>
+        <section class="content-header">
+            <h1>
+              Sucursales
+               <small> Cecap</small>
+            </h1>
+            <div>     
+             <ol class="breadcrumb" >
+                 <li *ngIf='(role?.name=="Admin")||(role?.name=="Gerente")'><a class="btn btn-primary fa fa-book" [routerLink]="['/home/sucursal/add']"><i class=""></i>Registrar Sucursal</a></li>
+                
+             </ol>
+           </div> 
+         </section>
+         <section class="content h">
+            <table class="table table-hover">
+               <thead>
+                  <tr class="text-info cabecera hover">
+       
+                     <th><h4 class="text-center font-family-serif"><strong>Nombre de Sucursal</strong> </h4></th>
+                     <th><h4 class="text-center"><strong>Departamento</strong></h4></th>
+                     <th><h4 class="text-center"><strong>Dirección</strong></h4></th>
+                     <th><h4 class="text-center"><strong>Caja</strong></h4></th>
+                     <!-- <th colspan="2"><h4 class="text-center"><strong>Opciones</strong></h4></th> -->
+                     
+                  </tr>
+               </thead>
+       
+               <tbody>
+       
+                  <tr *ngFor="let i of sucursales" class="bg-info text-center">
+                     <td> {{i.name}}</td>
+                     <td>{{i.departament}}</td>
+                     <td>{{i.ubicacion}}</td>
+                     <td>{{i.caja}}</td>
+                     <!-- <td>
+                        <a class="btn btn-primary" (click)="verSucursal(i._id)">Ver</a>
+                        <a class="btn btn-warning" (click)="sendEdit(i._id)">Editar</a>
+                     </td> -->
+                  </tr>
+               </tbody>
+            </table>
+         </section>
+    </div>
+  </div>
+  
 </div>

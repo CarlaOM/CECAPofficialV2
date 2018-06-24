@@ -54,7 +54,7 @@
                   <div class="form-group col-sm-3">
                      <label for="difinePrice" class="control-label" style="text-align:right">Precio Definido</label>
                      <input type="number" pattern="[0-9]{0,5}" class="form-control" id="difinePrice" [(ngModel)]="inscription.price_event" name="definePrice"
-                        #definePrice="ngModel" />
+                        #definePrice="ngModel" required>
                      <span *ngIf="!definePrice.valid && definePrice.touched" class="text-alert">
                         *Precio de definido invalido.
                      </span>
@@ -65,7 +65,7 @@
                   <div class="form-group col-sm-3">
                      <label for="monto" class="control-label" style="text-align:right">Pago Inicial</label>
                      <input type="number" pattern="[0-9]{0,5}" class="form-control" id="monto" [(ngModel)]="inscription.canceled_price" name="monto"
-                        #monto="ngModel" />
+                        #monto="ngModel" required/>
                      <span *ngIf="!monto.valid && monto.touched" class="text-alert">
                         *Monto Inicial inválido.
                      </span>
@@ -75,7 +75,7 @@
                   </div>
                   <div class="form-group col-sm-3">
                      <label for="receipt" class="control-label" style="text-align:right">Número de Recibo</label>
-                     <input type="text" pattern="[0-9]{0,15}[a-zA-Z]{0,5}" class="form-control" id="receipt" [(ngModel)]="inscription.receipt"
+                     <input type="text" pattern="[0-9a-zA-Z]{0,15}" class="form-control" id="receipt" [(ngModel)]="inscription.receipt"
                         name="receipt" #receipt="ngModel" required />
                      <span *ngIf="!receipt.valid && receipt.touched" class="text-alert">
                         *Numero de Recibo invalido.
