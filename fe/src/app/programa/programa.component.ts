@@ -31,6 +31,9 @@ export class ProgramaComponent implements OnInit {
          console.log(<any>error);
       });
   }
+  volver(){
+    this.router.navigate(['home/events']);    
+  }
   send(_id:string) {
     this.router.navigate(['home/modulos', _id]);
   }
