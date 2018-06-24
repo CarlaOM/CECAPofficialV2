@@ -1,86 +1,94 @@
 <div class="content-wrapper">
-  <section class="content-header">
-      <h1>
-         Detalle Caja Chica Ejecutivo
-         <small>Ingresos - Egresos</small>
-      </h1>
-   </section>
-<section class="content">
-     
-   <table class="table table-hover" >
-      <thead>
-         <tr>
-            <th>Título</th>
-            <th>Descripción</th>
-            <th>Número recibo</th>
-            <th>Fecha</th>
-            <th>Ingreso</th>
-            <th>Egreso</th>
-            <th>Total</th>                 
-         </tr>
-      </thead>
-      <tbody> 
-         <tr *ngFor="let detalle of detalles">
 
-                <td class="">{{detalle.title }}</td>
-                <td class="">{{detalle.description}}</td>
-                <td class="">{{detalle.receipt}}</td>
-                <td class="">{{detalle.date_detail|date}}</td>
-                <td class="" *ngIf="detalle.input==true; else vacio "> {{detalle.amount}}</td>
-                <td class="" *ngIf="detalle.input==false; else vacio">{{detalle.amount}}</td>
-                <ng-template #vacio class="">
-                  ---
-    
-                </ng-template>
-                <td class=""></td>
+  <div class="content">
 
-         </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-
-          <td class="success"></td>   
-          <td class="success"></td>          
-          <td class="success"></td>          
-          <td class="success"></td>          
-          <td class="success"></td>          
-          <td class="success"></td>          
-          <td class="success">{{total}}</td>          
-
-        </tr>
-      </tfoot>
-
-
-   </table>
-   <section>
-    <form (ngSubmit)="onSubmit()" #AmountDeliveredForm="ngForm">
+    <div class="box box-primary">
+        <section class="content-header">
+            <h1>
+               Detalle Caja Chica Ejecutivo
+               <small>Ingresos - Egresos</small>
+            </h1>
+         </section>
+      <section class="content">
+           
+         <table class="table table-hover" >
+            <thead>
+               <tr>
+                  <th>Título</th>
+                  <th>Descripción</th>
+                  <th>Número recibo</th>
+                  <th>Fecha</th>
+                  <th>Ingreso</th>
+                  <th>Egreso</th>
+                  <th>Total</th>                 
+               </tr>
+            </thead>
+            <tbody> 
+               <tr *ngFor="let detalle of detalles">
       
-      <div class="form-group col-sm-8">
-          <label for="delivered">Dinero entregado</label>
-          <input type="number" pattern="[1-9]{1}[0-9]{0,6}" class="form-control" id="delivered"
-                 required
-                 [(ngModel)]="amountDelivered" name="delivered"
-                 #delivered="ngModel">
-          <div [hidden]="delivered?.valid || delivered?.pristine"
-               class="text-alert">
-               *Monto requerido
-          </div>
-        </div> 
-      <div class="form-group col-sm-8" style="text-align:center">
-        <button type="submit" class="btn btn-success" [disabled]="!AmountDeliveredForm.form.valid||btnInactiveConfirm">Confirmar</button>
-        <button type="button" class="btn btn-danger" (click)="goPendingCash()">Cancelar</button>
-      </div>
-      </form>
+                      <td class="">{{detalle.title }}</td>
+                      <td class="">{{detalle.description}}</td>
+                      <td class="">{{detalle.receipt}}</td>
+                      <td class="">{{detalle.date_detail|date}}</td>
+                      <td class="" *ngIf="detalle.input==true; else vacio "> {{detalle.amount}}</td>
+                      <td class="" *ngIf="detalle.input==false; else vacio">{{detalle.amount}}</td>
+                      <ng-template #vacio class="">
+                        ---
+          
+                      </ng-template>
+                      <td class=""></td>
+      
+               </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+      
+                <td class="success"></td>   
+                <td class="success"></td>          
+                <td class="success"></td>          
+                <td class="success"></td>          
+                <td class="success"></td>          
+                <td class="success"></td>          
+                <td class="success">{{total}}</td>          
+      
+              </tr>
+            </tfoot>
+      
+      
+         </table>
+         <section class="content">
+          <form (ngSubmit)="onSubmit()" #AmountDeliveredForm="ngForm">
+            
+            <div class="form-group col-sm-8">
+                <label for="delivered">Dinero entregado</label>
+                <input type="number" pattern="[1-9]{1}[0-9]{0,6}" class="form-control" id="delivered"
+                       required
+                       [(ngModel)]="amountDelivered" name="delivered"
+                       #delivered="ngModel">
+                <div [hidden]="delivered?.valid || delivered?.pristine"
+                     class="text-alert">
+                     *Monto requerido
+                </div>
+              </div> 
+            <div class="form-group col-sm-8" style="text-align:center">
+              <button type="submit" class="btn btn-success" [disabled]="!AmountDeliveredForm.form.valid||btnInactiveConfirm">Confirmar</button>
+              <button type="button" class="btn btn-danger" (click)="goPendingCash()">Cancelar</button>
+            </div>
+            </form>
+      
+         </section>
+      
+         
+            <!-- <a class="btn btn-primary" (click)="goPendingCash()">Cancelar</a>
+      
+            <button class="btn btn-danger" [disabled]="btnInactiveConfirm" (click)="confirmPendingCash()">Confirmar</button>
+       -->
+      
+         
+      </section>
 
-   </section>
-
-   
-      <!-- <a class="btn btn-primary" (click)="goPendingCash()">Cancelar</a>
-
-      <button class="btn btn-danger" [disabled]="btnInactiveConfirm" (click)="confirmPendingCash()">Confirmar</button>
- -->
-
-   
-</section>
+    </div>
+  </div>
+  
 <!-- <router-outlet></router-outlet> -->
 </div>

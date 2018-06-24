@@ -1,42 +1,50 @@
 <div class="content-wrapper">
-    <section class="content-header">
-        <h1>
-           Ejecutivos
-           <small>Lista</small>
-        </h1>
-     </section>
-  <section class="content">
-        <button *ngIf='(role?.name=="Admin")||(role?.name=="Gerente")' class="btn btn-primary fa fa-book" (click)="addEjecutivo()">Registrar Ejecutivo</button>
-        
-       
-     <table class="table table-hover" >
-        <thead>
-           <tr>
-              <th>Nombre</th>
-              <th>Estado</th>
-              <th>Información</th>
-              <th colspan="2">Editar</th>
-                 
-              
-           </tr>
-        </thead>
-        <tbody> 
-           <tr *ngFor="let ejecutivo of ejecutivos">
-              <td>{{ ejecutivo.name }}</td>
-              <td *ngIf="ejecutivo.active==true">Activo</td>
-              <td *ngIf="ejecutivo.active==false">Inactivo</td>
-              <td>
-                 <a class="btn btn-info" (click)="infoEjecutivo(ejecutivo._id)">INFORMACIÓN</a>
-              </td>
-              <td *ngIf='(role?.name=="Admin")||(role?.name=="Gerente")'>
-                <a class="btn btn-warning" (click)="editEjecutivo(ejecutivo._id)">EDITAR</a>
-             </td>
-             <td>
-                <!-- <a class="btn btn-danger" (click)="deleteEjecutivo(ejecutivo._id)" >ELIMINAR</a> -->
-             </td>
-           </tr>
-        </tbody>
-     </table> 
-  </section>
+  <div class="content">
+
+    <div class="box box-primary">
+
+
+        <section class="content-header">
+            <h1>
+               Ejecutivos
+               <small>Lista</small>
+            </h1>
+         </section>
+      <section class="content">
+            <button *ngIf='(role?.name=="Admin")||(role?.name=="Gerente")' class="btn btn-primary fa fa-book" (click)="addEjecutivo()">Registrar Ejecutivo</button>
+            
+           
+         <table class="table table-hover" >
+            <thead>
+               <tr>
+                  <th>Nombre</th>
+                  <th>Estado</th>
+                  <th>Información</th>
+                  <th colspan="2">Editar</th>
+                     
+                  
+               </tr>
+            </thead>
+            <tbody> 
+               <tr *ngFor="let ejecutivo of ejecutivos">
+                  <td>{{ ejecutivo.name }}</td>
+                  <td *ngIf="ejecutivo.active==true">Activo</td>
+                  <td *ngIf="ejecutivo.active==false">Inactivo</td>
+                  <td>
+                     <a class="btn btn-info" (click)="infoEjecutivo(ejecutivo._id)">INFORMACIÓN</a>
+                  </td>
+                  <td *ngIf='(role?.name=="Admin")||(role?.name=="Gerente")'>
+                    <a class="btn btn-warning" (click)="editEjecutivo(ejecutivo._id)">EDITAR</a>
+                 </td>
+                 <td>
+                    <!-- <a class="btn btn-danger" (click)="deleteEjecutivo(ejecutivo._id)" >ELIMINAR</a> -->
+                 </td>
+               </tr>
+            </tbody>
+         </table> 
+      </section>
+    </div>
+  </div>
+  
   <router-outlet></router-outlet>
 </div>
