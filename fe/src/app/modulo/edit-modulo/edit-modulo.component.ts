@@ -79,6 +79,7 @@ export class EditModuloComponent implements OnInit {
                alert('Error al Guardar verifique los datos');
             })
       }
+      window.history.back();
    }
    //save() {
    //console.log(this.modulo);
