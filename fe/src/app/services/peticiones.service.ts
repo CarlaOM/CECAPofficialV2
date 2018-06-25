@@ -93,14 +93,17 @@ export class PeticionesService {
   getPersonProfile(_id) {
     return this._http.get(this.url + 'persons/programs/' + _id).map((res: Response) => res);
   }
+  getPersonWorkshop(_id) {
+    return this._http.get(this.url + 'persons/workshop/' + _id).map((res: Response) => res);
+  }
   getCi(ci) {
     return this._http.get(this.url + 'persons/existCi/' + ci).map((res: Response) => res);
   }
-  getPersonProgram(idPerson, idProfile) {
-    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-    let body = JSON.stringify({ profileId: idProfile });
-    return this._http.post(this.url + 'persons/profile/' + idPerson, body).map((res: Response) => res);
-  }
+  // getPersonProgram(idPerson, idProfile) {
+  //   var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+  //   let body = JSON.stringify({ profileId: idProfile });
+  //   return this._http.post(this.url + 'persons/profile/' + idPerson, body).map((res: Response) => res);
+  // }
   postPersonProgramDetails(idPerson, idProfile) {
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     let body = JSON.stringify({ profileId: idProfile });

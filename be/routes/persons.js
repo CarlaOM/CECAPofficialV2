@@ -69,6 +69,24 @@ router
       return res.status(200).send(person[0]);
     });
   })
+  //////////////////////////////////////////////////////////////////
+  .get('/workshop/:id', function (req, res) {
+    db.persons.aggregate([
+      { $match: { _id: mongoose.Types.ObjectId(req.params.id) } },
+      {
+        $lookup:
+          {
+            from: "events",
+            localField: "workshops.events",    // field in the orders collection
+            foreignField: "_id",  // field in the items collection
+            as: "workshopDetails"
+          }
+      }
+    ]).exec(function (err, person) {
+      if (err) return res.status(404).send(err)
+      return res.status(200).send(person[0]);
+    });
+  })
   /////////////////////////////////////////////////////////////////7
   .get('/inscriptionPerson/:id', function(req, res){
     var arrayIds = req.params.id.split('-');
@@ -411,24 +429,24 @@ router
     });
   })
   ////////////////////////////////////////////////////////////////////////////
-  .post('/profile/:id', function (req, res) {
-    db.persons.findOne({ _id: req.params.id }, function (err, person) {
-      if (err) return res.status(400).send(err);
-      if (person == null) return res.status(404).send();
-      console.log(person)
-      console.log(req.body)
-      var idProfile = req.body;
-      var profile = person.profile.map((i) => i.person);
-      getProfilePerson(profile);
-    });
-    function getProfilePerson(profile) {
-      db.persons.findOne({ _id: profile }, { profile: 1 }, function (err, profile) {
-        if (err) return res.status(400).send(err);
-        console.log(profile)
-        return res.status(200).send(profile);
-      })
-    }
-  })
+  // .post('/profile/:id', function (req, res) {
+  //   db.persons.findOne({ _id: req.params.id }, function (err, person) {
+  //     if (err) return res.status(400).send(err);
+  //     if (person == null) return res.status(404).send();
+  //     console.log(person)
+  //     console.log(req.body)
+  //     var idProfile = req.body;
+  //     var profile = person.profile.map((i) => i.person);
+  //     getProfilePerson(profile);
+  //   });
+  //   function getProfilePerson(profile) {
+  //     db.persons.findOne({ _id: profile }, { profile: 1 }, function (err, profile) {
+  //       if (err) return res.status(400).send(err);
+  //       console.log(profile)
+  //       return res.status(200).send(profile);
+  //     })
+  //   }
+  // })
   //////////////////////////////////////////////////////////////////////////
   .post('/upload', multipartMiddleware, function (req, res) {
 

@@ -235,6 +235,8 @@ module.exports = {
                   assist:Boolean,
                   certificate:Boolean,
             
+                  nameEvent: String, // nombre del evento
+                  nameModule: String, // nombre del modulo
                   }
             ],
             // user: ObjectId,
