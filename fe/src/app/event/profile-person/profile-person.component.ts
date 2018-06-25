@@ -17,7 +17,9 @@ export class ProfilePersonComponent implements OnInit {
   public ocupation;
   public ocupations;
   public programs;
-  public programsPerson;
+  public workshop;
+
+  // public programsPerson;
   // public programReturned;
   // public programsId: Array<any> = [];
   // public listPrograms: Array<any> = [];
@@ -46,7 +48,7 @@ export class ProfilePersonComponent implements OnInit {
     this._peticionesService.getPersonProfile(this.personId).subscribe(
       result => {
         this.person = result;
-        // this.findCartera();
+        console.log(this.person)
         
         this.ocupation = this.person.ocupation;
         //  console.log(this.ocupation)
@@ -54,7 +56,10 @@ export class ProfilePersonComponent implements OnInit {
         //  console.log(this.ocupations)
         //  console.log(this.programsPerson)
         
-        // console.log(this.person)
+        this.findWorkshops();
+
+        // this.findCartera();
+
         // console.log(this.person.programDetails)
         for (let i = 0; i < this.person.profile.length; i++) {
           for (let j = 0; j < this.person.programDetails.length; j++) {
@@ -66,24 +71,44 @@ export class ProfilePersonComponent implements OnInit {
           }
         }
         console.log(this.person.profile);
-        // console.log(this.);
-        this.programsPerson = this.person.profile;
+        // this.programsPerson = this.person.profile;
         //  this.viewPrograms();
       },
       error => {
         console.log(<any>error);
       });
   }
-  findCartera() {
-    this._peticionesService.getCartera(this.person.carteras).subscribe(
+  findWorkshops(){
+    this._peticionesService.getPersonWorkshop(this.personId).subscribe(
       result => {
-        this.carteraReturned = result;
-        //console.log(this.carteraReturned)
-      },
+        this.workshop = result;
+        // console.log(this.workshop)
+
+        for (let i = 0; i < this.workshop.workshops.length; i++) {
+          for (let j = 0; j < this.workshop.workshopDetails.length; j++) {
+            // console.log(this.workshop.workshops[i].events)
+            // console.log(this.workshop.workshopDetails[j].name)
+            if (this.workshop.workshops[i].events == this.workshop.workshopDetails[j]._id) {
+              this.workshop.workshops[i].nameEvent = this.workshop.workshopDetails[j].name;
+            }
+          }
+        }
+        },
       error => {
         console.log(<any>error);
       });
   }
+  // findCartera() {
+  //   this._peticionesService.getCartera(this.person.carteras).subscribe(
+  //     result => {
+  //       this.carteraReturned = result;
+  //       //console.log(this.carteraReturned)
+  //     },
+  //     error => {
+  //       console.log(<any>error);
+  //     });
+  // }
+
   // findProgram() {
   //   this._peticionesService.getProgram(this.programsId).subscribe(
   //     result => {

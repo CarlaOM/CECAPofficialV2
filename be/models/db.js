@@ -243,6 +243,8 @@ module.exports = {
                   assist:Boolean,
                   certificate:Boolean,
             
+                  nameEvent: String, // nombre del evento
+                  nameModule: String, // nombre del modulo
                   }
             ],
             // user: ObjectId,
@@ -289,7 +291,8 @@ module.exports = {
                   ci: String,
                   cellphone: Number,
                   persons: ObjectId,
-                  users: ObjectId
+                  users: ObjectId,
+                  nivelacion:Boolean
             }],
             total: Number,
             programs: ObjectId,
