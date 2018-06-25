@@ -567,7 +567,8 @@ router
                                     ci: pers[0].ci,
                                     cellphone: pers[0].cellphone,
                                     persons: pers[0]._id,
-                                    users: inscri.users
+                                    users: inscri.users,
+                                    nivelacion: true
                               };
                               db.events.update({ _id: req.body.eventId },
                                     { $push: { inscriptions: inscription } },

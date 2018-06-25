@@ -155,8 +155,18 @@
                   </tr>-->
                 </tbody>
               </table>
+            <strong>Talleres Cursados:</strong>
+              <table class="table table-user-information">
+                <tbody>
+                  <tr *ngFor="let i of workshop?.workshops">
+                    <td><li>{{i.nameEvent}}</li></td>
+                    <!-- <td>
+                      <a class="btn btn-primary" (click)="viewDetails(i._id)">Detalles</a>
+                    </td> -->
+                  </tr>
+                </tbody>
+              </table>
 
-             
             </div>
           </div>
         </div>

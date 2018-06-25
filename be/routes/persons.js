@@ -69,6 +69,24 @@ router
       return res.status(200).send(person[0]);
     });
   })
+  //////////////////////////////////////////////////////////////////
+  .get('/workshop/:id', function (req, res) {
+    db.persons.aggregate([
+      { $match: { _id: mongoose.Types.ObjectId(req.params.id) } },
+      {
+        $lookup:
+          {
+            from: "events",
+            localField: "workshops.events",    // field in the orders collection
+            foreignField: "_id",  // field in the items collection
+            as: "workshopDetails"
+          }
+      }
+    ]).exec(function (err, person) {
+      if (err) return res.status(404).send(err)
+      return res.status(200).send(person[0]);
+    });
+  })
   /////////////////////////////////////////////////////////////////7
   .get('/inscriptionPerson/:id', function(req, res){
     var arrayIds = req.params.id.split('-');
@@ -128,11 +146,11 @@ router
     }  
     function addModularsAmount(registro, pagoActual, total_cancelado, price_event, lista){
       console.log('modulo ID: '+registro.moduleId+' Event ID: '+registro.eventId+' Persona ID: '+registro.persona._id);
-      console.log(JSON.stringify(null), registro.moduleId)
+      console.log(JSON.stringify(null), registro.moduleId);
       if(JSON.stringify(null) == registro.moduleId){
           if(pagoActual < 1 ){
               console.log('No Puede pagar (0.00 Bs) en el pago Extra');
-              return res.status(400).send(lista);
+              return res.status(400).send(lista);////verificar
           }else{
             db.persons.findOne({ _id: registro.persona._id }, function (err, ps) {
               if (err) return res.status(400).send(err);
@@ -142,10 +160,10 @@ router
                   var profileId = null;
                   for (let i = 0; i < ps.profile.length; i++) {
                     console.log('bucando el profileID'+ i);
-                        if (JSON.stringify(ps.profile[i].programs) == JSON.stringify(event.programs)) {
-                              profileId = ps.profile[i]._id;
-                        }
-                  }
+                    if (JSON.stringify(ps.profile[i].programs) == JSON.stringify(event.programs)) {
+                        profileId = ps.profile[i]._id;
+                    }
+                  }//refaCTORIZAR
                   var amount = {  // observation
                     detail: 'Control Pago Extra',
                     receipt: registro.inscription.receipt,// nro factura
@@ -200,11 +218,9 @@ router
       }else{//caso que exista obtener el modulo y el pago anterior y si debe enviar mensaje,sino
           console.log('Lista el monto bolibianos = '+lista.bolivianos)    
           if( lista.bolivianos == 0 || lista.bolivianos == undefined ){
-              db.lists.update({ person: registro.persona._id, 
-                                events: registro.eventId, 
+              db.lists.update({ person: registro.persona._id, events: registro.eventId, 
                                 modulars: registro.modularsId},
-                {
-                  $set: {  
+                { $set: {  
                       'bolivianos': registro.inscription.canceled_price,
                       'dolares': 0,
                       'receipt': registro.inscription.receipt, // varios recibos
@@ -216,7 +232,7 @@ router
                       //return res.status(200).send(off);
                       console.log('Lista actualizada de pago = 0.00 : ');
                       updateModulars(registro, total_cancelado, price_event , pagoActual);
-                });
+              });
           }else{
               console.log('El modulo ya se cancelo, o sino debe realizar un Correlativo');
               return res.status(400).send(lista);
@@ -233,10 +249,10 @@ router
             date: new Date(),
             amount: pagoActual
           };
-          db.modulars.update({ persons: registro.persona._id, 
-                                events: registro.eventId, 
-                                modules: registro.moduleId },
-                              { $set: {'amount': amounte}
+          // db.modulars.update({ persons: registro.persona._id,events: registro.eventId,modules: registro.moduleId },
+          db.modulars.update({ persons: registro.persona._id,modules: registro.moduleId },
+            { 
+                    $set: {'amount': amounte}
                   }).exec(function (err, off){
                   if (err) return res.status(400).send(err);
                   console.log(off);
@@ -246,6 +262,7 @@ router
           });
       }
     }
+    //** PARA REALIZAR SUMAR EL PAGO EN LA INSCRIPCION */
     function editInscription(registro, total_cancelado, price_event, pagoActual){
       db.events.update({ _id: registro.eventId, 'inscriptions.persons': registro.persona._id },
       {
@@ -394,7 +411,8 @@ router
     });
   })
   //////////////////////////////////////////////////////////////
-  //**esta consulta obtine el perfil y los modulars de la persona con su assistencia */
+  
+  /**esta consulta obtine el perfil y los modulars de la persona con su assistencia */
   .get('/existCiAmount/:id', function (req, res) {
     var arrayIds = req.params.id.split('-');
         var ci = arrayIds[0];
@@ -484,24 +502,24 @@ router
     });
   })
   ////////////////////////////////////////////////////////////////////////////
-  .post('/profile/:id', function (req, res) {
-    db.persons.findOne({ _id: req.params.id }, function (err, person) {
-      if (err) return res.status(400).send(err);
-      if (person == null) return res.status(404).send();
-      console.log(person)
-      console.log(req.body)
-      var idProfile = req.body;
-      var profile = person.profile.map((i) => i.person);
-      getProfilePerson(profile);
-    });
-    function getProfilePerson(profile) {
-      db.persons.findOne({ _id: profile }, { profile: 1 }, function (err, profile) {
-        if (err) return res.status(400).send(err);
-        console.log(profile)
-        return res.status(200).send(profile);
-      })
-    }
-  })
+  // .post('/profile/:id', function (req, res) {
+  //   db.persons.findOne({ _id: req.params.id }, function (err, person) {
+  //     if (err) return res.status(400).send(err);
+  //     if (person == null) return res.status(404).send();
+  //     console.log(person)
+  //     console.log(req.body)
+  //     var idProfile = req.body;
+  //     var profile = person.profile.map((i) => i.person);
+  //     getProfilePerson(profile);
+  //   });
+  //   function getProfilePerson(profile) {
+  //     db.persons.findOne({ _id: profile }, { profile: 1 }, function (err, profile) {
+  //       if (err) return res.status(400).send(err);
+  //       console.log(profile)
+  //       return res.status(200).send(profile);
+  //     })
+  //   }
+  // })
   //////////////////////////////////////////////////////////////////////////
   .post('/upload', multipartMiddleware, function (req, res) {
 
