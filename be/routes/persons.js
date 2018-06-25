@@ -393,7 +393,7 @@ router
     });
   })
   //////////////////////////////////////////////////////////////
-  
+
   /**esta consulta obtine el perfil y los modulars de la persona con su assistencia */
   .get('/existCiAmount/:id', function (req, res) {
     var arrayIds = req.params.id.split('-');
