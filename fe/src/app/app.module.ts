@@ -104,6 +104,7 @@ import { InscriptionWorkshopComponent } from './event/inscription-workshop/inscr
 import { NivelacionComponent } from './event/nivelacion/nivelacion.component';
 import { WorkshopComponent } from './workshop/workshop.component';
 import { PrintBatchCertificatesComponent } from './event/print-batch-certificates/print-batch-certificates.component';
+import { ListaPesonsNivelacionComponent } from './lista-pesons-nivelacion/lista-pesons-nivelacion.component';
 
 @NgModule({
   declarations: [
@@ -195,6 +196,7 @@ import { PrintBatchCertificatesComponent } from './event/print-batch-certificate
     NivelacionComponent,
     WorkshopComponent,
     PrintBatchCertificatesComponent,
+    ListaPesonsNivelacionComponent,
   ],
   imports: [
     BrowserModule,
