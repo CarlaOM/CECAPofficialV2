@@ -1,77 +1,84 @@
 <div class="content-wrapper">
-  <section class="content-header">
-      <h1>
-         Caja Chica Ejecutivo
-         <small>Ingresos - Egresos</small>
-      </h1>
-   </section>
-<section class="content">
-      <a class="btn btn-primary a" (click)="goIngreso()" >Ingreso</a>
-      <a class="btn btn-primary a" (click)="goEgreso()">Egreso</a>
-      
-     
-   <table class="table table-hover" >
-      <thead>
-         <tr>
-            <th>Título</th>
-            <th>Descripción</th>
-            <th>Número de Recibo</th>
-            <th>Fecha</th>
-            <th>Ingreso</th>
-            <th>Egreso</th>
-            <th>Total</th>
-               
+  <div class="content">
+
+    <div class="box box-primary">
+
+        <section class="content-header">
+            <h1>
+               Caja Chica Ejecutivo
+               <small>Ingresos - Egresos</small>
+            </h1>
+         </section>
+      <section class="content">
+            <a class="btn btn-primary a" (click)="goIngreso()" >Ingreso</a>
+            <a class="btn btn-primary a" (click)="goEgreso()">Egreso</a>
             
-         </tr>
-      </thead>
-      <tbody>
-         
-         <tr  *ngFor=" let detalle of listaDetalles">
-
-
-                <td class="">{{detalle.title}}</td>
-                <td class=""> {{detalle.description}}</td>
-                <td class="">{{detalle.receipt}}</td>
-                <td class="">{{detalle.date_detail|date}}</td>
-                <td class="" *ngIf="detalle.Input==true; else vacio "> {{detalle.amount}}</td>
-                <td class="" *ngIf="detalle.Input==false; else vacio">{{detalle.amount}}</td>
-                <ng-template #vacio class="">
-                  ---
-    
-                </ng-template>
            
-
-
-         </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-
-          <td class="success"></td>   
-          <td class="success"></td>          
-          <td class="success"></td>          
-          <td class="success"></td>          
-          <td class="success"></td>          
-          <td class="success"></td>          
-          <td class="success">{{total}}</td>       
-
-        </tr>
-      </tfoot>
-
-
-   </table>
-   <div *ngIf='total<=0'>
-      <h4>
-        El boton Cerrar Caja , se habilitará cuando el monto sea mayor a cero.Gracias
-      </h4>
+         <table class="table table-hover" >
+            <thead>
+               <tr>
+                  <th>Título</th>
+                  <th>Descripción</th>
+                  <th>Número de Recibo</th>
+                  <th>Fecha</th>
+                  <th>Ingreso</th>
+                  <th>Egreso</th>
+                  <th>Total</th>
+                     
+                  
+               </tr>
+            </thead>
+            <tbody>
+               
+               <tr  *ngFor=" let detalle of listaDetalles">
+      
+      
+                      <td class="">{{detalle.title}}</td>
+                      <td class=""> {{detalle.description}}</td>
+                      <td class="">{{detalle.receipt}}</td>
+                      <td class="">{{detalle.date_detail|date}}</td>
+                      <td class="" *ngIf="detalle.Input==true; else vacio "> {{detalle.amount}}</td>
+                      <td class="" *ngIf="detalle.Input==false; else vacio">{{detalle.amount}}</td>
+                      <ng-template #vacio class="">
+                        ---
+          
+                      </ng-template>
+                 
+      
+      
+               </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+      
+                <td class="success"></td>   
+                <td class="success"></td>          
+                <td class="success"></td>          
+                <td class="success"></td>          
+                <td class="success"></td>          
+                <td class="success"></td>          
+                <td class="success">{{total}}</td>       
+      
+              </tr>
+            </tfoot>
+      
+      
+         </table>
+         <div *ngIf='total<=0'>
+            <h4>
+              El boton Cerrar Caja , se habilitará cuando el monto sea mayor a cero.Gracias
+            </h4>
+        </div>
+         <div *ngIf='total>0'>  
+            <a class="btn btn-warning a" (click)="goCloseCash()">Cerrar Caja</a>
+           
+      
+      
+         </div>
+            <!-- <app-confirm-close-cash></app-confirm-close-cash> -->
+         
+      </section>
+    </div>
   </div>
-   <div *ngIf='total>0'>  
-      <a class="btn btn-warning a" (click)="goCloseCash()">Cerrar Caja</a>
-     
-
-
-   </div>
-      <!-- <app-confirm-close-cash></app-confirm-close-cash> -->
-   
-</section>
+ 
 </div>

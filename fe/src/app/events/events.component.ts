@@ -22,7 +22,8 @@ export class EventsComponent implements OnInit {
    ) { }
    ngOnInit() {
       this.queryRol();
-       this.queryEvents(); 
+
+    //    this.queryEvents(); 
     //    this.role=Roles.name;
     }
     
@@ -41,7 +42,29 @@ export class EventsComponent implements OnInit {
     send(_id: string) {
       this.router.navigate(['home/event', _id]);
     }
-   
+    sendTaller(_id:string){
+      this.router.navigate(['home/workshopListP', _id]);
+        
+    }
+   queryEventsSucursalActive(){
+       this._peticionesService.getEventsActiveOfSucursal(Identity._id).subscribe(
+        result => {
+            this.events = result;
+           console.log(this.events)
+            this.events.map(event => {
+               var sum = 0;
+               event.inscriptions.forEach(e => {
+                  if (e.state == 1) sum++;
+               });
+               event.cupos = event.total - sum;
+            });
+         },
+         error => {
+            var errorMessage = <any>error;
+            console.log(errorMessage);
+         }
+      );
+   }
    queryEvents() {
       this._peticionesService.getEvents().subscribe(
          result => {
@@ -66,6 +89,13 @@ export class EventsComponent implements OnInit {
     this._peticionesService.getRole(Identity.rol).subscribe(
         result => {
          this.role = result;
+
+            if(this.role.name=='Admin'){
+                this.queryEvents();
+            }else{
+                this.queryEventsSucursalActive();
+            }
+
         },
         error=>{
          var errorMessage = <any>error;

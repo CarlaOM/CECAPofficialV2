@@ -1,13 +1,13 @@
 <div class="content-wrapper">
   <br>
-  <div class="">
+  <div class="content">
 
   <div class="box box-primary">
 
 <div class="container">
     <div [hidden]="submitted">
       <h1>Ingreso</h1>
-      <form (ngSubmit)="onSubmit()" #IngresoForm="ngForm" class="jumbotron">
+      <form (ngSubmit)="onSubmit()" #IngresoForm="ngForm" class="">
         <div class="form-group col-sm-8">
           <label for="titulo">Título</label>
           <input type="text" pattern="[a-zA-Z0-9-_ñÑáéíóúÁÉÍÓÚ]{3,20}[ ]{0,1}[a-zA-Z0-9-_ñÑáéíóúÁÉÍÓÚ]{0,20}[ ]{0,1}[a-zA-Z0-9-_ñÑáéíóúÁÉÍÓÚ]{0,20}[ ]{0,1}[a-zA-Z0-9-_ñÑáéíóúÁÉÍÓÚ]{0,20}" class="form-control" id="titulo"

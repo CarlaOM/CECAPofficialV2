@@ -1,79 +1,86 @@
 <div class="content-wrapper">
-  <section class="content-header">
-      <h1>
-         Administrar Cajas de Sucursales
-         <small></small>
-      </h1>
-   </section>
-<section class="content">
+  <div class="content">
+    <div class="box box-primary">
+        <section class="content-header">
+            <h1>
+               Administrar Cajas de Sucursales
+               <small></small>
+            </h1>
+         </section>
+      <section class="content">
+            
+         <table class="table table-hover" >
+            <thead>
+               <tr>
+                  <!-- <th>Usuario</th> -->
+                  <th>Título</th>
+                  
+                  <th>Sucursal</th>
+                  <!-- <th>Fecha de Inicio</th> -->
+                  <th>Fecha de Cierre</th>
+                  <th>Monto</th>
+                  <th>Estado</th>
+                  <!-- <th>Descripción</th> -->
+                 
+                  
+                     
+                  
+               </tr>
+            </thead>
+            <tbody> 
+               <tr *ngFor="let det of details" [ngSwitch]="det.input">
+                      <td>{{det.title}}</td>
+                      <td>{{det.officeName}}</td>
+                      <!-- <td class="">{{det.cashFlowOffice}}</td> -->
+                      <td>{{det.dateCloseCash|date}}</td>
+                      <td class="">{{det.amount}}</td>
       
-   <table class="table table-hover" >
-      <thead>
-         <tr>
-            <!-- <th>Usuario</th> -->
-            <th>Título</th>
-            
-            <th>Sucursal</th>
-            <!-- <th>Fecha de Inicio</th> -->
-            <th>Fecha de Cierre</th>
-            <th>Monto</th>
-            <th>Estado</th>
-            <!-- <th>Descripción</th> -->
-           
-            
-               
-            
-         </tr>
-      </thead>
-      <tbody> 
-         <tr *ngFor="let det of details" [ngSwitch]="det.input">
-                <td>{{det.title}}</td>
-                <td>{{det.officeName}}</td>
-                <!-- <td class="">{{det.cashFlowOffice}}</td> -->
-                <td>{{det.dateCloseCash|date}}</td>
-                <td class="">{{det.amount}}</td>
+                      <td *ngSwitchCase="true" class="">Ingreso</td>
+                      <td *ngSwitchCase="false" class="">Egreso</td>
+                      
+      
+                      <!-- <td class="">{{det.description}}</td> -->
+      
+      
+                      <!-- <td *ngIf="office.active==true">
+                        <button class="btn btn-primary" (click)="confirmarCajaSucursal(office)" >Confirmar</button>
+                      </td> -->
+      
+                      
+                 
+      
+      
+               </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+      
+                <td></td>   
+                <td></td>          
+      
+                <td></td>          
+                <!-- <td><strong>TOTAL</strong></td>    -->
+                <td></td>       
+                <td></td>          
+                <td></td>          
+                <!-- <td></td>           -->
+                <td></td>          
+      
+              </tr>
+            </tfoot>
+      
+      
+         </table>
+      
+         
+            <!-- <a class="btn btn-danger a" >Confirmar</a> -->
+      
+         
+      </section>
+      
 
-                <td *ngSwitchCase="true" class="">Ingreso</td>
-                <td *ngSwitchCase="false" class="">Egreso</td>
-                
+    </div>
 
-                <!-- <td class="">{{det.description}}</td> -->
-
-
-                <!-- <td *ngIf="office.active==true">
-                  <button class="btn btn-primary" (click)="confirmarCajaSucursal(office)" >Confirmar</button>
-                </td> -->
-
-                
-           
-
-
-         </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-
-          <td></td>   
-          <td></td>          
-
-          <td></td>          
-          <!-- <td><strong>TOTAL</strong></td>    -->
-          <td></td>       
-          <td></td>          
-          <td></td>          
-          <!-- <td></td>           -->
-          <td></td>          
-
-        </tr>
-      </tfoot>
-
-
-   </table>
-
-   
-      <!-- <a class="btn btn-danger a" >Confirmar</a> -->
-
-   
-</section>
-<!-- <router-outlet></router-outlet> -->
+  </div>
+  <!-- <router-outlet></router-outlet> -->
 </div>

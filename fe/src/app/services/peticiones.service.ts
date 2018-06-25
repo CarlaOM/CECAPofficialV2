@@ -87,6 +87,13 @@ export class PeticionesService {
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.post(this.url + 'events/inscriptPerson/' + id, body, { headers: headers }).map((res: Response) => res);
   }
+  addNivelacion(registro){
+    let body = JSON.stringify(registro);
+    var id = registro.eventId;
+    console.log('id del evento Actual: '+id);
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return this._http.post(this.url + 'events/nivelacion/' + id, body, { headers: headers }).map((res: Response) => res);
+  }
   getPerson(_id) {
     return this._http.get(this.url + 'persons/' + _id).map((res: Response) => res);
   }
@@ -99,11 +106,14 @@ export class PeticionesService {
   getCi(ci) {
     return this._http.get(this.url + 'persons/existCi/' + ci).map((res: Response) => res);
   }
-  // getPersonProgram(idPerson, idProfile) {
-  //   var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-  //   let body = JSON.stringify({ profileId: idProfile });
-  //   return this._http.post(this.url + 'persons/profile/' + idPerson, body).map((res: Response) => res);
-  // }
+  getCiAmount(ci) {
+    return this._http.get(this.url + 'persons/existCiAmount/' + ci).map((res: Response) => res);
+  }
+  getPersonProgram(idPerson, idProfile) {
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    let body = JSON.stringify({ profileId: idProfile });
+    return this._http.post(this.url + 'persons/profile/' + idPerson, body).map((res: Response) => res);
+  }
   postPersonProgramDetails(idPerson, idProfile) {
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     let body = JSON.stringify({ profileId: idProfile });
@@ -516,4 +526,37 @@ export class PeticionesService {
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
     return this._http.post(this.url + 'events/addNewTaller/', body, { headers: headers }).map((res: Response) => res);		
   }
+
+  // getEventTallerInscriptions(event){
+  //   let body = JSON.stringify(event);	
+  //   console.log(body);
+  //   var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
+  //   return this._http.post(this.url + 'events/getEventTallerInscriptions/', body, { headers: headers }).map((res: Response) => res);		
+	
+
+
+  // }
+
+  getEventTallerInscriptions(id) {
+    return this._http.get(this.url + 'events/getEventTallerInscriptions/' + id).map((res: Response) => res);
+  }
+
+  getEvetnModuleTallerInscriptions(moduleTaller){
+    let body = JSON.stringify(moduleTaller);	
+    console.log(body);
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
+    return this._http.post(this.url + 'events/getEvetnModuleTallerInscriptions/', body, { headers: headers }).map((res: Response) => res);		
+	
+
+  }
+  cerrarEvento(id){
+    return this._http.get(this.url + 'events/cerrarEvento/' + id).map((res: Response) => res);
+    
+  }
+  getEventsActiveOfSucursal(id){
+    return this._http.get(this.url + 'events/getEventsActiveOfSucursal/' + id).map((res: Response) => res);
+    
+  }
+
+
 }

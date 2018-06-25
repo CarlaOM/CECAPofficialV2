@@ -22,7 +22,7 @@ var multipartMiddleware = multipart();
 // var upload = multer({ //multer settings
 //                 storage: storage,
 //                 fileFilter : function(req, file, callback) { //file filter
-//                     if (['xls', 'xlsx'].indexOf(file.originalFilename.split('.')[file.originalFilename.split('.').length-1]) === -1) {
+//                     if (['xls', 'xlsx'].iOf(file.originalFilename.split('.')[file.originalFilename.split('.').length-1]) === -1) {
 //                         return callback(new Error('Wrong extension type'));
 //                     }
 //                     callback(null, true);
@@ -146,11 +146,11 @@ router
     }  
     function addModularsAmount(registro, pagoActual, total_cancelado, price_event, lista){
       console.log('modulo ID: '+registro.moduleId+' Event ID: '+registro.eventId+' Persona ID: '+registro.persona._id);
-      console.log(JSON.stringify(null), registro.moduleId)
+      console.log(JSON.stringify(null), registro.moduleId);
       if(JSON.stringify(null) == registro.moduleId){
           if(pagoActual < 1 ){
               console.log('No Puede pagar (0.00 Bs) en el pago Extra');
-              return res.status(400).send(lista);
+              return res.status(400).send(lista);////verificar
           }else{
             db.persons.findOne({ _id: registro.persona._id }, function (err, ps) {
               if (err) return res.status(400).send(err);
@@ -160,10 +160,10 @@ router
                   var profileId = null;
                   for (let i = 0; i < ps.profile.length; i++) {
                     console.log('bucando el profileID'+ i);
-                        if (JSON.stringify(ps.profile[i].programs) == JSON.stringify(event.programs)) {
-                              profileId = ps.profile[i]._id;
-                        }
-                  }
+                    if (JSON.stringify(ps.profile[i].programs) == JSON.stringify(event.programs)) {
+                        profileId = ps.profile[i]._id;
+                    }
+                  }//refaCTORIZAR
                   var amount = {  // observation
                     detail: 'Control Pago Extra',
                     receipt: registro.inscription.receipt,// nro factura
@@ -193,23 +193,6 @@ router
       }else{
         console.log('########## control pago Amount #########');
         crearLists(registro, pagoActual, total_cancelado, price_event, lista);
-        // var amounte = {  // observation
-        //     detail: 'Control Pago',
-        //     receipt: registro.inscription.receipt,// nro factura
-        //     date: new Date(),
-        //     amount: pagoActual
-        // };
-        // db.modulars.update({ persons: registro.persona._id, 
-        //                      events: registro.eventId, 
-        //                      modules: registro.moduleId },
-        //                    { $set: {'amount': amounte}
-        //       }).exec(function (err, off){
-        //       if (err) return res.status(400).send(err);
-        //       console.log(off);
-        //       console.log('CONTROL en modulars Actualizado')
-        //       //return res.status(200).send(off);
-        //       crearLists(registro, pagoActual, total_cancelado, price_event, lista);
-        // });
       }
     }
     function crearLists(registro, pagoActual, total_cancelado, price_event, lista){
@@ -235,11 +218,9 @@ router
       }else{//caso que exista obtener el modulo y el pago anterior y si debe enviar mensaje,sino
           console.log('Lista el monto bolibianos = '+lista.bolivianos)    
           if( lista.bolivianos == 0 || lista.bolivianos == undefined ){
-              db.lists.update({ person: registro.persona._id, 
-                                events: registro.eventId, 
+              db.lists.update({ person: registro.persona._id, events: registro.eventId, 
                                 modulars: registro.modularsId},
-                {
-                  $set: {  
+                { $set: {  
                       'bolivianos': registro.inscription.canceled_price,
                       'dolares': 0,
                       'receipt': registro.inscription.receipt, // varios recibos
@@ -251,7 +232,7 @@ router
                       //return res.status(200).send(off);
                       console.log('Lista actualizada de pago = 0.00 : ');
                       updateModulars(registro, total_cancelado, price_event , pagoActual);
-                });
+              });
           }else{
               console.log('El modulo ya se cancelo, o sino debe realizar un Correlativo');
               return res.status(400).send(lista);
@@ -268,10 +249,10 @@ router
             date: new Date(),
             amount: pagoActual
           };
-          db.modulars.update({ persons: registro.persona._id, 
-                                events: registro.eventId, 
-                                modules: registro.moduleId },
-                              { $set: {'amount': amounte}
+          // db.modulars.update({ persons: registro.persona._id,events: registro.eventId,modules: registro.moduleId },
+          db.modulars.update({ persons: registro.persona._id,modules: registro.moduleId },
+            { 
+                    $set: {'amount': amounte}
                   }).exec(function (err, off){
                   if (err) return res.status(400).send(err);
                   console.log(off);
@@ -281,6 +262,7 @@ router
           });
       }
     }
+    //** PARA REALIZAR SUMAR EL PAGO EN LA INSCRIPCION */
     function editInscription(registro, total_cancelado, price_event, pagoActual){
       db.events.update({ _id: registro.eventId, 'inscriptions.persons': registro.persona._id },
       {
@@ -426,6 +408,97 @@ router
       if (err) return console.log(err);
       if (user == null) return res.sendStatus(404);
       return res.status(200).send(user);
+    });
+  })
+  //////////////////////////////////////////////////////////////
+  
+  /**esta consulta obtine el perfil y los modulars de la persona con su assistencia */
+  .get('/existCiAmount/:id', function (req, res) {
+    var arrayIds = req.params.id.split('-');
+        var ci = arrayIds[0];
+        var eventId= arrayIds[1];
+    db.persons.findOne({ ci: ci }, { _id:1, first_name: 1, last_name: 1 }, function (err, user) {
+      if (err) return console.log(err);
+      if (user == null) return res.sendStatus(404);
+        db.events.findOne({_id: eventId},{programs:1},function(err,event){
+          if (err) return console.log(err);
+          if (event == null) return res.sendStatus(404);
+          db.persons.aggregate([
+            { $match: { _id: mongoose.Types.ObjectId(user._id) } },
+            { $project: { profile: 1 ,first_name:1, last_name:1} },
+            { $unwind: '$profile' },
+            { $match: { 'profile.programs': { $eq: event.programs } } },
+                // { $group: { _id: { persons: '$inscriptions.persons' }, total: { $sum: 1 } } }
+          ], function (err, pers) {
+                if (err) { return res.status(400).send(err); }
+                if (pers == null) return res.sendStatus(404);
+                //console.log(pers);
+                let modules = [];
+                var modulesName=[];
+                db.modules.find({ programs: event.programs }, function (err, moduls) {
+                    if (err) { return res.status(400).send(err); }
+                    if (moduls == null) return res.sendStatus(404);
+                    for (let i = 0; i < moduls.length; i++) {
+                        modules.push(moduls[i]._id);
+                    }
+                    db.modulars.find({persons: user._id, modules: { $in: modules },assist:false},function(err, modularsPerf){
+                      if (err) { return res.status(400).send(err); }
+                      if (modularsPerf == null) return res.sendStatus(404);//cuando la persona no tiene faltas en modulos
+                      console.log('el modulars del perfil');
+                      var listModuls= [];
+                      for(var e=0; e<= modularsPerf.length-1; e++){
+                        for(var j=0; j <= moduls.length-1; j++){
+                            var mod = moduls[j]._id;
+                            if(JSON.stringify(modularsPerf[e].modules)==JSON.stringify(mod)) {
+                              var modulars1 = {
+                                name: moduls[j].name,
+                                //_id: modularsPerf[e]._id,
+                                modules: moduls[j]._id,
+                                assist:modularsPerf[e].assist
+                              };
+                              listModuls.push(modulars1);  
+                            }else{
+                              console.log('falla  '+ moduls[j]._id);
+                              //return res.status(404).send();
+                            }
+                        }
+                      }
+                      db.events.find({_id: eventId}, {modulars: 1},function(err, modulars){
+                        if (err) return res.status(400).send(err);
+                        if (modulars == null) return res.status(404).send();
+                        var modulares = modulars[0];
+                        /////////////////////////////////////////////////////////////////////////////7
+                        var listModuls2= [];
+                        for(var e=0; e<= modulares.modulars.length-1; e++){
+                          for(var j=0; j <= listModuls.length - 1; j++){
+                            var mod2 = listModuls[j].modules;
+                              if(JSON.stringify(modulares.modulars[e].modules)==JSON.stringify(mod2)) {
+                                          var modulars2 = {
+                                              name: listModuls[j].name,
+                                              _id: modulares.modulars[e]._id,
+                                              modules: listModuls[j].modules,
+                                              assist:listModuls[j].assist
+                                          };
+                                          listModuls2.push(modulars2);
+                              }else{
+                                    console.log('falla doss '+ listModuls[j].modules);
+                              }
+                          }
+                        }
+                        //////////////////////////////////////////////////////////////////////////7
+                        var result = {
+                          first_name:pers[0].first_name ,
+                          last_name: pers[0].last_name,
+                          profile:pers[0].profile,
+                          modularsPer: listModuls2
+                        };
+                        console.log(result);
+                        return res.status(200).send(result);
+                      });
+                    });
+                });
+          });
+        });
     });
   })
   ////////////////////////////////////////////////////////////////////////////

@@ -778,6 +778,9 @@ var _event_seg = {
    ],
    total: 30,
    programs: _program_seguridad._id,
+   offices: _offices_stc,
+   date_end: '',
+   active:true,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()

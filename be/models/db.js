@@ -141,6 +141,14 @@ module.exports = {
                   receipt: String,// nro factura
                   date: Date,
                   amount: Number,
+                  events: ObjectId
+            },
+            nivelacion: {  // observation
+                  detail: String,
+                  receipt: String,// nro factura
+                  date: Date,
+                  amount: Number,
+                  events: ObjectId
             },
             assist: Boolean, //cambio
             persons: ObjectId,//a la persona que pertenece
@@ -283,11 +291,14 @@ module.exports = {
                   ci: String,
                   cellphone: Number,
                   persons: ObjectId,
-                  users: ObjectId
+                  users: ObjectId,
+                  nivelacion:Boolean
             }],
             total: Number,
             programs: ObjectId,
             offices: ObjectId, //sucursal
+            date_end: Date,
+            active:Boolean,
 
             _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
             record_date: { type: Date, default: function () { return new Date() } },
@@ -365,7 +376,7 @@ module.exports = {
             company_id: ObjectId,
             //user_id: ObjectId,
             receipts: [{
-                  receipt: Number,
+                  receipt: String,
                   amount: Number,
                   description: String
             }],

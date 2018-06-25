@@ -101,6 +101,9 @@ import { PrintCertificateComponent } from './event/profile-person/print-certific
 import { AlertCreateComponent } from './programa/alert-create/alert-create.component';
 import { ReporteEventosComponent } from './reporte-eventos/reporte-eventos.component';
 import { InscriptionWorkshopComponent } from './event/inscription-workshop/inscription-workshop.component';
+import { NivelacionComponent } from './event/nivelacion/nivelacion.component';
+import { WorkshopComponent } from './workshop/workshop.component';
+import { PrintBatchCertificatesComponent } from './event/print-batch-certificates/print-batch-certificates.component';
 
 @NgModule({
   declarations: [
@@ -189,6 +192,9 @@ import { InscriptionWorkshopComponent } from './event/inscription-workshop/inscr
     AlertCreateComponent,
     ReporteEventosComponent,
     InscriptionWorkshopComponent,
+    NivelacionComponent,
+    WorkshopComponent,
+    PrintBatchCertificatesComponent,
   ],
   imports: [
     BrowserModule,
