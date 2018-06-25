@@ -289,7 +289,8 @@ module.exports = {
                   ci: String,
                   cellphone: Number,
                   persons: ObjectId,
-                  users: ObjectId
+                  users: ObjectId,
+                  nivelacion:Boolean
             }],
             total: Number,
             programs: ObjectId,
