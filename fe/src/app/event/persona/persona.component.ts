@@ -16,8 +16,8 @@ import { FilterPipe } from "./filter.pipe";
 export class PersonaComponent implements OnInit {
   public listado_personas;
   public busqueda;
-   public name: string;
-   public searchText: string = "";
+  public name: string;
+  public searchText: string = "";
   public color='rojo';
   public page;
   public total;
