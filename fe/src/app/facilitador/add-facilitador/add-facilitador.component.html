@@ -10,26 +10,38 @@
         <form (ngSubmit)="onSubmit()" #addEjecutivo="ngForm" >
           <div class="form-group col-sm-8">
             <label for="name">Nombre Completo</label>
-            <input type="text" pattern="[a-zA-Z]{3,15}([ ]{0,1}[a-zA-Z]{0,15}){0,3}" class="form-control" id="name"
+            <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú]{3,15}([ ]{0,1}[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú]{0,15}){0,3}" class="form-control" id="name"
                    required
                    [(ngModel)]="facilitadorName" name="name"
                    #name="ngModel"
                    >
-            <div [hidden]="name?.valid || name?.pristine"
+            <!-- <div [hidden]="name?.valid || name?.pristine"
                  class="">
                  *Nombre es inválido
-            </div>
+            </div> -->
+            <span *ngIf="!name.untouched && !name.valid && program.name == ''" class="text-alert">
+              *Nombre es requerido o inválido.
+             </span>
           </div>
           
           <div class="form-group col-sm-8">
               <label for="correo">Trabajo</label>
-              <input type="correo" pattern="[a-zA-Z ]{3,50}" class="form-control" id="correo"
+              <input type="correo" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9 .,¿?¡!-]{3,150}" class="form-control" id="correo"
                      required
                      [(ngModel)]="facilitadorjob" name="correo"
                      #correo="ngModel">
-              <div [hidden]="correo?.valid || correo?.pristine" class="">
+              <!-- <div [hidden]="correo?.valid || correo?.pristine" class="">
               *Trabajo es inválido
-              </div>
+              </div> -->
+              <span *ngIf="!correo.valid && correo.touched && facilitadorjob.correo == ''" class="text-alert">
+                *Trabajo es requerido.
+               </span>
+               <span *ngIf="correo.dirty && correo.touched && !correo.valid && correo.name != '' && facilitadorjob.correo.length>150 " class="text-alert">
+                *Trabajo inválido, excedió el límite de 150 caracteres.
+                </span>
+                <span *ngIf="!correo?.pattern && correo.dirty && correo.touched && !correo.valid && facilitadorjob.correo != '' && facilitadorjob.correo.length<3 " class="text-alert">
+                *Trabajo inválido, tiene menos de 3 caracteres.
+                </span>
             </div>
             <div class="form-group col-sm-8" style="text-align:center">
               <button type="submit" class="btn btn-success" [disabled]="!addEjecutivo.form.valid">Guardar</button>
