@@ -110,9 +110,9 @@ export class InscriptionComponent implements OnInit {
       var arrayIds = this.modulsObject.split('-');
       this.registro.modularsId= arrayIds[0];
       this.registro.moduleId= arrayIds[1];
-    //   this.registro.cashFlowUser=this.cashFLowUser;
+    //   this.registro.cashFlowUser=this.cashFLowUser; 
       console.log(this.registro);
-      if(this.inscription.price_event > 0){
+      if(this.inscription.price_event > 0 && this.inscription.canceled_price > 0){
         this._peticionesService.addInscriptPerson(this.registro).subscribe(
           result => {
               var esperado = result;
@@ -152,7 +152,7 @@ export class InscriptionComponent implements OnInit {
           }
         );
       }else{
-        window.alert("El Precio Definido es obligatorio, no se permite 0");
+        window.alert("El Precio Definido y Pago Inicial son obligatorios, no se permite 0");
       }
    }
    captOcupation() {
