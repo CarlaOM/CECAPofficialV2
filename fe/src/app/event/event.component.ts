@@ -31,6 +31,11 @@ export class EventComponent implements OnInit, AfterViewInit {
       
       public certificateData;
 //////////////////////////////////////////////
+public page;
+public total;
+public totalPag;
+public mostrar = [];
+///////////////////////////////////////
       constructor(
                  private route: ActivatedRoute,
                  private router: Router,
@@ -58,7 +63,8 @@ export class EventComponent implements OnInit, AfterViewInit {
                   var total = this.event.total;   
                   this.lista_personasPorModulo=this.inscriptions; 
                   console.log('esta es la inscripcion de la persona');
-                  console.log(this.lista_personasPorModulo);      
+                  console.log(this.lista_personasPorModulo); 
+                  this.mostrarPer()     
             },
             error => {
                   var errorMessage = <any>error;
@@ -79,6 +85,45 @@ export class EventComponent implements OnInit, AfterViewInit {
                       } 
                    )
       }
+      dis(){
+            this.page = this.page-1;
+            var inicio = (8*(this.page-1));
+            var final = (8*(this.page-1))+8;
+            this.mostrar = [];
+            for(var a = inicio  ; a < final ; a++ ){
+              this.mostrar.push(this.lista_personasPorModulo[a]);
+          }
+          }
+          aum(){
+            this.page = this.page+1;
+            console.log(this.page)
+            var inicio = (8*(this.page-1));
+            console.log(inicio)
+            var final = (8*(this.page-1))+8;
+            if(final > this.total){
+              final = this.total;
+            }
+            console.log(final)
+            this.mostrar = [];
+            for(var a = inicio  ; a < final ; a++ ){
+                this.mostrar.push(this.lista_personasPorModulo[a]);
+            }
+          }
+          mostrarPer(){
+            this.page = 1;
+            this.total = this.lista_personasPorModulo.length;
+            this.totalPag = Math.ceil(this.total/8);
+            this.mostrar = []
+            console.log(this.totalPag)
+            if(this.totalPag > 1){
+              for(var a = 0 ; a < 8 ; a++){
+              this.mostrar.push(this.lista_personasPorModulo[a]) ;}
+              console.log("entro")
+            } else{
+              this.mostrar = this.lista_personasPorModulo;
+            }
+            console.log(this.mostrar)
+          }
       setListInscriptions(_id:string,nameModule:string){
             
             this.lista_personasPorModulo=[];
@@ -110,6 +155,7 @@ export class EventComponent implements OnInit, AfterViewInit {
 
                   this.lista_personasPorModulo.push(persona);
             }
+            this.mostrarPer();
             console.log(this.lista_personasPorModulo);
             console.log(this.moduleId);
 
