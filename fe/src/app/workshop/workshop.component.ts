@@ -31,7 +31,11 @@ export class WorkshopComponent implements OnInit {
       public moduleId;
       public eventId;
       public moduleName;
-      
+////////////////////////////////////////////////
+public page;
+public total;
+public totalPag;
+public mostrar = [];
 //////////////////////////////////////////////
       constructor(
                  private route: ActivatedRoute,
@@ -60,6 +64,7 @@ export class WorkshopComponent implements OnInit {
            this.lista=response;
            this.lista_personas=this.lista;
           console.log(this.lista_personas);
+          this.mostrarPer();
         })
 
       }
@@ -77,7 +82,44 @@ export class WorkshopComponent implements OnInit {
                    )
       }
 
-
+      dis(){
+            this.page = this.page-1;
+            var inicio = (8*(this.page-1));
+            var final = (8*(this.page-1))+8;
+            this.mostrar = [];
+            for(var a = inicio  ; a < final ; a++ ){
+              this.mostrar.push(this.lista_personas[a]);
+          }
+          }
+          aum(){
+            this.page = this.page+1;
+            console.log(this.page)
+            var inicio = (8*(this.page-1));
+            console.log(inicio)
+            var final = (8*(this.page-1))+8;
+            if(final > this.total){
+              final = this.total;
+            }
+            console.log(final)
+            this.mostrar = [];
+            for(var a = inicio  ; a < final ; a++ ){
+                this.mostrar.push(this.lista_personas[a]);
+            }
+          }
+          mostrarPer(){
+            this.page = 1;
+            this.total = this.lista_personas.length;
+            this.totalPag = Math.ceil(this.total/8);
+            this.mostrar = []
+            console.log(this.totalPag)
+            if(this.totalPag > 1){
+              for(var a = 0 ; a < 8 ; a++){
+              this.mostrar.push(this.lista_personas[a]) ;}
+            } else{
+              this.mostrar = this.lista_personas;
+            }
+            console.log(this.mostrar)
+          }
       setListInscriptions(_id:string,nameModule:string){
             
             this.lista_personasPorModulo=[];
@@ -92,7 +134,8 @@ export class WorkshopComponent implements OnInit {
               this.lista=res;
               this.lista_personasPorModulo=this.lista;
               this.lista_personas=this.lista_personasPorModulo;
-           })
+              this.mostrarPer();
+            })
 
       }
       viewProfile(personId) {
