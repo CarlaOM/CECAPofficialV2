@@ -30,8 +30,8 @@
            <div>
           <div class="filter-wrap col-lg-1">
             <div>Buscar:</div>
-            <input [(ngModel)]="searchText" placeholder="Nombre Persona" class="filter-input">
-            <span class="filter-clear" *ngIf="searchText.length>0" (click)="clearFilter()">X</span>
+            <input [(ngModel)]="searchText" placeholder="Nombre Persona" class="filter-input" (change)="cambiarLista()">
+            <span class="filter-clear" style="color: red" *ngIf="searchText.length>0" (click)="clearFilter()">X</span>
             <!-- <a class="btn btn-primary filter-clear" *ngIf="searchText.length>0" (clic)="clearFilter()">Cancelar</a> -->
           </div>
           <br>

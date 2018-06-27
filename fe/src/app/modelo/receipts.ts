@@ -1,6 +1,6 @@
 export class Receipt{
     constructor(
-        receipt: Number,
+        receipt: String,
         amount: Number,
         description: String
     ){}

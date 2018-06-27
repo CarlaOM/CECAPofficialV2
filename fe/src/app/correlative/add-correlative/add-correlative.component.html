@@ -18,6 +18,28 @@
                          <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
                              kjkn
                          </div>-->
+                         
+                         <br>
+                         <label for="recibo" class="control-label" >Recibo</label>
+                         <input type="text" class="form-control" id="recibo" 
+                         [(ngModel)]="receipt.receipt" name="recibo" #recibo="ngModel" required />
+                         <span *ngIf="!recibo.valid && recibo.touched" class="text-alert">
+                                 *El recibo es requerida.
+                         </span>
+                         <br>
+                         <label for="monto" class="control-label" >Monto</label>
+                         <input type="number" class="form-control" id="monto" 
+                         [(ngModel)]="receipt.amount" name="monto" #monto="ngModel" required />
+                         <span *ngIf="!monto.valid && monto.touched" class="text-alert">
+                                 *La Fecha es requerida.
+                         </span>
+                         <br>
+                         <label for="description" class="control-label" >Descripcion</label>
+                         <input type="text" class="form-control" id="description" 
+                         [(ngModel)]="receipt.description" name="description" #description="ngModel" required />
+                         <span *ngIf="!description.valid && description.touched" class="text-alert">
+                                 *La Descripcion es requerida.
+                         </span>
                      </div>
                      <div class="form-group col-sm-8" style="text-align:center ">
                          <button type="submit" class="btn btn-success" [disabled]="!addCorrelative.form.valid">Guardar</button>
