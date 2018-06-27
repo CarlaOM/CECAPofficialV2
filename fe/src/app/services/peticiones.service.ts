@@ -161,12 +161,12 @@ export class PeticionesService {
     return this._http.post(this.url + 'facilitators/register', body, { headers: headers }).map((res: Response) => res);
   }
   updateFacilitador(facilitador_object) {
-    console.log(facilitador_object);
+    //   console.log(facilitador_object, 'test');
     let body = JSON.stringify(facilitador_object);
-    var idfacilitador = facilitador_object._id;
+    var idFacilitador = facilitador_object._id;
     // console.log(body);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-    return this._http.put(this.url + 'facilitators/update/' + idfacilitador, body, { headers: headers }).map((res: Response) => res);
+    return this._http.put(this.url + 'facilitators/edit/' + idFacilitador, body, { headers: headers }).map((res: Response) => res);
   }
   addUser(user) {
     let body = JSON.stringify(user);
@@ -537,6 +537,8 @@ export class PeticionesService {
 
   // }
 
+
+
   getEventTallerInscriptions(id) {
     return this._http.get(this.url + 'events/getEventTallerInscriptions/' + id).map((res: Response) => res);
   }
@@ -556,6 +558,12 @@ export class PeticionesService {
   getEventsActiveOfSucursal(id){
     return this._http.get(this.url + 'events/getEventsActiveOfSucursal/' + id).map((res: Response) => res);
     
+  }
+  listPersonNivelacionForCalls(obj){
+    let body = JSON.stringify(obj);	
+    console.log(body);
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
+    return this._http.post(this.url + 'events/listPersonNivelacionForCalls/', body, { headers: headers }).map((res: Response) => res);		
   }
 
 

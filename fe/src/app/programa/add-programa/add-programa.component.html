@@ -32,15 +32,15 @@
                        <label for="ubicacion" class=" control-label">Detalles</label>
                                <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9 .,¿?¡!-]{3,150}" class="form-control" id="ubicacion" 
                                 [(ngModel)]="program.details" name="details" #details="ngModel" required >
-                               <span *ngIf="!details.valid && details.touched && program.details == ''" class="text-alert">
+                                <span *ngIf="!details.valid && details.touched && program.details == ''" class="text-alert">
                                 *Detalle de Programa requerido.
-                               <br></span>
-                               <span *ngIf="details.dirty && details.touched && !details.valid && details.name != '' && program.details.length>150 " class="text-alert">
+                                </span>
+                                <span *ngIf="details.dirty && details.touched && !details.valid && details.name != '' && program.details.length>150 " class="text-alert">
                                 *Detalle de Programa inválido, excedió el límite de 150 caracteres.
-                                <br></span>
-                               <span *ngIf="!details?.pattern && details.dirty && details.touched && !details.valid && program.details != '' && program.details.length<3 " class="text-alert">
+                                </span>
+                                <span *ngIf="!details?.pattern && details.dirty && details.touched && !details.valid && program.details != '' && program.details.length<3 " class="text-alert">
                                 *Detalle de Programa inválido, tiene menos de 3 caracteres.
-                                <br></span>
+                                </span>
                                <!-- <span *ngIf="!details?.pattern && details.dirty && details.touched && !details.valid && program.details != '' && program.details.length<151 && program.details.length>2 " class="text-alert">
                                 *Detalle de Programa inválido, use .,¿?¡!- no se permiten otros símbolos.
                                </span> -->
