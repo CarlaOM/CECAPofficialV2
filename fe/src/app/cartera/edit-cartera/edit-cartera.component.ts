@@ -76,12 +76,12 @@ export class EditCarteraComponent implements OnInit {
     
     if(this.carteraName==''){
 
-      window.alert("Asegurese que todos los campos esten llenos");
+      window.alert("Asegúrese que todos los campos esten llenos");
     
     }else{
       if(this.simbolos(this.carteraName)){
-        console.log("hay simbolos");
-        window.alert("asegurese de no introducir simbolos");
+        console.log("Hay símbolos");
+        window.alert("No se permiten símbolos");
       } else{
 
       this._peticionesService.updateCartera(this.cartera).subscribe(
@@ -90,12 +90,11 @@ export class EditCarteraComponent implements OnInit {
           var res=result;
           console.log(res);
           this.router.navigate(['home/cartera']);
-  
+          // alert('Se guardó correctamente la edición');          
         },error=>{
           var errorMessage=<any>error;
           console.log(errorMessage);
-        }
-      )
+        })
      }
     }
    
