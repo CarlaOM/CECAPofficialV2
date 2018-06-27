@@ -21,8 +21,8 @@
                 <tbody>
                   <tr *ngFor="let i of modulars" [ngSwitch]="i.print_certificate">
                     <td>{{i.name}}</td>
-                    <td *ngIf="i.assist==true">Asistió</td>
-                    <td *ngIf="i.assist==false">No asistió</td>
+                    <td *ngIf="i.assist==true" style="color:blue">Asistió</td>
+                    <td *ngIf="i.assist==false" style="color:red">No asistió</td>
                     <!-- <td *ngIf="i.print_certificate==true">Certificado impreso</td>
                     <td *ngIf="i.print_certificate==false">Falta imprimir certificado</td> -->
                     <td *ngSwitchCase="false">
@@ -56,18 +56,18 @@
                 <tbody>
                   <tr>
                     <td>Fotografías</td>
-                    <td *ngIf="requirements?.photograpy==true">Entregado</td>
-                    <td *ngIf="requirements?.photograpy==false">No entrego</td>
+                    <td *ngIf="requirements?.photograpy==true" style="color:blue">Entregado</td>
+                    <td *ngIf="requirements?.photograpy!=true" style="color:red">No entregó</td>
                   </tr>
                   <tr>
                     <td>Fotocopia de cédula de identidad</td>
-                    <td *ngIf="requirements?.photocopy_ci==true">Entregado</td>                    
-                    <td *ngIf="requirements?.photocopy_ci==false">No entrego</td>                    
+                    <td *ngIf="requirements?.photocopy_ci==true" style="color:blue">Entregado</td>                    
+                    <td *ngIf="requirements?.photocopy_ci!=true" style="color:red">No entregó</td>                    
                   </tr>
                   <tr>
                     <td>Fotocopia de título profesional</td>
-                    <td *ngIf="requirements?.photocopy_titule==true">Entregado</td>                                        
-                    <td *ngIf="requirements?.photocopy_titule==false">No entrego</td>                                        
+                    <td *ngIf="requirements?.photocopy_titule==true" style="color:blue">Entregado</td>                                        
+                    <td *ngIf="requirements?.photocopy_titule!=true" style="color:red">No entregó</td>                                        
                   </tr>
                 </tbody>
               </table>
@@ -75,7 +75,7 @@
               <table class="table table-user-information" >
                 <tbody>
                   <tr *ngIf="completed==null">
-                    <td>Estará disponible cuando haya completado la asistencia a todos los módulos</td>
+                    <td><i>Estará disponible cuando haya completado la asistencia a todos los módulos</i></td>
                   </tr>
                   <tr *ngIf="completed==true">
                     <td *ngIf="finalWork?.date_start==null">

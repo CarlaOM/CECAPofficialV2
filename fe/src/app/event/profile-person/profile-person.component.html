@@ -47,6 +47,7 @@
                   </tr>
                   <tr>
                     <td>Correo Electrónico</td>
+                    <td *ngIf="person?.email==''">-----</td>
                     <td>
                       <a href="mailto:email">{{person?.email}}</a>
                     </td>

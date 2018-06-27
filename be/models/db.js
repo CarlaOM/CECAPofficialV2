@@ -379,7 +379,7 @@ module.exports = {
 
       correlatives: mongoose.model('correlatives', new Schema({
             year: Date,
-            company_id: ObjectId,
+            // company_id: ObjectId,
             //user_id: ObjectId,
             receipts: [{
                   receipt: String,

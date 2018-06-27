@@ -101,7 +101,7 @@ captOcupation(){
       result =>{
         var res = result;
         console.log(res);
-        this.router.navigate(['home/persons']);
+        this.router.navigate(['home/persons']); 
         alert('La edición se guardó correctamente');
       },
       error=>{
