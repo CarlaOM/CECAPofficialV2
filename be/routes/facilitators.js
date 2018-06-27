@@ -41,8 +41,10 @@ router
           {
               $set: {'name': req.body.name,
                      'job': req.body.job}
-          }).exec(function(err, off){
+          }).exec(function(err, facilitador){
               if (err) return res.status(400).send(err);
+
+            return res.status(200).send(facilitador);
         })
  });
  

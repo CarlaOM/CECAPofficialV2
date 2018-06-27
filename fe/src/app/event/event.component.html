@@ -15,7 +15,7 @@
                                           </li>
                                           <li>
                                                 <a class="btn btn-primary" [routerLink]="['/home/nivelacion/'+event?._id]">
-                                                <i class="fa fa-book"></i> Nivelacion </a>
+                                                <i class="fa fa-book"></i> Nivelación </a>
                                           </li>
                                           <li>
                                                 <a class="btn btn-primary" [routerLink]="['/home/workshop/'+event?._id]">
@@ -26,9 +26,9 @@
                                                 <i class="fa fa-book"></i> Reportes Modulares</a>
                                           </li>
                                           <li *ngIf='role?.name=="Admin"'>
-                                                <button class="btn btn-danger fa fa-book" (click)="cerrarEvento(event?._id)" [disabled]="!activeEvent">Cerrar Evento </button>
-                              
-                                             </li>
+                                                <button class="btn btn-danger" (click)="cerrarEvento(event?._id)" [disabled]="!activeEvent">
+                                                      <i class="fa fa-book"></i> Cerrar Evento </button>
+                                          </li>
                                           <!-- <li><app-control-asistance></app-control-asistance></li> -->
                                        </ol>
                                     </div>
