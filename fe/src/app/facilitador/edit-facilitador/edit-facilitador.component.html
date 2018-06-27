@@ -1,6 +1,5 @@
-<div class="content-wrapper">
+<!-- <div class="content-wrapper">
     <section class="content">
-       <!-- test -->
        <div style="text-align:center; margin:auto; width:40%;">
           Editar Facilitador
              <div><label><h1>{{ facilitador?.name }}</h1></label></div>
@@ -19,4 +18,51 @@
      </div>
    </section>
      
- </div>
+ </div> -->
+
+ <div class="content-wrapper">
+    <br>
+    <div class="content">
+      <div class="box box-primary">
+        <div class="container">
+          <div>
+            <h1>Editar Facilitador</h1>
+            <form (ngSubmit)=" saveFacilitador()" #updateFacilitador="ngForm" class="jumbotron">
+              <div class="form-group col-sm-8">
+                  <label for="name">Nombre del Facilitador</label>
+                  <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú]{3,15}([ ]{0,1}[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú]{0,15}){0,3}" class="form-control" id="name" 
+                  [(ngModel)]="facilitadorName" name="name" #name="ngModel" required />
+                  <span *ngIf="!name.untouched && !name.valid && facilitadorName == ''" class="text-alert">
+                  *Nombre de Facilitador requerido.
+                  </span>
+                  <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && facilitadorName != '' && facilitadorName.length>43" class="text-alert">
+                  *Nombre de Facilitador inválido, excedió el límite de caracteres.
+                  </span>
+                  <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && facilitadorName != '' && facilitadorName.length<3" class="text-alert">
+                  *Nombre de Facilitador inválido, tiene menos de 3 caracteres.
+                  </span>
+              </div>
+              <div class="form-group col-sm-8">
+                  <label for="job">Trabajo</label>
+                  <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9 .,¿?¡!-]{3,150}" class="form-control" id="job" 
+                  [(ngModel)]="facilitadorJob" name="job" #job="ngModel" required >
+                  <span *ngIf="!job.valid && job.touched && facilitadorJob == ''" class="text-alert">
+                  *Detalle de Facilitador requerido.
+                  </span>
+                  <span *ngIf="job.dirty && job.touched && !job.valid && job.name != '' && facilitadorJob.length>150 " class="text-alert">
+                  *Detalle de Facilitador inválido, excedió el límite de caracteres.
+                  </span>
+                  <span *ngIf="!job?.pattern && job.dirty && job.touched && !job.valid && facilitadorJob != '' && facilitadorJob.length<3 " class="text-alert">
+                  *Detalle de Facilitador inválido, tiene menos de 3 caracteres.
+                  </span>
+              </div>
+              <div class="form-group col-sm-8" style="text-align:center">
+                <button  type="submit" class="btn btn-success" [disabled]="!updateFacilitador.form.valid">Guardar</button>
+                <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

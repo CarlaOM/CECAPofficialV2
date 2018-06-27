@@ -58,7 +58,7 @@
                                        </thead>
                                        <tbody>
                                           <!--<tr *ngFor="let i of inscriptions | buscarPersona: busqueda">-->
-                                          <tr *ngFor="let i of lista_personas" [ngSwitch]=i.assist>
+                                          <tr *ngFor="let i of mostrar" [ngSwitch]=i.assist>
                                              <td>{{ i.first_name }} {{i.last_name}}</td>
                                              <td>{{ i.ci }}</td>
                                              <td>{{ i.cellphone }}</td>
@@ -79,6 +79,10 @@
                                            
                                           </tr>
                                        </tbody>
+                                       <tfoot>
+                                          <button (click)="dis()" [disabled]="page == 1">Anterior</button>
+                                          <button (click)="aum()" [disabled]="page == totalPag">Siguiente</button>
+                                        </tfoot>
                                     </table>
                                     
                                

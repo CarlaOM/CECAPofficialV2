@@ -13,6 +13,12 @@ import { Identity } from "../services/global";
 export class ProgramaComponent implements OnInit {
     public programs;
     public role;
+    /////////////////////////////////////////
+    public page;
+    public total;
+    public totalPag;
+    public mostrar = [];
+    //////////////////////////////////////////
 
   constructor(
       private route: ActivatedRoute,
@@ -26,10 +32,50 @@ export class ProgramaComponent implements OnInit {
       result => {
          this.programs = result;
          console.log(result)
+         this.mostrarProg()
       },
       error => {
          console.log(<any>error);
       });
+  }
+  dis(){
+    this.page = this.page-1;
+    var inicio = (8*(this.page-1));
+    var final = (8*(this.page-1))+8;
+    this.mostrar = [];
+    for(var a = inicio  ; a < final ; a++ ){
+      this.mostrar.push(this.programs[a]);
+  }
+  }
+  aum(){
+    this.page = this.page+1;
+    console.log(this.page)
+    var inicio = (8*(this.page-1));
+    console.log(inicio)
+    var final = (8*(this.page-1))+8;
+    if(final > this.total){
+      final = this.total;
+    }
+    console.log(final)
+    this.mostrar = [];
+    for(var a = inicio  ; a < final ; a++ ){
+        this.mostrar.push(this.programs[a]);
+    }
+  }
+  mostrarProg(){
+    this.page = 1;
+    this.total = this.programs.length;
+    this.totalPag = Math.ceil(this.total/8);
+    this.mostrar = []
+    console.log(this.totalPag)
+    if(this.totalPag > 1){
+      for(var a = 0 ; a < 8 ; a++){
+      this.mostrar.push(this.programs[a]) ;}
+      console.log("entro")
+    } else{
+      this.mostrar = this.programs;
+    }
+    console.log(this.mostrar)
   }
   volver(){
     this.router.navigate(['home/events']);    
