@@ -1,0 +1,48 @@
+<div class="content-wrapper">
+  <div class="content">
+
+    <div class="box box-primary">
+
+        <section class="content-header">
+            <h1>
+               Carteras
+               <small>Vigentes</small>
+            </h1>
+           
+         </section>
+         <section class="content">
+             <a class="btn btn-primary a" (click)="addCartera()"><i class="fa fa-book"></i> Registrar Cartera</a>
+            <table class="table table-hover">
+               <thead>
+                  <tr>
+                     <th>Nombre de la Cartera</th>
+                     <th>Estado</th>
+                     <th>Información</th>
+                     <th *ngIf='role?.name == "Admin"'>Editar Cartera</th>
+                  </tr>
+               </thead>
+       
+               <tbody>
+       
+                  <tr *ngFor="let cartera of carteras">
+                     <td>{{ cartera?.name }}</td>
+                     <td *ngIf="cartera?.active==true; else inactivo "> Activa</td>
+                     <td>  
+                       <a class="btn btn-primary a" (click)="send(cartera._id)">INFORMACIÓN</a>
+                     </td>
+                     <td *ngIf='role?.name == "Admin"'>
+                        <button class="btn btn-warning" (click)="editCartera(cartera._id)">EDITAR</button>
+                       
+                     </td>
+       
+                     <ng-template #inactivo>
+                         Sin Asignar
+                     </ng-template>
+                  </tr>
+               </tbody>
+            </table>
+         </section>
+    </div>
+  </div>
+ 
+</div>
