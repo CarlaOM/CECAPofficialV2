@@ -13,20 +13,22 @@ import { Receipt } from '../../modelo/receipts';
   providers:[PeticionesService]
 })
 export class AddCorrelativeComponent implements OnInit {
- public correlativo: Correlativo;
- public receipt: Receipt;
+ public correlativo;
+ public receipt;
   constructor(
     private _peticionesService:PeticionesService,
     private router: Router,
     private route: ActivatedRoute,
   ) {
-    this.receipt = new Receipt(1233, 1000, "recivo de caja");
-    this.correlativo = new Correlativo(null,null,this.receipt);
+    this.receipt = new Receipt("1233", 1000, "recibo de caja");
+    this.correlativo = new Correlativo(null,null);
    }
-
+  submitted = false;
   ngOnInit() {
   }
   guardar(){
+      this.correlativo.receipts = this.receipt
+
       console.log(this.correlativo);
       this._peticionesService.addCorrelative(this.correlativo).subscribe(response=>{
       //this.router.navigate(['/home/ejecutivo/']); 
@@ -34,6 +36,8 @@ export class AddCorrelativeComponent implements OnInit {
           var errorMessage=<any>error;
           console.log(errorMessage);
       })
+
+      this.router.navigate(['/home/events'])
   }
   cancel(){
     this.router.navigate(['home/events']);

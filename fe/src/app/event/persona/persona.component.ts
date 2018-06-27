@@ -71,10 +71,14 @@ export class PersonaComponent implements OnInit {
         this.mostrar.push(this.listado_personas[a]);
     }
   }
+  cambiarLista(){
+    this.mostrar = this.listado_personas;
+  }
   mostrarPer(){
     this.page = 1;
     this.total = this.listado_personas.length;
     this.totalPag = Math.ceil(this.total/8);
+    this.mostrar = []
     console.log(this.totalPag)
     if(this.totalPag > 1){
       for(var a = 0 ; a < 8 ; a++){
@@ -110,6 +114,7 @@ export class PersonaComponent implements OnInit {
   
   clearFilter() {
     this.searchText = "";
+    this.mostrarPer();
   }
   
 }
