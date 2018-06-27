@@ -537,6 +537,8 @@ export class PeticionesService {
 
   // }
 
+
+
   getEventTallerInscriptions(id) {
     return this._http.get(this.url + 'events/getEventTallerInscriptions/' + id).map((res: Response) => res);
   }
@@ -556,6 +558,12 @@ export class PeticionesService {
   getEventsActiveOfSucursal(id){
     return this._http.get(this.url + 'events/getEventsActiveOfSucursal/' + id).map((res: Response) => res);
     
+  }
+  listPersonNivelacionForCalls(obj){
+    let body = JSON.stringify(obj);	
+    console.log(body);
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
+    return this._http.post(this.url + 'events/listPersonNivelacionForCalls/', body, { headers: headers }).map((res: Response) => res);		
   }
 
 

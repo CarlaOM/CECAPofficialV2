@@ -14,6 +14,8 @@ export class EventsComponent implements OnInit {
    
    public events;
    public role;
+   public listaPersonas=[];
+   public lista;
    
    constructor(
       private router: Router,
@@ -45,6 +47,18 @@ export class EventsComponent implements OnInit {
     sendTaller(_id:string){
       this.router.navigate(['home/workshopListP', _id]);
         
+    }
+    listNivelacion(_id:string){
+        this.router.navigate(['home/listaParaNivelar',_id]);
+        // let programEvent={}as ProgramEvent;
+        // programEvent.programId=null;
+        // programEvent.eventId=_id;
+        // this._peticionesService.listPersonNivelacionForCalls(programEvent).subscribe(res=>{
+        //     this.lista=res;
+        //     this.listaPersonas=this.lista;
+        //     console.log(this.listaPersonas[0]);
+        // })
+
     }
    queryEventsSucursalActive(){
        this._peticionesService.getEventsActiveOfSucursal(Identity._id).subscribe(
@@ -106,3 +120,7 @@ export class EventsComponent implements OnInit {
 }
 
 
+export interface ProgramEvent{
+    programId:string,
+    eventId:string,
+}
