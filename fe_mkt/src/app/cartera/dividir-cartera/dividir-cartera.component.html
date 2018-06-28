@@ -75,16 +75,24 @@
                  
 
                   <div *ngIf='listaGeneral'>
-                        <table class="table table-hover" >
+                        <!-- <table class="table table-hover"   
+                                id="listaGeneral" 
+                                style="display:table;" 
+                                summary="Code page support in different versions of MS Windows." 
+                                rules="groups" 
+                                frame="hsides" 
+                                border="2"
+                        > -->
+                        <table class="table table-hover " id="listaGeneral">
                                 <thead >
                                    <tr>
-                                       <th>Número</th>
+                                       <th>Numero</th>
                                       <th>Nombre</th>
                                       <th>Apellido</th>
-                                      <th>Teléfono</th>
+                                      <th>Telefono</th>
                                       <th>Grupo de Whatsapp</th>
                                       <th>Ciudad</th>
-                                      <th>Ocupación</th>
+                                      <th>Ocupacion</th>
                                       <!-- <th colspan="2">Opciones</th> -->
                                    </tr>
                                 </thead>
@@ -101,35 +109,39 @@
                                 </tbody>      
                              </table>
                              <div align="center" *ngIf='enablePrint'>
-                                    <input type="text" id="PrimerNombre" placeholder="Primer Nombre">
+                                    <!-- <input type="text" id="PrimerNombre" placeholder="Primer Nombre">
                                     <input type="text" id="Apellido" placeholder="Apellidos">
                                     <input type="text" id="Celular" placeholder="Celular">
                                     <input type="text" id="email" placeholder="email">
                                     <input type="text" id="Telefono" placeholder="Telefono">
                                     <input type="text" id="Ciudad" placeholder="Ciudad">
-                                    <input type="text" id="whatsapp_group" placeholder="whatsapp_group">  
-                                <button class="btn btn-primary" (click)="imprimir(listadepersonasReturned)">Imprimir</button>
+                                    <input type="text" id="whatsapp_group" placeholder="whatsapp_group">   -->
+                                <!-- <button class="btn btn-primary" (click)="imprimir(listadepersonasReturned)">Imprimir</button>
+                                <button class="btn btn-primary" (click)="imprimir2Opcion()">Imprimir</button> -->
+                                <button class="btn btn-primary" (click)="imprimir3Opcion('listaGeneral')">Imprimir</button>
+                                
+                                
                             </div>
 
                   </div>
 
                   <div *ngIf='!listaGeneral'>
-                        <div *ngFor="let unaLista of lista_lista_personas">
-                                <table class="table table-hover" >
+                        <div *ngFor="let unaLista of lista_lista_personasConIdTable; let tablaid = index" >
+                                <table class="table table-hover" #table id='{{unaLista.id}}' >
                                         <thead >
                                            <tr>
-                                               <th>Número</th>
+                                               <th>Numero</th>
                                               <th>Nombre</th>
                                               <th>Apellido</th>
-                                              <th>Teléfono</th>
+                                              <th>Telefono</th>
                                               <th>Grupo de Whatsapp</th>
                                               <th>Ciudad</th>
-                                              <th>Ocupación</th>
+                                              <th>Ocupacion</th>
                                               <!-- <th colspan="2">Opciones</th> -->
                                            </tr>
                                         </thead>
                                         <tbody> 
-                                           <tr *ngFor="let i of unaLista; let num = index" >
+                                           <tr *ngFor="let i of unaLista.lista; let num = index" >
                                               <td>{{num+1}}</td>
                                               <td>{{ i.first_name }}</td>
                                               <th>{{i.last_name}}</th>
@@ -141,14 +153,17 @@
                                         </tbody>      
                                      </table>
                                      <div align="center" *ngIf='enablePrint'>
-                                            <input type="text" id="PrimerNombre" placeholder="Primer Nombre">
+                                            <!-- <input type="text" id="PrimerNombre" placeholder="Primer Nombre">
                                             <input type="text" id="Apellido" placeholder="Apellidos">
                                             <input type="text" id="Celular" placeholder="Celular">
                                             <input type="text" id="email" placeholder="email">
                                             <input type="text" id="Telefono" placeholder="Telefono">
                                             <input type="text" id="Ciudad" placeholder="Ciudad">
-                                            <input type="text" id="whatsapp_group" placeholder="whatsapp_group">  
-                                        <button class="btn btn-primary" (click)="imprimir(unaLista)">Imprimir</button>
+                                            <input type="text" id="whatsapp_group" placeholder="whatsapp_group">   -->
+                                        <!-- <button class="btn btn-primary" (click)="imprimir(unaLista)">Imprimir</button> -->
+
+                                          <button class="btn btn-primary"  (click)="imprimir4Opcion(unaLista.id)">Imprimir Excel</button>
+                                        
                                     </div>
             
                         </div>
