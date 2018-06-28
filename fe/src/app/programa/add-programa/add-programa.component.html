@@ -16,7 +16,7 @@
                             *Nombre de Programa requerido.
                            </span>
                            <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && program.name != '' && program.name.length>43" class="text-alert">
-                            *Nombre de Programa inválido, excedió el límite de 42 caracteres.
+                            *Nombre de Programa inválido, excedió el límite de caracteres.
                            </span>
                            <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && program.name != '' && program.name.length<3" class="text-alert">
                             *Nombre de Programa inválido, tiene menos de 3 caracteres.
@@ -36,7 +36,7 @@
                                 *Detalle de Programa requerido.
                                 </span>
                                 <span *ngIf="details.dirty && details.touched && !details.valid && details.name != '' && program.details.length>150 " class="text-alert">
-                                *Detalle de Programa inválido, excedió el límite de 150 caracteres.
+                                *Detalle de Programa inválido, excedió el límite de caracteres.
                                 </span>
                                 <span *ngIf="!details?.pattern && details.dirty && details.touched && !details.valid && program.details != '' && program.details.length<3 " class="text-alert">
                                 *Detalle de Programa inválido, tiene menos de 3 caracteres.

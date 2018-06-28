@@ -10,10 +10,16 @@
                 <form (ngSubmit)="onSubmit()" #addEjecutivo="ngForm" class="">
                     <div class="form-group col-sm-8">
                         <label for="name" class="control-label" >Nombre de Sucursal</label>
-                            <input type="text" pattern="[a-zA-Z]{3,10}[ ]{0,1}[a-zA-Z]{0,10}" class="form-control" id="name" 
+                            <input type="text" pattern="[A-Za-zÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9 ]{3,42}" class="form-control" id="name" 
                             [(ngModel)]="office.name" name="name" #name="ngModel" required />
-                            <span *ngIf="!name.valid && name.touched" class="text-alert">
-                                    *Nombre de Sucursal requerido.
+                            <span *ngIf="!name.untouched && !name.valid && office.name == ''" class="text-alert">
+                            *Nombre de Sucursal requerido.
+                            </span>
+                            <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && office.name != '' && office.name.length>43" class="text-alert">
+                            *Nombre de Sucursal inválido, excedió el límite de caracteres.
+                            </span>
+                            <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && office.name != '' && office.name.length<3" class="text-alert">
+                            *Nombre de Sucursal inválido, tiene menos de 3 caracteres.
                             </span>
                         <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
                             kjkn
@@ -21,10 +27,16 @@
                     </div>
                     <div class="form-group col-sm-8">
                         <label for="ubicacion" class=" control-label">Ubicación</label>
-                                <input type="text" pattern="[a-zA-Z0-9#]{4,20}([ ]{0,1}[a-zA-Z0-9#]{0,20}){0,2}" class="form-control" id="ubicacion" 
+                                <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9 .,¿?¡!#-]{3,150}" class="form-control" id="ubicacion" 
                                     [(ngModel)]="office.ubicacion" name="ubicacion" #ubicacion="ngModel" required >
-                                <span *ngIf="!ubicacion.valid && ubicacion.touched" class="text-alert">
-                                            *Ubicación de Sucursal invalido.
+                                <span *ngIf="!ubicacion.valid && ubicacion.touched && office.ubicacion == ''" class="text-alert">
+                                *Ubicación de Sucursal requerido.
+                                </span>
+                                <span *ngIf="ubicacion.dirty && ubicacion.touched && !ubicacion.valid && office.ubicacion != '' && office.ubicacion.length>150 " class="text-alert">
+                                *Ubicación de Sucursal inválido, excedió el límite de caracteres.
+                                </span>
+                                <span *ngIf="!ubicacion?.pattern && ubicacion.dirty && ubicacion.touched && !ubicacion.valid && office.ubicacion != '' && office.ubicacion.length<3 " class="text-alert">
+                                *Ubicación de Sucursal inválido, tiene menos de 3 caracteres.
                                 </span>
                             <!--<div [hidden]="ubicacion?.valid || ubicacion?.pristine" class="">
                                 Ubicacion requerida

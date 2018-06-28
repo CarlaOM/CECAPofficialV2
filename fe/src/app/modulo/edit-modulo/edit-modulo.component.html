@@ -1,6 +1,4 @@
-
-
-  <div class="content-wrapper">
+<div class="content-wrapper">
       <br>
       <div class="content">
         <div class="box box-primary">
@@ -13,13 +11,13 @@
                     <label for="content">Contenido</label>
                     <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9 .,¿?¡!-]{3,150}" class="form-control" id="content" 
                     [(ngModel)]="moduloContent" name="content" #content="ngModel" required >
-                    <span *ngIf="!content.valid && content.touched && modulo.content== ''" class="text-alert">
+                    <span *ngIf="!content.valid && content.touched && moduloContent== ''" class="text-alert">
                      *Detalle de Módulo requerido.
                     <br></span>
-                    <span *ngIf="content.dirty && content.touched && !content.valid && content.name != '' && modulo.content.length>150 " class="text-alert">
-                     *Detalle de Módulo inválido, excedió el límite de 150 caracteres.
+                    <span *ngIf="content.dirty && content.touched && !content.valid && moduloContent != '' && moduloContent.length>150 " class="text-alert">
+                     *Detalle de Módulo inválido, excedió el límite de caracteres.
                      <br></span>
-                    <span *ngIf="!content?.pattern && content.dirty && content.touched && !content.valid && modulo.content != '' && modulo.content.length<3 " class="text-alert">
+                    <span *ngIf="!content?.pattern && content.dirty && content.touched && !content.valid && moduloContent != '' && moduloContent.length<3 " class="text-alert">
                      *Detalle de Módulo inválido, tiene menos de 3 caracteres.
                      <br></span>
                 </div>
