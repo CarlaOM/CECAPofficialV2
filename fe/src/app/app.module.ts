@@ -4,6 +4,8 @@ import { HttpModule } from '@angular/http';
 import { FormsModule }   from '@angular/forms';
 import{ routing, appRoutingProviders } from './app.routing';
 import { AsyncLocalStorageModule } from 'angular-async-local-storage';
+import {  HTTP_INTERCEPTORS } from '@angular/common/http';
+
 //modules
 //import { AlertsModule } from 'angular-alert-module';
 //components
@@ -108,6 +110,8 @@ import { ListaPesonsNivelacionComponent } from './lista-pesons-nivelacion/lista-
 
 import { AuthGuard } from "./auth.guard";
 import { RouterModule } from '@angular/router';
+import { PermisosVistaComponent } from './permisos-vista/permisos-vista.component';
+import { JwtInterceptor } from "./jwt.interceptor";
 
 
 @NgModule({
@@ -201,6 +205,7 @@ import { RouterModule } from '@angular/router';
     WorkshopComponent,
     PrintBatchCertificatesComponent,
     ListaPesonsNivelacionComponent,
+    PermisosVistaComponent,
   ],
   imports: [
     BrowserModule,
@@ -227,6 +232,12 @@ import { RouterModule } from '@angular/router';
     FilterPipe,
     SucursalService,
     AuthGuard,
+    UserService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: JwtInterceptor,
+            multi: true
+        },
   ],//aniadir appRo..
   bootstrap: [AppComponent]
 })
