@@ -16,6 +16,6 @@ export class AuthGuard implements CanActivate {
       //   let resp=res;
         
       // })
-    return false;
+    return true;
   }
 }
