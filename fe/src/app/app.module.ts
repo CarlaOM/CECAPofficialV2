@@ -106,6 +106,10 @@ import { WorkshopComponent } from './workshop/workshop.component';
 import { PrintBatchCertificatesComponent } from './event/print-batch-certificates/print-batch-certificates.component';
 import { ListaPesonsNivelacionComponent } from './lista-pesons-nivelacion/lista-pesons-nivelacion.component';
 
+import { AuthGuard } from "./auth.guard";
+import { RouterModule } from '@angular/router';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -208,6 +212,13 @@ import { ListaPesonsNivelacionComponent } from './lista-pesons-nivelacion/lista-
     ChartsModule,
     // Specify this module as an import
     //AlertsModule.forRoot()
+    RouterModule.forRoot([
+      {
+        path:'home',
+        component:HomeComponent,
+        canActivate:[AuthGuard]
+      }
+    ])
     
   ],
   providers: [
@@ -215,6 +226,7 @@ import { ListaPesonsNivelacionComponent } from './lista-pesons-nivelacion/lista-
     UserService,
     FilterPipe,
     SucursalService,
+    AuthGuard,
   ],//aniadir appRo..
   bootstrap: [AppComponent]
 })
