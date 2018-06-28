@@ -73,6 +73,8 @@ import { PrintBatchCertificatesComponent } from "./event/print-batch-certificate
 import { ListaPesonsNivelacionComponent } from "./lista-pesons-nivelacion/lista-pesons-nivelacion.component";
 
 
+import { AuthGuard } from "./auth.guard";
+
 const appRoutes: Routes = [
    { path: '', component: HomeComponent },//ruta basica
    { path: 'login', component: LoginComponent },
@@ -80,7 +82,9 @@ const appRoutes: Routes = [
       path: 'home', component: HomeComponent,
       children: [
          { path: 'home', redirectTo: 'home', pathMatch: 'full' },
-         { path: 'events', component: EventsComponent },
+         { path: 'events', component: EventsComponent,canActivate:[AuthGuard], },
+        //  { path: 'events', component: EventsComponent, },
+        
          //{ path: 'events/alert', component: AlertComponent },
          { path: 'events/add', component: AddEventComponent },
          { path: 'listPrint/:id', component: ListInscriptionsComponent },
@@ -96,7 +100,7 @@ const appRoutes: Routes = [
          { path: 'reports', component: ReportsComponent },
          { path: 'trimestral', component: ReportTrimestralComponent },
          { path: 'reportEvent/:id', component: ReportEventComponent },
-         { path: 'persons', component: PersonaComponent },
+         { path: 'persons', component: PersonaComponent , },
          { path: 'persons/add', component: AddPersonComponent },
          { path: 'persons/edit/:id', component: EditComponent },
          { path: 'persons/asistencia/:id', component: AsistenciaComponent },

@@ -3,6 +3,7 @@ import {PeticionesService } from '../../services/peticiones.service';
 import { Identity } from "../../services/global";
 import { ActivatedRoute,Router,Route } from "@angular/router";
 import { Angular5Csv } from 'angular5-csv/Angular5-csv';
+import { ArrayType } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class DividirCarteraComponent implements OnInit {
   public listadepersonasReturned;
   public listaEjecutivosChecked=[];
   public listaEventosChecked=[];
+  public lista_lista_personasConIdTable=[];
   
   public listaGeneral=true;
   public numTotal;
@@ -105,6 +107,17 @@ export class DividirCarteraComponent implements OnInit {
       console.log(this.lista_lista_personas);
       let res=llenado(this.listado_personas,this.lista_lista_personas);
       console.log(this.lista_lista_personas);
+      let count=1;
+      for(let lista of this.lista_lista_personas){
+          let listObject={}as ListaConId;
+          listObject.lista=lista;
+          listObject.id=count;
+          count++;
+          this.lista_lista_personasConIdTable.push(listObject);
+      }
+
+
+
     }
     
 
@@ -177,49 +190,103 @@ export class DividirCarteraComponent implements OnInit {
        }
     );
  }
- imprimir(listaToExport){
+//  imprimir(listaToExport){
 
-  console.log(listaToExport);
-  let lista=[];
-  for(let i of listaToExport){
-    let newPerson={}as PersonToExport;
-    newPerson.first_name=i.first_name;
-    newPerson.last_name=i.last_name;    
-    newPerson.celular=i.cellphone;
-    newPerson.email=i.email;
-    newPerson.telefono=i.phone;
-    newPerson.city=i.city;
-    newPerson.whatsapp_group=i.whatsapp_group
-    lista.push(newPerson);
-  }
+//   console.log(listaToExport);
+//   let lista=[];
+//   for(let i of listaToExport){
+//     let newPerson={}as PersonToExport;
+//     newPerson.first_name=i.first_name;
+//     newPerson.last_name=i.last_name;    
+//     newPerson.celular=i.cellphone;
+//     newPerson.email=i.email;
+//     newPerson.telefono=i.phone;
+//     newPerson.city=i.city;
+//     newPerson.whatsapp_group=i.whatsapp_group
+//     lista.push(newPerson);
+//   }
 
-  let options = {
-    fieldSeparator: ',',
-    quoteStrings: '"',
-    decimalseparator: '.',
-    showLabels: false,
-    showTitle: false,
-    useBom: true,
-    // noDownload: true,
-    // headers: ["NOMBRES", "APELLIDOS", "CIUDAD", "CELULAR", "Móvil"]
-    headers: [
-      // (<HTMLInputElement>document.getElementById(elementId)).value,
-      (<HTMLInputElement>document.getElementById('PrimerNombre')).value,
-      (<HTMLInputElement>document.getElementById('Apellido')).value,
-      (<HTMLInputElement>document.getElementById('Celular')).value,
-      (<HTMLInputElement>document.getElementById('email')).value,
-      (<HTMLInputElement>document.getElementById('Telefono')).value,
-      (<HTMLInputElement>document.getElementById('Ciudad')).value,
-      (<HTMLInputElement>document.getElementById('whatsapp_group')).value,
+//   let options = {
+//     fieldSeparator: ',',
+//     quoteStrings: '"',
+//     decimalseparator: '.',
+//     showLabels: false,
+//     showTitle: false,
+//     useBom: true,
+//     // noDownload: true,
+//     // headers: ["NOMBRES", "APELLIDOS", "CIUDAD", "CELULAR", "Móvil"]
+//     headers: [
+//       // (<HTMLInputElement>document.getElementById(elementId)).value,
+//       (<HTMLInputElement>document.getElementById('PrimerNombre')).value,
+//       (<HTMLInputElement>document.getElementById('Apellido')).value,
+//       (<HTMLInputElement>document.getElementById('Celular')).value,
+//       (<HTMLInputElement>document.getElementById('email')).value,
+//       (<HTMLInputElement>document.getElementById('Telefono')).value,
+//       (<HTMLInputElement>document.getElementById('Ciudad')).value,
+//       (<HTMLInputElement>document.getElementById('whatsapp_group')).value,
       
-    ]
-  };
+//     ]
+//   };
 
-   let toExportCarteraShared=new Angular5Csv(lista,"carteraToExport",options)
+//    let toExportCarteraShared=new Angular5Csv(lista,"carteraToExport",options)
 
+//  }
+
+//  imprimir2Opcion(){
+//   // tableToExcel("Contacts","excel");
+  
+//  }
+ imprimir3Opcion(tableID){
+   exportTableToExcel(tableID,"Cartera");
+ }
+ imprimir4Opcion(tableId){
+
+  exportTableToExcel(tableId,"Cartera");
  }
 
 }
+
+function exportTableToExcel(tableID, filename = ''){
+  var downloadLink;
+  var dataType = 'application/vnd.ms-excel';
+  var tableSelect = document.getElementById(tableID);
+  var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+  
+  // Specify file name
+  filename = filename?filename+'.xls':'excel_data.xls';
+  
+  // Create download link element
+  downloadLink = document.createElement("a");
+  
+  document.body.appendChild(downloadLink);
+  
+  if(navigator.msSaveOrOpenBlob){
+      var blob = new Blob(['\ufeff', tableHTML], {
+          type: dataType
+      });
+      navigator.msSaveOrOpenBlob( blob, filename);
+  }else{
+      // Create a link to the file
+      downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+  
+      // Setting the file name
+      downloadLink.download = filename;
+      
+      //triggering the function
+      downloadLink.click();
+  }
+}
+
+// function tableToExcel(table, name) {
+//   var uri = 'data:application/vnd.ms-excel;base64,'
+//   var template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+//   var base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+//   var format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
+//   if (!table.nodeType) table = document.getElementById(table)
+
+//   var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+//   window.location.href = uri + base64(format(template, ctx))
+// }
 
 
 function llenado(listaP,listaParaLlenar){
@@ -270,5 +337,10 @@ export interface PersonToExport{
   city:string,
 
 
+
+}
+export interface ListaConId{
+  lista:ArrayType,
+  id:number,
 
 }
