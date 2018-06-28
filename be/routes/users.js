@@ -5,11 +5,50 @@ var jwt = require('jsonwebtoken');
 var db = require('../models/db');
 var router = express.Router();
 
+const fs = require('fs');
+// var mongojs = require('mongojs');
+// var db = mongojs('test', []); 
 
+/**
+ * @param {string} directorio de destino
+ * @param {string} texto a escribir dentro del archivo
+ * @param {function} manejador de funcion 
+ */
 router
    // .get('/', function (req, res, next) {
    // 	f.validation(res, req.body.token, next);
    //   })
+   .get('/backup', function (req, res){
+        //var collectionNames = db.getCollectionNames()[0];
+        var collections=db.getCollectionNames();
+        console.log(collections);
+        // console.log(collectionNames);
+        // db.collectionNames[0].find({},function(err, col){
+        //   if (err) return res.status(400).send(err);
+        //   saveWriteFile(col, collectionNames[0]);
+        
+        //   return res.status(200).send(events);
+        // });
+        db.events.find({},function(err, col){
+          if (err) return res.status(400).send(err);
+          saveWriteFile(col, 'events');
+        
+          return res.status(200).send(events);
+        });
+        function saveWriteFile(date, dbName){
+         // var content = JSON.parse(JSON.stringify(events));
+            var content = JSON.stringify(date);
+            var ruta = "./backups/"+dbName+".json";
+            fs.writeFile(ruta, content, function (err) {
+                if (err) {
+                    console.log(err);
+                    //return res.status(400).send(err);
+                }
+                console.log("El archivo $dbName fue Guardado!");
+                //return res.status(200).send(events);
+            });
+        }
+    })
    .get('/', function (req, res) {
       db.users.find({}, { name: 1, active: 1, password_hash: 1, rol: 1 }, function (err, users) {
          if (err) return res.status(400).send(err);
@@ -25,6 +64,7 @@ router
          return res.status(200).send(users);
       });
    })
+   
    .get('/getEjecutivoToEdit/:id', function (req, res) {
       db.users.findOne({ _id: req.params.id }, function (err, user) {
          if (err) return res.status(400).send(err);

@@ -62,7 +62,7 @@ public mostrar = [];
                   this.inscriptions = this.event.inscriptions;
                   var total = this.event.total;   
                   this.lista_personasPorModulo=this.inscriptions; 
-                  console.log('esta es la inscripcion de la persona');
+                  console.log('Esta es la inscripción de la persona');
                   console.log(this.lista_personasPorModulo); 
                   this.mostrarPer()     
             },

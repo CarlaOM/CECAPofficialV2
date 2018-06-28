@@ -64,22 +64,22 @@ export class EditModuloComponent implements OnInit {
 
       // if (this.numberRef.nativeElement.value == null || this.nameRef.nativeElement.value == '' || this.contentRef.nativeElement.value == '') {
       //    window.alert("Asegurese que todos los campos esten llenos");
-      if (this.moduloNumber == null || this.moduloName.value == '' || this.moduloContent == '') {
-            window.alert("Asegurese que todos los campos esten llenos");
-      } else {
+      // if (this.moduloNumber == null || this.moduloName.value == '' || this.moduloContent == '') {
+      //       window.alert("Asegurese que todos los campos esten llenos");
+      // } else {
          this._peticionesService.updateModulo(this.modulo).subscribe(
             result => {
                var res = result;
                console.log(res);
-               alert('Se Guardo correctamente la edicion');
+               alert('La edición se guardó correctamente');
                window.history.back();
             },
             error => {
                console.log(<any>error);
                alert('Error al Guardar verifique los datos');
             })
-      }
-      window.history.back();
+      // }
+      // window.history.back();
    }
    //save() {
    //console.log(this.modulo);

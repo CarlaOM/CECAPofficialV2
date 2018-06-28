@@ -107,6 +107,10 @@ import { PrintBatchCertificatesComponent } from './event/print-batch-certificate
 import { ListaPesonsNivelacionComponent } from './lista-pesons-nivelacion/lista-pesons-nivelacion.component';
 import { CorrelativeComponent } from './correlative/correlative.component';
 
+import { AuthGuard } from "./auth.guard";
+import { RouterModule } from '@angular/router';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -210,6 +214,13 @@ import { CorrelativeComponent } from './correlative/correlative.component';
     ChartsModule,
     // Specify this module as an import
     //AlertsModule.forRoot()
+    RouterModule.forRoot([
+      {
+        path:'home',
+        component:HomeComponent,
+        canActivate:[AuthGuard]
+      }
+    ])
     
   ],
   providers: [
@@ -217,6 +228,7 @@ import { CorrelativeComponent } from './correlative/correlative.component';
     UserService,
     FilterPipe,
     SucursalService,
+    AuthGuard,
   ],//aniadir appRo..
   bootstrap: [AppComponent]
 })

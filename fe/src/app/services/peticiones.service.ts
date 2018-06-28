@@ -19,6 +19,9 @@ export class PeticionesService {
     // this.url = "https://jsonplaceholder.typicode.com/users";
 
   }
+  backup(){
+    return this._http.get(this.url + 'users/backup').map((res: Response) => res);
+   }
   getCatEgresos() {
     return this._http.get(this.url + 'categoriaEgresos').map((res: Response) => res);
   }

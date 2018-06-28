@@ -54,23 +54,25 @@ export class EditProgramaComponent implements OnInit {
 
       // if (this.nameRef.nativeElement.value == '' || this.detailsRef.nativeElement.value == '') {
       //    window.alert("Asegurese que todos los campos esten llenados");
-      if (this.programName == '' || this.programDetails == '') {
-            window.alert("Asegurese que todos los campos esten llenados");
-      } else {
+      // if (this.programName == '' || this.programDetails == '') {
+      //       window.alert("Asegurese que todos los campos esten llenados");
+      // } else {
          console.log(this.program);
          this._peticionesService.updateProgram(this.program).subscribe(
             result => {
-               console.log(result);
                var res = result;
-               alert('Se guardó correctamente la edición');
+               console.log(res);
                this.router.navigate(['home/programs']);
+               alert('La edición se guardó correctamente');
             //    window.history.back();          
             },
             error => {
-               console.log(<any>error);
+            //    console.log(<any>error);
+               var errorMessage = <any>error;
+               console.log(errorMessage);
                alert('Error al guardar verifique los datos');
             })
-      }
+      // }
    }
    cancel() {
       // this.router.navigate(['home/programs']);

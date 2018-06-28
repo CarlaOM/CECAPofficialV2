@@ -29,8 +29,8 @@ export class AddProgramaComponent implements OnInit {
       result => {
         var esperado = result;
         console.log(esperado);
-        alert('El Programa se creó correctamente');
         this.router.navigate(['home/programs']);
+        alert('El Programa se creó correctamente');
       },
       error => {
         var errorMessage = <any>error;
