@@ -278,6 +278,10 @@ export class PeticionesService {
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.get(this.url + 'offices/' + id, { headers: headers }).map((res: Response) => res);
   }
+  getCorrelativos(){
+    return this._http.get(this.url + 'correlatives').map((res: Response) => res);
+    
+  }
   getRoles() {
     return this._http.get(this.url + 'roles').map((res: Response) => res);
   }
@@ -522,6 +526,11 @@ export class PeticionesService {
     let body = JSON.stringify( fechas);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
     return this._http.post(this.url + 'events/reporteEvento/', body, { headers: headers }).map((res: Response) => res);
+  }
+  correlativeDate(date){
+    let body = JSON.stringify(date);
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
+    return this._http.post(this.url + 'correlatives/fechas/', body, { headers: headers }).map((res: Response) => res);
   }
   addNewTaller(taller){
     let body = JSON.stringify(taller);	
