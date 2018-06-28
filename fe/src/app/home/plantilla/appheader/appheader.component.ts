@@ -1,18 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { PeticionesService } from '../../../services/peticiones.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AsyncLocalStorage } from 'angular-async-local-storage';
 import { Identity } from '../../../services/global';
 @Component({
    selector: 'app-appheader',
    templateUrl: './appheader.component.html',
-   styleUrls: ['./appheader.component.css']
+   styleUrls: ['./appheader.component.css'],
+   providers: [ PeticionesService]
 })
 export class AppheaderComponent implements OnInit {
     public nameUser;
 
    constructor(
       protected localStorage: AsyncLocalStorage,
-      private _router: Router) { }
+      private _router: Router,
+      private _peticionesService: PeticionesService) { }
 
    ngOnInit() {
        this.nameUser = Identity.name;
@@ -24,5 +27,16 @@ export class AppheaderComponent implements OnInit {
       Identity.name = '';
       this._router.navigate(['/login']);
    }
-
+   backup(){
+    this._peticionesService.backup().subscribe(
+        result => {
+         alert('backup realizado');
+        },
+        error=>{
+         var errorMessage = <any>error;
+         console.log(errorMessage);
+         window.alert('Error, no se pudo realizar backup');
+        }
+    );
+}
 }
