@@ -125,6 +125,7 @@ router
    })
 
    .get('/rolName/:id', function (req, res) {
+       console.log(req.params.id);
 
       db.roles.findOne({ _id: req.params.id }, function (err, roleName) {
          if (err) return res.status(400).send(err);
