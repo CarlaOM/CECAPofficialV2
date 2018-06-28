@@ -6,6 +6,7 @@ var db = require('../models/db');
 var router = express.Router();
 
 const fs = require('fs');
+var JSZip = require("jszip");
 // var mongojs = require('mongojs');
 // var db = mongojs('test', []); 
 
@@ -20,8 +21,8 @@ router
    //   })
    .get('/backup', function (req, res){
         //var collectionNames = db.getCollectionNames()[0];
-        var collections=db.getCollectionNames();
-        console.log(collections);
+        // var collections=db.getCollectionNames();
+        // console.log(collections);
         // console.log(collectionNames);
         // db.collectionNames[0].find({},function(err, col){
         //   if (err) return res.status(400).send(err);
@@ -32,8 +33,138 @@ router
         db.events.find({},function(err, col){
           if (err) return res.status(400).send(err);
           saveWriteFile(col, 'events');
-        
-          return res.status(200).send(events);
+          db.carteras.find({},function(err, col){
+            if (err) return res.status(400).send(err);
+            saveWriteFile(col, 'carteras');
+            db.cashFlowOffices.find({},function(err, col){
+                if (err) return res.status(400).send(err);
+                saveWriteFile(col, 'cashFlowOffices');
+                db.cashFlowPrincipal.find({},function(err, col){
+                    if (err) return res.status(400).send(err);
+                    saveWriteFile(col, 'cashFlowPrincipal');
+                    db.cashFlowUsers.find({},function(err, col){
+                        if (err) return res.status(400).send(err);
+                        saveWriteFile(col, 'cashFlowUsers');
+                        db.categoriaEgresos.find({},function(err, col){
+                            if (err) return res.status(400).send(err);
+                            saveWriteFile(col, 'categoriaEgresos');
+                            db.company.find({},function(err, col){
+                                if (err) return res.status(400).send(err);
+                                saveWriteFile(col, 'company');
+                                db.correlatives.find({},function(err, col){
+                                    if (err) return res.status(400).send(err);
+                                    saveWriteFile(col, 'correlatives');
+                                    db.facilitators.find({},function(err, col){
+                                        if (err) return res.status(400).send(err);
+                                        saveWriteFile(col, 'facilitators');
+                                        db.lists.find({},function(err, col){
+                                            if (err) return res.status(400).send(err);
+                                            saveWriteFile(col, 'lists');
+                                            db.modulars.find({},function(err, col){
+                                                if (err) return res.status(400).send(err);
+                                                saveWriteFile(col, 'modulars');
+                                                db.modules.find({},function(err, col){
+                                                    if (err) return res.status(400).send(err);
+                                                    saveWriteFile(col, 'modules');
+                                                    db.offices.find({},function(err, col){
+                                                        if (err) return res.status(400).send(err);
+                                                        saveWriteFile(col, 'offices');
+                                                        db.persons.find({},function(err, col){
+                                                            if (err) return res.status(400).send(err);
+                                                            saveWriteFile(col, 'persons');
+                                                            db.programs.find({},function(err, col){
+                                                                if (err) return res.status(400).send(err);
+                                                                saveWriteFile(col, 'programs');
+                                                                db.roles.find({},function(err, col){
+                                                                    if (err) return res.status(400).send(err);
+                                                                    saveWriteFile(col, 'roles');
+                                                                    db.users.find({},function(err, col){
+                                                                        if (err) return res.status(400).send(err);
+                                                                        saveWriteFile(col, 'users');
+                                                                        
+                                ///////////////////////////////////////////////////////////////////
+                            // db.roles.find({},function(err, col){
+                            //     if (err) return res.status(400).send(err);
+                            //     saveWriteFile(col, 'roles');
+                            //     db.roles.find({},function(err, col){
+                            //         if (err) return res.status(400).send(err);
+                            //         saveWriteFile(col, 'roles');
+                            //         db.roles.find({},function(err, col){
+                            //             if (err) return res.status(400).send(err);
+                            //             saveWriteFile(col, 'roles');
+                            //             db.roles.find({},function(err, col){
+                            //                 if (err) return res.status(400).send(err);
+                            //                 saveWriteFile(col, 'roles');
+                            //                 db.roles.find({},function(err, col){
+                            //                     if (err) return res.status(400).send(err);
+                            //                     saveWriteFile(col, 'roles');
+                            //                     db.roles.find({},function(err, col){
+                            //                         if (err) return res.status(400).send(err);
+                            //                         saveWriteFile(col, 'roles');
+                            //                         db.roles.find({},function(err, col){
+                            //                             if (err) return res.status(400).send(err);
+                            //                             saveWriteFile(col, 'roles');
+                            //                             db.roles.find({},function(err, col){
+                            //                                 if (err) return res.status(400).send(err);
+                            //                                 saveWriteFile(col, 'roles');
+                            //                                 db.roles.find({},function(err, col){
+                            //                                     if (err) return res.status(400).send(err);
+                            //                                     saveWriteFile(col, 'roles');
+                            //                                     db.roles.find({},function(err, col){
+                            //                                         if (err) return res.status(400).send(err);
+                            //                                         saveWriteFile(col, 'roles');
+                            //                                         db.roles.find({},function(err, col){
+                            //                                             if (err) return res.status(400).send(err);
+                            //                                             saveWriteFile(col, 'roles');
+                            //                                             db.roles.find({},function(err, col){
+                            //                                                 if (err) return res.status(400).send(err);
+                            //                                                 saveWriteFile(col, 'roles');
+                            //                                                 db.roles.find({},function(err, col){
+                            //                                                     if (err) return res.status(400).send(err);
+                            //                                                     saveWriteFile(col, 'roles');
+                                                                                                                            
+                            //                                                     });                                            
+                            //                                                 });                                            
+                            //                                             });                                            
+                            //                                         });                                           
+                            //                                     });                                            
+                            //                                 });                                            
+                            //                             });                                           
+                            //                         });                                           
+                            //                     });                                           
+                            //                 });                                           
+                            //             });                                           
+                            //         });                                           
+                            //     });
+
+                            //var folderName="cecapBacup"+new Date();
+                            var zip = new JSZip();
+                            //zip.add("Hello.txt", "Hello World\n");
+                            zip.folder('./backups');
+                            // img.add("smile.gif", imgData, {base64: true});
+                            zip.generateAsync({type:"blob"}).then(function(content) {
+                                saveAs(content, "cecapBackup.zip");
+                                return res.status(200).send(col);
+                            });
+                            // location.href="data:application/zip;base64,"+content;
+                            // return res.status(200).send(col);
+                                                                      });
+                                                                  });
+                                                              });
+                                                          });
+                                                      });
+                                                  });
+                                              });
+                                          });
+                                      });
+                                  });
+                              });
+                          });
+                      });
+                  });
+              });
+          });
+          //return res.status(200).send(events);
         });
         function saveWriteFile(date, dbName){
          // var content = JSON.parse(JSON.stringify(events));
@@ -44,7 +175,7 @@ router
                     console.log(err);
                     //return res.status(400).send(err);
                 }
-                console.log("El archivo $dbName fue Guardado!");
+                console.log("El archivo " +dbName+" fue Guardado!");
                 //return res.status(200).send(events);
             });
         }
