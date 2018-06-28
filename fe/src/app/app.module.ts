@@ -107,6 +107,7 @@ import { NivelacionComponent } from './event/nivelacion/nivelacion.component';
 import { WorkshopComponent } from './workshop/workshop.component';
 import { PrintBatchCertificatesComponent } from './event/print-batch-certificates/print-batch-certificates.component';
 import { ListaPesonsNivelacionComponent } from './lista-pesons-nivelacion/lista-pesons-nivelacion.component';
+import { CorrelativeComponent } from './correlative/correlative.component';
 
 import { AuthGuard } from "./auth.guard";
 import { RouterModule } from '@angular/router';
@@ -206,6 +207,7 @@ import { JwtInterceptor } from "./jwt.interceptor";
     PrintBatchCertificatesComponent,
     ListaPesonsNivelacionComponent,
     PermisosVistaComponent,
+    CorrelativeComponent,
   ],
   imports: [
     BrowserModule,

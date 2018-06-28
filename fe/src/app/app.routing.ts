@@ -72,6 +72,7 @@ import { WorkshopComponent } from "./workshop/workshop.component";
 import { PrintBatchCertificatesComponent } from "./event/print-batch-certificates/print-batch-certificates.component";
 import { ListaPesonsNivelacionComponent } from "./lista-pesons-nivelacion/lista-pesons-nivelacion.component";
 import { PermisosVistaComponent } from "./permisos-vista/permisos-vista.component";
+import { CorrelativeComponent } from './correlative/correlative.component';
 
 
 import { AuthGuard } from "./auth.guard";
@@ -148,6 +149,7 @@ const appRoutes: Routes = [
          { path: 'imprimirLoteCertificados/:id',component:PrintBatchCertificatesComponent},
          { path: 'listaParaNivelar/:id',component:ListaPesonsNivelacionComponent},
          { path: 'error',component:PermisosVistaComponent},
+         { path: 'correlative', component:CorrelativeComponent},
       ]
    },
 
