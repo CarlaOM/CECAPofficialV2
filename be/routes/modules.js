@@ -83,8 +83,10 @@ router
           'name': req.body.name,
           'content': req.body.content
         }
-      }).exec(function (err, off) {
+      }).exec(function (err, modulo) {
         if (err) return res.status(400).send(err);
+
+        return res.status(200).send(modulo);
       })
   })
   .delete('/:id', function (req, res) {

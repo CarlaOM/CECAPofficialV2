@@ -21,18 +21,21 @@ export class facilitadorComponent implements OnInit {
   ngOnInit() {
     this.queryFacilitators();
  }
- editFacilitador(id:String){
-  //console.log("facilitadorComponent");
-  this.router.navigate(['/home/facilitador/edit/', id]);
-  }
- 
   addfacilitador(){
     this.router.navigate(['/home/facilitador/add']);
   }
-  infofacilitador(_id:string){
-    // console.log(_id);
-    this.router.navigate(['/home/facilitador/info',_id]);
+  editFacilitador(_id:string){
+    //console.log("facilitadorComponent");
+    this.router.navigate(['/home/facilitador/edit/', _id]);
   }
+  volver(){
+    this.router.navigate(['home/events']);    
+  }
+  // infofacilitador(_id:string){
+  //   // console.log(_id);
+  //   this.router.navigate(['/home/facilitador/info',_id]);
+  // }
+
   // deletefacilitador(_id:string){
   //   this._peticionesService.deleteUser().subscribe(
   //     result => {

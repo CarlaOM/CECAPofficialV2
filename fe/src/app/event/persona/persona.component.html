@@ -30,8 +30,8 @@
            <div>
           <div class="filter-wrap col-lg-1">
             <div>Buscar:</div>
-            <input [(ngModel)]="searchText" placeholder="Nombre Persona" class="filter-input">
-            <span class="filter-clear" *ngIf="searchText.length>0" (click)="clearFilter()">X</span>
+            <input [(ngModel)]="searchText" placeholder="Nombre Persona" class="filter-input" (change)="cambiarLista()">
+            <span class="filter-clear" style="color: red" *ngIf="searchText.length>0" (click)="clearFilter()">X</span>
             <!-- <a class="btn btn-primary filter-clear" *ngIf="searchText.length>0" (clic)="clearFilter()">Cancelar</a> -->
           </div>
           <br>
@@ -50,7 +50,7 @@
             </thead>
             <tbody> 
                <!--<tr *ngFor="let i of inscriptions | buscarPersona: busqueda">-->
-               <tr *ngFor="let i of listado_personas  | filter : searchText">
+               <tr *ngFor="let i of mostrar  | filter : searchText">
                   <td>{{ i.first_name }}</td>
                   <th>{{i.last_name}}</th>
                   <td>{{ i.cellphone }}</td>
@@ -81,6 +81,10 @@
                   </td>
                </tr>
             </tbody>
+            <tfoot>
+              <button (click)="dis()" [disabled]="page == 1">Anterior</button>
+              <button (click)="aum()" [disabled]="page == totalPag">Siguiente</button>
+            </tfoot>
          </table>
          
       </section>

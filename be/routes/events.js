@@ -26,6 +26,7 @@ router
                   //       if (insert) programs.push(events[i].program);
                   //    }
                   //    getPrograms(programs, events);
+                  console.log(new Date())
                   return res.status(200).send(events);
             });
             // function getPrograms(programs, events) {
@@ -361,6 +362,160 @@ router
             return res.status(200).send(listModuls);
          }
       })
+
+      ////////////////////////////////////////////////////////////////////////////////////
+
+      .post('/listPersonNivelacionForCalls',function(req,res){
+
+            let programId;
+            let eventId=req.body.eventId;
+
+            let listaPersonas=[];
+            db.events.findOne({_id:eventId},function(err,evento){
+                  if (err) { return res.status(400).send(err); }
+                  // console.log(evento);
+                  programId=evento.programs;   
+                  
+                  db.persons.aggregate([
+                        // {$project:{_id:1,first_name:1,last_name:1,cellphone:1,ci:1,profile:1}},
+                        // {$unwind:'$profile'},
+                        {$match:{'profile.programs':{$eq:programId}}},
+                        {$project:{
+                              "_id":1,
+                              "first_name":1,
+                              "last_name":1,
+                              "cellphone":1,
+                              "ci":1,
+                              "programs":1,
+                              "profile.programs":1
+                        }},
+                        {$unwind:'$profile'},
+                        
+                        {$lookup:{
+                              from:"events",
+                              localField:"profile.programs",
+                              foreignField:"programs",
+                              as:"lista_eventos"
+                        }},
+                        {$unwind:'$lista_eventos'},
+
+
+                        {$lookup:{
+                              from:'modulars',
+                              let:{eventIdLookup:'$lista_eventos._id',personIdLookup:'_id'},
+                              pipeline:[
+                                    {$match:
+                                          { $expr:
+                                                { $and:
+                                                      [
+                                                            {$eq :["$events","$$eventIdLookup"]},
+                                                            // {$ew :["$persons","$$personIdLookup"]}
+                                                      ]
+
+                                                }
+                                                
+                                          }
+                                    },
+                                    {$project:{
+                                          "assist":1,
+                                          "events":1,
+                                          "modules":1,
+                                          "persons":1,
+                                    }}
+                              ],
+                              as:"listaConModulos"
+
+                        }},
+                        {$project:{
+                              "_id":1,
+                              "first_name":1,
+                              "last_name":1,
+                              "cellphone":1,
+                              "ci":1,
+                              "programs":1,
+                              "profile.programs":1,
+                              "listaConModulos":1,
+                              "lista_eventos.modulars":1,
+                              "lista_eventos.name":1,
+                              "lista_eventos._id":1,
+                              "lista_eventos.inscriptions":1
+                        }},
+
+                        // {$unwind:'$lista_eventos.modulars'},
+                        // {$unwind:'$lista_eventos.modulars.modules'},
+                        // {$project:{
+                        //       "_id":1,
+                        //       "first_name":1,
+                        //       "last_name":1,
+                        //       "cellphone":1,
+                        //       "ci":1,
+                        //       "programs":1,
+                        //       // "profile.programs":1,
+                        //       "lista_eventos.modulars.modules":1,
+                        //       "lista_eventos.name":1,
+                        //       "lista_eventos._id":1,
+                        // }},
+                        // {$lookup:{
+                        //       from:"modulars",
+                        //       localField:"_id",
+                        //       foreignField:"persons",
+                        //       as:"lista_modulars",
+                        // }},
+                        // {$project:{
+                        //       "_id":1,
+                        //       "first_name":1,
+                        //       "last_name":1,
+                        //       "cellphone":1,
+                        //       "ci":1,
+                        //       "programs":1,
+                        //       "profile.programs":1,
+                        //       "lista_eventos.modulars.modules":1,
+                        //       "lista_modulars":1,
+                        //       "lista_eventos.name":1,
+                        //       "lista_eventos._id":1,
+                              
+                              
+                        // }},
+                  ],function(err,personas){
+                        if (err) { return res.status(400).send(err); }
+                        console.log(personas);
+                        // findModulars(personas);
+                        
+                        // return res.status(200).send(personas);  
+                        listaPersonasNivelacion=[];
+                        for(let p of personas){
+                              if(p.listaConModulos.length>0){
+                                    for(let unModulo of p.listaConModulos){
+                                          if (unModulo.assist==false){
+                                                
+                                                let nuevaPersona={};
+                                                nuevaPersona.first_name=p.first_name;
+                                                nuevaPersona._id=p._id;
+                                                nuevaPersona.modulesNivelacion=1;
+                                                
+                                                listaPersonasNivelacion.push(nuevaPersona);
+                                          }
+                                    }
+                              }else{
+                                    for(let i=1;i<p.lista_eventos.modulars.length;i++){
+                                          let nuevaPersona={};
+                                                nuevaPersona.first_name=p.first_name;
+                                                nuevaPersona._id=p._id;
+                                                nuevaPersona.modulesNivelacion=1;
+                                                
+                                                listaPersonasNivelacion.push(nuevaPersona); 
+                                    }
+                              }
+                        }
+                        
+                        return res.status(200).send(listaPersonasNivelacion);  
+                        
+                  })               
+            })
+            
+      })
+
+
       //////////////////////////////////////////////////////////////////////////////////77
       .post('/nivelacion/:id', function (req, res){
             db.events.findOne({ _id: req.body.eventId }, function (err, even) {

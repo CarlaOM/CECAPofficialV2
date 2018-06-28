@@ -1,24 +1,22 @@
-
-
 <div class="content-wrapper">
   <br>
   <div class="content">
     <div class="box box-primary">
       <div class="container">
-        <div>
-          <h1>Editar Programa</h1>
-          <form (ngSubmit)=" saveProgram()" #updateProgram="ngForm" >
+        <h1>Editar Programa</h1>
+        <div [hidden]="submitted">
+          <form (ngSubmit)=" saveProgram()" #addProgram="ngForm" >
             <div class="form-group col-sm-8">
                 <label for="name">Nombre del Programa</label>
                 <input type="text" pattern="[A-Za-zÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9 ]{3,42}" class="form-control" id="name" 
                 [(ngModel)]="programName" name="name" #name="ngModel" required />
-                <span *ngIf="!name.untouched && !name.valid && program.name == ''" class="text-alert">
+                <span *ngIf="!name.untouched && !name.valid && programName == ''" class="text-alert">
                 *Nombre de Programa requerido.
                 </span>
-                <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && program.name != '' && program.name.length>43" class="text-alert">
-                *Nombre de Programa inválido, excedió el límite de 42 caracteres.
+                <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && programName != '' && programName.length>43" class="text-alert">
+                *Nombre de Programa inválido, excedió el límite de caracteres.
                 </span>
-                <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && program.name != '' && 3>program.name.length" class="text-alert">
+                <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && programName != '' && programName.length<3" class="text-alert">
                 *Nombre de Programa inválido, tiene menos de 3 caracteres.
                 </span>
                 <!-- <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && program.name != '' && program.name.length<65 && program.name.length>2 " class="text-alert">
@@ -27,23 +25,23 @@
             </div>
             <div class="form-group col-sm-8">
                 <label for="details">Detalles</label>
-                <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9 .,¿?¡!-]{3,150}" class="form-control" id="ubicacion" 
+                <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9 .,¿?¡!-]{3,150}" class="form-control" id="details" 
                 [(ngModel)]="programDetails" name="details" #details="ngModel" required >
-                <span *ngIf="!details.valid && details.touched && program.details == ''" class="text-alert">
+                <span *ngIf="!details.valid && details.touched && programDetails == ''" class="text-alert">
                 *Detalle de Programa requerido.
-                <br></span>
-                <span *ngIf="details.dirty && details.touched && !details.valid && details.name != '' && program.details.length>150 " class="text-alert">
-                *Detalle de Programa inválido, excedió el límite de 150 caracteres.
-                <br></span>
-                <span *ngIf="!details?.pattern && details.dirty && details.touched && !details.valid && program.details != '' && program.details.length<3 " class="text-alert">
+                </span>
+                <span *ngIf="details.dirty && details.touched && !details.valid && details.name != '' && programDetails.length>150 " class="text-alert">
+                *Detalle de Programa inválido, excedió el límite de caracteres.
+                </span>
+                <span *ngIf="!details?.pattern && details.dirty && details.touched && !details.valid && programDetails != '' && programDetails.length<3 " class="text-alert">
                 *Detalle de Programa inválido, tiene menos de 3 caracteres.
-                <br></span>
+                </span>
                 <!-- <span *ngIf="!details?.pattern && details.dirty && details.touched && !details.valid && program.details != '' && program.details.length<151 && program.details.length>2 " class="text-alert">
                 *Detalle de Programa inválido, use .,-¿?¡! no se permiten otros símbolos.
                 </span> -->
             </div>
             <div class="form-group col-sm-8" style="text-align:center">
-              <button  type="submit" class="btn btn-success" [disabled]="!updateProgram.form.valid">Guardar</button>
+              <button  type="submit" class="btn btn-success" [disabled]="!addProgram.form.valid">Guardar</button>
               <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
             </div>
           </form>
