@@ -71,6 +71,7 @@ import { NivelacionComponent } from './event/nivelacion/nivelacion.component';
 import { WorkshopComponent } from "./workshop/workshop.component";
 import { PrintBatchCertificatesComponent } from "./event/print-batch-certificates/print-batch-certificates.component";
 import { ListaPesonsNivelacionComponent } from "./lista-pesons-nivelacion/lista-pesons-nivelacion.component";
+import { CorrelativeComponent } from './correlative/correlative.component';
 
 
 import { AuthGuard } from "./auth.guard";
@@ -146,6 +147,7 @@ const appRoutes: Routes = [
          { path: 'workshopListP/:id',component:WorkshopComponent},
          { path: 'imprimirLoteCertificados/:id',component:PrintBatchCertificatesComponent},
          { path: 'listaParaNivelar/:id',component:ListaPesonsNivelacionComponent},
+         { path: 'correlative', component:CorrelativeComponent},
       ]
    },
 

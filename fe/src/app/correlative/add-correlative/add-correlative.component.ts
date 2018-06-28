@@ -37,9 +37,9 @@ export class AddCorrelativeComponent implements OnInit {
           console.log(errorMessage);
       })
 
-      this.router.navigate(['/home/events'])
+      this.router.navigate(['/home/correlative'])
   }
   cancel(){
-    this.router.navigate(['home/events']);
+    this.router.navigate(['home/correlative']);
   }
 }
