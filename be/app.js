@@ -24,6 +24,16 @@ app
       next();
    });
 
+//    app.use(authChecker);
+//    app.use(app.router);
+
+//    function authChecker(req, res, next) {
+//         if (req.session.auth || req.path==='/login') {
+//             next();
+//         } else {
+//         res.redirect("/login");
+//         }
+//     }
 
 app.get('/', function (req, res) {
    res.sendfile('public/index.html', { root: __dirname })
@@ -48,10 +58,27 @@ app
    .use('/categoriaEgresos',require('./routes/categoriaEgresos'))
    .use('/modulars',require('./routes/modulars'))
    .use('/cajaPrincipal',require('./routes/cajaPrincipal'))
+
+   .use('/Mkt_users', require('./routes/Mkt_users'))
+   .use('/Mkt_events', require('./routes/Mkt_events'))
+   .use('/Mkt_carteras', require('./routes/Mkt_carteras'))
+   .use('/Mkt_facilitators', require('./routes/Mkt_facilitators'))
+   
+   .use('/Mkt_persons', require('./routes/Mkt_persons'))
+   .use('/Mkt_programs', require('./routes/Mkt_programs'))
+   .use('/Mkt_modules', require('./routes/Mkt_modules'))
+   .use('/Mkt_offices', require('./routes/Mkt_offices'))
+   .use('/Mkt_roles', require('./routes/Mkt_roles'))   
+   .use('/Mkt_company', require('./routes/Mkt_company'))
+   .use('/Mkt_lists', require('./routes/Mkt_lists'))  
+   .use('/Mkt_correlatives', require('./routes/Mkt_correlatives'))
+   .use('/Mkt_list',require('./routes/Mkt_list'))
    .use(function (err, req, res, next) { 
       console.error(err.stack);
       return res.status(err.status || 500).send('Not Found');
    });
+
+  
 
 //   db.
 //If need initialize db 
