@@ -487,7 +487,7 @@ router
                         }
                         //////////////////////////////////////////////////////////////////////////7
                         var result = {
-                          first_name:pers[0].first_name ,
+                          first_name:pers[0].first_name,
                           last_name: pers[0].last_name,
                           profile:pers[0].profile,
                           modularsPer: listModuls2

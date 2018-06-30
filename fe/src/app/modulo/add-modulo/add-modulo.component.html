@@ -27,7 +27,7 @@
                     *Nombre de Módulo requerido.
                     </span>
                     <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && modulo.name != '' && modulo.name.length>43" class="text-alert">
-                    *Nombre de Módulo inválido, excedió el límite de 42 caracteres.
+                    *Nombre de Módulo inválido, excedió el límite de caracteres.
                     </span>
                     <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && modulo.name != '' && 3>modulo.name.length" class="text-alert">
                     *Nombre de Módulo inválido, tiene menos de 3 caracteres.
@@ -47,7 +47,7 @@
                      *Detalle de Módulo requerido.
                     <br></span>
                     <span *ngIf="content.dirty && content.touched && !content.valid && content.name != '' && modulo.content.length>150 " class="text-alert">
-                     *Detalle de Módulo inválido, excedió el límite de 150 caracteres.
+                     *Detalle de Módulo inválido, excedió el límite de caracteres.
                      <br></span>
                     <span *ngIf="!content?.pattern && content.dirty && content.touched && !content.valid && modulo.content != '' && modulo.content.length<3 " class="text-alert">
                      *Detalle de Módulo inválido, tiene menos de 3 caracteres.

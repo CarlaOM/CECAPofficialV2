@@ -131,6 +131,7 @@ export class AddEjecutivoComponent implements OnInit {
  }
   asignarCartera(){
     this.carteraObject.user=this.newUser._id;
+    this.carteraObject.active=true;
     this._peticionesService.updateCartera(this.carteraObject).subscribe(
       result=>{
         var res=result;

@@ -16,10 +16,11 @@
       "debug": "*",
       "express": "*",
       "jade": "*",
-      "jsonwebtoken": "*",
+      "jsonwebtoken": "^8.3.0",
+      "jszip": "^3.1.5",
       "mongoose": "*",
       "morgan": "*",
-      "nodemon": "^1.17.3",
+      "nodemon": "^1.17.5",
       "save": "^2.3.2",
       "serve-favicon": "*",
       "xlsx": "^0.12.13"

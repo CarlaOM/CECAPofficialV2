@@ -12,14 +12,15 @@
                                         <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú]{3,20}[ ]{0,1}[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú]{0,20}" class="form-control" id="first_name" 
                                         [(ngModel)]="person.first_name" name="first_name" #firstname="ngModel" required />
                                         <span *ngIf="!firstname.valid && firstname.touched && person.first_name == ''" class="text-alert">
-                                        *Nombre requerido.
+                                        *Nombre de Persona requerido.
                                         </span>
-                                        <span *ngIf="firstname.dirty && firstname.touched && !firstname.valid && firstname.name != '' && person.first_name.length>20 " class="text-alert">
-                                        *Nombre inválido, excedió el límite de 20 caracteres por palabra.
-                                        <br></span>
+                                        <span *ngIf="!firstname?.pattern && firstname.dirty && firstname.touched && !firstname.valid && firstname.name != '' && person.first_name.length>20 " class="text-alert">
+                                        *Nombre de Persona inválido, excedió el límite de caracteres.
+                                        </span>
                                         <span *ngIf="!firstname?.pattern && firstname.dirty && firstname.touched && !firstname.valid && person.first_name != '' && person.first_name.length<3 " class="text-alert">
-                                        *Nombre inválido, tiene menos de 3 caracteres.
-                                        <br></span>
+                                        *Nombre de Persona inválido, tiene menos de 3 caracteres.
+                                        </span>
+                        
                                         <!-- <span *ngIf="!firstname?.pattern && firstname.dirty && firstname.touched && !firstname.valid && person.first_name != ''" class="text-alert">
                                         *Nombre inválido, no se pertimten símbolos.
                                         </span> -->
@@ -28,14 +29,14 @@
                                    <label for="last_name" class="control-label" >Apellidos</label>
                                        <input type="text" pattern="[A-Za-zÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú]{3,20}[ ]{0,1}[A-Za-zÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú]{0,20}" class="form-control" id="last_name" 
                                        [(ngModel)]="person.last_name" name="last_name" #lastname="ngModel" required />
-                                       <span *ngIf="!lastname.valid && lastname.touched && person.last_name == ''" class="text-alert">
-                                        *Apellido requerido.
+                                        <span *ngIf="!lastname.valid && lastname.touched && person.last_name == ''" class="text-alert">
+                                        *Apellido de Persona requerido.
                                         </span>
                                         <span *ngIf="!lastname?.pattern && lastname.dirty && lastname.touched && !lastname.valid && person.last_name != '' && person.last_name.length>20 " class="text-alert">
-                                        *Apellido inválido, excedió el límite de 20 caracteres por palabra.
+                                        *Apellido de Persona inválido, excedió el límite de caracteres.
                                         </span>
                                         <span *ngIf="!lastname?.pattern && lastname.dirty && lastname.touched && !lastname.valid && person.last_name != '' && person.last_name.length<3 " class="text-alert">
-                                        *Apellido inválido, tiene menos de 3 caracteres.
+                                        *Apellido de Persona inválido, tiene menos de 3 caracteres.
                                         </span>
                                         <!-- <span *ngIf="!lastname?.pattern && lastname.dirty && lastname.touched && !lastname.valid && person.last_name != '' && person.last_name.length < 61 && person.last_name.length > 2 " class="text-alert">
                                         *Apellido invalido no se permiten simbolos.
@@ -57,35 +58,35 @@
                                   <input type="number" pattern="[1-9][0-9]{6}" class="form-control" id="ci" 
                                   [(ngModel)]="person.ci" name="ci" #ci="ngModel" required/>
                                   <span *ngIf="!ci.valid && ci.touched" class="text-alert">
-                                          *CI de persona requerido o es inválido.
+                                          *CI de Persona requerido.
                                   </span>
                                   <span *ngIf="ci?.pattern && ci.touched" class="text-alert">
-                                    *CI de persona es inválido.
-                            </span>
+                                    *CI de Persona es inválido.
+                                  </span>
                           </div>
                           <div class="form-group col-sm-4">
                               <label for="cellphone" class="control-label" style="text-align: center">Celular</label>
                                   <input type="number" pattern="[6-7][0-9]{7}" class="form-control" id="cellphone" 
                                   [(ngModel)]="person.cellphone" name="cellphone" #cellphone="ngModel" required />
                                   <span *ngIf=" cellphone.touched && person.cellphone == null" class="text-alert">
-                                          *Celular de persona requerido.
+                                          *Celular de Persona requerido.
                                   </span>
                                   <span *ngIf="!cellphone?.pattern && cellphone.touched && !cellphone.valid" class="text-alert">
-                                        *Celular de persona inválido.
-                                </span>
+                                        *Celular de Persona inválido.
+                                  </span>
                                   <!-- <span *ngIf=" cellphone?.pattern && cellphone.touched" class="text-alert">
-                                    *Celular de persona inválido.
+                                    *Celular de Persona inválido.
                                   </span> -->
                           </div>
                           <div class="form-group col-sm-4">
                               <label for="phone" class="control-label" style="text-align: right">Teléfono</label>
                                   <input type="number" pattern="[4][0-9]{6}" class="form-control" id="phone" 
                                   [(ngModel)]="person.phone" name="phone" #phone="ngModel"/>
-                                  <span *ngIf="!phone.valid && phone.touched" class="text-alert">
-                                          *Telefono de persona requerido o es invalido.
-                                  </span>
+                                  <!-- <span *ngIf="!phone.valid && phone.touched" class="text-alert">
+                                          *Telefono de Persona requerido o es invalido.
+                                  </span> -->
                                   <span *ngIf="phone?.pattern && phone.touched" class="text-alert">
-                                    *Teléfono de persona es inválido.
+                                    *Teléfono de Persona es inválido.
                                 </span>
                           </div>
                       </div>
@@ -95,11 +96,11 @@
                                   <input type="email" pattern="[a-zA-Z.0-9-_]*[@][a-zA-Z]{3,15}[.][a-zA-Z]{2,15}" class="form-control" id="email" 
                                   
                                   [(ngModel)]="person.email" name="email" #email="ngModel" />
-                                  <span *ngIf="!email.valid && email.touched" class="text-alert">
-                                          *Email de persona requerido.
-                                  </span>
+                                  <!-- <span *ngIf="!email.valid && email.touched" class="text-alert">
+                                          *Email de Persona requerido.
+                                  </span> -->
                                   <span *ngIf="email?.pattern && email.touched" class="text-alert">
-                                    *Email de persona requerido.
+                                    *Email de Persona es inválido.
                                   </span>
                           </div>
                         </div>
@@ -148,52 +149,52 @@
                           <div class="form-group col-sm-6">
                             <br>
                             <p *ngIf="ocupSelected == 'estudiante'">
-                              <input type="text" pattern="[a-zA-Z]{3,20}([ ]{0,1}[a-zA-Z]{0,20}){0,4}" placeholder="Universidad" name="universidad" #universidad="ngModel" 
+                              <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú.]{0,20}[ ]{0,1}[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú.]{0,20}[ ]{0,1}[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú.]{0,20}" placeholder="Universidad" name="universidad" #universidad="ngModel" 
                               [(ngModel)]="descOcupation.universidad" class="form-control" />
                               <span *ngIf="!universidad.valid && universidad.touched" class="text-alert">
-                                  <h6>*Nombre de Universidad requerido.</h6> 
+                                  <h6>*Universidad  de Persona es inválido.</h6> 
                               </span>
                             </p>
                             <p *ngIf="ocupSelected == 'estudiante'">
-                                <input type="text" pattern="[a-zA-Z]{3,20}([ ]{0,1}[a-zA-Z]{0,20}){0,3}" placeholder="Carrera" name="carrera" #carrera="ngModel"
+                                <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú.]{0,20}[ ]{0,1}[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú.]{0,20}[ ]{0,1}[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú.]{0,20}" placeholder="Carrera" name="carrera" #carrera="ngModel"
                                  [(ngModel)]="descOcupation.carrera" class="form-control"/>
                                  <span *ngIf="!carrera.valid && carrera.touched" class="text-alert">
-                                    <h6>*Carrera de persona requerido.</h6>
+                                    <h6>*Carrera de Persona es inválido.</h6>
                                  </span> 
                               </p> 
                               <p *ngIf="ocupSelected == 'estudiante'">
-                                <input type="text" pattern="[a-zA-Z0-9]{1,20}([ ]{0,1}[a-zA-Z0-9]{0,20}){0,2}" placeholder="Semestre" name="semestre" #semestre="ngModel" 
+                                <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9.]{0,20}" placeholder="Semestre" name="semestre" #semestre="ngModel" 
                                 [(ngModel)]="descOcupation.semestre" class="form-control"  /> 
                                 <span *ngIf="!semestre.valid && semestre.touched" class="text-alert">
-                                    <h6>*Semestre de persona requerido.</h6>
+                                    <h6>*Semestre de Persona es inválido.</h6>
                                 </span>
                               </p>
                               <p *ngIf="ocupSelected == 'particular'">
-                                <input type="text" pattern="[a-zA-Z]{3,20}([ ]{0,1}[a-zA-Z]{0,20}){0,3}" placeholder="Area de Trabajo" name="areaTrabajo" #areaTrabajo="ngModel" 
+                                <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú.]{0,20}[ ]{0,1}[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú.]{0,20}[ ]{0,1}[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú.]{0,20}" placeholder="Area de Trabajo" name="areaTrabajo" #areaTrabajo="ngModel" 
                                 [(ngModel)]="descOcupation.areaTrabajo" class="form-control"  /> 
                                 <span *ngIf="!areaTrabajo.valid && areaTrabajo.touched" class="text-alert">
-                                    <h6>*Área de trabajo de persona requerido.</h6>
+                                    <h6>*Área de trabajo de Persona es inválido.</h6>
                                 </span>
                               </p> 
                               <p *ngIf="ocupSelected == 'profesional'">
-                                <input type="text" pattern="[a-zA-Z]{3,20}([ ]{0,1}[a-zA-Z]{0,20}){0,3}" placeholder="Profesion" name="profesion" #profesion="ngModel"
+                                <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú.]{0,20}[ ]{0,1}[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú.]{0,20}[ ]{0,1}[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú.]{0,20}" placeholder="Profesion" name="profesion" #profesion="ngModel"
                                  [(ngModel)]="descOcupation.profesion" class="form-control"  /> 
                                  <span *ngIf="!profesion.valid && profesion.touched" class="text-alert">
-                                    <h6>*Profesión de persona requerido.</h6>
+                                    <h6>*Profesión de Persona es inválido.</h6>
                                </span>
                               </p> 
                               <p *ngIf="ocupSelected == 'profesional'">
-                                <input type="text" pattern="[a-zA-Z]{3,20}([ ]{0,1}[a-zA-Z]{0,20}){0,3}" placeholder="Empresa" name="empresa" #empresa="ngModel"
+                                <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú.]{0,20}[ ]{0,1}[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú.]{0,20}[ ]{0,1}[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú.]{0,20}" placeholder="Empresa" name="empresa" #empresa="ngModel"
                                  [(ngModel)]="descOcupation.empresa" class="form-control"   /> 
                                  <span *ngIf="!empresa.valid && empresa.touched" class="text-alert">
-                                    <h6>*Nombre de Empresa requerido.</h6>
+                                    <h6>*Empresa de Persona es inválido.</h6>
                                 </span>
                               </p> 
                               <p *ngIf="ocupSelected == 'profesional'">
-                                <input type="text" pattern="[a-zA-Z]{3,20}([ ]{0,1}[a-zA-Z]{0,20}){0,3}" placeholder="Cargo" name="cargo" #cargo="ngModel" 
+                                <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú.]{0,20}[ ]{0,1}[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú.]{0,20}[ ]{0,1}[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú.]{0,20}" placeholder="Cargo" name="cargo" #cargo="ngModel" 
                                 [(ngModel)]="descOcupation.cargo" class="form-control"  />
                                 <span *ngIf="!cargo.valid && cargo.touched" class="text-alert">
-                                    <h6>*Cargo de persona requerido.</h6>
+                                    <h6>*Cargo de Persona es inválido.</h6>
                                 </span> 
                               </p>
                             </div>

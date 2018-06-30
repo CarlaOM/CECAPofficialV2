@@ -71,6 +71,7 @@ import { NivelacionComponent } from './event/nivelacion/nivelacion.component';
 import { WorkshopComponent } from "./workshop/workshop.component";
 import { PrintBatchCertificatesComponent } from "./event/print-batch-certificates/print-batch-certificates.component";
 import { ListaPesonsNivelacionComponent } from "./lista-pesons-nivelacion/lista-pesons-nivelacion.component";
+import { PermisosVistaComponent } from "./permisos-vista/permisos-vista.component";
 import { CorrelativeComponent } from './correlative/correlative.component';
 
 
@@ -101,20 +102,20 @@ const appRoutes: Routes = [
          { path: 'reports', component: ReportsComponent },
          { path: 'trimestral', component: ReportTrimestralComponent },
          { path: 'reportEvent/:id', component: ReportEventComponent },
-         { path: 'persons', component: PersonaComponent , },
+         { path: 'persons', component: PersonaComponent },
          { path: 'persons/add', component: AddPersonComponent },
          { path: 'persons/edit/:id', component: EditComponent },
          { path: 'persons/asistencia/:id', component: AsistenciaComponent },
          { path: 'cartera', component: CarteraComponent },
-         { path: 'cartera/add', component: AddCarteraComponent },
+         { path: 'cartera/add', component: AddCarteraComponent ,canActivate:[AuthGuard] },///////////authGuard
          { path: 'cartera/:id', component: InfoCarteraComponent },
-         { path: 'cartera/edit/:name', component: EditCarteraComponent },
+         { path: 'cartera/edit/:name', component: EditCarteraComponent ,canActivate:[AuthGuard] },///////////authGuard
          { path: 'ejecutivo', component: EjecutivoComponent },
-         { path: 'ejecutivo/add', component: AddEjecutivoComponent },
+         { path: 'ejecutivo/add', component: AddEjecutivoComponent ,canActivate:[AuthGuard] },///////////authGuard
          { path: 'ejecutivo/:id', component: InfoEjecutivoComponent },
-         { path: 'ejecutivo/edit/:active', component: EditEjecutivoComponent },
+         { path: 'ejecutivo/edit/:active', component: EditEjecutivoComponent ,canActivate:[AuthGuard] },///////////authGuard
          { path: 'sucursal', component: SucursalComponent },
-         { path: 'sucursal/add', component: AddSucursalComponent },
+         { path: 'sucursal/add', component: AddSucursalComponent,canActivate:[AuthGuard] },///////////authGuard
          { path: 'sucursal/detalleCaja', component: DetalleCajaComponent },
          { path: 'sucursal/detalleCaja/:id', component: DetalleCajaComponent },
          { path: 'sucursal/personal', component: DetallePersonalComponent },
@@ -141,12 +142,13 @@ const appRoutes: Routes = [
          { path: 'accountsModulars/:id', component: AccountsModularsComponent },
          { path: 'importFromExcel', component: ImportFromExcelComponent },
          { path: 'sucursal/sendToPrincipal',component:SendToPrincipalComponent},
-         { path: 'cajaPrincipal',component:PrincipalCashComponent},
+         { path: 'cajaPrincipal',component:PrincipalCashComponent,canActivate:[AuthGuard] },///////////authGuard
          { path: 'reporteEvento', component:ReporteEventosComponent},
          { path: 'workshop/:id', component:InscriptionWorkshopComponent},
          { path: 'workshopListP/:id',component:WorkshopComponent},
          { path: 'imprimirLoteCertificados/:id',component:PrintBatchCertificatesComponent},
          { path: 'listaParaNivelar/:id',component:ListaPesonsNivelacionComponent},
+         { path: 'error',component:PermisosVistaComponent},
          { path: 'correlative', component:CorrelativeComponent},
       ]
    },
