@@ -151,7 +151,7 @@ router
           cartera[i] = req.body[i];
          //  console.log(cartera[i]);  
        }
-       cartera.active=true;
+    //    cartera.active=true;
        cartera.save(function (err, cartera) {
           if (err) return res.status(400).send(err);
 
