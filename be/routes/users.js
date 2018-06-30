@@ -6,6 +6,9 @@ var db = require('../models/db');
 var router = express.Router();
 
 const fs = require('fs');
+var JSZip = require("jszip");
+var path = require('path');
+var mime = require('mime');
 // var mongojs = require('mongojs');
 // var db = mongojs('test', []); 
 
@@ -20,8 +23,8 @@ router
    //   })
    .get('/backup', function (req, res){
         //var collectionNames = db.getCollectionNames()[0];
-        var collections=db.getCollectionNames();
-        console.log(collections);
+        // var collections=db.getCollectionNames();
+        // console.log(collections);
         // console.log(collectionNames);
         // db.collectionNames[0].find({},function(err, col){
         //   if (err) return res.status(400).send(err);
@@ -32,8 +35,136 @@ router
         db.events.find({},function(err, col){
           if (err) return res.status(400).send(err);
           saveWriteFile(col, 'events');
-        
-          return res.status(200).send(events);
+          db.carteras.find({},function(err, col){
+            if (err) return res.status(400).send(err);
+            saveWriteFile(col, 'carteras');
+            db.cashFlowOffices.find({},function(err, col){
+                if (err) return res.status(400).send(err);
+                saveWriteFile(col, 'cashFlowOffices');
+                db.cashFlowPrincipal.find({},function(err, col){
+                    if (err) return res.status(400).send(err);
+                    saveWriteFile(col, 'cashFlowPrincipal');
+                    db.cashFlowUsers.find({},function(err, col){
+                        if (err) return res.status(400).send(err);
+                        saveWriteFile(col, 'cashFlowUsers');
+                        db.categoriaEgresos.find({},function(err, col){
+                            if (err) return res.status(400).send(err);
+                            saveWriteFile(col, 'categoriaEgresos');
+                            db.company.find({},function(err, col){
+                                if (err) return res.status(400).send(err);
+                                saveWriteFile(col, 'company');
+                                db.correlatives.find({},function(err, col){
+                                    if (err) return res.status(400).send(err);
+                                    saveWriteFile(col, 'correlatives');
+                                    db.facilitators.find({},function(err, col){
+                                        if (err) return res.status(400).send(err);
+                                        saveWriteFile(col, 'facilitators');
+                                        db.lists.find({},function(err, col){
+                                            if (err) return res.status(400).send(err);
+                                            saveWriteFile(col, 'lists');
+                                            db.modulars.find({},function(err, col){
+                                                if (err) return res.status(400).send(err);
+                                                saveWriteFile(col, 'modulars');
+                                                db.modules.find({},function(err, col){
+                                                    if (err) return res.status(400).send(err);
+                                                    saveWriteFile(col, 'modules');
+                                                    db.offices.find({},function(err, col){
+                                                        if (err) return res.status(400).send(err);
+                                                        saveWriteFile(col, 'offices');
+                                                        db.persons.find({},function(err, col){
+                                                            if (err) return res.status(400).send(err);
+                                                            saveWriteFile(col, 'persons');
+                                                            db.programs.find({},function(err, col){
+                                                                if (err) return res.status(400).send(err);
+                                                                saveWriteFile(col, 'programs');
+                                                                db.roles.find({},function(err, col){
+                                                                    if (err) return res.status(400).send(err);
+                                                                    saveWriteFile(col, 'roles');
+                                                                    db.users.find({},function(err, col){
+                                                                        if (err) return res.status(400).send(err);
+                                                                        
+                                                                        
+                                ///////////////////////////////////////////////////////////////////
+    //////////////////////--------------------MKT-DATA----------------//////////////////////////////
+                            db.mkt_roles.find({},function(err, col){
+                                if (err) return res.status(400).send(err);
+                                saveWriteFile(col, 'mkt_roles');
+                                db.mkt_users.find({},function(err, col){
+                                    if (err) return res.status(400).send(err);
+                                    saveWriteFile(col, 'mkt_users');
+                                    db.mkt_carteras.find({},function(err, col){
+                                        if (err) return res.status(400).send(err);
+                                        saveWriteFile(col, 'mkt_carteras');
+                                        db.mkt_persons.find({},function(err, col){
+                                            if (err) return res.status(400).send(err);
+                                            saveWriteFile(col, 'mkt_persons');
+                                            db.mkt_facilitators.find({},function(err, col){
+                                                if (err) return res.status(400).send(err);
+                                                saveWriteFile(col, 'mkt_facilitators');
+                                                db.mkt_listExtra.find({},function(err, col){
+                                                    if (err) return res.status(400).send(err);
+                                                    saveWriteFile(col, 'mkt_listExtra');
+                                                    db.mkt_events.find({},function(err, col){
+                                                        if (err) return res.status(400).send(err);
+                                                        saveWriteFile(col, 'mkt_events');
+                                                        db.mkt_lists.find({},function(err, col){
+                                                            if (err) return res.status(400).send(err);
+                                                            saveWriteFile(col, 'mkt_lists');
+                                                            db.mkt_programs.find({},function(err, col){
+                                                                if (err) return res.status(400).send(err);
+                                                                saveWriteFile(col, 'mkt_programs');
+                                                                db.mkt_modules.find({},function(err, col){
+                                                                    if (err) return res.status(400).send(err);
+                                                                    saveWriteFile(col, 'mkt_modules');
+                                                                    db.mkt_offices.find({},function(err, col){
+                                                                        if (err) return res.status(400).send(err);
+                                                                        saveWriteFile(col, 'mkt_offices');
+                                                                        db.mkt_company.find({},function(err, col){
+                                                                            if (err) return res.status(400).send(err);
+                                                                            saveWriteFile(col, 'mkt_company');
+                                                                            db.mkt_correlatives.find({},function(err, col){
+                                                                                if (err) return res.status(400).send(err);
+                                                                                saveWriteFile(col, 'mkt_correlatives');
+                                                                                var zip = new JSZip();
+                                                                                //var file = zip.folder('./backups');
+                                                                                // console.log(file);
+                                                                                // console.log('el contenido del archivo')
+                                                                                // res.download(file);
+                                                                                // var filePath = "./backups"; 
+                                                                                // var fileName = "carteras.json";
+                                                                                //res.download(filePath, fileName);
+                                                                                saveFileZip(zip.folder('./backups'))
+                                                                                res.sendfile('./backups/file.zip')                                      
+                                                                                });                                            
+                                                                            });                                            
+                                                                        });                                            
+                                                                    });                                           
+                                                                });                                            
+                                                            });                                            
+                                                        });                                           
+                                                    });                                           
+                                                });                                           
+                                            });                                           
+                                        });                                           
+                                    });                                           
+                                });                            
+                                                                      });
+                                                                  });
+                                                              });
+                                                          });
+                                                      });
+                                                  });
+                                              });
+                                          });
+                                      });
+                                  });
+                              });
+                          });
+                      });
+                  });
+              });
+          });
+          //return res.status(200).send(events);
         });
         function saveWriteFile(date, dbName){
          // var content = JSON.parse(JSON.stringify(events));
@@ -44,10 +175,23 @@ router
                     console.log(err);
                     //return res.status(400).send(err);
                 }
-                console.log("El archivo $dbName fue Guardado!");
+                console.log("El archivo " +dbName+" fue Guardado!");
                 //return res.status(200).send(events);
             });
         }
+        function saveFileZip( fileZip){
+            // var content = JSON.parse(JSON.stringify(events));
+               
+               var ruta = "./backups/casa";
+               fs.writeFile(ruta, fileZip, function (err) {
+                   if (err) {
+                       console.log(err);
+                       //return res.status(400).send(err);
+                   }
+                   console.log("El archivo ZIP fue Guardado!");
+                   //return res.status(200).send(events);
+               });
+           }
     })
    .get('/', function (req, res) {
       db.users.find({}, { name: 1, active: 1, password_hash: 1, rol: 1 }, function (err, users) {
