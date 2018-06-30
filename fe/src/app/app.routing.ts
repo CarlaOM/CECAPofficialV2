@@ -83,8 +83,8 @@ const appRoutes: Routes = [
       path: 'home', component: HomeComponent,
       children: [
          { path: 'home', redirectTo: 'home', pathMatch: 'full' },
-         { path: 'events', component: EventsComponent,canActivate:[AuthGuard], },
-        //  { path: 'events', component: EventsComponent, },
+        //  { path: 'events', component: EventsComponent,canActivate:[AuthGuard], },
+         { path: 'events', component: EventsComponent, },
         
          //{ path: 'events/alert', component: AlertComponent },
          { path: 'events/add', component: AddEventComponent },

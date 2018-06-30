@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class AddSucursalComponent implements OnInit {
 
-  public office: Offices;
+  public office;
   public companys;
   constructor(
       private _peticionSucursalService: SucursalService,
