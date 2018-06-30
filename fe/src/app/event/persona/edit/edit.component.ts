@@ -101,7 +101,8 @@ captOcupation(){
       result =>{
         var res = result;
         console.log(res);
-        this.router.navigate(['home/persons']); 
+        // this.router.navigate(['home/persons']);
+        window.history.back();
         alert('La edición se guardó correctamente');
       },
       error=>{
@@ -112,6 +113,7 @@ captOcupation(){
   );
  }
  cancel() {
-  this.router.navigate(['/home/persons']);
+  // this.router.navigate(['/home/persons']);
+  window.history.back();
  }
 }

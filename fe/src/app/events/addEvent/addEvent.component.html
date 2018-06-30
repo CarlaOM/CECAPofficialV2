@@ -12,11 +12,11 @@
                      <label for="name" class="control-label">Nombre del Evento</label>
                      <!-- pattern="[a-zA-Z]{3,20}[ ]{0,1}[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" -->
                      <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9]{3,20}[ ]{0,1}[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" class="form-control" id="name" [(ngModel)]="model.name" name="name" #name="ngModel" required />
-                     <span *ngIf="!name.valid && name.touched && model.name == ''" class="text-alert">
+                        <span *ngIf="!name.valid && name.touched && model.name == ''" class="text-alert">
                         *Nombre del Evento requerido o nombre invalido.
                         </span>
                         <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && model.name != '' && model.name.length>43" class="text-alert">
-                        *Nombre del Evento inválido, excedió el límite de 42 caracteres.
+                        *Nombre del Evento inválido, excedió el límite de caracteres.
                         </span>
                         <span *ngIf="!name?.pattern && name.dirty && name.touched && !name.valid && model.name != '' && model.name.length<3" class="text-alert">
                         *Nombre del Evento, tiene menos de 3 caracteres.
@@ -33,7 +33,7 @@
                         *Descripción de Evento requerido.
                      </span>
                      <span *ngIf="descripcion.dirty && descripcion.touched && !descripcion.valid && model.description != '' && model.description.length>150 " class="text-alert">
-                        *Detalle del Evento inválido, excedió el límite de 150 caracteres.
+                        *Detalle del Evento inválido, excedió el límite de caracteres.
                         <br></span>
                          <span *ngIf="!descripcion?.pattern && descripcion.dirty && descripcion.touched && !descripcion.valid && model.description != ''&& model.description.length<3 " class="text-alert">
                         *Detalle del Evento inválido, tiene menos de 3 caracteres.
