@@ -22,6 +22,7 @@ export class AddFinalWorkComponent implements OnInit {
   ) {
     this.model = new FinalWork(new Date(), "", "", "", "", null);
   }
+  
   ngOnInit() {
     this.route.params.subscribe(params => {
       var arrayIds = params.id.split('-');
