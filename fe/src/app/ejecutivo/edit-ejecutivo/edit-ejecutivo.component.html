@@ -48,7 +48,6 @@
           <div class="form-group col-sm-8">
               <label for="correo">Correo</label>
               <input type="correo"  pattern="[a-zA-Z.0-9_-]{1,30}[@][a-z]{3,15}[.][a-zA-Z]{2,15}" class="form-control" id="correo"
-                     required
                      [(ngModel)]="ejecutivoCorreo" name="correo"
                      #correo="ngModel">
               <div [hidden]="correo?.valid || correo?.pristine"

@@ -53,7 +53,7 @@ router
             db.users.findOne({_id:req.params.id},function(err,user){
                   db.events.find({offices:user.offices, active:true, date_start: { $gt: d }},{ name: 1, description: 1, date_start: 1, modulars: 1, inscriptions: 1, total: 1, programs: 1 },function(err,event){
                   if (err) return res.status(400).send(err);
-                  return res.status(200).send(events);
+                  return res.status(200).send(event);
                   
 
                   })
