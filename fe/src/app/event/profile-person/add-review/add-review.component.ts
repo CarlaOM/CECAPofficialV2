@@ -12,7 +12,7 @@ import { Review } from '../../../modelo/review';
 export class AddReviewComponent implements OnInit {
   public profileId;  
   public personId;
-  public model: Review;
+  public model;
   public details;
   public reviews;
   

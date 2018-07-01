@@ -72,7 +72,11 @@ export class PersonaComponent implements OnInit {
     }
   }
   cambiarLista(){
+    if(this.searchText != ""){
     this.mostrar = this.listado_personas;
+  }else{
+    this.mostrarPer();
+  }
   }
   mostrarPer(){
     this.page = 1;
