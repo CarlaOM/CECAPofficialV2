@@ -355,7 +355,7 @@ router
       req.body._id = undefined;
       var _user = req.body;
       _user.active = true;
-      _user.password_hash = _user.name;
+    //   _user.password_hash = _user.name;
 
       var user_model = new db.users(_user);
       user_model.token = jwt.sign(user_model._id + '' + user_model.record_date, 'AltaPrecision'); //FIX
