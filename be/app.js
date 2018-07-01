@@ -1,4 +1,5 @@
 var express = require('express');
+const session = require('express-session');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
 var body_parser = require('body-parser');
@@ -11,7 +12,9 @@ process.env.TZ = 'America/La_Paz';
 
 //middlewares
 app
-   .use(cors())
+    .use(cors({
+    origin:["http://localhost:4200","http://localhost:4210"],
+    credentials:true}))
    .use(compression())
    .use('/', express.static(__dirname + '/public'))
    .use(morgan('dev'))
@@ -23,6 +26,12 @@ app
       req.body.token = token;
       next();
    });
+
+   app.use(session({
+    secret:'secret',
+    resave:false,
+    saveUninitialized:true
+}));
 
 //    app.use(authChecker);
 //    app.use(app.router);
