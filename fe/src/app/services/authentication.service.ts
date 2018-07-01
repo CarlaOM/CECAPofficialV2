@@ -52,7 +52,7 @@ export class AuthService {
     }
     getToken(){
         console.log(localStorage.getItem('idToken'))
-        // return localStorage.getItem('idToken');
+        return localStorage.getItem('idToken');
     }
 
     public isLoggedIn() {
