@@ -26,7 +26,7 @@ export class AuthService {
             let body = JSON.stringify(user);	
             console.log(body);
             var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
-            return this._http.post(this.url + 'auth/loginAuth/', body, { headers: headers }).map((res: Response) => res)
+            return this._http.post(this.url + 'auth/loginAuth/', body, { headers: headers ,withCredentials:true}).map((res: Response) => res)
                                                     // .do(res=>this.setSession)
                                                     // .shareReplay();		
             
@@ -49,6 +49,12 @@ export class AuthService {
         Identity.name='';
         Identity.password_hash='';
         Identity.rol='';
+
+        let body = JSON.stringify(Identity._id);	
+            console.log('asdfasfadfasdfasf');
+            var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
+            return this._http.post(this.url + 'auth/logOut/',body, { headers: headers ,withCredentials:true},).map((res: Response) => res)
+
     }
     getToken(){
         console.log(localStorage.getItem('idToken'))
