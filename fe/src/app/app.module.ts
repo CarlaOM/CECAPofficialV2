@@ -112,7 +112,11 @@ import { CorrelativeComponent } from './correlative/correlative.component';
 import { AuthGuard } from "./auth.guard";
 import { RouterModule } from '@angular/router';
 import { PermisosVistaComponent } from './permisos-vista/permisos-vista.component';
-import { JwtInterceptor } from "./jwt.interceptor";
+import { JwtInterceptor } from "./jwt.interceptor";//////este ya no se usa
+
+// import { TokenInterceptor } from "./services/token.interceptor";
+
+
 
 
 @NgModule({
