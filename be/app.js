@@ -73,6 +73,8 @@ app
    .use('/Mkt_lists', require('./routes/Mkt_lists'))  
    .use('/Mkt_correlatives', require('./routes/Mkt_correlatives'))
    .use('/Mkt_list',require('./routes/Mkt_list'))
+   .use('/auth',require('./routes/auth'))
+
    .use(function (err, req, res, next) { 
       console.error(err.stack);
       return res.status(err.status || 500).send('Not Found');

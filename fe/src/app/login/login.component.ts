@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     private _router: Router,
     private _userService: UserService,
     private _authenticationService: AuthService,
-    protected localStorage: AsyncLocalStorage
+    // protected localStorage: AsyncLocalStorage
   ) {
     this.title = 'CECAP COMPANY';
     this.user = new User('', '', null, '', '');
@@ -59,110 +59,110 @@ export class LoginComponent implements OnInit {
 
     console.log(nuevoUsuarioLogin.password_hash);
 
-    // if ((this.user.name == 'a') || (this.user.name == 'e') || (this.user.name == 'i')) {
+    if ((this.user.name == 'a') || (this.user.name == 'e') || (this.user.name == 'i')) {
 
-    //   this._authenticationService.login(this.user).subscribe(response => {
-    //     this.jsonWebToken = response;
-    //     console.log(this.jsonWebToken);
-    //     if (!this.jsonWebToken || !this.jsonWebToken.idToken) {
-    //       alert('Usuario Incorrecto');
-    //     } else {
-    //       Identity._id = this.jsonWebToken.identity._id;
-    //       Identity.rol = this.jsonWebToken.identity.rol;
-    //       Identity.name = this.user.name;
-    //       localStorage.setItem('idToken', this.jsonWebToken.idToken);
+      this._authenticationService.login(this.user).subscribe(response => {
+        this.jsonWebToken = response;
+        console.log(this.jsonWebToken);
+        if (!this.jsonWebToken || !this.jsonWebToken.idToken) {
+          alert('Usuario Incorrecto');
+        } else {
+          Identity._id = this.jsonWebToken.identity._id;
+          Identity.rol = this.jsonWebToken.identity.rol;
+          Identity.name = this.user.name;
+          localStorage.setItem('idToken', this.jsonWebToken.idToken);
 
-    //       localStorage.setItem("expiresIn", JSON.stringify(this.jsonWebToken.expiresIn));
-
-
-    //       this._router.navigate(['/']);
-
-    //     }
-    //   },
-    //     error => {
-    //       //console.log(<any>error);
-    //       alert('Usuario Incorrecto');
-    //       var errorMessage = <any>error;
-    //       if (errorMessage != null) {
-    //         var body = JSON.parse(error.body);
-    //         this.status = 'error';
-    //       }
-
-    //     }
-    //   );
+          localStorage.setItem("expiresIn", JSON.stringify(this.jsonWebToken.expiresIn));
 
 
-    // } else {
-    //   this._authenticationService.login(nuevoUsuarioLogin).subscribe(response => {
-    //     this.jsonWebToken = response;
-    //     console.log(this.jsonWebToken);
-    //     if (!this.jsonWebToken || !this.jsonWebToken.idToken) {
-    //       alert('Usuario Incorrecto');
-    //     } else {
-    //       Identity._id = this.jsonWebToken.identity._id;
-    //       Identity.rol = this.jsonWebToken.identity.rol;
-    //       Identity.name = this.user.name;
-    //       localStorage.setItem('idToken', this.jsonWebToken.idToken);
+          this._router.navigate(['/']);
 
-    //       localStorage.setItem("expiresIn", JSON.stringify(this.jsonWebToken.expiresIn));
-
-
-    //       this._router.navigate(['/']);
-
-    //     }
-    //   },
-    //     error => {
-    //       //console.log(<any>error);
-    //       alert('Usuario Incorrecto');
-    //       var errorMessage = <any>error;
-    //       if (errorMessage != null) {
-    //         var body = JSON.parse(error.body);
-    //         this.status = 'error';
-    //       }
-
-    //     }
-    //   );
-
-    // }
-
-
-
-
-    this._userService.getPassword(this.user.name).subscribe(
-        Response => {
-          this.passO = Response;
-          this.pass = this.passO.password_hash;
-        },
-        error => {
-          var err = error;  
         }
-    )
-
-    this._userService.signin(this.user).subscribe(
-       response => {
-          this.identity = response;
-          if (!this.identity || !this.identity._id) {
-             alert('Usuario Incorrecto');
-          } else {
-             Identity._id = this.identity._id;
-             Identity.rol = this.identity.rol;
-             Identity.name = this.user.name;
-             this.localStorage.setItem('Identity', { _id: this.identity._id }).subscribe(() => { console.log('verifico el usuario') });
-             this._router.navigate(['/']);
-
-          }
-       },
-       error => {
+      },
+        error => {
           //console.log(<any>error);
           alert('Usuario Incorrecto');
           var errorMessage = <any>error;
           if (errorMessage != null) {
-             var body = JSON.parse(error.body);
-             this.status = 'error';
+            var body = JSON.parse(error.body);
+            this.status = 'error';
           }
 
-       }
-    );
+        }
+      );
+
+
+    } else {
+      this._authenticationService.login(nuevoUsuarioLogin).subscribe(response => {
+        this.jsonWebToken = response;
+        console.log(this.jsonWebToken);
+        if (!this.jsonWebToken || !this.jsonWebToken.idToken) {
+          alert('Usuario Incorrecto');
+        } else {
+          Identity._id = this.jsonWebToken.identity._id;
+          Identity.rol = this.jsonWebToken.identity.rol;
+          Identity.name = this.user.name;
+          localStorage.setItem('idToken', this.jsonWebToken.idToken);
+
+          localStorage.setItem("expiresIn", JSON.stringify(this.jsonWebToken.expiresIn));
+
+
+          this._router.navigate(['/']);
+
+        }
+      },
+        error => {
+          //console.log(<any>error);
+          alert('Usuario Incorrecto');
+          var errorMessage = <any>error;
+          if (errorMessage != null) {
+            var body = JSON.parse(error.body);
+            this.status = 'error';
+          }
+
+        }
+      );
+
+    }
+
+
+
+
+    // this._userService.getPassword(this.user.name).subscribe(
+    //     Response => {
+    //       this.passO = Response;
+    //       this.pass = this.passO.password_hash;
+    //     },
+    //     error => {
+    //       var err = error;  
+    //     }
+    // )
+
+    // this._userService.signin(this.user).subscribe(
+    //    response => {
+    //       this.identity = response;
+    //       if (!this.identity || !this.identity._id) {
+    //          alert('Usuario Incorrecto');
+    //       } else {
+    //          Identity._id = this.identity._id;
+    //          Identity.rol = this.identity.rol;
+    //          Identity.name = this.user.name;
+    //          this.localStorage.setItem('Identity', { _id: this.identity._id }).subscribe(() => { console.log('verifico el usuario') });
+    //          this._router.navigate(['/']);
+
+    //       }
+    //    },
+    //    error => {
+    //       //console.log(<any>error);
+    //       alert('Usuario Incorrecto');
+    //       var errorMessage = <any>error;
+    //       if (errorMessage != null) {
+    //          var body = JSON.parse(error.body);
+    //          this.status = 'error';
+    //       }
+
+    //    }
+    // );
   }
 
   //  guardarSesion(){
