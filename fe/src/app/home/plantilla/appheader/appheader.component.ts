@@ -25,13 +25,13 @@ export class AppheaderComponent implements OnInit {
         this.nameUser = Identity.name;
     }
     logOut() {
-        this._authService.logout();
-        this._router.navigate(['/login']);
-        //   this.localStorage.removeItem('Identity').subscribe(() => { });
-        //   Identity._id = '';
-        //   Identity.rol = '';
-        //   Identity.name = '';
-        //   this._router.navigate(['/login']);
+        // this._authService.logout();
+        // this._router.navigate(['/login']);
+          this.localStorage.removeItem('Identity').subscribe(() => { });
+          Identity._id = '';
+          Identity.rol = '';
+          Identity.name = '';
+          this._router.navigate(['/login']);
     }
     backup() {
         this._peticionesService.backup().subscribe(
