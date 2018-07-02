@@ -51,13 +51,13 @@ export class AuthService {
         Identity.rol='';
 
         let body = JSON.stringify(Identity._id);	
-            console.log('asdfasfadfasdfasf');
+            
             var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
             return this._http.post(this.url + 'auth/logOut/',body, { headers: headers ,withCredentials:true},).map((res: Response) => res)
 
     }
     getToken(){
-        console.log(localStorage.getItem('idToken'))
+        // console.log(localStorage.getItem('idToken'))
         return localStorage.getItem('idToken');
     }
 

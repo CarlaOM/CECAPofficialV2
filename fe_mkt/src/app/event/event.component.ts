@@ -56,7 +56,7 @@ export class EventComponent implements OnInit, AfterViewInit {
       this._peticionesService.getList(this.personId).subscribe(
          result => {
             this.list = result;
-            console.log(this.list);
+            // console.log(this.list);
             //  if(personList == null){
             //  }
          },
@@ -74,13 +74,13 @@ export class EventComponent implements OnInit, AfterViewInit {
       else { this.color = 'rojo' }
    }
    filter(modular_id){
-      console.log(modular_id);
+      // console.log(modular_id);
 // solicitar lista de personas inscritas por modulo
    }
    queryEventId() {
       this.route.params.subscribe(params => {
          this.eventId = params.id;
-         console.log(this.eventId)
+      //    console.log(this.eventId)
       });
    }
    query() {
@@ -89,7 +89,7 @@ export class EventComponent implements OnInit, AfterViewInit {
             this.event = result;
             this.queryModules();
 
-            console.log(this.event);
+            // console.log(this.event);
             this.inscriptions = this.event.inscriptions;
 
             //prueba total

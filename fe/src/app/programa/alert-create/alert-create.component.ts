@@ -24,11 +24,11 @@ export class AlertCreateComponent implements OnInit {
   queryPrograms(){
     this._peticionesService.getPrograms().subscribe(response => {
         this.programs = response;
-        console.log(this.programs.length);
+        // console.log(this.programs.length);
        },
        error=>{
         var errorMessage = <any>error;
-        console.log(errorMessage);
+        // console.log(errorMessage);
        }
       );
    }

@@ -83,7 +83,7 @@ export class InfoPendingCashComponent implements OnInit {
 
                 this._peticionesService.confirmCashFlowUser(this.pendingCashId).subscribe(response=>{
                         this.confirmedCash=response;
-                        console.log(this.confirmedCash);
+                        // console.log(this.confirmedCash);
 
                       let cashFlowOfficeDetail={} as DetailCashFlowOffice;
                       cashFlowOfficeDetail.cashFlowUser=this.confirmedCash._id;

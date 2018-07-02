@@ -32,11 +32,11 @@ export class InfoEjecutivoComponent implements OnInit {
 
     this._peticionesService.getCarteras().subscribe(response=>{
       this.carteras=response;
-      console.log(this.carteras);
+      // console.log(this.carteras);
     });
     this._peticionesService.getSucursales().subscribe(response=>{
       this.sucursales=response;
-      console.log(this.sucursales)
+      // console.log(this.sucursales)
     });
     this.queryEjecutivoId();
     this.findEjecutivo();
@@ -44,7 +44,7 @@ export class InfoEjecutivoComponent implements OnInit {
   queryEjecutivoId(){
     this.route.params.subscribe(params => {
     this.ejecutivoId=params.id;
-    console.log(this.ejecutivo);
+    // console.log(this.ejecutivo);
  });
 }
 
@@ -52,7 +52,7 @@ export class InfoEjecutivoComponent implements OnInit {
     this._peticionesService.getOneUser(this.ejecutivoId).subscribe(
        result =>{
          this.ejecutivo=result;
-         console.log(this.ejecutivo);
+        //  console.log(this.ejecutivo);
          this.findRol(this.ejecutivo.rol);
          
        },
@@ -62,13 +62,13 @@ export class InfoEjecutivoComponent implements OnInit {
  }
 
  findRol(idRol){
-   console.log(idRol);
+  //  console.log(idRol);
 
   this._peticionesService.getRole(idRol).subscribe(
     result =>{
 
       this.rolUser=result;
-      console.log(this.rolUser)
+      // console.log(this.rolUser)
       this.findCartera(this.ejecutivoId);
     },
     error =>{
@@ -80,7 +80,7 @@ export class InfoEjecutivoComponent implements OnInit {
     result =>{
 
       this.carteraReturned=result;
-      console.log(this.carteraReturned)
+      // console.log(this.carteraReturned)
 
       this.findSucursal(this.ejecutivo.offices);
     },
@@ -91,12 +91,12 @@ export class InfoEjecutivoComponent implements OnInit {
  }
  findSucursal(sucursalId){
 
-  console.log(sucursalId);
+  // console.log(sucursalId);
     this._peticionesService.getSucursal(sucursalId).subscribe(
     result =>{
 
       this.sucursalReturned=result;
-      console.log(this.sucursalReturned)
+      // console.log(this.sucursalReturned)
 
      
     },

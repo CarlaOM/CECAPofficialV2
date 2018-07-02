@@ -47,7 +47,7 @@ export class IngresoComponent implements OnInit {
     this._peticionesService.getEvents().subscribe(response =>{
 
       this.eventos=response;
-      console.log(this.eventos);
+      // console.log(this.eventos);
     })
 
   }

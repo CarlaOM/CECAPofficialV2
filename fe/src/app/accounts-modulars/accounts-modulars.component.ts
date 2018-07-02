@@ -27,7 +27,7 @@ export class AccountsModularsComponent implements OnInit {
   queryModulars(){
     this.route.params.subscribe(params => {
       this.eventId = params.id;
-      // console.log(this.eventId)
+      // //console.log(this.eventId)
     });
     this._peticionesService.getModulars(this.eventId).subscribe(
       result => {
@@ -42,12 +42,12 @@ export class AccountsModularsComponent implements OnInit {
         //         this.modules.pop();
         //     }
         // }
-         console.log('aqui los modules Objedts');
-         console.log(this.modules);
+         //console.log('aqui los modules Objedts');
+         //console.log(this.modules);
       },
       error=>{
         var errorMessage = <any>error;
-         console.log(errorMessage);
+         //console.log(errorMessage);
       }
     );
   }
@@ -55,19 +55,19 @@ export class AccountsModularsComponent implements OnInit {
     this._peticionesService.getEvent(this.eventId).subscribe(
        result => {
           this.event = result;
-          // console.log(this.event);
+          // //console.log(this.event);
        },
        error => {
-          console.log(<any>error);
+          //console.log(<any>error);
        });
   }
   filterModular(modular_id){
-    console.log(modular_id);
+    //console.log(modular_id);
     //returned object 
     this._peticionesService.getAcconutsModulars(modular_id+'-'+this.eventId).subscribe(
       res =>{
           this.account = res;
-          console.log(this.account);
+          // console.log(this.account);
       },
       error =>{
         console.error(<any>error());

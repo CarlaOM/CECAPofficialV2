@@ -79,7 +79,7 @@ export class InfoCarteraComponent implements OnInit {
       this.user=response;
       this.userName=this.user.name;
       this.userRecordDate=this.user.record_date;
-      console.log(this.user);
+      // console.log(this.user);
     });
     
     

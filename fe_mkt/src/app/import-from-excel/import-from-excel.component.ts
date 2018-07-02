@@ -50,8 +50,8 @@ export class ImportFromExcelComponent implements OnInit {
     this._peticionesService.getPrograms().subscribe(response => {
       this.programs = response;
       this.llenarProgramsCheckbox();
-      console.log(this.programs);
-      console.log("hi")
+      // console.log(this.programs);
+      // console.log("hi")
     },
       error => {
         var errorMessage = <any>error;
@@ -75,10 +75,10 @@ export class ImportFromExcelComponent implements OnInit {
         newInteres.push(npc);
       }
     }
-    console.log(newInteres);
+    // console.log(newInteres);
     // this.person.interes = newInteres;
     this._peticionesService.postFile(this.fileToUpload, this.cartera, newInteres).subscribe(data => {
-      console.log(data, 'si se puede, si se puede')
+      // console.log(data, 'si se puede, si se puede')
 
       this.router.navigate(['home/persons']);
 

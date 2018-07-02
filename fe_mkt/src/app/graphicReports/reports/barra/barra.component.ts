@@ -25,11 +25,11 @@ export class BarraComponent implements OnInit {
  
   // events
   public chartClicked(e:any):void {
-    console.log(e);
+    // console.log(e);
   }
  
   public chartHovered(e:any):void {
-    console.log(e);
+    // console.log(e);
   }
  
   public randomize():void {
@@ -62,7 +62,7 @@ export class BarraComponent implements OnInit {
           // console.log(e)
           // event.inscritos = sum;
        });
-       console.log(this.events)
+      //  console.log(this.events)
          this.inscriptions = this.events.inscritos;
       },
       error => {

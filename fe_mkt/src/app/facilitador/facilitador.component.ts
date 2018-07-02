@@ -47,7 +47,7 @@ export class facilitadorComponent implements OnInit {
     this._peticionesService.getFacilitadores().subscribe(
       result => {
          this.facilitadores = result;
-         console.log(this.facilitadores); 
+        //  console.log(this.facilitadores); 
       },
     error => {
       console.log(<any>error)

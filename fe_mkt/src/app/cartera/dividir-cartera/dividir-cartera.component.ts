@@ -104,9 +104,9 @@ export class DividirCarteraComponent implements OnInit {
         let lista=[];
         this.lista_lista_personas.push(lista);
       }
-      console.log(this.lista_lista_personas);
+      // console.log(this.lista_lista_personas);
       let res=llenado(this.listado_personas,this.lista_lista_personas);
-      console.log(this.lista_lista_personas);
+      // console.log(this.lista_lista_personas);
       let count=1;
       for(let lista of this.lista_lista_personas){
           let listObject={}as ListaConId;
@@ -151,9 +151,9 @@ export class DividirCarteraComponent implements OnInit {
   queryEvents() {
     this._peticionesService.getAllEvents(Identity._id).subscribe(
        result => {
-           console.log('hola')
+          //  console.log('hola')
           this.events = result;
-         console.log(this.events)
+        //  console.log(this.events)
           this.events.map(event => {
              var sum = 0;
              event.inscriptions.forEach(e => {

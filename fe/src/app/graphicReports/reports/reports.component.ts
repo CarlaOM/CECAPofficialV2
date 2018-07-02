@@ -22,7 +22,7 @@ export class ReportsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('reports.component.ts cargado')
+    // console.log('reports.component.ts cargado')
     this._peticionesService.getEvents().subscribe(
       result => {
          this.events = result;
@@ -33,7 +33,7 @@ export class ReportsComponent implements OnInit {
           // console.log(e)
           // event.inscritos = sum;
        });
-       console.log(this.events)
+      //  console.log(this.events)
          this.inscriptions = this.events.inscritos;
       },
       error => {

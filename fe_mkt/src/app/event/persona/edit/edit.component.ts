@@ -53,7 +53,7 @@ export class EditComponent implements OnInit {
     this.queryPersonId();
   }
   selectMed(){
-    console.log(this.person.contact_medium);
+    // console.log(this.person.contact_medium);
   }
   queryPersonId() {
     this.queryPrograms();
@@ -82,7 +82,7 @@ export class EditComponent implements OnInit {
       for (let npc of this.newProgramsCheck) {
         if (npc.programId == p.programId) {
           npc.checked = true;
-          console.log(this.newProgramsCheck);
+          // console.log(this.newProgramsCheck);
         }
       }
     }
@@ -91,8 +91,8 @@ export class EditComponent implements OnInit {
   queryPrograms() {
     this._peticionesService.getPrograms().subscribe(response => {
       this.programs = response;
-      console.log(this.programs);
-      console.log("hi")
+      // console.log(this.programs);
+      // console.log("hi")
     },
       error => {
         var errorMessage = <any>error;
@@ -104,7 +104,7 @@ export class EditComponent implements OnInit {
     this._peticionesService.getPerson(this.personId).subscribe(
       result => {
         this.person = result;
-        console.log(this.person);
+        // console.log(this.person);
         this.personfirstname = this.person.first_name;
         this.last_name = this.person.last_name;
         this.ci = this.person.ci;
@@ -114,7 +114,7 @@ export class EditComponent implements OnInit {
         this.ocupacion = this.person.ocupation;
         this.descOcupation = this.person.descOcupation;
         this.medium = this.person.contact_medium;
-        console.log(this.descOcupation + "hola");
+        // console.log(this.descOcupation + "hola");
         this.llenarProgramsCheckbox();
 
       }, error => {
@@ -124,7 +124,7 @@ export class EditComponent implements OnInit {
     )
   }
   captOcupation() {
-    console.log(this.ocupSelected);
+    // console.log(this.ocupSelected);
     this.descOcupation.universidad = ''; this.descOcupation.carrera = '';
     this.descOcupation.semestre = ''; this.descOcupation.areaTrabajo = '';
     this.descOcupation.profesion = ''; this.descOcupation.cargo = '';
@@ -149,11 +149,11 @@ export class EditComponent implements OnInit {
     this.person.interes = this.newInteres;
 
 
-    console.log(this.person);
+    // console.log(this.person);
     this._peticionesService.updatePerson(this.person).subscribe(
       result => {
         var res = result;
-        console.log(res);
+        // console.log(res);
         for (let pro of this.person.interes) {
 
           let programPerson = {} as ProgramIdPersonId;

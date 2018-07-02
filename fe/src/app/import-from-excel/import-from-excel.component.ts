@@ -28,11 +28,11 @@ export class ImportFromExcelComponent implements OnInit {
   }
   uploadFileToActivity() {
     this._peticionesService.postFile(this.fileToUpload).subscribe(data => {
-      console.log(data, 'si se puede, si se puede')
+      // console.log(data, 'si se puede, si se puede')
 
       this.router.navigate(['home/persons']);
       // this.router.navigate(['home/importFromExcel']);
-      console.log(this.fileToUpload)
+      // console.log(this.fileToUpload)
       // do something, if upload success
     },
     error => {

@@ -41,13 +41,13 @@ export class CarteraComponent implements OnInit {
     this.router.navigate(['/home/cartera',_id]);
   }
   editCartera(_name:string){
-    console.log("carteracomponent");
+    // console.log("carteracomponent");
     this.router.navigate(['/home/cartera/edit',_name]);
-    console.log("router.navigate");
+    // console.log("router.navigate");
   }
 
   queryRol(){
-    console.log(Identity.rol)
+    // console.log(Identity.rol)
       this._peticionesService.getRole(Identity.rol).subscribe(
      result => {
       this.role = result;

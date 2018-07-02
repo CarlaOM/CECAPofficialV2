@@ -24,11 +24,11 @@ export class AddProgramaComponent implements OnInit {
     this.query();
   }
   onSubmit() {
-    console.log(this.program);
+    // console.log(this.program);
     this._peticionesService.addProgram(this.program).subscribe(
       result => {
         var esperado = result;
-        console.log(esperado);
+        // console.log(esperado);
         this.router.navigate(['home/programs']);
         alert('El Programa se creó correctamente');
       },

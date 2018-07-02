@@ -31,7 +31,7 @@ export class ProgramaComponent implements OnInit {
     this._peticionesService.getPrograms().subscribe(
       result => {
          this.programs = result;
-         console.log(result)
+        //  console.log(result)
          this.mostrarProg()
       },
       error => {
@@ -49,14 +49,14 @@ export class ProgramaComponent implements OnInit {
   }
   aum(){
     this.page = this.page+1;
-    console.log(this.page)
+    // console.log(this.page)
     var inicio = (8*(this.page-1));
-    console.log(inicio)
+    // console.log(inicio)
     var final = (8*(this.page-1))+8;
     if(final > this.total){
       final = this.total;
     }
-    console.log(final)
+    // console.log(final)
     this.mostrar = [];
     for(var a = inicio  ; a < final ; a++ ){
         this.mostrar.push(this.programs[a]);
@@ -67,15 +67,15 @@ export class ProgramaComponent implements OnInit {
     this.total = this.programs.length;
     this.totalPag = Math.ceil(this.total/8);
     this.mostrar = []
-    console.log(this.totalPag)
+    // console.log(this.totalPag)
     if(this.totalPag > 1){
       for(var a = 0 ; a < 8 ; a++){
       this.mostrar.push(this.programs[a]) ;}
-      console.log("entro")
+      // console.log("entro")
     } else{
       this.mostrar = this.programs;
     }
-    console.log(this.mostrar)
+    // console.log(this.mostrar)
   }
   volver(){
     this.router.navigate(['home/events']);    

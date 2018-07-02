@@ -16,59 +16,59 @@ export class AsistenciaComponent implements OnInit {
   public eventId;
   public modulos;
 
-  submitted= false;
+  submitted = false;
   constructor(
-        private _peticionesService: PeticionesService,
-        private route: ActivatedRoute,
-        private router: Router
-  ) { 
-    this.lists = new Lists(null,0,'',null,null, '','','');//(bol, dol,receipt,assist,type,per,event,mod)
+    private _peticionesService: PeticionesService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.lists = new Lists(null, 0, '', null, null, '', '', '');//(bol, dol,receipt,assist,type,per,event,mod)
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.queryModulos();
   }
-  guardar(){
-    console.log(this.lists);
+  guardar() {
+    //console.log(this.lists);
     this.lists.events = this.eventId;
     this.lists.person = this.personId;
 
     this._peticionesService.addAssitance(this.lists).subscribe(
       result => {
         var esperado = result;
-        console.log(esperado);
+        //console.log(esperado);
         alert('Registrado correctamente');
-        var _id =this.eventId;
+        var _id = this.eventId;
         this.router.navigate(['home/event', _id]);
       },
       error => {
         var errorMessage = <any>error;
         console.log(errorMessage);
         alert('Error al registrar Asistencia');
-        
+
       }
     );
 
   }
-  queryModulos(){
+  queryModulos() {
     this.route.params.subscribe(params => {
       var arrayIds = params.id.split('-');
       this.personId = arrayIds[0];
       this.eventId = arrayIds[1];
-      console.log(this.eventId);
-      console.log('el id del evento ')
-   });
+      // console.log(this.eventId);
+      // console.log('el id del evento ')
+    });
     this._peticionesService.getEventModuls(this.eventId).subscribe(//consulta para obt todo modulos
       result => {
-          this.modulos = result;
-          console.log(this.modulos);
+        this.modulos = result;
+        // console.log(this.modulos);
       },
       error => {
-          var errorMessage = <any>error;
-          console.log(errorMessage);
+        var errorMessage = <any>error;
+        console.log(errorMessage);
       });
   }
-  cancel(){
+  cancel() {
     window.history.back();
   }
 }

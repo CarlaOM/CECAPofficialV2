@@ -23,7 +23,7 @@ export class EjecutivoComponent implements OnInit {
     this._peticionesService.getUser().subscribe(
       result => {
          this.ejecutivos = result;
-         console.log(this.ejecutivos); 
+        //  console.log(this.ejecutivos); 
       },
     error => {
       console.log(<any>error)

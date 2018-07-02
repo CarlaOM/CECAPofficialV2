@@ -29,13 +29,13 @@ export class TracingComponent implements OnInit {
     });
   }
   onSubmit() {
-    console.log(this.model);
+    // console.log(this.model);
   }
   save() {
     if ((this.model.details == '')) {
       window.alert("Asegúrese de llenar todos los campos")
     } else {
-        console.log(this.model);
+        // console.log(this.model);
         // this._peticionesService.addTracing(this.personId, this.model).subscribe(response => {
         //     var esperado = response;
         //     console.log(esperado);

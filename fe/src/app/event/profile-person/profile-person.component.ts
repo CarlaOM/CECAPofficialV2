@@ -48,7 +48,7 @@ export class ProfilePersonComponent implements OnInit {
     this._peticionesService.getPersonProfile(this.personId).subscribe(
       result => {
         this.person = result;
-        console.log(this.person)
+        // console.log(this.person)
         
         this.ocupation = this.person.ocupation;
         //  console.log(this.ocupation)
@@ -70,7 +70,7 @@ export class ProfilePersonComponent implements OnInit {
             }
           }
         }
-        console.log(this.person.profile);
+        // console.log(this.person.profile);
         // this.programsPerson = this.person.profile;
         //  this.viewPrograms();
       },

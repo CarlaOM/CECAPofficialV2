@@ -39,11 +39,11 @@ export class ModuloComponent implements OnInit {
       });
    }
    findModulos() {
-      console.log(this.programId)
+      // console.log(this.programId)
       this._peticionesService.getModulos(this.programId).subscribe(
          result => {
             this.modulos = result;
-            console.log(this.modulos)
+            // console.log(this.modulos)
          },
          error => {
             console.log(<any>error);

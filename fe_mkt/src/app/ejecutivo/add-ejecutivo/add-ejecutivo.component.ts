@@ -41,24 +41,24 @@ export class AddEjecutivoComponent implements OnInit {
   ngOnInit() {
     this._peticionesService.getCarterasLibres().subscribe(response=>{
       this.carteras=response;
-      console.log(this.carteras);
+      // console.log(this.carteras);
     });
     this._peticionesService.getSucursales().subscribe(response=>{
       this.sucursales=response;
-      console.log(this.sucursales)
+      // console.log(this.sucursales)
     });
     this._peticionesService.getRoles().subscribe(response=>{
       this.roles=response;
-      console.log(this.roles);
+      // console.log(this.roles);
     });
     
     
   }
   onSubmit() { this.submitted = true;
-    console.log(this.model);
+    // console.log(this.model);
     this._peticionesService.addUser(this.model).subscribe(response=>{
             this.newUser=response;
-            console.log(this.newUser);
+            // console.log(this.newUser);
             this.findCartera();
             // this.MessageEvent.emit();
             this.router.navigate(['/home/ejecutivo/']); 
@@ -77,7 +77,7 @@ export class AddEjecutivoComponent implements OnInit {
 
   findCartera(){
     this.carteraSeleccionada=this.model.cartera;
-    console.log(this.carteraSeleccionada);
+    // console.log(this.carteraSeleccionada);
     this._peticionesService.getCartera(this.carteraSeleccionada).subscribe(
        result =>{
          this.carteraObject=result;

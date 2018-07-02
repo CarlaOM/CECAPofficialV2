@@ -19,7 +19,7 @@ export class ReportTrimestralComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('report-trimestral.component.ts cargado')
+    // console.log('report-trimestral.component.ts cargado')
     
   }
 
