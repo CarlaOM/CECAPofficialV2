@@ -239,11 +239,11 @@ import { JwtInterceptor } from "./jwt.interceptor";//////este ya no se usa
     SucursalService,
     AuthGuard,
     UserService,
-        // {
-        //     provide: HTTP_INTERCEPTORS,
-        //     useClass: JwtInterceptor,
-        //     multi: true
-        // },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: JwtInterceptor,
+            multi: true
+        },
   ],//aniadir appRo..
   bootstrap: [AppComponent]
 })
