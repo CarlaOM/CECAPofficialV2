@@ -14,16 +14,19 @@
          <table class="table table-hover" >
             <thead>
                <tr>
-                  <th>Nombre</th>
+                  <th>Nombre del Programa</th>
                   <th>Detalles</th>
+                  <th>Módulos Disponibles</th>
                   <th>Módulos</th>
-                  <th colspan="3">Ajustes</th>
+                  <th colspan="3">Opciones</th>
                </tr>
             </thead>
             <tbody> 
                <tr *ngFor="let program of mostrar">
                   <td>{{ program.name }}</td>
                   <td>{{ program.details }}</td>
+                  <td *ngIf="program.cantModules==0" style="color:red">{{ program.cantModules }}, asegúrese de registrar módulos</td>
+                  <td *ngIf="program.cantModules!=0" style="color:blue">{{ program.cantModules }} módulos </td>
                   <td>
                     <a class="btn btn-info" (click)="send(program._id)">VER MÓDULOS</a>
                   </td>
