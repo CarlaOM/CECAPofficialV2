@@ -83,8 +83,7 @@ router
                                                                     db.users.find({},function(err, col){
                                                                         if (err) return res.status(400).send(err);
                                                                         
-                                                                        
-                                ///////////////////////////////////////////////////////////////////
+                                                        
     //////////////////////--------------------MKT-DATA----------------//////////////////////////////
                             db.mkt_roles.find({},function(err, col){
                                 if (err) return res.status(400).send(err);
