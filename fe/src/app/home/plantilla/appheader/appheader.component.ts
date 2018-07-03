@@ -37,9 +37,10 @@ export class AppheaderComponent implements OnInit {
         this._peticionesService.backup().subscribe(
             result => {
                 alert('backup realizado');
-                var blob = new Blob([result]);
+                var blob = new Blob([result], {'type':"application/octet-stream"});
                 var url = window.URL.createObjectURL(blob);
-                window.open(url);
+                // window.open(url);
+                
             },
             error => {
                 var errorMessage = <any>error;
