@@ -56,7 +56,7 @@ export class PeticionesService {
     return this._http.post(this.url + 'modules/add', body, { headers: headers }).map((res: Response) => res);
   }
   getModulos(idProgram) {
-    console.log(idProgram)
+    // console.log(idProgram)
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.get(this.url + 'modules/lista/' + idProgram, { headers: headers }).map((res: Response) => res);
   }

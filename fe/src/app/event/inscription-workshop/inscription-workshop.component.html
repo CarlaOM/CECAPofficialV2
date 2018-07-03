@@ -4,7 +4,7 @@
      <div class="box box-primary">
         <div class="container ">
            <div >
-              <h1>Inscribir Persona a</h1>
+              <h1>Inscribir Persona a Taller</h1>
               <!-- <form (ngSubmit)="guardar()" #addPerson="ngForm" class="jumbotron"> -->
 
               <div class="form-group col-sm-8">
@@ -13,7 +13,7 @@
                     <input type="number" pattern="[1-9][0-9]{6}[a-z]{0,1}" class="form-control" id="ci" [(ngModel)]="person.ci" name="ci" #ci="ngModel"
                        (keydown)="onKeydown($event)" required/>
                     <span *ngIf="!ci.valid && ci.touched" class="text-alert">
-                       *CI de persona requerido o es inválido.
+                       *CI de persona requerido.
                     </span>
                     <span *ngIf="ci?.pattern && ci.touched" class="text-alert">
                        *CI de persona es inválido.
@@ -29,7 +29,7 @@
                        *Nombre de persona requerido.
                     </span>
                     <span *ngIf=" firstname?.pattern && firstname.touched" class="text-alert">
-                       *Nombre inválido
+                       *Nombre de persona es inválido
                     </span>
                     <!-- <div [hidden]="first_name?.valid || first_name?.pristine" class="text-alert">
                                        kjknkasdkjhjask
@@ -43,7 +43,7 @@
                        *Apellido de persona requerido.
                     </span>
                     <span *ngIf="lastname?.pattern && lastname.touched" class="text-alert">
-                       *Apellido inválido.
+                       *Apellido de persona inválido.
                     </span>
                     <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
                                       kjkn

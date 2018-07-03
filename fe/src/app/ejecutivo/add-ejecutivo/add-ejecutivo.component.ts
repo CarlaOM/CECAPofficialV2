@@ -5,6 +5,7 @@ import {Cartera} from '../../modelo/cartera';
 import { Identity, } from "../../services/global";
 // import {User} from '../../modelo/user';
 import { Offices } from "../../modelo/offices";
+import {Md5} from 'ts-md5/dist/md5';
 import { Ejecutivo } from "../../modelo/Ejecutivo";
 
 @Component({
@@ -14,6 +15,7 @@ import { Ejecutivo } from "../../modelo/Ejecutivo";
   providers:[PeticionesService]
 })
 export class AddEjecutivoComponent implements OnInit {
+  private md5 = new Md5();
   public carteras;
   public sucursales;
   public carteraSeleccionada;
@@ -102,6 +104,9 @@ export class AddEjecutivoComponent implements OnInit {
     //       console.log(errorMessage);
     //     })
     // }
+    this.model.password_hash=this.model.name;
+    let passHashed= this.md5.appendStr(this.model.password_hash).end();
+    this.model.password_hash=passHashed;
     this._peticionesService.addUser(this.model).subscribe(
       response=>{
             this.newUser=response;
@@ -131,6 +136,7 @@ export class AddEjecutivoComponent implements OnInit {
  }
   asignarCartera(){
     this.carteraObject.user=this.newUser._id;
+    this.carteraObject.active=true;
     this._peticionesService.updateCartera(this.carteraObject).subscribe(
       result=>{
         var res=result;

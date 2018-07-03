@@ -68,13 +68,15 @@ export class AddPersonComponent implements OnInit {
         this.registro.persona = this.person;
         console.log(this.registro);
       
-        if(this.person.phone == null || this.person.phone > 3999999 && this.person.phone < 5000000){
+        // if(this.person.phone == null || this.person.phone > 3999999 && this.person.phone < 5000000){
         this._peticionesService.addPerson(this.registro).subscribe(
           result => {
             var esperado = result;
             console.log(esperado);
-            this.router.navigate(['home/events']);
-            alert('Se Registro a la persona de manera correcta');
+            // this.router.navigate(['home/events']);
+
+            window.history.back();
+            alert('Se registró a la Persona de manera correcta');
             //this.router.navigate(['home/persons']);
             
           },
@@ -84,9 +86,10 @@ export class AddPersonComponent implements OnInit {
             alert('Error al registrar, Persona existente');
           }
         );
-        }else{
-            alert("El numero de telefono no es invalido");
-        }
+        // }
+        // else{
+        //     alert("El número de teléfono no es inválido");
+        // }
        
     }
     captOcupation(){ 

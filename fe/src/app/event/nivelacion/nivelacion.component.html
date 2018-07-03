@@ -4,7 +4,7 @@
        <div class="box box-primary">
           <div class="container ">
              <div [hidden]="submitted">
-                <h1>Inscribir Persona</h1>
+                <h1>Inscribir Persona para Nivelación</h1>
                 <!-- <form (ngSubmit)="guardar()" #addPerson="ngForm" class="jumbotron"> -->
  
                 <div class="form-group col-sm-8">
@@ -13,7 +13,7 @@
                       <input type="number" pattern="[1-9][0-9]{6}[a-z]{0,1}" class="form-control" id="ci" [(ngModel)]="person.ci" name="ci" #ci="ngModel"
                          (keydown)="onKeydown($event)" required/>
                       <span *ngIf="!ci.valid && ci.touched" class="text-alert">
-                         *CI de persona requerido o es inválido.
+                         *CI de persona requerido.
                       </span>
                       <span *ngIf="ci?.pattern && ci.touched" class="text-alert">
                          *CI de persona es inválido.
@@ -26,7 +26,7 @@
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
-                        <label for="ci" class="control-label" style="text-align: left">Modulos Faltantes</label>
+                        <label for="ci" class="control-label" style="text-align: left">Módulos Faltantes</label>
                         <div class="form-group row "> 
                             <label *ngFor="let mn of modulsNot" for="m" class="control-label col-sm-3">{{mn.name}}</label></div>
                     </div>
@@ -40,7 +40,7 @@
                          *Nombre de persona requerido.
                       </span>
                       <span *ngIf=" firstname?.pattern && firstname.touched" class="text-alert">
-                         *Nombre inválido
+                         *Nombre de persona inválido
                       </span>
                       <!-- <div [hidden]="first_name?.valid || first_name?.pristine" class="text-alert">
                                          kjknkasdkjhjask
@@ -54,7 +54,7 @@
                          *Apellido de persona requerido.
                       </span>
                       <span *ngIf="lastname?.pattern && lastname.touched" class="text-alert">
-                         *Apellido inválido.
+                         *Apellido de persona inválido.
                       </span>
                       <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
                                         kjkn
@@ -67,10 +67,10 @@
                       <input type="number" pattern="[0-9]{0,5}" class="form-control" id="difinePrice" [(ngModel)]="inscription.price_event" name="definePrice"
                          #definePrice="ngModel" disabled />
                       <span *ngIf="!definePrice.valid && definePrice.touched" class="text-alert">
-                         *Precio de definido invalido.
+                         *Precio de definido inválido.
                       </span>
                       <span *ngIf="definePrice?.pattern" class="text-alert">
-                         *Invalido Cobro.
+                         *Cobro inválido.
                       </span>
                    </div>
                    <div class="form-group col-sm-3">
@@ -89,7 +89,7 @@
                       <input type="text" pattern="[0-9]{0,15}[a-zA-Z]{0,5}" class="form-control" id="receipt" [(ngModel)]="inscription.receipt"
                          name="receipt" #receipt="ngModel" required />
                       <span *ngIf="!receipt.valid && receipt.touched" class="text-alert">
-                         *Numero de Recibo invalido.
+                         *Numero de Recibo inválido.
                       </span>
                    </div>
                    <div class="form-group col-sm-3">
