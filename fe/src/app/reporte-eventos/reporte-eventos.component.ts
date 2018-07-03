@@ -30,7 +30,7 @@ export class ReporteEventosComponent implements OnInit {
     if(this.fechaIni<this.fechaFin){
         this.fechas.fechaIni = this.fechaIni;
         this.fechas.fechaFin = this.fechaFin;
-        console.log(this.fechas)
+        // console.log(this.fechas)
         this._peticionesService.reporteEvento(this.fechas).subscribe(response => {
         this.eventos = response;
       })
@@ -45,7 +45,7 @@ export class ReporteEventosComponent implements OnInit {
     this._peticionesService.getEvents().subscribe(
        result => {
           this.events = result;
-         console.log(this.events)
+        //  console.log(this.events)
           // this.events.map(event => {
           //    var sum = 0;
           //    event.inscriptions.forEach(e => {

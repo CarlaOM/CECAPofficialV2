@@ -28,7 +28,7 @@ export class EditFacilitadorComponent implements OnInit {
   }
  
   simbolos(nameV){
-    console.log("ingreso simbolos");
+    // console.log("ingreso simbolos");
     var res = false;
     for(var i = 0; i<nameV.length;i++){
       if(nameV[i] == '!' || nameV[i] == '@' || nameV[i] == '#' || nameV[i] == '$' || nameV[i] == '%' || nameV[i] == '^' ){res = true;}
@@ -46,7 +46,7 @@ export class EditFacilitadorComponent implements OnInit {
     
     }else{
       if(this.simbolos(this.facilitadorName)){
-        console.log("hay simbolos");
+        // console.log("hay simbolos");
         window.alert("asegurese de no introducir simbolos");
       } else{
 
@@ -54,7 +54,7 @@ export class EditFacilitadorComponent implements OnInit {
         result=>{
   
           var res=result;
-          console.log(res);
+          // console.log(res);
           this.router.navigate(['home/facilitador']);
   
         },error=>{
@@ -69,12 +69,12 @@ export class EditFacilitadorComponent implements OnInit {
   queryFacilitador(){
     this.route.params.subscribe(params => {
       this.facilitadorId = params.id;
-      console.log(this.facilitadorId);
+      // console.log(this.facilitadorId);
      });
     this._peticionesService.getFacilitador(this.facilitadorId).subscribe(
          result => {
             this.facilitador = result;
-            console.log(this.facilitador);
+            // console.log(this.facilitador);
          },
          error => {
             var errorMessage = <any>error;

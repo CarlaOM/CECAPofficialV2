@@ -54,7 +54,7 @@ export class EditEjecutivoComponent implements OnInit {
     this._peticionesService.getCarterasLibres().subscribe(response=>{
       this.carteras=response;
       this.listacarteras=this.carteras;
-      console.log(this.carteras);
+      // console.log(this.carteras);
     });
     this._peticionesService.getSucursales().subscribe(response=>{
       this.sucursales=response;
@@ -62,7 +62,7 @@ export class EditEjecutivoComponent implements OnInit {
     });
     this._peticionesService.getRoles().subscribe(response=>{
       this.roles=response;
-      console.log(this.roles);
+      // console.log(this.roles);
     });
     
   }
@@ -82,8 +82,8 @@ export class EditEjecutivoComponent implements OnInit {
       this.ejecutivoCartera=this.ejecutivo.cartera._id;
       this.carteraAnti=this.ejecutivo.cartera._id;
       this.listacarteras.push(this.ejecutivo.cartera)
-      console.log(this.ejecutivo.cartera.name);
-      console.log(this.ejecutivo)
+      // console.log(this.ejecutivo.cartera.name);
+      // console.log(this.ejecutivo)
 
     })
   }
@@ -132,13 +132,13 @@ export class EditEjecutivoComponent implements OnInit {
     this.ejecutivo.rol=this.ejecutivoRol;
     
     
-    console.log(this.ejecutivo);
+    // console.log(this.ejecutivo);
     
     
     this._peticionesService.updateUser(this.ejecutivo).subscribe(
       result=>{
         var res=result;
-        console.log(res)
+        // console.log(res)
         this.reasignarCartera();
         // this.findCartera();
         this.router.navigate(['home/ejecutivo']);
@@ -154,11 +154,11 @@ export class EditEjecutivoComponent implements OnInit {
 
   reasignarCartera(){
     let carteraObjEjecutivo={} as CarteraObjEjecutivo
-    console.log(this.carteraAnti);
+    // console.log(this.carteraAnti);
     carteraObjEjecutivo.carteraAntigua=this.carteraAnti;
     carteraObjEjecutivo.cartera=this.carteraActual;
     carteraObjEjecutivo.ejecutivo=this.ejecutivoId;
-    console.log(carteraObjEjecutivo);
+    // console.log(carteraObjEjecutivo);
 
     this._peticionesService.reasignarCartera(carteraObjEjecutivo).subscribe(res=>{
       

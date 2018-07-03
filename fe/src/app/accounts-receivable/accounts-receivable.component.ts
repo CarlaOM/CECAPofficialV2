@@ -36,9 +36,9 @@ export class AccountsReceivableComponent implements OnInit {
           this.event = result;
           // this.queryModules();
 
-          console.log(this.event);
+          // console.log(this.event);
           this.inscriptions = this.event.inscriptions;
-          console.log(this.inscriptions)          
+          // console.log(this.inscriptions)          
           //prueba total
           // var total = this.event.total;
           this.todos();

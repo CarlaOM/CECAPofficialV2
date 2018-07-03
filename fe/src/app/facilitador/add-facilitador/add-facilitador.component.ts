@@ -38,7 +38,7 @@ export class AddFacilitadorComponent implements OnInit {
     this._peticionesService.addFacilitador(this.facilitador).subscribe(
       response=>{
          this.facilitadorNuevo=response;
-        console.log(this.facilitadorNuevo);
+        // console.log(this.facilitadorNuevo);
         this.router.navigate(['/home/facilitador']);
         alert('se creo facilitador');
       // this.MessageEvent.emit();
@@ -50,7 +50,7 @@ export class AddFacilitadorComponent implements OnInit {
   ngOnInit() {
     this._peticionesService.getSucursales().subscribe(response=>{
       this.sucursales=response;
-      console.log(this.sucursales)
+      // console.log(this.sucursales)
     });
   }
   cancel() {

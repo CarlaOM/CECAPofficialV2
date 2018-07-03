@@ -70,7 +70,7 @@ export class EditModuloComponent implements OnInit {
          this._peticionesService.updateModulo(this.modulo).subscribe(
             result => {
                var res = result;
-               console.log(res);
+            //    console.log(res);
                alert('La edición se guardó correctamente');
                window.history.back();
             },

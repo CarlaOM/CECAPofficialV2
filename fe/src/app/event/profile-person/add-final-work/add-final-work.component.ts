@@ -44,17 +44,17 @@ export class AddFinalWorkComponent implements OnInit {
       });
   }
   onSubmit() {
-    console.log(this.model);
+    // console.log(this.model);
   }
   save() {
     if ((this.model.name == '') || (this.model.origin == '')) {
       window.alert("Asegurese de llenar todos los campos")
     } else {
-        console.log(this.model);
+        // console.log(this.model);
         // envia el id de la persona q recibes como parametro al entrar a esta ventana, y el finalwork q llenaste en la vista
         this._peticionesService.addFinalWork(this.personId, this.model).subscribe(response => {
             var esperado = response;
-            console.log(esperado);
+            // console.log(esperado);
             alert("El Trabajo Final se creo con exito");
             // this.router.navigate(['/home/detailsProfile']);
             window.history.back()

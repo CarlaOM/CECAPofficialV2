@@ -29,7 +29,7 @@ export class AddCorrelativeComponent implements OnInit {
   guardar(){
       this.correlativo.receipts = this.receipt
 
-      console.log(this.correlativo);
+      // console.log(this.correlativo);
       this._peticionesService.addCorrelative(this.correlativo).subscribe(response=>{
       //this.router.navigate(['/home/ejecutivo/']); 
       },error=>{

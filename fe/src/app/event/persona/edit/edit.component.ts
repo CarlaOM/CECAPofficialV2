@@ -61,7 +61,7 @@ findPerson(){
   this._peticionesService.getPerson(this.personId).subscribe(
     result => {
       this.person = result;
-      console.log(this.person);
+      // console.log(this.person);
       this.personfirstname = this.person.first_name;
       this.last_name= this.person.last_name;
       this.ci = this.person.ci;
@@ -70,7 +70,7 @@ findPerson(){
       this.email = this.person.email;
       this.ocupacion = this.person.ocupation;
       this.descOcupation = this.person.descOcupation;
-      console.log(this.descOcupation+ "hola");
+      // console.log(this.descOcupation+ "hola");
     }, error => {
       var errorMessage = <any>error;
           console.log(errorMessage);
@@ -78,7 +78,7 @@ findPerson(){
   )
 }
 captOcupation(){ 
-  console.log(this.ocupSelected);
+  // console.log(this.ocupSelected);
   this.descOcupation.universidad = '';this.descOcupation.carrera = '';
   this.descOcupation.semestre = '';this.descOcupation.areaTrabajo = '';
   this.descOcupation.profesion = '';this.descOcupation.cargo = '';
@@ -96,11 +96,11 @@ captOcupation(){
   this.person.ocupation=this.ocupacion.toLowerCase();
   this.person.descOcupation=this.descOcupation;
 
-  console.log(this.person);
+  // console.log(this.person);
   this._peticionesService.updatePerson(this.person).subscribe(
       result =>{
         var res = result;
-        console.log(res);
+        // console.log(res);
         // this.router.navigate(['home/persons']);
         window.history.back();
         alert('La edición se guardó correctamente');

@@ -19,8 +19,8 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this._authService.isLoggedIn());
-    console.log(this._authService.getExpiration());
+    // console.log(this._authService.isLoggedIn());
+    // console.log(this._authService.getExpiration());
 
     if (this._authService.isLoggedIn()) {
       this.router.navigate(['/home/events']);

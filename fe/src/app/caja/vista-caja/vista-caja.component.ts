@@ -37,11 +37,11 @@ export class VistaCajaComponent implements OnInit {
     this._peticionesService.getCashFlowUserByUser(Identity._id).subscribe(response=>{
       this.cash=response;
 
-      console.log(this.cash);
+      // console.log(this.cash);
 
       this.detalles=this.cash.details;
       this.total=this.cash.amount;
-      console.log(this.detalles);
+      // console.log(this.detalles);
       for(let detalle of this.detalles){
         let dets = {} as detalleS;
         this.det = detalle.description.split(',');
@@ -57,7 +57,7 @@ export class VistaCajaComponent implements OnInit {
                 dets.description = dets.description.concat(this.eventos[a].name);
               }
               } 
-            console.log(dets.description)
+            // console.log(dets.description)
         }else{
           dets.description=detalle.description;
           dets.title = 'Ingreso: '+detalle.title;
@@ -71,12 +71,12 @@ export class VistaCajaComponent implements OnInit {
         this.listaDetalles.push(dets);        
       }
     });
-    console.log(this.listaDetalles); 
+    // console.log(this.listaDetalles); 
   }
   getSucursales(){
     this._peticionesService.getSucursales().subscribe(response => {
       this.sucursales = response;
-      console.log(this.sucursales);
+      // console.log(this.sucursales);
     },error => {
       var mensage = error;
       console.log(mensage);

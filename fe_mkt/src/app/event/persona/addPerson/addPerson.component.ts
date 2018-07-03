@@ -108,14 +108,14 @@ export class AddPersonComponent implements OnInit {
                 newInteres.push(npc);
             }
         }
-        console.log(this.person);
+        // console.log(this.person);
         this.person.interes = newInteres;
         this.person.descOcupation = this.descOcupation;
         this.inscription.users = Identity._id;
         this.registro.inscription = this.inscription;
         this.registro.eventId = this.IdEvent;
         this.registro.persona = this.person;
-        console.log(this.registro);
+        // console.log(this.registro);
         // this._peticionesService.addPerson(this.registro).subscribe(
         this._peticionesService.addNewPerson(this.registro).subscribe(
             result => {
@@ -136,10 +136,10 @@ export class AddPersonComponent implements OnInit {
         );
     }
     selectMed(){
-        console.log(this.person.contact_medium);
+        // console.log(this.person.contact_medium);
     }
     captOcupation() {
-        console.log(this.ocupSelected);
+        // console.log(this.ocupSelected);
         this.descOcupation.universidad = ''; this.descOcupation.carrera = '';
         this.descOcupation.semestre = ''; this.descOcupation.areaTrabajo = '';
         this.descOcupation.profesion = ''; this.descOcupation.cargo = '';

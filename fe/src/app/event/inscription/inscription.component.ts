@@ -57,7 +57,7 @@ export class InscriptionComponent implements OnInit {
    onSubmit() {
    }
    ngOnInit() {
-      console.log(Identity._id); 
+      // console.log(Identity._id); 
       //this.queryPrograms();
       this.currentCashFlow();
       this.queryEventId();
@@ -111,7 +111,7 @@ export class InscriptionComponent implements OnInit {
       this.registro.modularsId= arrayIds[0];
       this.registro.moduleId= arrayIds[1];
     //   this.registro.cashFlowUser=this.cashFLowUser; 
-      console.log(this.registro);
+      // console.log(this.registro);
       if(this.inscription.price_event > 0 && this.inscription.canceled_price > 0){
         this._peticionesService.addInscriptPerson(this.registro).subscribe(
           result => {
@@ -156,7 +156,7 @@ export class InscriptionComponent implements OnInit {
       }
    }
    captOcupation() {
-      console.log(this.ocupSelected);
+      // console.log(this.ocupSelected);
       this.descOcupation.universidad = ''; this.descOcupation.carrera = '';
       this.descOcupation.semestre = ''; this.descOcupation.areaTrabajo = '';
       this.descOcupation.profesion = ''; this.descOcupation.cargo = '';
@@ -198,7 +198,7 @@ export class InscriptionComponent implements OnInit {
     this._peticionesService.getEventModuls(this.eventId).subscribe(//consulta para obt todo modulos
       result => {
           this.modulos = result;
-          console.log(this.modulos);
+          // console.log(this.modulos);
       },
       error => {
           var errorMessage = <any>error;
@@ -220,8 +220,8 @@ export class InscriptionComponent implements OnInit {
                 //this.modulos.pop(i);
             }
         }
-        console.log('aqui los modulos Objedts');
-         console.log(this.modulos);
+        // console.log('aqui los modulos Objedts');
+        //  console.log(this.modulos);
       },
       error=>{
         var errorMessage = <any>error;

@@ -34,7 +34,7 @@ export class DetallePersonalComponent implements OnInit {
         //     alert('Error ');
         //   }
         // );
-       console.log(this.users);
+      //  console.log(this.users);
       },
       error => {
         var errorMessage = <any>error;

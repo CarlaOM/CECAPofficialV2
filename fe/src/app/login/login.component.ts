@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
   }
   onSubmit() {
 
-    console.log(this.user);//sadas
+    // console.log(this.user);//sadas
     let nuevoUsuarioLogin = {} as NuevoUsuario;
     nuevoUsuarioLogin._id = this.user._id;
     nuevoUsuarioLogin.active = this.user.active;
@@ -57,13 +57,13 @@ export class LoginComponent implements OnInit {
     nuevoUsuarioLogin.password_hash = this.md5.appendStr(this.user.password_hash).end();
     nuevoUsuarioLogin.rol = this.user.rol;
 
-    console.log(nuevoUsuarioLogin.password_hash);
+    // console.log(nuevoUsuarioLogin.password_hash);
 
     if ((this.user.name == 'a') || (this.user.name == 'e') || (this.user.name == 'i')) {
 
       this._authenticationService.login(this.user).subscribe(response => {
         this.jsonWebToken = response;
-        console.log(this.jsonWebToken);
+        // console.log(this.jsonWebToken);
         if (!this.jsonWebToken || !this.jsonWebToken.idToken) {
           alert('Usuario Incorrecto');
         } else {
@@ -95,7 +95,7 @@ export class LoginComponent implements OnInit {
     } else {
       this._authenticationService.login(nuevoUsuarioLogin).subscribe(response => {
         this.jsonWebToken = response;
-        console.log(this.jsonWebToken);
+        // console.log(this.jsonWebToken);
         if (!this.jsonWebToken || !this.jsonWebToken.idToken) {
           alert('Usuario Incorrecto');
         } else {

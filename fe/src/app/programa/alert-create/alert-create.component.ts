@@ -1,36 +1,34 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
 import { PeticionesService } from '../../services/peticiones.service';
 
-import { ActivatedRoute, Router } from "@angular/router";
 @Component({
-  selector: 'app-alert',
-  templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.css'],
-  providers: [ PeticionesService]
+  selector: 'app-alert-create',
+  templateUrl: './alert-create.component.html',
+  styleUrls: ['./alert-create.component.css'],
+  providers: [PeticionesService]
 })
-export class AlertComponent implements OnInit {
-  public listaPrograms:Array<any>=[];
+export class AlertCreateComponent implements OnInit {
   public programs;
   @ViewChild("close", {read: ElementRef}) close: ElementRef;
+
   constructor(
     private _peticionesService: PeticionesService,
-     private route: ActivatedRoute,
-     private router: Router
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.queryPrograms();
   }
-
   queryPrograms(){
     this._peticionesService.getPrograms().subscribe(response => {
         this.programs = response;
-        this.listaPrograms=this.programs;
         // console.log(this.programs.length);
        },
        error=>{
         var errorMessage = <any>error;
-        console.log(errorMessage);
+        // console.log(errorMessage);
        }
       );
    }
@@ -42,6 +40,4 @@ export class AlertComponent implements OnInit {
     this.router.navigate(['/home/events/add']);
     this.close.nativeElement.click();
    }
-
-
 }

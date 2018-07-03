@@ -39,9 +39,9 @@ export class ReportsEjecutivosComponent implements OnInit {
 
           this._peticionesService.getAllEjecutivosOfSucursal(Identity).subscribe(res=>{
             this.listaUsersOfOffices=res;
-            console.log(this.listaUsersOfOffices);
+            // console.log(this.listaUsersOfOffices);
             for(let u of this.listaUsersOfOffices){
-                console.log(u)
+                // console.log(u)
                 let item={}as ItemReport;
                 item.user=u.userName;
                 item.cartera=u.carteraName;
@@ -68,7 +68,7 @@ export class ReportsEjecutivosComponent implements OnInit {
 
   
 
-      console.log(this.listaReporteUsuarios);
+      // console.log(this.listaReporteUsuarios);
 
 
   }
