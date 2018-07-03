@@ -27,6 +27,8 @@ export class AddPersonComponent implements OnInit {
     public IdEvent;
     public cartera;
     public ingresoPorInscripcion;
+    public universidades = [];
+    public carreras;
 
     public newProgramsCheck = [];
     public registro: Registro;
@@ -61,6 +63,15 @@ export class AddPersonComponent implements OnInit {
 
     }
     onSubmit() {
+        
+    }
+    getUniversidades(){
+        console.log("hnjdjdjd")
+        this._peticionesService.getUni().subscribe(res=>{
+            this.universidades= res[0].university;
+            this.carreras = res[0].carrera;
+            console.log(this.universidades);
+        })
     }
     ngOnInit() {
         // console.log(Identity._id);
@@ -68,6 +79,7 @@ export class AddPersonComponent implements OnInit {
         this.queryEvents();
         this.queryCartera();
         this.queryPrograms();
+        this.getUniversidades();
 
     }
     llenarProgramsCheckbox() {

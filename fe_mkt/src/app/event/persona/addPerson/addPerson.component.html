@@ -157,20 +157,24 @@
 
                                     <select class="form-control" id="univer" [(ngModel)]="descOcupation.universidad" 
                                         name="univer" #ocupSelect="ngModel">
-                                        <option value="" hidden>Seleccionar...</option>                               
-                                        <option value=1>Universidad Mayor de San Simon</option>
+                                        <option *ngFor="let univ of universidades" [value]="univ._id">{{univ.nombre}}</option>                               
+                                        <!-- <option value=1>Universidad Mayor de San Simon</option>
                                         <option value=2>U. Catolica</option>
-                                        <option value=3>U. Latinoamericana</option>                     
+                                        <option value=3>U. Latinoamericana</option>                      -->
                                     </select>
 
 
                                 </p>
                                 <p *ngIf="ocupSelected == 'estudiante'">
-                                    <input type="text" pattern="[a-zA-Z]{0,20}" placeholder="Carrera" name="carrera" #carrera="ngModel" [(ngModel)]="descOcupation.carrera"
+                                    <select class="form-control" id="carr" [(ngModel)]="descOcupation.carrera" 
+                                    name="carr" #ocupSelect="ngModel">
+                                        <option *ngFor="let carrera of carreras" [value]="carrera._id">{{carrera.nombre}}</option>
+                                    </select>
+                                    <!-- <input type="text" pattern="[a-zA-Z]{0,20}" placeholder="Carrera" name="carrera" #carrera="ngModel" [(ngModel)]="descOcupation.carrera"
                                         class="form-control" />
                                     <span *ngIf="!carrera.valid && carrera.touched" class="text-alert">
                                         <h6>*carrera de persona requerido.</h6>
-                                    </span>
+                                    </span> -->
                                 </p>
                                 <p *ngIf="ocupSelected == 'estudiante'">
                                     <input type="text" pattern="[a-zA-Z]{0,20}" placeholder="Semestre" name="semestre" #semestre="ngModel" [(ngModel)]="descOcupation.semestre"
