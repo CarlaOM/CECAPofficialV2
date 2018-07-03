@@ -33,7 +33,7 @@ export class OfficesCashComponent implements OnInit {
       this.offices=result;
       this.llenarCajasNuevas();
 
-      console.log(this.offices)
+      // console.log(this.offices)
     })
   }
   llenarCajasNuevas(){
@@ -43,7 +43,7 @@ export class OfficesCashComponent implements OnInit {
 
       let infoCajaSucursal= {} as InfoSucursal;
       var user;
-      console.log(caja);
+      // console.log(caja);
       var username;
       this._peticionesService.getOneUser(caja.users).subscribe(response=>{
         user=response;
@@ -68,7 +68,7 @@ export class OfficesCashComponent implements OnInit {
       })
       infoCajaSucursal.estado=caja.state;
       this.nuevasCajasOffices.push(infoCajaSucursal);
-      console.log(infoCajaSucursal);
+      // console.log(infoCajaSucursal);
     }
 
 
@@ -84,7 +84,7 @@ export class OfficesCashComponent implements OnInit {
         this.offices=result;
         this.llenarCajasNuevas();
   
-        console.log(this.offices)
+        // console.log(this.offices)
       })
 
       

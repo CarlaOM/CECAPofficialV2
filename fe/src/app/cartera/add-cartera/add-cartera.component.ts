@@ -42,11 +42,11 @@ export class AddCarteraComponent implements OnInit {
     return res;
   }
   guardar(){
-    // console.log("hola pao" + this.cartera.name);
+    // //console.log("hola pao" + this.cartera.name);
     this.cartera.name=this.carteraName;
-    console.log(this.cartera);
+    //console.log(this.cartera);
     if(this.simbolos(this.carteraName)){
-      console.log("hay simbolos");
+      //console.log("hay simbolos");
       this.router.navigate(['home/cartera']);
 
        alert("No se permiten simbolos");
@@ -55,7 +55,7 @@ export class AddCarteraComponent implements OnInit {
         
         result=> {
           var esperado = result;
-       // console.log(esperado);
+       // //console.log(esperado);
        alert('Se Creo correctamente la cartera');
        this.router.navigate(['home/cartera']);
         },
@@ -67,7 +67,7 @@ export class AddCarteraComponent implements OnInit {
     const name=this.carteraName;
 
     const newCartera=new Cartera(name,null);
-    console.log(newCartera);
+    //console.log(newCartera);
 
     if(this.carteraName==''){
 

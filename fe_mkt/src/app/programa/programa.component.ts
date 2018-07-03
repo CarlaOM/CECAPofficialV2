@@ -22,7 +22,7 @@ export class ProgramaComponent implements OnInit {
     this._peticionesService.getPrograms().subscribe(
       result => {
          this.programs = result;
-         console.log(result)
+        //  console.log(result)
       },
       error => {
          console.log(<any>error);

@@ -52,7 +52,7 @@ export class AddReviewComponent implements OnInit {
         // console.log(this.details)
 
         this.reviews = this.details.profile.final_work.revisions; 
-        console.log(this.reviews)
+        // console.log(this.reviews)
 
         for(let i = 0; i < this.reviews.length; i++){
           if(this.reviews[i].state == 1)
@@ -80,7 +80,7 @@ export class AddReviewComponent implements OnInit {
       });
   }
   onSubmit() {
-    console.log(this.model);
+    // console.log(this.model);
   }
   save() {
     if ((this.model.observations == '')) {
@@ -89,7 +89,7 @@ export class AddReviewComponent implements OnInit {
       // if (this.model.date_review < new Date()) {
       //   window.alert("Asegurese que la fecha sea mayor a la de hoy")
       // } else {
-        console.log(this.model);
+        // console.log(this.model);
         // envia el id de la persona q recibes como parametro al entrar a esta ventana, y el review q llenaste en la vista
         this._peticionesService.addReview(this.personId, this.model).subscribe(response => {
             var esperado = response;

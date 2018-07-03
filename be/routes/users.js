@@ -6,9 +6,11 @@ var db = require('../models/db');
 var router = express.Router();
 
 const fs = require('fs');
-var JSZip = require("jszip");
+//var JSZip = require("jszip");
 var path = require('path');
-var mime = require('mime');
+// var mime = require('mime');
+
+var zip = new require('node-zip')();
 // var mongojs = require('mongojs');
 // var db = mongojs('test', []); 
 
@@ -32,109 +34,108 @@ router
         
         //   return res.status(200).send(events);
         // });
+        var dt = new Date();
+        var month = dt.getMonth()+1;
+        var day = dt.getDate();
+        var year = dt.getFullYear();
+        var fecha= day+'-'+month+'-'+year;
+        console.log(fecha);
         db.events.find({},function(err, col){
           if (err) return res.status(400).send(err);
-          saveWriteFile(col, 'events');
+          saveWriteFile(col, 'events',fecha);
           db.carteras.find({},function(err, col){
             if (err) return res.status(400).send(err);
-            saveWriteFile(col, 'carteras');
+            saveWriteFile(col, 'carteras',fecha);
             db.cashFlowOffices.find({},function(err, col){
                 if (err) return res.status(400).send(err);
-                saveWriteFile(col, 'cashFlowOffices');
+                saveWriteFile(col, 'cashFlowOffices',fecha);
                 db.cashFlowPrincipal.find({},function(err, col){
                     if (err) return res.status(400).send(err);
-                    saveWriteFile(col, 'cashFlowPrincipal');
+                    saveWriteFile(col, 'cashFlowPrincipal',fecha);
                     db.cashFlowUsers.find({},function(err, col){
                         if (err) return res.status(400).send(err);
-                        saveWriteFile(col, 'cashFlowUsers');
+                        saveWriteFile(col, 'cashFlowUsers',fecha);
                         db.categoriaEgresos.find({},function(err, col){
                             if (err) return res.status(400).send(err);
-                            saveWriteFile(col, 'categoriaEgresos');
+                            saveWriteFile(col, 'categoriaEgresos',fecha);
                             db.company.find({},function(err, col){
                                 if (err) return res.status(400).send(err);
-                                saveWriteFile(col, 'company');
+                                saveWriteFile(col, 'company',fecha);
                                 db.correlatives.find({},function(err, col){
                                     if (err) return res.status(400).send(err);
-                                    saveWriteFile(col, 'correlatives');
+                                    saveWriteFile(col, 'correlatives',fecha);
                                     db.facilitators.find({},function(err, col){
                                         if (err) return res.status(400).send(err);
-                                        saveWriteFile(col, 'facilitators');
+                                        saveWriteFile(col, 'facilitators',fecha);
                                         db.lists.find({},function(err, col){
                                             if (err) return res.status(400).send(err);
-                                            saveWriteFile(col, 'lists');
+                                            saveWriteFile(col, 'lists',fecha);
                                             db.modulars.find({},function(err, col){
                                                 if (err) return res.status(400).send(err);
-                                                saveWriteFile(col, 'modulars');
+                                                saveWriteFile(col, 'modulars',fecha);
                                                 db.modules.find({},function(err, col){
                                                     if (err) return res.status(400).send(err);
-                                                    saveWriteFile(col, 'modules');
+                                                    saveWriteFile(col, 'modules',fecha);
                                                     db.offices.find({},function(err, col){
                                                         if (err) return res.status(400).send(err);
-                                                        saveWriteFile(col, 'offices');
+                                                        saveWriteFile(col, 'offices',fecha);
                                                         db.persons.find({},function(err, col){
                                                             if (err) return res.status(400).send(err);
-                                                            saveWriteFile(col, 'persons');
+                                                            saveWriteFile(col, 'persons',fecha);
                                                             db.programs.find({},function(err, col){
                                                                 if (err) return res.status(400).send(err);
-                                                                saveWriteFile(col, 'programs');
+                                                                saveWriteFile(col, 'programs',fecha);
                                                                 db.roles.find({},function(err, col){
                                                                     if (err) return res.status(400).send(err);
-                                                                    saveWriteFile(col, 'roles');
+                                                                    saveWriteFile(col, 'roles',fecha);
                                                                     db.users.find({},function(err, col){
                                                                         if (err) return res.status(400).send(err);
-                                                                        
-                                                                        
-                                ///////////////////////////////////////////////////////////////////
+                                                                        saveWriteFile(col, 'users',fecha);                                                                                                                           
     //////////////////////--------------------MKT-DATA----------------//////////////////////////////
                             db.mkt_roles.find({},function(err, col){
                                 if (err) return res.status(400).send(err);
-                                saveWriteFile(col, 'mkt_roles');
+                                saveWriteFile(col, 'mkt_roles',fecha);
                                 db.mkt_users.find({},function(err, col){
                                     if (err) return res.status(400).send(err);
-                                    saveWriteFile(col, 'mkt_users');
+                                    saveWriteFile(col, 'mkt_users',fecha);
                                     db.mkt_carteras.find({},function(err, col){
                                         if (err) return res.status(400).send(err);
-                                        saveWriteFile(col, 'mkt_carteras');
+                                        saveWriteFile(col, 'mkt_carteras',fecha);
                                         db.mkt_persons.find({},function(err, col){
                                             if (err) return res.status(400).send(err);
-                                            saveWriteFile(col, 'mkt_persons');
+                                            saveWriteFile(col, 'mkt_persons',fecha);
                                             db.mkt_facilitators.find({},function(err, col){
                                                 if (err) return res.status(400).send(err);
-                                                saveWriteFile(col, 'mkt_facilitators');
+                                                saveWriteFile(col, 'mkt_facilitators',fecha);
                                                 db.mkt_listExtra.find({},function(err, col){
                                                     if (err) return res.status(400).send(err);
-                                                    saveWriteFile(col, 'mkt_listExtra');
+                                                    saveWriteFile(col, 'mkt_listExtra',fecha);
                                                     db.mkt_events.find({},function(err, col){
                                                         if (err) return res.status(400).send(err);
-                                                        saveWriteFile(col, 'mkt_events');
+                                                        saveWriteFile(col, 'mkt_events',fecha);
                                                         db.mkt_lists.find({},function(err, col){
                                                             if (err) return res.status(400).send(err);
-                                                            saveWriteFile(col, 'mkt_lists');
+                                                            saveWriteFile(col, 'mkt_lists',fecha);
                                                             db.mkt_programs.find({},function(err, col){
                                                                 if (err) return res.status(400).send(err);
-                                                                saveWriteFile(col, 'mkt_programs');
+                                                                saveWriteFile(col, 'mkt_programs',fecha);
                                                                 db.mkt_modules.find({},function(err, col){
                                                                     if (err) return res.status(400).send(err);
-                                                                    saveWriteFile(col, 'mkt_modules');
+                                                                    saveWriteFile(col, 'mkt_modules',fecha);
                                                                     db.mkt_offices.find({},function(err, col){
                                                                         if (err) return res.status(400).send(err);
-                                                                        saveWriteFile(col, 'mkt_offices');
+                                                                        saveWriteFile(col, 'mkt_offices',fecha);
                                                                         db.mkt_company.find({},function(err, col){
                                                                             if (err) return res.status(400).send(err);
-                                                                            saveWriteFile(col, 'mkt_company');
+                                                                            saveWriteFile(col, 'mkt_company',fecha);
                                                                             db.mkt_correlatives.find({},function(err, col){
                                                                                 if (err) return res.status(400).send(err);
-                                                                                saveWriteFile(col, 'mkt_correlatives');
-                                                                                var zip = new JSZip();
-                                                                                //var file = zip.folder('./backups');
-                                                                                // console.log(file);
-                                                                                // console.log('el contenido del archivo')
-                                                                                // res.download(file);
-                                                                                // var filePath = "./backups"; 
-                                                                                // var fileName = "carteras.json";
-                                                                                //res.download(filePath, fileName);
-                                                                                saveFileZip(zip.folder('./backups'))
-                                                                                res.sendfile('./backups/file.zip')                                      
+                                                                                saveWriteFile(col, 'mkt_correlatives',fecha);
+                                                                                    
+                                                                                    console.log('File compress created Zip');
+                                                                                //    return res.sendFile('./backups/cecapBackup'+'_'+fecha+'.zip', { root: __dirname });
+                                                                                   return res.status(200).sendFile( path.join(__dirname, '../backups/', 'cecapBackup'+'_'+fecha+'.zip'));
+                                                                                //    return res.status(200).send(events);
                                                                                 });                                            
                                                                             });                                            
                                                                         });                                            
@@ -166,32 +167,24 @@ router
           });
           //return res.status(200).send(events);
         });
-        function saveWriteFile(date, dbName){
+        function saveWriteFile(date, dbName,fecha){
          // var content = JSON.parse(JSON.stringify(events));
-            var content = JSON.stringify(date);
-            var ruta = "./backups/"+dbName+".json";
-            fs.writeFile(ruta, content, function (err) {
-                if (err) {
-                    console.log(err);
-                    //return res.status(400).send(err);
-                }
-                console.log("El archivo " +dbName+" fue Guardado!");
-                //return res.status(200).send(events);
-            });
+         var content = JSON.stringify(date);
+         zip.file(dbName+".json", content);
+         var data = zip.generate({base64:false,compression:'DEFLATE'});
+         fs.writeFileSync('./backups/cecapBackup'+'_'+fecha+'.zip', data, 'binary');
+
+            // var content = JSON.stringify(date);
+            // var ruta = "./backups/"+dbName+".json";
+            // fs.writeFile(ruta, content, function (err) {
+            //     if (err) {
+            //         console.log(err);
+            //         //return res.status(400).send(err);
+            //     }
+            //     console.log("El archivo " +dbName+" fue Guardado!");
+            //     //return res.status(200).send(events);
+            // });
         }
-        function saveFileZip( fileZip){
-            // var content = JSON.parse(JSON.stringify(events));
-               
-               var ruta = "./backups/casa";
-               fs.writeFile(ruta, fileZip, function (err) {
-                   if (err) {
-                       console.log(err);
-                       //return res.status(400).send(err);
-                   }
-                   console.log("El archivo ZIP fue Guardado!");
-                   //return res.status(200).send(events);
-               });
-           }
     })
    .get('/', function (req, res) {
       db.users.find({}, { name: 1, active: 1, password_hash: 1, rol: 1 }, function (err, users) {
@@ -355,7 +348,7 @@ router
       req.body._id = undefined;
       var _user = req.body;
       _user.active = true;
-      _user.password_hash = _user.name;
+    //   _user.password_hash = _user.name;
 
       var user_model = new db.users(_user);
       user_model.token = jwt.sign(user_model._id + '' + user_model.record_date, 'AltaPrecision'); //FIX

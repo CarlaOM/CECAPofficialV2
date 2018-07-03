@@ -57,11 +57,11 @@ export class EditProgramaComponent implements OnInit {
       // if (this.programName == '' || this.programDetails == '') {
       //       window.alert("Asegurese que todos los campos esten llenados");
       // } else {
-         console.log(this.program);
+      //    console.log(this.program);
          this._peticionesService.updateProgram(this.program).subscribe(
             result => {
                var res = result;
-               console.log(res);
+            //    console.log(res);
                this.router.navigate(['home/programs']);
                alert('La edición se guardó correctamente');
             //    window.history.back();          

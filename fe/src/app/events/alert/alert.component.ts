@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from "@angular/router";
   providers: [ PeticionesService]
 })
 export class AlertComponent implements OnInit {
+  public listaPrograms:Array<any>=[];
   public programs;
   @ViewChild("close", {read: ElementRef}) close: ElementRef;
   constructor(
@@ -24,7 +25,8 @@ export class AlertComponent implements OnInit {
   queryPrograms(){
     this._peticionesService.getPrograms().subscribe(response => {
         this.programs = response;
-        console.log(this.programs.length);
+        this.listaPrograms=this.programs;
+        // console.log(this.programs.length);
        },
        error=>{
         var errorMessage = <any>error;

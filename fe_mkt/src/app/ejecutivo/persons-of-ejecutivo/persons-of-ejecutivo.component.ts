@@ -39,7 +39,7 @@ export class PersonsOfEjecutivoComponent implements OnInit {
   queryEjecutivoId(){
     this.route.params.subscribe(params => {
     this.ejecutivoId=params.id;
-      console.log(this.ejecutivoId);
+      // console.log(this.ejecutivoId);
     this.queryCartera();
 
    
@@ -51,7 +51,7 @@ export class PersonsOfEjecutivoComponent implements OnInit {
     this._peticionesService.getPersonsOfCartera(this.cartera._id).subscribe(
        result => {
           this.listado_personas = result;
-          console.log(this.listado_personas);
+          // console.log(this.listado_personas);
        },
        error => {
           var errorMessage = <any>error;

@@ -25,7 +25,7 @@ export class AddSucursalComponent implements OnInit {
     this.queryCompany();
   }
   onSubmit(){
-    console.log(this.office);
+    // console.log(this.office);
     this._peticionSucursalService.addOffice(this.office).subscribe(
       result => {
         var esperado = result;

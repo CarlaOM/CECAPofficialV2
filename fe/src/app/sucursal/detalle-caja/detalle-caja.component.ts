@@ -27,12 +27,12 @@ export class DetalleCajaComponent implements OnInit {
   querySucursal(){
     this.route.params.subscribe(params => {
       this.officeId = params.id;
-      console.log(this.officeId);
+      // console.log(this.officeId);
      });
     this._peticionesServiceSucursal.getSucursal(this.officeId).subscribe(
          result => {
             this.office = result;
-            console.log(this.office);
+            // console.log(this.office);
          },
          error => {
             var errorMessage = <any>error;

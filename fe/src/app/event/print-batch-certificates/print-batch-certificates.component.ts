@@ -49,8 +49,8 @@ export class PrintBatchCertificatesComponent implements OnInit {
   this.route.params.subscribe(params => {
   this.eventId = params.id.split("-")[0];
   this.moduleId=params.id.split("-")[1];
-    console.log(this.eventId);
-    console.log(this.moduleId);
+    // console.log(this.eventId);
+    // console.log(this.moduleId);
   });
   this.queryEventInscription();
 }
@@ -60,7 +60,7 @@ queryEventInscription() {
            this.event = result;
           
 
-           console.log(this.event);
+          //  console.log(this.event);
            this.inscriptions = this.event.inscriptions;
            var total = this.event.total;   
            this.lista_personasPorModulo=this.inscriptions; 
@@ -108,7 +108,7 @@ setListInscriptions(_id:string){
 
         this.lista_personasPorModulo.push(persona);
   }
-  console.log(this.lista_personasPorModulo);
+  // console.log(this.lista_personasPorModulo);
   // console.log(this.moduleId);
 
 
@@ -304,7 +304,7 @@ oneCertificate(namePerson:string){
       // this.doc.setFontSize(14);
       // this.doc.text(265,175,'Cochabamba - Bolivia,2017 ',null,null,'right');
 
-      console.log(this.doc.getFontList());
+      // console.log(this.doc.getFontList());
 
       
 

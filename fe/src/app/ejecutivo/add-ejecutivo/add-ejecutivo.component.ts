@@ -5,6 +5,7 @@ import {Cartera} from '../../modelo/cartera';
 import { Identity, } from "../../services/global";
 // import {User} from '../../modelo/user';
 import { Offices } from "../../modelo/offices";
+import {Md5} from 'ts-md5/dist/md5';
 import { Ejecutivo } from "../../modelo/Ejecutivo";
 
 @Component({
@@ -14,6 +15,7 @@ import { Ejecutivo } from "../../modelo/Ejecutivo";
   providers:[PeticionesService]
 })
 export class AddEjecutivoComponent implements OnInit {
+  private md5 = new Md5();
   public carteras;
   public sucursales;
   public carteraSeleccionada;
@@ -44,15 +46,15 @@ export class AddEjecutivoComponent implements OnInit {
   ngOnInit() {
     this._peticionesService.getCarterasLibres().subscribe(response=>{
       this.carteras=response;
-      console.log(this.carteras);
+      // console.log(this.carteras);
     });
     this._peticionesService.getSucursales().subscribe(response=>{
       this.sucursales=response;
-      console.log(this.sucursales)
+      // console.log(this.sucursales)
     });
     this._peticionesService.getRoles().subscribe(response=>{
       this.roles=response;
-      console.log(this.roles);
+      // console.log(this.roles);
       for(let r of this.roles){
         if(r.name!="Admin"){
           this.rolesSinAdmin.push(r);
@@ -62,7 +64,7 @@ export class AddEjecutivoComponent implements OnInit {
     }); 
   }
   onSubmit() { this.submitted = true;
-    console.log(this.model);
+    // console.log(this.model);
     // this.model.rol = this.rol._id;
     // this._peticionesService.getUser().subscribe(response => {
     //   this.personas = response;
@@ -102,6 +104,9 @@ export class AddEjecutivoComponent implements OnInit {
     //       console.log(errorMessage);
     //     })
     // }
+    this.model.password_hash=this.model.name;
+    let passHashed= this.md5.appendStr(this.model.password_hash).end();
+    this.model.password_hash=passHashed;
     this._peticionesService.addUser(this.model).subscribe(
       response=>{
             this.newUser=response;
@@ -117,7 +122,7 @@ export class AddEjecutivoComponent implements OnInit {
     }
   findCartera(){
     this.carteraSeleccionada=this.model.cartera;
-    console.log(this.carteraSeleccionada);
+    // console.log(this.carteraSeleccionada);
     this._peticionesService.getCartera(this.carteraSeleccionada).subscribe(
        result =>{
           this.carteraObject=result;

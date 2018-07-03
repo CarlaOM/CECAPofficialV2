@@ -56,12 +56,13 @@ export class PeticionesService {
     return this._http.post(this.url + 'modules/add', body, { headers: headers }).map((res: Response) => res);
   }
   getModulos(idProgram) {
-    console.log(idProgram)
+    // //console.log(idProgram)
+    // console.log(idProgram)
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.get(this.url + 'modules/lista/' + idProgram, { headers: headers }).map((res: Response) => res);
   }
   getEventModuls(eventId) {
-    console.log(eventId)
+    // //console.log(eventId)
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.get(this.url + 'modules/eventoModuls/' + eventId, { headers: headers }).map((res: Response) => res);
   }
@@ -86,14 +87,14 @@ export class PeticionesService {
   addInscriptPerson(registro) {
     let body = JSON.stringify(registro);
     var id = registro.eventId;
-    console.log(id);
+    // //console.log(id);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.post(this.url + 'events/inscriptPerson/' + id, body, { headers: headers }).map((res: Response) => res);
   }
   addNivelacion(registro){
     let body = JSON.stringify(registro);
     var id = registro.eventId;
-    console.log('id del evento Actual: '+id);
+    // //console.log('id del evento Actual: '+id);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.post(this.url + 'events/nivelacion/' + id, body, { headers: headers }).map((res: Response) => res);
   }
@@ -164,10 +165,10 @@ export class PeticionesService {
     return this._http.post(this.url + 'facilitators/register', body, { headers: headers }).map((res: Response) => res);
   }
   updateFacilitador(facilitador_object) {
-    //   console.log(facilitador_object, 'test');
+      //console.log(facilitador_object, 'test');
     let body = JSON.stringify(facilitador_object);
     var idFacilitador = facilitador_object._id;
-    // console.log(body);
+    //console.log(body);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.put(this.url + 'facilitators/edit/' + idFacilitador, body, { headers: headers }).map((res: Response) => res);
   }
@@ -193,7 +194,7 @@ export class PeticionesService {
   updatePerson(event_object) {
     let body = JSON.stringify(event_object);
     var idPerson = event_object._id;
-    // console.log(body);
+    //console.log(body);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.put(this.url + 'persons/' + idPerson, body, { headers: headers }).map((res: Response) => res);
   }
@@ -206,13 +207,13 @@ export class PeticionesService {
   }
   getPersonCartera(_id) {
 
-    // console.log(_id+"desde peticionesservice")
+    //console.log(_id+"desde peticionesservice")
     return this._http.get(this.url + 'carteras/persons/' + _id).map((res: Response) => res);
     //  return this._http.get(this.url+'cartera/listPersonsCartera/'+_id).map((res: Response)=> res);
 
   }
   getCarteraFromUserId(id) {
-    // console.log(body);
+    //console.log(body);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.get(this.url + 'carteras/otro/' + id, { headers: headers }).map((res: Response) => res);
   }
@@ -226,10 +227,10 @@ export class PeticionesService {
   // }
 
   updateCartera(cartera_object) {
-    console.log(cartera_object);
+    // //console.log(cartera_object);
     let body = JSON.stringify(cartera_object);
     var idCartera = cartera_object._id;
-    // console.log(body);
+    //console.log(body);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.put(this.url + 'carteras/' + idCartera, body, { headers: headers }).map((res: Response) => res);
   }
@@ -242,7 +243,7 @@ export class PeticionesService {
     return this._http.get(this.url + 'users/rolName/' + id).map((res: Response) => res);
   }
   updateUser(user_object) {
-    console.log(user_object);
+    // //console.log(user_object);
     let body = JSON.stringify(user_object);
     var idUser = user_object._id;
     //console.log(body);
@@ -250,18 +251,18 @@ export class PeticionesService {
     return this._http.put(this.url + 'users/' + idUser, body, { headers: headers }).map((res: Response) => res);
   }
   updateProgram(program_object) {
-    //   console.log(program_object, 'test');
+      //console.log(program_object, 'test');
     let body = JSON.stringify(program_object);
     var idProgram = program_object._id;
-    // console.log(body);
+    //console.log(body);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.put(this.url + 'programs/edit/' + idProgram, body, { headers: headers }).map((res: Response) => res);
   }
   updateModulo(modulo_object) {
-    console.log(modulo_object);
+    // //console.log(modulo_object);
     let body = JSON.stringify(modulo_object);
     var idModulo = modulo_object._id;
-    // console.log(body);
+    //console.log(body);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.put(this.url + 'modules/edit/' + idModulo, body, { headers: headers }).map((res: Response) => res);
   }
@@ -295,7 +296,7 @@ export class PeticionesService {
   }
 
   addCashFlowUserEgreso(egreso) {
-    // console.log(egreso);
+    //console.log(egreso);
     let body = JSON.stringify(egreso);
     //console.log(body);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
@@ -340,7 +341,7 @@ export class PeticionesService {
 
   addDetailCashFlowOffice(detail) {
 
-    // console.log(egreso);
+    //console.log(egreso);
     let body = JSON.stringify(detail);
     //console.log(body);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
@@ -349,7 +350,7 @@ export class PeticionesService {
   }
 
   getCurrentCashFlowOffice(id) {
-    // console.log(id);
+    //console.log(id);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.get(this.url + 'cajaSucursal/current/' + id, { headers: headers }).map((res: Response) => res);
 
@@ -446,7 +447,7 @@ export class PeticionesService {
   }
   markPrintCertificate(ObjId){
     let body = JSON.stringify(ObjId);
-    console.log(body)
+    // //console.log(body)
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.post(this.url + 'modulars/printCertificate', body, { headers: headers }).map((res: Response) => res);
   
@@ -462,7 +463,7 @@ export class PeticionesService {
 
    confirmCajaSucursal(idCajaSucursal){
     let body = JSON.stringify(idCajaSucursal);	
-    console.log(body);	
+    // //console.log(body);	
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
     return this._http.post(this.url + 'cajaSucursal/confirm/', body, { headers: headers }).map((res: Response) => res);		
 
@@ -475,8 +476,8 @@ export class PeticionesService {
 
   addDetailToPrincipal(detail){
     let body = JSON.stringify(detail);	
-    console.log(body);
-    console.log('desde peticiones');	
+    // //console.log(body);
+    // //console.log('desde peticiones');	
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
     return this._http.post(this.url + 'cajaPrincipal/addDetail/', body, { headers: headers }).map((res: Response) => res);		
 
@@ -484,15 +485,15 @@ export class PeticionesService {
   }
   getPrincipalCash(_id){	
     let body = JSON.stringify(_id);	
-    console.log(body);
-    console.log('desde peticiones');	
+    // //console.log(body);
+    // //console.log('desde peticiones');	
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
     return this._http.post(this.url + 'cajaPrincipal/getPrincipal/', body, { headers: headers }).map((res: Response) => res);		
 	
     // return this._http.get(this.url + 'cajaPrincipal/getPrincipal/' + _id).map((res: Response) => res);		
   }	
   getModulars(eventId) {
-    console.log(eventId)
+    // //console.log(eventId)
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.get(this.url + 'events/getModulars/' + eventId, { headers: headers }).map((res: Response) => res);
   }
@@ -503,7 +504,7 @@ export class PeticionesService {
   }
 
   getAcconutsModulars(modular_id){
-    console.log(modular_id)
+    // //console.log(modular_id)
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return this._http.get(this.url + 'modulars/accountModulars/' + modular_id, { headers: headers }).map((res: Response) => res);
   }
@@ -534,14 +535,14 @@ export class PeticionesService {
   }
   addNewTaller(taller){
     let body = JSON.stringify(taller);	
-    console.log(body);
+    // //console.log(body);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
     return this._http.post(this.url + 'events/addNewTaller/', body, { headers: headers }).map((res: Response) => res);		
   }
 
   // getEventTallerInscriptions(event){
   //   let body = JSON.stringify(event);	
-  //   console.log(body);
+    //console.log(body);
   //   var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
   //   return this._http.post(this.url + 'events/getEventTallerInscriptions/', body, { headers: headers }).map((res: Response) => res);		
 	
@@ -557,7 +558,7 @@ export class PeticionesService {
 
   getEvetnModuleTallerInscriptions(moduleTaller){
     let body = JSON.stringify(moduleTaller);	
-    console.log(body);
+    // //console.log(body);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
     return this._http.post(this.url + 'events/getEvetnModuleTallerInscriptions/', body, { headers: headers }).map((res: Response) => res);		
 	
@@ -573,7 +574,7 @@ export class PeticionesService {
   }
   listPersonNivelacionForCalls(obj){
     let body = JSON.stringify(obj);	
-    console.log(body);
+    // //console.log(body);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
     return this._http.post(this.url + 'events/listPersonNivelacionForCalls/', body, { headers: headers }).map((res: Response) => res);		
   }

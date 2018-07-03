@@ -55,7 +55,7 @@ export class EditPersonaInteresComponent implements OnInit {
     this._peticionesService.getPerson(this.personId).subscribe(result => {
 
       this.person = result;
-      console.log(this.person);
+      // console.log(this.person);
       this.getIntersOfPerson();
     })
 
@@ -67,7 +67,7 @@ export class EditPersonaInteresComponent implements OnInit {
     interesItem.personId = this.personId;
     this._peticionesService.getInteresOfPersonaWithInteres(interesItem).subscribe(res => {
       this.interes = res;
-      console.log(this.interes);
+      // console.log(this.interes);
       this.person.detail = this.interes.details || '';
       this.interesOfPerson = this.interes.state;
     })
@@ -86,7 +86,7 @@ export class EditPersonaInteresComponent implements OnInit {
 
       // console.log(response);
 
-      console.log(this.model);
+      // console.log(this.model);
       // this._peticionesService.addNewTracing(this.personId, this.model).subscribe(response => {
       //   var esperado = response;
       //   console.log(esperado);

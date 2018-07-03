@@ -56,10 +56,10 @@ export class EditFacilitadorComponent implements OnInit {
     // if (this.facilitadorName == '' || this.facilitadorJob == '') {
     //       window.alert("Asegúrese que todos los campos esten llenados");
     // } else {
-       console.log(this.facilitador);
+      //  console.log(this.facilitador);
        this._peticionesService.updateFacilitador(this.facilitador).subscribe(
           result => {
-             console.log(result);
+            //  console.log(result);
             //  var res = result;
             this.router.navigate(['home/facilitador']);
              alert('La edición se guardó correctamente');        

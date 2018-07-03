@@ -78,7 +78,7 @@ export class FiltroUniversidadMedioComponent implements OnInit {
 
       this.listaPersonas=response;
       this.listado_personas=this.listaPersonas;
-      console.log(this.listado_personas);
+      // console.log(this.listado_personas);
     })
   }
   llenarUniversidades(){

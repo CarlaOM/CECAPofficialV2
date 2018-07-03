@@ -4,7 +4,7 @@ export class Ejecutivo {
         public _id: string,
         public name: string,
         public lastname:string,
-        public password_hash:string,
+        public password_hash:any,
         public active:boolean,    
         public cell:number,
         public correo:string,        

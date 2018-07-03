@@ -54,7 +54,7 @@ export class AddModuloComponent implements OnInit {
       this._peticionesService.addModulo(this.modulo).subscribe(
          result => {
             var esperado = result;
-            console.log(esperado);
+            // console.log(esperado);
             alert('El Módulo se creo correctamente');
             window.history.back();
          },

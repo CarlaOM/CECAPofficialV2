@@ -51,7 +51,7 @@ export class EgresoComponent implements OnInit {
     // this.nomSucursal = this.egresoSucursal.name;
     // console.log(this.nomSucursal);
     
-    console.log(this.egresoEvent);
+    // console.log(this.egresoEvent);
     this.submitted = true;
     // if(this.egresoSucursal == 'Santa Cruz'){
     //   this.dimSuc = 'SC';
@@ -131,7 +131,7 @@ export class EgresoComponent implements OnInit {
     this.egreso.user = Identity._id;
     this.egreso.modulars = this.modularsId;
 
-    console.log(this.egreso);
+    // console.log(this.egreso);
 
     this._peticionesService.addCashFlowUserEgreso(this.egreso).subscribe(
       result => {
@@ -148,14 +148,14 @@ export class EgresoComponent implements OnInit {
   }
   ngOnInit() {
     this._peticionesService.getCatEgresos().subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this._peticionesService.getSucursales().subscribe(response => {
         this.sucursales = response;
-        console.log(this.sucursales);
+        // console.log(this.sucursales);
         this._peticionesService.getEvents().subscribe(response => {
 
           this.eventos = response;
-          console.log(this.eventos);
+          // console.log(this.eventos);
         })
       })
     })
@@ -170,8 +170,8 @@ export class EgresoComponent implements OnInit {
                 this.modulos.pop();
             }
         }
-        console.log('aqui los modulos Objedts');
-         console.log(this.modulos);
+        // console.log('aqui los modulos Objedts');
+        //  console.log(this.modulos);
       },
       error=>{
         var errorMessage = <any>error;
@@ -180,13 +180,13 @@ export class EgresoComponent implements OnInit {
     );
   }
   idSuc(idSucur){
-    console.log(idSucur);
+    // console.log(idSucur);
   }
   captArea(){
     if(this.areaSelected == 'P' || this.areaSelected == 'F'){
       var a = "no";
       var concatenar = a.concat(this.areaSelected)
-      console.log(concatenar); 
+      // console.log(concatenar); 
     }
     
   }

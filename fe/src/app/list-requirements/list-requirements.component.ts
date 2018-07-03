@@ -55,7 +55,7 @@ export class ListRequirementsComponent implements OnInit {
         this.event = result;
         // this.queryModules();
 
-        console.log(this.event);
+        // console.log(this.event);
         // this.inscriptions = this.event[0].inscribed;          
 
         //prueba total
@@ -106,7 +106,7 @@ export class ListRequirementsComponent implements OnInit {
 
 
       this.inscriptions.push(personaR);
-      console.log(personaR);
+      // console.log(personaR);
       // personaR.photocopy_ci = 
       this.a++;
 
@@ -125,9 +125,9 @@ export class ListRequirementsComponent implements OnInit {
     var photo = this.checks[(a * 3)].checked;
     var ci = this.checks[(a * 3) + 1].checked;
     var titulo = this.checks[(a * 3) + 2].checked;
-    console.log(this.checks);
+    // console.log(this.checks);
     this._peticionesService.updateProfilePerson(id, profileId, photo, ci, titulo).subscribe(r => {
-      console.log(r);
+      // console.log(r);
     });
   }
   cancelar() {

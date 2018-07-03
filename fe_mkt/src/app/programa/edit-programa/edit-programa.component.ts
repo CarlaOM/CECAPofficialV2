@@ -53,10 +53,10 @@ export class EditProgramaComponent implements OnInit {
       if (this.nameRef.nativeElement.value == '' || this.detailsRef.nativeElement.value == '') {
          window.alert("Asegurese que todos los campos esten llenados");
       } else {
-         console.log(this.program);
+      //    console.log(this.program);
          this._peticionesService.updateProgram(this.program).subscribe(
             result => {
-               console.log(result);
+            //    console.log(result);
                var res = result;
                alert('Se Guardo correctamente la edicion');
                // window.history.back();          

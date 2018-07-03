@@ -57,7 +57,7 @@ export class PendingCashComponent implements OnInit {
     
 
   ngOnInit() {
-    console.log(Identity._id);
+    // console.log(Identity._id);
     this.cajas=[];
     this.nuevasCajas=[];
     this.validateCloseCashButton=0;
@@ -91,7 +91,7 @@ export class PendingCashComponent implements OnInit {
     this._peticionesService.getCurrentCashFlowOffice(Identity._id).subscribe(response=>{
 
       this.currentCashFlowOffice=response;
-      console.log(this.currentCashFlowOffice);
+      // console.log(this.currentCashFlowOffice);
 
       this.cashFlowOfficeAmount=this.currentCashFlowOffice.amount;     
 
@@ -128,7 +128,7 @@ export class PendingCashComponent implements OnInit {
       infoCaja.estado=caja.state;
       if(infoCaja.estado==1){
         this.validateCloseCashButton++;
-        console.log(this.validateCloseCashButton+"------aaaaaaaaaaaaaaaaaaaaaa");
+        // console.log(this.validateCloseCashButton+"------aaaaaaaaaaaaaaaaaaaaaa");
       }
       this.nuevasCajas.push(infoCaja);
 
@@ -139,11 +139,11 @@ export class PendingCashComponent implements OnInit {
 
     if(this.nuevasCajas.length-1==this.validateCloseCashButton){
       this.validateCloseCashButtonBoolean=true;
-      console.log("lo cambiamos a TRUEEEEEE") 
+      // console.log("lo cambiamos a TRUEEEEEE") 
     }
-    console.log(this.validateCloseCashButtonBoolean)
+    // console.log(this.validateCloseCashButtonBoolean)
     
-    console.log(this.nuevasCajas);
+    // console.log(this.nuevasCajas);
   }
   
   infoPendiente(idCash){
@@ -168,14 +168,14 @@ export class PendingCashComponent implements OnInit {
     this._peticionesService.closeCashFlowOffice(this.currentCashFlowOffice).subscribe(response=>{
       this.currentOffice=response;
 
-      console.log(this.currentCashFlowOffice);
+      // console.log(this.currentCashFlowOffice);
       this._peticionesService.addDetailToPrincipal(this.currentCashFlowOffice).subscribe(res=>{
         this.principal=res;
 
       })
       this.newCashOffice.user=Identity._id;
       this.newCashOffice.offices=this.currentOffice;
-      console.log(this.newCashOffice);
+      // console.log(this.newCashOffice);
       
       this._peticionesService.addNewCashFlowOffice(this.newCashOffice).subscribe(response=>{
 

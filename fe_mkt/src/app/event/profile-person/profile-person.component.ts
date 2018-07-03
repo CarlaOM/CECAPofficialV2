@@ -39,7 +39,7 @@ export class ProfilePersonComponent implements OnInit {
     this._peticionesService.getPerson(this.personId).subscribe(
       result => {
         this.person = result;
-        console.log(this.person)
+        // console.log(this.person)
         this.findCartera();
         
         this.ocupation = this.person.ocupation;

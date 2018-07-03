@@ -29,14 +29,14 @@ export class AsistenciaComponent implements OnInit {
     this.queryModulos();
   }
   guardar(){
-    console.log(this.lists);
+    // console.log(this.lists);
     this.lists.events = this.eventId;
     this.lists.person = this.personId;
 
     this._peticionesService.addAssitance(this.lists).subscribe(
       result => {
         var esperado = result;
-        console.log(esperado);
+        // console.log(esperado);
         alert('Registrado correctamente');
         var _id =this.eventId;
         this.router.navigate(['home/event', _id]);
@@ -55,13 +55,13 @@ export class AsistenciaComponent implements OnInit {
       var arrayIds = params.id.split('-');
       this.personId = arrayIds[0];
       this.eventId = arrayIds[1];
-      console.log(this.eventId);
-      console.log('el id del evento ')
+      // console.log(this.eventId);
+      // console.log('el id del evento ')
    });
     this._peticionesService.getEventModuls(this.eventId).subscribe(//consulta para obt todo modulos
       result => {
           this.modulos = result;
-          console.log(this.modulos);
+          // console.log(this.modulos);
       },
       error => {
           var errorMessage = <any>error;

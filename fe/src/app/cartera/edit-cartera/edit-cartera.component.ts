@@ -62,7 +62,7 @@ export class EditCarteraComponent implements OnInit {
 
   }
   simbolos(nameV){
-    console.log("ingreso simbolos");
+    // console.log("ingreso simbolos");
     var res = false;
     for(var i = 0; i<nameV.length;i++){
       if(nameV[i] == '!' || nameV[i] == '@' || nameV[i] == '#' || nameV[i] == '$' || nameV[i] == '%' || nameV[i] == '^' ){res = true;}
@@ -80,7 +80,7 @@ export class EditCarteraComponent implements OnInit {
     
     }else{
       if(this.simbolos(this.carteraName)){
-        console.log("Hay símbolos");
+        // console.log("Hay símbolos");
         window.alert("No se permiten símbolos");
       } else{
 
@@ -88,7 +88,7 @@ export class EditCarteraComponent implements OnInit {
         result=>{
   
           var res=result;
-          console.log(res);
+          // console.log(res);
           this.router.navigate(['home/cartera']);
           // alert('Se guardó correctamente la edición');          
         },error=>{

@@ -77,7 +77,7 @@ export class ReporteEventsComponent implements OnInit {
     this.showReporteEvento=null;
     this._peticionesService.getReportEvent(eventId).subscribe(resp=>{
       this.showReporteEvento=resp;
-      console.log(this.showReporteEvento);
+      // console.log(this.showReporteEvento);
     })
 
   }

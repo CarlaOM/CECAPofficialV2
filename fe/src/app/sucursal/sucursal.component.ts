@@ -33,7 +33,7 @@ export class SucursalComponent implements OnInit {
       this._peticionSucursalService.getSucursales().subscribe(
         result => {
           this.sucursales = result;
-         console.log(this.sucursales);
+        //  console.log(this.sucursales);
         },
         error => {
           var errorMessage = <any>error;
