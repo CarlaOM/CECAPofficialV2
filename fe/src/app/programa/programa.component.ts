@@ -19,6 +19,8 @@ export class ProgramaComponent implements OnInit {
     public totalPag;
     public mostrar = [];
     //////////////////////////////////////////
+    public modules;
+    public modulesDisp = [];
 
   constructor(
       private route: ActivatedRoute,
@@ -32,11 +34,32 @@ export class ProgramaComponent implements OnInit {
       result => {
          this.programs = result;
         //  console.log(result)
+        //  console.log(result)
+         
+         this.messageForModules()
          this.mostrarProg()
       },
       error => {
          console.log(<any>error);
       });
+  }
+  messageForModules(){
+    for(let i=0; i<this.programs.length; i++){
+      var idProgram = this.programs[i]._id
+
+      this._peticionesService.getModulos(idProgram).subscribe(
+        result => {
+          this.modules = result;
+          // console.log(result)  
+           
+          // this.modulesDisp[i] = this.modules.length;
+          this.programs[i].cantModules = this.modules.length;
+          // console.log(this.programs)
+        },
+        error => {
+           console.log(<any>error);
+        });
+    }
   }
   dis(){
     this.page = this.page-1;
