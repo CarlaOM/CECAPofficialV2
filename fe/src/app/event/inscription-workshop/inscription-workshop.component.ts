@@ -95,8 +95,8 @@ export class InscriptionWorkshopComponent implements OnInit {
                 //this.modulos.pop(i);
             }
         }
-        console.log('aqui los modulos Objedts');
-         console.log(this.modulos);
+        // console.log('aqui los modulos Objedts');
+        //  console.log(this.modulos);
       },
       error=>{
         var errorMessage = <any>error;

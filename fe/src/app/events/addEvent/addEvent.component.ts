@@ -43,7 +43,7 @@ export class AddEventComponent implements OnInit {
      this._peticionesService.getSucursales().subscribe(
       response => {
         this.sucursales= response;
-        console.log(this.sucursales);
+        // console.log(this.sucursales);
       },
       error => {
         var errorMessage = <any>error;
@@ -55,7 +55,7 @@ export class AddEventComponent implements OnInit {
       this.router.navigate(['home/events']);
    }
    onSubmit() {
-      console.log(this.model);
+      // console.log(this.model);
    }
    save() {
       
@@ -69,7 +69,7 @@ export class AddEventComponent implements OnInit {
             if (new Date(this.model.date_start) < new Date()) {
               window.alert("Asegurese que la fecha sea mayor a la de hoy")
           } else {
-              console.log(this.model);
+              // console.log(this.model);
               this._peticionesService.addEvent(this.model).subscribe(response => {
                 //this.messageEvent.emit();
                 //this.close.nativeElement.click();
@@ -80,7 +80,7 @@ export class AddEventComponent implements OnInit {
           }
         }
     }
-      console.log(this.model.date_start)
+      // console.log(this.model.date_start)
    }
 
 }

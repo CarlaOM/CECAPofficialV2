@@ -38,7 +38,7 @@ export class PersonaComponent implements OnInit {
     this._peticionesService.getPersons().subscribe(
        result => {
           this.listado_personas = result;
-          console.log(this.listado_personas);
+          // console.log(this.listado_personas);
           this.mostrarPer();
        },
        error => {
@@ -58,14 +58,14 @@ export class PersonaComponent implements OnInit {
   }
   aum(){
     this.page = this.page+1;
-    console.log(this.page)
+    // console.log(this.page)
     var inicio = (8*(this.page-1));
-    console.log(inicio)
+    // console.log(inicio)
     var final = (8*(this.page-1))+8;
     if(final > this.total){
       final = this.total;
     }
-    console.log(final)
+    // console.log(final)
     this.mostrar = [];
     for(var a = inicio  ; a < final ; a++ ){
         this.mostrar.push(this.listado_personas[a]);
@@ -83,7 +83,7 @@ export class PersonaComponent implements OnInit {
     this.total = this.listado_personas.length;
     this.totalPag = Math.ceil(this.total/8);
     this.mostrar = []
-    console.log(this.totalPag)
+    // console.log(this.totalPag)
     if(this.totalPag > 1){
       for(var a = 0 ; a < 8 ; a++){
       this.mostrar.push(this.listado_personas[a]) ;}

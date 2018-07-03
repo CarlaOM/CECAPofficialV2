@@ -8,19 +8,19 @@
             </button>
           </div>
           <div class="modal-body mx-3 ">
-            <div *ngIf='(programs?.length == 0)'><h5> Tiene 0 programas, necesita 
+            <div *ngIf='(listaPrograms?.length == 0)'><h5> Tiene 0 programas, necesita 
                         <strong >CREAR PROGRAMA</strong> para agregar al evento</h5>
             </div>
-            <div *ngIf='(programs.length > 0)'><h5> Estos son los programas que tiene para añadir al nuevo Evento, si usted quiere crear o registrar un nuevo programa elija la opción 
+            <div *ngIf='(listaPrograms?.length > 0)'><h5> Estos son los programas que tiene para añadir al nuevo Evento, si usted quiere crear o registrar un nuevo programa elija la opción 
               <strong >CREAR PROGRAMA</strong> y si no 
               <strong >CREAR EVENTO</strong></h5>
             </div>
-              <li *ngFor="let programa of programs" style="color: plum"><strong> * {{programa.name}}</strong></li>
+              <li *ngFor="let programa of listaPrograms" style="color: plum"><strong> * {{programa.name}}</strong></li>
             
             </div>
           <div class="modal-footer d-flex justify-content-center" >
-              <button *ngIf='(programs.length == 0)' disabled type="button" class="btn btn-success" (click)="continuar()">CREAR EVENTO</button>
-              <button *ngIf='(programs.length > 0)' type="button" class="btn btn-success" (click)="continuar()">CREAR EVENTO</button>
+              <button *ngIf='(listaPrograms.length == 0)' disabled type="button" class="btn btn-success" (click)="continuar()">CREAR EVENTO</button>
+              <button *ngIf='(listaPrograms.length > 0)' type="button" class="btn btn-success" (click)="continuar()">CREAR EVENTO</button>
               <button type="submit" class="btn btn-warning"(click)="craerProgram()">CREAR PROGRAMA</button>
           </div>
      </div>

@@ -60,7 +60,7 @@ export class ControlPagoComponent implements OnInit {
   onSubmit() {
   }
   ngOnInit() {
-     console.log(Identity._id); 
+    //  console.log(Identity._id); 
      //this.queryPrograms();
      this.queryEventId();
      this.queryPerson();
@@ -74,15 +74,15 @@ export class ControlPagoComponent implements OnInit {
       var arrayIds = params.id.split('-');
       this.personId = arrayIds[0];
       this.eventId = arrayIds[1];
-      console.log(this.eventId);
-      console.log('el id del evento ')
+      // console.log(this.eventId);
+      // console.log('el id del evento ')
    });
   }
   queryPerson(){
     this._peticionesService.getPerson(this.personId).subscribe(
       result =>{
         this.persona = result;
-        console.log(this.persona);
+        // console.log(this.persona);
       },
       error =>{
         var errorMessage = <any>error;
@@ -103,7 +103,7 @@ export class ControlPagoComponent implements OnInit {
      var arrayIds = this.modulsObject.split('-');
       this.registro.modularsId= arrayIds[0];
       this.registro.moduleId= arrayIds[1];
-     console.log(this.registro);
+    //  console.log(this.registro);
      this._peticionesService.addControlPago(this.registro).subscribe(
         result => {
             var esperado = result;
@@ -148,7 +148,7 @@ export class ControlPagoComponent implements OnInit {
     this._peticionesService.getInscriptionPerson(idPersonEvent).subscribe(
       result => {
           this.inscriPer = result[0];
-          console.log(this.inscriPer);;
+          // console.log(this.inscriPer);;
       },
       error => {
           var errorMessage = <any>error;
@@ -186,7 +186,7 @@ export class ControlPagoComponent implements OnInit {
    this._peticionesService.getEventModuls(this.eventId).subscribe(//consulta para obt todo modulos
      result => {
          this.modulos = result;
-         console.log(this.modulos);
+        //  console.log(this.modulos);
      },
      error => {
          var errorMessage = <any>error;
@@ -202,8 +202,8 @@ export class ControlPagoComponent implements OnInit {
           if(left.name>right.name)return 1;
           return 0;
         });
-        console.log('aqui los modulos Objedts');
-         console.log(this.modulos);
+        // console.log('aqui los modulos Objedts');
+        //  console.log(this.modulos);
       },
       error=>{
         var errorMessage = <any>error;

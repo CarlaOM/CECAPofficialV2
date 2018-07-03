@@ -30,11 +30,11 @@ export class BarComponent implements OnInit {
 
    // events
    public chartClicked(e: any): void {
-      console.log(e);
+    //   console.log(e);
    }
 
    public chartHovered(e: any): void {
-      console.log(e);
+    //   console.log(e);
    }
 
    // public setGraphic(data): void {
@@ -62,7 +62,7 @@ export class BarComponent implements OnInit {
       this._peticionesService.getTrimestral().subscribe(
          result => {
             this.events = result;
-            console.log("sssssssssssss"+this.events)
+            // console.log("sssssssssssss"+this.events)
             // this.events.map(event => {
             //    event.inscriptions = event.inscriptions.filter(e => e.state == 1);;
             // });

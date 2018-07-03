@@ -40,13 +40,13 @@ export class ListInscriptionsComponent implements OnInit {
   findEventId() {
     this.route.params.subscribe(params => {
        this.eventId = params.id;
-       console.log(this.eventId)
+      //  console.log(this.eventId)
     });
   }
   findEventPro(){
     this._peticionesService.getEvent(this.eventId).subscribe(result => {
       this.eventPro = result;
-      console.log(this.eventPro);
+      // console.log(this.eventPro);
     },
     error => {
       console.log(<any>error);
@@ -73,7 +73,7 @@ export class ListInscriptionsComponent implements OnInit {
           if(left.name>right.name)return 1;
           return 0;
         });
-        console.log(this.modulos);
+        // console.log(this.modulos);
     },
     error => {
         var errorMessage = <any>error;
@@ -87,7 +87,7 @@ export class ListInscriptionsComponent implements OnInit {
           this.event = result;
           // this.queryModules();
 
-          console.log(this.event);
+          // console.log(this.event);
           this.inscriptions = this.event.inscriptions;
 
           //prueba total

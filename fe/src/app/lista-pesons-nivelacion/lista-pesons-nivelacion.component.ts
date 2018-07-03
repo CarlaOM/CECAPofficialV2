@@ -36,7 +36,7 @@ export class ListaPesonsNivelacionComponent implements OnInit {
         this._peticionesService.listPersonNivelacionForCalls(programEvent).subscribe(res=>{
             this.lista=res;
             this.listaPersonas=this.lista;
-            console.log(this.listaPersonas);
+            // console.log(this.listaPersonas);
         })
   }
 

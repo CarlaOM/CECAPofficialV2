@@ -37,7 +37,7 @@ export class UserService {
 
       let body = JSON.stringify(user_to_login);//get interface
       let headers = new Headers();
-      console.log(body);
+      // console.log(body);
       headers.append('Content-Type', 'application/json');
       return this._http.post(this.url + 'Mkt_users/login', body, { headers: headers })
          .map(res => res.json() );
@@ -71,7 +71,10 @@ export class UserService {
                      this._router.navigate(['/']);
                   }
                )
-         } else console.log('sin _id en localStorage')
+         } else {
+            // console.log('sin _id en localStorage')
+
+         }
       });
    }
 }

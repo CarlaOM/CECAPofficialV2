@@ -45,7 +45,7 @@ public mostrar = [];
       ngOnInit(){
          this.route.params.subscribe(params => {
          this.eventId = params.id;
-         console.log(this.eventId)
+      //    console.log(this.eventId)
             this.queryRol();
          
          });
@@ -58,12 +58,12 @@ public mostrar = [];
                   this.activeEvent=this.event.active;
                   this.queryModules();
 
-                  console.log(this.event);
+                  // console.log(this.event);
                   this.inscriptions = this.event.inscriptions;
                   var total = this.event.total;   
                   this.lista_personasPorModulo=this.inscriptions; 
-                  console.log('Esta es la inscripción de la persona');
-                  console.log(this.lista_personasPorModulo); 
+                  // console.log('Esta es la inscripción de la persona');
+                  // console.log(this.lista_personasPorModulo); 
                   this.mostrarPer()     
             },
             error => {
@@ -96,14 +96,14 @@ public mostrar = [];
           }
           aum(){
             this.page = this.page+1;
-            console.log(this.page)
+            // console.log(this.page)
             var inicio = (8*(this.page-1));
-            console.log(inicio)
+            // console.log(inicio)
             var final = (8*(this.page-1))+8;
             if(final > this.total){
               final = this.total;
             }
-            console.log(final)
+            // console.log(final)
             this.mostrar = [];
             for(var a = inicio  ; a < final ; a++ ){
                 this.mostrar.push(this.lista_personasPorModulo[a]);
@@ -114,15 +114,15 @@ public mostrar = [];
             this.total = this.lista_personasPorModulo.length;
             this.totalPag = Math.ceil(this.total/8);
             this.mostrar = []
-            console.log(this.totalPag)
+            // console.log(this.totalPag)
             if(this.totalPag > 1){
               for(var a = 0 ; a < 8 ; a++){
               this.mostrar.push(this.lista_personasPorModulo[a]) ;}
-              console.log("entro")
+            //   console.log("entro")
             } else{
               this.mostrar = this.lista_personasPorModulo;
             }
-            console.log(this.mostrar)
+            // console.log(this.mostrar)
           }
       setListInscriptions(_id:string,nameModule:string){
             
@@ -146,7 +146,7 @@ public mostrar = [];
                         personEventModule.personId=i.persons
                         personEventModule.moduleId=this.moduleId;
                         personEventModule.eventId=this.eventId; 
-                        console.log(personEventModule);
+                        // console.log(personEventModule);
                   this._peticionesService.getAsistenciaOfPerson(personEventModule).subscribe(response=>{
 
                         this.modularForAssist=response;
@@ -156,8 +156,8 @@ public mostrar = [];
                   this.lista_personasPorModulo.push(persona);
             }
             this.mostrarPer();
-            console.log(this.lista_personasPorModulo);
-            console.log(this.moduleId);
+            // console.log(this.lista_personasPorModulo);
+            // console.log(this.moduleId);
 
 
 

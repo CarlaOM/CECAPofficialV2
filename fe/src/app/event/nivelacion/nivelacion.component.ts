@@ -62,7 +62,7 @@ export class NivelacionComponent implements OnInit {
    onSubmit() {
    }
    ngOnInit() {
-      console.log(Identity._id);
+      // console.log(Identity._id);
       this.currentCashFlow();
       this.queryEventId();
       this.queryModulars();
@@ -91,7 +91,7 @@ export class NivelacionComponent implements OnInit {
                this.canceledprice= this.personRecived.profile.payed;
                this.debtPrice= this.personRecived.profile.debt;
                this.modulsNot=this.personRecived.modularsPer;
-               console.log(this.modulsNot);
+              //  console.log(this.modulsNot);
             })
          }
 
@@ -106,7 +106,7 @@ export class NivelacionComponent implements OnInit {
       var arrayIds = this.modulsObject.split('-');
       this.registro.modularsId= arrayIds[0];
       this.registro.moduleId= arrayIds[1];
-      console.log(this.registro);
+      // console.log(this.registro);
       if(this.inscription.price_event > 0){
         this._peticionesService.addNivelacion(this.registro).subscribe(
           result => {
@@ -151,7 +151,7 @@ export class NivelacionComponent implements OnInit {
       }
    }
    captOcupation() {
-      console.log(this.ocupSelected);
+      // console.log(this.ocupSelected);
       this.descOcupation.universidad = ''; this.descOcupation.carrera = '';
       this.descOcupation.semestre = ''; this.descOcupation.areaTrabajo = '';
       this.descOcupation.profesion = ''; this.descOcupation.cargo = '';
@@ -173,8 +173,8 @@ export class NivelacionComponent implements OnInit {
                 //this.modulos.pop(i);
             }
         }
-        console.log('aqui los modulos Objedts');
-         console.log(this.modulos);
+        // console.log('aqui los modulos Objedts');
+        //  console.log(this.modulos);
       },
       error=>{
         var errorMessage = <any>error;

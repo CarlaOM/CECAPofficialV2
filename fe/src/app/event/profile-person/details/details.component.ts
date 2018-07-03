@@ -52,7 +52,7 @@ export class DetailsComponent implements OnInit {
     this._peticionesService.getPerson(this.personId).subscribe(
       result => {
          this.person = result;
-         console.log(result)
+        //  console.log(result)
       },
       error => {
          console.log(<any>error);
@@ -65,7 +65,7 @@ export class DetailsComponent implements OnInit {
     this._peticionesService.postPersonProgramDetails(this.personId, this.profileId).subscribe(
       result => {
         this.details = result
-         console.log(this.details)
+        //  console.log(this.details)
 
          this.profile = this.details.profile;
          this.requirements = this.details.profile.requirements; //console.log(this.requirements)
@@ -94,7 +94,7 @@ export class DetailsComponent implements OnInit {
        })
   }
   listModules() {
-    console.log(this.details.modulars)
+    // console.log(this.details.modulars)
     var x =[];
     // for (let i = 0; i <= this.modulars.length; i++) {
     //   this.modulars.pop(); i = 0;
@@ -146,7 +146,7 @@ export class DetailsComponent implements OnInit {
     window.history.back();
   }
   closeWork(){
-    console.log(":3")
+    // console.log(":3")
     if(this.reviews != undefined){
       for(let i = 0; i < this.reviews.length; i++){
         if(this.reviews[i].state == 6){
@@ -173,11 +173,11 @@ export class DetailsComponent implements OnInit {
             personProfileModule.personId = this.personId;
             personProfileModule.profileId = this.profileId;
             personProfileModule.moduleId = moduleId;
-            console.log(personProfileModule);
+            // console.log(personProfileModule);
             
     this._peticionesService.markPrintCertificate(personProfileModule).subscribe(response=>{
       var res = response
-      console.log(res)
+      // console.log(res)
       // this.setListInscriptions(this.moduleId,this.moduleName);
     });
   }

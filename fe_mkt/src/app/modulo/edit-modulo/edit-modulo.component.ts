@@ -66,7 +66,7 @@ export class EditModuloComponent implements OnInit {
          this._peticionesService.updateModulo(this.modulo).subscribe(
             result => {
                var res = result;
-               console.log(res);
+            //    console.log(res);
                alert('Se Guardo correctamente la edicion');
             },
             error => {

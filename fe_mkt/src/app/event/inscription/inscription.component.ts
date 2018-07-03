@@ -48,7 +48,7 @@ export class InscriptionComponent implements OnInit {
    onSubmit() {
    }
    ngOnInit() {
-      console.log(Identity._id); 
+    //   console.log(Identity._id); 
       //this.queryPrograms();
       this.queryEventId();
       this.queryModulos();
@@ -86,7 +86,7 @@ export class InscriptionComponent implements OnInit {
     this._peticionesService.getEventModuls(this.eventId).subscribe(//consulta para obt todo modulos
       result => {
           this.modulos = result;
-          console.log(this.modulos);
+        //   console.log(this.modulos);
       },
       error => {
           var errorMessage = <any>error;

@@ -72,8 +72,8 @@ export class ImportWhatsNumbersComponent implements OnInit {
   onSubmit() {
 
     this.fixText();
-    console.log(this.whatsGroupName);
-    console.log(this.whatsNumbers);
+    // console.log(this.whatsGroupName);
+    // console.log(this.whatsNumbers);
 
 
 
@@ -83,7 +83,7 @@ export class ImportWhatsNumbersComponent implements OnInit {
   }
   fixText() {
     var numeros = this.whatsNumbers.split(',');
-    console.log(numeros);
+    // console.log(numeros);
     numeros.forEach(element => {
       if (element.split(';')[1] != undefined) {
         if (element.split(';')[1].length == 8) {
@@ -92,7 +92,7 @@ export class ImportWhatsNumbersComponent implements OnInit {
 
       }
     });
-    console.log(this.numbers);
+    // console.log(this.numbers);
     this.llenarProgramasConInteres();
 
   }
@@ -106,7 +106,7 @@ export class ImportWhatsNumbersComponent implements OnInit {
 
 
     }
-    console.log(this.programasConInteres);
+    // console.log(this.programasConInteres);
     this.saveOnDB();
 
   }
@@ -120,7 +120,7 @@ export class ImportWhatsNumbersComponent implements OnInit {
     objWhats.interes = this.programasConInteres;
     objWhats.universidad = this.Universidad;
     objWhats.carrera = this.nameCarrera;
-    console.log(this.Universidad);
+    // console.log(this.Universidad);
     this._peticionesService.saveBatchWhatsappNumbers(objWhats).subscribe(response => {
       this.router.navigate(['home/persons']);
       // console.log(response);
@@ -154,7 +154,7 @@ export class ImportWhatsNumbersComponent implements OnInit {
   queryPrograms() {
     this._peticionesService.getPrograms().subscribe(response => {
       this.programs = response;
-      console.log(this.programs);
+      // console.log(this.programs);
       this.llenarProgramsCheckbox();
     },
       error => {

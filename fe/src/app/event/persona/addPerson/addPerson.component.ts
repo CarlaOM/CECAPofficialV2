@@ -50,7 +50,7 @@ export class AddPersonComponent implements OnInit {
     onSubmit() { 
     }
     ngOnInit() {
-        console.log(Identity._id);
+        // console.log(Identity._id);
         //this.queryPrograms();
         this.queryEvents();
         this.queryCartera();
@@ -66,13 +66,13 @@ export class AddPersonComponent implements OnInit {
         this.registro.inscription = this.inscription;
         this.registro.eventId = this.IdEvent;
         this.registro.persona = this.person;
-        console.log(this.registro);
+        // console.log(this.registro);
       
         // if(this.person.phone == null || this.person.phone > 3999999 && this.person.phone < 5000000){
         this._peticionesService.addPerson(this.registro).subscribe(
           result => {
             var esperado = result;
-            console.log(esperado);
+            // console.log(esperado);
             // this.router.navigate(['home/events']);
 
             window.history.back();
@@ -93,7 +93,7 @@ export class AddPersonComponent implements OnInit {
        
     }
     captOcupation(){ 
-        console.log(this.ocupSelected);
+        // console.log(this.ocupSelected);
         this.descOcupation.universidad = '';this.descOcupation.carrera = '';
         this.descOcupation.semestre = '';this.descOcupation.areaTrabajo = '';
         this.descOcupation.profesion = '';this.descOcupation.cargo = '';

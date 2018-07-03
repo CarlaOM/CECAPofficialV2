@@ -151,7 +151,7 @@ export class PersonsOfEventsComponent implements OnInit {
 
 }
 function nPersons(i, lista_personasPorInteres, listaToExport, name) {
-  console.log(i, lista_personasPorInteres.length);
+  // console.log(i, lista_personasPorInteres.length);
   if (i == lista_personasPorInteres.length) return;
   let personToExport = {} as PersonToExport;
   // for (let p of lista_personasPorInteres) {
