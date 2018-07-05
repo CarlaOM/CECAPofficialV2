@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
           Identity._id = this.jsonWebToken.identity._id;
           Identity.rol = this.jsonWebToken.identity.rol;
           Identity.name = this.user.name;
-          localStorage.setItem('idToken', this.jsonWebToken.idToken);
+          localStorage.setItem('idToken', this.jsonWebToken.identity._id);
 
           localStorage.setItem("expiresIn", JSON.stringify(this.jsonWebToken.expiresIn));
 
@@ -102,7 +102,8 @@ export class LoginComponent implements OnInit {
           Identity._id = this.jsonWebToken.identity._id;
           Identity.rol = this.jsonWebToken.identity.rol;
           Identity.name = this.user.name;
-          localStorage.setItem('idToken', this.jsonWebToken.idToken);
+          let iden=Identity._id;
+          localStorage.setItem('idToken',this.jsonWebToken.identity._id);
 
           localStorage.setItem("expiresIn", JSON.stringify(this.jsonWebToken.expiresIn));
 
