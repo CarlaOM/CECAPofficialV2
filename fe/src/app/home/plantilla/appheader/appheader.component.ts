@@ -12,7 +12,7 @@ import { AuthService } from "../../../services/authentication.service";
 })
 export class AppheaderComponent implements OnInit {
     public nameUser;
-
+    public role;
     constructor(
         protected localStorage: AsyncLocalStorage,
         private _router: Router,
@@ -23,6 +23,7 @@ export class AppheaderComponent implements OnInit {
 
     ngOnInit() {
         this.nameUser = Identity.name;
+        this.queryRol();
     }
     logOut() {
         this._authService.logout();
@@ -34,19 +35,38 @@ export class AppheaderComponent implements OnInit {
         //   this._router.navigate(['/login']);
     }
     backup() {
-        this._peticionesService.backup().subscribe(
-            result => {
-                alert('backup realizado');
-                var blob = new Blob([result], {'type':"application/octet-stream"});
-                var url = window.URL.createObjectURL(blob);
-                // window.open(url);
-                
+       return this._peticionesService.backup(Identity).subscribe(
+            res => {
+                console.log(res)
+                window.open(window.URL.createObjectURL(res));
+                //window.open(url);
             },
             error => {
                 var errorMessage = <any>error;
                 console.log(errorMessage);
-                window.alert('Error, no se pudo realizar backup');
+                window.open(errorMessage.url);
+                //window.alert('Error, no se pudo realizar backup');
+                window.alert('backup realizado')
             }
         );
     }
+    queryRol(){
+        //console.log(Identity.rol)
+     this._peticionesService.getRole(Identity.rol).subscribe(
+         result => {
+          this.role = result;
+ 
+            //  if(this.role.name=='Admin'){
+            //      this.queryEvents();
+            //  }else{
+            //      this.queryEventsSucursalActive();
+            //  }
+ 
+         },
+         error=>{
+          var errorMessage = <any>error;
+          console.log(errorMessage);
+         }
+     );
+     }
 }

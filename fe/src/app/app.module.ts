@@ -20,8 +20,8 @@ import { AppsettingsComponent } from './home/plantilla/appsettings/appsettings.c
 import { EventsComponent } from './events/events.component';
 import { EventComponent } from './event/event.component';
 import { PersonaComponent } from "./event/persona/persona.component"
+import { AlertBackupComponent } from './home/plantilla/alert-backup/alert-backup.component';
 import { AlertComponent } from './events/alert/alert.component';
-
 
 //Services
 import { UserService} from './services/user.service';
@@ -182,6 +182,7 @@ import { JwtInterceptor } from "./jwt.interceptor";//////este ya no se usa
     EditFacilitadorComponent,
     ProfilePersonComponent,
     AlertComponent,
+    AlertBackupComponent,
     PendingCashComponent,
     ControlAsistanceComponent,
     InfoPendingCashComponent,
