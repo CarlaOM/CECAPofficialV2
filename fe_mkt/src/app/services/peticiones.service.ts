@@ -37,6 +37,9 @@ export class PeticionesService {
         var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
         return this._http.post(this.url + 'Mkt_programs/add', body, { headers: headers }).map((res: Response) => res);
     }
+    getUni(){
+        return this._http.get(this.url + 'Mkt_list/').map((res: Response) => res);        
+    }
     getPrograms() {
 
         return this._http.get(this.url + 'Mkt_programs').map((res: Response) => res);

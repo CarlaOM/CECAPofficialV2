@@ -6,7 +6,13 @@ var db = require('../models/db');
 var router = express.Router();
 
 router
+    .get('/', function (req, res) {
+        db.mkt_listExtra.find({}, function (err, universidades) {
+        if (err) return res.status(400).send(err);
 
+        return res.status(200).send(universidades);
+        });
+     })
     .post('/add/university', function (req, res) {
         console.log(req.body);
         // db.mkt_listExtra.find({}, function (err, lista) {
