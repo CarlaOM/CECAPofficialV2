@@ -240,8 +240,13 @@
                 </li> -->
                 <!-- Menu Footer-->
                 <li class="user-footer">
-                  <div class="pull-left">
+                  <!-- <ol class="breadcrumb pull-right">
                     <a class="btn btn-warning btn-flat" (click)="backup()">Do Backup</a>
+                    <li *ngIf='(role?.name == "Admin")||(role?.name=="Gerente")'><app-backup></app-backup></li>
+                  </ol> -->
+                  <div class="pull-left">
+                      <a *ngIf='(role?.name == "Admin")||(role?.name=="Gerente")' class="btn btn-warning btn-flat" (click)="backup()">Do Backup</a>
+                      <!-- <li *ngIf='(role?.name == "Admin")||(role?.name=="Gerente")'><app-backup></app-backup></li> -->
                   </div>
                   <div class="pull-right">
                     <a class="btn btn-default btn-flat" (click)="logOut()">Sign out</a>

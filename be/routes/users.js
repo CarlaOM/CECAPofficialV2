@@ -9,6 +9,7 @@ const fs = require('fs');
 //var JSZip = require("jszip");
 var path = require('path');
 // var mime = require('mime');
+//var archiver = require('archiver');
 
 var zip = new require('node-zip')();
 // var mongojs = require('mongojs');
@@ -23,7 +24,7 @@ router
    // .get('/', function (req, res, next) {
    // 	f.validation(res, req.body.token, next);
    //   })
-   .get('/backup', function (req, res){
+   .get('/backup/:id', function (req, res){
         //var collectionNames = db.getCollectionNames()[0];
         // var collections=db.getCollectionNames();
         // console.log(collections);
@@ -91,7 +92,7 @@ router
                                                                     db.users.find({},function(err, col){
                                                                         if (err) return res.status(400).send(err);
                                                                         saveWriteFile(col, 'users',fecha);                                                                                                                           
-    //////////////////////--------------------MKT-DATA----------------//////////////////////////////
+//////////////////////--------------------MKT-DATA----------------//////////////////////////////
                             db.mkt_roles.find({},function(err, col){
                                 if (err) return res.status(400).send(err);
                                 saveWriteFile(col, 'mkt_roles',fecha);
@@ -131,11 +132,36 @@ router
                                                                             db.mkt_correlatives.find({},function(err, col){
                                                                                 if (err) return res.status(400).send(err);
                                                                                 saveWriteFile(col, 'mkt_correlatives',fecha);
-                                                                                    
-                                                                                    console.log('File compress created Zip');
-                                                                                //    return res.sendFile('./backups/cecapBackup'+'_'+fecha+'.zip', { root: __dirname });
-                                                                                   return res.status(200).sendFile( path.join(__dirname, '../backups/', 'cecapBackup'+'_'+fecha+'.zip'));
-                                                                                //    return res.status(200).send(events);
+                                                                                console.log('File compress created Zip');
+                                                                                    //    return res.sendFile('./backups/cecapBackup'+'_'+fecha+'.zip', { root: __dirname });
+                                                                                 //  return res.status(200).sendFile( path.join(__dirname, '../backups/', 'cecapBackup'+'_'+fecha+'.zip'));
+                                                                                    //    return res.status(200).send(events);
+                                                                                    //  res.sendFile('D:/1-2018/project/CECAPoficialV2/be/backups/cecapBackup'+'_'+fecha+'.zip');
+//////////////////////////------------send file zip--------------///////////////////////////////////////////////7
+        var error = false;
+        const filePath =  path.join(__dirname, '../backups/', 'cecapBackup'+'_'+fecha+'.zip');
+        console.log(filePath);
+        fs.exists(filePath, function(exists){
+            if (exists) {
+                // res.writeHead(200, {
+                // "Content-Type": "application/zip",
+                // "Content-Disposition": "attachment; filename=" + 'cecapBackup'+'_'+fecha+'.zip'
+                // });
+                // //var stream= fs.createReadStream(filePath).pipe(res);
+                // var stream= fs.createReadStream(filePath,{bufferSize: 64 * 1024});
+                // stream.pipe(res);
+                // //return res.status(200).send(JSON.stringify(stream))
+                var filename = path.basename(filePath);
+                console.log('este es el name '+  filename);
+                res.setHeader('Content-Disposition', 'attachment; filename=' + 'cecapBackup'+'_'+fecha+'.zip');
+                res.setHeader('Content-Transfer-Encoding', 'binary');
+                res.setHeader('Content-Type', 'application/octet-stream');
+                res.sendFile(filePath);
+            } else {
+                res.writeHead(400, {"Content-Type": "text/plain"});
+                res.end("ERROR File does not exist");
+            }
+        });
                                                                                 });                                            
                                                                             });                                            
                                                                         });                                            
@@ -186,7 +212,7 @@ router
             // });
         }
     })
-   .get('/', function (req, res) {
+    .get('/', function (req, res) {
       db.users.find({}, { name: 1, active: 1, password_hash: 1, rol: 1 }, function (err, users) {
          if (err) return res.status(400).send(err);
          return res.status(200).send(users);
@@ -278,6 +304,185 @@ router
          if (user == null) return res.sendStatus(404);
          return res.status(200).send(user);
       });
+   })
+   .post('/backupa', function (req, res){
+    var dt = new Date();
+    var month = dt.getMonth()+1;
+    var day = dt.getDate();
+    var year = dt.getFullYear();
+    var fecha= day+'-'+month+'-'+year;
+    console.log(fecha);
+    db.events.find({},function(err, col){
+      if (err) return res.status(400).send(err);
+      saveWriteFile(col, 'events',fecha);
+      db.carteras.find({},function(err, col){
+        if (err) return res.status(400).send(err);
+        saveWriteFile(col, 'carteras',fecha);
+        db.cashFlowOffices.find({},function(err, col){
+            if (err) return res.status(400).send(err);
+            saveWriteFile(col, 'cashFlowOffices',fecha);
+            db.cashFlowPrincipal.find({},function(err, col){
+                if (err) return res.status(400).send(err);
+                saveWriteFile(col, 'cashFlowPrincipal',fecha);
+                db.cashFlowUsers.find({},function(err, col){
+                    if (err) return res.status(400).send(err);
+                    saveWriteFile(col, 'cashFlowUsers',fecha);
+                    db.categoriaEgresos.find({},function(err, col){
+                        if (err) return res.status(400).send(err);
+                        saveWriteFile(col, 'categoriaEgresos',fecha);
+                        db.company.find({},function(err, col){
+                            if (err) return res.status(400).send(err);
+                            saveWriteFile(col, 'company',fecha);
+                            db.correlatives.find({},function(err, col){
+                                if (err) return res.status(400).send(err);
+                                saveWriteFile(col, 'correlatives',fecha);
+                                db.facilitators.find({},function(err, col){
+                                    if (err) return res.status(400).send(err);
+                                    saveWriteFile(col, 'facilitators',fecha);
+                                    db.lists.find({},function(err, col){
+                                        if (err) return res.status(400).send(err);
+                                        saveWriteFile(col, 'lists',fecha);
+                                        db.modulars.find({},function(err, col){
+                                            if (err) return res.status(400).send(err);
+                                            saveWriteFile(col, 'modulars',fecha);
+                                            db.modules.find({},function(err, col){
+                                                if (err) return res.status(400).send(err);
+                                                saveWriteFile(col, 'modules',fecha);
+                                                db.offices.find({},function(err, col){
+                                                    if (err) return res.status(400).send(err);
+                                                    saveWriteFile(col, 'offices',fecha);
+                                                    db.persons.find({},function(err, col){
+                                                        if (err) return res.status(400).send(err);
+                                                        saveWriteFile(col, 'persons',fecha);
+                                                        db.programs.find({},function(err, col){
+                                                            if (err) return res.status(400).send(err);
+                                                            saveWriteFile(col, 'programs',fecha);
+                                                            db.roles.find({},function(err, col){
+                                                                if (err) return res.status(400).send(err);
+                                                                saveWriteFile(col, 'roles',fecha);
+                                                                db.users.find({},function(err, col){
+                                                                    if (err) return res.status(400).send(err);
+                                                                    saveWriteFile(col, 'users',fecha);                                                                                                                           
+//////////////////////--------------------MKT-DATA----------------//////////////////////////////
+                        db.mkt_roles.find({},function(err, col){
+                            if (err) return res.status(400).send(err);
+                            saveWriteFile(col, 'mkt_roles',fecha);
+                            db.mkt_users.find({},function(err, col){
+                                if (err) return res.status(400).send(err);
+                                saveWriteFile(col, 'mkt_users',fecha);
+                                db.mkt_carteras.find({},function(err, col){
+                                    if (err) return res.status(400).send(err);
+                                    saveWriteFile(col, 'mkt_carteras',fecha);
+                                    db.mkt_persons.find({},function(err, col){
+                                        if (err) return res.status(400).send(err);
+                                        saveWriteFile(col, 'mkt_persons',fecha);
+                                        db.mkt_facilitators.find({},function(err, col){
+                                            if (err) return res.status(400).send(err);
+                                            saveWriteFile(col, 'mkt_facilitators',fecha);
+                                            db.mkt_listExtra.find({},function(err, col){
+                                                if (err) return res.status(400).send(err);
+                                                saveWriteFile(col, 'mkt_listExtra',fecha);
+                                                db.mkt_events.find({},function(err, col){
+                                                    if (err) return res.status(400).send(err);
+                                                    saveWriteFile(col, 'mkt_events',fecha);
+                                                    db.mkt_lists.find({},function(err, col){
+                                                        if (err) return res.status(400).send(err);
+                                                        saveWriteFile(col, 'mkt_lists',fecha);
+                                                        db.mkt_programs.find({},function(err, col){
+                                                            if (err) return res.status(400).send(err);
+                                                            saveWriteFile(col, 'mkt_programs',fecha);
+                                                            db.mkt_modules.find({},function(err, col){
+                                                                if (err) return res.status(400).send(err);
+                                                                saveWriteFile(col, 'mkt_modules',fecha);
+                                                                db.mkt_offices.find({},function(err, col){
+                                                                    if (err) return res.status(400).send(err);
+                                                                    saveWriteFile(col, 'mkt_offices',fecha);
+                                                                    db.mkt_company.find({},function(err, col){
+                                                                        if (err) return res.status(400).send(err);
+                                                                        saveWriteFile(col, 'mkt_company',fecha);
+                                                                        db.mkt_correlatives.find({},function(err, col){
+                                                                            if (err) return res.status(400).send(err);
+                                                                            saveWriteFile(col, 'mkt_correlatives',fecha);
+                                                                            console.log('File compress created Zip');
+//////////////////////////////////////////////for download file zip///////////////////////////////////////
+            const filePath =  path.join(__dirname, '../backups/', 'cecapBackup'+'_'+fecha+'.zip');
+            var error    = false;
+            console.log(filePath);
+            fs.exists(filePath, function(exists){
+                if (exists) {
+                //     res.writeHead(200, {
+                //     "Content-Type": "application/zip",
+                //     "Content-Disposition": "attachment; filename=" + 'cecapBackup'+'_'+fecha+'.zip'
+                //     });
+                //     res.status(200);
+                //     //console.log(res)
+                //     var stream= fs.createReadStream(filePath,{bufferSize: 64 * 1024});
+                //     console.log(stream);
+                //     stream.pipe(res);
+                //    // return res.status(200).sendFile(stream);
+                // // // if (fs.existsSync(filePath)) {
+                // // //     filetext = fs.readFileSync(filePath, "binary");//tried encoding binary
+                // // // }
+    
+                // // // var headers = {
+                // // //     'Content-Type':  'application/octet-stream',//tried application/zip
+                // // //     'Content-Disposition': "attachment; filename=" + 'cecapBackup'+'_'+fecha+'.zip'
+                // // // };
+                // // // res.writeHead(200, headers);
+                // // // return res.end(filetext,"binary");
+                // // // return res.end(new Buffer(filetext).toString('base64'),"binary");
+                    var filename = path.basename(filePath);
+
+                    res.setHeader('Content-Disposition', 'attachment; filename=' + 'cecapBackup'+'_'+fecha+'.zip');
+                    res.setHeader('Content-Transfer-Encoding', 'binary');
+                    res.setHeader('Content-Type', 'application/octet-stream');
+                    console.log(typeof filePath)
+                    console.log(typeof filename)
+                    console.log(typeof res.sendFile(filePath))
+                    return res.sendFile(filePath)
+                    // return res.status(200).send(col);
+                } else {
+                        res.writeHead(400, {"Content-Type": "text/plain"});
+                        res.end("ERROR File does not exist");
+                }
+            });
+                                                                            });                                            
+                                                                        });                                            
+                                                                    });                                            
+                                                                });                                           
+                                                            });                                            
+                                                        });                                            
+                                                    });                                           
+                                                });                                           
+                                            });                                           
+                                        });                                           
+                                    });                                           
+                                });                                           
+                            });                            
+                                                                  });
+                                                              });
+                                                          });
+                                                      });
+                                                  });
+                                              });
+                                          });
+                                      });
+                                  });
+                              });
+                          });
+                    });
+                  });
+              });
+          });
+      });
+    });
+    function saveWriteFile(date, dbName,fecha){
+     // var content = JSON.parse(JSON.stringify(events));
+     var content = JSON.stringify(date);
+     zip.file(dbName+".json", content);
+     var data = zip.generate({base64:false,compression:'DEFLATE'});
+     fs.writeFileSync('./backups/cecapBackup'+'_'+fecha+'.zip', data, 'binary');
+    }
    })
    .post('/exist', function (req, res) {
       db.users.findOne({ _id: req.body._id }, { rol: 1, name: 1, active: 1 }, function (err, user) {
