@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from './services/user.service';
+// import { AuthService } from "./services/authentication.service";
 
 @Component({
    selector: 'app-root',
@@ -11,10 +12,12 @@ export class AppComponent {
    public url: string;
 
    constructor(
-      private _userService: UserService
+      private _userService: UserService,
+    //   private _userServiceAuth:AuthService
    ) {
    }
    ngOnInit() {
+    //    this._userServiceAuth.initApp();
       this._userService.initApp();
    }
 }

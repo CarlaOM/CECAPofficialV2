@@ -51,35 +51,48 @@ export class UserService {
          .map(res => res.json() );
    }
    initApp() {
-      this._http.get(this.url + 'users/roles')
-         .map((response: Response) => response.json())
-         .subscribe(
-            response => {
-               response.forEach(rol => {
-                  if (rol.name == 'Admin') { Roles[0]._id = rol._id; }
-                  else if (rol.name == 'Ejecutivo') { Roles[1]._id = rol._id; }
-               });
-            }
-         )
+      // this._http.get(this.url + 'users/roles')
+      //    .map((response: Response) => response.json())
+      //    .subscribe(
+      //       response => {
+      //          response.forEach(rol => {
+      //             if (rol.name == 'Admin') { Roles[0]._id = rol._id; }
+      //             else if (rol.name == 'Ejecutivo') { Roles[1]._id = rol._id; }
+      //          });
+      //       }
+      //    )
+      console.log('asdfasdfasdf')
+      
+      console.log(localStorage.getItem('idToken'));
 
-      this.localStorage.getItem('Identity').subscribe((id) => {
-         if (id != null) {
-            // console.log(id)
-            let body = JSON.stringify(id)
+      let id=localStorage.getItem('idToken');
+
+      // this.localStorage.getItem('idToken').subscribe((id) => {
+      //    if (id != null) {
+      //       console.log(id)
+      //       console.log(Identity);
+            let bodyObject={id:id}
+            let body = JSON.stringify(bodyObject)
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
-            this._http.post(this.url + 'users/auth', body, { headers: headers })
+            this._http.post(this.url + 'auth/relogin', body, { headers: headers })
                .map((response: Response) => response.json())
                .subscribe(
                   response => {
-                     // console.log(Identity, response)
+                    console.log('asldfjaskdfjl;aksdjfl;askjflksjadflkjsadl;fjalsdfjlaskjf');
+                     console.log(Identity, response)
                      Identity._id = response._id;
                      Identity.rol = response.rol;
                      Identity.name = response.name;
                      this._router.navigate(['/']);
                   }
                )
-         } else console.log('sin _id en localStorage')
-      });
+      //    } else console.log('sin _id en localStorage')
+      // });
+
+
+
+                     this._router.navigate(['/']);
+      
    }
 }
