@@ -10,40 +10,14 @@ import { CATCH_ERROR_VAR } from "@angular/compiler/src/output/abstract_emitter";
 @Injectable()
 export class PeticionesService {
   public url: string = GLOBAL.url;
-
   constructor(
     // private _httpClient: HttpClient,
     private _http: HttpClient
+    
 
   ) {
     // this.url = "https://jsonplaceholder.typicode.com/users";
-
   }
-  backup(ident){
-    let body = JSON.stringify(ident);
-    var id = ident._id;
-    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=binary');
-    return this._http.get(this.url + 'users/backup/'+ id,{ headers: headers }).map((res) => new Blob([res['_body']], { type: 'application/zip' }));
-  
-  
-  }
-   backupa(ids){
-    let body = JSON.stringify(ids);
-    var id = ids._id;
-    // let headers = new Headers();
-    //     headers.append('Content-Type', 'application/json');
-    //     headers.append('responseType', 'blob');
-        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-        console.log(id)
-        return this._http.post(this.url + 'users/backupa',body, {headers: headers})
-            .map((res: Response) => {
-              // var blob = new Blob([(<any>res)._body], { type: contentType });            // size is 89KB instead of 52KB
-              //  var blob = new Blob([(<any>res).arrayBuffer()], { type: 'application/zip' });  // size is 98KB instead of 52KB
-              var blob = new Blob([(<any>res).blob()], { type: 'application/zip' });         // received Error: The request body isn't either a blob or an array buffer
-              return blob;
-             }
-            );
-   }
   getCatEgresos() {
     return this._http.get(this.url + 'categoriaEgresos').map((res: Response) => res);
   }

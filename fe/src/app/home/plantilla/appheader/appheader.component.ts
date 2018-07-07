@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PeticionesService } from '../../../services/peticiones.service';
+import { BackupService } from '../../../services/backup.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AsyncLocalStorage } from 'angular-async-local-storage';
 import { Identity } from '../../../services/global';
@@ -13,10 +14,13 @@ import { AuthService } from "../../../services/authentication.service";
 export class AppheaderComponent implements OnInit {
     public nameUser;
     public role;
+    public dates;
+    public loader:Boolean;
     constructor(
         protected localStorage: AsyncLocalStorage,
         private _router: Router,
         private _peticionesService: PeticionesService,
+        private _backupService:BackupService,
         private _authService: AuthService
 
     ) { }
@@ -34,22 +38,31 @@ export class AppheaderComponent implements OnInit {
         //   Identity.name = '';
         //   this._router.navigate(['/login']);
     }
-    backup() {
-       return this._peticionesService.backup(Identity).subscribe(
-            res => {
-                console.log(res)
-                window.open(window.URL.createObjectURL(res));
-                //window.open(url);
-            },
-            error => {
-                var errorMessage = <any>error;
-                console.log(errorMessage);
-                window.open(errorMessage.url);
-                //window.alert('Error, no se pudo realizar backup');
-                window.alert('backup realizado')
-            }
-        );
+    backup2() {
+       return this._backupService.backup2(Identity)
+        .subscribe(res => {
+            console.log(res);
+            //window.open(URL.createObjectURL(res.url));
+        },
+        err => {
+           console.log(err); 
+        })
     }
+    backup() {
+        this.loader = false;
+        this._backupService.backup3(Identity)
+            .subscribe(res => {
+                console.log(res);
+                //window.open(window.URL.createObjectURL(res));
+            },
+            err => {
+               console.log(err); 
+            })
+        }
+
+    // backupe() {
+    //     return this._backupService.backupfile(Identity).subscribe(hero => this.dates.push(hero));
+    // }
     queryRol(){
         //console.log(Identity.rol)
      this._peticionesService.getRole(Identity.rol).subscribe(
@@ -68,5 +81,26 @@ export class AppheaderComponent implements OnInit {
           console.log(errorMessage);
          }
      );
+     
      }
+
+     BackupDemo(){
+       var passCode = window.prompt("Ingrese su contraseña para realizar el backup y descargar comprimido", "")
+       console.log(passCode)
+       if(passCode != null || passCode != ''){
+            this._backupService.backup3(Identity._id +'-'+ passCode).subscribe(
+            res => {
+                console.log(res);
+                //window.open(window.URL.createObjectURL(res));
+                window.alert('Backup realizado :)');
+            },
+            err => {
+            console.log(err); 
+            window.alert('Error, Solo un usuario autorizado puede Hacer el Bachup');
+            });
+        }else{
+            console.log('vacio')
+        }
+     
+    }
 }
