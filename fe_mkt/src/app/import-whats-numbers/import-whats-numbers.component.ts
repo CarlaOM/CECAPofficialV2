@@ -29,6 +29,8 @@ export class ImportWhatsNumbersComponent implements OnInit {
   public programs;
   public nameCarrera;
   public Universidad;
+  public universidades;
+  public carreras;
 
   public programasListCheckbox = [];
 
@@ -67,6 +69,7 @@ export class ImportWhatsNumbersComponent implements OnInit {
   ngOnInit() {
     this.queryCartera();
     this.queryPrograms();
+    this.getUniversidades();
   }
 
   onSubmit() {
@@ -78,6 +81,14 @@ export class ImportWhatsNumbersComponent implements OnInit {
 
 
   }
+  getUniversidades(){
+    console.log("hnjdjdjd")
+    this._peticionesService.getUni().subscribe(res=>{
+        this.universidades= res[0].university;
+        this.carreras = res[0].carrera;
+        console.log(this.universidades);
+    })
+}
   captUnive(){
 
   }
@@ -106,10 +117,11 @@ export class ImportWhatsNumbersComponent implements OnInit {
 
 
     }
-    // console.log(this.programasConInteres);
+    // console.log(this.programasConInteres8);
     this.saveOnDB();
 
   }
+
   saveOnDB() {
     let objWhats = {} as ObjetcWhatsappToSend;
     objWhats.listaNumeros = this.numbers;
