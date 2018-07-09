@@ -6,12 +6,12 @@
 
         <div class="container ">
            <div [hidden]="submitted">
-              <h1>Registrar Evento</h1>
+              <h1>Registrar Carrera</h1>
               <br>
               <form (ngSubmit)="save()" #addEvent="ngForm" class="">
                  <div class="form-group col-sm-8">
                     <label for="uni" class="control-label">Nombre Carrera</label>
-                    <input type="text" pattern="[a-zA-Z ]{3,150}" class="form-control" id="uni" [(ngModel)]="model.carrera" name="uni" #uni="ngModel" required />
+                    <input type="text" pattern="[a-zA-Z0-9 .,-]{3,100}" class="form-control" id="uni" [(ngModel)]="model.carrera" name="uni" #uni="ngModel" required />
                  </div>
                  <div class="form-group col-sm-8" style="text-align:center ">
                     <button type="submit" class="btn btn-success" [disabled]="!addEvent.form.valid">Guardar</button>

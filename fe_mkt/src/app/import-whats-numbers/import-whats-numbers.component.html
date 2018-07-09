@@ -14,7 +14,7 @@
             <form (ngSubmit)="onSubmit()" #WhatsNumber="ngForm" >
                 <div class="form-group col-sm-8">
                   <label for="name">Nombre del Grupo</label>
-                  <input type="text"  class="form-control" id="name"
+                  <input type="text" pattern="[a-zA-Z0-9 ]{3,100}" class="form-control" id="name"
                          required
                          [(ngModel)]="whatsGroupName" name="name"
                          #groupname="ngModel"
@@ -92,24 +92,36 @@
                   <label for="name">Ocupacion</label>
                     
                     <label for="univer">Universidad</label>
-                    <select class="form-control" id="univer" [(ngModel)]="Universidad" (change)="captUnive()"
+                    <select class="form-control" id="univer" [(ngModel)]="Universidad" 
+                                        name="univer" #ocupSelect="ngModel">
+                                        <option *ngFor="let univ of universidades" [value]="univ._id">{{univ.nombre}}</option>                               
+                                        <!-- <option value=1>Universidad Mayor de San Simon</option>
+                                        <option value=2>U. Catolica</option>
+                                        <option value=3>U. Latinoamericana</option>                      -->
+                                    </select>
+
+                    <!-- <select class="form-control" id="univer" [(ngModel)]="Universidad" (change)="captUnive()"
                                name="univer" #ocupSelect="ngModel">
                               <option value="" hidden>Seleccionar...</option>                               
                               <option value=1>Universidad Mayor de San Simon</option>
                               <option value=2>U. Catolica</option>
                               <option value=3>U. Latinoamericana</option>                     
-                          </select>
+                          </select> -->
                   </div>
                   <div class="form-group col-sm-8">
                     <label for="carrera">Carrera</label>
-                    <input type="text"  class="form-control" id="carrera"
+                    <select class="form-control" id="carr" [(ngModel)]="nameCarrera" 
+                                    name="carr" #ocupSelect="ngModel">
+                                        <option *ngFor="let carrera of carreras" [value]="carrera._id">{{carrera.nombre}}</option>
+                                    </select>
+                    <!-- <input type="text"  class="form-control" id="carrera"
                            [(ngModel)]="nameCarrera" name="carrera"
                            #carrera="ngModel"
                            >
                     <div [hidden]="groupname?.valid || groupname?.pristine"
                          class="text-alert">
                       Nombre es invalido
-                    </div>
+                    </div> -->
                   </div>    
 
                   <div class="form-group col-sm-8">

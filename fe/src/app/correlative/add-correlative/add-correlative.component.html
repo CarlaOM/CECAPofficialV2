@@ -21,7 +21,7 @@
                          
                          <br>
                          <label for="recibo" class="control-label" >Recibo</label>
-                         <input type="text" class="form-control" id="recibo" 
+                         <input type="text" pattern="[0-9]{0,15}[a-zA-Z]{0,5}" class="form-control" id="recibo" 
                          [(ngModel)]="receipt.receipt" name="recibo" #recibo="ngModel" required />
                          <span *ngIf="!recibo.valid && recibo.touched" class="text-alert">
                                  *El recibo es requerida.
