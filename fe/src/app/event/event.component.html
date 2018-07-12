@@ -96,6 +96,8 @@
                                           </tr>
                                        </tbody>
                                        <tfoot>
+                                                <a>Pagina # {{page}}</a>
+                                                <br>
                                           <button (click)="dis()" [disabled]="page == 1">Anterior</button>
                                           <button (click)="aum()" [disabled]="page == totalPag">Siguiente</button>
                                         </tfoot>
@@ -135,6 +137,8 @@
                                                    </tr>
                                                 </tbody>
                                                 <tfoot>
+                                                            <a>Pagina # {{page}}</a>
+                                                            <br>
                                                       <button (click)="dis()" [disabled]="page == 1">Anterior</button>
                                                       <button (click)="aum()" [disabled]="page == totalPag">Siguiente</button>
                                                 </tfoot>

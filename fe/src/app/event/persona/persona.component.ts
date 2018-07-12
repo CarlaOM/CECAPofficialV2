@@ -81,7 +81,11 @@ export class PersonaComponent implements OnInit {
   mostrarPer(){
     this.page = 1;
     this.total = this.listado_personas.length;
+    if(this.total == 0){
+      this.totalPag = 1;
+    } else{
     this.totalPag = Math.ceil(this.total/8);
+    }
     this.mostrar = []
     // console.log(this.totalPag)
     if(this.totalPag > 1){
