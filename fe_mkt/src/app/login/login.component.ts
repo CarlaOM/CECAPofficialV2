@@ -38,9 +38,9 @@ export class LoginComponent implements OnInit {
    }
    onSubmit() {
       // console.log(this.user);//sadas
-    //   console.log(this.user)
       this._userService.signin(this.user).subscribe(
          response => {
+          //  console
             this.identity = response;
             if (!this.identity || !this.identity._id) {
                alert('Usuario Incorrecto');

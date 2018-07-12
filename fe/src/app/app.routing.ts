@@ -64,6 +64,7 @@ import { ImportFromExcelComponent } from './import-from-excel/import-from-excel.
 import { SendToPrincipalComponent } from "./pending-cash/send-to-principal/send-to-principal.component";
 import { PrincipalCashComponent } from "./principal-cash/principal-cash.component";
 import { ReporteEventosComponent } from './reporte-eventos/reporte-eventos.component';
+import { RepEventComponent } from './reporte-eventos/rep-event/rep-event.component';
 
 import { InscriptionWorkshopComponent } from "./event/inscription-workshop/inscription-workshop.component";
 import { NivelacionComponent } from './event/nivelacion/nivelacion.component';
@@ -78,83 +79,84 @@ import { CorrelativeComponent } from './correlative/correlative.component';
 import { AuthGuard } from "./auth.guard";
 
 const appRoutes: Routes = [
-   { path: '', component: HomeComponent },//ruta basica
-   { path: 'login', component: LoginComponent },
-   {
-      path: 'home', component: HomeComponent,
-      children: [
-         { path: 'home', redirectTo: 'home', pathMatch: 'full' },
-        //  { path: 'events', component: EventsComponent,canActivate:[AuthGuard], },
-         { path: 'events', component: EventsComponent, },
-        
-         //{ path: 'events/alert', component: AlertComponent },
-         { path: 'events/add', component: AddEventComponent },
-         { path: 'listPrint/:id', component: ListInscriptionsComponent },
-         { path: 'listRequeriments/:id', component: ListRequirementsComponent },
-         { path: 'accountsReceivable/:id', component: AccountsReceivableComponent },
-         { path: 'event/:id', component: EventComponent },
-         { path: 'event/asistencia/:id', component: AsistenciaComponent },
-         { path: 'profilePerson/:id', component: ProfilePersonComponent },
-         { path: 'finalWork/add/:id', component: AddFinalWorkComponent },         
-         { path: 'review/add/:id', component: AddReviewComponent },         
-         { path: 'printCertificate/:id', component: PrintCertificateComponent },         
-         { path: 'detailsProfile/:id', component: DetailsComponent },
-         { path: 'reports', component: ReportsComponent },
-         { path: 'trimestral', component: ReportTrimestralComponent },
-         { path: 'reportEvent/:id', component: ReportEventComponent },
-         { path: 'persons', component: PersonaComponent },
-         { path: 'persons/add', component: AddPersonComponent },
-         { path: 'persons/edit/:id', component: EditComponent },
-         { path: 'persons/asistencia/:id', component: AsistenciaComponent },
-         { path: 'cartera', component: CarteraComponent },
-         { path: 'cartera/add', component: AddCarteraComponent ,canActivate:[AuthGuard] },///////////authGuard
-         { path: 'cartera/:id', component: InfoCarteraComponent },
-         { path: 'cartera/edit/:name', component: EditCarteraComponent ,canActivate:[AuthGuard] },///////////authGuard
-         { path: 'ejecutivo', component: EjecutivoComponent },
-         { path: 'ejecutivo/add', component: AddEjecutivoComponent ,canActivate:[AuthGuard] },///////////authGuard
-         { path: 'ejecutivo/:id', component: InfoEjecutivoComponent },
-         { path: 'ejecutivo/edit/:active', component: EditEjecutivoComponent ,canActivate:[AuthGuard] },///////////authGuard
-         { path: 'sucursal', component: SucursalComponent },
-         { path: 'sucursal/add', component: AddSucursalComponent,canActivate:[AuthGuard] },///////////authGuard
-         { path: 'sucursal/detalleCaja', component: DetalleCajaComponent },
-         { path: 'sucursal/detalleCaja/:id', component: DetalleCajaComponent },
-         { path: 'sucursal/personal', component: DetallePersonalComponent },
-         { path: 'formulariobase', component: HeroFormComponent },
-         { path: 'programs', component: ProgramaComponent },
-         { path: 'program/edit/:id', component: EditProgramaComponent },
-         { path: 'program/add', component: AddProgramaComponent },
-         { path: 'modulos/:id', component: ModuloComponent },
-         { path: 'modulo/edit/:id', component: EditModuloComponent },
-         { path: 'modulo/add/:id', component: AddModuloComponent },
-         { path: 'caja/vistacaja', component: VistaCajaComponent },
-         { path: 'caja/ingreso', component: IngresoComponent },
-         { path: 'caja/egreso', component: EgresoComponent },
-         { path: 'facilitador', component: facilitadorComponent },
-         { path: 'facilitador/add', component: AddFacilitadorComponent },
-         { path: 'facilitador/edit/:id', component: EditFacilitadorComponent },
-         { path: 'correlative/add', component: AddCorrelativeComponent },
-         { path: 'pendientes', component: PendingCashComponent },
-         { path: 'pendientes/info/:id', component: InfoPendingCashComponent },
-         { path: 'officesCash', component: OfficesCashComponent },
-         { path: 'inscription/:id', component: InscriptionComponent },
-         { path: 'nivelacion/:id', component: NivelacionComponent },
-         { path: 'event/controPago/:id', component: ControlPagoComponent },
-         { path: 'accountsModulars/:id', component: AccountsModularsComponent },
-         { path: 'importFromExcel', component: ImportFromExcelComponent },
-         { path: 'sucursal/sendToPrincipal',component:SendToPrincipalComponent},
-         { path: 'cajaPrincipal',component:PrincipalCashComponent,canActivate:[AuthGuard] },///////////authGuard
-         { path: 'reporteEvento', component:ReporteEventosComponent},
-         { path: 'workshop/:id', component:InscriptionWorkshopComponent},
-         { path: 'workshopListP/:id',component:WorkshopComponent},
-         { path: 'imprimirLoteCertificados/:id',component:PrintBatchCertificatesComponent},
-         { path: 'listaParaNivelar/:id',component:ListaPesonsNivelacionComponent},
-         { path: 'error',component:PermisosVistaComponent},
-         { path: 'correlative', component:CorrelativeComponent},
-      ]
-   },
+    { path: '', component: HomeComponent },//ruta basica
+    { path: 'login', component: LoginComponent },
+    {
+        path: 'home', component: HomeComponent,
+        children: [
+            { path: 'home', redirectTo: 'home', pathMatch: 'full' },
+            //  { path: 'events', component: EventsComponent,canActivate:[AuthGuard], },
+            { path: 'events', component: EventsComponent, },
 
-   //{path: '', component: LoginFormComponent}
-   { path: '**', component: HomeComponent }//ruta redir
+            //{ path: 'events/alert', component: AlertComponent },
+            { path: 'events/add', component: AddEventComponent },
+            { path: 'listPrint/:id', component: ListInscriptionsComponent },
+            { path: 'listRequeriments/:id', component: ListRequirementsComponent },
+            { path: 'accountsReceivable/:id', component: AccountsReceivableComponent },
+            { path: 'event/:id', component: EventComponent },
+            { path: 'event/asistencia/:id', component: AsistenciaComponent },
+            { path: 'profilePerson/:id', component: ProfilePersonComponent },
+            { path: 'finalWork/add/:id', component: AddFinalWorkComponent },
+            { path: 'review/add/:id', component: AddReviewComponent },
+            { path: 'printCertificate/:id', component: PrintCertificateComponent },
+            { path: 'detailsProfile/:id', component: DetailsComponent },
+            { path: 'reports', component: ReportsComponent },
+            { path: 'trimestral', component: ReportTrimestralComponent },
+            { path: 'reportEvent/:id', component: ReportEventComponent },
+            { path: 'persons', component: PersonaComponent },
+            { path: 'persons/add', component: AddPersonComponent },
+            { path: 'persons/edit/:id', component: EditComponent },
+            { path: 'persons/asistencia/:id', component: AsistenciaComponent },
+            { path: 'cartera', component: CarteraComponent },
+            { path: 'cartera/add', component: AddCarteraComponent, canActivate: [AuthGuard] },///////////authGuard
+            { path: 'cartera/:id', component: InfoCarteraComponent },
+            { path: 'cartera/edit/:name', component: EditCarteraComponent, canActivate: [AuthGuard] },///////////authGuard
+            { path: 'ejecutivo', component: EjecutivoComponent },
+            { path: 'ejecutivo/add', component: AddEjecutivoComponent, canActivate: [AuthGuard] },///////////authGuard
+            { path: 'ejecutivo/:id', component: InfoEjecutivoComponent },
+            { path: 'ejecutivo/edit/:active', component: EditEjecutivoComponent, canActivate: [AuthGuard] },///////////authGuard
+            { path: 'sucursal', component: SucursalComponent },
+            { path: 'sucursal/add', component: AddSucursalComponent, canActivate: [AuthGuard] },///////////authGuard
+            { path: 'sucursal/detalleCaja', component: DetalleCajaComponent },
+            { path: 'sucursal/detalleCaja/:id', component: DetalleCajaComponent },
+            { path: 'sucursal/personal', component: DetallePersonalComponent },
+            { path: 'formulariobase', component: HeroFormComponent },
+            { path: 'programs', component: ProgramaComponent },
+            { path: 'program/edit/:id', component: EditProgramaComponent },
+            { path: 'program/add', component: AddProgramaComponent },
+            { path: 'modulos/:id', component: ModuloComponent },
+            { path: 'modulo/edit/:id', component: EditModuloComponent },
+            { path: 'modulo/add/:id', component: AddModuloComponent },
+            { path: 'caja/vistacaja', component: VistaCajaComponent },
+            { path: 'caja/ingreso', component: IngresoComponent },
+            { path: 'caja/egreso', component: EgresoComponent },
+            { path: 'facilitador', component: facilitadorComponent },
+            { path: 'facilitador/add', component: AddFacilitadorComponent },
+            { path: 'facilitador/edit/:id', component: EditFacilitadorComponent },
+            { path: 'correlative/add', component: AddCorrelativeComponent },
+            { path: 'pendientes', component: PendingCashComponent },
+            { path: 'pendientes/info/:id', component: InfoPendingCashComponent },
+            { path: 'officesCash', component: OfficesCashComponent },
+            { path: 'inscription/:id', component: InscriptionComponent },
+            { path: 'nivelacion/:id', component: NivelacionComponent },
+            { path: 'event/controPago/:id', component: ControlPagoComponent },
+            { path: 'accountsModulars/:id', component: AccountsModularsComponent },
+            { path: 'importFromExcel', component: ImportFromExcelComponent },
+            { path: 'sucursal/sendToPrincipal', component: SendToPrincipalComponent },
+            { path: 'cajaPrincipal', component: PrincipalCashComponent, canActivate: [AuthGuard] },///////////authGuard
+            { path: 'reporteEvento', component: ReporteEventosComponent },
+            { path: 'repEvent/:id', component: RepEventComponent },
+            { path: 'workshop/:id', component: InscriptionWorkshopComponent },
+            { path: 'workshopListP/:id', component: WorkshopComponent },
+            { path: 'imprimirLoteCertificados/:id', component: PrintBatchCertificatesComponent },
+            { path: 'listaParaNivelar/:id', component: ListaPesonsNivelacionComponent },
+            { path: 'error', component: PermisosVistaComponent },
+            { path: 'correlative', component: CorrelativeComponent },
+        ]
+    },
+
+    //{path: '', component: LoginFormComponent}
+    { path: '**', component: HomeComponent }//ruta redir
 
 ];
 

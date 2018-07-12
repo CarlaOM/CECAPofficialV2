@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { FormsModule }   from '@angular/forms';
-import{ routing, appRoutingProviders } from './app.routing';
+import { FormsModule } from '@angular/forms';
+import { routing, appRoutingProviders } from './app.routing';
 import { AsyncLocalStorageModule } from 'angular-async-local-storage';
-import {  HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 //modules
 //import { AlertsModule } from 'angular-alert-module';
@@ -24,14 +24,14 @@ import { AlertComponent } from './events/alert/alert.component';
 import { BackupComponent } from './home/alert-backup/alert-backup.component';
 
 //Services
-import { UserService} from './services/user.service';
+import { UserService } from './services/user.service';
 import { SearchPipe } from './event/filtro/filtropersona.pipe';
 import { FilterPipe } from "./event/persona/filter.pipe";
 import { SucursalService } from './services/sucursal.service';
-import { BackupService} from './services/backup.service';
+import { BackupService } from './services/backup.service';
 
 
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AddProgramComponent } from './events/addProgram/addProgram.component';
 import { AddEventComponent } from './events/addEvent/addEvent.component';
 import { AddPersonComponent } from './event/persona/addPerson/addPerson.component';
@@ -102,6 +102,7 @@ import { SendToPrincipalComponent } from './pending-cash/send-to-principal/send-
 import { PrincipalCashComponent } from './principal-cash/principal-cash.component';
 import { PrintCertificateComponent } from './event/profile-person/print-certificate/print-certificate.component';
 import { ReporteEventosComponent } from './reporte-eventos/reporte-eventos.component';
+import { RepEventComponent } from './reporte-eventos/rep-event/rep-event.component';
 import { InscriptionWorkshopComponent } from './event/inscription-workshop/inscription-workshop.component';
 import { NivelacionComponent } from './event/nivelacion/nivelacion.component';
 import { WorkshopComponent } from './workshop/workshop.component';
@@ -134,7 +135,7 @@ import { JwtInterceptor } from "./jwt.interceptor";//////este ya no se usa
     AddEventComponent,
     AddPersonComponent,
     PersonaComponent,
-    
+
     ReportsComponent,
     ReportTrimestralComponent,
     ReportEventComponent,
@@ -143,7 +144,7 @@ import { JwtInterceptor } from "./jwt.interceptor";//////este ya no se usa
     TortaComponent,
     BarComponent,
     BarEventComponent,
-    
+
     SearchPipe,
     AddEjecutivoComponent,
     AddCarteraComponent,
@@ -205,6 +206,7 @@ import { JwtInterceptor } from "./jwt.interceptor";//////este ya no se usa
     PrincipalCashComponent,
     PrintCertificateComponent,
     ReporteEventosComponent,
+    RepEventComponent,
     InscriptionWorkshopComponent,
     NivelacionComponent,
     WorkshopComponent,
@@ -225,12 +227,12 @@ import { JwtInterceptor } from "./jwt.interceptor";//////este ya no se usa
     //AlertsModule.forRoot()
     RouterModule.forRoot([
       {
-        path:'home',
-        component:HomeComponent,
-        canActivate:[AuthGuard]
+        path: 'home',
+        component: HomeComponent,
+        canActivate: [AuthGuard]
       }
     ])
-    
+
   ],
   providers: [
     appRoutingProviders,
@@ -240,11 +242,11 @@ import { JwtInterceptor } from "./jwt.interceptor";//////este ya no se usa
     BackupService,
     AuthGuard,
     UserService,
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: JwtInterceptor,
-            multi: true
-        },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
   ],//aniadir appRo..
   bootstrap: [AppComponent]
 })
