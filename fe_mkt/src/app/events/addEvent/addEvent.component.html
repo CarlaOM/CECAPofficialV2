@@ -12,7 +12,8 @@
                   <div class="form-group col-sm-8">
                      <label for="name" class="control-label">Nombre Evento</label>
                      <!-- pattern="[a-zA-Z]{3,20}[ ]{0,1}[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" -->
-                     <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9]{3,20}[ ]{0,1}[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9]{0,20}[ ]{0,1}[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9]{0,20}" class="form-control" id="name" [(ngModel)]="model.name" name="name" #name="ngModel" required />
+                     <!-- <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9]{3,20}[ ]{0,1}[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9]{0,20}[ ]{0,1}[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9]{0,20}" class="form-control" id="name" [(ngModel)]="model.name" name="name" #name="ngModel" required /> -->
+                     <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú0-9 ]{3,80}" class="form-control" id="name" [(ngModel)]="model.name" name="name" #name="ngModel" required />
                      <!-- <span *ngIf="!name.valid && name.touched" class="text-alert">
                                      *Nombre de Evento requerido.
                              </span> -->

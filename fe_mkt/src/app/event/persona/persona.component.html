@@ -73,7 +73,7 @@
               </td>
            </tr>
         </tbody>
-        <tfoot class="">
+        <tfoot align="center">
          <!-- <pagination-controls id = "foo" maxSize = " 9 "
          ( pageChange ) = " pageChanged ($ event) "
          directionLinks = " true "
@@ -91,8 +91,10 @@
          <!-- <a class="btn" (click)="dis()" disabled = "page == 1" >
           anterior
         </a> -->
+        <a>Pagina # {{page}}</a>
+        <br>
         <button (click)="dis()" [disabled]="page == 1">Anterior</button>
-        <button (click)="aum()" [disabled]="page == 4">Siguiente</button>
+        <button (click)="aum()" [disabled]="page == totalPag" >Siguiente</button>
          <!-- <a class="previousLabel" (click)="aum()" disabled=" page == totalPag">
            siguiente
          </a> -->
