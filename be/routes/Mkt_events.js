@@ -8,23 +8,7 @@ router
             var d = new Date();
             db.mkt_events.find({ date_start: { $gt: d } }, { name: 1, description: 1, date_start: 1, modulars: 1, inscriptions: 1, total: 1, programs: 1 }, function (err, events) {
                   if (err) return res.status(400).send(err);
-                  // let programs = [];
-                  //let modulos = [];
-                  //    var j = 0;
-                  //    let insert = true;
-                  //    var today = new Date;
-                  //    for (let i = 0; i < events.length; i++) {
-                  //       j = 0;
-                  //       insert = true;
-
-                  //       do {
-                  //          if (programs.length == 0) { insert = false; programs.push(events[i].program); }
-                  //          else if (JSON.stringify(programs[j]) == JSON.stringify(events[i].program)) insert = false;
-                  //          if (today > events[i].date_start) { insert = false; }
-                  //          j++;
-                  //       } while (j < programs.length);
-                  //       if (insert) programs.push(events[i].program);
-                  //    }
+                  console.log(events);
                   //    getPrograms(programs, events);
                   return res.status(200).send(events);
             });
@@ -64,7 +48,7 @@ router
                         newPerson.last_name = personItem.last_name;
                         newPerson.cellphone = personItem.cellphone;
                         newPerson.city = personItem.city;
-                        newPerson.contact_medium=personItem.contact_medium;
+                        newPerson.contact_medium = personItem.contact_medium;
 
                         for (let pid of event.interes) {
                               if (pid.persons == personItem._id) {
@@ -105,7 +89,7 @@ router
                         newPerson.last_name = personItem.last_name;
                         newPerson.cellphone = personItem.cellphone;
                         newPerson.city = personItem.city;
-                        newPerson.contact_medium=personItem.contact_medium;
+                        newPerson.contact_medium = personItem.contact_medium;
 
                         for (let pid of event.interes) {
                               if (pid.persons == personItem._id) {
@@ -153,7 +137,7 @@ router
                               newPerson.last_name = personItem.last_name;
                               newPerson.cellphone = personItem.cellphone;
                               newPerson.city = personItem.city;
-                              newPerson.contact_medium=personItem.contact_medium;
+                              newPerson.contact_medium = personItem.contact_medium;
 
                               for (let pid of event.interes) {
                                     if (pid.persons == personItem._id) {
@@ -210,7 +194,7 @@ router
                               newPerson.contact_medium = personItem.contact_medium;
                               newPerson.ocupation = personItem.ocupation;
                               newPerson.descOcupation = personItem.descOcupation;
-                              newPerson.contact_medium=personItem.contact_medium;
+                              newPerson.contact_medium = personItem.contact_medium;
                               for (let pid of event.interes) {
                                     if (pid.persons == personItem._id) {
                                           newPerson.state = pid.state;
@@ -252,31 +236,26 @@ router
 
       .get('/all/:id', function (req, res) {
 
-            db.mkt_users.findOne({_id:req.params.id},function(err,user){
-                  if (err) return res.status(400).send(err);                  
-                  db.mkt_events.find({offices:user.offices}, function (err, events) {
+            db.mkt_users.findOne({ _id: req.params.id }, function (err, user) {
+                  if (err) return res.status(400).send(err);
+                  db.mkt_events.find({ offices: user.offices }, function (err, events) {
                         if (err) return res.status(400).send(err);
                         return res.status(200).send(events);
-      
-      
+
+
                   })
 
             })
-           
+
       })
       .get('/getAllEventsActive/:id', function (req, res) {
-
-            db.mkt_users.findOne({_id:req.params.id},function(err,user){
-                  if (err) return res.status(400).send(err);                  
-                  db.mkt_events.find({offices:user.offices,active:true}, function (err, events) {
+            db.mkt_users.findOne({ _id: req.params.id }, function (err, user) {
+                  if (err) return res.status(400).send(err);
+                  db.mkt_events.find({ offices: user.offices, active: true }, function (err, events) {
                         if (err) return res.status(400).send(err);
                         return res.status(200).send(events);
-      
-      
                   })
-
             })
-           
       })
       .get('/lists', function (req, res) {
             db.mkt_lists.find({}, function (err, lists) {
@@ -441,71 +420,71 @@ router
             }
       })
       ////////////////////reporte de un evento////////////
-      .get('/getReportEvent/:id',function(req,res){
+      .get('/getReportEvent/:id', function (req, res) {
 
-            db.mkt_events.findOne({_id:req.params.id},function(err,event){
-                  if(err) return res.status(400).send(err);
-                        ////////////
-                        //  0 interesados
-                        //  1 en duda
-                        //  2 confirmados
-                        //  3 isncritos
-                        //  4 enlinea
-                        //  5 proximo evento 
-                        //  6 sin interes
-                        //////// 
-                  let reporte={};
-                  reporte.eventName=event.name;
-                  reporte.programName='';
-                  reporte.interesados=0;
-                  reporte.enDuda=0;
-                  reporte.confirmados=0;
-                  reporte.inscritos=0;
-                  reporte.enLinea=0;
-                  reporte.proximoEvento=0;
-                  reporte.sinInteres=0;
+            db.mkt_events.findOne({ _id: req.params.id }, function (err, event) {
+                  if (err) return res.status(400).send(err);
+                  ////////////
+                  //  0 interesados
+                  //  1 en duda
+                  //  2 confirmados
+                  //  3 isncritos
+                  //  4 enlinea
+                  //  5 proximo evento 
+                  //  6 sin interes
+                  //////// 
+                  let reporte = {};
+                  reporte.eventName = event.name;
+                  reporte.programName = '';
+                  reporte.interesados = 0;
+                  reporte.enDuda = 0;
+                  reporte.confirmados = 0;
+                  reporte.inscritos = 0;
+                  reporte.enLinea = 0;
+                  reporte.proximoEvento = 0;
+                  reporte.sinInteres = 0;
 
-                  for(let person of event.interes){
+                  for (let person of event.interes) {
 
-                        if(person.state==0)reporte.interesados++;
-                        if(person.state==1)reporte.enDuda++;
-                        if(person.state==2)reporte.confirmados++;
-                        if(person.state==3)reporte.inscritos++;
-                        if(person.state==4)reporte.enLinea++;
-                        if(person.state==5)reporte.proximoEvento++;
-                        if(person.state==6)reporte.sinInteres++;                   
+                        if (person.state == 0) reporte.interesados++;
+                        if (person.state == 1) reporte.enDuda++;
+                        if (person.state == 2) reporte.confirmados++;
+                        if (person.state == 3) reporte.inscritos++;
+                        if (person.state == 4) reporte.enLinea++;
+                        if (person.state == 5) reporte.proximoEvento++;
+                        if (person.state == 6) reporte.sinInteres++;
                   }
-                  db.mkt_programs.findOne({_id:event.programs},function(err,program){
-                        if(err) return res.status(400).send(err);
-                        reporte.programName=program.name;
+                  db.mkt_programs.findOne({ _id: event.programs }, function (err, program) {
+                        if (err) return res.status(400).send(err);
+                        reporte.programName = program.name;
                         return res.status(200).send(reporte);
-                        
+
                   })
             })
       })
       /////////////////////////////////////////
-        ////////////////////////
-      .get('/cerrarEvento/:id',function(req,res){
-            db.mkt_events.findOne({_id:req.params.id},function(err,event){
+      ////////////////////////
+      .get('/cerrarEvento/:id', function (req, res) {
+            db.mkt_events.findOne({ _id: req.params.id }, function (err, event) {
                   if (err) return res.status(400).send(err);
-                  
-                  event.date_end=new Date();
-                  event.active=false;
-                  event.save(function(err,event){
+
+                  event.date_end = new Date();
+                  event.active = false;
+                  event.save(function (err, event) {
                         if (err) return res.status(400).send(err);
-                        return res.status(200).send(event);                  
+                        return res.status(200).send(event);
                   })
             })
       })
       //////////////evetns of suicursal//////
-      .get('/getEventsOfSucursal/:id',function(req,res){
+      .get('/getEventsOfSucursal/:id', function (req, res) {
 
-            db.mkt_users.findOne({_id:req.params.id},function(err,user){
-                  if (err) return res.status(400).send(err);                  
-                  let userOffice=user.offices;
-                  db.mkt_events.find({offices:userOffice,active:true},function(err,eventos){
+            db.mkt_users.findOne({ _id: req.params.id }, function (err, user) {
+                  if (err) return res.status(400).send(err);
+                  let userOffice = user.offices;
+                  db.mkt_events.find({ offices: userOffice, active: true }, function (err, eventos) {
                         if (err) return res.status(400).send(err);
-                        return res.status(200).send(eventos);                  
+                        return res.status(200).send(eventos);
                   })
             })
       })
@@ -674,19 +653,19 @@ router
             })
       })
 
-      .post('/getEventsFilterByDates',function(req,res){
-            
-            console.log(req.body);
-            let fecha_ini=req.body.fecha_ini;
-            let fecha_fin=req.body.fecha_fin;
-            let userId=req.body.identity._id;
+      .post('/getEventsFilterByDates', function (req, res) {
 
-            db.mkt_users.findOne({_id:userId},function(err,user){
-                  let sucursal=user.offices;
-                  db.mkt_events.find({offices:sucursal,date_start:{$gt:fecha_ini},date_start:{$lt:fecha_fin}},function(err,listEvents){
+            console.log(req.body);
+            let fecha_ini = req.body.fecha_ini;
+            let fecha_fin = req.body.fecha_fin;
+            let userId = req.body.identity._id;
+
+            db.mkt_users.findOne({ _id: userId }, function (err, user) {
+                  let sucursal = user.offices;
+                  db.mkt_events.find({ offices: sucursal, date_start: { $gt: fecha_ini }, date_start: { $lt: fecha_fin } }, function (err, listEvents) {
                         if (err) return res.status(400).send(err);
-                        return res.status(200).send(listEvents);                  
-                        
+                        return res.status(200).send(listEvents);
+
                   })
             })
 
@@ -792,8 +771,8 @@ router
             }
       })
 
-    
-      
+
+
       .post('/edit', function (req, res) {
             // console.log('test')
             console.log('ESTE ES EL BODY DE QUERY');

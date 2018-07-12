@@ -15,7 +15,6 @@ router
     });
      }) 
    .get('/:id', function (req, res) {
-      console.log(res)
       db.roles.findOne({ _id: req.params.id }, function (err, rol) {
          if (err) return res.status(400).send(err);
          if (rol == null) return res.status(404).send();

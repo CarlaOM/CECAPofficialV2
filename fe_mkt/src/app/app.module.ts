@@ -38,7 +38,7 @@ import { AddEjecutivoComponent } from './ejecutivo/add-ejecutivo/add-ejecutivo.c
 
 
 //Graphics
-import { ChartsModule } from 'ng2-charts';
+// import { ChartsModule } from 'ng2-charts';
 import { ReportsComponent } from './graphicReports/reports/reports.component';
 import { BarraComponent } from './graphicReports/reports/barra/barra.component';
 import { LineaComponent } from './graphicReports/reports/linea/linea.component';
@@ -177,7 +177,7 @@ import { AddCarreraComponent } from './events/add-carrera/add-carrera.component'
     HttpClientModule,
     FormsModule,
     HttpModule,
-    ChartsModule,
+    // ChartsModule,
     NgxPaginationModule, 
     // Specify this module as an import
     //AlertsModule.forRoot()

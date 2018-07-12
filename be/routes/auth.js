@@ -61,11 +61,11 @@ router
             return res.status(200).send({ loggedIn: false });
         }
     })
-    .post('/relogin',function(req,res){
+    .post('/relogin', function (req, res) {
 
         console.log(req.body)
-        db.users.findOne({_id:req.body.id},function(err,user){
-            if(err)return res.status(400).send(err);
+        db.users.findOne({ _id: req.body.id }, function (err, user) {
+            if (err) return res.status(400).send(err);
             delete user.password_hash;
             return res.status(200).send(user);
         })
@@ -73,16 +73,15 @@ router
 
     .post('/loginAuth', function (req, res) {
         //  let username=req.body.username;
-        //  let userpassword=req.body.userpassword;
+        let userpassword = req.body.userpassword;
+        console.log(userpassword);
         db.users.findOne({ name: req.body.name, password_hash: req.body.password_hash, active: true }, { rol: 1, _id: 1 }, function (err, user) {
-            console.log(user)
             if (err) return console.log(err);
-            console.log(user);
             if (user == null) return res.sendStatus(404);
 
             delete user.password_hash;
             req.session.user = user;
-            console.log(req.session);
+            // console.log(req.session);
 
             const userId = user._id;
             let payload = { subject: user._id }
@@ -104,7 +103,7 @@ router
             nuevoJWTJson.idToken = nuevoJWTBeareToken;
             nuevoJWTJson.identity = user;
 
-            console.log(jwtjson)
+            // console.log(jwtjson)
             return res.status(200).send(jwtjson);
         });
 

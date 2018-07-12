@@ -13,7 +13,7 @@ process.env.TZ = 'America/La_Paz';
 //middlewares
 app
     .use(cors({
-    origin:["http://localhost:4200","http://localhost:4210"],
+    origin:["http://localhost:4200","http://localhost:4201"],
     credentials:true}))
    .use(compression())
    .use('/', express.static(__dirname + '/public'))

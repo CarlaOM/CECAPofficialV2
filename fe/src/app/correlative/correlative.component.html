@@ -1,91 +1,94 @@
 <div class="content-wrapper">
   <div class="content">
 
-        <div class="box box-primary">
-                    <section class="content">
-                                <!-- <app-addPerson (messageEvent)="receiveMessage()"></app-addPerson> -->
-                                <!-- <a class="btn btn-primary" (click)="addPerson()">Registrar Persona</a> -->
-                                <!-- <app-persona></app-persona> -->
-                                <div>
-                                   <ol class="breadcrumb">
-                                      <!-- <br> -->
-                                      <li><a class="btn btn-primary a" [routerLink]="['/home/correlative/add']"><i class="fa fa-book"></i> Registrar Correlativo</a></li>
-                                      
-                                      <!-- <li>
+    <div class="box box-primary">
+      <section class="content">
+        <!-- <app-addPerson (messageEvent)="receiveMessage()"></app-addPerson> -->
+        <!-- <a class="btn btn-primary" (click)="addPerson()">Registrar Persona</a> -->
+        <!-- <app-persona></app-persona> -->
+        <div>
+          <ol class="breadcrumb">
+            <!-- <br> -->
+            <li>
+              <a class="btn btn-primary a" [routerLink]="['/home/correlative/add']">
+                <i class="fa fa-book"></i> Registrar Correlativo</a>
+            </li>
+
+            <!-- <li>
                                             <a class="btn btn-primary" [routerLink]="['/home/nivelacion/'+event?._id]">
                                             <i class="fa fa-book"></i> Nivelacion </a>
                                       </li> -->
-                                      <!-- <li>
+            <!-- <li>
                                             <a class="btn btn-primary" [routerLink]="['/home/workshop/'+event?._id]">
                                                <i class="fa fa-book"></i> Inscribir Persona a Taller</a>
                                          </li> -->
-                                      <!-- <li>
+            <!-- <li>
                                          <a class="btn btn-primary" [routerLink]="['/home/accountsModulars/'+event?._id]">
                                             <i class="fa fa-book"></i> Reportes Modulares</a>
                                       </li> -->
-                                      <!-- <li *ngIf='role?.name=="Admin"'>
+            <!-- <li *ngIf='role?.name=="Admin"'>
                                             <button class="btn btn-danger fa fa-book" (click)="cerrarEvento(event?._id)" [disabled]="!activeEvent">Cerrar Evento </button>
                           
                                          </li> -->
-                                      <!-- <li><app-control-asistance></app-control-asistance></li> -->
-                                   </ol>
-                                </div>
-                                <section class="content">
-                                    <table>
-                                      <thead>
-                                        <tr>Buscar</tr>
-                                        <tr>
-                                          <th>
-                                        <label>Fecha Inicio:</label>
-                                        <input type="date" [(ngModel)]="fechaIni">
-                                          </th>
-                                          <br>
-                                          <th>
-                                              <label>Fecha Fin:</label>
-                                              <input type="date" [(ngModel)]="fechaFin">  
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <a class="btn btn-info" (click)="reporte()">Buscar</a>
-                                        </tr>
-                                  
-                                      </thead>
-                                    </table>
-                                  </section>
-                                <table class="table table-hover">
-                                   <thead>
-                                      <tr>
-                                        <th>Recibo</th>
-                                        <th>Fecha</th>
-                                         <th>Descripcion</th>
-                                         <th>Monto</th>
-                                      </tr>
-                                   </thead>
-                                   <tbody>
-                                      <!--<tr *ngFor="let i of inscriptions | buscarPersona: busqueda">-->
-                                      <tr *ngFor="let i of mostrar" >
-                                         <td>{{ i.receipts[0].receipt }}</td>
-                                         <td>{{ i.year|date }}</td>
-                                         <td>{{ i.receipts[0].description }}</td>
-                                         <td>{{ i.receipts[0].amount }}</td>
-                                      </tr>
-                                   </tbody>
-                                   <tfoot>
-                                      <a>Pagina # {{page}}</a>
-                                      <br>
-                                      <button (click)="dis()" [disabled]="page == 1">Anterior</button>
-                                      <button (click)="aum()" [disabled]="page == totalPag">Siguiente</button>
-                                    </tfoot>
-                                </table>
-                                
-                                <div class="" style="text-align: center">
-                                      <button class="btn btn-primary" (click)="cancelar()">Volver</button>
-                                </div>
-                          
-                             </section>
-
+            <!-- <li><app-control-asistance></app-control-asistance></li> -->
+          </ol>
         </div>
+        <section class="content">
+          <table>
+            <thead>
+              <tr>Buscar</tr>
+              <tr>
+                <th>
+                  <label>Fecha Inicio:</label>
+                  <input type="date" [(ngModel)]="fechaIni">
+                </th>
+                <br>
+                <th>
+                  <label>Fecha Fin:</label>
+                  <input type="date" [(ngModel)]="fechaFin">
+                </th>
+              </tr>
+              <tr>
+                <a class="btn btn-info" (click)="reporte()">Buscar</a>
+              </tr>
+
+            </thead>
+          </table>
+        </section>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Recibo</th>
+              <th>Fecha</th>
+              <th>Descripcion</th>
+              <th>Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!--<tr *ngFor="let i of inscriptions | buscarPersona: busqueda">-->
+            <tr *ngFor="let i of mostrar">
+              <td>{{ i.receipts[0].receipt }}</td>
+              <td>{{ i.year|date }}</td>
+              <td>{{ i.receipts[0].description }}</td>
+              <td>{{ i.receipts[0].amount }}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+              <a>Pagina # {{page}}</a>
+              <br>
+            <button (click)="dis()" [disabled]="page == 1">Anterior</button>
+            <button (click)="aum()" [disabled]="page == totalPag">Siguiente</button>
+          </tfoot>
+        </table>
+
+        <div class="" style="text-align: center">
+          <button class="btn btn-primary" (click)="cancelar()">Volver</button>
+        </div>
+
+      </section>
+
+    </div>
   </div>
 
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>

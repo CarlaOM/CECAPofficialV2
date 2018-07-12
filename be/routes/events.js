@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 router
       .get('/', function (req, res) {
             var d = new Date();
-            db.events.find({ date_start: { $gt: d },active:true }, { name: 1, description: 1, date_start: 1, modulars: 1, inscriptions: 1, total: 1, programs: 1 }, function (err, events) {
+            db.events.find({ date_start: { $gt: d }, active: true }, { name: 1, description: 1, date_start: 1, modulars: 1, inscriptions: 1, total: 1, programs: 1 }, function (err, events) {
                   if (err) return res.status(400).send(err);
                   // let programs = [];
                   //let modulos = [];
@@ -47,14 +47,14 @@ router
             //    return res.status(200).send(events);
             // });
       })
-      .get('/getEventsActiveOfSucursal/:id',function(req,res){
+      .get('/getEventsActiveOfSucursal/:id', function (req, res) {
             var d = new Date();
-            
-            db.users.findOne({_id:req.params.id},function(err,user){
-                  db.events.find({offices:user.offices, active:true, date_start: { $gt: d }},{ name: 1, description: 1, date_start: 1, modulars: 1, inscriptions: 1, total: 1, programs: 1 },function(err,event){
-                  if (err) return res.status(400).send(err);
-                  return res.status(200).send(event);
-                  
+
+            db.users.findOne({ _id: req.params.id }, function (err, user) {
+                  db.events.find({ offices: user.offices, active: true, date_start: { $gt: d } }, { name: 1, description: 1, date_start: 1, modulars: 1, inscriptions: 1, total: 1, programs: 1 }, function (err, event) {
+                        if (err) return res.status(400).send(err);
+                        return res.status(200).send(event);
+
 
                   })
             })
@@ -204,47 +204,47 @@ router
                   // return res.status(200).send(event);
                   // getProgram(event);
                   // return res.status(200).send(event);
-                  db.persons.find({},function(err,personas){
-                        let listaPersonas=[];
-                        for(let p of personas){
+                  db.persons.find({}, function (err, personas) {
+                        let listaPersonas = [];
+                        for (let p of personas) {
                               console.log(p.first_name);
-                             for(let taller of p.workshops){
-                                   console.log(taller.events)
-                                   console.log(event._id);
-                                   if(taller.events==req.params.id){
-                                     
-                                         let person={}                                         
-                                         person.first_name=p.first_name;
-                                         person.last_name=p.last_name;
-                                         person.ci=p.ci;
-                                         person.cellphone=p.cellphone;
-                                         person.canceled_price=taller.amount;
-                                         person.assist=taller.assist;
-                                         person._id=p._id;
+                              for (let taller of p.workshops) {
+                                    console.log(taller.events)
+                                    console.log(event._id);
+                                    if (taller.events == req.params.id) {
 
-                                         listaPersonas.push(person);
-                                         console.log(p.first_name);
-                                   }
-                             }
+                                          let person = {}
+                                          person.first_name = p.first_name;
+                                          person.last_name = p.last_name;
+                                          person.ci = p.ci;
+                                          person.cellphone = p.cellphone;
+                                          person.canceled_price = taller.amount;
+                                          person.assist = taller.assist;
+                                          person._id = p._id;
+
+                                          listaPersonas.push(person);
+                                          console.log(p.first_name);
+                                    }
+                              }
                         }
 
                         return res.status(200).send(listaPersonas);
                   })
-                  
+
             });
-          
-           
+
+
       })
       ////////////////////////
-      .get('/cerrarEvento/:id',function(req,res){
-            db.events.findOne({_id:req.params.id},function(err,event){
+      .get('/cerrarEvento/:id', function (req, res) {
+            db.events.findOne({ _id: req.params.id }, function (err, event) {
                   if (err) return res.status(400).send(err);
-                  
-                  event.date_end=new Date();
-                  event.active=false;
-                  event.save(function(err,event){
+
+                  event.date_end = new Date();
+                  event.active = false;
+                  event.save(function (err, event) {
                         if (err) return res.status(400).send(err);
-                        return res.status(200).send(event);                  
+                        return res.status(200).send(event);
                   })
             })
       })
@@ -302,48 +302,48 @@ router
 
       })
       //*****************Obtener los modulars de Events **********************
-      .get('/getModulars/:id', function(req, res){
+      .get('/getModulars/:id', function (req, res) {
             console.log(req.params.id);
-         db.events.find({_id: req.params.id }, {modulars: 1},function(err, modulars){
-            if (err) return res.status(400).send(err);
-            if (modulars == null) return res.status(404).send();
-            //console.log(modulars[0]);
-            var modulares = modulars[0];
-            //return res.status(200).send(modulars);
-            getEventModules(modulares, req.params.id);
-         });
-         function getEventModules(modulares, eventId){
-            db.events.findOne({ _id: eventId }, function (err, events) {
-                  //console.log(events);
-                  if (err) { return res.status(400).send(err); }
-                  if (events) {
-                    db.modules.find({ programs: events.programs }, function (err, moduls) {
-                      if (err) { return res.status(400).send(err); }
-                      //console.log(moduls);
-                        //return res.status(200).send(moduls);
-                        newGenerateModulars(modulares, moduls, eventId);
-                    });//F module
-                  } else return res.status(404).send();
-                });//F EVENTS
-          }
-          function newGenerateModulars(modulares, moduls, eventId){
-            var listModuls= [];
-            for(var e=0; e<= modulares.modulars.length-1; e++){
-                  for(var j=0; j <= moduls.length - 1; j++){
-                        console.log(j,e);
-                       // console.log(JSON.stringify(null) , typeof modulares.modulars[e].modules);
-                        if(JSON.stringify(null) == JSON.stringify(modulares.modulars[e].modules)){
-                              //console.log(e + ' '+ JSON.stringify(modulares.modulars[e].modules))
-                              var modulars = {
-                                    name: 'Pago Extra',
-                                    _id: modulares.modulars[e]._id,
-                                    modules: null
-                              };
-                              listModuls.push(modulars);
-                              j = moduls.length;
-                        }else{
-                              var mod = moduls[j]._id;
-                              if(JSON.stringify(modulares.modulars[e].modules)==JSON.stringify(mod)) {
+            db.events.find({ _id: req.params.id }, { modulars: 1 }, function (err, modulars) {
+                  if (err) return res.status(400).send(err);
+                  if (modulars == null) return res.status(404).send();
+                  //console.log(modulars[0]);
+                  var modulares = modulars[0];
+                  //return res.status(200).send(modulars);
+                  getEventModules(modulares, req.params.id);
+            });
+            function getEventModules(modulares, eventId) {
+                  db.events.findOne({ _id: eventId }, function (err, events) {
+                        //console.log(events);
+                        if (err) { return res.status(400).send(err); }
+                        if (events) {
+                              db.modules.find({ programs: events.programs }, function (err, moduls) {
+                                    if (err) { return res.status(400).send(err); }
+                                    //console.log(moduls);
+                                    //return res.status(200).send(moduls);
+                                    newGenerateModulars(modulares, moduls, eventId);
+                              });//F module
+                        } else return res.status(404).send();
+                  });//F EVENTS
+            }
+            function newGenerateModulars(modulares, moduls, eventId) {
+                  var listModuls = [];
+                  for (var e = 0; e <= modulares.modulars.length - 1; e++) {
+                        for (var j = 0; j <= moduls.length - 1; j++) {
+                              console.log(j, e);
+                              // console.log(JSON.stringify(null) , typeof modulares.modulars[e].modules);
+                              if (JSON.stringify(null) == JSON.stringify(modulares.modulars[e].modules)) {
+                                    //console.log(e + ' '+ JSON.stringify(modulares.modulars[e].modules))
+                                    var modulars = {
+                                          name: 'Pago Extra',
+                                          _id: modulares.modulars[e]._id,
+                                          modules: null
+                                    };
+                                    listModuls.push(modulars);
+                                    j = moduls.length;
+                              } else {
+                                    var mod = moduls[j]._id;
+                                    if (JSON.stringify(modulares.modulars[e].modules) == JSON.stringify(mod)) {
                                           var modulars1 = {
                                                 name: moduls[j].name,
                                                 _id: modulares.modulars[e]._id,
@@ -351,95 +351,108 @@ router
                                           };
                                           listModuls.push(modulars1);
                                           //console.log('ingreso  '+ moduls[j]._id);
-                              }else{
-                                    console.log('falla  '+ moduls[j]._id);
-                                    //return res.status(404).send();
+                                    } else {
+                                          console.log('falla  ' + moduls[j]._id);
+                                          //return res.status(404).send();
+                                    }
                               }
                         }
                   }
+                  console.log(listModuls);
+                  return res.status(200).send(listModuls);
             }
-            console.log(listModuls);
-            return res.status(200).send(listModuls);
-         }
       })
 
       ////////////////////////////////////////////////////////////////////////////////////
 
-      .post('/listPersonNivelacionForCalls',function(req,res){
+      .post('/listPersonNivelacionForCalls', function (req, res) {
 
             let programId;
-            let eventId=req.body.eventId;
+            let eventId = req.body.eventId;
 
-            let listaPersonas=[];
-            db.events.findOne({_id:eventId},function(err,evento){
+            let listaPersonas = [];
+            db.events.findOne({ _id: eventId }, function (err, evento) {
                   if (err) { return res.status(400).send(err); }
                   // console.log(evento);
-                  programId=evento.programs;   
-                  
+                  programId = evento.programs;
+
                   db.persons.aggregate([
                         // {$project:{_id:1,first_name:1,last_name:1,cellphone:1,ci:1,profile:1}},
                         // {$unwind:'$profile'},
-                        {$match:{'profile.programs':{$eq:programId}}},
-                        {$project:{
-                              "_id":1,
-                              "first_name":1,
-                              "last_name":1,
-                              "cellphone":1,
-                              "ci":1,
-                              "programs":1,
-                              "profile.programs":1
-                        }},
-                        {$unwind:'$profile'},
-                        
-                        {$lookup:{
-                              from:"events",
-                              localField:"profile.programs",
-                              foreignField:"programs",
-                              as:"lista_eventos"
-                        }},
-                        {$unwind:'$lista_eventos'},
+                        { $match: { 'profile.programs': { $eq: programId } } },
+                        {
+                              $project: {
+                                    "_id": 1,
+                                    "first_name": 1,
+                                    "last_name": 1,
+                                    "cellphone": 1,
+                                    "ci": 1,
+                                    "programs": 1,
+                                    "profile.programs": 1
+                              }
+                        },
+                        { $unwind: '$profile' },
+
+                        {
+                              $lookup: {
+                                    from: "events",
+                                    localField: "profile.programs",
+                                    foreignField: "programs",
+                                    as: "lista_eventos"
+                              }
+                        },
+                        { $unwind: '$lista_eventos' },
 
 
-                        {$lookup:{
-                              from:'modulars',
-                              let:{eventIdLookup:'$lista_eventos._id',personIdLookup:'_id'},
-                              pipeline:[
-                                    {$match:
-                                          { $expr:
-                                                { $and:
-                                                      [
-                                                            {$eq :["$events","$$eventIdLookup"]},
-                                                            // {$ew :["$persons","$$personIdLookup"]}
-                                                      ]
+                        {
+                              $lookup: {
+                                    from: 'modulars',
+                                    let: { eventIdLookup: '$lista_eventos._id', personIdLookup: '_id' },
+                                    pipeline: [
+                                          {
+                                                $match:
+                                                {
+                                                      $expr:
+                                                      {
+                                                            $and:
+                                                                  [
+                                                                        { $eq: ["$events", "$$eventIdLookup"] },
+                                                                        // {$ew :["$persons","$$personIdLookup"]}
+                                                                  ]
+
+                                                      }
 
                                                 }
-                                                
+                                          },
+                                          {
+                                                $project: {
+                                                      "assist": 1,
+                                                      "events": 1,
+                                                      "modules": 1,
+                                                      "persons": 1,
+                                                }
                                           }
-                                    },
-                                    {$project:{
-                                          "assist":1,
-                                          "events":1,
-                                          "modules":1,
-                                          "persons":1,
-                                    }}
-                              ],
-                              as:"listaConModulos"
+                                    ],
+                                    as: "listaConModulos"
 
-                        }},
-                        {$project:{
-                              "_id":1,
-                              "first_name":1,
-                              "last_name":1,
-                              "cellphone":1,
-                              "ci":1,
-                              "programs":1,
-                              "profile.programs":1,
-                              "listaConModulos":1,
-                              "lista_eventos.modulars":1,
-                              "lista_eventos.name":1,
-                              "lista_eventos._id":1,
-                              "lista_eventos.inscriptions":1
-                        }},
+                              }
+                        },
+                        {
+                              $project: {
+                                    "_id": 1,
+                                    "first_name": 1,
+                                    "last_name": 1,
+                                    "cellphone": 1,
+                                    "ci": 1,
+                                    "programs": 1,
+                                    "profile.programs": 1,
+                                    "listaConModulos": 1,
+                                    "lista_eventos.modulars": 1,
+                                    "lista_eventos.name": 1,
+                                    "lista_eventos._id": 1,
+                                    "lista_eventos.inscriptions": 1
+                              }
+                        },
 
                         // {$unwind:'$lista_eventos.modulars'},
                         // {$unwind:'$lista_eventos.modulars.modules'},
@@ -473,75 +486,75 @@ router
                         //       "lista_modulars":1,
                         //       "lista_eventos.name":1,
                         //       "lista_eventos._id":1,
-                              
-                              
+
+
                         // }},
-                  ],function(err,personas){
+                  ], function (err, personas) {
                         if (err) { return res.status(400).send(err); }
                         console.log(personas);
                         // findModulars(personas);
-                        
+
                         // return res.status(200).send(personas);  
-                        listaPersonasNivelacion=[];
-                        for(let p of personas){
-                              if(p.listaConModulos.length>0){
-                                    for(let unModulo of p.listaConModulos){
-                                          if (unModulo.assist==false){
-                                                
-                                                let nuevaPersona={};
-                                                nuevaPersona.first_name=p.first_name;
-                                                nuevaPersona._id=p._id;
-                                                nuevaPersona.modulesNivelacion=1;
-                                                
+                        listaPersonasNivelacion = [];
+                        for (let p of personas) {
+                              if (p.listaConModulos.length > 0) {
+                                    for (let unModulo of p.listaConModulos) {
+                                          if (unModulo.assist == false) {
+
+                                                let nuevaPersona = {};
+                                                nuevaPersona.first_name = p.first_name;
+                                                nuevaPersona._id = p._id;
+                                                nuevaPersona.modulesNivelacion = 1;
+
                                                 listaPersonasNivelacion.push(nuevaPersona);
                                           }
                                     }
-                              }else{
-                                    for(let i=1;i<p.lista_eventos.modulars.length;i++){
-                                          let nuevaPersona={};
-                                                nuevaPersona.first_name=p.first_name;
-                                                nuevaPersona._id=p._id;
-                                                nuevaPersona.modulesNivelacion=1;
-                                                
-                                                listaPersonasNivelacion.push(nuevaPersona); 
+                              } else {
+                                    for (let i = 1; i < p.lista_eventos.modulars.length; i++) {
+                                          let nuevaPersona = {};
+                                          nuevaPersona.first_name = p.first_name;
+                                          nuevaPersona._id = p._id;
+                                          nuevaPersona.modulesNivelacion = 1;
+
+                                          listaPersonasNivelacion.push(nuevaPersona);
                                     }
                               }
                         }
-                        
-                        return res.status(200).send(listaPersonasNivelacion);  
-                        
-                  })               
+
+                        return res.status(200).send(listaPersonasNivelacion);
+
+                  })
             })
-            
+
       })
 
 
       //////////////////////////////////////////////////////////////////////////////////77
-      .post('/nivelacion/:id', function (req, res){
+      .post('/nivelacion/:id', function (req, res) {
             db.events.findOne({ _id: req.body.eventId }, function (err, even) {
-                    if (err) { return res.status(400).send(err); }
-                    db.persons.aggregate([
+                  if (err) { return res.status(400).send(err); }
+                  db.persons.aggregate([
                         { $match: { ci: req.body.persona.ci } },
-                        { $project: { profile:1, first_name:1,last_name:1, ci:1, cellphone:1, persons:1} },
+                        { $project: { profile: 1, first_name: 1, last_name: 1, ci: 1, cellphone: 1, persons: 1 } },
                         { $unwind: '$profile' },
                         { $match: { 'profile.programs': { $eq: even.programs } } },
-                            // { $group: { _id: { persons: '$inscriptions.persons' }, total: { $sum: 1 } } }
-                     ], function (err, pers) {
+                        // { $group: { _id: { persons: '$inscriptions.persons' }, total: { $sum: 1 } } }
+                  ], function (err, pers) {
                         if (err) { return res.status(400).send(err); }
                         console.log(pers);
-                        console.log('este es el ID del profile::'+pers[0].profile._id);
-                        if(pers != null){
+                        console.log('este es el ID del profile::' + pers[0].profile._id);
+                        if (pers != null) {
                               console.log('34 ifffffffff');
                               nivelInscription(pers);
                               //return res.status(400).send(err);
-                        }else{
+                        } else {
                               //inscribir persona en un nuevo evento
                               console.log('la Persona no esta inscrito en ningun evento');
                               return res.status(400).send(err);
                         }
-                      });
+                  });
             });
-            function nivelInscription(pers){
+            function nivelInscription(pers) {
                   var inscri = req.body.inscription;
                   db.events.aggregate([
                         { $match: { _id: mongoose.Types.ObjectId(req.body.eventId) } },
@@ -553,7 +566,7 @@ router
                         if (err) return res.status(400).send(err);
                         console.log('La Inscripcon de la persona');
                         console.log(events.length);
-                        if (events.length == 0 ){
+                        if (events.length == 0) {
                               console.log('condicion cumplida para inscribir la persona al evento');
                               var inscription = {
                                     total_price: pers[0].profile.payed + inscri.canceled_price,//sumatorio por asistencia de cada modulo
@@ -563,7 +576,7 @@ router
                                     canceled_price: pers[0].profile.payed + inscri.canceled_price,
                                     price_event: inscri.price_event,
                                     receipt: inscri.receipt,
-                                    name: pers[0].first_name+' '+pers[0].last_name,
+                                    name: pers[0].first_name + ' ' + pers[0].last_name,
                                     ci: pers[0].ci,
                                     cellphone: pers[0].cellphone,
                                     persons: pers[0]._id,
@@ -578,14 +591,14 @@ router
                                     });
                               console.log('Inscrito :)');
                               nivelList(inscri, pers);
-                        }else{
+                        } else {
                               console.log('La persona ya se inscribio');
                               return res.status(400).send(err);
                         }
                   });
             }
             //crear nueva Lista Para nivelacion de persona 
-            function nivelList(inscri,pers){
+            function nivelList(inscri, pers) {
                   var list = {
                         bolivianos: inscri.canceled_price,
                         dolares: 0,
@@ -603,105 +616,108 @@ router
                         nivelUpdateModulars(inscri, pers);
                   });
             }
-            function nivelUpdateModulars(inscri, pers){
-                  db.modulars.findOne({persons: pers[0]._id , profile:pers[0].profile._id ,modules:req.body.moduleId },function(err, modularsPer){
-                    if (err) { return res.status(400).send(err); } 
-                    console.log(modularsPer);
-                    console.log('El ammount de modulars: '+modularsPer.amount.amount);
-                     if ( modularsPer != null){
-                        if(modularsPer.amount.amount > 0 || modularsPer.amount.amount!=undefined){
-                              var nivelacion = {  // observation
-                                    detail: 'Inscripcion Nivelacion',
-                                    receipt: inscri.receipt, // nro factura
-                                    date: new Date(),
-                                    amount: inscri.canceled_price,
-                                    events: req.body.eventId
-                              };
-                              // db.modulars.update({ person: pers[0]._id,events: registro.eventId, modulars: registro.modularsId},
-                              db.modulars.update({ persons: pers[0]._id,profile:pers[0].profile._id,modules:req.body.moduleId},
-                              {  $set: { 'nivelacion': nivelacion }
-                              }).exec(function (err, off) {
-                                if (err) return res.status(400).send(err);
-                                //return res.status(200).send(off);
-                                console.log('Modulars Update con Ammoun > 0 :)');
-                                nivelPerfil(inscri, pers);
-                              });
-                        }else{
-                               var amounte = {  // observation
-                                     detail: 'Inscripcion Nivelacion',
-                                     receipt: inscri.receipt, // nro factura
-                                     date: new Date(),
-                                     amount: inscri.canceled_price,
-                                     events: req.body.eventId
-                               };
-                               // db.modulars.update({ person: pers[0]._id,events: registro.eventId, modulars: registro.modularsId},
-                               console.log(pers[0]._id,pers[0].profile._id,mongoose.Types.ObjectId(req.body.moduleId));
-                               db.modulars.update({ persons: pers[0]._id,profile:pers[0].profile._id,modules: req.body.moduleId},
-                               {  $set: {'amount': amounte }
-                               }).exec(function (err, off) {
-                                 if (err) return res.status(400).send(err);
-                                 //return res.status(200).send(off);
-                                 console.log(off)
-                                 console.log('Modulars Update :)');
-                                 nivelPerfil(inscri, pers);
-                               });
+            function nivelUpdateModulars(inscri, pers) {
+                  db.modulars.findOne({ persons: pers[0]._id, profile: pers[0].profile._id, modules: req.body.moduleId }, function (err, modularsPer) {
+                        if (err) { return res.status(400).send(err); }
+                        console.log(modularsPer);
+                        console.log('El ammount de modulars: ' + modularsPer.amount.amount);
+                        if (modularsPer != null) {
+                              if (modularsPer.amount.amount > 0 || modularsPer.amount.amount != undefined) {
+                                    var nivelacion = {  // observation
+                                          detail: 'Inscripcion Nivelacion',
+                                          receipt: inscri.receipt, // nro factura
+                                          date: new Date(),
+                                          amount: inscri.canceled_price,
+                                          events: req.body.eventId
+                                    };
+                                    // db.modulars.update({ person: pers[0]._id,events: registro.eventId, modulars: registro.modularsId},
+                                    db.modulars.update({ persons: pers[0]._id, profile: pers[0].profile._id, modules: req.body.moduleId },
+                                          {
+                                                $set: { 'nivelacion': nivelacion }
+                                          }).exec(function (err, off) {
+                                                if (err) return res.status(400).send(err);
+                                                //return res.status(200).send(off);
+                                                console.log('Modulars Update con Ammoun > 0 :)');
+                                                nivelPerfil(inscri, pers);
+                                          });
+                              } else {
+                                    var amounte = {  // observation
+                                          detail: 'Inscripcion Nivelacion',
+                                          receipt: inscri.receipt, // nro factura
+                                          date: new Date(),
+                                          amount: inscri.canceled_price,
+                                          events: req.body.eventId
+                                    };
+                                    // db.modulars.update({ person: pers[0]._id,events: registro.eventId, modulars: registro.modularsId},
+                                    console.log(pers[0]._id, pers[0].profile._id, mongoose.Types.ObjectId(req.body.moduleId));
+                                    db.modulars.update({ persons: pers[0]._id, profile: pers[0].profile._id, modules: req.body.moduleId },
+                                          {
+                                                $set: { 'amount': amounte }
+                                          }).exec(function (err, off) {
+                                                if (err) return res.status(400).send(err);
+                                                //return res.status(200).send(off);
+                                                console.log(off)
+                                                console.log('Modulars Update :)');
+                                                nivelPerfil(inscri, pers);
+                                          });
+                              }
+                        } else {
+                              console.log('el Modulars de person no Existe!!!');
+                              return res.status(404).send(err);
                         }
-                      }else{
-                        console.log('el Modulars de person no Existe!!!');
-                        return res.status(404).send(err);
-                      }  
-                     
+
                   });
             }
-            function nivelPerfil(inscri, pers){//funciona solo una primera vez
-                  db.persons.update({ _id: pers[0]._id , 'profile.programs': pers[0].profile.programs},
-                  { $set: { 
-                        'profile.$.payed': pers[0].profile.payed + inscri.canceled_price,
-                        'profile.$.debt': pers[0].profile.total_price - (pers[0].profile.payed + inscri.canceled_price)
-                        }
-                  }).exec(function (err, profile) {
-                        if (err) return res.status(400).send(err);
-                        console.log('Profile Actualizado :) ');
-                        return res.status(200).send(profile);
-                  });
+            function nivelPerfil(inscri, pers) {//funciona solo una primera vez
+                  db.persons.update({ _id: pers[0]._id, 'profile.programs': pers[0].profile.programs },
+                        {
+                              $set: {
+                                    'profile.$.payed': pers[0].profile.payed + inscri.canceled_price,
+                                    'profile.$.debt': pers[0].profile.total_price - (pers[0].profile.payed + inscri.canceled_price)
+                              }
+                        }).exec(function (err, profile) {
+                              if (err) return res.status(400).send(err);
+                              console.log('Profile Actualizado :) ');
+                              return res.status(200).send(profile);
+                        });
             }
       })
-      .post('/reporteEvento', function(req,res){
+      .post('/reporteEvento', function (req, res) {
 
             // let fechaIni = new Date(2018, 3, 24, 10, 33, 30, 0);
             console.log(req.body.fechaIni)
             console.log(req.body.fechaFin)
-                  let fechaIni = new Date(req.body.fechaIni);
-                  let fechaFin = new Date(req.body.fechaFin);
-                  console.log(fechaIni)
-                  // db.events.find({ date_start: { $gt: d } }, { name: 1, description: 1, date_start: 1, modulars: 1, inscriptions: 1, total: 1, programs: 1 }, function (err, events) {
-                  db.events.find({date_start: {$gt: fechaIni},date_start:{$lt:fechaFin}},function(err,eventos){
-                        if (err) { return res.status(400).send(err); }
-                        return res.status(200).send(eventos);
-                  })
-            
-            })
-            
-
-      .post('/getEvetnModuleTallerInscriptions',function(req,res){
-            
-            let event=req.body.event;
-            let moduleId=req.body.module;
-            let listaPersonas=[];
-
-            db.persons.find({},function(err,personas){
+            let fechaIni = new Date(req.body.fechaIni);
+            let fechaFin = new Date(req.body.fechaFin);
+            console.log(fechaIni)
+            // db.events.find({ date_start: { $gt: d } }, { name: 1, description: 1, date_start: 1, modulars: 1, inscriptions: 1, total: 1, programs: 1 }, function (err, events) {
+            db.events.find({ date_start: { $gt: fechaIni, $lt: fechaFin } }, function (err, eventos) {
                   if (err) { return res.status(400).send(err); }
-                  for(let p of personas){
-                        for(let taller of p.workshops){
-                              if((taller.events==event)&&(taller.modules==moduleId)){
-                                    let person={}                                         
-                                    person.first_name=p.first_name;
-                                    person.last_name=p.last_name;
-                                    person.ci=p.ci;
-                                    person.cellphone=p.cellphone;
-                                    person.canceled_price=taller.amount;
-                                    person.assist=taller.assist;
-                                    person._id=p._id;
+                  return res.status(200).send(eventos);
+            })
+
+      })
+
+
+      .post('/getEvetnModuleTallerInscriptions', function (req, res) {
+
+            let event = req.body.event;
+            let moduleId = req.body.module;
+            let listaPersonas = [];
+
+            db.persons.find({}, function (err, personas) {
+                  if (err) { return res.status(400).send(err); }
+                  for (let p of personas) {
+                        for (let taller of p.workshops) {
+                              if ((taller.events == event) && (taller.modules == moduleId)) {
+                                    let person = {}
+                                    person.first_name = p.first_name;
+                                    person.last_name = p.last_name;
+                                    person.ci = p.ci;
+                                    person.cellphone = p.cellphone;
+                                    person.canceled_price = taller.amount;
+                                    person.assist = taller.assist;
+                                    person._id = p._id;
 
                                     listaPersonas.push(person);
 
@@ -714,17 +730,17 @@ router
 
       })
 
-      .post('/addNewTaller',function(req,res){
+      .post('/addNewTaller', function (req, res) {
             console.log(req.body);
 
-            let personCi=req.body.persona.ci;
-            let events=req.body.events;
-            let modulars=req.body.modulars;
-            let modules=req.body.modules;
-            let receipt=req.body.receipt;
-            let amount=req.body.amount;
+            let personCi = req.body.persona.ci;
+            let events = req.body.events;
+            let modulars = req.body.modulars;
+            let modules = req.body.modules;
+            let receipt = req.body.receipt;
+            let amount = req.body.amount;
 
-            db.persons.findOne({ci:personCi},function(err,person){
+            db.persons.findOne({ ci: personCi }, function (err, person) {
                   if (err) { return res.status(400).send(err); }
 
 
@@ -735,19 +751,19 @@ router
                   // receipt:String,
                   // assist:Boolean,
                   // certificate:Boolean,
-                  let taller={};
-                  taller.events=events
-                  taller.modulars=modulars;
-                  taller.modules=modules;
-                  taller.amount=amount;
-                  taller.receipt=receipt;
-                  taller.assist=true;
-                  taller.cetificate=false;
+                  let taller = {};
+                  taller.events = events
+                  taller.modulars = modulars;
+                  taller.modules = modules;
+                  taller.amount = amount;
+                  taller.receipt = receipt;
+                  taller.assist = true;
+                  taller.cetificate = false;
 
                   person.workshops.push(taller);
-                  person.save(function(err,pers){
+                  person.save(function (err, pers) {
                         if (err) { return res.status(400).send(err); }
-                        return res.status(200).send(pers)                        
+                        return res.status(200).send(pers)
 
                   })
             })
@@ -796,10 +812,10 @@ router
                                                 console.log('lista guardada');
                                                 if (err) { return res.status(400).send(err); }
                                                 addInscription(person, req.body.inscription, req.body.eventId, date.programs, req.body.moduleId, asistencia);//**controlar fecha y modulars*/
-                                                
+
                                                 //addIngreso(cashFlowUser,req.body.inscription.receipt,cashFlowUser_description,req.body.inscription.canceled_price)
-                                                
-                                                
+
+
                                                 //addProfile(person, date.programs, req.body.eventId, req.body.moduleId, req.body.inscription, asistencia);
                                                 //   inscriptionEvent(person, programId, idEvent, moduleId, inscri, asistencia );
                                           });
@@ -813,7 +829,7 @@ router
                                     db.events.aggregate([{ $match: { _id: mongoose.Types.ObjectId(idEvent) } },
                                     { $lookup: { from: "modules", localField: "programs", foreignField: "programs", as: "moduls" } },
                                     { $group: { _id: "$moduls._id", "numOfmoduls": { $sum: 1 } } }
-                                    ]).exec(function (err, moduls){
+                                    ]).exec(function (err, moduls) {
                                           // if (err) return res.status(404).send(err)
                                           console.log(typeof moduls, moduls);
                                           var modulPrice = inscri.price_event / moduls[0]._id.length;///////DIVISION
@@ -1048,7 +1064,7 @@ router
             console.log(req.params.id)
             // db.events.findOne({_id: req.params.id},function (err,ev) {
             //       console.log(ev.programs, req.body.programId);
-                  
+
             // })
             db.events.aggregate([
                   { $match: { _id: mongoose.Types.ObjectId(req.params.id) } },
@@ -1164,7 +1180,7 @@ router
                   });
       })
 
-   
+
 
       .delete('/:id', function (req, res) {
             db.events.remove({ _id: req.params.id }, function (err, event) {
