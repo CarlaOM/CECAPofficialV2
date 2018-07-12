@@ -81,6 +81,7 @@ export class AddEjecutivoComponent implements OnInit {
     this._peticionesService.getCartera(this.carteraSeleccionada).subscribe(
        result =>{
          this.carteraObject=result;
+         console.log(this.carteraObject);
         this.asignarCartera(); 
 
         
@@ -97,6 +98,7 @@ export class AddEjecutivoComponent implements OnInit {
   asignarCartera(){
     this.carteraObject.user=this.newUser._id;
     this.carteraObject.active=true;
+    console.log(this.carteraObject);
     this._peticionesService.updateCartera(this.carteraObject).subscribe(
       result=>{
 
