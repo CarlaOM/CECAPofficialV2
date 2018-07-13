@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
     nuevoUsuarioLogin.password_hash = this.md5.appendStr(this.user.password_hash).end();
     nuevoUsuarioLogin.rol = this.user.rol;
 
-    // console.log(nuevoUsuarioLogin.password_hash);
+    console.log(nuevoUsuarioLogin.password_hash);
 
     if ((this.user.name == 'a') || (this.user.name == 'e') || (this.user.name == 'i')) {
 

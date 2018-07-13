@@ -21,7 +21,7 @@ import { EventsComponent } from './events/events.component';
 import { EventComponent } from './event/event.component';
 import { PersonaComponent } from "./event/persona/persona.component"
 import { AlertComponent } from './events/alert/alert.component';
-import { BackupComponent } from './home/alert-backup/alert-backup.component';
+import { AlertBackupComponent } from './home/alert-backup/alert-backup.component';
 
 //Services
 import { UserService} from './services/user.service';
@@ -113,7 +113,7 @@ import { AuthGuard } from "./auth.guard";
 import { RouterModule } from '@angular/router';
 import { PermisosVistaComponent } from './permisos-vista/permisos-vista.component';
 import { JwtInterceptor } from "./jwt.interceptor";//////este ya no se usa
-
+import { BackupComponent } from './home/backup/backup.component';
 // import { TokenInterceptor } from "./services/token.interceptor";
 
 
@@ -183,6 +183,7 @@ import { JwtInterceptor } from "./jwt.interceptor";//////este ya no se usa
     EditFacilitadorComponent,
     ProfilePersonComponent,
     AlertComponent,
+    AlertBackupComponent,
     BackupComponent,
     PendingCashComponent,
     ControlAsistanceComponent,

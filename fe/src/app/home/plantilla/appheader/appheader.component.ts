@@ -103,4 +103,7 @@ export class AppheaderComponent implements OnInit {
         }
      
     }
+    popup(){
+        this._router.navigate([{ outlets: { modal: [ 'backup' ] }}]); 
+    }
 }

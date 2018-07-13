@@ -73,7 +73,8 @@ import { PrintBatchCertificatesComponent } from "./event/print-batch-certificate
 import { ListaPesonsNivelacionComponent } from "./lista-pesons-nivelacion/lista-pesons-nivelacion.component";
 import { PermisosVistaComponent } from "./permisos-vista/permisos-vista.component";
 import { CorrelativeComponent } from './correlative/correlative.component';
-
+import { AlertBackupComponent } from './home/alert-backup/alert-backup.component';
+import { BackupComponent } from './home/backup/backup.component';
 
 import { AuthGuard } from "./auth.guard";
 
@@ -150,6 +151,8 @@ const appRoutes: Routes = [
          { path: 'listaParaNivelar/:id',component:ListaPesonsNivelacionComponent},
          { path: 'error',component:PermisosVistaComponent},
          { path: 'correlative', component:CorrelativeComponent},
+         { path: 'backupAlert',component: AlertBackupComponent,  outlet: 'modal'},
+         { path: 'backup',component: BackupComponent}
       ]
    },
 

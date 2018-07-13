@@ -1,10 +1,26 @@
-<!-- Small modal -->
-
-<div class="modal fade " id="modalBackup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      ...
-    </div>
+<div class="modal fade" style="border: rosybrown" id="modalAlerta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+          <div class="modal-header text-center"> 
+            <h4 class="modal-title w-100 font-weight-bold">Alerta</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" #close>
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mx-3 ">
+            
+            <div ><h5> Estos son los programas que tiene para añadir al nuevo Evento, si usted quiere crear o registrar un nuevo programa elija la opción 
+              <strong >CREAR PROGRAMA</strong> y si no 
+              <strong >CREAR EVENTO</strong></h5>
+            </div>
+            
+            </div>
+          <div class="modal-footer d-flex justify-content-center" >
+              <button type="submit" class="btn btn-warning"(click)="craerProgram()">CONFIRMAR</button>
+          </div>
+     </div>
+   </div>
   </div>
+<div class="text-center">
+  <li><a class="btn btn-primary" data-toggle="modal" data-target="#modalAlerta"><i class="fa fa-book"></i>Bakup Up</a></li>
 </div>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalBackup">Small modal</button>
