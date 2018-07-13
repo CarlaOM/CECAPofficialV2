@@ -244,8 +244,12 @@
                       <a *ngIf='(role?.name == "Admin")||(role?.name=="Gerente")' class="btn btn-warning btn-flat" (click)="backup()">Do Backup</a>
                    </div> -->
                   <div class="pull-left">
-                    <li *ngIf='(role?.name == "Admin")||(role?.name=="Gerente")' class="btn btn-warning btn-flat" type="password" (click)="BackupDemo()" >Do Backup</li>
-                  
+                    <!-- <li *ngIf='(role?.name == "Admin")||(role?.name=="Gerente")' class="btn btn-warning btn-flat" type="password" (click)="BackupDemo()" >Do Backup</li>
+                   <a *ngIf='(role?.name == "Admin")||(role?.name=="Gerente")' [routerLink]="[{ outlets: { modal: ['backup'] } }]" > Add Book</a>
+                    <a *ngIf='(role?.name == "Admin")||(role?.name=="Gerente")' ></a>			  -->
+                    <li  class="btn btn-warning btn-flat"><a [routerLink]="['/home/backup']">Bakup Max</a></li>
+
+
                     <!-- <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password_hash" class="form-control" placeholder="Contraseña" required /> -->
                   </div>
                   <div class="pull-right">
@@ -260,6 +264,7 @@
             </li>
           </ul>
         </div>
-  
       </nav>
+      
     </header>
+    

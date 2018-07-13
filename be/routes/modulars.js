@@ -42,35 +42,79 @@ router
                         if(persons[j].ocupation == 'profesional'){canProf++;}
                         if(persons[j].ocupation == 'particular'){canParticular++;}
                     }
-                    db.cashFlowUsers.find({},{details: 1}, function(err, cashUser){
-                        if (err) return res.status(400).send(err);
-                        var canEgreso=0;
-                        for (let i = 0; i < cashUser.length ; i++) {
-                            for (let j = 0; j < cashUser[i].details.length; j++) {console.log(cashUser[i].details[j].input);
-                                if(JSON.stringify(cashUser[i].details[j].modulars) == JSON.stringify(modularsId) && cashUser[i].details[j].input == false ){
-                                    canEgreso = canEgreso + cashUser[i].details[j].amount; 
-                                }
-                            }
-                        } 
-                        // console.log(cashUser.length);
-                        // console.log(cashUser[0].details.length);
-                        console.log('¿¿¿¿¿¿¿¿¿¿¿¿ :) ???????????');
-                        console.log('Total ingreso Modulo: '+ cantIngresoMod);
-                        console.log('Total Assist Modulo:  '+ cantAssist);
-                        console.log('Total estudi Modulo:  '+ canStudent);
-                        console.log('Total profe Modulo:   '+ canProf);
-                        console.log('Total partic Modulo:  '+ canParticular);
-                        console.log('Total Egreso Modulo:  '+ canEgreso);
-                        var accountModulars = {
-                            ingreso: cantIngresoMod,
-                            egreso: canEgreso,
-                            assist:cantAssist,
-                            student:canStudent,
-                            professional:canProf,
-                            particular:canParticular
-                        };
-                        return res.status(200).send(accountModulars);
+                    db.persons.find({},{workshops: 1},function(err, people){ 
+                        var i = 0, m = 0;
+                        var costTaller= 0;
+                        var persTaller= 0;
+                        recursivo(i);///Function recursive
+                        function recursivo(i) {
+                              if (i == people.length) {
+                                    return;// addModular(person, inscri,idEvent,moduleId,asistencia ) ;
+    
+                              } else {
+                                    console.log(people[i]._id);
+                                    db.persons.aggregate([
+                                        { $match: { _id: mongoose.Types.ObjectId(people[i]._id) } },
+                                        { $project: { workshops:1} },
+                                        { $unwind: '$workshops' },
+                                        // { $match: { 'workshops.modules': { $eq: mongoose.Types.ObjectId(moduleId) } } },
+                                            // { $group: { _id: { persons: '$inscriptions.persons' }, total: { $sum: 1 } } }
+                                     ], function (err, pers){ 
+                                        // if (err) { return res.status(400).send(err); }
+                                        console.log('aqui las personas con taller')
+                                        console.log(pers[0]);
+                                        try {
+                                            if(pers[0] != undefined){
+                                                console.log(pers[0].workshops.amount);
+                                                costTaller = costTaller + pers[0].workshops.amount;
+                                                persTaller++;
+                                            }
+                                            m++;
+                                            if (m == people.length) {
+                                                console.log('FINALIZO!!!')
+                                                getEgresos(cantIngresoMod,cantAssist,canStudent, canProf, canParticular, costTaller);
+                                            }
+                                        } catch (err) {
+                                                console.error(err);
+                                                //console.log(err);
+                                        }
+                                    });
+                                    return recursivo(i + 1);
+                              }
+                        }
                     });
+                    function getEgresos(cantIngresoMod,cantAssist,canStudent, canProf, canParticular, costTaller){
+                        db.cashFlowUsers.find({},{details: 1}, function(err, cashUser){
+                            if (err) return res.status(400).send(err);
+                            var canEgreso=0;
+                            for (let i = 0; i < cashUser.length ; i++) {
+                                for (let j = 0; j < cashUser[i].details.length; j++) {//console.log(cashUser[i].details[j].input);
+                                    if(JSON.stringify(cashUser[i].details[j].modulars) == JSON.stringify(modularsId) && cashUser[i].details[j].input == false ){
+                                        canEgreso = canEgreso + cashUser[i].details[j].amount; 
+                                    }
+                                }
+                            } 
+                            // console.log(cashUser.length);
+                            // console.log(cashUser[0].details.length);
+                            console.log('¿¿¿¿¿¿¿¿¿¿¿¿ :) ???????????');
+                            console.log('Total ingreso Modulo: '+ cantIngresoMod);
+                            console.log('Total Assist Modulo:  '+ cantAssist);
+                            console.log('Total estudi Modulo:  '+ canStudent);
+                            console.log('Total profe Modulo:   '+ canProf);
+                            console.log('Total partic Modulo:  '+ canParticular);
+                            console.log('Total Egreso Modulo:  '+ canEgreso);
+                            console.log(costTaller)
+                            var accountModulars = {
+                                ingreso: cantIngresoMod,
+                                egreso: canEgreso,
+                                assist:cantAssist,
+                                student:canStudent,
+                                professional:canProf,
+                                particular:canParticular
+                            };
+                            return res.status(200).send(accountModulars);
+                        });
+                    }
                 });
             });
         }
