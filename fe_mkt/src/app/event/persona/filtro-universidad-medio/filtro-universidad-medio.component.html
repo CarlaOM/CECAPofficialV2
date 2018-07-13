@@ -16,7 +16,7 @@
                           <br>           
                           <label>
                             <div *ngFor="let uni of listaUniversidades; let i = index" >
-                                  <input type="checkbox" name="uni{{i}}" #univer="ngModel" value="{{uni.id}}" [(ngModel)]="uni.checked" /> {{uni.name}}
+                                  <input type="checkbox" name="uni{{i}}" #univer="ngModel" value="{{uni._id}}" [(ngModel)]="uni.checked" /> {{uni.name}}
                             </div>
                            </label>                                 
                             <div [hidden]="univer?.valid || univer?.pristine"

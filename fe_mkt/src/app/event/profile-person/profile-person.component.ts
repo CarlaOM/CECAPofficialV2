@@ -17,6 +17,8 @@ export class ProfilePersonComponent implements OnInit {
   public ocupation;
   public ocupations;
   public programs;
+  public carrera;
+  public universidad;
   // public tracing;
 
   constructor(
@@ -45,6 +47,15 @@ export class ProfilePersonComponent implements OnInit {
         this.ocupation = this.person.ocupation;
         //  console.log(this.ocupation)
         this.ocupations = this.person.descOcupation;
+        this._peticionesService.getCarrera(this.person.descOcupation.carrera).subscribe(res=>{
+          this.carrera=res;
+          // console.log('esta es la carrera',this.carrera);
+          this._peticionesService.getUniversidad(this.person.descOcupation.universidad).subscribe(res=>{
+            this.universidad=res;
+          })
+        },err=>{
+          console.log(err);
+        })
         //  console.log(this.ocupations)
         // this.tracing = this.person.profile.tracing;
         // console.log(this.tracing)

@@ -514,5 +514,13 @@ export class PeticionesService {
     return this._http.get(this.url + 'Mkt_events/cerrarEvento/' + id).map((res: Response) => res);
     
   }
+  getCarrera(id){
+    return this._http.get(this.url + 'Mkt_list/getCarrera/' + id).map((res: Response) => res);
+      
+  }
+  getUniversidad(id){
+    return this._http.get(this.url + 'Mkt_list/getUniversidad/' + id).map((res: Response) => res);
+      
+  }
 
 }

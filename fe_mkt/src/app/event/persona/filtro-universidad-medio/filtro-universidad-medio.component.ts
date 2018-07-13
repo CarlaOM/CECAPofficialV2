@@ -20,6 +20,7 @@ export class FiltroUniversidadMedioComponent implements OnInit {
   public listaUniversidadesChecked=[];
   public listaMediosContactoChecked=[];
   public listaPersonas;
+  
 
   constructor(
 
@@ -66,8 +67,8 @@ export class FiltroUniversidadMedioComponent implements OnInit {
 
   filterPerson(){
 
-    let u={}as ObjeSearch;
-    u.uni='Universidad Mayor de San Simon';
+    // let u={}as ObjeSearch;
+    // u.uni='Universidad Mayor de San Simon';
 
     let ots={}as ObjectToSearch;
     ots.listaUniChecked=this.listaUniversidadesChecked;
@@ -82,22 +83,34 @@ export class FiltroUniversidadMedioComponent implements OnInit {
     })
   }
   llenarUniversidades(){
+    this._peticionesService.getUni().subscribe(res=>{
+      let universidades=res[0].university;
+      console.log(universidades);
+      for(let univer of universidades){
+        let uni={}as ItemUniversidad;
+        uni._id=univer._id;
+        uni.name=univer.nombre;
+        uni.checked=false;
+        this.listaUniversidades.push(uni);
+      }
+      console.log(this.listaUniversidades);
+    })
 
-    let umss={}as ItemUniversidad;
-    umss.checked=false;
-    umss.id=1;
-    umss.name='Universidad Mayor de San Simon';
-    this.listaUniversidades.push(umss);
-    let umss2={}as ItemUniversidad;
-    umss2.checked=false;
-    umss2.id=2;
-    umss2.name='U. Catolica';
-    this.listaUniversidades.push(umss2);
-    let umss3={}as ItemUniversidad;
-    umss3.checked=false;
-    umss3.id=3;
-    umss3.name='U. Latinoamericana';
-    this.listaUniversidades.push(umss3);
+    // let umss={}as ItemUniversidad;
+    // umss.checked=false;
+    // umss.id=1;
+    // umss.name='Universidad Mayor de San Simon';
+    // this.listaUniversidades.push(umss);
+    // let umss2={}as ItemUniversidad;
+    // umss2.checked=false;
+    // umss2.id=2;
+    // umss2.name='U. Catolica';
+    // this.listaUniversidades.push(umss2);
+    // let umss3={}as ItemUniversidad;
+    // umss3.checked=false;
+    // umss3.id=3;
+    // umss3.name='U. Latinoamericana';
+    // this.listaUniversidades.push(umss3);
   }
 
 
@@ -176,7 +189,7 @@ export interface ItemUniversidad{
 
   name:string,
   checked:boolean,
-  id:number,
+  _id:string,
 }
 
 
