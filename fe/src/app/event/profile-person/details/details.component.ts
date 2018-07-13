@@ -169,17 +169,14 @@ export class DetailsComponent implements OnInit {
     var ppmId = this.personId + '-' + this.profileId + '-' + moduleId;
     this.router.navigate(['/home/printCertificate', ppmId]);
 
-    let personProfileModule={} as PersonProfileModule;
-            personProfileModule.personId = this.personId;
-            personProfileModule.profileId = this.profileId;
-            personProfileModule.moduleId = moduleId;
-            // console.log(personProfileModule);
+    // let personProfileModule={} as PersonProfileModule;
+    //         personProfileModule.personId = this.personId;
+    //         personProfileModule.profileId = this.profileId;
+    //         personProfileModule.moduleId = moduleId;
             
-    this._peticionesService.markPrintCertificate(personProfileModule).subscribe(response=>{
-      var res = response
-      // console.log(res)
-      // this.setListInscriptions(this.moduleId,this.moduleName);
-    });
+    // this._peticionesService.markPrintCertificate(personProfileModule).subscribe(response=>{
+    //   var res = response
+    // });
   }
 }
 export interface PersonProfileModule{
