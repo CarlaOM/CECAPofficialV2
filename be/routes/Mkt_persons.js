@@ -421,7 +421,7 @@ router
                         // console.log(personas)
                         for (let p of personas) {
                             for (let ItemUnivers of listaUniversidades) {
-                                if (p.descOcupation.universidad == ItemUnivers.id) {
+                                if (p.descOcupation.universidad == ItemUnivers._id) {
                                     personasFiltradas.push(p);
                                     // console.log(p);
                                 }
@@ -513,15 +513,17 @@ router
     })
 
     .post('/addNewPerson',function(req,res){
-        console.log(req.body);
+        // console.log(req.body);
         let interes=req.body.persona.interes;
         db.mkt_persons.findOne({cellphone:req.body.persona.cellphone},function(err,celExist){
             if (err) return res.status(400).send(err);
             if(celExist==null){
                 var person=new db.mkt_persons(req.body.persona);
+                // console.log('///////////////////////////////')
+                // console.log(person);
                 person.save(function(err,pers){
                     if (err){
-                        return res.status(200).send(err)
+                        return res.status(400).send(err)
                     }else{
                         for (let program of interes) {
                             // console.log(program);

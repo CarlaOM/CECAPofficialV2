@@ -489,7 +489,7 @@ module.exports = {
             descOcupation: {
                   //universitario
                   carrera: String,
-                  universidad: Number,
+                  universidad: String,
                   ///////
                   /// 1 Universidad Mayor de San Simon
                   /// 2 U. Catolica
