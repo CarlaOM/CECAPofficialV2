@@ -742,15 +742,6 @@ router
 
             db.persons.findOne({ ci: personCi }, function (err, person) {
                   if (err) { return res.status(400).send(err); }
-
-
-                  // events:ObjectId,
-                  // modulars:ObjectId,
-                  // modules:ObjectId,
-                  // amount:Number,
-                  // receipt:String,
-                  // assist:Boolean,
-                  // certificate:Boolean,
                   let taller = {};
                   taller.events = events
                   taller.modulars = modulars;
@@ -759,12 +750,25 @@ router
                   taller.receipt = receipt;
                   taller.assist = true;
                   taller.cetificate = false;
-
                   person.workshops.push(taller);
                   person.save(function (err, pers) {
                         if (err) { return res.status(400).send(err); }
-                        return res.status(200).send(pers)
-
+                        var list = {
+                              bolivianos: req.body.amount,
+                              dolares: req.body.amount / (6.96),
+                              receipt: req.body.receipt, // varios recibos
+                              assist: true, //controlar por fecha de inscription ****************
+                              type: 1, //nuevo // nivelacion
+                              person: person._id,
+                              events: req.body.events,
+                              modulars: req.body.modulars
+                        };
+                        var lists = new db.lists(list);
+                        lists.save(function (err, lists) {
+                              console.log('lista guardada');
+                              if (err) { return res.status(400).send(err); }
+                              return res.status(200).send(pers)
+                        });
                   })
             })
       })

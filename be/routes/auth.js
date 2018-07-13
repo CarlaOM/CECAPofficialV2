@@ -64,9 +64,9 @@ router
     .post('/relogin', function (req, res) {
 
         console.log(req.body)
-        db.users.findOne({ _id: req.body.id }, function (err, user) {
+        db.users.findOne({ _id: req.body.id }, { password_hash: 0 }, function (err, user) {
             if (err) return res.status(400).send(err);
-            delete user.password_hash;
+            // delete user.password_hash;
             return res.status(200).send(user);
         })
     })
