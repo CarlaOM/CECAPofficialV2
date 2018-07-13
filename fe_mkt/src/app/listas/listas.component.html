@@ -11,7 +11,7 @@
               <form (ngSubmit)="save()" #addEvent="ngForm" class="jumbotron">
                  <div class="form-group col-sm-8">
                     <label for="uni" class="control-label">Nombre Universidad</label>
-                    <input type="text" class="form-control" id="uni" [(ngModel)]="model.university" name="uni" #uni="ngModel" required />
+                    <input type="text" pattern="[a-zA-Z0-9 ,.-]{3,100}" class="form-control" id="uni" [(ngModel)]="model.university" name="uni" #uni="ngModel" required />
                  </div>
                  <!-- <div class="form-group col-sm-8">
                   <label for="carrera" class="control-label">Nombre Carrera</label>

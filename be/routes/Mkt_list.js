@@ -13,6 +13,30 @@ router
         return res.status(200).send(universidades);
         });
      })
+     .get('/getCarrera/:id',function(req,res){
+         db.mkt_listExtra.findOne({},function(err,carreras){
+             if(err) return res.status(400).send(err);
+            //  console.log(carreras)
+            for(let unacarrera of carreras.carrera){
+                if(unacarrera._id==req.params.id){
+                    console.log(unacarrera);
+                    return res.status(200).send(unacarrera);
+                }
+            }
+         })
+     })
+     .get('/getUniversidad/:id',function(req,res){
+        db.mkt_listExtra.findOne({},function(err,carreras){
+            if(err) return res.status(400).send(err);
+           //  console.log(carreras)
+           for(let unaUniversidad of carreras.university){
+               if(unaUniversidad._id==req.params.id){
+                   console.log(unaUniversidad);
+                   return res.status(200).send(unaUniversidad);
+               }
+           }
+        })
+    })
     .post('/add/university', function (req, res) {
         console.log(req.body);
         // db.mkt_listExtra.find({}, function (err, lista) {

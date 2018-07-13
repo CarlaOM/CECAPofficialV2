@@ -102,7 +102,7 @@ export class PeticionesService {
         return this._http.get(this.url + 'Mkt_carteras').map((res: Response) => res);
     }
     getCartera(_id) {
-        return this._http.get(this.url + 'Mkt_carteras' + _id).map((res: Response) => res);
+        return this._http.get(this.url + 'Mkt_carteras/' + _id).map((res: Response) => res);
     }
     getCarterasLibres() {
         return this._http.get(this.url + 'Mkt_carteras/libres').map((res: Response) => res);
@@ -513,6 +513,14 @@ export class PeticionesService {
   cerrarEvento(id){
     return this._http.get(this.url + 'Mkt_events/cerrarEvento/' + id).map((res: Response) => res);
     
+  }
+  getCarrera(id){
+    return this._http.get(this.url + 'Mkt_list/getCarrera/' + id).map((res: Response) => res);
+      
+  }
+  getUniversidad(id){
+    return this._http.get(this.url + 'Mkt_list/getUniversidad/' + id).map((res: Response) => res);
+      
   }
 
 }

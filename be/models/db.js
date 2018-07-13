@@ -489,7 +489,7 @@ module.exports = {
             descOcupation: {
                   //universitario
                   carrera: String,
-                  universidad: Number,
+                  universidad: String,
                   ///////
                   /// 1 Universidad Mayor de San Simon
                   /// 2 U. Catolica
@@ -768,7 +768,7 @@ module.exports = {
 
       //Connection
       connection: function () {
-            var db = mongoose.connect('mongodb://localhost:27017/CecapImportsMarketing',
+            var db = mongoose.connect('mongodb://localhost:27017/Cecap',
                   function (err) {
                         if (err) return console.log(err);
                         console.log("MongoDB: connection to database succesful!");
