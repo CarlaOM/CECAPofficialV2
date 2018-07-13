@@ -105,7 +105,8 @@ export class AddEjecutivoComponent implements OnInit {
     //     })
     // }
     this.model.password_hash=this.model.name;
-    let passHashed= this.md5.appendStr(this.model.password_hash).end();
+    // let passHashed= this.md5.appendStr(this.model.password_hash).end();
+    let passHashed=this.model.password_hash;
     this.model.password_hash=passHashed;
     this._peticionesService.addUser(this.model).subscribe(
       response=>{

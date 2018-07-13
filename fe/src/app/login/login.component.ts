@@ -54,7 +54,8 @@ export class LoginComponent implements OnInit {
     nuevoUsuarioLogin._id = this.user._id;
     nuevoUsuarioLogin.active = this.user.active;
     nuevoUsuarioLogin.name = this.user.name;
-    nuevoUsuarioLogin.password_hash = this.md5.appendStr(this.user.password_hash).end();
+    nuevoUsuarioLogin.password_hash=this.user.password_hash;
+    // nuevoUsuarioLogin.password_hash = this.md5.appendStr(this.user.password_hash).end();
     nuevoUsuarioLogin.rol = this.user.rol;
 
     // console.log(nuevoUsuarioLogin.password_hash);
