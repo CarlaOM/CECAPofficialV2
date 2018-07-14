@@ -98,11 +98,10 @@ if (false){
 //    init.clearCollections();
    init.initializer();
 }
-try{
+setTimeout(() => {
     db.connection();
-} catch (err){
-    console.log("test")
-}
+}, 300000);
+
 
 //start app
 app.listen(80, function () {
