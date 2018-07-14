@@ -87,7 +87,8 @@ var _mkt_user_ejecutivo2 = {
   _id: new mongoose.Types.ObjectId,
   record_date: new Date()
 };
-var _mkt_users = [_mkt_user_admin, _mkt_user_ejecutivo1, _mkt_user_ejecutivo2];
+//var _mkt_users = [_mkt_user_admin, _mkt_user_ejecutivo1, _mkt_user_ejecutivo2];
+var _mkt_users = [_mkt_user_admin];
 
 //////////////////////////////////////////////////////////////////////////
 var _mkt_facilitator_1 = {
@@ -151,7 +152,8 @@ var _mkt_cartera_user_3 = {
   _id: new mongoose.Types.ObjectId,
   record_date: new Date()
 }
-var _mkt_carteras = [_mkt_cartera_user_1, _mkt_cartera_user_2, _mkt_cartera_user_3];
+//var _mkt_carteras = [_mkt_cartera_user_1, _mkt_cartera_user_2, _mkt_cartera_user_3];
+var _mkt_carteras = [_mkt_cartera_user_1];
 //////////////////////////////////////////////////////
 var _mkt_program_seguridad = {
   name: 'seguridad industrial',
@@ -1560,17 +1562,17 @@ module.exports = {
     saveData(_mkt_roles, db.mkt_roles);
     saveData(_mkt_users, db.mkt_users);
     saveData(_mkt_company, db.mkt_company);
-    saveData(_mkt_correlatives, db.mkt_correlatives);
     saveData(_mkt_carteras, db.mkt_carteras);
-    saveData(_mkt_programs, db.mkt_programs);
-    saveData(_mkt_modulos, db.mkt_modules);
-    saveData(_mkt_facilitators, db.mkt_facilitators);
     saveData(_mkt_offices, db.mkt_offices);
-    saveData(_mkt_events, db.mkt_events);
-    saveData(_mkt_persons, db.mkt_persons);
-    saveData(_mkt_lists, db.mkt_lists);
+    //saveData(_mkt_correlatives, db.mkt_correlatives);
+    //saveData(_mkt_programs, db.mkt_programs);
+    //saveData(_mkt_modulos, db.mkt_modules);
+    //saveData(_mkt_facilitators, db.mkt_facilitators);
+    //saveData(_mkt_events, db.mkt_events);
+    //saveData(_mkt_persons, db.mkt_persons);
+    //saveData(_mkt_lists, db.mkt_lists);
    //  saveData(_mkt_cashFlowOffices,db.mkt_cashFlowOffices);
-    saveData(_mkt_listExtra1, db.mkt_listExtra);
+    //saveData(_mkt_listExtra1, db.mkt_listExtra);
 
   },
 
