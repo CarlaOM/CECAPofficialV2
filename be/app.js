@@ -16,7 +16,7 @@ app
     origin:["http://localhost:4200","http://localhost:4201"],
     credentials:true}))
    .use(compression())
-   .use('/', express.static(__dirname + '/public'))
+   .use('/', express.static(__dirname + '/mkt'))
    .use(morgan('dev'))
    .use(body_parser.urlencoded({ extended: true }))
    .use(body_parser.json())
@@ -45,7 +45,7 @@ app
 //     }
 
 app.get('/', function (req, res) {
-   res.sendfile('public/index.html', { root: __dirname })
+   res.sendfile('mkt/index.html', { root: __dirname })
 });
 
 //routes 

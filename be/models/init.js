@@ -133,18 +133,21 @@ var _mkt_correlatives = [_mkt_correlative1, _mkt_correlative2];
 var _mkt_cartera_user_1 = {
   name: 'cartera1',
   user: _mkt_user_admin,
+  active: true,
   _id: new mongoose.Types.ObjectId,
   record_date: new Date()
 }
 var _mkt_cartera_user_2 = {
   name: 'cartera2',
   user: _mkt_user_ejecutivo1,
+  active: true,
   _id: new mongoose.Types.ObjectId,
   record_date: new Date()
 }
 var _mkt_cartera_user_3 = {
   name: 'cartera3',
   user: _mkt_user_ejecutivo2,
+  active: true,
   _id: new mongoose.Types.ObjectId,
   record_date: new Date()
 }
@@ -1534,23 +1537,23 @@ function clearCollections(schema) {
 
 module.exports = {
   initializer: function () {
-     saveData(_roles, db.roles);
-     saveData(_users, db.users);
-     saveData(_company, db.company);
-     saveData(_correlatives, db.correlatives);
-     saveData(_carteras, db.carteras);
-     saveData(_programs, db.programs);
-     saveData(_modulos, db.modules);
-     saveData(_facilitators, db.facilitators);
-     saveData(_cashFlowUser, db.cashFlowUsers);
-     saveData(_offices, db.offices);
-     saveData(_events, db.events);
-     saveData(_persons, db.persons);
-     saveData(_lists, db.lists);
-     saveData(_cashFlowOffices,db.cashFlowOffices);
-     saveData(_modulars, db.modulars);
-     saveData(_categoriaEgresos,db.categoriaEgresos);
-     saveData(_cashFlowPrincipal,db.cashFlowPrincipal);
+    //  saveData(_roles, db.roles);
+    //  saveData(_users, db.users);
+    //  saveData(_company, db.company);
+    //  saveData(_correlatives, db.correlatives);
+    //  saveData(_carteras, db.carteras);
+    //  saveData(_programs, db.programs);
+    //  saveData(_modulos, db.modules);
+    //  saveData(_facilitators, db.facilitators);
+    //  saveData(_cashFlowUser, db.cashFlowUsers);
+    //  saveData(_offices, db.offices);
+    //  saveData(_events, db.events);
+    //  saveData(_persons, db.persons);
+    //  saveData(_lists, db.lists);
+    //  saveData(_cashFlowOffices,db.cashFlowOffices);
+    //  saveData(_modulars, db.modulars);
+    //  saveData(_categoriaEgresos,db.categoriaEgresos);
+    //  saveData(_cashFlowPrincipal,db.cashFlowPrincipal);
 
      ///////////////////////////////////////////////////////////
     ////////////////////// BD MARKETING.///////////////////////

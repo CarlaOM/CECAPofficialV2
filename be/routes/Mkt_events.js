@@ -12,33 +12,14 @@ router
                   //    getPrograms(programs, events);
                   return res.status(200).send(events);
             });
-            // function getPrograms(programs, events) {
-            //    db.mkt_programs.find({ _id: { $in: programs } }, { name: 1 }, function (err, programs) {
-            //       if (err) return res.status(400).send(err);
-            //       console.log(programs)
-            //       events.forEach(event => {
-            //          programs.forEach(program => {
-            //             if (JSON.stringify(event.program) == JSON.stringify(program._id)) {
-            //                event.name = program.name;
-            //             }
-            //          });
-            //       });
-            //       return res.status(200).send(events);
-            //    });
-            // }
-            // db.mkt_events.find({},function(err,events){
-            //    return res.status(200).send(events);
-            // });
       })
       .post('/getPersonasInteresWithEvent', function (req, res) {
             let event = req.body;
             console.log(event);
             let lista = [];
             let nuevaLista = [];
-
             for (let p of event.interes) {
                   lista.push(p.persons);
-
             }
             db.mkt_persons.find({ _id: { $in: lista } }, function (err, persons) {
                   for (let personItem of persons) {
@@ -162,12 +143,7 @@ router
                   })
 
             })
-
-
-
-
       })
-
 
       .post('/getPersonasInteresWithEventByCartera', function (req, res) {
 
@@ -235,18 +211,13 @@ router
       })
 
       .get('/all/:id', function (req, res) {
-
             db.mkt_users.findOne({ _id: req.params.id }, function (err, user) {
                   if (err) return res.status(400).send(err);
                   db.mkt_events.find({ offices: user.offices }, function (err, events) {
                         if (err) return res.status(400).send(err);
                         return res.status(200).send(events);
-
-
                   })
-
             })
-
       })
       .get('/getAllEventsActive/:id', function (req, res) {
             db.mkt_users.findOne({ _id: req.params.id }, function (err, user) {
@@ -688,6 +659,7 @@ router
                   db.mkt_programs.findOne({ _id: event.program }, { name: 1 }, function (err, program) {
                         if (err) return res.status(400).send(err);
                         event.name = program.name;
+                        // console.log('no')
                         // return res.status(200).send(event);
                         var persons = event.inscriptions.map(i => i.person);
                         getPerson(persons, event);
@@ -743,8 +715,8 @@ router
             console.log(req.body);
             var event = new db.mkt_events(req.body);
             var d = new Date();
-            console.log(event);
             if ((event.date_start == undefined || event.date_start < d) || event.description == '' || event.total == '' || event.programs == '') return res.status(400).send();
+            console.log(event);
 
             addInterested();
             function addInterested() {
@@ -757,6 +729,7 @@ router
                         // { $match: { 'interes.state': 2 } },
                         // { $match: { 'interes.state': 5 } },
                   ], function (err, persons) {
+                        console.log(err);
                         if (err) return res.status(400).send(err);
                         var interes = [];
                         persons.forEach(p => {

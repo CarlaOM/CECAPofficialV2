@@ -44,6 +44,14 @@ export class UserService {
             // console.log(body);
             return this._http.post(this.url + 'Mkt_users/login', body, { headers: headers });
       }
+      change(id, user) {
+            let body = JSON.stringify(user);//get interface
+            var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+            //   let headers = new Headers();
+            //   headers.append('Content-Type', 'application/json');
+            // console.log(body);
+            return this._http.post(this.url + 'Mkt_users/change/' + id, body, { headers: headers });
+      }
       initApp() {
             this._http.get(this.url + 'Mkt_users/roles')
                   .map((response: Response) => response.json())

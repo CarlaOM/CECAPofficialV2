@@ -122,11 +122,11 @@ router
                 db.mkt_persons.update({
                     _id: personId,
                     'interes.programId': event.programs,
-                    date_state:new Date(),
+                    date_state: new Date(),
                 }, {
                         $set: {
                             'interes.$.state': state,
-                            'interes.$.date_state':new Date(),
+                            'interes.$.date_state': new Date(),
                         },
                         $push: {
                             'interes.$.tracing': req.body.tracing
@@ -141,28 +141,22 @@ router
 
     .post('/upload', multipartMiddleware, function (req, res) {
         // var x = new Object(req.body.body);
-
+        // console.log(JSON.parse(req.body.body));
+        var body = JSON.parse(req.body.body);
         let respuestaVacia = {};
         try {
-            var interes = [];
-            var l = (req.body.body.split('interes')[1].split('programId')).length;
-            for (let i = 1; i < l; i++) {
-                // console.log((req.body.body.split('interes')[1].split('programId'))[i].split('"')[2])
-                interes.push({
-                    programId: (req.body.body.split('interes')[1].split('programId'))[i].split('"')[2],
-                    state: 0
-                })
-            }
-            let carteraId = (req.body.body.split(','))[0].split(':')[2];
+
+            // let carteraId = (req.body.body.split(','))[0].split(':')[2];
+            // console.log(carteraId);
             var workbook = XLSX.readFile(req.files.fileKey.path);
             var sheet_name_list = workbook.SheetNames;
             var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
-            let carteraIdMongoose = carteraId.substring(1, carteraId.length - 1);
-            let newId = new mongoose.mongo.ObjectId(carteraIdMongoose);
+            // let carteraIdMongoose = carteraId.substring(1, carteraId.length - 1);
+            // let newId = new mongoose.mongo.ObjectId(carteraIdMongoose);
 
             for (let contact of xlData) {
                 let newPerson = new db.mkt_persons(req.body);
-                newPerson.carteras = carteraId;
+                newPerson.carteras = body.cartera._id;
                 newPerson.whatsapp_group = 'Importados del Celular';
                 newPerson.city = '';
                 newPerson.first_name = '';
@@ -180,8 +174,8 @@ router
                 };
                 // console.log('todo bien')
 
-                newPerson.carteras = newId;
-                newPerson.interes = interes;
+                // newPerson.carteras = newId;
+                newPerson.interes = body.interes;
                 console.log('/////////////////////////////////////////////////');
 
                 // console.log(contact);
@@ -254,11 +248,9 @@ router
         } catch (error) {
             // console.log('todo bien')
             console.log('error al guardar numero', error)
-            // return res.status(400).send(respuestaVacia);
-        }
-        finally {
-            // console.log('todo bien',2)
-            return res.status(200).send(respuestaVacia);
+            return res.status(400).send(respuestaVacia);
+        } finally{
+            return res.status(200).send();
         }
 
     })
@@ -377,7 +369,7 @@ router
                                     let inte = {};
                                     inte.persons = np;
                                     inte.state = 0;
-                                    inte.date_state=new Date();
+                                    inte.date_state = new Date();
                                     e.interes.push(inte);
                                     e.save();
                                 }
@@ -512,19 +504,19 @@ router
 
     })
 
-    .post('/addNewPerson',function(req,res){
+    .post('/addNewPerson', function (req, res) {
         // console.log(req.body);
-        let interes=req.body.persona.interes;
-        db.mkt_persons.findOne({cellphone:req.body.persona.cellphone},function(err,celExist){
+        let interes = req.body.persona.interes;
+        db.mkt_persons.findOne({ cellphone: req.body.persona.cellphone }, function (err, celExist) {
             if (err) return res.status(400).send(err);
-            if(celExist==null){
-                var person=new db.mkt_persons(req.body.persona);
+            if (celExist == null) {
+                var person = new db.mkt_persons(req.body.persona);
                 // console.log('///////////////////////////////')
                 // console.log(person);
-                person.save(function(err,pers){
-                    if (err){
+                person.save(function (err, pers) {
+                    if (err) {
                         return res.status(400).send(err)
-                    }else{
+                    } else {
                         for (let program of interes) {
                             // console.log(program);
                             db.mkt_events.find({ programs: program.programId }, function (err, eventos) {
@@ -532,8 +524,8 @@ router
                                     let inte = {};
                                     inte.persons = pers;
                                     inte.state = 0;
-                                    inte.date_state=new Date();
-                                    
+                                    inte.date_state = new Date();
+
                                     e.interes.push(inte);
                                     e.save();
                                 }
@@ -541,9 +533,9 @@ router
                         }
                         return res.status(200).send(pers);
                     }
-                        
+
                 })
-            }else{
+            } else {
                 return res.status(404).send('la persona ya existe');
             }
 

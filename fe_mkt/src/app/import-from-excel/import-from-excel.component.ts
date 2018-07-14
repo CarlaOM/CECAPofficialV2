@@ -89,10 +89,11 @@ export class ImportFromExcelComponent implements OnInit {
   }
 
   queryCartera() {
-    //console.log(Identity._id)
+    // console.log(Identity._id)
     this._peticionesService.getCarteraFromUserId(Identity._id).subscribe(
       result => {
         this.cartera = result;
+        console.log(this.cartera);
 
       },
       error => {

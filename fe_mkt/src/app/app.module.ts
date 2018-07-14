@@ -92,6 +92,7 @@ import { ReportsEjecutivosComponent } from './reports-ejecutivos/reports-ejecuti
 import { ReporteEventsComponent } from './reporte-events/reporte-events.component';
 import { ListasComponent } from './listas/listas.component';
 import { AddCarreraComponent } from './events/add-carrera/add-carrera.component';
+import { ContraComponent } from './login/contra/contra.component';
 
 @NgModule({
   declarations: [
@@ -168,6 +169,7 @@ import { AddCarreraComponent } from './events/add-carrera/add-carrera.component'
     ReporteEventsComponent,
     ListasComponent,
     AddCarreraComponent,
+    ContraComponent,
 
   ],
   imports: [

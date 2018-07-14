@@ -77,30 +77,40 @@ export class ImportWhatsNumbersComponent implements OnInit {
     this.fixText();
     // console.log(this.whatsGroupName);
     // console.log(this.whatsNumbers);
-
-
-
   }
-  getUniversidades(){
-    console.log("hnjdjdjd")
-    this._peticionesService.getUni().subscribe(res=>{
-        this.universidades= res[0].university;
-        this.carreras = res[0].carrera;
-        console.log(this.universidades);
+  getUniversidades() {
+    // console.log("hnjdjdjd")
+    this._peticionesService.getUni().subscribe(res => {
+      this.universidades = res[0].university;
+      this.carreras = res[0].carrera;
+      console.log(this.universidades);
     })
-}
-  captUnive(){
+  }
+  captUnive() {
 
   }
   fixText() {
+    // var numeros = this.whatsNumbers.split(',');
+    // // console.log(numeros);
+    // numeros.forEach(element => {
+    //   if (element.split(';')[1] != undefined) {
+    //     if (element.split(';')[1].length == 8) {
+    //       this.numbers.push(element.split(';')[1]);
+    //     }
+
+    //   }
+    // });
+    
+    // this.whatsNumbers = (<HTMLInputElement>document.getElementById('numbers')).value;
     var numeros = this.whatsNumbers.split(',');
-    // console.log(numeros);
     numeros.forEach(element => {
       if (element.split(';')[1] != undefined) {
         if (element.split(';')[1].length == 8) {
           this.numbers.push(element.split(';')[1]);
         }
-
+      } else {
+        if (element.split('+591 ')[1] != undefined)
+          this.numbers.push(element.split('+591 ')[1]);
       }
     });
     // console.log(this.numbers);
@@ -124,15 +134,17 @@ export class ImportWhatsNumbersComponent implements OnInit {
 
   saveOnDB() {
     let objWhats = {} as ObjetcWhatsappToSend;
+    console.log(this.numbers);
     objWhats.listaNumeros = this.numbers;
     objWhats.whatsapp_group = this.whatsGroupName;
     objWhats.cellphone = 0;
-    objWhats.carteras = this.cartera;
+    objWhats.carteras = this.cartera._id;
     objWhats.city = this.departamento;
     objWhats.interes = this.programasConInteres;
     objWhats.universidad = this.Universidad;
     objWhats.carrera = this.nameCarrera;
     // console.log(this.Universidad);
+    console.log(objWhats);
     this._peticionesService.saveBatchWhatsappNumbers(objWhats).subscribe(response => {
       this.router.navigate(['home/persons']);
       // console.log(response);
@@ -148,11 +160,11 @@ export class ImportWhatsNumbersComponent implements OnInit {
 
 
   queryCartera() {
-    //console.log(Identity._id)
+    // console.log(Identity._id)
     this._peticionesService.getCarteraFromUserId(Identity._id).subscribe(
       result => {
         this.cartera = result;
-
+        // console.log(this.cartera);
       },
       error => {
         var errorMessage = <any>error;

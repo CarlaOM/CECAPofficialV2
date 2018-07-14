@@ -2522,7 +2522,8 @@ var AddEjecutivoComponent = /** @class */ (function () {
         //     })
         // }
         this.model.password_hash = this.model.name;
-        var passHashed = this.md5.appendStr(this.model.password_hash).end();
+        // let passHashed= this.md5.appendStr(this.model.password_hash).end();
+        var passHashed = this.model.password_hash;
         this.model.password_hash = passHashed;
         this._peticionesService.addUser(this.model).subscribe(function (response) {
             _this.newUser = response;
@@ -8561,7 +8562,8 @@ var LoginComponent = /** @class */ (function () {
         nuevoUsuarioLogin._id = this.user._id;
         nuevoUsuarioLogin.active = this.user.active;
         nuevoUsuarioLogin.name = this.user.name;
-        nuevoUsuarioLogin.password_hash = this.md5.appendStr(this.user.password_hash).end();
+        nuevoUsuarioLogin.password_hash = this.user.password_hash;
+        // nuevoUsuarioLogin.password_hash = this.md5.appendStr(this.user.password_hash).end();
         nuevoUsuarioLogin.rol = this.user.rol;
         console.log(nuevoUsuarioLogin.password_hash);
         if ((this.user.name == 'a') || (this.user.name == 'e') || (this.user.name == 'i')) {

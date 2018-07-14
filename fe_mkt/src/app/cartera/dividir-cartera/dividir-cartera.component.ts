@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {PeticionesService } from '../../services/peticiones.service';
+import { PeticionesService } from '../../services/peticiones.service';
 import { Identity } from "../../services/global";
-import { ActivatedRoute,Router,Route } from "@angular/router";
+import { ActivatedRoute, Router, Route } from "@angular/router";
 import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 import { ArrayType } from '@angular/compiler/src/output/output_ast';
 
@@ -10,270 +10,276 @@ import { ArrayType } from '@angular/compiler/src/output/output_ast';
   selector: 'app-dividir-cartera',
   templateUrl: './dividir-cartera.component.html',
   styleUrls: ['./dividir-cartera.component.css'],
-  providers:[PeticionesService]
-  
+  providers: [PeticionesService]
+
 })
 export class DividirCarteraComponent implements OnInit {
 
   public listaEjecutivos;
-  public listado_personas=[];
+  public listado_personas = [];
   public events;
   public program;
-  public lista_eventos=[];
+  public lista_eventos = [];
   public numeroParaDividir;
-  public enablePrint=false;
-  public lista_lista_personas=[];
+  public enablePrint = false;
+  public lista_lista_personas = [];
   public listadepersonasReturned;
-  public listaEjecutivosChecked=[];
-  public listaEventosChecked=[];
-  public lista_lista_personasConIdTable=[];
-  
-  public listaGeneral=true;
+  public listaEjecutivosChecked = [];
+  public listaEventosChecked = [];
+  public lista_lista_personasConIdTable = [];
+
+  public listaGeneral = true;
   public numTotal;
 
   constructor(
 
-    private _peticionesService:PeticionesService,
-    private router:Router  
+    private _peticionesService: PeticionesService,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this._peticionesService.getAllEjecutivosOfSucursal(Identity).subscribe(response=>{
-      this.listaEjecutivos=response;
+    this._peticionesService.getAllEjecutivosOfSucursal(Identity).subscribe(response => {
+      this.listaEjecutivos = response;
+      console.log(this.listaEjecutivos);
       this.queryEvents();
     })
 
   }
 
-  onSubmit(){
+  onSubmit() {
 
-   
-    this.listaEjecutivosChecked=[];
-    this.listaEventosChecked=[];
-    this.listado_personas=[];
-    for(let unEjecutivo of this.listaEjecutivos){
-      if(unEjecutivo.checked){
+
+    this.listaEjecutivosChecked = [];
+    this.listaEventosChecked = [];
+    this.listado_personas = [];
+    for (let unEjecutivo of this.listaEjecutivos) {
+      // console.log(unEjecutivo);
+      if (unEjecutivo.userId == Identity._id) {
+        console.log(this.listaEjecutivosChecked);
         this.listaEjecutivosChecked.push(unEjecutivo);
       }
+      // if (unEjecutivo.checked) {
+      // }
     }
-    for(let unEvento of this.lista_eventos){
-      if(unEvento.checked){
+
+    for (let unEvento of this.lista_eventos) {
+      if (unEvento.checked) {
         this.listaEventosChecked.push(unEvento);
       }
     }
 
-    let objtsend={} as ObjToSend;
-    objtsend.lista_ejecutivos=this.listaEjecutivosChecked;
-    objtsend.lista_eventos=this.listaEventosChecked;
-    this._peticionesService.getPersonsShareCarteraEvent(objtsend).subscribe(response=>{
-      this.listadepersonasReturned=response
-      this.listado_personas=this.listadepersonasReturned;
-      this.numTotal=this.listado_personas.length;
+    let objtsend = {} as ObjToSend;
+    objtsend.lista_ejecutivos = this.listaEjecutivosChecked;
+    objtsend.lista_eventos = this.listaEventosChecked;
+    this._peticionesService.getPersonsShareCarteraEvent(objtsend).subscribe(response => {
+      this.listadepersonasReturned = response
+      this.listado_personas = this.listadepersonasReturned;
+      this.numTotal = this.listado_personas.length;
 
 
 
-      this.enablePrint=true;
-     
-       
+      this.enablePrint = true;
 
-        
+
+
+
       // console.log(this.lista_lista_personas)
     })
 
-   
+
 
 
 
   }
-  dividir(){
+  dividir() {
 
 
-    if(this.numeroParaDividir>this.numTotal){
-      window.alert("El numero debe ser menor o igual a "+ this.numTotal)
+    if (this.numeroParaDividir > this.numTotal) {
+      window.alert("El numero debe ser menor o igual a " + this.numTotal)
 
-    }else{
-      
-      this.lista_lista_personas=[];
-      this.listaGeneral=false;
-      this.enablePrint=true;
-      
-      let dividido=Math.floor(this.lista_lista_personas.length/this.numeroParaDividir)
-      let numDeListas=this.numeroParaDividir;
+    } else {
 
-      for(let i=0 ;i<numDeListas;i++){
-        let lista=[];
+      this.lista_lista_personas = [];
+      this.listaGeneral = false;
+      this.enablePrint = true;
+
+      let dividido = Math.floor(this.lista_lista_personas.length / this.numeroParaDividir)
+      let numDeListas = this.numeroParaDividir;
+
+      for (let i = 0; i < numDeListas; i++) {
+        let lista = [];
         this.lista_lista_personas.push(lista);
       }
       // console.log(this.lista_lista_personas);
-      let res=llenado(this.listado_personas,this.lista_lista_personas);
+      let res = llenado(this.listado_personas, this.lista_lista_personas);
       // console.log(this.lista_lista_personas);
-      let count=1;
-      for(let lista of this.lista_lista_personas){
-          let listObject={}as ListaConId;
-          listObject.lista=lista;
-          listObject.id=count;
-          count++;
-          this.lista_lista_personasConIdTable.push(listObject);
+      let count = 1;
+      for (let lista of this.lista_lista_personas) {
+        let listObject = {} as ListaConId;
+        listObject.lista = lista;
+        listObject.id = count;
+        count++;
+        this.lista_lista_personasConIdTable.push(listObject);
       }
 
 
 
     }
-    
+
 
 
   }
-  deshacerDividir(){
-    this.listaGeneral=true;
+  deshacerDividir() {
+    this.listaGeneral = true;
   }
 
- 
-  
-  cancel(){
 
-    for(let a of this.listaEjecutivos){
-      a.checked=false;
-    }
-    this.listaEjecutivosChecked=[];
-    for(let b of this.lista_eventos){
-      b.checked=false;
-    }
-    this.listaEventosChecked=[];
-    this.listado_personas=[];
-    this.listadepersonasReturned=[];
-    this.lista_lista_personas=[];
-    this.listaGeneral=true;
-    this.numeroParaDividir=undefined;
-    this.enablePrint=false;
 
-    
+  cancel() {
+
+    for (let a of this.listaEjecutivos) {
+      a.checked = false;
+    }
+    this.listaEjecutivosChecked = [];
+    for (let b of this.lista_eventos) {
+      b.checked = false;
+    }
+    this.listaEventosChecked = [];
+    this.listado_personas = [];
+    this.listadepersonasReturned = [];
+    this.lista_lista_personas = [];
+    this.listaGeneral = true;
+    this.numeroParaDividir = undefined;
+    this.enablePrint = false;
+
+
   }
   queryEvents() {
     this._peticionesService.getAllEvents(Identity._id).subscribe(
-       result => {
-          //  console.log('hola')
-          this.events = result;
+      result => {
+        //  console.log('hola')
+        this.events = result;
         //  console.log(this.events)
-          this.events.map(event => {
-             var sum = 0;
-             event.inscriptions.forEach(e => {
-                if (e.state == 1) sum++;
-             });
-             event.cupos = event.total - sum;
+        this.events.map(event => {
+          var sum = 0;
+          event.inscriptions.forEach(e => {
+            if (e.state == 1) sum++;
+          });
+          event.cupos = event.total - sum;
+        });
+
+
+        for (let e of this.events) {
+          let eventoItem = {} as EventoItem;
+
+          eventoItem.name = e.name;
+          eventoItem.date_start = e.date_start;
+          eventoItem.cupos = e.total;
+          eventoItem._id = e._id;
+          eventoItem.programaId = e.programs;
+          eventoItem.checked = false;
+          eventoItem.listaInteres = e.interes;
+          this._peticionesService.getProgram(e.programs).subscribe(result => {
+            this.program = result;
+            eventoItem.programa = this.program.name;
+            this.lista_eventos.push(eventoItem);
+
           });
 
-
-          for(let e of this.events){
-              let eventoItem={}as EventoItem;
-
-              eventoItem.name=e.name;
-              eventoItem.date_start=e.date_start;
-              eventoItem.cupos=e.total;
-              eventoItem._id=e._id;
-              eventoItem.programaId=e.programs;
-              eventoItem.checked=false;
-              eventoItem.listaInteres=e.interes;
-              this._peticionesService.getProgram(e.programs).subscribe(result=>{
-                  this.program=result;
-                  eventoItem.programa=this.program.name;
-                  this.lista_eventos.push(eventoItem);
-
-              });
-
-          }
+        }
 
 
-       },
-       error => {
-          var errorMessage = <any>error;
-          console.log(errorMessage);
-       }
+      },
+      error => {
+        var errorMessage = <any>error;
+        console.log(errorMessage);
+      }
     );
- }
-//  imprimir(listaToExport){
+  }
+  //  imprimir(listaToExport){
 
-//   console.log(listaToExport);
-//   let lista=[];
-//   for(let i of listaToExport){
-//     let newPerson={}as PersonToExport;
-//     newPerson.first_name=i.first_name;
-//     newPerson.last_name=i.last_name;    
-//     newPerson.celular=i.cellphone;
-//     newPerson.email=i.email;
-//     newPerson.telefono=i.phone;
-//     newPerson.city=i.city;
-//     newPerson.whatsapp_group=i.whatsapp_group
-//     lista.push(newPerson);
-//   }
+  //   console.log(listaToExport);
+  //   let lista=[];
+  //   for(let i of listaToExport){
+  //     let newPerson={}as PersonToExport;
+  //     newPerson.first_name=i.first_name;
+  //     newPerson.last_name=i.last_name;    
+  //     newPerson.celular=i.cellphone;
+  //     newPerson.email=i.email;
+  //     newPerson.telefono=i.phone;
+  //     newPerson.city=i.city;
+  //     newPerson.whatsapp_group=i.whatsapp_group
+  //     lista.push(newPerson);
+  //   }
 
-//   let options = {
-//     fieldSeparator: ',',
-//     quoteStrings: '"',
-//     decimalseparator: '.',
-//     showLabels: false,
-//     showTitle: false,
-//     useBom: true,
-//     // noDownload: true,
-//     // headers: ["NOMBRES", "APELLIDOS", "CIUDAD", "CELULAR", "Móvil"]
-//     headers: [
-//       // (<HTMLInputElement>document.getElementById(elementId)).value,
-//       (<HTMLInputElement>document.getElementById('PrimerNombre')).value,
-//       (<HTMLInputElement>document.getElementById('Apellido')).value,
-//       (<HTMLInputElement>document.getElementById('Celular')).value,
-//       (<HTMLInputElement>document.getElementById('email')).value,
-//       (<HTMLInputElement>document.getElementById('Telefono')).value,
-//       (<HTMLInputElement>document.getElementById('Ciudad')).value,
-//       (<HTMLInputElement>document.getElementById('whatsapp_group')).value,
-      
-//     ]
-//   };
+  //   let options = {
+  //     fieldSeparator: ',',
+  //     quoteStrings: '"',
+  //     decimalseparator: '.',
+  //     showLabels: false,
+  //     showTitle: false,
+  //     useBom: true,
+  //     // noDownload: true,
+  //     // headers: ["NOMBRES", "APELLIDOS", "CIUDAD", "CELULAR", "Móvil"]
+  //     headers: [
+  //       // (<HTMLInputElement>document.getElementById(elementId)).value,
+  //       (<HTMLInputElement>document.getElementById('PrimerNombre')).value,
+  //       (<HTMLInputElement>document.getElementById('Apellido')).value,
+  //       (<HTMLInputElement>document.getElementById('Celular')).value,
+  //       (<HTMLInputElement>document.getElementById('email')).value,
+  //       (<HTMLInputElement>document.getElementById('Telefono')).value,
+  //       (<HTMLInputElement>document.getElementById('Ciudad')).value,
+  //       (<HTMLInputElement>document.getElementById('whatsapp_group')).value,
 
-//    let toExportCarteraShared=new Angular5Csv(lista,"carteraToExport",options)
+  //     ]
+  //   };
 
-//  }
+  //    let toExportCarteraShared=new Angular5Csv(lista,"carteraToExport",options)
 
-//  imprimir2Opcion(){
-//   // tableToExcel("Contacts","excel");
-  
-//  }
- imprimir3Opcion(tableID){
-   exportTableToExcel(tableID,"Cartera");
- }
- imprimir4Opcion(tableId){
+  //  }
 
-  exportTableToExcel(tableId,"Cartera");
- }
+  //  imprimir2Opcion(){
+  //   // tableToExcel("Contacts","excel");
+
+  //  }
+  imprimir3Opcion(tableID) {
+    exportTableToExcel(tableID, "Cartera");
+  }
+  imprimir4Opcion(tableId) {
+
+    exportTableToExcel(tableId, "Cartera");
+  }
 
 }
 
-function exportTableToExcel(tableID, filename = ''){
+function exportTableToExcel(tableID, filename = '') {
   var downloadLink;
   var dataType = 'application/vnd.ms-excel';
   var tableSelect = document.getElementById(tableID);
   var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
-  
+
   // Specify file name
-  filename = filename?filename+'.xls':'excel_data.xls';
-  
+  filename = filename ? filename + '.xls' : 'excel_data.xls';
+
   // Create download link element
   downloadLink = document.createElement("a");
-  
+
   document.body.appendChild(downloadLink);
-  
-  if(navigator.msSaveOrOpenBlob){
-      var blob = new Blob(['\ufeff', tableHTML], {
-          type: dataType
-      });
-      navigator.msSaveOrOpenBlob( blob, filename);
-  }else{
-      // Create a link to the file
-      downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-  
-      // Setting the file name
-      downloadLink.download = filename;
-      
-      //triggering the function
-      downloadLink.click();
+
+  if (navigator.msSaveOrOpenBlob) {
+    var blob = new Blob(['\ufeff', tableHTML], {
+      type: dataType
+    });
+    navigator.msSaveOrOpenBlob(blob, filename);
+  } else {
+    // Create a link to the file
+    downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+    // Setting the file name
+    downloadLink.download = filename;
+
+    //triggering the function
+    downloadLink.click();
   }
 }
 
@@ -289,58 +295,58 @@ function exportTableToExcel(tableID, filename = ''){
 // }
 
 
-function llenado(listaP,listaParaLlenar){
+function llenado(listaP, listaParaLlenar) {
 
-  if(listaP.length==0){
+  if (listaP.length == 0) {
     return listaParaLlenar;
   }
-  else{
-    for(let i of listaParaLlenar){
-      if(listaP.length==0){
+  else {
+    for (let i of listaParaLlenar) {
+      if (listaP.length == 0) {
         return listaParaLlenar
-      }else{
+      } else {
         i.push(listaP.pop());
 
       }
     }
-    llenado(listaP,listaParaLlenar);
+    llenado(listaP, listaParaLlenar);
   }
   // console.log(listaParaLlenar);
 }
 
 
-export interface EventoItem{
-  _id:string,
-  name:string,
-  date_start:Date,
-  cupos:number,
-  programa:string,
-  programaId:string,
-  checked:boolean,
-  listaInteres:{},
+export interface EventoItem {
+  _id: string,
+  name: string,
+  date_start: Date,
+  cupos: number,
+  programa: string,
+  programaId: string,
+  checked: boolean,
+  listaInteres: {},
 }
 
 
-export interface ObjToSend{
+export interface ObjToSend {
 
-  lista_ejecutivos:{},
-  lista_eventos:{}
+  lista_ejecutivos: {},
+  lista_eventos: {}
 }
-export interface PersonToExport{
+export interface PersonToExport {
 
-  first_name:string,
-  last_name:string,
-  celular:number,
-  telefono:number,
-  email:string,  
-  whatsapp_group:string,
-  city:string,
+  first_name: string,
+  last_name: string,
+  celular: number,
+  telefono: number,
+  email: string,
+  whatsapp_group: string,
+  city: string,
 
 
 
 }
-export interface ListaConId{
-  lista:ArrayType,
-  id:number,
+export interface ListaConId {
+  lista: ArrayType,
+  id: number,
 
 }
