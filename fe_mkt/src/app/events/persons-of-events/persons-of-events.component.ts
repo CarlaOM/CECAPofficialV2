@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Pipe, PipeTransform } from '@angular/core';
 import { Identity } from '../../services/global';
 
-import { Angular5Csv } from 'angular5-csv/Angular5-csv';
+//import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 
 
 @Component({
@@ -145,7 +145,7 @@ export class PersonsOfEventsComponent implements OnInit {
       ]
     };
     // console.log(this.listaToExport);
-    this.toExport = new Angular5Csv(this.listaToExport, "Nuevo Reporte", options);
+    //this.toExport = new Angular5Csv(this.listaToExport, "Nuevo Reporte", options);
   }
 
 

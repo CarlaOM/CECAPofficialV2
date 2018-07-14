@@ -98,11 +98,15 @@ if (false){
 //    init.clearCollections();
    init.initializer();
 }
-db.connection();
+try{
+    db.connection();
+} catch (err){
+    console.log("test")
+}
 
 //start app
-app.listen(3000, function () {
-   console.log('Example app listening at http://localhost:3000');
+app.listen(80, function () {
+   console.log('Example app listening at http://localhost');
 });
 
 // If the Node process ends, close the Mongoose connection

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PeticionesService } from '../../services/peticiones.service';
 import { Identity } from "../../services/global";
 import { ActivatedRoute, Router, Route } from "@angular/router";
-import { Angular5Csv } from 'angular5-csv/Angular5-csv';
+//import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 import { ArrayType } from '@angular/compiler/src/output/output_ast';
 
 
