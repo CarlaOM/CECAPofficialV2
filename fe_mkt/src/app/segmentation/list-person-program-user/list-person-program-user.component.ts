@@ -25,6 +25,12 @@ export class ListPersonProgramUserComponent implements OnInit {
   public personasInteresadasParaLaConsulta={} as UserIdProgramId;
   public personasConfirmadasParaLaConsulta={} as UserIdProgramId;
   public personasProximoeventoParaLaConsulta={} as UserIdProgramId;
+  ////////////////////////////////////////////////////
+  public page;
+  public total;
+  public totalPag;
+  public mostrar = [];
+  ////////////////////////////////////////////////////
 
   constructor(
     private router: Router,
@@ -76,6 +82,50 @@ export class ListPersonProgramUserComponent implements OnInit {
     this.findPersonOfProgramByUser();    
 
   }
+
+  dis(){
+    this.page = this.page-1;
+    var inicio = (8*(this.page-1));
+    var final = (8*(this.page-1))+8;
+    this.mostrar = [];
+    for(var a = inicio  ; a < final ; a++ ){
+      this.mostrar.push(this.listado_personas[a]);
+  }
+  }
+  aum(){
+    this.page = this.page+1;
+    // console.log(this.page)
+    var inicio = (8*(this.page-1));
+    // console.log(inicio)
+    var final = (8*(this.page-1))+8;
+    if(final > this.total){
+      final = this.total;
+    }
+    // console.log(final)
+    this.mostrar = [];
+    for(var a = inicio  ; a < final ; a++ ){
+        this.mostrar.push(this.listado_personas[a]);
+    }
+  }
+  mostrarPers(){
+    this.page = 1;
+    this.total = this.listado_personas.length;
+    if(this.total == 0){
+      this.totalPag = 1;
+    } else{
+    this.totalPag = Math.ceil(this.total/8);
+    }
+    this.mostrar = []
+    // console.log(this.totalPag)
+    if(this.totalPag > 1){
+      for(var a = 0 ; a < 8 ; a++){
+      this.mostrar.push(this.listado_personas[a]) ;}
+    } else{
+      this.mostrar = this.listado_personas;
+    }
+    
+  }
+
   findPersonOfProgramByUser(){
 
     this._peticionesService.getPersonsOfProgramByUser(this.personasConfirmadasParaLaConsulta).subscribe(
@@ -99,6 +149,7 @@ export class ListPersonProgramUserComponent implements OnInit {
                 for(let personasProximoEvento of this.listado_personasProximoEvento){
                   this.listado_personas.push(personasProximoEvento);
                 }
+                this.mostrarPers();
               }
             )
            }

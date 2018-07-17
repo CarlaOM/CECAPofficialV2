@@ -75,7 +75,7 @@
                                    </thead>
                                    <tbody>
                                       <!--<tr *ngFor="let i of inscriptions | buscarPersona: busqueda">-->
-                                      <tr *ngFor="let person of persons">
+                                      <tr *ngFor="let person of mostrar">
                                          <td>{{ person.first_name }} {{person.last_name}}</td>
                                          <td>{{ person.ci }}</td>
                                          <td>{{ person.cellphone }}</td>
@@ -83,6 +83,12 @@
                                          <td>{{ person.ocupation }}</td>
                                       </tr>
                                    </tbody>
+                                   <tfoot>
+                                    <a>Pagina # {{page}}</a>
+                                    <br>
+                                    <button (click)="dis()" [disabled]="page == 1">Anterior</button>
+                                    <button (click)="aum()" [disabled]="page == totalPag">Siguiente</button>
+                                    </tfoot>  
                                 </table>
                                 
                              </section>
