@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonaService } from '../services/persona.service';
-import { PeticionesService} from '../services/peticiones.service';
+import { PeticionesService } from '../services/peticiones.service';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Pipe, PipeTransform } from '@angular/core';
 import { all } from 'q';
@@ -10,7 +10,7 @@ import { all } from 'q';
   selector: 'app-segmentation',
   templateUrl: './segmentation.component.html',
   styleUrls: ['./segmentation.component.css'],
-  providers:[PersonaService,PeticionesService]
+  providers: [PersonaService, PeticionesService]
 
 })
 export class SegmentationComponent implements OnInit {
@@ -27,12 +27,7 @@ export class SegmentationComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
-    private _personaService: PersonaService,
     private _peticionesService: PeticionesService
-   
-
-
   ) { }
 
   ngOnInit() {
@@ -43,7 +38,7 @@ export class SegmentationComponent implements OnInit {
         //  console.log(result)
       },
       error => {
-         console.log(<any>error);
+        console.log(<any>error);
       });
   }
   
@@ -51,10 +46,9 @@ export class SegmentationComponent implements OnInit {
   //  var idInteresados=_id+'-'+'0';
   // this.router.navigate(['home/segmentacion/list/', idInteresados]);
 
-  this.router.navigate(['home/segmentacion/list/',_id]);
- }
+    this.router.navigate(['home/segmentacion/list/', _id]);
+  }
 }
-
 ////////////
 //  0 interesados
 //  1 en duda

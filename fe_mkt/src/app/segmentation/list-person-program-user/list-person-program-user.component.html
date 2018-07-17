@@ -1,65 +1,78 @@
 <div class="content-wrapper">
   <div class="content">
-
     <div class="box box-primary">
-
-        <section class="content">
-            <div>     
-                <ol class="breadcrumb">
-                    <!-- <li><a class="btn btn-primary" [routerLink]="['/home/persons/add']"><i class="fa fa-book"></i>Registrar Persona</a></li>
+      <section class="content">
+        <div>
+          <ol class="breadcrumb">
+            <!-- <li><a class="btn btn-primary" [routerLink]="['/home/persons/add']"><i class="fa fa-book"></i>Registrar Persona</a></li>
                     <li><app-control-asistance></app-control-asistance></li> -->
-                </ol>
-            </div> 
-           
-           <table class="table">
-                 <th>Filtros Personas</th> 
-           </table>
-          
-             <div>
-            <!-- <div class="filter-wrap">
-              <div class="col-lg-1">Buscar:</div>
-              <input [(ngModel)]="searchText" placeholder="Nombre Persona" class="filter-input">
-              <span class="filter-clear" *ngIf="searchText.length>0" (click)="clearFilter()">X</span>
-            </div> -->
-      
-      
-          </div>
-           <table class="table table-hover" >
-              <thead >
-                 <tr>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Telefono</th>
-                    <th>Whatsapp Group</th>
-                    <th>Ciudad</th>
-                    <th>Ocupacion</th>
-                    <th colspan="2">Opciones</th>
-                 </tr>
-              </thead>
-              <tbody> 
-                 <tr *ngFor="let i of mostrar">
-                    <td>{{ i.first_name }}</td>
-                    <th>{{i.last_name}}</th>
-                    <td>{{ i.cellphone }}</td>
-                    <td>{{i.whatsapp_group}}</td>
-                    <td>{{i.city}}</td>
-                    <td>{{ i.ocupation }}</td>
-                   
-                    <!-- <td>
-                       <a class="btn btn-primary" (click)="edit(i._id)">EDITAR</a>
-                         </td> -->
-                 </tr>
-              </tbody>
-              <tfoot>
-                <a>Pagina # {{page}}</a>
-                <br>
-                <button (click)="dis()" [disabled]="page == 1">Anterior</button>
-                <button (click)="aum()" [disabled]="page == totalPag">Siguiente</button>
-                </tfoot>
-           </table>
-           
-        </section>
+          </ol>
+        </div>
+        <table class="table">
+          <th>Filtros Personas</th>
+        </table>
+        <div>
+        </div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Telefono</th>
+              <th>Whatsapp Group</th>
+              <th>Ciudad</th>
+              <th>Ocupacion</th>
+              <th colspan="2">Opciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let i of mostrar">
+              <td>{{ i.first_name }}</td>
+              <th>{{i.last_name}}</th>
+              <td>{{ i.cellphone }}</td>
+              <td>{{i.whatsapp_group}}</td>
+              <td>{{i.city}}</td>
+              <td>{{ i.ocupation }}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <a>Pagina # {{page}}</a>
+            <br>
+            <button (click)="dis()" [disabled]="page == 1">Anterior</button>
+            <button (click)="aum()" [disabled]="page == totalPag">Siguiente</button>
+            </tfoot>
+        </table>
+        <table id="Contacts" style="display: none;" summary="Code page support in different versions of MS Windows." rules="groups"
+          frame="hsides" border="2">
+          <thead valign="top">
+            <tr>
+              <th>{{group}}</th>
+              <th>{{first}}</th>
+              <th>{{second}}</th>
+              <th>{{last}}</th>
+              <th>{{cell}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let contact of contacts">
+              <td>{{contact.group}}</td>
+              <td>{{contact.first}}</td>
+              <td>{{contact.second}}</td>
+              <td>{{contact.last}}</td>
+              <td>{{contact.cell}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div align="center">
+          <input type="text" id="grupo" placeholder="Grupo">
+          <input type="text" id="PrimerNombre" placeholder="Primer Nombre">
+          <input type="text" id="SegundoNombre" placeholder="Segundo Nombre">
+          <input type="text" id="Apellido" placeholder="Apellidos">
+          <input type="text" id="Celular" placeholder="Celular">
+          <button class="btn btn-primary" (click)="exportarExcel()">Exportar Excel</button>
+        </div>
+      </section>
     </div>
   </div>
- 
+
 </div>
