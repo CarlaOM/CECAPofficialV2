@@ -7,12 +7,10 @@ router
     .get('/', function (req, res) {
         db.correlatives.find({}, function (err, correlative) {
             if (err) return res.status(400).send(err);
-
             return res.status(200).send(correlative);
         });
     })
     .post('/add', function (req, res) {
-        console.log(req.body);
         var correlative = new db.correlatives(req.body);
         correlative.save(function (err, correlative) {
             if (err) { return res.status(400).send(err); }
@@ -20,13 +18,8 @@ router
         });
     })
     .post('/fechas', function (req, res) {
-
-        // let fechaIni = new Date(2018, 3, 24, 10, 33, 30, 0);
-        // console.log(req.body.fechaIni)
-        // console.log(req.body.fechaFin)
         let fechaIni = new Date(req.body.fechaIni);
         let fechaFin = new Date(req.body.fechaFin);
-        console.log(fechaIni, fechaFin)
         // db.events.find({ date_start: { $gt: d } }, { name: 1, description: 1, date_start: 1, modulars: 1, inscriptions: 1, total: 1, programs: 1 }, function (err, events) {
         db.correlatives.find({ year: { $gt: fechaIni, $lt: fechaFin } }, function (err, correlativo) {
             if (err) { return res.status(400).send(err); }

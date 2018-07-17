@@ -15,7 +15,6 @@ router
       });
     }) 
    .get('/:id', function (req, res) {
-      console.log(req.params);
       db.mkt_offices.findOne({ _id: req.params.id }, function (err, office) {
          if (err) return res.status(400).send(err);
          if (office == null) return res.status(404).send();
@@ -23,7 +22,6 @@ router
       });
    })
    .post('/add', function(req, res){
-      console.log(req.body);
       var office = new db.mkt_offices(req.body);
       office.save(function (err, office) {
         if (err){return res.status(400).send(err);} 

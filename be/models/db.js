@@ -9,7 +9,7 @@ var ObjectId = Schema.Types.ObjectId;
 process.env.TZ = 'America/La_Paz';
 
 module.exports = {
-      
+
       //////////////////////////////////////////////////////////////////////
       //////////////////////////////////////////////////////////////////////
       /////////////////// BD FINANZAS ///////////////////////////////////////
@@ -37,7 +37,7 @@ module.exports = {
             rol: ObjectId,
             offices: ObjectId,
             amount: Number,
-            debt:Number,
+            debt: Number,
 
             _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
             record_date: { type: Date, default: function () { return new Date() } },
@@ -58,7 +58,7 @@ module.exports = {
                   date_detail: Date,
                   title: String,
                   events: ObjectId,
-                  modulars: ObjectId 
+                  modulars: ObjectId
             }],
             user: ObjectId,
             active: Boolean,
@@ -104,22 +104,22 @@ module.exports = {
             date_end: Date,
             amount: Number,
             amount_delivered: Number,
-            
+
             details: [{
-                  officeName:String,
+                  officeName: String,
                   cashFlowOffices: ObjectId,
                   dateCloseCash: Date,
-                  amount:Number,
-                  description:String,
-                  input:Boolean,
-                  title:String,
+                  amount: Number,
+                  description: String,
+                  input: Boolean,
+                  title: String,
 
             }],
             offices: ObjectId,
             users: ObjectId,
             active: Boolean,
             state: Number,
-            debt:Number,
+            debt: Number,
 
 
             _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
@@ -239,18 +239,18 @@ module.exports = {
                   debt: Number,  // deuda
                   print_diploma: Boolean
             }],
-            workshops:[
+            workshops: [
                   {
-                  events:ObjectId,
-                  modulars:ObjectId,
-                  modules:ObjectId,
-                  amount:Number,
-                  receipt:String,
-                  assist:Boolean,
-                  certificate:Boolean,
-            
-                  nameEvent: String, // nombre del evento
-                  nameModule: String, // nombre del modulo
+                        events: ObjectId,
+                        modulars: ObjectId,
+                        modules: ObjectId,
+                        amount: Number,
+                        receipt: String,
+                        assist: Boolean,
+                        certificate: Boolean,
+
+                        nameEvent: String, // nombre del evento
+                        nameModule: String, // nombre del modulo
                   }
             ],
             // user: ObjectId,
@@ -298,13 +298,13 @@ module.exports = {
                   cellphone: Number,
                   persons: ObjectId,
                   users: ObjectId,
-                  nivelacion:Boolean
+                  nivelacion: Boolean
             }],
             total: Number,
             programs: ObjectId,
             offices: ObjectId, //sucursal
             date_end: Date,
-            active:Boolean,
+            active: Boolean,
 
             _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
             record_date: { type: Date, default: function () { return new Date() } },
@@ -457,7 +457,7 @@ module.exports = {
       ////////////////////////////////////////////////////////////////////////////
 
 
-    
+
       mkt_carteras: mongoose.model('mkt_carteras', new Schema({
             name: String,
             user: ObjectId,
@@ -542,7 +542,7 @@ module.exports = {
                         programName: String,
                         checked: Boolean,
                         state: Number,
-                        date_state:Date,
+                        date_state: Date,
                         ////////////
                         //  0 interesados
                         //  1 en duda     
@@ -588,9 +588,10 @@ module.exports = {
       })),
       ////////////////////////////////////////////////////////////////////////////
       mkt_listExtra: mongoose.model('mkt_listExtra', new Schema({
-            university: [{nombre:String
-                        }],
-            carrera: [{nombre:String}],
+            university: [{
+                  nombre: String
+            }],
+            carrera: [{ nombre: String }],
             // job: String,
 
 
@@ -635,7 +636,7 @@ module.exports = {
                         persons: ObjectId,
                         details: String,
                         state: Number,
-                        date_state:Date,
+                        date_state: { type: Date, default: function () { return new Date() } },
                         ////////////
                         //  0 interesados
                         //  1 en duda
@@ -661,8 +662,8 @@ module.exports = {
 
             ],
             offices: ObjectId,
-            date_end:Date,
-            active:Boolean,
+            date_end: Date,
+            active: Boolean,
             //modulo: [ObjectId],
 
             _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
@@ -750,9 +751,9 @@ module.exports = {
             record_date: { type: Date, default: function () { return new Date() } }
       })),
 
-     ///////////////////// END BD MARKETING////////////////////////////      
+      ///////////////////// END BD MARKETING////////////////////////////      
       /////////////////////////////////////////////////////////////////////
-     ////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////
 
 
 

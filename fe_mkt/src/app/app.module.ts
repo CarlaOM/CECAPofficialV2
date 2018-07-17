@@ -4,7 +4,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule }   from '@angular/forms';
 import{ routing, appRoutingProviders } from './app.routing';
 import { AsyncLocalStorageModule } from 'angular-async-local-storage';
-import { NgxPaginationModule } from 'ngx-pagination';
+//import { NgxPaginationModule } from 'ngx-pagination';
 
 //modules
 //import { AlertsModule } from 'angular-alert-module';
@@ -92,6 +92,7 @@ import { ReportsEjecutivosComponent } from './reports-ejecutivos/reports-ejecuti
 import { ReporteEventsComponent } from './reporte-events/reporte-events.component';
 import { ListasComponent } from './listas/listas.component';
 import { AddCarreraComponent } from './events/add-carrera/add-carrera.component';
+import { ContraComponent } from './login/contra/contra.component';
 
 @NgModule({
   declarations: [
@@ -168,6 +169,7 @@ import { AddCarreraComponent } from './events/add-carrera/add-carrera.component'
     ReporteEventsComponent,
     ListasComponent,
     AddCarreraComponent,
+    ContraComponent,
 
   ],
   imports: [
@@ -178,7 +180,7 @@ import { AddCarreraComponent } from './events/add-carrera/add-carrera.component'
     FormsModule,
     HttpModule,
     // ChartsModule,
-    NgxPaginationModule, 
+    //NgxPaginationModule, 
     // Specify this module as an import
     //AlertsModule.forRoot()
     

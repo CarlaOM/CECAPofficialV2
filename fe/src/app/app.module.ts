@@ -102,7 +102,7 @@ import { SendToPrincipalComponent } from './pending-cash/send-to-principal/send-
 import { PrincipalCashComponent } from './principal-cash/principal-cash.component';
 import { PrintCertificateComponent } from './event/profile-person/print-certificate/print-certificate.component';
 import { ReporteEventosComponent } from './reporte-eventos/reporte-eventos.component';
-// import { RepEventComponent } from './reporte-eventos/rep-event/rep-event.component'; 
+import { RepEventComponent } from './reporte-eventos/rep-event/rep-event.component'; 
 import { InscriptionWorkshopComponent } from './event/inscription-workshop/inscription-workshop.component';
 import { NivelacionComponent } from './event/nivelacion/nivelacion.component';
 import { WorkshopComponent } from './workshop/workshop.component';
@@ -207,7 +207,7 @@ import { BackupComponent } from './home/backup/backup.component';
     PrincipalCashComponent,
     PrintCertificateComponent,
     ReporteEventosComponent,
-    // RepEventComponent,
+    RepEventComponent,
     InscriptionWorkshopComponent,
     NivelacionComponent,
     WorkshopComponent,

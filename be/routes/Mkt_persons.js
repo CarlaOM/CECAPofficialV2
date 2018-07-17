@@ -1,6 +1,4 @@
 var express = require('express');
-var mongoose = require('mongoose');
-
 var db = require('../models/db');
 var router = express.Router();
 
@@ -45,23 +43,7 @@ router
 
     })
 
-    // .get('/personsOfProgramByUserId/:userId',function(req,res){
-
-
-    //     var ver=req.params.body.body;
-    //     console.log(ver);
-    //     // var userId=req.params.userId;
-    //     // db.mkt_carteras.findOne({user:userId},function(err,cartera){
-    //     //     if (err) return res.status(400).send(err);
-    //     //     db.mkt_persons.find({carteras})
-
-
-    //     // })
-    // })
     .post('/personsOfProgramByUserId', function (req, res) {
-
-
-        console.log(req.body);
         let userId = req.body.userId;
         let programId = req.body.programId;
         let interesState = req.body.state;
@@ -74,7 +56,6 @@ router
                     let interes = p.interes;
                     for (let int of interes) {
                         if (int.programId == programId && int.state == interesState) {
-
                             personasIntersadasPorPrograma.push(p);
                         }
                     }
@@ -87,7 +68,6 @@ router
 
     })
     .post('/getInteres', function (req, res) {
-
         let personId = req.body.personId;
         let eventId = req.body.eventId;
         db.mkt_events.findOne({ _id: eventId }, function (err, event) {
@@ -97,12 +77,8 @@ router
                 }
             }
         })
-
-
     })
     .post('/setInteres', function (req, res) {
-
-        // console.log(req.body);
         let details = req.body.details;
         let state = req.body.state;
         let personId = req.body.personId;
@@ -117,16 +93,15 @@ router
                 'interes.$.tracing': req.body.tracing
             }
         }).exec(function (err, event) {
-            // console.log(programId);
             db.mkt_events.findOne({ _id: eventId }, { programs: 1 }, function (err, event) {
                 db.mkt_persons.update({
                     _id: personId,
                     'interes.programId': event.programs,
-                    date_state:new Date(),
+                    date_state: new Date(),
                 }, {
                         $set: {
                             'interes.$.state': state,
-                            'interes.$.date_state':new Date(),
+                            'interes.$.date_state': new Date(),
                         },
                         $push: {
                             'interes.$.tracing': req.body.tracing
@@ -140,29 +115,15 @@ router
     })
 
     .post('/upload', multipartMiddleware, function (req, res) {
-        // var x = new Object(req.body.body);
-
+        var body = JSON.parse(req.body.body);
         let respuestaVacia = {};
         try {
-            var interes = [];
-            var l = (req.body.body.split('interes')[1].split('programId')).length;
-            for (let i = 1; i < l; i++) {
-                // console.log((req.body.body.split('interes')[1].split('programId'))[i].split('"')[2])
-                interes.push({
-                    programId: (req.body.body.split('interes')[1].split('programId'))[i].split('"')[2],
-                    state: 0
-                })
-            }
-            let carteraId = (req.body.body.split(','))[0].split(':')[2];
             var workbook = XLSX.readFile(req.files.fileKey.path);
             var sheet_name_list = workbook.SheetNames;
             var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
-            let carteraIdMongoose = carteraId.substring(1, carteraId.length - 1);
-            let newId = new mongoose.mongo.ObjectId(carteraIdMongoose);
-
             for (let contact of xlData) {
                 let newPerson = new db.mkt_persons(req.body);
-                newPerson.carteras = carteraId;
+                newPerson.carteras = body.cartera._id;
                 newPerson.whatsapp_group = 'Importados del Celular';
                 newPerson.city = '';
                 newPerson.first_name = '';
@@ -178,37 +139,20 @@ router
                     empresa: '',
                     cargao: ''
                 };
-                // console.log('todo bien')
-
-                newPerson.carteras = newId;
-                newPerson.interes = interes;
-                console.log('/////////////////////////////////////////////////');
-
-                // console.log(contact);
-                // console.log(contact['Móvil']);
-                // console.log(contact.Nombre);
-                // console.log(contact.Apellidos);
-                // console.log(contact.Mobile);
-                // console.log(contact.first_name);
-
-
-
+                newPerson.interes = body.interes;
                 if (contact['Móvil'] != undefined) {
 
                     if (contact['Móvil'].split(' ')[1] != null) {
                         newPerson.cellphone = contact['Móvil'].split(' ')[1];
                     } else {
                         newPerson.cellphone = contact['Móvil'];
-
                     }
                     if (contact.Nombre != undefined) {
                         newPerson.first_name = contact.Nombre;
-
                     } else { newPerson.last_name = ''; }
                     if (contact.Apellidos != undefined) {
                         newPerson.last_name = contact.Apellido;
                     } else { newPerson.last_name = ''; }
-                    console.log('se guardo la posrsonaaaaaaaaaaaaaaaaaaaaaa')
                     savePerson();
                 } else if (contact.Mobile != undefined) {
                     if (contact.Mobile.split(' ')[1] != null) {
@@ -242,52 +186,32 @@ router
                         if (person == null) {
                             newPerson.save(function (err, p) {
                                 if (err) console.log(err);
-                                console.log(p)
                             });
-                            // console.log(newPerson);
-                            // console.log('se guardarala persoana');
                         }
                         else console.log('el celular existe')
                     })
                 }
             }
         } catch (error) {
-            // console.log('todo bien')
-            console.log('error al guardar numero', error)
-            // return res.status(400).send(respuestaVacia);
+            return res.status(400).send(respuestaVacia);
+        } finally{
+            return res.status(200).send();
         }
-        finally {
-            // console.log('todo bien',2)
-            return res.status(200).send(respuestaVacia);
-        }
-
     })
-
-
-
-
-
     .post('/addFromWhatsapp', function (req, res) {/////////////////////////////NO SE ESETA USANDO///////////////////
         var person = new db.mkt_persons(req.body);
-        console.log(person);
         db.mkt_persons.findOne({ cellphone: person.cellphone }, function (err, existe) {
-
             if (err) {
                 return res.status(400).send(err);
 
             } else {
                 if (existe == null) {
-                    console.log(existe);
                     person.save(function (err, persona) {
                         if (err) {
-                            console.log(err);
                             return res.status(400).send(err);
-
                         } else {
-
                             let interesPersona = persona.interes;
                             for (let pi of interesPersona) {
-
                                 db.mkt_events.find({ programs: pi.programId }, function (err, eventos) {
                                     if (err) return res.status(400).send(err);
                                     for (let e of eventos) {
@@ -307,21 +231,14 @@ router
                                         e.interes.push(int);
                                         e.save();
                                     }
-
                                 })
                             }
-
                             return res.status(200).send(persona);
-                            console.log(person);
-
-
                         }
                     })
 
                 } else {
                     if (err) return res.status(400).send(err);
-                    console.log('el celular ya existe')
-
                 }
             }
         })
@@ -329,7 +246,6 @@ router
     })
 
     .post('/BatchWhatsappNumbers', function (req, res) {
-        // console.log(req.body);
         let listaNumeros = req.body.listaNumeros;
         let whatsapp_group = req.body.whatsapp_group;
         let cellphone = req.body.cellphone;
@@ -364,20 +280,15 @@ router
                         empresa: '',
                         cargao: ''
                     };
-                    // console.log(newPerson);
-                    // db.mkt_persons.findOne({ cellphone: newPerson.cellphone }, function (err, person) {
-
-                    // if (person == null) {
                     newPerson.save(function (err, np) {
                         if (err) console.log(err);
                         for (let program of interes) {
-                            // console.log(program);
                             db.mkt_events.find({ programs: program.programId }, function (err, eventos) {
                                 for (let e of eventos) {
                                     let inte = {};
                                     inte.persons = np;
                                     inte.state = 0;
-                                    inte.date_state=new Date();
+                                    inte.date_state = new Date();
                                     e.interes.push(inte);
                                     e.save();
                                 }
@@ -385,52 +296,36 @@ router
                         }
 
                     });
-                    // }
-                    // })
-
                 }
                 i++;
             })
         }
         return res.status(200).send(req.body);
-
-
     })
 
 
     .post('/filterUniversidadMedio', function (req, res) {
-
-        // console.log(req.body);
         let listaUniversidades = req.body.listaUniChecked;
         let listaMedios = req.body.listaMedChecked;
         let identity = req.body.identity;
         let listaCarteras = [];
         let personasFiltradas = [];
         let personasFiltroSelectivo = [];
-
-
-        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
         db.mkt_users.findOne({ _id: identity._id }, function (err, user) {
             if (err) return res.status(200).send(err)
             db.mkt_users.find({ offices: user.offices }, { _id: 1 }, function (err, users) {
-                // console.log(users);
                 db.mkt_carteras.find({ user: { $in: users } }, { _id: 1 }, function (err, carteraslist) {
                     if (err) return res.status(200).send(err)
                     listaCarteras = carteraslist;
                     db.mkt_persons.find({ carteras: { $in: carteraslist } }, function (err, personas) {
-                        // console.log(personas)
                         for (let p of personas) {
                             for (let ItemUnivers of listaUniversidades) {
                                 if (p.descOcupation.universidad == ItemUnivers._id) {
                                     personasFiltradas.push(p);
-                                    // console.log(p);
                                 }
                             }
                             for (let ItemMedio of listaMedios) {
-                                // console.log(ItemMedio.id ,p.contact_medium);
-
                                 if (p.contact_medium == ItemMedio.id) {
-                                    // console.log(p)
                                     if (personasFiltradas.includes(p)) {
                                         personasFiltroSelectivo.push(p);
                                     }
@@ -440,10 +335,7 @@ router
                                 }
                             }
                         }
-                        // console.log(personasFiltradas);
-                        // console.log(listaMedios.length , listaUniversidades.length)
                         if ((listaMedios.length > 0) && (listaUniversidades.length > 0)) {
-                            // console.log("imprime filetro selectivo")
                             return res.status(200).send(personasFiltroSelectivo)
                         } else {
                             return res.status(200).send(personasFiltradas);
@@ -452,41 +344,24 @@ router
                 })
             })
         })
-
-
-
-
-
     })
 
     .post('/getPersonsShareCarteraEvent', function (req, res) {
-        // console.log(req.body);
-
         let listaEjecutivos = req.body.lista_ejecutivos;
         let listaEventos = req.body.lista_eventos;
-
         let listaPersonasDeEventos = [];
         let listaCarteras = [];
         for (let i of listaEventos) {
-            // console.log(i.listaInteres);
             for (let ip of i.listaInteres) {
                 if (!listaPersonasDeEventos.includes(ip.persons)) {
                     listaPersonasDeEventos.push(ip.persons);
-
                 }
             }
-
         }
         for (let ejecutivo of listaEjecutivos) {
             listaCarteras.push(ejecutivo.carteraId)
-
         }
-        console.log(listaPersonasDeEventos)
-        console.log(listaCarteras);
-
-
         if ((listaEjecutivos.length > 0) && (listaEventos.length > 0)) {
-
             db.mkt_persons.find({ _id: { $in: listaPersonasDeEventos }, carteras: { $in: listaCarteras } }, function (err, personas) {
                 if (err) return res.status(400).send(err);
                 return res.status(200).send(personas);
@@ -507,33 +382,25 @@ router
                 }
             }
         }
-
-
-
     })
 
-    .post('/addNewPerson',function(req,res){
-        // console.log(req.body);
-        let interes=req.body.persona.interes;
-        db.mkt_persons.findOne({cellphone:req.body.persona.cellphone},function(err,celExist){
+    .post('/addNewPerson', function (req, res) {
+        let interes = req.body.persona.interes;
+        db.mkt_persons.findOne({ cellphone: req.body.persona.cellphone }, function (err, celExist) {
             if (err) return res.status(400).send(err);
-            if(celExist==null){
-                var person=new db.mkt_persons(req.body.persona);
-                // console.log('///////////////////////////////')
-                // console.log(person);
-                person.save(function(err,pers){
-                    if (err){
+            if (celExist == null) {
+                var person = new db.mkt_persons(req.body.persona);
+                person.save(function (err, pers) {
+                    if (err) {
                         return res.status(400).send(err)
-                    }else{
+                    } else {
                         for (let program of interes) {
-                            // console.log(program);
                             db.mkt_events.find({ programs: program.programId }, function (err, eventos) {
                                 for (let e of eventos) {
                                     let inte = {};
                                     inte.persons = pers;
                                     inte.state = 0;
-                                    inte.date_state=new Date();
-                                    
+                                    inte.date_state = new Date();
                                     e.interes.push(inte);
                                     e.save();
                                 }
@@ -541,12 +408,10 @@ router
                         }
                         return res.status(200).send(pers);
                     }
-                        
                 })
-            }else{
+            } else {
                 return res.status(404).send('la persona ya existe');
             }
-
         })
     })
 
@@ -570,7 +435,6 @@ router
         person.save(function (err, person) {
             if (err) { return res.status(400).send(err); }
             return res.status(200).send(person);
-            // addInscription(person, req.body.inscription, req.body.eventId);
         });
     })
 
@@ -581,104 +445,20 @@ router
             return res.status(200).send(user);
         });
     })
-    //    .post('/', function (req, res) {
-    //       var person = new db.mkt_persons(req.body.persona);
-    //       console.log(req.body);
-    //       db.mkt_persons.findOne({ ci: req.body.persona.ci, cellphone: req.body.persona.cellphone }, function (err, existeCellphone) {
-    //          if (existeCellphone == null) {
-    //             console.log('llegue aqui');
-    //             //if(person.first_name == '' || person.last_name == '' || person.ci == '' || person.carteras == '') 
-    //             //return res.status(400).send(); 
-    //             // save person
-    //             person.save(function (err, person) {
-    //                console.log('persona guardada');
-    //                if (err) { return res.status(400).send(err); }
-    //                addInscription(person, req.body.inscription, req.body.eventId);
-    //             });
-    //             function addInscription(person, inscri, idEvent) {
-    //                db.mkt_events.findOne({ _id: idEvent }, function (err, events) {
-    //                   console.log(events);
-    //                   db.mkt_modules.find({ programs: events.programs }).count().exec(function (err, moduls) {
-    //                      console.log(moduls);
-    //                      console.log('llegue al la cantidad de modulos');
-    //                      var modulPrice = inscri.price_event / moduls;///////DIVISION
-    //                      console.log(modulPrice);
-    //                      var inscription = {
-    //                         // segun al numero de asistencias sacar el precio total q tiene q pagar
-    //                         total_price: 0,//sumatorio por asistencia de cada modulo
-    //                         module_price: modulPrice,
-    //                         bolivianos_price: inscri.canceled_price,
-    //                         dolares_price: 0,
-    //                         canceled_price: inscri.canceled_price,
-    //                         price_event: inscri.price_event,
-    //                         receipt: inscri.receipt,
-    //                         name: person.name,
-    //                         ci: person.ci,
-    //                         cellphone: person.cellphone,
-    //                         persons: person._id,
-    //                         users: inscri.users
-    //                      };
-    //                      var d = new Date();
-    //                      //////////////////////
-    //                      // db.mkt_events.update({ _id: idEvent, 'inscriptions.person': req.body.person },
-    //                      //       {
-    //                      //             $set: { 'inscriptions.$.state': req.body.state, 'inscriptions.$.description': req.body.description }
-    //                      //       }).exec(function (err, off) {
-    //                      //             if (err) return res.status(400).send(err);
-    //                      //             //db.mkt_events.find({ _id: req.body.name, _id: { $in: req.body.person } }, function (err, event) {
-    //                      //             db.mkt_events.find({ _id: req.body.name }, function (err, event) {
-    //                      //                   if (err) return res.status(401).send(err);
-    //                      //             return res.status(201).send(event);
-    //                      //             });
-    //                      //             //	if (off.nModified == 0) return res.status(406).send();
-    //                      //       });
-    //                      db.mkt_events.update({ _id: idEvent },
-    //                         {
-    //                            $push: {
-    //                               inscriptions: inscription
-    //                            }
-    //                         }, {
-    //                            multi: true
-    //                         }, function (err, events) {
-    //                            if (err) return res.status(400).send(err);
-    //                            console.log(events);
-    //                            // if (events == null) return res.status(404).send();
-    //                            return res.status(200).send(person);
-    //                         });
-    //                   });//fin module
-    //                });//fin Event
-    //             }
-    //          } else {
-    //             if (err) return res.status(400).send(err);
-    //             console.log('La Persona ya existe');
-    //          }
-    //       });
-    //       //       }else{
-    //       //             if (err) return res.status(400).send(err);
-    //       //             console.log('El numero de CI de la Persona ya existe')
-    //       //       }
-    //       //    });      
-    //    })
-
     .put('/:id', function (req, res) {
-        console.log("exito");
-        console.log(req.params.id);
         db.mkt_persons.findOne({ _id: req.params.id }, function (err, person) {
             if (err) return res.status(400).send(err);
             if (person == null) return res.status(404).send();
-
             for (i in req.body) {
                 person[i] = req.body[i];
             }
             person.save(function (err, person) {
                 if (err) return res.status(400).send(err);
-
                 return res.status(200).send(person);
             });
         });
     })
     .put('/ocupation/:id', function (req, res) {
-        console.log(req.body);
         db.mkt_persons.update({ _id: req.params.id },
             {
                 $set: {//Universitario
@@ -695,65 +475,7 @@ router
             }).exec(function (err, off) {
                 if (err) return res.status(400).send(err);
             })
-        // db.mkt_events.update({ _id: req.body.name, 'inscriptions.person': req.body.person },
-        //    {
-        //       $set: { 'inscriptions.$.state': req.body.state, 'inscriptions.$.description': req.body.description }
-        //    }).exec(function (err, off) {
-        //       if (err) return res.status(400).send(err);
-        //       db.mkt_events.find({ _id: req.body.name, _id: { $in: req.body.person } }, function (err, event) {
-        //          if (err) return res.status(401).send(err);
-        //          return res.status(201).send(event);
-        //       });
-        //       //	if (off.nModified == 0) return res.status(406).send();
-        //    });
     })
-
-    ////////////////////////////////////////////////////////////////////////////////
-
-    // .put('/tracing/:id', function (req, res) {
-    //     db.mkt_persons.update({ _id: req.params.id},
-    //       {
-    //         $push: {
-    //           'profile.tracing': req.body,
-    //         }
-    //     }).exec(function (err, off) {
-    //         if (err) return res.status(400).send(err);
-    //         console.log(off)                
-    //         return res.status(200).send(off)
-    //     });
-    // })
-
-
-    // .put('/newTracing/:id', function (req, res) {
-
-    //     console.log(req.body);
-
-    //     let eventId = req.body.eventId;
-    //     let programId;
-    //     // db.mkt_events.update({ _id: eventId, 'tracing.persons': req.params.id }, {
-    //     //     $push: {
-    //     //         'tracing': req.body,
-    //     //     }
-    //     // }).exec(function (err, event) {
-    //         // console.log(programId);
-    //         db.mkt_events.findOne({ _id: eventId }, { programs: 1 }, function (err, event) {
-    //             db.mkt_persons.update({
-    //                 _id: req.params.id,
-    //                 'tracing.programId': event.programs
-    //             }, {
-    //                     $push: {
-    //                         'tracing': req.body,
-    //                     }
-    //                 }, function (err, off) {
-    //                     if (err) return res.status(400).send(err);
-    //                     console.log(off)
-    //                     return res.status(200).send(off);
-    //                 })
-    //         });
-    //     // })
-    // })
-
-    ///////////////////////////////////////////////////////////////////////////////////
 
     .delete('/:id', function (req, res) {
         db.mkt_persons.remove({ _id: req.params.id }, function (err, person) {

@@ -35,9 +35,6 @@ export class PersonaComponent implements OnInit {
      private route: ActivatedRoute,
      private _personaService: PersonaService,
      private _peticionesService: PeticionesService
-     
-    
-
   ) {}
 
   ngOnInit() {

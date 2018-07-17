@@ -21,22 +21,17 @@ router
     });
   })
   .get('/lista/:id', function (req, res) {
-    console.log('hola')
     db.modules.find({ programs: req.params.id }, function (err, modules) {
       if (err) return res.status(400).send(err);
       return res.status(200).send(modules);
     });
   })
   .get('/eventoModuls/:id', function (req, res) {
-    console.log(req.params.id);
-    console.log('el id del evento para modulos');
     db.events.findOne({ _id: req.params.id }, function (err, events) {
-      //console.log(events);
       if (err) { return res.status(400).send(err); }
       if (events) {
         db.modules.find({ programs: events.programs }, function (err, moduls) {
           if (err) { return res.status(400).send(err); }
-          //console.log(moduls);
           return res.status(200).send(moduls);
 
         });//F module
@@ -45,7 +40,6 @@ router
   })
 
   .post('/add', function (req, res) {
-    console.log(req.body);
     var modulo = new db.modules(req.body);
     modulo.save(function (err, modulo) {
       if (err) { return res.status(400).send(err); }
@@ -53,9 +47,8 @@ router
     });
   })
   .post('/modules', function (req, res) {
-    db.modules.find({ _id: { $in: req.body } },{name:1}, function (err, moduls) {
+    db.modules.find({ _id: { $in: req.body } }, { name: 1 }, function (err, moduls) {
       if (err) { return res.status(400).send(err); }
-      //console.log(moduls);
       return res.status(200).send(moduls);
 
     })
@@ -74,8 +67,6 @@ router
     });
   })
   .put('/edit/:id', function (req, res) {
-    console.log(req.body)
-    console.log(req.params.id)
     db.modules.update({ _id: req.params.id },
       {
         $set: {
@@ -85,14 +76,12 @@ router
         }
       }).exec(function (err, modulo) {
         if (err) return res.status(400).send(err);
-
         return res.status(200).send(modulo);
       })
   })
   .delete('/:id', function (req, res) {
     db.modules.remove({ _id: req.params.id }, function (err, modulo) {
       if (err) return res.status(400).send(err);
-
       return res.status(200).send(modulo);
     });
   });

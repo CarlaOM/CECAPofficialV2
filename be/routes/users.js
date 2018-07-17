@@ -1,29 +1,18 @@
 var express = require('express');
-var mongoose = require('mongoose');
-var body_parser = require('body-parser');
 var jwt = require('jsonwebtoken');
 var db = require('../models/db');
 var router = express.Router();
 
 const fs = require('fs');
-//var JSZip = require("jszip");
 var path = require('path');
-// var mime = require('mime');
-//var archiver = require('archiver');
 
 var zip = new require('node-zip')();
-// var mongojs = require('mongojs');
-// var db = mongojs('test', []); 
-
 /**
  * @param {string} directorio de destino
  * @param {string} texto a escribir dentro del archivo
  * @param {function} manejador de funcion 
  */
 router
-    // .get('/', function (req, res, next) {
-    // 	f.validation(res, req.body.token, next);
-    //   })
     .get('/backup/:id', function (req, res) {
         var arrayIds = req.params.id.split('-');
         var userId = arrayIds[0];
@@ -34,7 +23,6 @@ router
         db.users.findOne({ _id: userId, password_hash: password_hash, active: true }, function (err, user) {
             if (err) return res.status(400).send(err);
             if (user == null) {
-                console.log('No existe el usuario')
                 return res.status(404).send();
             } else {
                 backup(fecha);
@@ -133,26 +121,10 @@ router
                                                                                                                                 db.mkt_correlatives.find({}, function (err, col) {
                                                                                                                                     if (err) return res.status(400).send(err);
                                                                                                                                     saveWriteFile(col, 'mkt_correlatives', fecha);
-                                                                                                                                    console.log('File compress created Zip');
-                                                                                                                                    //    return res.sendFile('./backups/cecapBackup'+'_'+fecha+'.zip', { root: __dirname });
-                                                                                                                                    //  return res.status(200).sendFile( path.join(__dirname, '../backups/', 'cecapBackup'+'_'+fecha+'.zip'));
-                                                                                                                                    //    return res.status(200).send(events);
-                                                                                                                                    //  res.sendFile('D:/1-2018/project/CECAPoficialV2/be/backups/cecapBackup'+'_'+fecha+'.zip');
-                                                                                                                                    //////////////////////////------------send file zip--------------///////////////////////////////////////////////7
                                                                                                                                     var error = false;
                                                                                                                                     var filePath = path.join(__dirname, '../backups/', 'cecapBackup' + '_' + fecha + '.zip');
-                                                                                                                                    console.log(typeof filePath);
                                                                                                                                     fs.exists(filePath, function (exists) {
                                                                                                                                         if (exists) {
-                                                                                                                                            // res.writeHead(200, {
-                                                                                                                                            // "Content-Type": "application/zip",
-                                                                                                                                            // "Content-Disposition": "attachment; filename=" + 'cecapBackup'+'_'+fecha+'.zip',
-                                                                                                                                            // 'Accept': 'application/zip'
-                                                                                                                                            // });
-                                                                                                                                            // //var stream= fs.createReadStream(filePath).pipe(res);
-                                                                                                                                            // var stream= fs.createReadStream(filePath,{bufferSize: 64 * 1024});
-                                                                                                                                            // stream.pipe(res);
-                                                                                                                                            // //return res.status(200).send(JSON.stringify(stream))
                                                                                                                                             if (fs.existsSync(filePath)) {
                                                                                                                                                 filetext = fs.readFileSync(filePath, 'binary');//tried encoding binary
                                                                                                                                             }
@@ -161,15 +133,7 @@ router
                                                                                                                                                 'Content-Disposition': "attachment; filename=" + 'cecapBackup' + '_' + fecha + '.zip'
                                                                                                                                             };
                                                                                                                                             res.writeHead(200, headers);
-                                                                                                                                            //return res.end(new Buffer(filetext ).toString('base64'));
                                                                                                                                             return res.end(filetext, "binary");
-
-                                                                                                                                            // // // // var filename = path.basename(filePath);
-                                                                                                                                            // // // // console.log(path.resolve(filePath));
-                                                                                                                                            // // // // res.setHeader('Content-Disposition', 'attachment; filename=' + 'cecapBackup'+'_'+fecha+'.zip');
-                                                                                                                                            // // // // res.setHeader('Content-Transfer-Encoding', 'binary');
-                                                                                                                                            // // // // res.setHeader('Content-Type', 'application/zip');
-                                                                                                                                            // // // // res.sendFile(path.resolve(filePath));
                                                                                                                                         } else {
                                                                                                                                             res.writeHead(400, { "Content-Type": "text/plain" });
                                                                                                                                             res.end("ERROR File does not exist");
@@ -207,22 +171,10 @@ router
             });
         }
         function saveWriteFile(date, dbName, fecha) {
-            // var content = JSON.parse(JSON.stringify(events));
             var content = JSON.stringify(date);
             zip.file(dbName + ".json", content);
             var data = zip.generate({ base64: false, compression: 'DEFLATE' });
             fs.writeFileSync('./backups/cecapBackup' + '_' + fecha + '.zip', data, 'binary');
-
-            // var content = JSON.stringify(date);
-            // var ruta = "./backups/"+dbName+".json";
-            // fs.writeFile(ruta, content, function (err) {
-            //     if (err) {
-            //         console.log(err);
-            //         //return res.status(400).send(err);
-            //     }
-            //     console.log("El archivo " +dbName+" fue Guardado!");
-            //     //return res.status(200).send(events);
-            // });
         }
     })
 
@@ -230,7 +182,6 @@ router
         db.users.find({}, { name: 1, active: 1, password_hash: 1, rol: 1 }, function (err, users) {
             if (err) return res.status(400).send(err);
             return res.status(200).send(users);
-            //console.log(res.status(200).send(users))
         });
     })
 
@@ -259,12 +210,8 @@ router
             db.carteras.findOne({ user: user._id }, function (err, cart) {
                 if (err) return res.status(400).send(err);
                 eje.cartera = cart;
-                console.log(cart);
                 return res.status(200).send(eje);
-
             })
-
-
         });
     })
 
@@ -318,22 +265,11 @@ router
         });
     })
     .post('/backupa', function (req, res) {
-        //var collectionNames = db.getCollectionNames()[0];
-        // var collections=db.getCollectionNames();
-        // console.log(collections);
-        // console.log(collectionNames);
-        // db.collectionNames[0].find({},function(err, col){
-        //   if (err) return res.status(400).send(err);
-        //   saveWriteFile(col, collectionNames[0]);
-
-        //   return res.status(200).send(events);
-        // });
         var dt = new Date();
         var month = dt.getMonth() + 1;
         var day = dt.getDate();
         var year = dt.getFullYear();
         var fecha = day + '-' + month + '-' + year;
-        console.log(fecha);
         db.events.find({}, function (err, col) {
             if (err) return res.status(400).send(err);
             saveWriteFile(col, 'events', fecha);
@@ -425,23 +361,15 @@ router
                                                                                                                             db.mkt_correlatives.find({}, function (err, col) {
                                                                                                                                 if (err) return res.status(400).send(err);
                                                                                                                                 saveWriteFile(col, 'mkt_correlatives', fecha);
-                                                                                                                                console.log('File compress created Zip');
                                                                                                                                 //////////////////////////////////////////////for download file zip///////////////////////////////////////
                                                                                                                                 const filePath = path.join(__dirname, '../backups/', 'cecapBackup' + '_' + fecha + '.zip');
                                                                                                                                 var error = false;
-                                                                                                                                console.log(filePath);
                                                                                                                                 fs.exists(filePath, function (exists) {
                                                                                                                                     if (exists) {
                                                                                                                                         res.writeHead(200, {
                                                                                                                                             "Content-Type": "application/zip",
                                                                                                                                             "Content-Disposition": "attachment; filename=" + 'cecapBackup' + '_' + fecha + '.zip'
                                                                                                                                         });
-                                                                                                                                        // // res.status(200);
-                                                                                                                                        // // //console.log(res)
-                                                                                                                                        // // var stream= fs.createReadStream(filePath,{bufferSize: 64 * 1024});
-                                                                                                                                        // // console.log(stream);
-                                                                                                                                        // // stream.pipe(res);
-                                                                                                                                        // return res.status(200).sendFile(stream);
                                                                                                                                         if (fs.existsSync(filePath)) {
                                                                                                                                             filetext = fs.readFileSync(filePath, "binary");//tried encoding binary
                                                                                                                                         }
@@ -452,17 +380,6 @@ router
                                                                                                                                         };
                                                                                                                                         res.writeHead(200, headers);
                                                                                                                                         return res.end(filetext, "binary");
-                                                                                                                                        // return res.end(new Buffer(filetext).toString('base64'),"binary");
-                                                                                                                                        // var filename = path.basename(filePath);
-
-                                                                                                                                        // res.setHeader('Content-Disposition', 'attachment; filename=' + 'cecapBackup'+'_'+fecha+'.zip');
-                                                                                                                                        // res.setHeader('Content-Transfer-Encoding', 'binary');
-                                                                                                                                        // res.setHeader('Content-Type', 'application/zip');
-                                                                                                                                        // console.log(typeof filePath)
-                                                                                                                                        // console.log(typeof filename)
-                                                                                                                                        // // console.log(typeof res.sendFile(filePath))
-                                                                                                                                        // return res.sendFile(filePath)
-                                                                                                                                        // // return res.status(200).send(col);
                                                                                                                                     } else {
                                                                                                                                         res.writeHead(400, { "Content-Type": "text/plain" });
                                                                                                                                         res.end("ERROR File does not exist");
@@ -499,7 +416,6 @@ router
             });
         });
         function saveWriteFile(date, dbName, fecha) {
-            // var content = JSON.parse(JSON.stringify(events));
             var content = JSON.stringify(date);
             zip.file(dbName + ".json", content);
             var data = zip.generate({ base64: false, compression: 'DEFLATE' });
@@ -540,14 +456,12 @@ router
             if (err) return res.status(400).send(err);
             if (role == null) return res.sendStatus(404);
             role_id = role._id;
-            //    console.log(req.body);
             validating(role_id);
         });
         function validating(role_id) {
             db.users.findOne({ _id: req.body._id, rol: role_id }, function (err, user) {
                 if (err) return console.log(err);
                 if (user == null) return res.sendStatus(405);
-                // console.log(user);
                 validarGerente();
             });
         }
@@ -556,7 +470,6 @@ router
                 if (err) return res.status(400).send(err);
                 if (role == null) return res.sendStatus(404);
                 var roleId = role._id;
-                console.log(JSON.stringify(roleId), req.body.rol);
                 if (roleId == req.body.rol) {
                     db.users.findOne({ rol: req.body.rol, offices: req.body.offices }, function (err, us) {
                         if (err) return console.log(err);
@@ -613,90 +526,26 @@ router
     .post('/login', function (req, res) {
         //modificar active
         db.users.findOne({ name: req.body.name, password_hash: req.body.password_hash, active: true }, { rol: 1, _id: 1 }, function (err, user) {
-            console.log(user)
             if (err) return console.log(err);
-            console.log(user);
             if (user == null) return res.sendStatus(404);
-
             res.status(200).send(user);
         });
     })
-    //    .post('/logins', function (req, res) {
-    //       // console.log('test')
-    //       console.log(req.body);
-    //       //modificar active
-    //       db.users.findOne({ name: req.body.name, password_hash: req.body.password_hash}, 
-    //             { rol: 1, _id: 1 },//nos devuelve el rol y id de este user
-    //            function (err, user) {
-    //          if (err) return console.log(err);
-    //          if (user == null) return res.sendStatus(404);
-    //          res.status(200).send(user);
-    //          db.users.update({ _id: req.body._id },
-    //             {$set:{ active: true }}
-    //          );
-    //       });
-    //    })
-
-    // .post('/logout', function (req, res) {
-    // 	db.users.findOne({phone: req.body.phone, password_hash: req.body.password_hash}, function (err, user_model) {
-    // 		if (err) return console.log(err);
-    // 		if (user_model == null) return res.sendStatus(404);
-
-    // 		user_model.token = jwt.sign(_user, 'password_hash_key_token'); //FIX
-    // 		user_model.tokens = user_model.tokens.push(_user.token);
-
-    // 		user_model.save(function (err, user) {
-    // 	    if (err) return console.log(err);
-
-    // 			res.status(200).send(user);
-    // 		});
-    // 	});
-    // })
 
 
     .post('/', function (req, res) {
         var users = new db.users(req.body);
-        console.log(users);
-        // if (person.first_name == '' || person.last_name == '' || person.ci == '' || person.user == '') return res.status(400).send();
-        // save person
         users.save(function (err, users) {
             if (err) return res.status(400).send(err);
             return res.status(200).send(users);
         });
-        // add vigent events
-
-
     })
     .put('/:id', function (req, res) {
-
-        // console.log(req.body.user);
-        // db.users.update(
-        //    { _id: req.params.id },
-        //    {
-        //       $set: {
-        //          name: req.body.user.name,
-        //       //    salary: req.body.user.salary,
-        //          active: req.body.user.active,
-        //          password_hash: req.body.user.name,
-        //          lastname:req.body.user.lastname,
-        //          cell:req.body.user.cell,
-        //          correo:req.body.user.correo,
-        //          rol:req.body.user.rol,
-        //          offices:req.body.user.offices
-
-        //       }
-        //    }, function (err, user) {
-        //       if (err) return res.status(400).send(err);
-        //       return res.status(200).send();
-        //    });
-
         db.users.findOne({ _id: req.params.id }, function (err, user) {
             if (err) return res.status(400).send(err);
             if (user == null) return res.status(404).send();
-
             for (i in req.body) {
                 user[i] = req.body[i];
-                console.log(user[i]);
             }
             user.save(function (err, user) {
                 if (err) return res.status(400).send(err);

@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
       // console.log('this._userService.register()');
    }
    onSubmit() {
-      // console.log(this.user);//sadas
       this._userService.signin(this.user).subscribe(
          response => {
           //  console

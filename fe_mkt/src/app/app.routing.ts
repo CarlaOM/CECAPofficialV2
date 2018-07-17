@@ -49,7 +49,7 @@ import { InscriptionComponent } from './event/inscription/inscription.component'
 
 /////////nuevo marketig////////
 import { ImportWhatsNumbersComponent } from "./import-whats-numbers/import-whats-numbers.component";
-import { ImportFromExcelComponent  } from "./import-from-excel/import-from-excel.component";
+import { ImportFromExcelComponent } from "./import-from-excel/import-from-excel.component";
 import { PersonsOfEjecutivoComponent } from "./ejecutivo/persons-of-ejecutivo/persons-of-ejecutivo.component";
 import { SegmentationComponent } from "./segmentation/segmentation.component";
 import { ListPersonProgramUserComponent } from "./segmentation/list-person-program-user/list-person-program-user.component";
@@ -63,69 +63,71 @@ import { ReportsEjecutivosComponent } from "./reports-ejecutivos/reports-ejecuti
 import { ReporteEventsComponent } from "./reporte-events/reporte-events.component";
 import { ListasComponent } from './listas/listas.component';
 import { AddCarreraComponent } from './events/add-carrera/add-carrera.component';
+import { ContraComponent } from './login/contra/contra.component';
 
 
 const appRoutes: Routes = [
-   { path: '', component: HomeComponent },//ruta basica
-   { path: 'login', component: LoginComponent },
-   {
-      path: 'home', component: HomeComponent,
-      children: [
-         { path: 'home', redirectTo: 'home', pathMatch: 'full' },
-         { path: 'events', component: EventsComponent },
-         //{ path: 'events/alert', component: AlertComponent },
-         { path: 'events/add', component: AddEventComponent },
-         { path: 'event/:id', component: EventComponent },
-         { path: 'event/asistencia/:id', component: AsistenciaComponent },
-         { path: 'profilePerson/:id', component: ProfilePersonComponent },
-         { path: 'tracing/add/:id', component: TracingComponent },
-         { path: 'reports', component: ReportsComponent },
-         { path: 'trimestral', component: ReportTrimestralComponent },
-         { path: 'reportEvent/:id', component: ReportEventComponent },
-         { path: 'persons', component: PersonaComponent },
-         { path: 'persons/add', component: AddPersonComponent },
-         { path: 'persons/edit/:id', component: EditComponent },
-         { path: 'persons/asistencia/:id', component: AsistenciaComponent },
-         { path: 'cartera', component: CarteraComponent },
-         { path: 'cartera/add', component: AddCarteraComponent },
-         { path: 'cartera/:id', component: InfoCarteraComponent },
-         { path: 'cartera/edit/:name', component: EditCarteraComponent },
-         { path: 'ejecutivo', component: EjecutivoComponent },
-         { path: 'ejecutivo/add', component: AddEjecutivoComponent },
-         { path: 'ejecutivo/:id', component: InfoEjecutivoComponent },
-         { path: 'ejecutivo/edit/:active', component: EditEjecutivoComponent },
-         { path: 'sucursal', component: SucursalComponent },
-         { path: 'sucursal/add', component: AddSucursalComponent },
-         { path: 'programs', component: ProgramaComponent },
-         { path: 'program/edit/:id', component: EditProgramaComponent },
-         { path: 'program/add', component: AddProgramaComponent },
-         { path: 'modulos/:id', component: ModuloComponent },
-         { path: 'modulo/edit/:id', component: EditModuloComponent },
-         { path: 'modulo/add/:id', component: AddModuloComponent },
-         { path: 'facilitador', component: facilitadorComponent },
-         { path: 'facilitador/add', component: AddFacilitadorComponent },
-         { path: 'facilitador/edit/:id', component: EditFacilitadorComponent },
-         { path: 'correlative/add', component: AddCorrelativeComponent },
-         { path: 'inscription/:id', component: InscriptionComponent },
-         { path: 'importWhatsapp',component:ImportWhatsNumbersComponent},
-         { path: 'importFromExcel',component:ImportFromExcelComponent},
-         { path: 'personsOfEjecutivo/:id',component:PersonsOfEjecutivoComponent},
-         { path: 'segmentacion',component:SegmentationComponent},
-         { path: 'segmentacion/list/:id',component:ListPersonProgramUserComponent},
-         { path: 'events/persons/:id',component:PersonsOfEventsComponent},
-         { path: 'events/persons/edit/:id',component:EditPersonaInteresComponent},
-         { path: 'filtros', component:FiltroUniversidadMedioComponent},
-         { path: 'divideCartera', component:DividirCarteraComponent},
-         { path: 'reporteEjecutivo', component:ReportsEjecutivosComponent},
-         { path: 'reporteEvents', component:ReporteEventsComponent},
-         { path: 'listas', component:ListasComponent},
-         { path: 'addCarrera', component:AddCarreraComponent},
+    { path: '', component: HomeComponent },//ruta basica
+    { path: 'login', component: LoginComponent },
+    {
+        path: 'home', component: HomeComponent,
+        children: [
+            { path: 'home', redirectTo: 'home', pathMatch: 'full' },
+            { path: 'events', component: EventsComponent },
+            //{ path: 'events/alert', component: AlertComponent },
+            { path: 'events/add', component: AddEventComponent },
+            { path: 'event/:id', component: EventComponent },
+            { path: 'event/asistencia/:id', component: AsistenciaComponent },
+            { path: 'profilePerson/:id', component: ProfilePersonComponent },
+            { path: 'tracing/add/:id', component: TracingComponent },
+            { path: 'reports', component: ReportsComponent },
+            { path: 'trimestral', component: ReportTrimestralComponent },
+            { path: 'reportEvent/:id', component: ReportEventComponent },
+            { path: 'persons', component: PersonaComponent },
+            { path: 'persons/add', component: AddPersonComponent },
+            { path: 'persons/edit/:id', component: EditComponent },
+            { path: 'persons/asistencia/:id', component: AsistenciaComponent },
+            { path: 'cartera', component: CarteraComponent },
+            { path: 'cartera/add', component: AddCarteraComponent },
+            { path: 'cartera/:id', component: InfoCarteraComponent },
+            { path: 'cartera/edit/:name', component: EditCarteraComponent },
+            { path: 'ejecutivo', component: EjecutivoComponent },
+            { path: 'ejecutivo/add', component: AddEjecutivoComponent },
+            { path: 'ejecutivo/:id', component: InfoEjecutivoComponent },
+            { path: 'ejecutivo/edit/:active', component: EditEjecutivoComponent },
+            { path: 'sucursal', component: SucursalComponent },
+            { path: 'sucursal/add', component: AddSucursalComponent },
+            { path: 'programs', component: ProgramaComponent },
+            { path: 'program/edit/:id', component: EditProgramaComponent },
+            { path: 'program/add', component: AddProgramaComponent },
+            { path: 'modulos/:id', component: ModuloComponent },
+            { path: 'modulo/edit/:id', component: EditModuloComponent },
+            { path: 'modulo/add/:id', component: AddModuloComponent },
+            { path: 'facilitador', component: facilitadorComponent },
+            { path: 'facilitador/add', component: AddFacilitadorComponent },
+            { path: 'facilitador/edit/:id', component: EditFacilitadorComponent },
+            { path: 'correlative/add', component: AddCorrelativeComponent },
+            { path: 'inscription/:id', component: InscriptionComponent },
+            { path: 'importWhatsapp', component: ImportWhatsNumbersComponent },
+            { path: 'importFromExcel', component: ImportFromExcelComponent },
+            { path: 'personsOfEjecutivo/:id', component: PersonsOfEjecutivoComponent },
+            { path: 'segmentacion', component: SegmentationComponent },
+            { path: 'segmentacion/list/:id', component: ListPersonProgramUserComponent },
+            { path: 'events/persons/:id', component: PersonsOfEventsComponent },
+            { path: 'events/persons/edit/:id', component: EditPersonaInteresComponent },
+            { path: 'filtros', component: FiltroUniversidadMedioComponent },
+            { path: 'divideCartera', component: DividirCarteraComponent },
+            { path: 'reporteEjecutivo', component: ReportsEjecutivosComponent },
+            { path: 'reporteEvents', component: ReporteEventsComponent },
+            { path: 'listas', component: ListasComponent },
+            { path: 'addCarrera', component: AddCarreraComponent },
+            { path: 'cambiar', component: ContraComponent },
 
-      ]
-   },
+        ]
+    },
 
-   //{path: '', component: LoginFormComponent}
-   { path: '**', component: HomeComponent }//ruta redir
+    //{path: '', component: LoginFormComponent}
+    { path: '**', component: HomeComponent }//ruta redir
 
 ];
 

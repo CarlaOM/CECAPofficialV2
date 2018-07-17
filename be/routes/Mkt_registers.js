@@ -22,10 +22,8 @@ router
 
 	.post('/', function (req, res) {
 		var register = new db.mkt_registers(req.body);
-    
 		register.save(function (err, register) {
 			if (err) return res.status(400).send(err);
-
 			return res.status(201).send(register);
 		});
 	})
@@ -35,7 +33,6 @@ router
 		db.mkt_registers.findOne({_id: req.params.id}, function (err, register) {
 			if (err) return res.status(400).send(err);
       if (register == null) return res.status(404).send();
-
 			for (i in req.body) {
 				register[i] = req.body[i];
 			}
