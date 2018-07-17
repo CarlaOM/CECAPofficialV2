@@ -20,6 +20,13 @@ export class PersonsOfEventsComponent implements OnInit {
   public listaReturned;
   // public contacts = [];
   public rol;
+  ////////////////////////////////////////////////////
+  public page;
+  public total;
+  public totalPag;
+  public mostrar = [];
+  ////////////////////////////////////////////////////  
+  // public listaToExport=[];
   public toExport;
 
 
@@ -44,7 +51,48 @@ export class PersonsOfEventsComponent implements OnInit {
       this.loadPersonsByCartera();
     })
   }
-
+  dis(){
+    this.page = this.page-1;
+    var inicio = (5*(this.page-1));
+    var final = (5*(this.page-1))+5;
+    this.mostrar = [];
+    for(var a = inicio  ; a < final ; a++ ){
+      this.mostrar.push(this.lista_personasPorInteres[a]);
+  }
+  }
+  aum(){
+    this.page = this.page+1;
+    // console.log(this.page)
+    var inicio = (5*(this.page-1));
+    // console.log(inicio)
+    var final = (5*(this.page-1))+5;
+    if(final > this.total){
+      final = this.total;
+    }
+    // console.log(final)
+    this.mostrar = [];
+    for(var a = inicio  ; a < final ; a++ ){
+        this.mostrar.push(this.lista_personasPorInteres[a]);
+    }
+  }
+  mostrarPersonas(){
+    this.page = 1;
+    this.total = this.lista_personasPorInteres.length;
+    if(this.total == 0){
+      this.totalPag = 1;
+    } else{
+    this.totalPag = Math.ceil(this.total/5);
+    }
+    this.mostrar = []
+    // console.log(this.totalPag)
+    if(this.totalPag > 1){
+      for(var a = 0 ; a < 5 ; a++){
+      this.mostrar.push(this.lista_personasPorInteres[a]) ;}
+    } else{
+      this.mostrar = this.lista_personasPorInteres;
+    }
+    
+  }
   loadPersonsByCartera() {
     this.lista_personasPorInteres = [];
     this._peticionesService.getEvent(this.eventId).subscribe(res => {
@@ -72,6 +120,7 @@ export class PersonsOfEventsComponent implements OnInit {
               }
             }
           }
+          this.mostrarPersonas();
         })
       })
     })

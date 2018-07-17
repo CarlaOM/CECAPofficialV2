@@ -22,7 +22,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let program of mostrar">
+            <tr *ngFor="let program of programs">
               <td>{{ program.name }}</td>
               <td>{{ program.details }}</td>
               <td>
@@ -30,12 +30,7 @@
               </td>
             </tr>
           </tbody>
-          <tfoot>
-            <a>Pagina # {{page}}</a>
-            <br>
-            <button (click)="dis()" [disabled]="page == 1">Anterior</button>
-            <button (click)="aum()" [disabled]="page == totalPag">Siguiente</button>
-          </tfoot>
+          
         </table>
         <table id="Contacts" style="display: none;" summary="Code page support in different versions of MS Windows." rules="groups"
           frame="hsides" border="2">
