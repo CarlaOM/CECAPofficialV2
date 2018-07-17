@@ -96,6 +96,27 @@
           </tbody>
         </table>
         <br>
+        <table id="Contacts" style="display: none;" summary="Code page support in different versions of MS Windows." rules="groups"
+          frame="hsides" border="2">
+          <thead valign="top">
+            <tr>
+              <th>{{group}}</th>
+              <th>{{first}}</th>
+              <th>{{second}}</th>
+              <th>{{last}}</th>
+              <th>{{cell}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let contact of contacts">
+              <td>{{contact.group}}</td>
+              <td>{{contact.first}}</td>
+              <td>{{contact.second}}</td>
+              <td>{{contact.last}}</td>
+              <td>{{contact.cell}}</td>
+            </tr>
+          </tbody>
+        </table>
         <div align="center">
           <input type="text" id="grupo" placeholder="Grupo">
           <input type="text" id="PrimerNombre" placeholder="Primer Nombre">
@@ -104,7 +125,6 @@
           <input type="text" id="Celular" placeholder="Celular">
           <button class="btn btn-primary" (click)="exportarExcel()">Exportar Excel</button>
         </div>
-
       </section>
 
     </div>
