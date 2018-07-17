@@ -1,7 +1,4 @@
 var express = require('express');
-var mongoose = require('mongoose');
-var body_parser = require('body-parser');
-var jwt = require('jsonwebtoken');
 var db = require('../models/db');
 var router = express.Router();
 
@@ -15,7 +12,6 @@ router
       });
     }) 
    .get('/:id', function (req, res) {
-      console.log(req.params);
       db.offices.findOne({ _id: req.params.id }, function (err, office) {
          if (err) return res.status(400).send(err);
          if (office == null) return res.status(404).send();
@@ -23,7 +19,6 @@ router
       });
    })
    .post('/add', function(req, res){
-      console.log(req.body);
       var office = new db.offices(req.body);
       office.save(function (err, office) {
         if (err){return res.status(400).send(err);} 
@@ -37,10 +32,7 @@ router
           if (err){return res.status(400).send(err);} 
           return res.status(200).send(office);
         })
-
       })
-
-   })
-   ;
+   });
 
    module.exports = router; 

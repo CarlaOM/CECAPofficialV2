@@ -21,7 +21,6 @@ router
       });
    })
    .post('/add', function(req, res){
-        console.log(req.body);
         var program = new db.mkt_programs(req.body);
         program.save(function (err, program) {
             if (err){return res.status(400).send(err);} 
@@ -43,19 +42,7 @@ router
             }
       });
    }) 
-   //para obtener el id del programa que la persona eligio
-//    .post('/id', function(req, res){
-//        var nombre = req.body;
-//        console.log(req.body);
-//        db.mkt_programs.findOne({name: req.body}, function(err, program){
-//         if (err) return res.status(400).send(err);
-//         if (program == null) return res.status(404).send();
-//         return res.status(200).send(program);
-//        });
-//    })
     .put('/:id', function (req, res) { 
-       console.log(req.body)
-       console.log(req.params.id)
       db.mkt_programs.findOne({ _id: req.params.id }, function (err, program) {
          if (err) return res.status(400).send(err);
          if (program == null) return res.status(404).send();
@@ -65,14 +52,11 @@ router
          }
          program.save(function (err, program) {
             if (err) return res.status(400).send(err);
-
             return res.status(200).send(program);
          });
       });
    })
    .put('/edit/:id', function(req, res){
-    console.log(req.body)
-    console.log(req.params.id)
      db.mkt_programs.update({_id: req.params.id},
         {
             $set: {'name': req.body.name,

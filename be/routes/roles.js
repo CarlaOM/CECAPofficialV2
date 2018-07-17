@@ -20,15 +20,6 @@ router
          if (rol == null) return res.status(404).send();
          return res.status(200).send(rol);
       });
-   })
-//    .post('/add', function(req, res){
-//       console.log(req.body);
-//       var office = new db.offices(req.body);
-//       office.save(function (err, office) {
-//         if (err){return res.status(400).send(err);} 
-//         return res.status(200).send(office);
-//      });
-//    })
-   ;
+   });
 
    module.exports = router; 

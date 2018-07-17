@@ -64,7 +64,7 @@ import { ImportFromExcelComponent } from './import-from-excel/import-from-excel.
 import { SendToPrincipalComponent } from "./pending-cash/send-to-principal/send-to-principal.component";
 import { PrincipalCashComponent } from "./principal-cash/principal-cash.component";
 import { ReporteEventosComponent } from './reporte-eventos/reporte-eventos.component';
-// import { RepEventComponent } from './reporte-eventos/rep-event/rep-event.component';
+import { RepEventComponent } from './reporte-eventos/rep-event/rep-event.component';
 
 import { InscriptionWorkshopComponent } from "./event/inscription-workshop/inscription-workshop.component";
 import { NivelacionComponent } from './event/nivelacion/nivelacion.component';
@@ -146,7 +146,7 @@ const appRoutes: Routes = [
             { path: 'sucursal/sendToPrincipal', component: SendToPrincipalComponent },
             { path: 'cajaPrincipal', component: PrincipalCashComponent, canActivate: [AuthGuard] },///////////authGuard
             { path: 'reporteEvento', component: ReporteEventosComponent },
-            // { path: 'repEvent/:id', component: RepEventComponent },
+            { path: 'repEvent/:id', component: RepEventComponent },
             { path: 'workshop/:id', component: InscriptionWorkshopComponent },
             { path: 'workshopListP/:id', component: WorkshopComponent },
             { path: 'imprimirLoteCertificados/:id', component: PrintBatchCertificatesComponent },

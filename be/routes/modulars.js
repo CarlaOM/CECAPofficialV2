@@ -21,7 +21,6 @@ router
         function ingresoModulo(eventId, moduleId, modularsId) {
             db.lists.find({ events: eventId, modulars: modularsId }, function (err, listas) {
                 if (err) return res.status(400).send(err);
-                // console.log(listas,' otro ')
                 var cantIngresoMod = 0;
                 var cantAssist = 0
                 var canStudent = 0;
@@ -42,47 +41,6 @@ router
                         if (persons[j].ocupation == 'profesional') { canProf++; }
                         if (persons[j].ocupation == 'particular') { canParticular++; }
                     }
-                    // db.persons.find({}, { workshops: 1 }, function (err, people) {
-                    //     var i = 0, m = 0;
-                    //     var costTaller = 0;
-                    //     var persTaller = 0;
-                    //     recursivo(i);///Function recursive
-                    //     function recursivo(i) {
-                    //         if (i == people.length) {
-                    //             return;// addModular(person, inscri,idEvent,moduleId,asistencia ) ;
-                    //         } else {
-                    //             console.log(people[i]._id);
-                    //             db.persons.aggregate([
-                    //                 { $match: { _id: mongoose.Types.ObjectId(people[i]._id) } },
-                    //                 { $project: { workshops: 1 } },
-                    //                 { $unwind: '$workshops' },
-                    //                 // { $match: { 'workshops.modules': { $eq: mongoose.Types.ObjectId(moduleId) } } },
-                    //                 // { $group: { _id: { persons: '$inscriptions.persons' }, total: { $sum: 1 } } }
-                    //             ], function (err, pers) {
-                    //                 // if (err) { return res.status(400).send(err); }
-                    //                 console.log('aqui las personas con taller')
-                    //                 console.log(pers[0]);
-                    //                 try {
-                    //                     if (pers[0] != undefined) {
-                    //                         console.log(pers[0].workshops.amount);
-                    //                         costTaller = costTaller + pers[0].workshops.amount;
-                    //                         persTaller++;
-                    //                     }
-                    //                     m++;
-                    //                     if (m == people.length) {
-                    //                         console.log('FINALIZO!!!')
-                    //                         getEgresos(cantIngresoMod, cantAssist, canStudent, canProf, canParticular, costTaller);
-                    //                     }
-                    //                 } catch (err) {
-                    //                     console.error(err);
-                    //                     //console.log(err);
-                    //                 }
-                    //             });
-                    //             return recursivo(i + 1);
-                    //         }
-                    //     }
-                    // });
-                    // function getEgresos(cantIngresoMod, cantAssist, canStudent, canProf, canParticular, costTaller) {
                     db.cashFlowUsers.find({}, { details: 1 }, function (err, cashUser) {
                         if (err) return res.status(400).send(err);
                         var canEgreso = 0;
@@ -93,16 +51,6 @@ router
                                 }
                             }
                         }
-                        // console.log(cashUser.length);
-                        // console.log(cashUser[0].details.length);
-                        console.log('¿¿¿¿¿¿¿¿¿¿¿¿ :) ???????????');
-                        console.log('Total ingreso Modulo: ' + cantIngresoMod);
-                        console.log('Total Assist Modulo:  ' + cantAssist);
-                        console.log('Total estudi Modulo:  ' + canStudent);
-                        console.log('Total profe Modulo:   ' + canProf);
-                        console.log('Total partic Modulo:  ' + canParticular);
-                        console.log('Total Egreso Modulo:  ' + canEgreso);
-                        // console.log(costTaller)
                         var accountModulars = {
                             ingreso: cantIngresoMod,
                             egreso: canEgreso,
@@ -113,29 +61,16 @@ router
                         };
                         return res.status(200).send(accountModulars);
                     });
-                    // }
                 });
-            });
-        }
-
-        function findEgresos() {
-            db.cashFlowUsers.find({}, { details: 1 }, function (err, cashUser) {
-                if (err) return res.status(400).send(err);
-                for (let j = 0; j < persons.length; j++) {
-                    if (persons[j].ocupation == 'estudiante') { canStudent++; }
-                }
             });
         }
     })
     .post('/asistencia', function (req, res) {
-        //console.log(req.body);
         let personId = req.body.personId;
         let eventId = req.body.eventId;
         let moduleId = req.body.moduleId;
-        // db.modulars.findOne({persons:personId,events:eventId,modules:moduleId},function(err,modular){
         db.modulars.findOne({ persons: personId, modules: moduleId }, function (err, modular) {
             if (err) return res.status(400).send(err);
-            //console.log(modular)
             modular.assist = true;
             modular.save();
             db.events.aggregate([
@@ -143,14 +78,10 @@ router
                 { $project: { modulars: 1 } },
                 { $unwind: '$modulars' },
                 { $match: { 'modulars.modules': { $eq: mongoose.Types.ObjectId(moduleId) } } },
-                //{ $group: { _id: { modules: '$modulars.modules' }, total: { $sum: 1 } } }
             ], function (err, modularEvent) {
                 if (err) return res.status(400).send(err);
-                console.log(modularEvent);
-                console.log('aqui el module ID de events');
                 var objectModular = modularEvent[0];
                 var modularsId = objectModular.modulars._id;
-                console.log('este es el Id del Modulars:  ' + modularsId);
                 findLists(personId, eventId, modularsId);
             });
         });
@@ -178,7 +109,6 @@ router
                     var lists = new db.lists(list);
                     lists.save(function (err, lis) {
                         if (err) { return res.status(400).send(err); }
-                        console.log('Lista nueva creada de Asistencia');
                         return res.status(200).send(lis);
                     });
                 }
@@ -196,21 +126,9 @@ router
         })
     })
     .post('/printCertificate', function (req, res) {
-        console.log('HOLA CARLA');
-        console.log(req.body);
         let personId = req.body.personId;
         let profileId = req.body.profileId;
         let moduleId = req.body.moduleId;
-        // db.modulars.findOne({persons:personId, profile:profileId, modules:moduleId},function(err,modular){
-
-        //     if(err)return res.status(400).send(err);
-        //     console.log('impreso ahougyuviugvuybh')
-        //     console.log(modular)
-        //     modular.print_certificate=true;
-
-        //     modular.save();
-        // })
-        // var print = true;
         db.modulars.update(
             { persons: personId, profile: profileId, modules: moduleId },
             {
@@ -220,7 +138,6 @@ router
             }
         ).exec(function (err, off) {
             if (err) return res.status(400).send(err);
-            console.log(off)
             return res.status(200).send();
         });
     })

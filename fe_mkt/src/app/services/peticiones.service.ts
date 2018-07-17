@@ -107,11 +107,6 @@ export class PeticionesService {
     getCarterasLibres() {
         return this._http.get(this.url + 'Mkt_carteras/libres').map((res: Response) => res);
     }
-    crearCartera(cartera) {
-        let body = JSON.stringify(cartera);
-        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-        return this._http.post(this.url + 'Mkt_carteras/guardar', body, { headers: headers }).map((res: Response) => res);
-    }
     getFacilitadores() {
         return this._http.get(this.url + 'Mkt_facilitators').map((res: Response) => res);
     }
@@ -485,7 +480,7 @@ export class PeticionesService {
 
     let body = JSON.stringify(ObjId);	
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
-    return this._http.post(this.url + 'Mkt_carterasreasignarCartera/', body, { headers: headers }).map((res: Response) => res);		
+    return this._http.post(this.url + 'Mkt_carteras/reasignarCartera/', body, { headers: headers }).map((res: Response) => res);		
 	
   }
   getEventsOfSucursal(identityId){
