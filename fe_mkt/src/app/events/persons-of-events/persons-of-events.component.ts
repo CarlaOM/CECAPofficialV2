@@ -65,6 +65,30 @@ export class PersonsOfEventsComponent implements OnInit {
         this.listaReturned = res;
         this.lista_personasPorInteres = this.listaReturned;
         // console.log(this.lista_personasPorInteres)
+        this._peticionesService.getUni().subscribe(res => {
+          var universidades = res[0].university;
+          var carreras = res[0].carrera;
+          for (let i = 0; i < this.lista_personasPorInteres.length; i++) {
+            if (this.lista_personasPorInteres[i].ocupation == 'estudiante') {
+              for (let j = 0; j < universidades.length; j++) {
+                if (this.lista_personasPorInteres[i].descOcupation.universidad == universidades[j]._id) {
+                  this.lista_personasPorInteres[i].descOcupation.universidad = universidades[j].nombre;
+                }
+              }
+              for (let j = 0; j < carreras.length; j++) {
+                if (this.lista_personasPorInteres[i].descOcupation.carrera == carreras[j]._id) {
+                  this.lista_personasPorInteres[i].descOcupation.carrera = carreras[j].nombre;
+                }
+              }
+            }
+          }
+          // for (const l in this.lista_personasPorInteres) {
+          //   if (l.descOcupation) {
+          //     const element = this.lista_personasPorInteres[l];
+
+          //   }
+          // }
+        })
       })
 
     })

@@ -66,16 +66,12 @@ export class AddPersonComponent implements OnInit {
         
     }
     getUniversidades(){
-        console.log("hnjdjdjd")
         this._peticionesService.getUni().subscribe(res=>{
             this.universidades= res[0].university;
             this.carreras = res[0].carrera;
-            console.log(this.universidades);
         })
     }
     ngOnInit() {
-        // console.log(Identity._id);
-        //this.queryPrograms();
         this.queryEvents();
         this.queryCartera();
         this.queryPrograms();
@@ -90,10 +86,7 @@ export class AddPersonComponent implements OnInit {
             programItem.programName = p.name;
             programItem.state = 0;
             this.newProgramsCheck.push(programItem);
-
         }
-        // this.fixProgramCheckbox()
-
     }
     queryPrograms() {
         this._peticionesService.getPrograms().subscribe(response => {
