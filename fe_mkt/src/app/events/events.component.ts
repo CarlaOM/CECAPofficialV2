@@ -16,7 +16,12 @@ export class EventsComponent implements OnInit {
     public events;
     public role;
     public program;
-
+    ////////////////////////////////////////////////////
+    public page;
+    public total;
+    public totalPag;
+    public mostrar = [];
+    ////////////////////////////////////////////////////
     constructor(
         private router: Router,
         private _peticionesService: PeticionesService
@@ -25,7 +30,48 @@ export class EventsComponent implements OnInit {
         this.queryRol();
         //    this.queryEventsOfSucursal();
     }
-
+    dis(){
+        this.page = this.page-1;
+        var inicio = (8*(this.page-1));
+        var final = (8*(this.page-1))+8;
+        this.mostrar = [];
+        for(var a = inicio  ; a < final ; a++ ){
+          this.mostrar.push(this.lista_eventos[a]);
+      }
+      }
+      aum(){
+        this.page = this.page+1;
+        // console.log(this.page)
+        var inicio = (8*(this.page-1));
+        // console.log(inicio)
+        var final = (8*(this.page-1))+8;
+        if(final > this.total){
+          final = this.total;
+        }
+        // console.log(final)
+        this.mostrar = [];
+        for(var a = inicio  ; a < final ; a++ ){
+            this.mostrar.push(this.lista_eventos[a]);
+        }
+      }
+      mostrarEvent(){
+        this.page = 1;
+        this.total = this.lista_eventos.length;
+        if(this.total == 0){
+          this.totalPag = 1;
+        } else{
+        this.totalPag = Math.ceil(this.total/8);
+        }
+        this.mostrar = []
+        // console.log(this.totalPag)
+        if(this.totalPag > 1){
+          for(var a = 0 ; a < 8 ; a++){
+          this.mostrar.push(this.lista_eventos[a]) ;}
+        } else{
+          this.mostrar = this.lista_eventos;
+        }
+        
+      }
     addPerson() {
         this.router.navigate(['home/event/persons/add']);
     }
@@ -64,6 +110,7 @@ export class EventsComponent implements OnInit {
                         this.program = result;
                         eventoItem.programa = this.program.name;
                         this.lista_eventos.push(eventoItem);
+                        this.mostrarEvent();
 
                     });
 
@@ -105,6 +152,7 @@ export class EventsComponent implements OnInit {
                         this.program = result;
                         eventoItem.programa = this.program.name;
                         this.lista_eventos.push(eventoItem);
+                        this.mostrarEvent();
 
                     });
 

@@ -30,6 +30,12 @@ export class DividirCarteraComponent implements OnInit {
   
   public listaGeneral=true;
   public numTotal;
+  ////////////////////////////////////////////////////
+  public page;
+  public total;
+  public totalPag;
+  public mostrar = [];
+  ////////////////////////////////////////////////////  
 
   constructor(
 
@@ -44,7 +50,48 @@ export class DividirCarteraComponent implements OnInit {
     })
 
   }
-
+  dis(){
+    this.page = this.page-1;
+    var inicio = (8*(this.page-1));
+    var final = (8*(this.page-1))+8;
+    this.mostrar = [];
+    for(var a = inicio  ; a < final ; a++ ){
+      this.mostrar.push(this.listadepersonasReturned[a]);
+  }
+  }
+  aum(){
+    this.page = this.page+1;
+    // console.log(this.page)
+    var inicio = (8*(this.page-1));
+    // console.log(inicio)
+    var final = (8*(this.page-1))+8;
+    if(final > this.total){
+      final = this.total;
+    }
+    // console.log(final)
+    this.mostrar = [];
+    for(var a = inicio  ; a < final ; a++ ){
+        this.mostrar.push(this.listadepersonasReturned[a]);
+    }
+  }
+  mostrarPersonas(){
+    this.page = 1;
+    this.total = this.listadepersonasReturned.length;
+    if(this.total == 0){
+      this.totalPag = 1;
+    } else{
+    this.totalPag = Math.ceil(this.total/8);
+    }
+    this.mostrar = []
+    // console.log(this.totalPag)
+    if(this.totalPag > 1){
+      for(var a = 0 ; a < 8 ; a++){
+      this.mostrar.push(this.listadepersonasReturned[a]) ;}
+    } else{
+      this.mostrar = this.listadepersonasReturned;
+    }
+    
+  }
   onSubmit(){
 
    
@@ -70,7 +117,7 @@ export class DividirCarteraComponent implements OnInit {
       this.listado_personas=this.listadepersonasReturned;
       this.numTotal=this.listado_personas.length;
 
-
+      this.mostrarPersonas();
 
       this.enablePrint=true;
      
@@ -114,6 +161,7 @@ export class DividirCarteraComponent implements OnInit {
           listObject.id=count;
           count++;
           this.lista_lista_personasConIdTable.push(listObject);
+          this.mostrarLista();
       }
 
 
@@ -122,6 +170,47 @@ export class DividirCarteraComponent implements OnInit {
     
 
 
+  }
+  mostrarLista(){
+    this.page = 1;
+    this.total = this.lista_lista_personasConIdTable.length;
+    if(this.total == 0){
+      this.totalPag = 1;
+    } else{
+    this.totalPag = Math.ceil(this.total/2);
+    }
+    this.mostrar = []
+    // console.log(this.totalPag)
+    if(this.totalPag > 1){
+      for(var a = 0 ; a < 2 ; a++){
+      this.mostrar.push(this.lista_lista_personasConIdTable[a]) ;}
+    } else{
+      this.mostrar = this.lista_lista_personasConIdTable;
+    }
+  }
+  disLista(){
+    this.page = this.page-1;
+    var inicio = (2*(this.page-1));
+    var final = (2*(this.page-1))+2;
+    this.mostrar = [];
+    for(var a = inicio  ; a < final ; a++ ){
+      this.mostrar.push(this.lista_lista_personasConIdTable[a]);
+  }
+  }
+  aumLista(){
+    this.page = this.page+1;
+    // console.log(this.page)
+    var inicio = (2*(this.page-1));
+    // console.log(inicio)
+    var final = (2*(this.page-1))+2;
+    if(final > this.total){
+      final = this.total;
+    }
+    // console.log(final)
+    this.mostrar = [];
+    for(var a = inicio  ; a < final ; a++ ){
+        this.mostrar.push(this.lista_lista_personasConIdTable[a]);
+    }
   }
   deshacerDividir(){
     this.listaGeneral=true;

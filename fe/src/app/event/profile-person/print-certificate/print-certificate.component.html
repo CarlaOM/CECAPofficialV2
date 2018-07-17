@@ -28,55 +28,64 @@
     
     
     
-        <div class="form-group col-sm-8">
-          <label for="nombreEventoCertificado">Nombre del Evento - Modulo</label>
-    
-          <input type="text" class="form-control" id="nombreEventoCertificado" required [(ngModel)]="nombreEventoModulo" name="nombreEventoCertificado"
-            #nombreEventoCertificado="ngModel">
-          <div [hidden]="nombreEventoCertificado?.valid || nombreEventoCertificado?.pristine" class="text-alert">
+        <form (ngSubmit)="onSubmit()" #print="ngForm">
+          <div class="form-group col-sm-8">
+            <label for="nombreEventoCertificado">Nombre del Evento - Modulo</label>
+            
+            <input type="text" pattern="[a-zA-Z ]{3,100}" class="form-control" id="nombreEventoCertificado"
+                   required
+                   [(ngModel)]="nombreEventoModulo" name="nombreEventoCertificado"
+                   #nombreEventoCertificado="ngModel">
+            <div [hidden]="nombreEventoCertificado?.valid || nombreEventoCertificado?.pristine"
+            class="text-alert">
             *El nombre es requerido
+            </div>
+            <div class="text-alert">
+              Ejemplo : HIDROPONIA :CULTIVO Y PROYECTO DE INNOVACION
+            </div>
           </div>
-          <div class="text-alert">
-            Ejemplo : HIDROPONIA :CULTIVO Y PROYECTO DE INNOVACION
-          </div>
-        </div>
-        <br>
-    
-        <div class="form-group col-sm-8">
-          <label for="fechaCertificado">Fecha de los Certificados</label>
-    
-          <input type="text" class="form-control" id="fechaCertificado" required [(ngModel)]="nombreFechaCertificado" name="fechaCertificado"
-            #fechaCertificado="ngModel">
-          <div [hidden]="fechaCertificado?.valid || fechaCertificado?.pristine" class="text-alert">
+          <br>
+
+          <div class="form-group col-sm-8">
+            <label for="fechaCertificado">Fecha de los Certificados</label>
+            
+            <input type="text"  class="form-control" id="fechaCertificado"
+                   required
+                   [(ngModel)]="nombreFechaCertificado" name="fechaCertificado"
+                   #fechaCertificado="ngModel">
+            <div [hidden]="fechaCertificado?.valid || fechaCertificado?.pristine"
+            class="text-alert">
             *La Fecha es requerido
+            </div>
+            <div class="text-alert">
+              Ejemplo : el dia viernes 21 de julio (7 horas)
+            </div>
           </div>
-          <div class="text-alert">
-            Ejemplo : el dia viernes 21 de julio (7 horas)
-          </div>
-        </div>
-        <br>
-    
-        <div class="form-group col-sm-8">
-          <label for="fechaDepartamento">Fecha y Departamento</label>
-    
-          <input type="text" class="form-control" id="fechaCertificado" required [(ngModel)]="nombreFechaDepartamento" name="fechaDepartamento"
-            #fechaDepartamento="ngModel">
-          <div [hidden]="fechaDepartamento?.valid || fechaDepartamento?.pristine" class="text-alert">
+          <br>
+
+          <div class="form-group col-sm-8">
+            <label for="fechaDepartamento">Fecha y Departamento</label>
+            
+            <input type="text"  class="form-control" id="fechaCertificado"
+                   required
+                   [(ngModel)]="nombreFechaDepartamento" name="fechaDepartamento"
+                   #fechaDepartamento="ngModel">
+            <div [hidden]="fechaDepartamento?.valid || fechaDepartamento?.pristine"
+            class="text-alert">
             *La Fecha y Departeamento es requerido
+            </div>
+            <div class="text-alert">
+              Ejemplo : Cochabamba - Bolivia,2017
+            </div>
           </div>
-          <div class="text-alert">
-            Ejemplo : Cochabamba - Bolivia,2017
+          <br>
+          <div class="form-group col-sm-8" style="text-align:center">
+            <label for="descargar">Descargue los certificados en pdf</label>
+            <button type="submit" class="btn btn-success" [disabled]="!print.form.valid" >Guardar</button>
+            <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
           </div>
-        </div>
-        <br>
-    
-    
-    
-        <div class="form-group col-sm-8" style="text-align:center">
-          <label for="descargar">Descargue los certificados en pdf</label>
-          <button type="submit" class="btn btn-success" (click)="onSubmit()">Guardar</button>
-          <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
-        </div>
+
+        </form>
     
     
 

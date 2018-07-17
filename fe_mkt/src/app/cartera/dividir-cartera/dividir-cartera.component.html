@@ -97,7 +97,7 @@
                                    </tr>
                                 </thead>
                                 <tbody> 
-                                   <tr *ngFor="let i of listadepersonasReturned; let num = index" >
+                                   <tr *ngFor="let i of mostrar; let num = index" >
                                       <td>{{num+1}}</td>
                                       <td>{{ i.first_name }}</td>
                                       <th>{{i.last_name}}</th>
@@ -106,7 +106,13 @@
                                       <td>{{i.city}}</td>
                                       <td>{{ i.ocupation }}</td>
                                    </tr>
-                                </tbody>      
+                                </tbody> 
+                                <tfoot>
+                                    <a>Pagina # {{page}}</a>
+                                    <br>
+                                    <button (click)="dis()" [disabled]="page == 1">Anterior</button>
+                                    <button (click)="aum()" [disabled]="page == totalPag">Siguiente</button>
+                                    </tfoot>     
                              </table>
                              <div align="center" *ngIf='enablePrint'>
                                     <!-- <input type="text" id="PrimerNombre" placeholder="Primer Nombre">
@@ -166,6 +172,12 @@
                                         
                                     </div>
             
+                        </div>
+                        <div>
+                            <a>Pagina # {{page}}</a>
+                            <br>
+                            <button (click)="dis()" [disabled]="page == 1">Anterior</button>
+                            <button (click)="aum()" [disabled]="page == totalPag">Siguiente</button>
                         </div>
 
                   </div>

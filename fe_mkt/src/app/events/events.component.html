@@ -34,7 +34,7 @@
                               
                                        <tbody>
                               
-                                          <tr *ngFor="let event of lista_eventos" class="bg-info text-center">
+                                          <tr *ngFor="let event of mostrar" class="bg-info text-center">
                                              <td>{{ event.name }}</td>
                                              <td>{{ event.date_start | date }}</td>
                                              <td>{{ event.cupos }}</td>
@@ -45,6 +45,12 @@
                                              <td > <button class="btn btn-danger" (click)="cerrarEvento(event?._id)" [disabled]="!event.active">Cerrar Evento</button></td>
                                           </tr>
                                        </tbody>
+                                       <tfoot>
+                                          <a>Pagina # {{page}}</a>
+                                          <br>
+                                        <button (click)="dis()" [disabled]="page == 1">Anterior</button>
+                                        <button (click)="aum()" [disabled]="page == totalPag">Siguiente</button>
+                                      </tfoot>
                                     </table>
                         </section>
 
