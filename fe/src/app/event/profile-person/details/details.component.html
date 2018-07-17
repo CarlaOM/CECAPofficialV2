@@ -25,12 +25,12 @@
                     <td *ngIf="i.assist==false" style="color:red">No asistió</td>
                     <!-- <td *ngIf="i.print_certificate==true">Certificado impreso</td>
                     <td *ngIf="i.print_certificate==false">Falta imprimir certificado</td> -->
-                    <td *ngSwitchCase="false">
+                    <td >
                       <button *ngIf="i.assist==true" class="btn btn-warning" (click)="printCertificate(i.modules)">Imprimir Certificado</button> 
                     </td>
-                    <td *ngSwitchCase="true">
+                    <!-- <td *ngSwitchCase="true">
                       <button *ngIf="i.assist==true" class="btn btn-success" disabled>Certificado Impreso</button>
-                    </td>
+                    </td> -->
                   </tr>
                 </tbody>
               </table>

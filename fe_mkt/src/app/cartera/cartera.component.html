@@ -24,7 +24,7 @@
        
                <tbody>
        
-                  <tr *ngFor="let cartera of carteras">
+                  <tr *ngFor="let cartera of mostrar">
                      <td>{{ cartera?.name }}</td>
                      <td *ngIf="cartera?.active==true; else inactivo "> Activa</td>
                      <td>  
@@ -40,6 +40,12 @@
                      </ng-template>
                   </tr>
                </tbody>
+                <tfoot>
+                <a>Pagina # {{page}}</a>
+                <br>
+                <button (click)="dis()" [disabled]="page == 1">Anterior</button>
+                <button (click)="aum()" [disabled]="page == totalPag">Siguiente</button>
+                </tfoot>  
             </table>
          </section>
     </div>

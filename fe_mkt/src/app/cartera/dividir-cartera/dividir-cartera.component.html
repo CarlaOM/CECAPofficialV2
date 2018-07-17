@@ -11,7 +11,7 @@
                 <div>
                     <form (ngSubmit)="onSubmit()" #compartirCarterasForm="ngForm">
                         <div class="form-group col-sm-8">
-                            <!-- <div class="form-group">
+                            <div class="form-group">
                                 <label for="ejecutivo">Ejecutivos</label>
                                 <br>
                                 <label>
@@ -22,7 +22,7 @@
                                 </label>
                                 <div [hidden]="ejec?.valid || ejec?.pristine" class="text-alert">
                                 </div>
-                            </div> -->
+                            </div>
                             <div class="form-group">
                                 <label for="eventos">Eventos</label>
                                 <br>
@@ -81,32 +81,38 @@
                                 border="2"
                         > -->
                         <table class="table table-hover " id="listaGeneral">
-                            <thead>
-                                <tr>
-                                    <th>Numero</th>
-                                    <th>Nombre</th>
-                                    <th>Apellido</th>
-                                    <th>Telefono</th>
-                                    <th>Grupo de Whatsapp</th>
-                                    <th>Ciudad</th>
-                                    <th>Ocupacion</th>
-                                    <!-- <th colspan="2">Opciones</th> -->
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let i of listadepersonasReturned; let num = index">
-                                    <td>{{num+1}}</td>
-                                    <td>{{ i.first_name }}</td>
-                                    <th>{{i.last_name}}</th>
-                                    <td>{{ i.cellphone }}</td>
-                                    <td>{{i.whatsapp_group}}</td>
-                                    <td>{{i.city}}</td>
-                                    <td>{{ i.ocupation }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div align="center" *ngIf='enablePrint'>
-                            <!-- <input type="text" id="PrimerNombre" placeholder="Primer Nombre">
+                                <thead >
+                                   <tr>
+                                       <th>Numero</th>
+                                      <th>Nombre</th>
+                                      <th>Apellido</th>
+                                      <th>Telefono</th>
+                                      <th>Grupo de Whatsapp</th>
+                                      <th>Ciudad</th>
+                                      <th>Ocupacion</th>
+                                      <!-- <th colspan="2">Opciones</th> -->
+                                   </tr>
+                                </thead>
+                                <tbody> 
+                                   <tr *ngFor="let i of mostrar; let num = index" >
+                                      <td>{{num+1}}</td>
+                                      <td>{{ i.first_name }}</td>
+                                      <th>{{i.last_name}}</th>
+                                      <td>{{ i.cellphone }}</td>
+                                      <td>{{i.whatsapp_group}}</td>
+                                      <td>{{i.city}}</td>
+                                      <td>{{ i.ocupation }}</td>
+                                   </tr>
+                                </tbody> 
+                                <tfoot>
+                                    <a>Pagina # {{page}}</a>
+                                    <br>
+                                    <button (click)="dis()" [disabled]="page == 1">Anterior</button>
+                                    <button (click)="aum()" [disabled]="page == totalPag">Siguiente</button>
+                                    </tfoot>     
+                             </table>
+                             <div align="center" *ngIf='enablePrint'>
+                                    <!-- <input type="text" id="PrimerNombre" placeholder="Primer Nombre">
                                     <input type="text" id="Apellido" placeholder="Apellidos">
                                     <input type="text" id="Celular" placeholder="Celular">
                                     <input type="text" id="email" placeholder="email">
@@ -163,6 +169,12 @@
 
                             </div>
 
+                        </div>
+                        <div>
+                            <a>Pagina # {{page}}</a>
+                            <br>
+                            <button (click)="dis()" [disabled]="page == 1">Anterior</button>
+                            <button (click)="aum()" [disabled]="page == totalPag">Siguiente</button>
                         </div>
 
                     </div>

@@ -19,6 +19,13 @@ export class CarteraComponent implements OnInit {
 
   public carteras;
   public role;
+  ////////////////////////////////////////////////////
+  public page;
+  public total;
+  public totalPag;
+  public mostrar = [];
+  ////////////////////////////////////////////////////
+
   constructor(
 
     private route: ActivatedRoute,
@@ -30,8 +37,51 @@ export class CarteraComponent implements OnInit {
 
     this._peticionesService.getCarteras().subscribe(response=>{
       this.carteras=response;
+      this.mostrarCartera();
     });
     this.queryRol();
+  }
+  dis(){
+    this.page = this.page-1;
+    var inicio = (8*(this.page-1));
+    var final = (8*(this.page-1))+8;
+    this.mostrar = [];
+    for(var a = inicio  ; a < final ; a++ ){
+      this.mostrar.push(this.carteras[a]);
+  }
+  }
+  aum(){
+    this.page = this.page+1;
+    // console.log(this.page)
+    var inicio = (8*(this.page-1));
+    // console.log(inicio)
+    var final = (8*(this.page-1))+8;
+    if(final > this.total){
+      final = this.total;
+    }
+    // console.log(final)
+    this.mostrar = [];
+    for(var a = inicio  ; a < final ; a++ ){
+        this.mostrar.push(this.carteras[a]);
+    }
+  }
+  mostrarCartera(){
+    this.page = 1;
+    this.total = this.carteras.length;
+    if(this.total == 0){
+      this.totalPag = 1;
+    } else{
+    this.totalPag = Math.ceil(this.total/8);
+    }
+    this.mostrar = []
+    // console.log(this.totalPag)
+    if(this.totalPag > 1){
+      for(var a = 0 ; a < 8 ; a++){
+      this.mostrar.push(this.carteras[a]) ;}
+    } else{
+      this.mostrar = this.carteras;
+    }
+    
   }
   addCartera(){
     this.router.navigate(['/home/cartera/add']);
