@@ -6,35 +6,7 @@ var mongoose = require('mongoose');
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
 
-// var multer = require('multer');
-// var xlstojson = require("xls-to-json-lc");
-// var xlsxtojson = require("xlsx-to-json-lc");
-
-// var storage = multer.diskStorage({ //multers disk storage settings
-//     destination: function (req, file, cb) {
-//         cb(null, './uploads/')
-//     },
-//     filename: function (req, file, cb) {
-//         var datetimestamp = Date.now();
-//         cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalFilename.split('.')[file.originalFilename.split('.').length -1])
-//     }
-// });
-// var upload = multer({ //multer settings
-//                 storage: storage,
-//                 fileFilter : function(req, file, callback) { //file filter
-//                     if (['xls', 'xlsx'].iOf(file.originalFilename.split('.')[file.originalFilename.split('.').length-1]) === -1) {
-//                         return callback(new Error('Wrong extension type'));
-//                     }
-//                     callback(null, true);
-//                 }
-//             }).single('file');
-
-///////////other//////////
-
-var XLSX = require('xlsx')
-
 ///////////////////////////
-
 router
   .get('/', function (req, res) {
     db.persons.find({}, function (err, persons) {

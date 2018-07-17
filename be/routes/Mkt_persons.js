@@ -194,7 +194,7 @@ router
             }
         } catch (error) {
             return res.status(400).send(respuestaVacia);
-        } finally{
+        } finally {
             return res.status(200).send();
         }
     })
@@ -390,24 +390,23 @@ router
             if (err) return res.status(400).send(err);
             if (celExist == null) {
                 var person = new db.mkt_persons(req.body.persona);
+                // console.log(person);
                 person.save(function (err, pers) {
-                    if (err) {
-                        return res.status(400).send(err)
-                    } else {
-                        for (let program of interes) {
-                            db.mkt_events.find({ programs: program.programId }, function (err, eventos) {
-                                for (let e of eventos) {
-                                    let inte = {};
-                                    inte.persons = pers;
-                                    inte.state = 0;
-                                    inte.date_state = new Date();
-                                    e.interes.push(inte);
-                                    e.save();
-                                }
-                            })
-                        }
-                        return res.status(200).send(pers);
+                    // console.log(err)
+                    if (err) return res.status(400).send(err)
+                    for (let program of interes) {
+                        db.mkt_events.find({ programs: program.programId }, function (err, eventos) {
+                            for (let e of eventos) {
+                                let inte = {};
+                                inte.persons = pers;
+                                inte.state = 0;
+                                inte.date_state = new Date();
+                                e.interes.push(inte);
+                                e.save();
+                            }
+                        })
                     }
+                    return res.status(200).send(pers);
                 })
             } else {
                 return res.status(404).send('la persona ya existe');

@@ -51,47 +51,48 @@ export class PersonsOfEventsComponent implements OnInit {
       this.loadPersonsByCartera();
     })
   }
-  dis(){
-    this.page = this.page-1;
-    var inicio = (5*(this.page-1));
-    var final = (5*(this.page-1))+5;
+  dis() {
+    this.page = this.page - 1;
+    var inicio = (5 * (this.page - 1));
+    var final = (5 * (this.page - 1)) + 5;
     this.mostrar = [];
-    for(var a = inicio  ; a < final ; a++ ){
+    for (var a = inicio; a < final; a++) {
       this.mostrar.push(this.lista_personasPorInteres[a]);
+    }
   }
-  }
-  aum(){
-    this.page = this.page+1;
+  aum() {
+    this.page = this.page + 1;
     // console.log(this.page)
-    var inicio = (5*(this.page-1));
+    var inicio = (5 * (this.page - 1));
     // console.log(inicio)
-    var final = (5*(this.page-1))+5;
-    if(final > this.total){
+    var final = (5 * (this.page - 1)) + 5;
+    if (final > this.total) {
       final = this.total;
     }
     // console.log(final)
     this.mostrar = [];
-    for(var a = inicio  ; a < final ; a++ ){
-        this.mostrar.push(this.lista_personasPorInteres[a]);
+    for (var a = inicio; a < final; a++) {
+      this.mostrar.push(this.lista_personasPorInteres[a]);
     }
   }
-  mostrarPersonas(){
+  mostrarPersonas() {
     this.page = 1;
     this.total = this.lista_personasPorInteres.length;
-    if(this.total == 0){
+    if (this.total == 0) {
       this.totalPag = 1;
-    } else{
-    this.totalPag = Math.ceil(this.total/5);
+    } else {
+      this.totalPag = Math.ceil(this.total / 5);
     }
     this.mostrar = []
     // console.log(this.totalPag)
-    if(this.totalPag > 1){
-      for(var a = 0 ; a < 5 ; a++){
-      this.mostrar.push(this.lista_personasPorInteres[a]) ;}
-    } else{
+    if (this.totalPag > 1) {
+      for (var a = 0; a < 5; a++) {
+        this.mostrar.push(this.lista_personasPorInteres[a]);
+      }
+    } else {
       this.mostrar = this.lista_personasPorInteres;
     }
-    
+
   }
   loadPersonsByCartera() {
     this.lista_personasPorInteres = [];
@@ -102,24 +103,24 @@ export class PersonsOfEventsComponent implements OnInit {
       eventIdPersonId.identity = Identity;
       this._peticionesService.getPersonasInteresWithEventByCartera(eventIdPersonId).subscribe(res => {
         this.listaReturned = res;
-        this.lista_personasPorInteres = this.listaReturned;
         this._peticionesService.getUni().subscribe(res => {
           var universidades = res[0].university;
           var carreras = res[0].carrera;
-          for (let i = 0; i < this.lista_personasPorInteres.length; i++) {
-            if (this.lista_personasPorInteres[i].ocupation == 'estudiante') {
+          for (let i = 0; i < this.listaReturned.length; i++) {
+            if (this.listaReturned[i].ocupation == 'estudiante') {
               for (let j = 0; j < universidades.length; j++) {
-                if (this.lista_personasPorInteres[i].descOcupation.universidad == universidades[j]._id) {
-                  this.lista_personasPorInteres[i].descOcupation.universidad = universidades[j].nombre;
+                if (this.listaReturned[i].descOcupation.universidad == universidades[j]._id) {
+                  this.listaReturned[i].descOcupation.universidad = universidades[j].nombre;
                 }
               }
               for (let j = 0; j < carreras.length; j++) {
-                if (this.lista_personasPorInteres[i].descOcupation.carrera == carreras[j]._id) {
-                  this.lista_personasPorInteres[i].descOcupation.carrera = carreras[j].nombre;
+                if (this.listaReturned[i].descOcupation.carrera == carreras[j]._id) {
+                  this.listaReturned[i].descOcupation.carrera = carreras[j].nombre;
                 }
               }
             }
           }
+          this.lista_personasPorInteres = this.listaReturned;
           this.mostrarPersonas();
         })
       })
@@ -146,10 +147,9 @@ export class PersonsOfEventsComponent implements OnInit {
     this._peticionesService.getPersonFilterInteresWithEvent(eventinteres).subscribe(response => {
       this.listaReturned = response;
       this.lista_personasPorInteres = this.listaReturned;
+      this.mostrarPersonas();
+
     })
-
-
-
   }
   loadPersonsInteresByCartera(numInteres) {
     this.lista_personasPorInteres = [];
@@ -160,10 +160,8 @@ export class PersonsOfEventsComponent implements OnInit {
     this._peticionesService.getPersonFilterInteresWithEventByCartera(eventinteres).subscribe(response => {
       this.listaReturned = response;
       this.lista_personasPorInteres = this.listaReturned;
+      this.mostrarPersonas();
     })
-
-
-
   }
 
   edit(_id: string) {

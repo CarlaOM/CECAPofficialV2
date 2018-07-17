@@ -39,6 +39,13 @@ export class ImportWhatsNumbersComponent implements OnInit {
 
   public newPersons = [];
 
+  public group = '';
+  public first = '';
+  public second = '';
+  public last = '';
+  public cell = '';
+  public contacts = [];
+
   constructor(
     private _peticionesService: PeticionesService,
     private router: Router,
@@ -75,8 +82,7 @@ export class ImportWhatsNumbersComponent implements OnInit {
   onSubmit() {
 
     this.fixText();
-    // console.log(this.whatsGroupName);
-    // console.log(this.whatsNumbers);
+    this.llenarProgramasConInteres();
   }
   getUniversidades() {
     // console.log("hnjdjdjd")
@@ -90,17 +96,6 @@ export class ImportWhatsNumbersComponent implements OnInit {
 
   }
   fixText() {
-    // var numeros = this.whatsNumbers.split(',');
-    // // console.log(numeros);
-    // numeros.forEach(element => {
-    //   if (element.split(';')[1] != undefined) {
-    //     if (element.split(';')[1].length == 8) {
-    //       this.numbers.push(element.split(';')[1]);
-    //     }
-
-    //   }
-    // });
-    
     // this.whatsNumbers = (<HTMLInputElement>document.getElementById('numbers')).value;
     var numeros = this.whatsNumbers.split(',');
     numeros.forEach(element => {
@@ -113,28 +108,18 @@ export class ImportWhatsNumbersComponent implements OnInit {
           this.numbers.push(element.split('+591 ')[1]);
       }
     });
-    // console.log(this.numbers);
-    this.llenarProgramasConInteres();
-
   }
   llenarProgramasConInteres() {
-
     for (let i of this.programasListCheckbox) {
       if (i.checked) {
-
         this.programasConInteres.push(i);
       }
-
-
     }
-    // console.log(this.programasConInteres8);
     this.saveOnDB();
-
   }
 
   saveOnDB() {
     let objWhats = {} as ObjetcWhatsappToSend;
-    console.log(this.numbers);
     objWhats.listaNumeros = this.numbers;
     objWhats.whatsapp_group = this.whatsGroupName;
     objWhats.cellphone = 0;
@@ -143,22 +128,13 @@ export class ImportWhatsNumbersComponent implements OnInit {
     objWhats.interes = this.programasConInteres;
     objWhats.universidad = this.Universidad;
     objWhats.carrera = this.nameCarrera;
-    // console.log(this.Universidad);
-    console.log(objWhats);
     this._peticionesService.saveBatchWhatsappNumbers(objWhats).subscribe(response => {
       this.router.navigate(['home/persons']);
-      // console.log(response);
     })
     this._peticionesService.getPersons().subscribe(response => {
       let prueba = response;
-      console.log(prueba);
-    }
-
-    )
-
+    })
   }
-
-
   queryCartera() {
     // console.log(Identity._id)
     this._peticionesService.getCarteraFromUserId(Identity._id).subscribe(
@@ -187,11 +163,8 @@ export class ImportWhatsNumbersComponent implements OnInit {
       }
     );
   }
-
-
   llenarProgramsCheckbox() {
     for (let pro of this.programs) {
-
       let oneProgramCheck = {} as ProgramasCheckbox;
       oneProgramCheck.programId = pro._id;
       oneProgramCheck.programName = pro.name;
@@ -201,15 +174,54 @@ export class ImportWhatsNumbersComponent implements OnInit {
 
     }
   }
-
   cancel() {
-    this
-
-
   }
-
-
+  exportarExcel() {
+    this.contacts = [];
+    this.numbers = [];
+    this.fixText();
+    this.group = (<HTMLInputElement>document.getElementById('grupo')).value;
+    this.first = (<HTMLInputElement>document.getElementById('PrimerNombre')).value;
+    this.second = (<HTMLInputElement>document.getElementById('SegundoNombre')).value;
+    this.last = (<HTMLInputElement>document.getElementById('Apellido')).value;
+    this.cell = (<HTMLInputElement>document.getElementById('Celular')).value;
+    nPersons(0, this.numbers, this.contacts, this.whatsGroupName);
+  }
 }
+function nPersons(i, numbers, contacts, name) {
+  if (i == numbers.length) return;
+  let personToExport = {} as PersonToExport;
+  personToExport.group = '';
+  personToExport.first = name + ' ' + i;
+  personToExport.second = '';
+  personToExport.last = '';
+  personToExport.cell = numbers[i];
+  contacts.push(personToExport);
+  if (contacts.length == numbers.length) {
+    setTimeout(() => {
+      // console.log(contacts);
+      tableToExcel('Contacts', 'Numeros Cecap');
+    }, 0);
+  }
+  return nPersons(i + 1, numbers, contacts, name);
+}
+function tableToExcel(table, name) {
+  var uri = 'data:application/vnd.ms-excel;base64,'
+  var template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+  var base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+  var format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
+  if (!table.nodeType) table = document.getElementById(table)
+  var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+  window.location.href = uri + base64(format(template, ctx))
+}
+export interface PersonToExport {
+  group: string,
+  first: string,
+  second: string,
+  last: string,
+  cell: number,
+}
+
 
 export interface ProgramasCheckbox {
   programId: string,

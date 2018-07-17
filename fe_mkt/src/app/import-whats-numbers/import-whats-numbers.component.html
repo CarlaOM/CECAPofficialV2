@@ -1,16 +1,9 @@
 <div class="content-wrapper">
   <br>
   <div class="content">
-
-
-
     <div class="box box-primary">
-
       <div class="container">
-
-        <h2>Impotar Numeros de WhatsApp</h2>
-
-
+        <h2>Importar Numeros de WhatsApp</h2>
         <form (ngSubmit)="onSubmit()" #WhatsNumber="ngForm">
           <div class="form-group col-sm-8">
             <label for="name">Nombre del Grupo</label>
@@ -20,7 +13,6 @@
               Nombre es invalido
             </div>
           </div>
-
           <div class="form-group col-sm-8">
             <label for="programs">Intereses</label>
             <!-- <input type="text"  class="form-control" id="programs"
@@ -28,23 +20,16 @@
                          [(ngModel)]="whatsGroupName" name="programs"
                          #programs="ngModel"
                          > -->
-
             <br>
-
             <label>
               <div *ngFor="let program of programasListCheckbox; let i = index">
                 <input type="checkbox" name="program{{i}}" #categories="ngModel" value="{{program.programName}}" [(ngModel)]="program.checked"
                 /> {{program.programName}}
               </div>
             </label>
-
-
             <div [hidden]="programs?.valid || programs?.pristine" class="text-alert">
-
             </div>
           </div>
-
-
           <div class="form-group col-sm-8">
             <label for="departament">Departamento</label>
             <select class="form-control" id="departament" [(ngModel)]="departamento" name="departament" #departament="ngModel" required>
@@ -65,60 +50,61 @@
           <div class="form-group col-sm-8">
             <label for="numbers">Pega los numeros aqui</label>
 
-            <textarea cols="30" rows="10" class="form-control" id="numbers" required [(ngModel)]="whatsNumbers" name="numbers" #numbers="ngModel">pega aqui
-
-
-
-
-                    </textarea>
+            <textarea cols="30" rows="10" class="form-control" id="numbers" required [(ngModel)]="whatsNumbers" name="numbers" #numbers="ngModel">pega aqui</textarea>
             <div [hidden]="numbers?.valid || numbers?.pristine" class="text-alert">
               Nombre es invalido
             </div>
           </div>
           <div class="form-group col-sm-8">
             <label for="name">Ocupacion</label>
-
             <label for="univer">Universidad</label>
             <select class="form-control" id="univer" [(ngModel)]="Universidad" name="univer" #ocupSelect="ngModel">
               <option *ngFor="let univ of universidades" [value]="univ._id">{{univ.nombre}}</option>
-              <!-- <option value=1>Universidad Mayor de San Simon</option>
-                                        <option value=2>U. Catolica</option>
-                                        <option value=3>U. Latinoamericana</option>                      -->
             </select>
-
-            <!-- <select class="form-control" id="univer" [(ngModel)]="Universidad" (change)="captUnive()"
-                               name="univer" #ocupSelect="ngModel">
-                              <option value="" hidden>Seleccionar...</option>                               
-                              <option value=1>Universidad Mayor de San Simon</option>
-                              <option value=2>U. Catolica</option>
-                              <option value=3>U. Latinoamericana</option>                     
-                          </select> -->
           </div>
           <div class="form-group col-sm-8">
             <label for="carrera">Carrera</label>
             <select class="form-control" id="carr" [(ngModel)]="nameCarrera" name="carr" #ocupSelect="ngModel">
               <option *ngFor="let carrera of carreras" [value]="carrera._id">{{carrera.nombre}}</option>
             </select>
-            <!-- <input type="text"  class="form-control" id="carrera"
-                           [(ngModel)]="nameCarrera" name="carrera"
-                           #carrera="ngModel"
-                           >
-                    <div [hidden]="groupname?.valid || groupname?.pristine"
-                         class="text-alert">
-                      Nombre es invalido
-                    </div> -->
           </div>
-
           <div class="form-group col-sm-8">
-
             <button type="submit" class="btn btn-success" [disabled]="!WhatsNumber.form.valid">Registrar</button>
             <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
           </div>
-
-
         </form>
+        <div class="form-group col-sm-8">
+          <table id="Contacts" style="display: none;" summary="Code page support in different versions of MS Windows." rules="groups"
+            frame="hsides" border="2">
+            <thead valign="top">
+              <tr>
+                <th>{{group}}</th>
+                <th>{{first}}</th>
+                <th>{{second}}</th>
+                <th>{{last}}</th>
+                <th>{{cell}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let contact of contacts">
+                <td>{{contact.group}}</td>
+                <td>{{contact.first}}</td>
+                <td>{{contact.second}}</td>
+                <td>{{contact.last}}</td>
+                <td>{{contact.cell}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div align="center">
+            <input type="text" id="grupo" placeholder="Grupo">
+            <input type="text" id="PrimerNombre" placeholder="Primer Nombre">
+            <input type="text" id="SegundoNombre" placeholder="Segundo Nombre">
+            <input type="text" id="Apellido" placeholder="Apellidos">
+            <input type="text" id="Celular" placeholder="Celular">
+            <button class="btn btn-primary" (click)="exportarExcel()">Exportar Excel</button>
+          </div>
+        </div>
       </div>
-
     </div>
   </div>
 </div>

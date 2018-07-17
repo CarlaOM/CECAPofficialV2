@@ -1,7 +1,6 @@
 var express = require('express');
 var db = require('../models/db');
 var router = express.Router();
-var mongoose = require('mongoose');
 
 router
    .get('/', function (req, res) {
@@ -16,7 +15,6 @@ router
       db.mkt_programs.findOne({ _id: req.params.id }, function (err, program) {
          if (err) return res.status(400).send(err);
          if (program == null) return res.status(404).send();
-
          return res.status(200).send(program);
       });
    })
@@ -38,7 +36,6 @@ router
                  });
             }else{
                 if (err) return res.status(400).send(err);
-                console.log('El nombre del Programa ya existe');
             }
       });
    }) 
@@ -46,7 +43,6 @@ router
       db.mkt_programs.findOne({ _id: req.params.id }, function (err, program) {
          if (err) return res.status(400).send(err);
          if (program == null) return res.status(404).send();
-
          for (i in req.body) {
             program[i] = req.body[i];
          }
@@ -68,7 +64,6 @@ router
    .delete('/:id', function (req, res) {
       db.mkt_programs.remove({ _id: req.params.id }, function (err, program) {
          if (err) return res.status(400).send(err);
-
          return res.status(200).send(program);
       });
    });

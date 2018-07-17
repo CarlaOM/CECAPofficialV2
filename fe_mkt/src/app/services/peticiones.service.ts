@@ -160,33 +160,24 @@ export class PeticionesService {
         return this._http.put(this.url + 'Mkt_persons/ocupation/' + id, body, { headers: headers }).map((res: Response) => res);
     }
     getPersonCartera(_id) {
-
-        // console.log(_id+"desde peticionesservice")
         return this._http.get(this.url + 'Mkt_carteras/persons/' + _id).map((res: Response) => res);
-        //  return this._http.get(this.url+'cartera/listPersonsCartera/'+_id).map((res: Response)=> res);
-
     }
     getCarteraFromUserId(id) {
         // console.log(body);
         var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
         return this._http.get(this.url + 'Mkt_carteras/otro/' + id, { headers: headers }).map((res: Response) => res);
     }
-
-
-    // updateUsers (user: User): Observable<null> {
-    //   return this.http.put(this.usersUrl, user, httpOptions).pipe(
-    //     tap(_ => this.log(`updated user id=${user.id}`)),
-    //     catchError(this.handleError<any>('updateUser'))
-    //   );
-    // }
-
     updateCartera(cartera_object) {
-        console.log(cartera_object);
         let body = JSON.stringify(cartera_object);
         var idCartera = cartera_object._id;
-        // console.log(body);
         var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
         return this._http.put(this.url + 'Mkt_carteras/' + idCartera, body, { headers: headers }).map((res: Response) => res);
+    }
+    updateCarteraEjec(cartera_object) {
+        let body = JSON.stringify(cartera_object);
+        var idCartera = cartera_object._id;
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.put(this.url + 'Mkt_carteras/ejec/' + idCartera, body, { headers: headers }).map((res: Response) => res);
     }
     addCartera(cartera) {
         let body = JSON.stringify(cartera);

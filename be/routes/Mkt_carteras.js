@@ -17,7 +17,6 @@ router
         });
     })
     .post('/reasignarCartera', function (req, res) {
-        console.log(req.body)
         db.mkt_carteras.findOne({ _id: req.body.cartera }, function (err, cart) {
             if (err) return res.status(400).send(err);
             if (req.body.cartera != req.body.carteraAntigua) {
@@ -74,6 +73,18 @@ router
     .put('/:id', function (req, res) {
         db.mkt_carteras.update({ _id: req.params.id }, {
             $set: { name: req.body.name }
+        }, function (err, cartera) {
+            if (err) return res.status(400).send(err);
+            return res.status(200).send(cartera);
+        })
+    })
+    .put('/ejec/:id', function (req, res) {
+        console.log('estamos aca')
+        db.mkt_carteras.update({ _id: req.params.id }, {
+            $set: {
+                active: req.body.active,
+                user: req.body.user
+            }
         }, function (err, cartera) {
             if (err) return res.status(400).send(err);
             return res.status(200).send(cartera);

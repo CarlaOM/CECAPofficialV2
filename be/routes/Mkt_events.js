@@ -83,7 +83,6 @@ router
       .post('/getPersonFilterInteresWithEventByCartera', function (req, res) {
             let event = req.body.event;
             let interesnumber = req.body.interes;
-            // console.log(event);
             let lista = [];
             let nuevaLista = [];
             db.mkt_carteras.findOne({ user: req.body.identity._id }, function (err, cartera) {

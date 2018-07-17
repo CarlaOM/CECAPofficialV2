@@ -275,10 +275,8 @@ router
       ////////////////////////////////////////////////////////////////////////////////////
 
       .post('/listPersonNivelacionForCalls', function (req, res) {
-
             let programId;
             let eventId = req.body.eventId;
-
             let listaPersonas = [];
             db.events.findOne({ _id: eventId }, function (err, evento) {
                   if (err) { return res.status(400).send(err); }
@@ -519,7 +517,6 @@ router
             }
       })
       .post('/reporteEvento', function (req, res) {
-
             // let fechaIni = new Date(2018, 3, 24, 10, 33, 30, 0);
             let fechaIni = new Date(req.body.fechaIni);
             let fechaFin = new Date(req.body.fechaFin);
@@ -900,8 +897,6 @@ router
                         });
                   });
       })
-
-
 
       .delete('/:id', function (req, res) {
             db.events.remove({ _id: req.params.id }, function (err, event) {

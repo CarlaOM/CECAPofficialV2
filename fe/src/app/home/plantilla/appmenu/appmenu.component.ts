@@ -7,12 +7,12 @@ import { PeticionesService } from '../../../services/peticiones.service';
   selector: 'app-appmenu',
   templateUrl: './appmenu.component.html',
   styleUrls: ['./appmenu.component.css'],
-  providers: [ PeticionesService]
+  providers: [PeticionesService]
 
 })
 export class AppmenuComponent implements OnInit {
   public nameUser;
-  public prueba= 'add';
+  public prueba = 'add';
   public role;
   constructor(
 
@@ -21,22 +21,21 @@ export class AppmenuComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.nameUser= Identity.name;
+    this.nameUser = Identity.name;
 
     this.queryRol();
 
   }
-  queryRol(){
-    //console.log(Identity.rol)
- this._peticionesService.getRole(Identity.rol).subscribe(
-     result => {
-      this.role = result;
-     },
-     error=>{
-      var errorMessage = <any>error;
-      console.log(errorMessage);
-     }
- );
- }
+  queryRol() {
+    this._peticionesService.getRole(Identity.rol).subscribe(
+      result => {
+        this.role = result;
+      },
+      error => {
+        var errorMessage = <any>error;
+        console.log(errorMessage);
+      }
+    );
+  }
 
 }

@@ -3,30 +3,32 @@
 
     <div class="box box-primary">
 
-        <section class="content">
-            <div>     
-                <ol class="breadcrumb">
-                    <li><a class="btn btn-primary" [routerLink]="['/home/persons/add']"><i class="fa fa-book"></i>Registrar Persona</a></li>
-                </ol>
-            </div> 
-           <div *ngIf='rol?.name=="Admin"'>
-             <label for="text">{{this.textoAdmin}}</label>
-           </div>
-           <table class="table">
-                 <th>Filtros Personas</th> 
-           </table>
-          
-             <div>
-            <div class="filter-wrap">
-              <div class="col-lg-1">Buscar:</div>
-              <input [(ngModel)]="searchText" placeholder="Nombre Persona" class="filter-input">
-              <span class="filter-clear" *ngIf="searchText.length>0" (click)="clearFilter()">X</span>
-              <!-- <a class="btn btn-primary filter-clear" *ngIf="searchText.length>0" (clic)="clearFilter()">Cancelar</a> -->
-            </div>
+      <section class="content">
+        <div>
+          <ol class="breadcrumb">
+            <li>
+              <a class="btn btn-primary" [routerLink]="['/home/persons/add']">
+                <i class="fa fa-book"></i>Registrar Persona</a>
+            </li>
+          </ol>
+        </div>
+        <div *ngIf='rol?.name=="Admin"'>
+          <label for="text">{{this.textoAdmin}}</label>
+        </div>
+        <table class="table">
+          <th>Filtros Personas</th>
+        </table>
+
+        <!-- <div>
+          <div class="filter-wrap">
+            <div class="col-lg-1">Buscar:</div>
+            <input [(ngModel)]="searchText" placeholder="Nombre Persona" class="filter-input">
+            <span class="filter-clear" *ngIf="searchText.length>0" (click)="clearFilter()">X</span>
           </div>
-     <table class="table table-hover table table-striped table-bordered" style="width:100%">
-        <thead >
-           <tr>
+        </div> -->
+        <table class="table table-hover table table-striped table-bordered" style="width:100%">
+          <thead>
+            <tr>
               <th>Nombre</th>
               <th>Apellido</th>
               <th>Telefono</th>
@@ -36,11 +38,11 @@
               <th>Perfil</th>
               <!-- <th>Asistencia</th> -->
               <th colspan="2">Opciones</th>
-           </tr>
-        </thead>
-        <tbody > 
-           <!--<tr *ngFor="let i of inscriptions | buscarPersona: busqueda">-->
-            <tr *ngFor="let i of mostrar | filter : searchText" >
+            </tr>
+          </thead>
+          <tbody>
+            <!--<tr *ngFor="let i of inscriptions | buscarPersona: busqueda">-->
+            <tr *ngFor="let i of mostrar | filter : searchText">
               <td>{{ i.first_name }}</td>
               <th>{{i.last_name}}</th>
               <td>{{ i.cellphone }}</td>
@@ -67,14 +69,14 @@
                 <a class="btn btn-info" (click)="viewProfile(i._id)">VER</a>
               </td>
               <td>
-                 <a class="btn btn-primary" (click)="edit(i._id)">EDITAR</a>
-                 <!-- <a class="btn btn-warning" (click)="asistence(i._id)">asist</a> -->
-                 <!-- <app-control-asistance></app-control-asistance> -->
+                <a class="btn btn-primary" (click)="edit(i._id)">EDITAR</a>
+                <!-- <a class="btn btn-warning" (click)="asistence(i._id)">asist</a> -->
+                <!-- <app-control-asistance></app-control-asistance> -->
               </td>
-           </tr>
-        </tbody>
-        <tfoot align="center">
-         <!-- <pagination-controls id = "foo" maxSize = " 9 "
+            </tr>
+          </tbody>
+          <tfoot align="center">
+            <!-- <pagination-controls id = "foo" maxSize = " 9 "
          ( pageChange ) = " pageChanged ($ event) "
          directionLinks = " true "
          autoHide = " verdadero "
@@ -88,18 +90,18 @@
            currentPage: p,
            totalItems: total}  
          </pagination-controls>  -->
-         <!-- <a class="btn" (click)="dis()" disabled = "page == 1" >
+            <!-- <a class="btn" (click)="dis()" disabled = "page == 1" >
           anterior
         </a> -->
-        <a>Pagina # {{page}}</a>
-        <br>
-        <button (click)="dis()" [disabled]="page == 1">Anterior</button>
-        <button (click)="aum()" [disabled]="page == totalPag" >Siguiente</button>
-         <!-- <a class="previousLabel" (click)="aum()" disabled=" page == totalPag">
+            <a>Pagina # {{page}}</a>
+            <br>
+            <button (click)="dis()" [disabled]="page == 1">Anterior</button>
+            <button (click)="aum()" [disabled]="page == totalPag">Siguiente</button>
+            <!-- <a class="previousLabel" (click)="aum()" disabled=" page == totalPag">
            siguiente
          </a> -->
-        </tfoot>
-     </table>
-     
-  </section>
-</div>
+          </tfoot>
+        </table>
+
+      </section>
+    </div>

@@ -102,25 +102,18 @@ export class AddPersonComponent implements OnInit {
         );
     }
     guardar() {
-        // console.log(this.IdEvent);
-        // console.log(this.montoCan);
-
-        // console.log(this.descOcupation);
-        // console.log(this.inscription);
         var newInteres = [];
         for (let npc of this.newProgramsCheck) {
             if (npc.checked) {
                 newInteres.push(npc);
             }
         }
-        // console.log(this.person);
         this.person.interes = newInteres;
         this.person.descOcupation = this.descOcupation;
         this.inscription.users = Identity._id;
         this.registro.inscription = this.inscription;
         this.registro.eventId = this.IdEvent;
         this.registro.persona = this.person;
-        // console.log(this.registro);
         // this._peticionesService.addPerson(this.registro).subscribe(
         this._peticionesService.addNewPerson(this.registro).subscribe(
             result => {

@@ -1,7 +1,5 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var body_parser = require('body-parser');
-var jwt = require('jsonwebtoken');
 var db = require('../models/db');
 var router = express.Router();
 

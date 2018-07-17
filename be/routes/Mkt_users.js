@@ -1,6 +1,4 @@
 var express = require('express');
-var mongoose = require('mongoose');
-var body_parser = require('body-parser');
 var jwt = require('jsonwebtoken');
 var db = require('../models/db');
 var router = express.Router();
@@ -82,7 +80,6 @@ router
                     for (let itemInteres of event.interes) {
                         for (let p of personsOfCartera) {
                             if (new String(p._id).valueOf() == new String(itemInteres.persons).valueOf()) {
-                                console.log('entra')
                                 if ((itemInteres.date_state < fechaFin) && (itemInteres.date_state > fechaInicio) && (itemInteres.state == 3)) {
                                     listaPersonasToReport.push(p);
                                 }
@@ -90,7 +87,6 @@ router
                         }
                     }
                 }
-                // console.log(listaPersonasToReport);
                 return res.status(200).send(listaPersonasToReport);
             })
         })

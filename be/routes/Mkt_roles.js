@@ -1,7 +1,4 @@
 var express = require('express');
-var mongoose = require('mongoose');
-var body_parser = require('body-parser');
-var jwt = require('jsonwebtoken');
 var db = require('../models/db');
 var router = express.Router();
 
@@ -10,7 +7,6 @@ router
   .get('/', function (req, res) {
     db.mkt_roles.find({}, function (err, roles) {
       if (err) return res.status(400).send(err);
-
       return res.status(200).send(roles);
     });
   })
