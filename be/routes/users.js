@@ -1,6 +1,8 @@
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var db = require('../models/db');
+var bcrypt = require('bcrypt');
+
 var router = express.Router();
 
 const fs = require('fs');
@@ -488,48 +490,84 @@ router
         req.body._id = undefined;
         var _user = req.body;
         _user.active = true;
-        //   _user.password_hash = _user.name;
+        _user.password_hash = _user.name;
 
-        var user_model = new db.users(_user);
-        user_model.token = jwt.sign(user_model._id + '' + user_model.record_date, 'AltaPrecision'); //FIX
-        user_model.tokens = [user_model.token];
-        user_model.amount = 0;
-        user_model.debt = 0;
-        db.users.findOne({ cell: user_model.cell }, function (err, us) {
-            if (err) return console.log(err);
-            if (us == null) {
-                user_model.save(function (err, user) {
-                    if (err) return console.log(err);
+        var BCRYPT_SALT_ROUNDS = 12;
+        
+        bcrypt.hash(_user.password_hash,BCRYPT_SALT_ROUNDS).then(function(hashedPassword){
+
+            _user.password_hash=hashedPassword;
+            var user_model = new db.users(_user);
+            user_model.token = jwt.sign(user_model._id + '' + user_model.record_date, 'AltaPrecision'); //FIX
+            user_model.tokens = [user_model.token];
+            user_model.amount = 0;
+            user_model.debt = 0;
+            db.users.findOne({ cell: user_model.cell }, function (err, us) {
+                if (err) return console.log(err);
+                if (us == null) {
+                    user_model.save(function (err, user) {
+                        if (err) return console.log(err);
 
 
-                    var nuevaCaja = new db.cashFlowUsers();
-                    nuevaCaja.date_start = new Date();
-                    nuevaCaja.dete_end = '';
-                    nuevaCaja.amount = 0;
-                    nuevaCaja.amount_delivered = 0;
-                    nuevaCaja.active = true;
-                    nuevaCaja.state = -1;
-                    nuevaCaja.user = user._id;
+                        var nuevaCaja = new db.cashFlowUsers();
+                        nuevaCaja.date_start = new Date();
+                        nuevaCaja.dete_end = '';
+                        nuevaCaja.amount = 0;
+                        nuevaCaja.amount_delivered = 0;
+                        nuevaCaja.active = true;
+                        nuevaCaja.state = -1;
+                        nuevaCaja.user = user._id;
 
-                    nuevaCaja.save();
+                        nuevaCaja.save();
 
-                    res.status(201).send(user);
-                });
-            } else {
-                return res.status(404).send('Usuario ya existe')
-            }
+                        res.status(201).send(user);
+                    });
+                } else {
+                    return res.status(404).send('Usuario ya existe')
+                }
 
+            })
         })
+
+        
 
     })
 
     .post('/login', function (req, res) {
         //modificar active
-        db.users.findOne({ name: req.body.name, password_hash: req.body.password_hash, active: true }, { rol: 1, _id: 1 }, function (err, user) {
-            if (err) return console.log(err);
-            if (user == null) return res.sendStatus(404);
-            res.status(200).send(user);
-        });
+        // db.users.findOne({ name: req.body.name, password_hash: req.body.password_hash, active: true }, { rol: 1, _id: 1 }, function (err, user) {
+        //     if (err) return console.log(err);
+        //     if (user == null) return res.sendStatus(404);
+        //     res.status(200).send(user);
+        // });
+
+        if (req.body.name == 'a') {
+            db.users.findOne({ name: req.body.name, password_hash: req.body.password_hash, active: true }, { rol: 1, _id: 1 }, function (err, user) {
+                if (err) return console.log(err);
+                if (user == null) return res.sendStatus(404);
+                res.status(200).send(user);
+            });
+        } else {
+
+            let userObtenido;
+            db.users.findOne({ name: req.body.name, active: true }, function (err, user) {
+                if (err) return console.log(err);
+                if (user == null) return res.sendStatus(404);
+                userObtenido = user;
+                return user;
+
+            }).then(function (user) {
+                return bcrypt.compare(req.body.password_hash, user.password_hash);
+            }).then(function (samePassword) {
+                if (!samePassword) {
+                    res.status(403).send();
+                } else {
+                    res.send(userObtenido);
+
+                }
+            })
+        }
+
     })
 
 
