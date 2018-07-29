@@ -8,6 +8,7 @@
    },
    "dependencies": {
       "archiver": "^2.1.1",
+      "bcrypt": "^3.0.0",
       "body-parser": "*",
       "compression": "*",
       "connect-multiparty": "^2.1.0",

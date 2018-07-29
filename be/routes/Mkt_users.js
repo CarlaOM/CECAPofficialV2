@@ -1,6 +1,8 @@
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var db = require('../models/db');
+var bcrypt = require('bcrypt');
+
 var router = express.Router();
 
 
@@ -180,6 +182,8 @@ router
     })
 
     .post('/register', function (req, res, next) {
+        // console.log('que paso aqui')
+
         var role_id;
         db.mkt_roles.findOne({ name: 'Admin' }, function (err, role) {
             if (err) return res.status(400).send(err);
@@ -187,36 +191,83 @@ router
             role_id = role._id;
             validating();
         })
+        console.log(req.body);
         function validating() {
             db.mkt_users.findOne({ _id: req.body._id, rol: role_id }, function (err, user) {
                 if (err) return console.log(err);
+                console.log(user);
                 if (user == null) return res.sendStatus(405);
                 next();
             });
         }
     })
     .post('/register', function (req, res) {
+        console.log('que paso aqui')
         req.body._id = undefined;
         var _user = req.body;
         _user.active = true;
         _user.password_hash = _user.name;
 
-        var user_model = new db.mkt_users(_user);
-        user_model.token = jwt.sign(user_model._id + '' + user_model.record_date, 'AltaPrecision'); //FIX
-        user_model.tokens = [user_model.token];
-        user_model.save(function (err, user) {
-            if (err) return console.log(err);
-            res.status(201).send(user);
-        });
+        // var user_model = new db.mkt_users(_user);
+        // user_model.token = jwt.sign(user_model._id + '' + user_model.record_date, 'AltaPrecision'); //FIX
+        // user_model.tokens = [user_model.token];
+        // user_model.save(function (err, user) {
+        //     if (err) return console.log(err);
+        //     res.status(201).send(user);
+        // });
+
+
+        var BCRYPT_SALT_ROUNDS = 12;
+
+        bcrypt.hash(_user.password_hash, BCRYPT_SALT_ROUNDS).then(function (hashedPassword) {
+            // console.log(hashedPassword); 
+            _user.password_hash = hashedPassword;
+            var user_model = new db.mkt_users(_user);
+            user_model.token = jwt.sign(user_model._id + '' + user_model.record_date, 'AltaPrecision'); //FIX
+            user_model.tokens = [user_model.token];
+            user_model.save(function (err, user) {
+                if (err) return console.log(err);
+                res.status(201).send(user);
+            });
+        })
     })
 
     .post('/login', function (req, res) {
         //modificar active
-        db.mkt_users.findOne({ name: req.body.name, password_hash: req.body.password_hash, active: true }, { rol: 1, _id: 1 }, function (err, user) {
-            if (err) return console.log(err);
-            if (user == null) return res.sendStatus(404);
-            res.status(200).send(user);
-        });
+        // db.mkt_users.findOne({ name: req.body.name, password_hash: req.body.password_hash, active: true }, { rol: 1, _id: 1 }, function (err, user) {
+        //     if (err) return console.log(err);
+        //     if (user == null) return res.sendStatus(404);
+        //     res.status(200).send(user);
+        // });
+
+
+        if (req.body.name == 'a') {
+            db.mkt_users.findOne({ name: req.body.name, password_hash: req.body.password_hash, active: true }, { rol: 1, _id: 1 }, function (err, user) {
+                if (err) return console.log(err);
+                if (user == null) return res.sendStatus(404);
+                res.status(200).send(user);
+            });
+        } else {
+
+            let userObtenido;
+            db.mkt_users.findOne({ name: req.body.name, active: true }, function (err, user) {
+                if (err) return console.log(err);
+                if (user == null) return res.sendStatus(404);
+                userObtenido = user;
+                return user;
+
+            }).then(function (user) {
+                return bcrypt.compare(req.body.password_hash, user.password_hash);
+            }).then(function (samePassword) {
+                if (!samePassword) {
+                    res.status(403).send();
+                } else {
+                    res.send(userObtenido);
+
+                }
+            })
+        }
+
     })
     .post('/change/:id', function (req, res) {
         db.mkt_users.update({ _id: req.params.id }, {
